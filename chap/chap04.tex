@@ -1,0 +1,33 @@
+\artigotrue
+\chapter{On the Uncertainty of Digital Soil Mapping - Orthogonalization}
+\label{chap:chapter04}
+
+\begin{chapterabstractPOR}{Pedometria, Incerteza, Componentes principais}
+este capítulo abordará a avaliação dos efeitos da multicolinearidade sobre o desempenho de modelos lineares de MDS e se a transformação das co-variáveis ambientais para suas componentes principais é uma maneira melhor de lidar com estes efeitos.
+\end{chapterabstractPOR}
+
+\begin{chapterabstractENG}{Pedometrics, Uncertainty, Principal components}
+This chapter will deal with evaluating multicollinearity effects on the performance of linear DSM models and whether transforming environmental co-variates to principal components (PCs) is a better way of dealing with it.
+\end{chapterabstractENG}
+
+\section{INTRODUCTION}
+
+This chapter will deal with evaluating multicollinearity effects on the performance of linear DSM models and whether transforming environmental co-variates to principal components (PCs) is a better way of dealing with it.
+
+\section{MATERIAL AND METHODS}
+
+\subsection{Mathematical Demonstrations}
+
+A series of mathematical demonstrations will be provided to show how multicollinearity impairs the estimation of stable regression coefficients and to prove that (a) using all PCs is equivalent to using all multicollinear environmental co-variates, (b) using only large variance PCs results a biased model, and (c) using small variance PCs increases the variance of regression coefficients.
+
+\subsection{Predictor Variables}
+
+A set consisting of $n=38$ environmental co-variates representing terrain attributes will be submitted to linear correlation and principal component analysis to assess the degree of multicollinearity in the set. Next, these environmental co-variates will be transformed to their $n=38$ PCs by spectral decomposition of the correlation matrix (package \texttt{stats}). These data will be used to generate five sets of predictor variables to fit the trend models. The first set will be composed by all $n=38$ PCs. Only large variance PCs, selected according to the Kaiser-Guttman criterion, analysis of the scree plot and parallel analysis, will enter the second set. The third set will be defined during model fitting using stepwise selection with the Akaike Information Criterion (AIC) to select PCs. The fourth set of predictor variables will be composed by all $n=38$ environmental co-variates (terrain attributes) available. And the fifth set will be constructed by manually selecting poorly correlated environmental co-variates as evidenced by the linear correlation and principal component analysis.
+
+\subsection{Model Fitting}
+
+Linear trend models will be fitted for each soil property (particle-size distribution, organic carbon content and cation exchange capacity) with $n=350$ calibration observations using ordinary-least-squares (OLS) regression (package \texttt{stats}) and the five sets of predictor variables described above. Interactions between predictor variables will not be included. The residuals will be used to fit a variogram model and the parameters of the trend models will be re-estimated using generalized-least-squares (GLS) regression (package \texttt{gstat}). Model assessment will involve evaluating the statistics of multiple regression and variographic analysis.
+
+\subsection{Assessment of Competing Models}
+
+Assessment of competing models will involve evaluating the degree of multicollinearity among predictor variables using the variance-covariance matrix of estimated regression coefficients and the variance inflation factor. Prediction accuracy will be evaluated for all models using independent field data obtained through probabilistic sampling ($n=60$). Error statistics (mean error, mean squared error, and mean squared deviation ratio) of pairs of competing models will be compared under the null hypothesis that the expected value of the estimated mean difference is zero. Also, the spatially averaged universal kriging variance will be estimated for each model. Statistical performance will also be compared with the trend models fitted using the fifth set of predictor variables composed by poorly correlated environmental co-variates. The pedological information content of trend models fitted with PCs will be evaluated eliciting the opinion of five experts.

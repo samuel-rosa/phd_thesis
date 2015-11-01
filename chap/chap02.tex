@@ -1,0 +1,38 @@
+\artigotrue
+\chapter{On the Uncertainty of Digital Soil Mapping - Sample Size and Design}
+\label{chap:chapter02}
+
+\begin{chapterabstractPOR}{Pedometria, Amostra de calibração, Otimização}
+Este capítulo abordará a identificação de tamanhos e delineamentos de amostras de calibraçao para a construção de modelos de predição de propriedades do solo.
+\end{chapterabstractPOR}
+
+\begin{chapterabstractENG}{Pedometrics, Calibration sample, Optimization}
+This chapter will deal with identifying appropriate calibration sample sizes and sampling designs for building linear DSM models for mapping soil properties.
+\end{chapterabstractENG}
+
+\section{INTRODUCTION}
+
+This chapter will deal with identifying appropriate calibration sample sizes and sampling designs for building linear DSM models for mapping soil properties. 
+
+\section{MATERIAL AND METHODS}
+
+\subsection{Database Scenarios}
+
+Seven subsets of calibration observations will be generated to simulate database scenarios regarding the number of calibration observations available to build DSM models. These subsets will contain $n=$50, 100, 150, 200, 250, 300 and 350 calibration observations. Expert knowledge used to collect the original set of $n=350$ calibration observations, coupled with a point pattern analysis (package \texttt{spatstat}) and information on landscape stratification (geology, land use and landform), accessibility (slope, land use, road network and urban areas) and spatial coverage (sampling density and distance between calibration observations), will be formalized as a series of decision rules (\textit{a sampling model}) to produce every subset of calibration observations. These seven subsets will be assumed as if they are the outcome of soil surveys with different budget restrictions and represent the most likely realizations of what soil surveyors would have done in a real situation.
+
+\subsection{Coast Model}
+
+A modified stratified two-stage sampling cost model will be employed to estimate the total survey cost for each subset of calibration observations. This cost model assumes constant and variable cost components. Constant cost components include (a) the time needed for observation in the field, (b) the survey cost or cost of personnel (US\$ per hour), (c) the cost of equipment (US\$ per hour), and (d) the cost of laboratory analysis per sample point (US\$). Variable cost components depend on assess time to sample points in a given stratum and include information on (e) the number of primary units that are selected, (f) the number of sampling points selected per primary unit, (g) the average reciprocal speed of access to primary units, (h) the average reciprocal speed of access to secondary units within primary units, (i) the area of every primary unit, and (j) the number of primary units.
+
+\subsection{Model Building}
+
+Linear DSM models (universal kriging) of soil properties (particle-size distribution, organic carbon content and cation exchange capacity) will be build with each subset of calibration observations using most up-to-date environmental co-variates available. The trend models will be fitted using ordinary-least-squares (OLS) regression (package \texttt{stats}) and environmental co-variates will be selected using the Akaike Information Criterion (AIC) (package \texttt{MASS}). Interactions between environmental co-variates will not be included. The residuals will be used to fit a variogram model and the parameters of the trend models will be re-estimated using generalized-least-squares (GLS) regression (package \texttt{gstat}). Model assessment will involve evaluating the degree of multicollinearity among environmental co-variates, and statistics of multiple regression and variographic analysis. Because it is expected that the trend models will be composed by different sets of environmental co-variates, a second 
+trend model will be fitted for every subset of calibration observations. These trend models will be composed by the same set of environmental co-variates as the best performing model built in the previous step. This will allow to assess the effect of sample size on prediction accuracy.
+
+\subsection{Assessment of Competing Models}
+
+Fourteen competing models will be build for every soil property. Seven of these competing models will be composed by different sets of environmental co-variates. Their analysis will include evaluating the differences among these sets of environmental co-variates under the light of the conceptual model of pedogenesis. Differences in variogram model parameters will also be searched. Coupled with the analysis of the spatial pattern of predicted values and prediction error variance maps, these analysis will help defining a degree of uncertainty about model specification due to variation of the number of calibration observations. Prediction accuracy will be evaluated for all models using independent field data obtained through probabilistic sampling (n=60). Error statistics (mean error, mean squared error, and mean squared deviation ratio) of pairs of competing models will be compared under the null hypothesis that the expected value of the estimated mean difference is zero. Also, the spatially averaged universal kriging variance will be estimated for each model. These error statistics will be plotted in a graph to visualize the relation between sample size, survey cost and prediction accuracy.
+
+\subsection{Pareto Optimization}
+
+Two optimization exercises will be carried out using the best performing model built in the previous steps coupled with spatial simulated annealing (SSA). In both cases, minimization of the spatially averaged universal kriging variance of all linear DSM models and of the total survey cost will serve as optimization criteria (Pareto optimization). The first optimization exercise will involve finding an optimum sampling design using already available calibration observations considering each of the seven simulated database scenarios described above. This will allow planning efficient field work if existing sampling points are to be revisited in the near future to develop a monitoring program. The results will include a graphic demonstration of optimized criteria regarding the number of calibration observations, which will be compared with the subsets used to fit the linear DSM models in the previous steps. The second optimization exercise will involve defining an optimum sampling design with the selection of new sampling points. This will demonstrate if a more efficient sampling design exists. The results will include plotting the new sampling designs and comparing the minimized criteria with previous results.

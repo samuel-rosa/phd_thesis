@@ -1,0 +1,28 @@
+\ctable[
+   caption  = {Description of the $p=12$ dummy predictor variables derived from the two soil maps.},
+   label    = tab:soil-covars,
+   notespar,
+   pos      = !ht,
+%    doinside = \scriptsize\setstretch{1.1},
+   doinside = \scriptsize
+   ]{l p{0.85\textwidth} l}{
+   \tnote[a]{Soil classification according to the old Brazilian classification (only for \citet{AzolinEtAl1988}), the current Brazilian classification \citep{SantosEtAl2013a}, and the international classification \citep{IUSSWorkingGroupWRB2007}.}
+   \tnote[b]{Minimum Legible Delineation calculated following \citet{Rossiter2000}.}
+   }{                                                                                                                    \FL
+   Code                & Mapping unit(s) included and Description\tmark[a,b]                                             \ML
+   \multicolumn{2}{l}{Source: \citet{AzolinEtAl1988}. Cartographic scale: 1:100,000. Minimum Legible Delineation: 40~ha.} \NN
+   \texttt{SOIL\_100b} & \textit{Re4}. Shallow soils with low to high base saturation covering mountainous terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico Distrófico/Eutrófico; Distric/Eutric Leptosol). \NN 
+   \texttt{SOIL\_100c} & \textit{Re-C-Co}. Shallow soils with high base saturation located in strongly sloping terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric Leptosol), low weathered soils (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric Cambisol), and colluvial deposits. \NN
+   \texttt{SOIL\_100d} & \textit{TBa-Rd}. Deep, well-structured, low base saturation soils (Terra Bruna Estruturada álica; Nitossolo; Nitisol), and shallow soils (Solo Litólico; Neossolo Litólico; Leptosol). \NN
+   \texttt{SOIL\_100e} & \textit{Rd1} and \textit{Re4}. \textit{Rd1} is composed mainly by shallow soils with low to high base saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; Distric/Eutric Leptosol) located in slopping terrain. This dummy predictor variable is composed by shallow soils in both sloping and mountainous terrain. \NN
+   \texttt{SOIL\_100f} & \textit{TBa-Rd} and \textit{C1}. \textit{C1} is composed by low weathered soils developed in lower landscape positions, close to drainage channels (Cambissolo Eutrófico; Cambissolo Eutrófico; Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop agriculture among those identified in the soil survey. \NN
+   &                                                                                                                     \NN
+   \multicolumn{2}{l}{Source: \citet{MiguelEtAl2012}. Cartographic scale: 1:25,000. Minimum Legible Delineation: 2.5~ha.} \NN
+   \texttt{SOIL\_25a}  & \textit{PBAC}. Moderately deep soils derived from sedimentary rocks, with abrupt textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol). \NN
+   \texttt{SOIL\_25b}  & \textit{PV}. Deep soils derived from igneous rocks, with moderate textural gradient, and low base saturation (Argissolo Vermelho; Acrisol). \NN
+   \texttt{SOIL\_25c}  & \textit{C-R}. Low weathered soils (Cambissolo; Cambisol) and shallow soils with low to high base saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric Leptosol/Regosol). \NN
+   \texttt{SOIL\_25d}  & \textit{RL}. Shallow soils with low to high base saturation (Neossolo Litólico Eutrófico/Distrófico; Eutric/Distric Leptosol). \NN
+   \texttt{SOIL\_25h}  & \textit{PBAC}, \textit{PV} and \textit{SX}. \textit{SX} is composed by moderately deep soils derived from sedimentary rocks, with abrupt textural change, low base saturation, and which are saturated with water for long periods of the year (Planossolo Háplico; Planosol). This dummy predictor variable includes the best soil mapping units for crop agriculture among those identified in the soil survey. \NN
+   \texttt{SOIL\_25i}  & \textit{RL}, \textit{RL-RR} and \textit{RR}. This dummy predictor variable includes all three mapping units composed mainly by shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol). \NN
+   \texttt{SOIL\_25j}  & \textit{PV}, \textit{RL}, \textit{RL-RR} and \textit{C-R}. This dummy predictor variable includes all four mapping units composed mainly by soils derived from igneous rocks. \LL
+   }

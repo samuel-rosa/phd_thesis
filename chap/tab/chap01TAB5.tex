@@ -1,0 +1,27 @@
+\ctable[
+   caption = {Statistics$^a$ of the LOO-CV of baseline and best performing multiple linear regression models (LM) and linear mixed models (LMM).},
+   label   = tab:cv-stats,
+   notespar,
+   pos = !th,
+   %    doinside = \scriptsize\setstretch{1.1}
+   doinside = \scriptsize
+   ]{llrrrrr}{
+   \tnote[a]{Statistics: mean error (\textit{ME}), mean absolute error (\textit{MAE}), root mean squared error (\textit{RMSE}), scaled root mean squared error (\textit{SRMSE}, unitless), and amount of variance explained (\textit{AVE}, percent).}
+   }{\FL
+   \multicolumn{1}{l}{Model}&\multicolumn{1}{c}{Type}&\multicolumn{1}{c}{\textit{ME}}&\multicolumn{1}{c}{\textit{MAE}}&\multicolumn{1}{c}{\textit{RMSE}}&\multicolumn{1}{c}{\textit{SRMSE}}&\multicolumn{1}{c}{\textit{AVE}}\ML
+   \multicolumn{7}{l}{CLAY (g kg$^{-1}$)}\NN
+   ~~Baseline&LM&$ 1.31$&$52.1$&$ 72.1$&$0.89$&$56.8$\NN
+   ~~&LMM&$ 0.94$&$48.5$&$ 68.8$&$1.03$&$60.7$\NN
+   ~~Best performing&LM&$ 1.59$&$51.3$&$ 70.7$&$0.91$&$58.4$\NN
+   ~~&LMM&$ 1.08$&$47.8$&$ 68.1$&$1.03$&$61.5$\ML
+   \multicolumn{7}{l}{SOC (g kg$^{-1}$)}\NN
+   ~~Baseline&LM&$-0.30$&$10.9$&$ 18.9$&$1.22$&$35.8$\NN
+   ~~&LMM&$-0.39$&$11.0$&$ 19.4$&$1.43$&$32.5$\NN
+   ~~Best performing&LM&$-0.20$&$10.1$&$ 16.9$&$0.91$&$49.0$\NN
+   ~~&LMM&$-0.25$&$10.4$&$ 17.6$&$1.16$&$44.3$\ML
+   \multicolumn{7}{l}{ECEC (mmol kg$^{-1}$)}\NN
+   ~~Baseline&LM&$-0.88$&$70.6$&$112.4$&$0.97$&$22.3$\NN
+   ~~&LMM&$-0.32$&$63.3$&$101.1$&$1.32$&$37.1$\NN
+   ~~Best performing&LM&$-0.76$&$64.9$&$101.7$&$0.86$&$36.3$\NN
+   ~~&LMM&$-0.29$&$62.6$&$ 97.9$&$1.09$&$41.1$\LL
+}

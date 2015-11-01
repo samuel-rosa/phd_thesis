@@ -1,0 +1,39 @@
+\artigotrue
+\chapter{On the Uncertainty of Digital Soil Mapping - Model Structure}
+\label{chap:chapter05}
+
+\begin{chapterabstractPOR}{Pedometria, Incerteza, Estrutura do modelo}
+Este capítulo abordará a identificação de cenários de bancos de dados relativos ao número de observações de calibração disponíveis nos quais modelos não-lineares apresentam desempenho melhor do que modelos lineares.
+\end{chapterabstractPOR}
+
+\begin{chapterabstractENG}{Pedometrics, Uncertainty, Model structure}
+This chapter will deal with identifying database scenarios regarding the number of calibration observations available in which non-linear models present better performance than linear models.
+\end{chapterabstractENG}
+
+\section{INTRODUCTION}
+
+This chapter will deal with identifying database scenarios regarding the number of calibration observations available in which non-linear models present better performance than linear models.
+
+\section{MATERIAL AND METHODS}
+
+\subsection{Database}
+
+Seven subsets of calibration observations will be used to simulate database scenarios regarding the number of calibration observations available to build DSM models. These subsets will contain $n=$50, 100, 150, 200, 250, 300 and 350 calibration observations and will be constructed using the criteria described in item Chapter 2. A suite of $n=64$ environmental co-variates will be derived from seventeen data layers to fit trend models. Orthogonalization of predictor variables will not be considered.
+
+\subsection{Model Structure}
+
+Two types of trend model structures will be evaluated: linear and non-linear. The linear structure will be represented by multivariate linear regression model with estimation of parameters by ordinary least squares (OLS) (package \texttt{stats}), while the non-linear structure will be represented by three models. These are:
+
+\begin{itemize}
+\item An artificial neural network with multilayer perceptron (MLP) architecture and training by error backpropagation (package \texttt{RSNNS});
+\item A regression tree using a one-step lookahead construction method with splits aiming at the reduction of the residual sum of squares (package \texttt{rpart});
+\item A random forest implementing Breiman's algorithm (package \texttt{randomForest}).
+\end{itemize}
+
+\subsection{Model Building}
+
+Four trend models will be fitted for each soil properties (particle-size distribution, organic carbon content and cation exchange capacity). Each of these trend models will be fitted using one of the four model structures described above. The residuals will be used to fit a variogram model and interpolated using simple kriging (package \texttt{gstat}). Final prediction map will be obtained by adding kriged predictions to the predictions made by the trend model. Model assessment will involve analyzing summary statistics of each method.
+
+\subsection{Assessment of Competing Models}
+
+Four competing models will be build for every soil property. Their analysis will include evaluating the differences among the sets of environmental co-variates included in the trend model under the light of the conceptual model of pedogenesis. Differences in variogram model parameters will also be searched. Coupled with the analysis of the spatial pattern of predicted values and prediction error variance maps, these analysis will help defining a degree of uncertainty about model specification due to trend model structure. Prediction accuracy  will be evaluated for all models using independent field data obtained through probabilistic sampling ($n=60$). Error statistics (mean error, mean squared error, and mean squared deviation ratio) of pairs of competing models will be compared under the null hypothesis that the expected value of the estimated mean difference is zero. The pedological information content of trend models will be evaluated eliciting the opinion of five experts.

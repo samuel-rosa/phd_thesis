@@ -1,0 +1,46 @@
+\artigotrue
+\chapter{On the Uncertainty of Digital Soil Mapping - Co-variate Selection}
+\label{chap:chapter03}
+
+\begin{chapterabstractPOR}{Pedometria, Incerteza, Seleção automática}
+Este capítulo abordará a avaliação de métodos automáticos usados para selecionar co-variáveis ambientais para construir modelos de MDS. Os métodos serão avaliados quanto a composição do modelo construído e à sua acurácia preditiva.
+\end{chapterabstractPOR}
+
+\begin{chapterabstractENG}{Pedometrics, Uncertainty, Automated selection}
+This chapter will deal with evaluating automated methods used to select environmental co-variates to build linear DSM models on how they affect model composition and prediction accuracy.
+\end{chapterabstractENG}
+
+\section{INTRODUCTION}
+
+This chapter will deal with evaluating automated methods used to select environmental co-variates to build linear DSM models on how they affect model composition and prediction accuracy.
+
+\section{MATERIAL AND METHODS}
+
+\subsection{Environmental Co-variates}
+
+There are 17 data layers freely available for the study area and which will be used to develop the empirical tests of this chapter. These data layers include two land use maps (1980 and 2009), one geological map (scale 1:25,000), two soil maps (scale 1:100,000 and 1:30,000), one digital elevation model (30-m spatial resolution), and eleven orbital images, ten of which with 30-m spatial resolution and one with 6.5-m spatial resolution. A suite of $n=64$ environmental co-variates will be derived from these data layers.
+
+\subsection{Co-variate Selection}
+
+Two co-variate selection approaches will be used. The first method consists of using expert knowledge with control of the false discovery rate as it was described by Murray Lark and collaborators \cite{LarkEtAl2007a}. Five experts will be consulted separately and their decisions will be aggregated using a behavioral method. Each expert will receive information on the conceptual models of pedogenesis and statistics (correlation and principal component analysis) of environmental co-variates. The second approach for co-variate selection consists of using automated co-variate selection methods, and includes nine methods:
+
+\begin{enumerate}
+\item Stepwise selection implemented in the package \texttt{stats};
+\item Forward selection implemented in the package \texttt{stats};
+\item Backward elimination implemented in the package \texttt{stats};
+\item A genetic algorithm implemented in the package \texttt{glmulti};
+\item A branch-and-bound algorithm implemented in the package \texttt{leaps};
+\item A simulated annealing algorithm implemented in the package \texttt{subselect};
+\item A genetic algorithm implemented in the package \texttt{subselect};
+\item A modifi{}ed local search algorithm implemented in the package \texttt{subselect};
+\item A \textit{L}$_{1}$-regularization path algorithm implemented in the
+package \texttt{glmpath}.
+\end{enumerate}
+
+\subsection{Model Building}
+
+Co-variate selection methods will be used to select sets of environmental co-variates to fit linear trend models of soil properties (particle-size distribution, organic carbon content and cation exchange capacity). The trend models will be fitted with $n=350$ calibration observations using ordinary-least-squares (OLS) regression (package \texttt{stats}) without including interactions between environmental co-variates. The residuals will be used to fit a variogram model and the parameters of the trend models will be re-estimated using generalized-least-squares (GLS) regression (package \texttt{gstat}). Model assessment will involve evaluating the degree of multicollinearity among environmental co-variates, and statistics of multiple regression and variographic analysis.
+
+\subsection{Assessment of Competing Models}
+
+Ten competing models will be build for every soil property. Their analysis will include evaluating the differences among the sets of environmental co-variates included in the trend model under the light of the conceptual model of pedogenesis. Differences in variogram model parameters will also be searched. Coupled with the analysis of the spatial pattern of predicted values and prediction error variance maps, these analysis will help defining a degree of uncertainty about model specification due to the co-variate selection method. Prediction accuracy will be evaluated for all models using independent field data obtained through probabilistic sampling ($n=60$). Error statistics (mean error, mean squared error, and mean squared deviation ratio) of pairs of competing models will be compared under the null hypothesis that the expected value of the estimated mean difference is zero. Also, the spatially averaged universal kriging variance will be estimated for each model.
