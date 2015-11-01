@@ -1,0 +1,384 @@
+%\listfiles
+
+%% Tipo de documento e a classe a ser usada para sua formatação.
+\documentclass[tese,english]{UFRuralRJ}
+
+%% Um tipo específico de monografia pode ser informado como parâmetro opcional:
+%\documentclass[tese]{UFRuralRJ}
+
+%% A opção 'openright' força inícios de capítulos em páginas ímpares
+%\documentclass[openright]{UFRuralRJ}
+
+%% Use a opção 'twoside' para gerar uma versão frente-e-verso
+%\documentclass[twoside]{UFRuralRJ}
+
+%%==============================================================================
+%% Pacotes - língua, codificação e fonte
+%%==============================================================================
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc} %% Conjunto de caracteres correto
+%\usepackage{times} %% Usar fonte Adobe Times Roman, equivalente à Times New Roman
+\usepackage[utf8]{inputenc} %% Para acentuação correta
+
+%%==============================================================================
+%% Pacotes - formatação de equações e números
+%%==============================================================================
+
+\usepackage{amsmath,latexsym,amssymb}
+\usepackage{siunitx} %% Sistema Internacional de Unidades
+% Access bold symbols in maths mode
+\usepackage{bm}
+
+%%==============================================================================
+%% Pacotes - formatação de figuras
+%%==============================================================================
+
+%% Importar figuras corretamente
+\usepackage{graphicx}
+
+%% Diretório onde estão as figuras dos capítulos
+\graphicspath{{chap/fig/}}
+
+% Im­proved in­ter­face for float­ing ob­jects
+\usepackage{float}
+\usepackage{wrapfig}
+
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,round}
+
+%%==============================================================================
+%% Pacotes - formatação de hyperlinks
+%%==============================================================================
+%% Opção 'hidelinks' disponível no pacote 'hyperref' a partir da versão 
+%% 2011-02-05  6.82a. 'hidelinks' retira os retângulos do entorno das palavras
+%% com links.
+
+\usepackage[%hidelinks%, 
+            bookmarksopen=true,linktoc=none,colorlinks=true,
+            linkcolor=blue,citecolor=blue,filecolor=magenta,urlcolor=blue,
+            pdftitle={Analysis of Sources of Uncertainty in Quantitative Spatial Soil Modelling},
+            pdfauthor={Alessandro Samuel-Rosa},
+            pdfsubject={Tese de Doutorado},
+            pdfkeywords={Pedometria, Modelos, Incerteza}
+            ]{hyperref}
+
+%%TODO: Margens conforme MDT UFSM 7ª edição. Corrigir no arquivo UFRuralRJ.cls 
+%%      para funcionar a opção twoside *PENDENTE*
+\usepackage[inner = 30mm, outer = 20mm, top = 30mm, bottom = 20mm]{geometry}
+
+%% Se o pacote 'hyperref' acima foi carregado, a linha abaixo corrige um bug na 
+%% hora de montar o sumário da lista de figuras e tabelas. Comente a linha se o
+%% pacote 'hyperref' não foi carregado.
+\input{macros/bugcaption}
+
+%%==============================================================================
+%% Pacotes - formatação de verbatim
+%%==============================================================================
+%% O ambiente verbatim é o ambiente onde são inseridos exemplos de código fonte.
+%% Está opção adiciona cor de fundo ao ambiente verbatim.
+
+\let\oldv\verbatim
+\let\oldendv\endverbatim
+\def\verbatim{\par\setbox0\vbox\bgroup\oldv}
+\def\endverbatim{\oldendv\egroup\fboxsep0pt 
+                 \noindent\colorbox[gray]{0.8}{\usebox0}\par}
+
+%%==============================================================================
+%% Packages - other
+%%==============================================================================
+
+% Include PDF documents in LaTeX
+\usepackage{pdfpages}
+
+% Place selected parts of a document in landscape
+\usepackage{lscape}
+
+% Publication quality tables in LaTeX
+\usepackage{booktabs}
+
+% Flexible typesetting of table and figure floats using key/value directives
+\usepackage{ctable}
+
+% Customising captions in floating environments
+\usepackage[font=footnotesize,labelfont=bf,compatibility=false]{caption}
+
+% Support for sub-captions
+\usepackage[skip=0pt,position=top,singlelinecheck=off,justification=raggedright,
+            font+=footnotesize]{subcaption}
+
+% A range of dash commands for compound words
+\usepackage[shortcuts]{extdash}
+
+% Con­trol lay­out of item­ize, enu­mer­ate, de­scrip­tion
+\usepackage{enumitem}
+
+%%==============================================================================
+%% Identificação do trabalho
+%%==============================================================================
+\titulo{Analysis of Sources of Uncertainty in Quantitative Spatial Soil Modelling}
+\author{Samuel-Rosa}{Alessandro}
+\instituto{Instituto de Agronomia}
+\curso{Curso de Pós-Graduação em Agronomia -- Ciência do Solo}
+\area{Ciência do Solo}
+\grau{Doutor em Agronomia -- Ciência do Solo}
+\nivel{Doutorado em Agronomia -- Ciência do Solo}
+\local{Serop\'edica}{RJ}{Brasil}
+
+%%==============================================================================
+%% Identificação dos orientadores
+%%==============================================================================
+\advisor[Professora]{Drª.}{Anjos}{Lúcia Helena Cunha dos}{UFRRJ}
+\orientadoratrue
+\coadvisor[Professor]{Dr.}{Vasques}{Gustavo de Mattos}
+\coadvisor[Professor]{Dr.}{Heuvelink}{Gerard B M}
+\coorientadorestrue
+
+%%==============================================================================
+%% Informações sobre a defesa
+%%==============================================================================
+\committee[Dr.]{Banca}{Melhor Presidente da}{UFRRJ} %% Presidente
+\committee[Dra.]{Banca}{Melhor Integrante da}{UFRRJ} %% Examinador
+\committee[Dr.]{Banca}{Melhor Integrante da}{UFRRJ} %% Examinador
+\committee[Dra.]{Banca}{Outra Melhor Integrante da}{MEFR} %% Examinador
+\committee[Dr.]{Banca}{Outro Melhor Integrante da}{MEFR} %% Examinador
+\date{14}{September}{2015} %% Data da defesa
+
+%%==============================================================================
+%% Outros itens
+%%==============================================================================
+
+% \keyword{Pedometria}
+% \keyword{Modelos preditivos}
+% \keyword{Incerteza}
+
+%%=============================================================================
+%% Início do documento
+%%=============================================================================
+\begin{document}
+
+%%=============================================================================
+%% Capa e folha de rosto
+%%=============================================================================
+\maketitle
+
+%%=============================================================================
+%% Ficha catalográfica
+%%=============================================================================
+% Como a CIP vai ser impressa atrás da página de rosto, as margens inner e outer	
+% devem ser invertidas.
+%\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}
+%\makeCIP{alessandrosamuel@yahoo.com.br}% email do autor		
+%\restoregeometry
+
+%Se for usar a catalogação gerada pelo gerador do site da biblioteca comentar as linhas
+%acima e utilizar o comando abaixo
+%\includeCIP{CIP.pdf}
+
+%%=============================================================================
+% Folha de aprovação
+%%=============================================================================
+% \makeapprove
+
+%%=============================================================================
+%% Dedicatória (opcional)
+%%=============================================================================
+% \clearpage\mbox{}\vfill\hspace{80mm}\begin{minipage}{76mm}\begin{flushright}{\em
+% Àqueles que financiaram meus estudos...
+% \par
+% ...DEDICO!
+% }\end{flushright}\end{minipage}
+
+%%=============================================================================
+%% Agradecimentos (opcional)
+%%=============================================================================
+% \chapter*{Acknowledgements}
+% 
+% Ao Curso de Pós-Graduação em Agronomia-Ciência do Solo (CPGA-CS) e ao Departamento de Solos da Universidade Federal Rural do Rio de Janeiro (UFRuralRJ).
+% 
+% Ao CNPq e à CAPES.
+% 
+% À Wageningen University and Research Centre (WUR) e ao International Soil Reference Information Centre (ISRIC).
+% 
+% Aos orientadores Dr\textsuperscript{a}. Lúcia Helena Cunha dos Anjos, Dr. Gustavo de Mattos Vasques e Dr. Gerard B M Heuvelink.
+% 
+% Á todos que, direta ou indiretamente, contribuíram para a construção deste trabalho.
+
+%%=============================================================================
+%% Biografia (opcional)
+%%=============================================================================
+% \chapter*{Biography}
+% O autor nasceu, cresceu e escreveu uma tese.
+
+%%=============================================================================
+%% Epígrafe (opcional)
+%%=============================================================================
+% \clearpage\mbox{}\vfill\hspace{80mm}\begin{minipage}{76mm}\begin{flushright}{\em
+% ``Fazer é a melhor forma de dizer.''
+% \par
+% Autor desconhecido
+% }\end{flushright}\end{minipage}
+
+%%=============================================================================
+%% Resumo geral em inglês
+%%=============================================================================
+\def\tituloingles{Analysis of Sources of Uncertainty in Quantitative Spatial 
+  Soil Modelling}
+\def\chavesingles{Pedometrics, Predictive Models, Uncertainty}
+\generalabstracttrue
+\begin{generalabstract}{english}{\tituloingles}{\chavesingles}
+Translating verbal representations of conceptual models that describe reality 
+into mathematical representations of these models is a key step in digital soil 
+mapping (DSM). The development of such mathematical representations is affected 
+by several sources of uncertainty. These sources can be classified into three 
+categories for didactic purposes: a) calibration observations, b) environmental
+co-variates and c) model structure. The general objective of this PhD research 
+proposal is to evaluate these three main sources of uncertainty in DSM under 
+different database scenarios regarding the number of calibration observations 
+and the quality of environmental co-variates used to fit DSM models. A database 
+from a pilot area in DSM studies in southern Brazil will be used to develop a 
+series of empirical tests to meet these objective. First, the quality of freely 
+available environmental co-variates and their suitability for DSM will be 
+assessed. Next, seven sets of calibration observations of varying sizes will be 
+evaluated as to how they affect the performance of DSM models. Co-variate 
+selection methods will also be evaluated on how they comply with the conceptual 
+model of pedogenesis. Multicollinearity effects on linear trend models and the 
+orthogonalization solution will be deeply evaluated. Last, but not least, 
+non-linear models will be evaluated if they present better performance than 
+linear models in poor database scenarios. The results will enable to understand 
+how uncertain factors influence DSM models and the definition of a proper 
+working protocol. This will be a direct contribution to the Brazilian Research 
+Network on Digital Soil Mapping, the GlobalSoilMap.net consortium, the Global 
+Soil Information Facilities, and of FAO's project Global Soil Partnership. 
+Besides, it will ensure the use of the soil information with greater confidence 
+about its reliability, which is critical for decision makers.
+\end{generalabstract}
+
+%%=============================================================================
+%% Resumo geral em português
+%%=============================================================================
+\def\tituloportugues{Análise das Fontes de Incerteza na Modelagem Quantitativa 
+  Espacial do Solo}
+\def\chavesportugues{Pedometria, Modelos Preditivos, Incerteza}
+\generalabstracttrue
+\begin{generalabstract}{brazilian}{\tituloportugues}{\chavesportugues}
+A tradução da representação verbal de modelos conceituais que descrevem a 
+realidade para a forma de representação matemática destes modelos é um passo 
+chave no mapeamento digital do solo (MDS). O desenvolvimento de tais 
+representações matemáticas é afetado por diversas fontes de incerteza. Estas 
+fontes podem ser classificadas, didaticamente, em três categoriais: a) 
+observações de calibração, b) co-variáveis ambientais, e c) estrutura do 
+modelo. O objetivo geral desta proposta de pesquisa de doutorado é avaliar 
+estas três principais fontes de incerteza no MDS sob diferentes cenários de 
+banco de dados relativos ao número de observações de calibração e à qualidade 
+das co-variáveis ambientais usadas para ajustas os modelos de MDS. Um banco de
+dados de uma área piloto em estudos de MDS no sul do Brasil será usada para 
+desenvolver uma série de testes empíricos para alcançar estes objetivos. 
+Primeiro será avaliada a qualidade das co-variáveis ambientais disponíveis 
+gratuitamente e a sua adequabilidade para o MDS. Em seguida, sete conjuntos 
+de observações de calibração com tamanhos variados serão avaliados em relação 
+ao seu efeito sobre o desempenho dos modelos de MDS. Métodos de seleção de 
+co-variáveis também serão avaliados quanto à sua aderência ao modelo conceitual
+de pedogênese. Os efeitos da multicolinearidade sobre os modelos lineares de 
+tendência e a solução de ortogonalização serão profundamente avaliados. Por 
+fim, mas não menos importante, modelos não-lineares serão avaliados em relação 
+a sua capacidade de apresentar melhor desempenho do que modelo lineares em 
+cenários de banco de dados pobres. Os resultados permitirão entender como os 
+fatores incertos influenciam os modelos de MDS e a definição de um protocolo 
+de trabalho apropriado. Isso será uma contribuição direta à Rede Brasileira de 
+Pesquisa em Mapeamento Digital do Solo, ao consórcio GlobalSoilMap.net, ao 
+Global Soil Information Facilities, e ao projeto da FAO Aliança Global pelo 
+Solo. Além disso, permitirá o uso da informação do solo com maior segurança 
+sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
+\end{generalabstract}
+
+%% Lista de Ilustrações (opc)
+%% Lista de Símbolos (opc)
+%% Lista de Anexos e Apêndices (opc)
+
+%%=============================================================================
+%% Lista de figuras
+%%=============================================================================
+\listoffigures
+
+%%=============================================================================
+%% Lista de tabelas (comentar se não houver)
+%%=============================================================================
+\listoftables
+
+%%=============================================================================
+%% Lista de Apêndices (comentar se não houver)
+%%=============================================================================
+% \listofappendix
+
+%%=============================================================================
+%% Lista de Anexos (comentar se não houver)
+%%=============================================================================
+%\listofannex
+
+%%=============================================================================
+%% Lista de abreviaturas e siglas
+%%=============================================================================
+%\begin{listofabbrv}{UbiComp}
+%   \item [DSM] Digital Soil Mapping
+%   \item [UbiComp] Computação Ubíqua
+%\end{listofabbrv}
+
+
+%%=============================================================================
+%% Lista de simbolos (opcional)
+%%=============================================================================
+%Simbolos devem aparecer conforme a ordem em que aparecem no texto
+% o parametro deve ser o símbolo mais longo
+%\begin{listofsymbols}{teste}
+%  \item [$\varnothing$] vazio
+%  \item [$\Gamma$]  Gama
+%  \item [$\forall$] Para todo
+%\end{listofsymbols}
+
+%%=============================================================================
+%% Sumário
+%%=============================================================================
+\tableofcontents
+
+%%=============================================================================
+%% Início da tese
+%%=============================================================================
+\setlength{\baselineskip}{1.5\baselineskip}
+
+% Adiciona cada capitulo
+\include{chap/chap00}
+\include{chap/chap01}
+% \include{chap/chap02}
+% \include{chap/chap03}
+% \include{chap/chap04}
+% \include{chap/chap05}
+%\include{capitulos/point-pattern-analysis}
+\setlength{\baselineskip}{\baselineskip}
+
+%%=============================================================================
+%% Referências
+%%=============================================================================
+% \bibliographystyle{abnt}
+\bibliography{ref/biblio}
+
+%IMPORTANTE: Se precisar usar alguma seção ou subseção dentro dos apêndices ou
+%anexos, utilizar o comando \tocless para não adicionar no Sumário
+%Exemplos: 
+% \tocless\section{Histórico}
+
+%%=============================================================================
+%% Apêndices
+%%=============================================================================
+\appendix
+\include{chap/apena} % description of the database
+% \include{chap/apenb} % R-package spsann
+% \include{chap/apenc} % R-package pedometrics
+
+%%=============================================================================
+%% Anexos
+%%=============================================================================
+%\annex
+%\include{capitulos/anexoa}
+
+\end{document}
