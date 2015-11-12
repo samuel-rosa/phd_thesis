@@ -7,7 +7,17 @@ description of each `*.tex` file is presented bellow.
 
 **Title**: General introduction
 
-**Description**: This chapter contains the general introduction of the thesis.
+**Description**: This chapter contains the general introduction of the thesis. 
+It is subdivided in two sections, each with three subsections:
+
+* Background and motivation
+  - Demand for soil information
+  - Modern soil mapping
+  - Sources of uncertainty
+* Content of the thesis
+  - Objectives and research questions
+  - Study area and database
+  - Outline
 
 ## chap01
 
