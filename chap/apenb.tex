@@ -63,20 +63,21 @@ kept in its original location.
 The \textbf{spsann}-package uses a more elegant method based on using a finite
 set of candidate locations coupled with a form of \textit{two-stage random 
 sampling} as implemented in the \texttt{spsample}-function of the 
-\textbf{spcosa}-package.
+\textbf{spcosa}-package. The fine grid of points that cover the sampling region
+can be understood as being the centre nodes of a finite set of grid cells (or 
+pixels of a raster image). In the first stage, one of the candidate 'grid cells'
+is selected with replacement, i.e. independently of already being occupied by 
+another sample point. The candidate location for our sample point is selected
+in the second stage within that 'grid cell' by simple random sampling. This 
+method guarantees that a sample point can be placed at \textit{almost} any 
+location within the sampling region. It also discards the need to check if the 
+candidate location already is occupied by a sample point, simplifying the code 
+and possibly speeding up the computations.
 
- Because 
-the candidate locations are placed on a finite regular grid, they can be 
-seen as being the centre nodes of a finite set of grid cells (or pixels of 
-a raster image). In the first stage, one of the 'grid cells' is selected 
-with replacement, i.e. independently of already being occupied by 
-another sample point. The new location for the point chosen to be jittered 
-is selected within that 'grid cell' by simple random sampling. This 
-method guarantees that \textit{almost} any location in the sampling region can 
-be a candidate location. It also discards the need to check if the new 
-location already is occupied by another point, simplifying the code and 
-(possibly) speeding up the computations.
- 
+
+
+
+
 The size of the search graph
 is reduced linearly at the end of each Markov chain. The size of the search 
 graph is correlated with the concept of \textit{temperature}: a larger search 
