@@ -7,8 +7,10 @@ description of each `*.tex` file is presented bellow.
 
 **Title**: General introduction
 
-**Description**: This chapter contains the general introduction of the thesis. 
-It is subdivided in two sections, each with three subsections:
+**Description**: This chapter contains the general introduction of the thesis.
+
+**Structure**: The *General introduction* is subdivided in two sections, each 
+with three subsections:
 
 * Background and motivation
   - Demand for soil information
