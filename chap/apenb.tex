@@ -7,11 +7,25 @@ Simulated Annealing}
 
 \section{Objective functions}
 
+\subsection{Spatial trend identification and estimation}
 
+CORR and DIST
 
-\section{Spatial simulated annealing}
+\subsection{Variogram identification and estimation}
 
-\subsection{Generation mechanism}
+PPL: points and pairs; minimum and distribution
+
+\subsection{Spatial interpolation}
+
+MKV and MSSD
+
+\subsection{Multi-objective optimization}
+
+ACDC: CORR and DIST;
+CLHS;
+SPAN: CORR, DIST, PPL, and MSSD
+
+\section{Generation mechanism}
 
 The \textit{generation mechanism} corresponds to the set of formal rules used 
 to randomly perturb the sample conﬁguration to create a new solution out of the
@@ -63,16 +77,16 @@ location.
 The \textbf{spsann}-package uses a more elegant method based on using a finite
 set of candidate locations coupled with a form of \textit{two-stage random 
 sampling} as implemented in the \texttt{spsample}-function of the 
-\textbf{spcosa}-package. The fine grid of points that cover the sampling region
-can be understood as being the centre nodes of a finite set of grid cells (or 
-pixels of a raster image). In the first stage, one of the candidate 'grid cells'
-is selected with replacement in the neighbourhood, i.e. independently of already
-being occupied by another sample point. The candidate location for our sample 
-point is selected in the second stage within that 'grid cell' by simple random 
-sampling. This method guarantees that a sample point can be placed at 
-\textit{almost} any location within the sampling region. It also discards the 
-need to worry if the candidate location already is occupied by a sample point, 
-possibly speeding up the computations.
+\textbf{spcosa}-package \citep{WalvoortEtAl2010}. The fine grid of points that 
+cover the sampling region can be understood as being the centre nodes of a 
+finite set of grid cells (or pixels of a raster image). In the first stage, one 
+of the candidate 'grid cells' is selected with replacement in the neighbourhood,
+i.e. independently of already being occupied by another sample point. The 
+candidate location for our sample point is selected in the second stage within 
+that 'grid cell' by simple random sampling. This method guarantees that a sample
+ point can be placed at \textit{almost} any location within the sampling region.
+It also discards the need to worry if the candidate location already is occupied
+by a sample point, possibly speeding up the computations.
 
 In order to increase its computational efficiency, the \textbf{spsann}-package 
 uses a decrement function to reduce the size of the neighbourhood as the search
@@ -103,7 +117,7 @@ these settings, at the end of the search, the neighbourhood will be constrained
 to the set of nine grid cells composed of that in which the sample point falls
 and its eight surrounding grid cells.
 
-\subsection{Annealing schedule}
+\section{Annealing schedule}
 
 The \textit{annealing schedule} corresponds to a set of formal rules that 
 determine how the probability of accepting inferior system configurations is 
