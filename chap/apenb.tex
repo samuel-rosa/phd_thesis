@@ -9,9 +9,9 @@ Simulated Annealing}
 
 
 
-\section{Spatial Simulated Annealing}
+\section{Spatial simulated annealing}
 
-\subsection{Generation Mechanism}
+\subsection{Generation mechanism}
 
 The \textit{generation mechanism} corresponds to the set of formal rules used 
 to randomly perturb the sample conﬁguration to create a new solution out of the
@@ -23,42 +23,42 @@ of random noise that can be added to its coordinates, i.e. the area within
 which it can be moved around. In principle, this area corresponds to a rectangle
 centred at the sample point that ignores the presence of non-sampling areas 
 (e.g. buildings and water bodies) and the finiteness of the sampling region. We 
-call this the \textit{search graph}.
+call this the \textit{neighbourhood}.
 
-Once we know the size of the search graph, we have to decide upon how much 
+Once we know the size of the neighbourhood, we have to decide upon how much 
 noise will be added to the coordinates of our sampling point, i.e. to choose a
-candidate location. This can be done in two different ways. We can use an 
-\textit{infinite} set of candidate locations, that is, any location within the 
-search graph can be selected as the candidate location for our sample point. 
-After a candidate location is selected, we check if it falls within the sampling
-region but does not fall within a non-sampling area. These checks usually are 
-computationally demanding, the reason why this method is not implemented in 
-the \textbf{spsann}-package.
+candidate location in the neighbourhood. This can be done in two different ways.
+We can use an \textit{infinite} set of candidate locations, that is, any 
+location in the neighbourhood can be selected as the candidate location for our 
+sample point. After a candidate location is selected, we check if it falls 
+within the sampling region but does not fall within a non-sampling area. These 
+checks usually are computationally demanding, the reason why this method is not 
+implemented in the \textbf{spsann}-package.
 
 A more efficient way of selecting a candidate location is to first identify the
-set of \textit{effective} candidate locations for our sample point. This can be
-done using a \textit{finite} set of candidate locations. A finite set of 
-candidate locations is created by discretizing the sampling region beforehand, 
-that is, creating a fine grid of points that serve as candidate locations during
-the entire search for the optimum sample configuration. This is the least 
-computationally demanding jittering method because, by definition, the candidate
-location will always fall within the sampling region and out of non-sampling 
-areas.
+set of \textit{effective} candidate locations for our sample point in the 
+neighbourhood. This can be done using a \textit{finite} set of candidate 
+locations. A finite set of candidate locations is created by discretizing the 
+sampling region beforehand, that is, creating a fine grid of points that serve 
+as candidate locations during the entire search for the optimum sample 
+configuration. This is the least computationally demanding jittering method 
+because, by definition, the candidate location will always fall within the 
+sampling region and out of non-sampling areas.
 
 Using a finite set of candidate locations has two main disadvantages. First, not
 all locations in the sampling region can enter the sample. The sample points are
 limited to a finite set of regularly spaced candidate locations which is not 
-guaranteed to include the \textit{true} global optimum configuration. Second, 
-when a sample point is jittered, it may be that the selected candidate location
-is occupied by a sample point. When this happens, another candidate location 
-has to be sought because we cannot have more than one point at the same 
-location. In the worst case, most (or all) candidate locations are occupied by 
-a sample point, demanding an iterative search for, say, as long as there are 
-points in the sample. In general, the more points there are in the sample (or 
-the smaller the size of the search graph -- see bellow), the more likely it is 
-that the selected candidate location already is occupied by a sample point. If 
-a solution is not found in a reasonable amount of time, our sample point is 
-kept in its original location.
+guaranteed to include the \textit{true} global optimum sample configuration. 
+Second, when a sample point is jittered, it may be that the selected candidate 
+location already is occupied by a sample point. When this happens, another 
+candidate location has to be sought in the neighbourhood because we cannot have 
+more than one sample point in the same location. In the worst case, most (or 
+all) candidate locations in the neighbourhood are already occupied by a sample 
+point -- in general, the more points there are in the sample (or the smaller 
+the size of the neighbourhood (see bellow), the more likely it is that the 
+selected candidate location already is occupied by a sample point. If a 
+candidate location is not found, our sample point is kept in its original 
+location.
 
 The \textbf{spsann}-package uses a more elegant method based on using a finite
 set of candidate locations coupled with a form of \textit{two-stage random 
@@ -66,39 +66,46 @@ sampling} as implemented in the \texttt{spsample}-function of the
 \textbf{spcosa}-package. The fine grid of points that cover the sampling region
 can be understood as being the centre nodes of a finite set of grid cells (or 
 pixels of a raster image). In the first stage, one of the candidate 'grid cells'
-is selected with replacement, i.e. independently of already being occupied by 
-another sample point. The candidate location for our sample point is selected
-in the second stage within that 'grid cell' by simple random sampling. This 
-method guarantees that a sample point can be placed at \textit{almost} any 
-location within the sampling region. It also discards the need to check if the 
-candidate location already is occupied by a sample point, simplifying the code 
-and possibly speeding up the computations.
+is selected with replacement in the neighbourhood, i.e. independently of already
+being occupied by another sample point. The candidate location for our sample 
+point is selected in the second stage within that 'grid cell' by simple random 
+sampling. This method guarantees that a sample point can be placed at 
+\textit{almost} any location within the sampling region. It also discards the 
+need to worry if the candidate location already is occupied by a sample point, 
+possibly speeding up the computations.
 
-
-
-
-
-The size of the search graph
-is reduced linearly at the end of each Markov chain. The size of the search 
-graph is correlated with the concept of \textit{temperature}: a larger search 
-graph is equivalent to higher temperatures, which potentially result in more 
-movement or 'agitation' of the set of points.
+In order to increase its computational efficiency, the \textbf{spsann}-package 
+uses a decrement function to reduce the size of the neighbourhood as the search
+for the optimum sample configuration evolves. The reason for this is that, as 
+the search evolves and approaches its end, it is likely that moving a sample 
+point over a short distance contributes more to finding the global optimum than 
+moving it over larger distances \citep{GroenigenEtAl1998}. The decrement 
+function determines that the size of the neighbourhood is reduced linearly at 
+the end of each chain $k_i$,
 
 \begin{equation}
-  x_max = x_max0 - (chains_i / chains) * (x_max0 - x_min) + x_cellsize
-  
-  y_max = y_max0 - (chains_i / chains) * (y_max0 - y_min) + y_cellsize
+  x_{max} = x_{max\,0} - k_i / k * x_{max\,0} - x_{min} + x_{dim}
+
+  y_{max} = y_{max\,0} - k_i / k * y_{max\,0} - y_{min} + y_{dim}
 \end{equation}
 
-where $x_max0$ and $y_max0$ are the maximum allowed shifts in the x- and 
-y-coordinates in the first chain, $x_min$ and $y_min$ are the minimum 
-required shifts in the x- and y-coordinates, $x_max$ and $y_max$ are the
-maximum allowed shifts in the x- and y-coordinates during the next chain, 
-$chains$ and $chain_i$ are the total and current chains, and $x_cellsize$ and
-$y_cellsize$ are the grid spacing in the x- and y-coordinates.
+where $x_{max}$ and $y_{max}$ are the dimensions of the neighbourhood in the 
+next chain, i.e. the maximum allowed shifts in the x- and y-coordinates, 
+$x_{max\,0}$ and $y_{max\,0}$ are the dimensions of the neighbourhood in the 
+first chain, $x_{min}$ and $y_{min}$ are the minimum required shifts in the x- 
+and y-coordinates, $x_{dim}$ and $y_{dim}$ are the grid spacings in the x- and 
+y-coordinates, i.e. the grid cell size, and $k$ is the total number of chains.
+The default settings stablish that the size of the neighbourhood in the first
+chain is equal to half the maximum distance in the x- and y-coordinates of the
+entire sampling region, and that the minimum jitter is equal to zero, i.e. that
+the grid cell were the sample point is located can be selected as well. With 
+these settings, at the end of the search, the neighbourhood will be constrained 
+to the set of nine grid cells composed of that in which the sample point falls
+and its eight surrounding grid cells.
 
-\subsection{Annealing Schedule}
+\subsection{Annealing schedule}
 
 The \textit{annealing schedule} corresponds to a set of formal rules that 
 determine how the probability of accepting inferior system configurations is 
 decreased as the search for the globally optimum system configuration evolves.
+
