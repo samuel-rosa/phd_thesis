@@ -57,7 +57,7 @@ and implementing DSM depends on training students and experienced soil
 scientists, standardizing methods and measures, and building international 
 collaboration \cite{Boettinger2004}.
 
-\subsection{Modern soil mapping}
+\subsection{Modern soil mapping} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In general terms, the DSM framework can be described as a series of seven steps 
 as follows:
@@ -129,7 +129,79 @@ as follows:
   through different visualization techniques.
 \end{description}
 
-\subsection{Sources of uncertainty}
+\subsection{Sources of uncertainty} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Soil mapping models, like any other model, are nothing more than a gross simplification of reality.
+This means that soil mapping models are unable to explain the spatio-temporal soil variation in 
+its entirety, but only a small part of it \citep{Heuvelink1998a}. When we use a soil mapping model
+to produce continuous representations of soil properties across space and/or time, i.e. soil
+maps, these continuous representations will inexorably deviate from the ``truth''. What the soil map
+presents is our most likely expectation about the soil properties, not our \textit{certainty} about 
+about them. The deviation from the ``truth'' is what we call \textit{error}. The soil mapping 
+literature shows that, irrespective of the soil property, soil mapping models have a quite variable 
+predictive performance, usually explaining between 15\% (or less) and (rarely more than) 75\% of 
+the spatio-temporal soil variation \citep{MooreEtAl1993, OdehEtAl1994, GesslerEtAl1995, 
+McKenzieEtAl1999, GobinEtAl2001, SumflethEtAl2008, SunEtAl2012, ViscarraRosselEtAl2013, 
+NussbaumEtAl2014, HenglEtAl2015, GaschEtAl2015, HeungEtAl2016}.
+
+The main reason for a soil map to be in error is that the background knowledge and data used to 
+construct the soil mapping model is very limited -- we have to try our best with the available 
+resources. Unless we observe the soil everywhere, which would destroy the soil and render the 
+observations useless, no matter how large the volume of data is, or how comprehensive our background
+knowledge is, it will never be possible to construct a model that explains the entire complexity of 
+the soil \citep{Tukey1997}. This means that our knowledge about the soil, and the world as a whole, 
+will always be only partial \citep{Box1993}. Because we cannot eliminate the uncertainty of a soil 
+map, they can always be considered as being wrong, the difference being that a few might be useful 
+\citep{Box1976}.
+
+The main goal of soil mappers/modellers is to produce the most accurate representations of the soil 
+given the available resources. Thus, a reasonable research project is the identification of the 
+causes for soil maps being more or less uncertain. For instance, the error that results from making 
+extrapolations and interpolations to predict the soil properties at unvisited locations is an 
+important source of uncertainty \citep{HeuvelinkEtAl1999, RefsgaardEtAl2006}. Because modern soil 
+mapping is data-driven, these errors usually are larger the farther we are to a sample point. Their
+reduction can be achieved increasing the number of observations and improving the spatial coverage 
+of the region (BrusEtAl2007a). However, most soil mapping projects must rely on using only soil 
+data produced many years ago \citep{KempenEtAl2009, HenglEtAl2014, PoggioEtAl2014, NussbaumEtAl2014,
+MulderEtAl2016}, when most sampling locations were defined based on the tacit knowledge of soil 
+surveyors, that usually place more samples in complex and less known areas \citep{Rossiter2000}, or 
+other poorly documented criteria. 
+
+On the contrary, if the budget of the soil mapping projects includes (additional) sampling, soil 
+mappers/modellers have to decide upon the number and spatial configuration of the sample 
+\citep{deGruijterEtAl2006, WebsterEtAl2013}. Unfortunately this is not an easy task, except if the 
+goal is on mapping very few soil properties that can be rapidly measured using field sensors, and for 
+which a model of spatial (co)variation can be assumed known \citep{MarchantEtAl2006}. In most cases,
+several, difficult-to-measure soil properties have to be mapped, many of which have a poorly known 
+structure of spatial (co)variation. The chosen spatial sample configuration has to be appropriate 
+for estimating the spatial trend \citep{HenglEtAl2003a, MinasnyEtAl2006b} and the variogram model 
+\citep{WarrickEtAl1987, WebsterEtAl1992, Lark2002}, making predictions 
+\citep{YfantisEtAl1987, WalvoortEtAl2010} and, (cross)validating the soil map \citep{BrusEtAl2011}, 
+three often conflicting objectives. Besides, one must be careful not to decide upon collecting an 
+insufficient or an exaggerated number of samples. Sub-sampling can result in soil-mapping models 
+with little utility, while over-sampling can produce modelling benefits that do not outweigh the
+sampling costs \citep{vanGroenigenEtAl1999}.
+
+Soil data may not only poorly cover the geographic and/or feature spaces \citep{HenglEtAl2003a}, but
+also have significant laboratory and positional errors \citep{NelsonEtAl2011}. Besides, some soil 
+properties may naturally contain more errors due to their conceptual definition. Take particle-size
+analysis as an example. First, the errors are propagated to the fraction obtained by difference 
+(silt). Second, pre-treatments, such as organic matter oxidation, can change mineral structure
+\citep{MikuttaEtAl2005a}. And third, ignoring that the particle-size distribution is a compositional
+data can affect predictions \citep{LarkEtAl2007}.
+
+Another important source of uncertainty in soil maps is the covariates used to calibrate the soil
+mapping models. First, because they contain varying levels of error \citep{HeuvelinkEtAl1989}.
+These errors derive from the various methods of data generation, analytical procedures and, 
+inherent characteristics of each site. For example, digital elevation models (DEM) usually present 
+larger errors in areas with steep slopes, rough terrains, and great elevations, and with dense 
+forest cover or urbanized \citep{Florinsky1998, Toutin2000, FisherEtAl2006}. Interpolation of 
+elevation data using kriging can produce spurious artefacts \cite{HenglEtAl2009} compared to 
+hydrologically consistent algorithms \citep{Hutchinson1989}. And stereoscopic correlation techniques
+produce DEMs with poorer quality than interferometric synthetic aperture radar \cite{HirtEtAl2010}.
+
+
+
 
 Despite the ease of building DSM models, their performance is quite variable and
 usually lies between 20\% and 70\% of soil property variance explanation 
@@ -156,42 +228,35 @@ observations, b) environmental covariates, and c) model structure.
 
 \subsubsection*{Calibration observations}
 
-Real-world soil data usually come from soil surveys where the number and 
-location of calibration observations are defined based on the tacit knowledge 
-of soil surveyors \cite{BrusEtAl2007a}. Several criteria are used by soil 
-surveyors and, whenever possible, they attempt to obtain a nice distribution of 
-observations in the geographic space. But this attempt is often held back by the
-availability of financial resources, staff, time, presence of geographic 
-accidents and prohibition of access in private properties \cite{KempenEtAl2012,
-SamuelRosa2012}. Because of these issues, soil surveyors rarely use 
-(geo)statistical criteria and usually obtain larger sampling densities in more 
-complex and less known areas \cite{Rossiter2000}. This can cause both the 
-selection of an insufficient as to an exaggerated number of samples 
-\cite{vanGroenigenEtAl1999}. Sub-sampling leads to the construction of 
-predictive models with little utility, giving a poor representation of the 
-conceptual model of pedogenesis and low prediction accuracy, and over-sampling,
-which allows building predictive models with great accuracy 
-\cite{vanGroenigenEtAl1999}. But in both cases there is waste of financial 
-resources, staff and time, what is highly undesirable because field sampling 
-is the largest contributor to soil mapping costs \cite{vanGroenigenEtAl1999,
-KempenEtAl2012, SamuelRosa2012}.
+Real-world soil data usually come from soil surveys where the number and location of calibration 
+observations are defined based on the tacit knowledge of soil surveyors \cite{BrusEtAl2007a}. 
+Several criteria are used by soil surveyors and, whenever possible, they attempt to obtain a nice 
+distribution of observations in the geographic space. But this attempt is often held back by the
+availability of financial resources, staff, time, presence of geographic accidents and prohibition 
+of access in private properties \cite{KempenEtAl2012, SamuelRosa2012}. Because of these issues, 
+soil surveyors rarely use (geo)statistical criteria and usually obtain larger sampling densities in 
+more complex and less known areas \cite{Rossiter2000}. This can cause both the selection of an 
+insufficient as to an exaggerated number of samples \cite{vanGroenigenEtAl1999}. Sub-sampling leads 
+to the construction of predictive models with little utility, giving a poor representation of the 
+conceptual model of pedogenesis and low prediction accuracy, and over-sampling, which allows 
+building predictive models with great accuracy \cite{vanGroenigenEtAl1999}. But in both cases there
+is waste of financial resources, staff and time, what is highly undesirable because field sampling 
+is the largest contributor to soil mapping costs \cite{vanGroenigenEtAl1999, KempenEtAl2012, 
+SamuelRosa2012}.
 
-Several (geo)statistical criteria can be used to help defining appropriate 
-calibration sample sizes and designs. For variographic analysis, it is 
-recommended to use more than 100-250 (equidistant) observations, depending on 
-the pattern of spatial distribution of the soil property under analysis 
-\cite{WebsterEtAl2007}. Prior information on the spatial distribution of soil 
-properties can be used coupled with optimization methods that minimize the 
-kriging variance \cite{vanGroenigenEtAl1999, BrusEtAl2007a}. But it is also 
-necessary to obtain a representative sample of the entire range of variation of 
-the environmental covariates (attribute space) \cite{HenglEtAl2003a} to 
-properly represent the conceptual model of pedogenesis. The variance of the 
-estimated regression coefficients has also to be minimized \cite{BrusEtAl2007a}.
-Finally, field work effort cannot overcome the available budget and the expected
-gains of using soil maps \cite{KempenEtAl2012}. Due to these conflicting needs, 
-model building in DSM is a multiple-objective optimization problem for which 
-there is no unique solution, but a set of possible solutions (\textit{Pareto 
-optimality}).
+Several (geo)statistical criteria can be used to help defining appropriate calibration sample sizes 
+and designs. For variographic analysis, it is recommended to use more than 100-250 (equidistant) 
+observations, depending on the pattern of spatial distribution of the soil property under analysis 
+\cite{WebsterEtAl2007}. Prior information on the spatial distribution of soil properties can be 
+used coupled with optimization methods that minimize the kriging variance 
+\cite{vanGroenigenEtAl1999, BrusEtAl2007a}. But it is also necessary to obtain a representative 
+sample of the entire range of variation of the environmental covariates (attribute space) 
+\cite{HenglEtAl2003a} to properly represent the conceptual model of pedogenesis. The variance of the 
+estimated regression coefficients has also to be minimized \cite{BrusEtAl2007a}. Finally, field 
+work effort cannot overcome the available budget and the expected gains of using soil maps 
+\cite{KempenEtAl2012}. Due to these conflicting needs, model building in DSM is a 
+multiple-objective optimization problem for which there is no unique solution, but a set of possible
+solutions (\textit{Pareto optimality}).
 
 \subsubsection*{Covariates}
 
@@ -227,9 +292,37 @@ not solved \cite{Harrell2001a}. Besides, each method selects a different set of
 environmental covariates, what constitutes a source of uncertainty regarding 
 model specification \cite{Harrell2001a}.
 
+\subsubsection*{Model Structure}
+
+The relation between soil properties and environmental co-variates
+in a given geomorphic surface seldom is completely linear. In fact,
+this relation usually is very complex and presents a large variation
+among different geomorphic surfaces \cite{McKenzieEtAl2000}. Such
+complexity occurs because many geomorphic surfaces are less stable
+or have recently undergone strong natural alterations \cite{Schumm1979}.
+As landscape complexity and rejuvenation increase the environmental
+co-variates available can loose their ability to explain the spatial
+distribution of soil properties. Moreover, in areas occupied with
+intense anthropic activities a series of environmental disturbs can
+have been caused, being sufficient to make the relation between soil
+properties and the landscape poorly noticeable. One alternative to
+map soil properties in these circumstances is to use more complex
+non-linear trend models, such as artificial neural networks and random
+forests. In general, these complex trend models have a greater ability
+to capture more complex site-specific soil-landscape relations \cite{Grunwald2009}.
+However, data quality (soil observations and environmental co-variates)
+has been shown to be more important in building a successful model
+than using more sophisticated statistical methods \cite{ParkEtAl2002, 
+MinasnyEtAl2007}.
+Besides, non-linear trend models such as artificial neural networks
+are more difficult to implement and interpret, and can be devoid of
+any pedological information \cite{Grunwald2009}.
+
 \section{Content of the thesis}
 
 \subsection{Objectives and research questions}
+
+
 
 Translating verbal representations of conceptual models that describe reality 
 into mathematical representations of these models is a key step in DSM. There 
@@ -313,7 +406,7 @@ surface conditions.
 
 \subsection{Outline}
 
-The thesis is composed of three chapters. Each chapter deals with one specific 
+The thesis is composed of three core chapters. Each chapter deals with one specific 
 research question and specific objective. Chapter 1 will deal with assessing 
 whether investing in more accurate covariates improves prediction accuracy. 
 Chapter 2 will deal with identifying appropriate calibration sample sizes and 
