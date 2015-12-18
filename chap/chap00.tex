@@ -145,38 +145,38 @@ McKenzieEtAl1999, GobinEtAl2001, SumflethEtAl2008, SunEtAl2012, ViscarraRosselEt
 NussbaumEtAl2014, HenglEtAl2015, GaschEtAl2015, HeungEtAl2016}.
 
 The main reason for a soil map to be in error is that the background knowledge and data used to 
-construct the soil mapping model is very limited -- we have to try our best with the available 
+construct the soil-mapping model is very limited -- we have to try our best with the available 
 resources. Unless we observe the soil everywhere, which would destroy the soil and render the 
 observations useless, no matter how large the volume of data is, or how comprehensive our background
 knowledge is, it will never be possible to construct a model that explains the entire complexity of 
 the soil \citep{Tukey1997}. This means that our knowledge about the soil, and the world as a whole, 
 will always be only partial \citep{Box1993}. Because we cannot eliminate the uncertainty of a soil 
-map, they can always be considered as wrong, the difference being that a few might be useful 
+map, they can always be considered as wrong, the difference being that some might be useful 
 \citep{Box1976}.
 
-The main goal of soil mappers/modellers is to produce the most accurate representations of the soil 
-given the available resources. Thus, a reasonable research program is the identification of the 
-causes for soil maps being more or less uncertain. For instance, the error that results from making 
+Soil modellers/mappers aim at producing the most accurate representations of the soil given the 
+available resources. Thus, a reasonable research program is the identification of the causes for 
+soil maps being more or less uncertain. For instance, the error that results from making 
 extrapolations and interpolations to predict the soil properties at unvisited locations is an 
 important source of uncertainty \citep{HeuvelinkEtAl1999, RefsgaardEtAl2006}. Because modern soil 
-mapping is \textit{data-centred}, these errors usually are larger the farther we are from the 
-existing observations. Reducing these errors can be done increasing the number of observations and 
-improving the spatial coverage of the mapping region (BrusEtAl2007a). However, most soil mapping 
-projects must rely on using only soil data produced many years ago \citep{KempenEtAl2009, 
+mapping is \textit{data-centred}, these errors are larger the farther we are from the existing 
+observations. Thus, the most efficient way of reducing these errors is to increase the number of 
+observations and improve the spatial coverage of the mapping region (BrusEtAl2007a). However, most 
+soil-mapping projects must rely on using only soil data produced many years ago \citep{KempenEtAl2009, 
 HenglEtAl2014, PoggioEtAl2014, NussbaumEtAl2014, MulderEtAl2016}, when most sampling locations were 
-defined based on the tacit knowledge of soil surveyors, that usually place more samples in complex 
-and less known areas \citep{Rossiter2000}, or other poorly documented criteria.
+defined based on the tacit knowledge of soil surveyors -- that usually place more samples in complex 
+and less known areas \citep{Rossiter2000} -- or other poorly documented criteria.
 
 On the contrary, if the budget of the soil-mapping project includes (additional) sampling, soil 
-mappers/modellers have to decide upon the number and spatial configuration of the sample 
+modellers/mappers have to decide upon the number and spatial configuration of the sample 
 \citep{deGruijterEtAl2006, WebsterEtAl2013}. Unfortunately this is not an easy task, except if the 
-goal is on mapping very few soil properties that can be rapidly measured using field sensors, and for 
-which a model of spatial (co)variation can be assumed known \citep{MarchantEtAl2006}. In most cases,
-several, difficult-to-measure soil properties have to be mapped, many of which have a poorly known 
-structure of spatial (co)variation. The chosen spatial sample configuration has to be appropriate 
-for estimating the spatial trend \citep{HenglEtAl2003a, MinasnyEtAl2006b} and the variogram model 
-\citep{WarrickEtAl1987, WebsterEtAl1992, Lark2002}, making predictions 
-\citep{YfantisEtAl1987, WalvoortEtAl2010} and, (cross)validating the soil map \citep{BrusEtAl2011}, 
+goal is on mapping/modelling very few soil properties that can be rapidly measured using field 
+sensors, and for which a model of spatial (co)variation can be assumed known \citep{MarchantEtAl2006}.
+In most cases, several difficult-to-measure soil properties have to be modelled/mapped, many of 
+which have a poorly known structure of spatial (co)variation. The chosen spatial sample configuration
+has to be appropriate for estimating the spatial trend \citep{HenglEtAl2003a, MinasnyEtAl2006b} and 
+the variogram model \citep{WarrickEtAl1987, WebsterEtAl1992, Lark2002}, making spatial predictions 
+\citep{YfantisEtAl1987, WalvoortEtAl2010} and, (cross)validating the model/map \citep{BrusEtAl2011}, 
 four often conflicting objectives. Besides, one must be careful not to decide upon collecting an 
 insufficient or an exaggerated number of samples. Sub-sampling can result in soil-mapping models 
 with little utility, while over-sampling can produce modelling benefits that do not outweigh the
@@ -184,28 +184,29 @@ sampling costs \citep{vanGroenigenEtAl1999}.
 
 Soil data may not only poorly cover the geographic and/or feature spaces \citep{HenglEtAl2003a}, but
 also have significant laboratory and positional errors \citep{NelsonEtAl2011}. Besides, some soil 
-properties may naturally contain more errors due to their conceptual definition. Take particle-size
-analysis as an example. First, the errors are propagated to the fraction obtained by difference 
-(silt). Second, pre-treatments, such as organic matter oxidation, can change mineral structure
-\citep{MikuttaEtAl2005a}. And third, ignoring that the particle-size distribution is a compositional
-datum can affect predictions \citep{LarkEtAl2007}.
+properties may naturally contain more errors due to their conceptual definition and analytical 
+procedures employed. Take particle-size distribution as an example. First, the errors are propagated
+to the fraction obtained by difference (silt). Second, pre-treatments, such as organic matter 
+oxidation, can change mineral structure \citep{MikuttaEtAl2005a}. And third, ignoring that the 
+particle-size distribution is a compositional datum can introduce bias in the predictions 
+\citep{LarkEtAl2007}.
 
-Another important source of uncertainty in soil maps is the covariates used to calibrate the 
-soil-mapping models. First, because they contain varying levels of error \citep{HeuvelinkEtAl1989}.
-These errors derive from the various methods of data generation, analytical procedures and, 
-inherent characteristics of each site. For example, digital elevation models (DEM) usually present 
-larger errors in areas with steep slopes, rough terrains, and great elevations, and with dense 
-forest cover or urbanized \citep{Florinsky1998, Toutin2000, FisherEtAl2006}. Interpolation of 
-elevation data using kriging can produce spurious artefacts \citep{HenglEtAl2009} compared to 
-hydrologically consistent algorithms \citep{Hutchinson1989}. And stereoscopic correlation techniques
-produce DEMs with poorer quality than interferometric synthetic aperture radar \citep{HirtEtAl2010}.
+Another important source of uncertainty is the covariates used to calibrate the soil-mapping models.
+First, because they contain varying levels of error \citep{HeuvelinkEtAl1989}. These errors derive 
+from the various methods of data generation, analytical procedures and, inherent characteristics of 
+each site. For example, digital elevation models usually present larger errors in areas with steep 
+slopes, rough terrains, and great elevations, and with dense forest cover or urbanized 
+\citep{Florinsky1998, Toutin2000, FisherEtAl2006}. Interpolation of elevation data using kriging 
+can produce spurious artefacts \citep{HenglEtAl2009} compared to hydrologically consistent 
+algorithms \citep{Hutchinson1989}. And stereoscopic correlation techniques produce digital elevation
+models with poorer quality than interferometric synthetic aperture radar \citep{HirtEtAl2010}.
 
 Deciding upon which covariates to include in the soil-mapping model is another important source of 
 uncertainty. This is specially important now days, when the number of available (uncertain) 
-covariates increases every week, most of which possibly being redundant. A pedologically sound 
-approach for selecting the covariates consists in eliciting the knowledge of a few experts 
-\citep{LarkEtAl2007b}, optimally more than five \citep{MeyerEtAl2001}. An expert is every soil 
-mapper/modeller with long practical experience and and large pedological, mathematical, and 
+covariates increases every week, many of which possibly being statistically redundant. A 
+pedologically sound approach for selecting the covariates consists in eliciting the knowledge of a 
+few experts \citep{LarkEtAl2007b}, optimally more than five \citep{MeyerEtAl2001}. An expert is 
+every soil modeller/mapper with long practical experience and large pedological, mathematical, and 
 statistical knowledge \citep{MeyerEtAl2001}. If the mapping region is unknown to the expert, then
 a sound \textit{conceptual model of pedogenesis} has to be provided. However, the knowledge 
 available for the mapping region may be limited to a point that enables building only a very 
