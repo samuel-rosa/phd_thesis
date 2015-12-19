@@ -258,42 +258,54 @@ uncertainty. Besides, machine-learning methods are more difficult to implement a
 possibly being more prone to error, and can be devoid of any pedological information 
 \citep{Grunwald2009}.
 
-As we have seen, the sources of uncertainty in a soil-mapping project are multiple and the list 
-presented here is far from being comprehensive. The main message here is that we cannot eliminate 
-the uncertainty of a soil map and, as such, our knowledge about the soil will always be limited. 
-Despite of this, soil models/maps -- and the entire body of human knowledge -- are needed to guide 
-our every-day actions. So the real quest is not for eliminating uncertainty, because this seems out
-of reach, but understanding it and its sources. That is to say, it is with those things about which 
-we are aware of not having a satisfactory comprehension -- the \textit{known unknowns} 
-\citep{Wikipedia2015}, that the scientist must be primarily concerned with. Once a 
-\textit{known unknown} becomes a \textit{known known}, i.e. something which we know to have a 
-good comprehension of, then action can be taken to reduce our uncertainty. For example, if we have 
-knowledge of the error, and know that it has a systematic nature, then a corrective measure can be 
-taken right away.
+As we have seen, the sources of uncertainty in soil-mapping projects are multiple and the list 
+presented here is far from being comprehensive -- others will do a better job. The main message
+is that we cannot eliminate the uncertainty of a soil map and, as such, our knowledge about the 
+soil will always be limited. Despite of this, soil models/maps -- and the entire body of human 
+knowledge -- are still needed to guide our every-day actions. So, instead of eliminating uncertainty, 
+the real quest is for understanding it and its sources. Because while working on those sources about 
+which we are aware of not having a satisfactory comprehension -- the \textit{known unknowns} --, 
+instead of bringing them all into light, turning them into sources of error which we know to have a 
+good understanding of -- the \textit{known knowns} --, we end up uncovering other sources of error 
+that we were not aware of -- the \textit{unknown unknowns} \citep{Wikipedia2015}. If a 
+known/unknown unknown happens to become a known known, then action can be taken to reduce 
+our uncertainty. For example, if gain knowledge that a source of error has a systematic nature, 
+then a corrective measure can be taken right away.
 
-A most comprehensive way of dealing with the uncertainty is \textit{error propagation analysis}, 
-also called \textit{uncertainty analysis} \citep{HeuvelinkEtAl1989, Taylor1997}. This is done 
-taking our uncertainty into account through the soil-modelling steps, seeing how it propagates, and 
+A most comprehensive way of dealing with the known unknowns is \textit{error propagation analysis}, 
+also called \textit{uncertainty analysis} \citep{HeuvelinkEtAl1989, Taylor1997}. This is done taking
+our uncertainty into account through the soil-modelling steps, seeing how it propagates, and 
 evaluating its impact on the uncertainty of the output soil map. This would allow us identifying the
-main source of uncertainty, so that we could take corrective measures to improve its quality. But 
-such an exercise is not an easy one \citep{NelsonEtAl2011}, and the efforts required may not 
-outweigh the benefits, this being one of the reasons why it is rarely done. Another important 
-reason for error propagation analysis not being popular is the common ignorance and lack 
-of understanding about error and uncertainty \citep{Wechsler2003, Heuvelink2005}. But perhaps the 
-most important reason is that statistical packages and data analysis environments do not include 
--- if they ever will or should include -- a simple routine to run a complete uncertainty analysis 
-\citep{HeuvelinkEtAl2006b}.
+main source of uncertainty, so that we could try to take corrective measures to improve its quality.
+But such an exercise is cumbersome \citep{NelsonEtAl2011}, and the efforts required may not
+outweigh the benefits, this being one of the reasons why it is rarely carried out. Another important 
+reason for error propagation analysis being unpopular is the common ignorance and lack of 
+understanding -- perhaps prejudice -- about error and uncertainty \citep{Wechsler2003, Heuvelink2005}.
+But the most important reason might be that statistical packages and data analysis environments do 
+not include -- if they ever will or should include -- a simple routine, a button, to run a complete 
+uncertainty analysis \citep{HeuvelinkEtAl2006b}.
+
+
+
 
 Because soil maps still are useful, despite being in error, most soil-mapping projects adopt a 
 very pragmatic approach: the existence of uncertainty is ignored throughout soil-modelling steps 
-\citep{McBratneyEtAl2003, ScullEtAl2003}. In other words, we assume that all possible sources of 
-uncertainty listed above (plus other sources not mentioned) are error-free, or that their errors 
-are insignificant. Positional and analytical errors are disregarded, covariates are taken as 
-certain, and so on. These data are then used to calibrate a few models, whose parameters are 
-assumed to be estimated without error \citep{DiggleEtAl1998}. The soil-mapping model with the best 
-validation statistics, generally obtained using (the optimistic) cross-validation, is then selected 
-to make spatial predictions for the entire mapping region \citep{BrusEtAl2011}. Any uncertainty in 
-the resulting map is regarded as being due to interpolation/extrapolation error.
+\citep{McBratneyEtAl2003, ScullEtAl2003}. In other words, we assume that all sources of uncertainty 
+listed above (plus other sources not mentioned) are insignificant. Positional and analytical errors 
+are disregarded, covariates are taken as certain, and so on. These data are then used to calibrate 
+a few models, whose parameters are assumed to be estimated without error \citep{DiggleEtAl1998}. 
+The soil-mapping model with the best validation statistics, generally obtained using (the 
+optimistic) cross-validation, is then selected to make spatial predictions for the entire mapping 
+region \citep{BrusEtAl2011}. Any uncertainty in the resulting map is regarded as being due to 
+interpolation/extrapolation error. Most soil-mapping models will output an estimate of this 
+uncertainty, i.e. a measure of what we do not know about the modelled/mapped soil property such as 
+the kriging prediction error variance \citep{HeuvelinkEtAl1989}. But even such a measure is nothing 
+more than a model of our uncertainty whose quality needs proper assessment \citep{Goovaerts2001}. 
+Because soil-mapping models that ignore the spatial autocorrelation of the prediction errors 
+generally are optimistic about our uncertainty, i.e. they estimate we known more than we actually 
+do. And geostatistical models can either under- or overestimate the uncertainty depending on the 
+available data and modelling decisions \citep{Lark2000a}.
+
 
 One of the main problems with the pragmatic approach is not that the known unknowns (the known 
 uncertainty) are disregarded, but fundamentally that it ignores that there might exist other sources
@@ -310,15 +322,7 @@ into account because we are ignorant about them, or
 
 
 
- Most soil-mapping 
-models will output an estimate of this uncertainty, i.e. a measure of what we do not know about the
-modelled/mapped soil property such as the kriging prediction error variance 
-\citep{HeuvelinkEtAl1989}. But even such a measure is nothing more than a model of our uncertainty, 
-and its quality needs proper assessment \citep{Goovaerts2001}. Because soil-mapping models that 
-ignore the spatial autocorrelation of the prediction errors generally are optimistic about our 
-uncertainty, i.e. they estimate we known more than we actually do. And geostatistical models can 
-either under- or overestimate the uncertainty depending on the available data and modelling 
-decisions \citep{Lark2000a}.
+
 
 
 Finally, it is worth pointing that the above mentioned sources of uncertainty can be understood 
