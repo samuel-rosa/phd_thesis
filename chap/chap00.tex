@@ -138,7 +138,7 @@ This means that soil-mapping models are unable to explain the spatio-temporal so
 its entirety, but only a small part of it \citep{Heuvelink1998a}. When we use a soil-mapping model
 to produce continuous representations of soil properties across space and/or time, i.e. soil
 maps, these continuous representations will inexorably deviate from the ``truth''. What the soil map
-presents is our most likely expectation about the soil properties -- not our \textit{certainty} about
+presents is our most likely expectation about the soil properties -- not our \textit{certainty}
 about them. The deviation from the ``truth'' is what we call \textit{error}. Many examples from the 
 soil-mapping literature show that, irrespective of the soil property, soil-mapping models have a 
 quite variable predictive performance, usually explaining between 15\% (or less) and (rarely more 
@@ -161,7 +161,7 @@ available resources. Thus, a reasonable research program is the identification o
 soil maps being more or less uncertain. For instance, the error that results from making 
 extrapolations and interpolations to predict the soil properties at unvisited locations is an 
 important source of uncertainty \citep{HeuvelinkEtAl1999, RefsgaardEtAl2006}. Because modern soil 
-mapping is \textit{data-centred}, these errors are larger the farther we are from the existing 
+mapping is data-centred, these errors are larger the farther we are from the existing 
 observations. Thus, the most efficient way of reducing these errors is to increase the number of 
 observations and improve the spatial coverage of the mapping region (BrusEtAl2007a). However, most 
 soil-mapping projects must rely on using only soil data produced many years ago \citep{KempenEtAl2009, 
@@ -172,7 +172,7 @@ and less known areas \citep{Rossiter2000} -- or other poorly documented criteria
 On the contrary, if the budget of the soil-mapping project includes (additional) sampling, soil 
 modellers/mappers have to decide upon the number and spatial configuration of the sample 
 \citep{deGruijterEtAl2006, WebsterEtAl2013}. Unfortunately this is not an easy task, except if the 
-goal is on mapping/modelling very few soil properties that can be rapidly measured using field 
+goal is on modelling/mapping very few soil properties that can be rapidly measured using field 
 sensors, and for which a model of spatial (co)variation can be assumed known \citep{MarchantEtAl2006}.
 In most cases, several difficult-to-measure soil properties have to be modelled/mapped, many of 
 which have a poorly known structure of spatial (co)variation. The chosen spatial sample configuration
@@ -209,16 +209,16 @@ covariates increases every week, many of which possibly being statistically redu
 pedologically sound approach for selecting the covariates consists in eliciting the knowledge of a 
 few experts \citep{LarkEtAl2007b}, optimally more than five \citep{MeyerEtAl2001}. An expert is 
 every soil modeller/mapper with long practical experience and large pedological, mathematical, and 
-statistical knowledge \citep{MeyerEtAl2001}. If the mapping region is unknown to the expert, then
+statistical knowledge \citep{MeyerEtAl2001}. If the mapping region is unknown to the experts, then
 a sound \textit{conceptual model of pedogenesis} must be provided. However, the understanding
 about the mapping region may be limited to a point that enables building only a very uncertain 
 conceptual model of pedogenesis. For example, a unstable landscape that consistently suffers natural
 and/or anthropogenic alterations is geomorphologically more complex than a stable one 
-\citep{Schumm1979}. As the complexity increases, and the landscape is rejuvenated, establishing 
+\citep{Schumm1979}. As the landscape is rejuvenated, thus increasing complexity, establishing 
 soil-landscape relationships becomes very difficult \citep{StreckEtAl2008}. Similar uncertainty 
 in the conceptual model of pedogenesis can arise in very old, stable geomorphic surfaces that have 
 gone through many environmental modifications, but were not affected by Pleistocene glaciations 
-\citep{McKenzieEtAl2000a}. These landscapes commonly have polygenetic soils that present properties
+\citep{MckenzieEtAl2006}. These landscapes commonly have polygenetic soils that present properties
 reflecting today but ancient vegetation and climate \citep{PainEtAl1995, Ker1998a}.
 
 A most used approach to select the covariates to enter a soil-mapping model is automated selection.
@@ -243,64 +243,94 @@ different set of covariates which unnecessarily have any physical or biological 
 soil property being modelled/mapped.
  
 Soil modellers/mappers also have to chose the form of model that will be used to model the 
-spatio-temporal soil variation. Early soil-mapping projects used standard statistical models that 
-assume a linear relation between covariates and soil properties \citep{MooreEtAl1993, OdehEtAl1994}.
-Developments in informatics introduced new forms of modelling the relation between covariates and 
-soil properties. Now days most soil-mapping projects employ machine-learning methods such as 
-regression trees, artificial neural networks, random forests, support vector machines, among many 
-others \citep{HeungEtAl2016}. The main reason being that these non-linear models have a greater 
-ability to capture more complex site-specific soil-landscape relations \citep{Grunwald2009}. In 
-fact, the relation between soil properties and covariates seldom is completely linear 
-\citep{McKenzieEtAl2000}. Once again, the problem is that each model produces a different soil map, 
-although the validation statistics may suggest that the differences in their performance are 
-insignificant \citep{HeungEtAl2016}. Aggregating the predictions of many different models not 
-necessarily reduce our uncertainty. Finally, machine-learning methods are more difficult to 
-implement and interpret, possibly being more prone to error, and can be devoid of any pedological 
-information \citep{Grunwald2009}.
+emphirical relation between covariates and soil properties. Early soil-mapping projects used 
+statistical models that assume a linear relation \citep{MooreEtAl1993, OdehEtAl1994}.
+Developments in informatics introduced new forms of modelling this relation. Now days most 
+soil-mapping projects employ machine-learning methods such as regression trees, artificial neural 
+networks, random forests, support vector machines, among many others \citep{HeungEtAl2016}. The 
+main reason being that these non-linear models have a greater ability to capture more complex 
+site-specific soil-landscape relations \citep{Grunwald2009}. In fact, the relation between soil 
+properties and covariates seldom is completely linear \citep{McKenzieEtAl1999}. Once again, the 
+problem is that each model produces a different soil map, although the validation statistics may 
+suggest that the differences in their performance are insignificant \citep{HeungEtAl2016}. A solution
+is to aggregate the predictions of the many models, but this will not necessarily reduce our 
+uncertainty. Besides, machine-learning methods are more difficult to implement and interpret, 
+possibly being more prone to error, and can be devoid of any pedological information 
+\citep{Grunwald2009}.
 
-As we have seen, the sources of uncertainty in soil mapping are multiple and the list presented here
-is far from being comprehensive. In general, if we have knowledge of the error, and know that it is
-systematic, then a corrective measure can be used to reduce our uncertainty. Unfortunately this is 
-seldom the case and we have to chose between two options. First, we can take our uncertainty into 
-account, see how it propagates through the soil-modelling steps, and evaluate its impact on the 
-uncertainty of the output soil map. This would allow us identifying the main source of uncertainty,
-so that we could take corrective measures to improve its quality. This is what we call 
-\textit{error propagation analysis} or \textit{uncertainty analysis} \citep{HeuvelinkEtAl1989, 
-Taylor1997}. Such an exercise is not an easy one \citep{NelsonEtAl2011}, and the efforts required 
-may not outweigh the benefits, this being one of the reasons why it is rarely done. Another 
-important reason for error propagation analysis not being popular is the common ignorance and lack 
+As we have seen, the sources of uncertainty in a soil-mapping project are multiple and the list 
+presented here is far from being comprehensive. The main message here is that we cannot eliminate 
+the uncertainty of a soil map and, as such, our knowledge about the soil will always be limited. 
+Despite of this, soil models/maps -- and the entire body of human knowledge -- are needed to guide 
+our every-day actions. So the real quest is not for eliminating uncertainty, because this seems out
+of reach, but understanding it and its sources. That is to say, it is with those things about which 
+we are aware of not having a satisfactory comprehension -- the \textit{known unknowns} 
+\citep{Wikipedia2015}, that the scientist must be primarily concerned with. Once a 
+\textit{known unknown} becomes a \textit{known known}, i.e. something which we know to have a 
+good comprehension of, then action can be taken to reduce our uncertainty. For example, if we have 
+knowledge of the error, and know that it has a systematic nature, then a corrective measure can be 
+taken right away.
+
+A most comprehensive way of dealing with the uncertainty is \textit{error propagation analysis}, 
+also called \textit{uncertainty analysis} \citep{HeuvelinkEtAl1989, Taylor1997}. This is done 
+taking our uncertainty into account through the soil-modelling steps, seeing how it propagates, and 
+evaluating its impact on the uncertainty of the output soil map. This would allow us identifying the
+main source of uncertainty, so that we could take corrective measures to improve its quality. But 
+such an exercise is not an easy one \citep{NelsonEtAl2011}, and the efforts required may not 
+outweigh the benefits, this being one of the reasons why it is rarely done. Another important 
+reason for error propagation analysis not being popular is the common ignorance and lack 
 of understanding about error and uncertainty \citep{Wechsler2003, Heuvelink2005}. But perhaps the 
 most important reason is that statistical packages and data analysis environments do not include 
 -- if they ever will or should include -- a simple routine to run a complete uncertainty analysis 
 \citep{HeuvelinkEtAl2006b}.
 
-The second option -- the most commonly adopted in soil-mapping projects -- is to ignore the 
-existence of uncertainty throughout soil-modelling steps \citep{McBratneyEtAl2003, ScullEtAl2003}. 
-In other words, we assume that all possible sources of uncertainty listed above (plus other sources 
-not mentioned) are error-free, or that their errors are insignificant. Positional and analytical 
-errors are disregarded, covariates are taken as certain, and so on. These data are then used to 
-calibrate a few models, whose parameters are assumed to be estimated without error 
-\citep{DiggleEtAl1998}. The soil-mapping model with the best validation statistics, generally 
-obtained using (the optimistic) cross-validation, is then selected to make spatial predictions for 
-the entire mapping region \citep{BrusEtAl2011}. Any uncertainty in the resulting map is regarded as 
-being due to interpolation/extrapolation error. Most soil-mapping models will output an estimate of 
-this uncertainty, i.e. a measure of what we do not know about the modelled/mapped soil property such 
-as the kriging prediction error variance \citep{HeuvelinkEtAl1989}. But even such a measure is nothing 
-more than a model of our uncertainty, and its quality needs proper assessment \citep{Goovaerts2001}.
-Because soil-mapping models that ignore the spatial autocorrelation of the prediction errors 
-generally are optimistic about our uncertainty, i.e. they estimate we known more than we actually 
-do. And geostatistical models can either under- or overestimate the uncertainty depending on the 
-available data and modelling decisions \citep{Lark2000a}.
+Because soil maps still are useful, despite being in error, most soil-mapping projects adopt a 
+very pragmatic approach: the existence of uncertainty is ignored throughout soil-modelling steps 
+\citep{McBratneyEtAl2003, ScullEtAl2003}. In other words, we assume that all possible sources of 
+uncertainty listed above (plus other sources not mentioned) are error-free, or that their errors 
+are insignificant. Positional and analytical errors are disregarded, covariates are taken as 
+certain, and so on. These data are then used to calibrate a few models, whose parameters are 
+assumed to be estimated without error \citep{DiggleEtAl1998}. The soil-mapping model with the best 
+validation statistics, generally obtained using (the optimistic) cross-validation, is then selected 
+to make spatial predictions for the entire mapping region \citep{BrusEtAl2011}. Any uncertainty in 
+the resulting map is regarded as being due to interpolation/extrapolation error.
+
+One of the main problems with the pragmatic approach is not that the known unknowns (the known 
+uncertainty) are disregarded, but fundamentally that it ignores that there might exist other sources
+of error that we are not aware of, i.e. the \textit{unknown unknowns}. Uncovering these unknown 
+sources of error will generally be a by-product of the search for a better understanding of the 
+known unknowns -- unknown unknowns would then become known unknowns and, hopefully, with time, 
+known knowns.
+
+Last, but not least, perhaps the worst,
+
+Last, but not least, perhaps the worst, are the \textit{unknown knowns} \citep{Zizek2006}: 
+these are the sources of uncertainty that are known, but that are not taken
+into account because we are ignorant about them, or 
+
+
+
+ Most soil-mapping 
+models will output an estimate of this uncertainty, i.e. a measure of what we do not know about the
+modelled/mapped soil property such as the kriging prediction error variance 
+\citep{HeuvelinkEtAl1989}. But even such a measure is nothing more than a model of our uncertainty, 
+and its quality needs proper assessment \citep{Goovaerts2001}. Because soil-mapping models that 
+ignore the spatial autocorrelation of the prediction errors generally are optimistic about our 
+uncertainty, i.e. they estimate we known more than we actually do. And geostatistical models can 
+either under- or overestimate the uncertainty depending on the available data and modelling 
+decisions \citep{Lark2000a}.
+
 
 Finally, it is worth pointing that the above mentioned sources of uncertainty can be understood 
 under the light of what has been called elsewhere the \textit{known unknowns} \citep{Wikipedia2015},
 i.e. the things about which we are aware of not having a satisfactory comprehension when carrying 
-out a soil-mapping project. The known unknowns contrast with those things about which we know (or 
-believe) to have a good comprehension, i.e. the \textit{known knowns}. Following this line of 
-thought, there unfortunately are things which we are unaware of not knowing, i.e. the 
-\textit{unknown unknowns}. These are much more difficult to deal with, because we have no clue about 
-their existence. Last, but not least, perhaps the worst, are the 
-
+out a soil-mapping project. The known unknowns contrast with those things which we know (or 
+believe) to have a good comprehension of, i.e. the \textit{known knowns}. It follows that there 
+unfortunately are sources of uncertainty which we are unaware of not knowing, i.e. the 
+\textit{unknown unknowns}. These are much more difficult to deal with, because we have no clue about
+their existence. Last, but not least, perhaps the worst, are the \textit{unknown knowns} 
+\citep{Zizek2006}: these are the sources of uncertainty that are known, but that are not taken
+into accout because we are ignorant about them, or 
 
 \section{Content of the thesis}
 
