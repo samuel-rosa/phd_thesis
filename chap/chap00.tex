@@ -321,36 +321,108 @@ we already known -- the \textit{unknown knowns} \citep{Zizek2006}.
 
 \subsection{Objectives and research questions}
 
+There are several sources of uncertainty that affect the development of soil-mapping models. Many 
+of this sources are known, others are still unknown, and some are disregarded due to our ignorance
+(or by convenience). The list given in the previous section is far from comprehensive, but it suggests 
+that we face a complex scenario. Accordingly, at the time of writing the research project that
+guided the development of the present study (2012-2013), it seemed appropriate to aim at evaluating 
+the main sources of uncertainty in soil-mapping projects. This required an operational definition, 
+which was given based on the observation that, in general, the main decisions made by soil 
+modellers/mappers are with regard to the
 
+\begin{enumerate}[label=(\alph*)]
+\item calibration observations,
+\item covariates, and
+\item model structure.
+\end{enumerate}
 
-Translating verbal representations of conceptual models that describe reality 
-into mathematical representations of these models is a key step in DSM. There 
-are several sources of uncertainty that may affect the development of such 
-mathematical representations. These sources of uncertainty can be classified 
-into three categories for didactic purposes: a) calibration observations, b) 
-environmental covariates and c) model structure. The general objective of this 
-project is to evaluate these three main sources of uncertainty in DSM under 
-different database scenarios. This general objective can be divided into three 
+The general objective of evaluating these three mains sources of uncertainty was divided into five 
 specific objectives with their respective research questions:
 
 \begin{enumerate}
-  \item Identify appropriate calibration sample sizes and designs;
+\item Identify appropriate calibration sample sizes and designs for soil-mapping projects.\newline
+Research question: How calibration sample size and design affect which covariates enter the 
+soil-mapping model, its prediction accuracy, and the monetary cost of the soil-mapping project?
 
-  \subitem [{Research\ Question}] How calibration sample size and sampling 
-  design affect model composition, prediction accuracy and monetary cost?
+\item Determine the accuracy of freely available covariates and their suitability to calibrate 
+soil-mapping models.\newline
+Research question: How accurate are the freely available covariates and how much uncertainty 
+reduction in the soil-mapping models is achieved when more detailed covariates are used?
 
-  \item Determine the accuracy of freely available covariates and their 
-  suitability for DSM;
+\item Identify appropriate covariate selection methods to build linear soil-mapping models.\newline
+Research question: How covariate selection methods affect which covariates enter the soil-mapping 
+model and its prediction accuracy?
 
-  \subitem [{Research\ Question}] How much accuracy improvement is achieved 
-  when more detailed covariates are used?
+\item Assess the effect of multicollinearity among covariates on the performance of linear 
+soil-mapping models.\newline
+Research question: How strongly correlated are the freely available covariates and is prediction 
+accuracy improved when they are transformed to their principal components?
 
-  \item Identify appropriate covariate selection methods to build linear 
-  predictive models;
-
-  \subitem [{Research\ Question}] How covariate selection methods affect model 
-  composition and prediction accuracy?
+\item Identify database scenarios in which non-linear soil-mapping models are more efficient than 
+linear soil-mapping models.\newline
+Research question: In which database scenarios do non-linear soil-mapping models have better 
+performance than linear soil-mapping models?
 \end{enumerate}
+
+The main expected result was the definition of a working protocol that would allows the construction
+of soil-mapping models while taking into account the main factors that influence their performance. 
+The goal was to contribute to national (Brazilian Research Network on Digital Soil Mapping) and 
+international (GlobalSoilMap and Global Soil Information Facilities) initiatives, while generating a
+significant amount of bibliographic material support the teaching of modern soil-mapping techniques 
+in Brazilian universities, which is still incipient these days.
+
+With time it became clear that the five objectives and the expected results were quite ambitious. 
+Perhaps, I was overwhelmed by the knowledge of the multiple sources of uncertainty at the same time 
+that the demand for soil information was increasing, and felt compelled to develop a very through 
+study of the sources of uncertainty. The reason for my mistake is simple: the unknown unknowns and
+the unknown knowns. First, a few unknown sources of error were uncovered during the development of 
+this study, and I decided to confront them because they affected the sources that were originally 
+planned to be studied. Then there was my lack of knowledge on some known topics and poor organization,
+which sometimes took me to the wrong way. But I guess that the main reason likely was my blind 
+optimism regarding the available resources. As a consequence of these events, the resulting PhD 
+thesis deals only with (a modified version of) the first and second above-mentioned specific 
+objectives and their respective research questions, i.e.
+
+\begin{enumerate}
+\item Identify appropriate calibration sample sizes and designs for soil-mapping projects.
+
+	\begin{enumerate}[label=(\alph*)]
+	\item Can theoretical and algorithmic improvements on existing spatial sample optimization 
+	algorithms improved the performance of soil-mapping models?
+	
+	\item How suboptimal is it to use a sample configuration that was optimized to a different 
+	purpose than that that it is going to be use with?
+
+	\item Is it the predictive performance of a soil-mapping model estimated using a sample 
+	configuration optimized using heuristics poorer than that of another soil-mapping model 
+	whose parameters were estimated using a sample configuration optimized using an 
+	\textit{a priori} knowledge of the model?
+	
+	\item Is it possible to obtain a sample configuration that is efficient in identifying and
+	estimating i) the spatial trend and ii) the variogram model, and iii) making spatial 
+	predictions?
+	
+	\item How does the sample configuration affect the estimated model parameters and thus the
+	conclusions that can be drawn under the light of the existing conceptual model of 
+	pedogenesis?
+	
+	\item Are the answers to these research questions consistent across sample sizes and soil 
+	properties?
+	\end{enumerate}
+
+\item Determine the suitability of freely available covariates to calibrate soil-mapping models.
+
+	\begin{enumerate}[label=(\alph*)]
+	\item Does the use of more detailed covariates result in considerably more accurate soil 
+	maps?
+
+	\item How does incorporation of spatial dependence in a soil-mapping model compare to the 
+	gain in prediction accuracy obtained with using more detailed covariates?
+
+	\item Are the answers to these research questions consistent across soil properties?
+	\end{enumerate}
+\end{enumerate}
+
 
 \subsection{Study area and database}
 
