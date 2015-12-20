@@ -114,6 +114,14 @@
 \usepackage{enumitem}
 
 %%==============================================================================
+%% User-defined macros
+%%==============================================================================
+
+\newcommand{\Rpackage}[1]{\texttt{R}-package \texttt{#1}} % reference to R-packages
+%\newcommand{\refsection}[1]{Section \textit{#1}} % link to a section in the document
+\newcommand{\refsec}[1]{\hyperref[sec:#1]{Section \ref{sec:#1}}} % link to a section in the document
+
+%%==============================================================================
 %% Identificação do trabalho
 %%==============================================================================
 \titulo{Analysis of Sources of Uncertainty in Soil Mapping}
