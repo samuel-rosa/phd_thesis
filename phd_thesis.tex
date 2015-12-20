@@ -222,8 +222,7 @@
 %%=============================================================================
 %% Resumo geral em inglês
 %%=============================================================================
-\def\tituloingles{Analysis of Sources of Uncertainty in Quantitative Spatial 
-  Soil Modelling}
+\def\tituloingles{Analysis of Sources of Uncertainty in Soil Mapping}
 \def\chavesingles{Pedometrics, Predictive Models, Uncertainty}
 \generalabstracttrue
 \begin{generalabstract}{english}{\tituloingles}{\chavesingles}
@@ -257,8 +256,7 @@ about its reliability, which is critical for decision makers.
 %%=============================================================================
 %% Resumo geral em português
 %%=============================================================================
-\def\tituloportugues{Análise das Fontes de Incerteza na Modelagem Quantitativa 
-  Espacial do Solo}
+\def\tituloportugues{Análise das Fontes de Incerteza no Mapeamento do Solo}
 \def\chavesportugues{Pedometria, Modelos Preditivos, Incerteza}
 \generalabstracttrue
 \begin{generalabstract}{brazilian}{\tituloportugues}{\chavesportugues}
@@ -360,7 +358,7 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %% Referências
 %%=============================================================================
 % \bibliographystyle{abnt}
-\bibliography{ref/biblio}
+\bibliography{ref/biblio}\label{chap:references}
 
 %IMPORTANTE: Se precisar usar alguma seção ou subseção dentro dos apêndices ou
 %anexos, utilizar o comando \tocless para não adicionar no Sumário
@@ -372,8 +370,9 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 \appendix
 \include{chap/apena} % description of the database
-% \include{chap/apenb} % R-package spsann
-% \include{chap/apenc} % R-package pedometrics
+\include{chap/apenb} % conceptual model of pedogenesis
+%\include{chap/apenc} % R-package spsann
+\include{chap/apend} % R-package pedometrics
 
 %%=============================================================================
 %% Anexos
