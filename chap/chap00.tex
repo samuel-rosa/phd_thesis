@@ -319,7 +319,7 @@ we already known -- the \textit{unknown knowns} \citep{Zizek2006}.
 
 \section{Content of the thesis}
 
-\subsection{Objectives and research questions}
+\subsection{Objectives and research questions}\label{sec:objectives}
 
 There are several sources of uncertainty that affect the development of soil-mapping models. Many 
 of this sources are known, others are still unknown, and some are disregarded due to our ignorance
@@ -387,6 +387,18 @@ the surface of the third and fifth, above-mentioned specific objectives and thei
 research questions, i.e.
 
 \begin{enumerate}
+\item Determine the suitability of freely available covariates to calibrate soil-mapping models.
+
+	\begin{enumerate}[label=(\alph*)]
+	\item Does the use of more detailed covariates result in considerably more accurate soil 
+	maps?
+
+	\item How does incorporation of spatial dependence in a soil-mapping model compare to the 
+	gain in prediction accuracy obtained with using more detailed covariates?
+
+	\item Are the answers to these research questions consistent across soil properties?
+	\end{enumerate}
+
 \item Identify appropriate calibration sample sizes and designs for soil-mapping projects.
 
 	\begin{enumerate}[label=(\alph*)]
@@ -412,22 +424,10 @@ research questions, i.e.
 	\item Are the answers to these research questions consistent across sample sizes and soil 
 	properties?
 	\end{enumerate}
-
-\item Determine the suitability of freely available covariates to calibrate soil-mapping models.
-
-	\begin{enumerate}[label=(\alph*)]
-	\item Does the use of more detailed covariates result in considerably more accurate soil 
-	maps?
-
-	\item How does incorporation of spatial dependence in a soil-mapping model compare to the 
-	gain in prediction accuracy obtained with using more detailed covariates?
-
-	\item Are the answers to these research questions consistent across soil properties?
-	\end{enumerate}
 \end{enumerate}
 
 
-\subsection{Study area and database}
+\subsection{Study area and database}\label{sec:database}
 
 The soil database used comes from a study area in the southern edge of the plateau of the Paraná 
 Sedimentary Basin, in the state of Rio Grande do Sul, Brazil. This study area is a small catchment 
@@ -475,10 +475,38 @@ and intimately-associated surface conditions.
 
 \subsection{Outline}
 
-The thesis is composed of three core chapters. Each chapter deals with one specific 
-research question and specific objective. Chapter 1 will deal with assessing 
-whether investing in more accurate covariates improves prediction accuracy. 
-Chapter 2 will deal with identifying appropriate calibration sample sizes and 
-sampling designs for building DSM models for mapping soil properties. Chapter 3 
-will deal with evaluating automated methods used to select covariates to build 
-linear DSM models on how they affect model composition and prediction accuracy.
+This thesis is composed of five chapters: this \textit{General introduction}, where the scope of the
+thesis is presented, three core chapters that address the objectives and research questions presented
+in section \ref{sec:objectives}, and the last, a \textit{General conclusion} of the work that was 
+developed during the last four years. The second chapter (\hyperref[chap:chapter01]{\textit{Chapter I}}),
+is based on an article published in the peer reviewed journal 
+\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}. The chapter compares linear soil-mapping
+ models calibrated using covariates available in two levels of detail, with and without taking the 
+spatial dependence of the residuals into account (Questions 1a-c).
+
+The third (\hyperref[chap:chapter02]{\textit{Chapter II}}) and fourth chapters 
+(\hyperref[chap:chapter03]{\textit{Chapter III}}) are based on manuscripts submitted to peer 
+reviewed journals, both dealing with the second objective of this thesis. The 
+former evaluates if improving a popular algorithm used to optimize sample configurations for spatial
+trend estimation results in more accurate spatial predictions (Questions 2a and 2f). The last 
+compares five methods for designing sample configurations on how they affect estimated model 
+parameters and prediction accuracy (Questions 2b and 2e). It also presents an algorithm for 
+optimizing sample configurations for identifying and estimating the spatial trend and variogram 
+model, and making spatial predictions (Question 2d). Finally, it evaluates the gain in prediction 
+accuracy when a sample configuration is optimized assuming the form of the model to be known.
+
+This thesis also includes a through description of the soil and covariate databases
+(\hyperref[apen:database]{\textit{Appendix A}}), and a verbal representation of the conceptual model
+of pedogenesis (\hyperref[apen:pedogenesis]{\textit{Appendix B}}), both summarized above in section
+\ref{sec:database}. The third (\hyperref[apen:spsann]{\textit{Appendix C}}) appendix contains a 
+description of the \texttt{R}-package \texttt{spsann}, designed for the optimization of sample 
+configurations using spatial simulated annealing. Finally, the fourth appendix 
+(\hyperref[apen:pedometrics]{\textit{Appendix D}}) presents a description of the \texttt{R}-package
+ \texttt{pedometrics}, which includes miscellaneous functions.
+
+All chapters can be read separately, which means that there might some overlap between chapters, 
+i.e. repeated information. However, there are clear links between this introductory chapter 
+and the concluding chapter. Chapters II, III, and appendix C also are closely connected. References 
+to specific sections of other chapters are made throughout the thesis. All literature references
+are presented under a unique \textit{Bibliographic references} section at the end of this thesis.
+
