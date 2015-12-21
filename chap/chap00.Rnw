@@ -133,7 +133,7 @@ as follows:
   through different visualization techniques.
 \end{description}
 
-\subsection{Sources of uncertainty} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sources of uncertainty}
 
 Soil-mapping models, like any other model, are nothing more than a gross simplification of reality.
 This means that soil-mapping models are unable to explain the spatio-temporal soil variation in 
@@ -488,16 +488,17 @@ installation and maintenance of an exuberant vegetation \citep{Sartori2009, Nasc
 There are three large morphostructural units \citep{GasparettoEtAl1988, NascimentoEtAl2010}:
 
 \begin{enumerate}[label=(\alph*)]
-\item the Planalto, with gently-rolling to slopping relief, composed predominately of denudational
- forms with flat surfaces, convex tops, and gently rolling convex slopes, often embedded in faults 
-and/or fractures,
+	\item the Planalto, with gently-rolling to slopping relief, composed predominately of 
+	denudational forms with flat surfaces, convex tops, and gently rolling convex slopes, often 
+	embedded in faults and/or fractures,
 
-\item the Rebordo do Planalto, with wide altimetric variation, steep slopes and abrupt cliffs, composed 
-predominately of denudational forms with convex, acute tops, presenting straight slopes with large 
-vertical drops often interrupted by terraces, generally embedded in faults and/or fractures, and
+	\item the Rebordo do Planalto, with wide altimetric variation, steep slopes and abrupt 
+	cliffs, composed predominately of denudational forms with convex, acute tops, presenting 
+	straight slopes with large vertical drops often interrupted by terraces, generally embedded
+	in faults and/or fractures, and
 
-\item the Depressão Periférica, composed of aggradational fluvial plains and denudational forms, the
-last with convex tops and flat surfaces, presenting concave elongated slopes.
+	\item the Depressão Periférica, composed of aggradational fluvial plains and denudational 
+	forms, the last with convex tops and flat surfaces, presenting concave elongated slopes.
 \end{enumerate}
 
 The drainage network has a well defined pattern, generally regular, determined by the faults and/or
@@ -540,19 +541,19 @@ discontinuities \citep{PieriniEtAl2002, MiguelEtAl2012}.
 \subsection{Database}
 \label{sec:intro-database}
 
-The soil database used in this study is part of the \hyperref[apen:database]{\textit{Santa Maria dataset}},
-a dataset composed of $n = 410$ soil observations made between \num{2004} and \num{2013} as part of 
-different research projects. These projects aimed at producing semi-detailed soil and land use maps
-(\scale{25000}) \citep{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013},
-and predicting the vulnerability of the topsoil to erosion \citep{MouraBueno2012, Miguel2013}. 
-The Santa Maria dataset, which is freely available at ISRIC World Soil Information Service 
-(\href{http://www.isric.org/data/wosis}{WoSIS}) and is fully documented at the end of this thesis
-(\autoref{apen:database}), is composed of three subsets, but only two of them are used here 
-(\reffig{intro-database}).
+The soil database used in this study is part of the \hyperref[apen:database]{\textit{Santa Maria 
+dataset}}, a dataset composed of $n = 410$ soil observations made between \num{2004} and \num{2013} 
+as part of different research projects. These projects aimed at producing semi-detailed soil and 
+land use maps (\scale{25000}) \citep{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012, 
+Samuel-RosaEtAl2013}, and predicting the vulnerability of the topsoil to erosion 
+\citep{MouraBueno2012, Miguel2013}. The Santa Maria dataset, which is freely available at ISRIC 
+World Soil Information Service (\href{http://www.isric.org/data/wosis}{WoSIS}), and is fully 
+documented at the end of this thesis (\autoref{apen:database}), is composed of three subsets, but 
+only two of them are used here (\reffig{intro-database}).
 
 \begin{figure}[!ht]
 \centering
-<<intro-database, fig = TRUE, echo = FALSE, warning = FALSE, error = FALSE, message = FALSE>>=
+<<intro-database, fig = TRUE, echo = FALSE>>=
 cal_data <- read.table(
   "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
   header = TRUE, na.strings = "na")[1:350, c("longitude", "latitude")]
@@ -597,9 +598,9 @@ p <- sp::spplot(
   latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed"))
 print(p)
 @
-\caption{Spatial distribution of the $n = 340$ (black) and $n = 10$ (red) point soil observations 
-from the Santa Maria dataset used in this thesis. The drainage network is shown in the 
-background to give an idea of how sampling locations are related to terrain features.}
+\caption{Spatial distribution of the $n = 340$ (black) and $n = 10$ (red) soil observations from 
+the Santa Maria dataset used in this thesis. The drainage network is shown in the background to 
+give an idea of how sampling locations are related to terrain features.}
 \label{fig:intro-database}
 \end{figure}
 
@@ -615,11 +616,11 @@ took place in the field using a GNSS signal receiver with a horizontal precision
 \SI{\pm8}{\metre} positioned approximately at the centre of the sampling area. When the GNSS signal 
 was affected by vegetation biomass, terrain features and satellite configuration, resulting in a 
 horizontal positional error larger than \SI{\pm8}{\metre}, georeferencing was carried out in the 
-office using \SI{1}{\metre} spatial resolution Google Earth satellite images with a positional 
-horizontal error of less than \SI{\pm6}{\metre}.
+office using \SI{1}{\metre} spatial resolution Google Earth\textregistered{} satellite image with 
+a positional horizontal error of less than \SI{\pm6}{\metre}.
 
 The second dataset ($n = 10$) contains data from the uppermost A horizon of modal soil profiles 
-whose location was purposively selected after the observations of the first dataset had been made, 
+whose locations were purposively selected after the observations of the first dataset had been made, 
 and a preliminary area-class soil map had been produced. The researchers aimed at locations that 
 they understood as being most representative of the soil mapping units depicted in the area-class 
 soil map. A single soil sample was taken from the each described soil horizon and used for 
@@ -629,22 +630,22 @@ described above, the difference being that GNSS signal receiver was positioned a
 location.
 
 Four soil properties contained in the Santa Maria dataset are explored in this thesis: clay content
-(CLAY, \si{\gram\per\kilo\gram}), organic carbon content (ORCA, \si{\gram\per\kilo\gram}), 
-effective cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}), and bulk density 
-(BUDE, \si{\mega\gram\per\cubic\metre}). CLAY was determined by the pipette method. ORCA was 
-determined using wet digestion. ECEC was calculated as the sum of exchangeable bases plus 
-exchangeable acidity. BUDE was determined using the core method. The first three of these soil 
-properties were selected because they were expected to present different patterns of spatial 
-variation and correlation with the dominant factors of soil formation in the study area: 
-organisms (\textit{O}), relief (\textit{R}), and parent material (\textit{P}). CLAY was presumed 
-to have a stronger relation with \textit{P}, while ORCA was expected to be more 
-correlated with \textit{O}. Because the soils of the study area were strongly eroded due to intense 
-agriculture in the 20th century, both CLAY and ORCA were also expected to be closely related with 
-\textit{R}. Finally, ECEC was expected to be strongly correlated with \textit{P} and \textit{O}, 
-which is supported by its natural relationship with both CLAY and ORCA. BUDE was selected because it
-was the only soil property that approximately follows a normal frequency distribution, while the 
-other three have a right-tailed frequency distribution (\autoref{intro-soil-properties}). The main 
-weakness of the BUDE data is that it is available at only $n = 282$ observations due to soil stoniness.
+(CLAY, \si{\gram\per\kilo\gram}), organic carbon content (ORCA, \si{\gram\per\kilo\gram}), effective
+cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}), and bulk density (BUDE, 
+\si{\mega\gram\per\cubic\metre}). CLAY was determined by the pipette method. ORCA was determined 
+using wet digestion. ECEC was calculated as the sum of exchangeable bases plus exchangeable acidity.
+BUDE was determined using the core method. The first three soil properties were selected because 
+they were expected to present different patterns of spatial variation and correlation with the 
+dominant factors of soil formation in the study area: organisms (\textit{O}), relief (\textit{R}), 
+and parent material (\textit{P}). CLAY was presumed to have a stronger relation with \textit{P}, 
+while ORCA was expected to be more correlated with \textit{O}. Because the soils of the study area 
+were strongly eroded due to intense agriculture in the 20th century, both CLAY and ORCA were also 
+expected to be closely related with \textit{R}. Finally, ECEC was expected to be strongly correlated
+with \textit{P} and \textit{O}, which is supported by its natural relationship with both CLAY and 
+ORCA. BUDE was selected because it was the only soil property that approximately follows a normal 
+frequency distribution, while the other three have a right-tailed frequency distribution 
+(\autoref{intro-soil-properties}). The main weakness of the BUDE data is that it is available at 
+only $n = 282$ observations due to soil stoniness.
 
 \begin{figure}[!ht]
 \centering
@@ -690,48 +691,70 @@ print(cc)
 print(dd)
 @
 \end{minipage}
-\caption{The four topsoil properties contained in the Santa Maria dataset explored in this thesis:
-(a) clay content, (b) organic carbon content, (c) effective cation exchange capacity, and (d)
-bulk density. Each panel shows the histogram of frequency, the empirical density function assuming a
-normal frequency distribution, and a few summary statistics.}
+\caption{The four soil properties explored in this thesis: (a) clay content, (b) organic carbon 
+content, (c) effective cation exchange capacity, and (d) bulk density. Each panel shows the sample 
+histogram and summary statistics of the soil properties in their original scale ($\lambda = 1$), as 
+well as the theoretical probability density function so that we can assess how good is the fit of 
+the normal distribution to the data -- a product of the \Rpackage{pedometrics}.}
 \label{fig:intro-soil-properties}
 \end{figure}
 
-Covariate data include 20 data layers freely available for the study area, 
-depicting information on relief, vegetation, land use, geology, soil parent material, soil (taxa) 
-and intimately-associated surface conditions.
+A list of more than \num{100} covariates were used in this thesis. All of them were derived from 
+five freely available sources: area-class soil maps, digital elevation models, geological maps,
+land use maps, and orbital images. Each of these sources was explored in two levels of spatial 
+detail, here defined by the data sources and/or production methods, which demand different amounts 
+of resources (time, workforce, budget, technology, etc.). Specifically, the level of spatial detail 
+of a covariate is a function of the components of its production process such as the cartographic 
+ratio, spatial sampling support, number and diversity of data sources explored, and quantity of 
+spatial data used. This definition of spatial detail is broader than that of spatial resolution
+or spatial scale, and should not be confounded with spatial support \citep{WebsterEtAl2007} or 
+thematic detail \citep{Rossiter2000}.
+
+The first area-class soil map was published at a \scale{100000} \citep{AzolinEtAl1988}, while the 
+second was prepared at the more detailed \scale{25000} \citep{MiguelEtAl2012}. The first digital 
+elevation model is the result of interpolating the contour lines of the most recent topographic maps
+produced by the Brazilian Army (\scale{25000}) \citep{DSG1980, DSG1992, DSG1992a}, while second 
+digital elevation model is the well known SRTM DEM (3 arc-seconds \SI{\approx90}{\metre} spatial 
+resolution) produced by NASA’s Jet Propulsion Laboratory in collaboration with the National 
+Geospatial-Intelligence Agency \citep{RodriguezEtAl2006}. Data on geology and soil parent material 
+comes from most recent geological maps published in the \scales{25000}{50000} \citep{MacielFilho1990,
+GasparettoEtAl1988}. The land use map of the year of 1980 comes from the most recent topographic 
+map produced by the Brazilian Army already mentioned above. The second land use map refers to the 
+years of 2008 and 2009, and was prepared at a \scale{2000} \citep{SamuelRosaEtAl2011a}. The less 
+detailed satellite image was acquired by the Landsat-5 Thematic Mapper on December 26, 2010, while
+the more detailed satellite image comes from the RapidEye constellation, acquired on November 16, 
+2012. A comprehensive description of these covariates and their processing is presented in the 
+end of this thesis (\autoref{apen:database}).
 
 \subsection{Outline}
 
 This thesis is composed of five chapters: this \textit{General introduction}, where the scope of the
 thesis is presented, three core chapters that address the objectives and research questions presented
 in \refsec{objectives}, and the last, a \hyperref[chap:conclusion]{\textit{General conclusion}}
-of the work that was developed during the last four years. The second chapter (\hyperref[chap:chapter01]{\textit{Chapter
-I}}), is based on an article published in the peer reviewed journal 
-\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}. The chapter compares linear soil-mapping
- models calibrated using covariates available in two levels of detail, with and without taking the 
-spatial dependence of the residuals into account (Questions 1a-c).
+of the work that was developed during the last four years. The second chapter 
+(\hyperref[chap:chapter01]{\textit{Chapter I}}), is based on an article published in the peer 
+reviewed journal \href{http://www.journals.elsevier.com/geoderma/}{Geoderma}. The chapter compares 
+linear soil-mapping models calibrated using covariates available in two levels of detail, with and 
+without taking the spatial dependence of the residuals into account (Questions 1a-c).
 
 The third (\hyperref[chap:chapter02]{\textit{Chapter II}}) and fourth chapters 
 (\hyperref[chap:chapter03]{\textit{Chapter III}}) are based on manuscripts submitted to peer 
-reviewed journals, both dealing with the second objective of this thesis. The 
-former evaluates if improving a popular algorithm used to optimize sample configurations for spatial
-trend estimation results in more accurate spatial predictions (Questions 2a and 2f). The last 
-compares five methods for designing sample configurations on how they affect estimated model 
-parameters and prediction accuracy (Questions 2b and 2e). It also presents an algorithm for 
-optimizing sample configurations for identifying and estimating the spatial trend and variogram 
-model, and making spatial predictions (Question 2d). Finally, it evaluates the gain in prediction 
-accuracy when a sample configuration is optimized assuming the form of the model to be known 
-(Question 2c).
+reviewed journals, both dealing with the second objective of this thesis. The former evaluates if 
+improving a popular algorithm used to optimize sample configurations for spatial trend estimation 
+results in more accurate spatial predictions (Questions 2a and 2f). The last compares five methods 
+for designing sample configurations on how they affect estimated model parameters and prediction 
+accuracy (Questions 2b and 2e). It also presents an algorithm for optimizing sample configurations 
+for identifying and estimating the spatial trend and variogram model, and making spatial predictions
+(Question 2d). Finally, it evaluates the gain in prediction accuracy when a sample configuration is 
+optimized assuming the form of the model to be known (Question 2c).
 
-This thesis also includes a through description of the soil and covariate databases
-(\hyperref[apen:database]{\textit{Appendix A}}), and a verbal representation of the conceptual model
-of pedogenesis (\hyperref[apen:pedogenesis]{\textit{Appendix B}}), both summarized above in section
-\ref{sec:database}. The third appendix (\hyperref[apen:spsann]{\textit{Appendix C}})  contains a 
-description of the \texttt{R}-package \texttt{spsann}, designed for the optimization of sample 
-configurations using spatial simulated annealing. Finally, the fourth appendix 
-(\hyperref[apen:pedometrics]{\textit{Appendix D}}) presents a description of the \texttt{R}-package
- \texttt{pedometrics}, which includes miscellaneous functions.
+This thesis also includes a through description of the soil and covariate databases 
+(\textit{\autoref{apen:database}}), and a verbal representation of the conceptual model of 
+pedogenesis (\textit{\autoref{apen:pedogenesis}}), both summarized above in \refsec{database}.
+\textit{\autoref{apen:spsann}} contains a description of the \Rpackage{spsann}, designed for the 
+optimization of sample configurations using spatial simulated annealing. Finally, 
+\textit{\autoref{apen:pedometrics}} presents a description of the \Rpackage{pedometrics}, which 
+includes miscellaneous functions.
 
 All chapters can be read separately, which means that there might be some overlap between chapters, 
 i.e. repeated information. However, there are clear links between this introductory chapter 
