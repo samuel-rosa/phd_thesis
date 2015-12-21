@@ -539,20 +539,60 @@ discontinuities \citep{PieriniEtAl2002, MiguelEtAl2012}.
 \subsection{Database}
 \label{sec:intro-database}
 
-The soil database is composed of $n=350$ point soil observations collected between 2004 and 2011 
-\citep{PedronEtAl2006b, SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013}. Soil data 
-includes particle size distribution, organic carbon content, bulk density, and effective 
-cation exchange capacity. Covariate data include 20 data layers freely available for the study area, 
-depicting information on relief, vegetation, land use, geology, soil parent material, soil (taxa) 
-and intimately-associated surface conditions.
+The soil database used in this study is part of the 
+\hyperref[apen:database]{\textit{Santa Maria dataset}}, a dataset composed of $n = 410$ soil 
+observations made between \num{2004} and \num{2013} as part of different research
+projects. These projects aimed at producing semi-detailed soil and land use maps (\scale{25000}) 
+\citep{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013}, and 
+predicting the vulnerability of the topsoil to erosion \citep{MouraBueno2012, Miguel2013}. 
+The Santa Maria dataset, which is freely available at ISRIC World Soil Information Service 
+(\href{http://www.isric.org/data/wosis}{WoSIS}) and is fully documented at the end of this thesis
+(\autoref{apen:database}), is composed of three subsets, but only two of them are used here 
+(\reffig{intro-database}).
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=90mm]{chap01FIG1a}
-  \caption{Spatial distribution of the $n = 350$ point soil observations made between the years of 
-  2008 and 2011 as part of soil and land use mapping projects.
+  \caption{Spatial distribution of the $n = 350$ point soil observations used in this study.}
   \label{fig:intro-database}
 \end{figure}
+
+The first dataset ($n = 340$) was produced using purposively selected observation locations (free 
+survey). The main goal of the researchers was to obtain a sample that they understood as being 
+representative of the different landforms, land uses, and soil taxa present in the study area. They 
+also wanted the sample to cover the entire study area. At the observation locations, the 
+researchers defined an area of \SI{\approx100}{\metre\squared} within which they opened three 
+soil pits. Soil samples were collected up to a depth of \SI{20}{\centi\metre}. The resulting 
+sampling depth varies from \num{2} to \SI{20}{\centi\metre}, with a mean of \SI{17}{\centi\metre}. 
+Soil samples from the three pits were used to produce a composite sample which was used for 
+laboratory analysis. Georeferencing took place using a GNSS signal receiver with a horizontal 
+precision of more than \SI{\pm8}{\metre} positioned approximately at the centre of the sampling 
+area. When the GNSS signal was affected by vegetation biomass, terrain features and satellite 
+configuration, resulting in a horizontal positional error larger than \SI{\pm8}{\metre}, the 
+georeferencing was carried out in the office using \SI{1}{\metre} spatial resolution Google Earth 
+satellite images of the years of 2008 and 2009, with a positional horizontal error of less than 
+\SI{\pm6}{\metre}.
+
+The second dataset ($n = 10$) contains data of the A horizon of modal soil profiles purposively 
+selected after the observations of the first dataset have been obtained, and a preliminary soil map 
+have been produced. The researchers aimed at the observation locations what they understood as
+being most representative of the soil mapping units depicted in the soil map. A single soil sample
+was taken from the A horizon and used for laboratory analysis. The resulting depth varies from 
+\num{12} to \SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was 
+carried out as described above, the difference being that GNSS signal receiver was positioned at the
+observation location.
+
+Four soil properties are explored in this thesis: clay content (CLAY, \si{\gram\per\kilo\gram}), 
+organic carbon content (ORCA, \si{\gram\per\kilo\gram}), bulk density (BUDE, 
+\si{\mega\gram\per\cubic\metre}), and effective cation exchange capacity (ECEC, 
+\si{\milli\mole\per\kilo\gram}).
+
+Soil data includes particle size distribution, organic carbon content, bulk density, and effective 
+cation exchange capacity. Covariate data include 20 data layers freely available for the study area, 
+depicting information on relief, vegetation, land use, geology, soil parent material, soil (taxa) 
+and intimately-associated surface conditions.
+
+
 
 
 \subsection{Outline}
