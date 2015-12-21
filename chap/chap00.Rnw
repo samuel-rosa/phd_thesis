@@ -536,7 +536,6 @@ the alluvial plains are determined by seasonal or permanent water-logging, sedim
 subsurface horizons due to argiluviation, preferential lateral erosion and, possibly, geological
 discontinuities \citep{PieriniEtAl2002, MiguelEtAl2012}.
 
-%TODO
 \subsection{Database}
 \label{sec:intro-database}
 
@@ -551,11 +550,50 @@ The Santa Maria dataset, which is freely available at ISRIC World Soil Informati
 (\autoref{apen:database}), is composed of three subsets, but only two of them are used here 
 (\reffig{intro-database}).
 
+
 \begin{figure}[!ht]
-  \centering
-  \includegraphics[width=90mm]{chap01FIG1a}
-  \caption{Spatial distribution of the $n = 350$ point soil observations used in this thesis.}
-  \label{fig:intro-database}
+\centering
+<<intro-database, fig = TRUE, echo = FALSE, width = 90mm>>=
+cal_data <- read.table(
+  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
+  header = TRUE, na.strings = "na")[1:350, c("longitude", "latitude")]
+sp::coordinates(cal_data) <- ~ longitude + latitude
+sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
+cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
+pts <- data.frame(cal_data@coords)
+pts$id <- c(rep("black", 340), rep("red", 10))
+spgrass6::initGRASS(
+  gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"), 
+  location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), 
+  override = TRUE)
+pol <- spgrass6::readVECT6("buffer_BASIN_10")
+drain <- spgrass6::readVECT6("STREAM_10")
+drain <- rgeos::gIntersection(drain, pol, byid = TRUE)
+p <- sp::spplot(
+  pol, zcol = "cat", col = "gray", fill = "lemonchiffon", 
+  scales = list(draw = TRUE),
+  colorkey = FALSE, aspect = "iso", 
+  xlim = c(cal_data@bbox[1, 1] * 0.9998, cal_data@bbox[1, 2] * 1.0005), 
+  ylim = c(cal_data@bbox[2, 1] * 0.99999, cal_data@bbox[2, 2] * 1.00001),
+  par.settings = list(
+    fontsize = list(text = 12, points = 8), 
+    layout.widths = list(left.padding = 0, right.padding = 0), 
+    layout.heights = list(top.padding = 0, bottom.padding = 0)),
+  panel = function(x, y, ...) {
+    sp::panel.polygonsplot(x, y, ...)
+    lattice::panel.points(
+      x = pts$longitude, y = pts$latitude, pch = 20, col = pts$id)
+    lattice::panel.abline(
+      v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
+      col = "gray", lty = "dashed", lwd = 0.5)
+    }) + 
+  latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed"))
+print(p)
+@
+\caption{Spatial distribution of the $n = 340$ (black) and $n = 10$ (red) point soil observations 
+obtained from the Santa Maria dataset used in this thesis. The drainage network is shown in the 
+background to give an idea of how sampling locations are related to terrain features.}
+\label{fig:intro-database}
 \end{figure}
 
 The first dataset ($n = 340$) was produced using purposively selected observation locations (free 
