@@ -2,6 +2,8 @@
 \artigofalse
 \chapter{General introduction}
 \label{chap:introduction}
+%\usepackage[utf8]{inputenc}
+ % tell Sweave where to put figures
 
 \section{Background and motivation}
 
@@ -535,7 +537,6 @@ the alluvial plains are determined by seasonal or permanent water-logging, sedim
 subsurface horizons due to argiluviation, preferential lateral erosion and, possibly, geological
 discontinuities \citep{PieriniEtAl2002, MiguelEtAl2012}.
 
-%TODO
 \subsection{Database}
 \label{sec:intro-database}
 
@@ -550,11 +551,14 @@ The Santa Maria dataset, which is freely available at ISRIC World Soil Informati
 (\autoref{apen:database}), is composed of three subsets, but only two of them are used here 
 (\reffig{intro-database}).
 
+
 \begin{figure}[!ht]
-  \centering
-  \includegraphics[width=90mm]{chap01FIG1a}
-  \caption{Spatial distribution of the $n = 350$ point soil observations used in this thesis.}
-  \label{fig:intro-database}
+\centering
+\includegraphics{chap00-intro-database}
+\caption{Spatial distribution of the $n = 340$ (black) and $n = 10$ (red) point soil observations 
+from the Santa Maria dataset used in this thesis. The drainage network is shown in the 
+background to give an idea of how sampling locations are related to terrain features.}
+\label{fig:intro-database}
 \end{figure}
 
 The first dataset ($n = 340$) was produced using purposively selected observation locations (free 
@@ -600,34 +604,35 @@ was the only soil property that approximately follows a normal frequency distrib
 other three have a right-tailed frequency distribution (\autoref{intro-soil-properties}). The main 
 weakness of the BUDE data is that it is available at only $n = 282$ observations due to soil stoniness.
 
- \begin{figure}[!ht]
-   \centering
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2a}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2d}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2b}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2e}
-    \end{minipage}
-  \caption{The four topsoil properties contained in the Santa Maria dataset explored in this thesis:
-  (a) clay content, (b) organic carbon content, (c) effective cation exchange capacity, and (d)
-  bulk density. Each panel shows the histogram of frequency, empirical density function, and a few 
-  summary statistics.}
-  \label{fig:intro-soil-properties}
- \end{figure}
+\begin{figure}[!ht]
+\centering
+\begin{minipage}[b]{63mm}
+\subcaption{}
+\centering
+\includegraphics{fig/chap00-intro-clay}
+\end{minipage}
+\begin{minipage}[b]{63mm}
+\subcaption{}
+\centering
+\includegraphics{fig/chap00-intro-orca}
+\end{minipage}
+\begin{minipage}[b]{63mm}
+\subcaption{}
+\centering
+\includegraphics{fig/chap00-intro-ecec}
+\end{minipage}
+\begin{minipage}[b]{63mm}
+\subcaption{}
+\centering
+\includegraphics{fig/chap00-intro-bude}
+\end{minipage}
+\caption{The four topsoil properties contained in the Santa Maria dataset explored in this thesis:
+(a) clay content, (b) organic carbon content, (c) effective cation exchange capacity, and (d)
+bulk density. Each panel shows the histogram of frequency, the empirical density function assuming a
+normal frequency distribution, and a few summary statistics.}
+\label{fig:intro-soil-properties}
+\end{figure}
+\end{document}
 
 Covariate data include 20 data layers freely available for the study area, 
 depicting information on relief, vegetation, land use, geology, soil parent material, soil (taxa) 

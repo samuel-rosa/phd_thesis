@@ -2,7 +2,8 @@
 \artigofalse
 \chapter{General introduction}
 \label{chap:introduction}
-\SweaveOpts{prefix.string = fig/chap00} % tell Sweave where to put figures
+\usepackage[utf8]{inputenc}
+\SweaveOpts{prefix.string = fig/chap00}
 
 \section{Background and motivation}
 
@@ -553,22 +554,30 @@ The Santa Maria dataset, which is freely available at ISRIC World Soil Informati
 
 \begin{figure}[!ht]
 \centering
-<<intro-database, fig = TRUE, echo = FALSE, width = 90mm>>=
+<<intro-database, fig = TRUE, echo = FALSE, warning = FALSE, error = FALSE, message = FALSE>>=
 cal_data <- read.table(
   "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
   header = TRUE, na.strings = "na")[1:350, c("longitude", "latitude")]
 sp::coordinates(cal_data) <- ~ longitude + latitude
 sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
 cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
-pts <- data.frame(cal_data@coords)
-pts$id <- c(rep("black", 340), rep("red", 10))
-spgrass6::initGRASS(
-  gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"), 
-  location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), 
-  override = TRUE)
-pol <- spgrass6::readVECT6("buffer_BASIN_10")
-drain <- spgrass6::readVECT6("STREAM_10")
-drain <- rgeos::gIntersection(drain, pol, byid = TRUE)
+pts <- data.frame(slot(cal_data, "coords"))
+pts[, "id"] <- c(rep("black", 340), rep("red", 10))
+invisible(capture.output(
+  spgrass6::initGRASS(
+    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"), 
+    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), 
+    override = TRUE)
+))
+invisible(capture.output(
+  pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)
+))
+invisible(capture.output(
+  drain <- spgrass6::readVECT6("STREAM_10", ignore.stderr = TRUE)
+))
+invisible(capture.output(
+  drain <- rgeos::gIntersection(drain, pol, byid = TRUE)
+))
 p <- sp::spplot(
   pol, zcol = "cat", col = "gray", fill = "lemonchiffon", 
   scales = list(draw = TRUE),
@@ -582,7 +591,7 @@ p <- sp::spplot(
   panel = function(x, y, ...) {
     sp::panel.polygonsplot(x, y, ...)
     lattice::panel.points(
-      x = pts$longitude, y = pts$latitude, pch = 20, col = pts$id)
+      x = pts[, "longitude"], y = pts[, "latitude"], pch = 20, col = pts[, "id"])
     lattice::panel.abline(
       v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
       col = "gray", lty = "dashed", lwd = 0.5)
@@ -591,7 +600,7 @@ p <- sp::spplot(
 print(p)
 @
 \caption{Spatial distribution of the $n = 340$ (black) and $n = 10$ (red) point soil observations 
-obtained from the Santa Maria dataset used in this thesis. The drainage network is shown in the 
+from the Santa Maria dataset used in this thesis. The drainage network is shown in the 
 background to give an idea of how sampling locations are related to terrain features.}
 \label{fig:intro-database}
 \end{figure}
@@ -642,18 +651,18 @@ weakness of the BUDE data is that it is available at only $n = 282$ observations
 \begin{figure}[!ht]
 \centering
 <<echo = FALSE>>=
-require(pedometrics)
+options(useFancyQuotes = FALSE)
 tmp <- read.table(
-  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
-  header = TRUE, na.strings = "na")
+  '~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv', sep = ";",
+  header = TRUE, na.strings = 'na')
 lattice::trellis.par.set(
   fontsize = list(text = 16, points = 15), axis.line = list(lwd = 0.01),
   layout.widths = list(left.padding = 0, right.padding = 0), 
   layout.heights = list(top.padding = 0, bottom.padding = 0))
-aa <- plotHD(tmp$CLAY, xlab = "CLAY")
-bb <- plotHD(tmp$ORCA, xlab = "ORCA")
-cc <- plotHD(tmp$ECEC, xlab = "ECEC")
-dd <- plotHD(na.exclude(tmp$BUDE), xlab = "BUDE")
+aa <- pedometrics::plotHD(tmp$CLAY, xlab = 'CLAY')
+bb <- pedometrics::plotHD(tmp$ORCA, xlab = 'ORCA')
+cc <- pedometrics::plotHD(tmp$ECEC, xlab = 'ECEC')
+dd <- pedometrics::plotHD(na.exclude(tmp$BUDE), xlab = "BUDE")
 @
 \begin{minipage}[b]{63mm}
 \subcaption{}
