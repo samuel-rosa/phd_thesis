@@ -540,17 +540,15 @@ discontinuities \citep{PieriniEtAl2002, MiguelEtAl2012}.
 \subsection{Database}
 \label{sec:intro-database}
 
-The soil database used in this study is part of the 
-\hyperref[apen:database]{\textit{Santa Maria dataset}}, a dataset composed of $n = 410$ soil 
-observations made between \num{2004} and \num{2013} as part of different research
-projects. These projects aimed at producing semi-detailed soil and land use maps (\scale{25000}) 
-\citep{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013}, and 
-predicting the vulnerability of the topsoil to erosion \citep{MouraBueno2012, Miguel2013}. 
+The soil database used in this study is part of the \hyperref[apen:database]{\textit{Santa Maria dataset}},
+a dataset composed of $n = 410$ soil observations made between \num{2004} and \num{2013} as part of 
+different research projects. These projects aimed at producing semi-detailed soil and land use maps
+(\scale{25000}) \citep{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013},
+and predicting the vulnerability of the topsoil to erosion \citep{MouraBueno2012, Miguel2013}. 
 The Santa Maria dataset, which is freely available at ISRIC World Soil Information Service 
 (\href{http://www.isric.org/data/wosis}{WoSIS}) and is fully documented at the end of this thesis
 (\autoref{apen:database}), is composed of three subsets, but only two of them are used here 
 (\reffig{intro-database}).
-
 
 \begin{figure}[!ht]
 \centering
@@ -633,13 +631,13 @@ location.
 Four soil properties contained in the Santa Maria dataset are explored in this thesis: clay content
 (CLAY, \si{\gram\per\kilo\gram}), organic carbon content (ORCA, \si{\gram\per\kilo\gram}), 
 effective cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}), and bulk density 
-(BUDE, \si{\mega\gram\per\cubic\metre}). CLAY was 
-determined by the pipette method. ORCA was determined using wet digestion. ECEC was calculated as 
-the sum of exchangeable bases plus exchangeable acidity. BUDE was determined using the core method. 
-The first three of these soil properties were selected because they were expected to present 
-different patterns of spatial variation and correlation with the dominant factors of soil formation 
-in the study area: organisms (\textit{O}), relief (\textit{R}), and parent material (\textit{P}). 
-CLAY was presumed to have a stronger relation with \textit{P}, while ORCA was expected to be more 
+(BUDE, \si{\mega\gram\per\cubic\metre}). CLAY was determined by the pipette method. ORCA was 
+determined using wet digestion. ECEC was calculated as the sum of exchangeable bases plus 
+exchangeable acidity. BUDE was determined using the core method. The first three of these soil 
+properties were selected because they were expected to present different patterns of spatial 
+variation and correlation with the dominant factors of soil formation in the study area: 
+organisms (\textit{O}), relief (\textit{R}), and parent material (\textit{P}). CLAY was presumed 
+to have a stronger relation with \textit{P}, while ORCA was expected to be more 
 correlated with \textit{O}. Because the soils of the study area were strongly eroded due to intense 
 agriculture in the 20th century, both CLAY and ORCA were also expected to be closely related with 
 \textit{R}. Finally, ECEC was expected to be strongly correlated with \textit{P} and \textit{O}, 
@@ -698,14 +696,10 @@ bulk density. Each panel shows the histogram of frequency, the empirical density
 normal frequency distribution, and a few summary statistics.}
 \label{fig:intro-soil-properties}
 \end{figure}
-\end{document}
 
 Covariate data include 20 data layers freely available for the study area, 
 depicting information on relief, vegetation, land use, geology, soil parent material, soil (taxa) 
 and intimately-associated surface conditions.
-
-
-
 
 \subsection{Outline}
 
