@@ -9,11 +9,25 @@
 
 \subsection{Demand for soil information}
 
-Soil science is experiencing a period of renaissance that started in the last 
-decade \cite{HarteminkEtAl2008}. It is a result of a new global demand for soil 
+Soil scientists have complained for many years about the lack of government funding for soil mapping
+and soil-related research, not only in Brazil \citep{Dalmolin1999, Ker1999, KerEtAl2003, 
+Mendonca-SantosEtAl2003, Ramos2003, Espindola2008}, but in many countries around the world 
+\citep{Basher1997, HarteminkEtAl2008, Grunwald2009, SanchezEtAl2009, Finke2012}. Many soil 
+scientists pointed out several economical, political, and cultural reasons to explain the general 
+lack of interest in soil information after the 1980's without coming to an agreement. Fortunately, 
+the landscape has changed dramatically since the last decade. Soil science is now experiencing a 
+period of renaissance \citep{HarteminkEtAl2008}. Soils are back on the agenda \citep{Kempen2011}. 
+Soil is now a hot topic at both local and global scales. Again, defining the reasons for increased 
+funding of soil mapping 
+and soil-related research is a quite complex task. 
+Some believe that it is a result of the global understanding that soil information is needed to 
+solve what has been defined as the five major problems of our time: food security, climate change, 
+environmental degradation, water scarcity, and threats to the biodiversity \citep{SanchezEtAl2009}.
+
+It is a result of a new global demand for soil 
 information needed to solve what has been defined as the five major problems of
 our time: food security, climate change, environmental degradation, water 
-scarcity and threats to the biodiversity \cite{SanchezEtAl2009}. The Food and 
+scarcity and threats to the biodiversity \citep{SanchezEtAl2009}. The Food and 
 Agriculture Organization (\href{http://www.fao.org/index_en.htm}{FAO}) of the 
 United Nations (\href{http://www.un.org/en/}{UN}), through the Global Soil 
 Partnership (\href{http://www.fao.org/globalsoilpartnership/en/}{GSP}) project, 
