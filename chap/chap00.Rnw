@@ -9,55 +9,67 @@
 
 \subsection{Demand for soil information}
 
-Soil science is experiencing a period of renaissance that started in the last 
-decade \cite{HarteminkEtAl2008}. It is a result of a new global demand for soil 
-information needed to solve what has been defined as the five major problems of
-our time: food security, climate change, environmental degradation, water 
-scarcity and threats to the biodiversity \cite{SanchezEtAl2009}. The Food and 
-Agriculture Organization (\href{http://www.fao.org/index_en.htm}{FAO}) of the 
-United Nations (\href{http://www.un.org/en/}{UN}), through the Global Soil 
-Partnership (\href{http://www.fao.org/globalsoilpartnership/en/}{GSP}) project, 
-is the main global demander of up-to-date soil information. The objective of 
-FAO is to support and ensure the implementation of joint efforts that lead to 
-the adoption of sustainable development goals for the soils \cite{FAO2012}. 
-Digital soil mapping (DSM), \textit{the} \textit{creation and population of 
-spatial soil information systems through the use of field and laboratory 
-observational methods, coupled with spatial and non-spatial soil inference 
-systems} \cite{LagacherieEtAl2007a}, a branch of pedometrics, a new emerging 
-discipline of soil science that corresponds to the \textit{application of 
-mathematical and statistical methods for the study of the distribution and 
-genesis of soils} \cite{Heuvelink2003}, is the best alternative to meet this 
-new demand for soil information. This is because DSM addresses the main 
-problems of the classical approach of soil mapping \cite{Kempen2011}. First, 
-DSM is data-centered (\textit{environmental-centered}) and gives emphasis on 
-producing soil information according to the needs of soil information users 
-(\textit{user-driven}). Second, DSM relies on using well documented statistical
-models (\textit{reproducible research}) that allow treating the soil as a 
-continuum (models of spatial variation). And third, DSM products can be made 
-available at a lower cost in soil information systems with quantified 
-uncertainty.
+Soil scientists have complained for many years about the lack of government funding for soil mapping
+and soil-related research, not only in Brazil \citep{Dalmolin1999, Ker1999, KerEtAl2003, 
+Mendonca-SantosEtAl2003, Ramos2003, Espindola2008}, but in many countries around the world 
+\citep{Basher1997, HarteminkEtAl2008, Grunwald2009, SanchezEtAl2009, Finke2012}. They pointed out 
+several scientific, psychological, and cultural reasons to explain the general lack of interest in 
+soil information after the 1980's. But all of them seem to agree on one point: cutting down the 
+budget for soil mapping and soil-related research fundamentally was an economic decision in which 
+the general public was not given the chance to participate \citep{SamuelRosa2012}.
 
-Several initiatives have been undertaken around the world in the last years to 
-ensure the development and implementation of DSM. The main examples are the 
-GlobalSoilMap.net consortium and ISRIC's Global Soil Information Facilities
-(\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}).
-In Brazil, soil scientists created the Brazilian Network for Research in DSM 
-(RedeMDS) with the main objective of generating synergy among Brazilian soil 
-scientists to advance the research in DSM in Brazil \cite{RedeMDS2013}. Also, 
-the two first job positions for assistant professors in Pedometrics and DSM in 
-Brazilian universities were created in 2011 and 2013 \cite{UFRRJ2011,UFSM2012}. 
-Unfortunately these local initiatives are not supported by any official 
-government demand for up-to-date soil information in Brazil 
-\cite{SamuelRosa2012}. Several economic, politic and cultural reasons have been 
-pointed out to explain the lack of interest on soil information in Brazil since 
-the 1980s \cite{Dalmolin1999, Ker1999, KerEtAl2003, Ramos2003, Espindola2008}, 
-but their resolution is out of the scope of this thesis. Alike many other local
-initiatives, the present thesis complies with the priorities defined by the 75 
-soil scientists from 17 countries that came together in Rio de Janeiro on July 
-2006 during the 2nd Global Workshop on Digital Soil Mapping, for whom developing
-and implementing DSM depends on training students and experienced soil 
-scientists, standardizing methods and measures, and building international 
-collaboration \cite{Boettinger2004}.
+The soil science landscape has changed dramatically since the last decade. Soil science is now 
+experiencing a period of renaissance \citep{HarteminkEtAl2008}. Soils are back on the agenda 
+\citep{Kempen2011}. Soil is now a hot topic. The United Nations 
+(\href{http://www.un.org/apps/news/story.asp?NewsID=49520#.VnremV6alz0}{UN}) declared 5 December 
+the World Soil Day and 2015 the International Year of Soils ``in an effort to raise awareness and 
+promote more sustainable use of this critical resource''. A global consortium, the 
+\href{http://www.globalsoilmap.net/}{GlobalSoilMap}, was created with the goal of producing ``a 
+new digital soil map of the world using state-of-the-art and emerging technologies''. The Food and 
+Agriculture Organization (\href{http://www.fao.org/index_en.htm}{FAO}) launched a Global Soil 
+Partnership (\href{http://www.fao.org/globalsoilpartnership/}{GSP}) for ``leading to the adoption
+of sustainable development goals for soils''. The International Union of Soil Sciences created a 
+working group, funded by the United States Department of Agriculture 
+(\href{http://www.nrcs.usda.gov/wps/portal/nrcs/main/soils/survey/class/}{USDA}) to develop a 
+Universal Soil Classification System, ``a common language to describe soils that can be used 
+internationally''. An Intergovernmental Technical Panel on Soils 
+(\href{http://www.fao.org/globalsoilpartnership/intergovernmental-technical-panel-on-soils/}{ITPS})
+was composed, counting with soil experts from all regions of the world ``to provide scientific and 
+technical advice and guidance on global soil issues to the Global Soil Partnership''. The 
+\href{http://www.gatesfoundation.org/what-we-do/global-development/agricultural-development}{Bill 
+\& Melinda Gates foundation} handed out an \SI{18}[\$]~million grant ``to map most parts in 
+Sub-Sahara Africa, and make all Sub-Saharan Africa data available''. The International Soil 
+Reference and Information Centre (ISRIC) launched its Global Soil Information Facilities 
+(\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}), a ``framework 
+for production of open soil data''. In Brazil, soil scientists created the Brazilian Network for 
+Research in Digital Soil Mapping (\href{https://goo.gl/m8QWUm}{RedeMDS}) with the objective of 
+``generating synergy among Brazilian soil scientists to advance the research in digital soil mapping
+in Brazil''. And the Federal Court of Accounts held a \href{https://www.governancadosolo.gov.br/}{
+Soil Governance Conference}, where the National Program for Soil Survey and Interpretation of Brazil 
+(\href{https://goo.gl/zbMK24}{PRONASOLOS}) was announced: the program shall have a 
+\SI{8}[R\$]~billion budget.
+
+Most soil scientists seem to agree that there is a renewed recognition of the importance of soils 
+for humanity and the environment, a global understanding that soil information is needed to solve 
+those that have been named as the five major problems of our time: food insecurity, climate change, 
+environmental degradation, water scarcity, and threats to the biodiversity \citep{SanchezEtAl2009}. 
+This renewed recognition would be the reason for an increasing worldwide societal demand for 
+up-to-date, high resolution soil information \citep{OmutoEtAl2013}. Although it is out of the scope 
+of this thesis to analyse whether this demand exists or not, it is worth pointing that the above 
+mentioned initiatives are coordinated by soil scientists themselves, where, again, the general 
+public seem not to be involved. Perhaps, the current increased funding for soil mapping and 
+soil-related research is more a result of a growing presence of (soil) scientists in all levels of 
+public administration (e.g. scientific and technical advisory boards) than of a global understanding
+of the importance of soils for humanity and the environment. Otherwise we could expect soil 
+degradation to have been significantly diminished in the last years considering the already existing
+body of knowledge on soil management and conservation \citep{Blanco-CanquiEtAl2010}. One could also 
+argue whether soil information is really needed to find a solution to major issues such as 
+food insecurity. FAO itself has already recognized many times that the problem of food insecurity 
+is more due to the lack of political will than to the lack of food \citep{FAO2005, FAO2009, FAO2015}.
+-- it is long known that about \SI{50}{\percent} of what is produced is lost, even in rich countries
+such as Switzerland \citep{BerettaEtAl2013}.
+
+
 
 In Brazil, the main reason for restarting the national soil survey program, today called PRONASOLOS,
 seems to be the same reason of about half a century ago: the (inter)national pressure to occupy the 
