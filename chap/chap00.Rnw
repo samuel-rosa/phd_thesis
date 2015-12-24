@@ -95,7 +95,44 @@ Finally, the outline of the thesis is presented in \refsec{thesis-outline}.
 \subsection{Modern soil mapping}
 \label{sec:intro-soil-mapping}
 
-Technology plays a determinant role on how we perceive the world around us. When early farmers during the Neolithic Revolution (ca. 10,000 years ago) first observed that soil properties varied in space, they probably saw that such variation was related to other environmental features. This understanding was first formalized using scientific parlance (i.e. mathematization) about 150 years ago \cite{Florinsky2012}, being revisited ca. 75 year ago \cite{Jenny1941}. Today we call this the discrete model of spatial variation, which explains the variation of soil properties in space by creating mutually exclusive units separated by crisp boundaries \cite{Legros2006}. Postwar technological developments in the fields of mathematics, statistics, and informatics, specially in the mining industry, showed that the variation of soil properties could be successfully explained using a continuous model of spatial variation. This model assumes that the spatial variation of soil properties is gradual and depend only on the spatial distances \cite{WebsterEtAl1990}.
+Technology plays a determinant role on how we perceive the world around us -- see, for example, 
+\citet{Hartemink2009}. When early farmers, during the Neolithic Revolution -- ca.~\num{10000}~years 
+ago -- first observed that soil properties varied in space, they probably soon figured out 
+that such variation was related to other environmental features and affected crop yields. This 
+early, rough, approximate understanding -- a ``model'' -- of the spatial soil variation was 
+fundamental for choosing -- ``predicting'' -- the most appropriate locations to start and maintain 
+human settlements, some of which became great, long standing empires \citep{MazoyerEtAl2008, 
+BrevikEtAl2010, Churchman2010}. Archaeological research provides evidence that several of these 
+empires had more formal ``soil classification systems'' and ``soil survey programs'', in most cases 
+for taxation purposes \citep{BrevikEtAl2010} -- a practice that lasts till today.
+
+A lot happened since the Neolithic Revolution \citep{BrevikEtAl2010} -- from bone to satellite, as 
+in Kubrick's \href{https://www.youtube.com/watch?v=qtbOmpTnyOc}{\textit{2001: A Space Odyssey}} --, 
+and the knowledge constructed with the multiple ``soil studies'' was fundamental for the development 
+of agriculture and increase of food production. An important step was given about 150 years ago with 
+the formalization of the approximate understanding of the spatial soil variation using 
+scientific parlance (i.e. mathematization) \citep{Florinsky2012}, which was revisited 
+ca.~\num{75}~year ago \citep{Jenny1941}. Soil maps produced during this long period of human history
+fit into what we call today the \texit{discrete model of spatial variation} \citep{Heuvelink1996}. The 
+discrete model of spatial variation explains the variation of soil properties in space using 
+mutually exclusive mapping units that are separated by sharply defined, crisp boundaries (i.e. 
+polygons) \citep{Legros2006}. The soil in each mapping unit is more or less homogeneous with regard 
+to its properties at the time in which the map was produced. These properties, which are generally 
+used to name the mapping unit, can be characterized using one or more direct observations made 
+within the domain of the mapping unit \citep{WebsterEtAl1990, Legros2006}.
+
+Postwar scientific/technological developments provided the tools to deal with the main weakness of
+the discrete model of soil variation: the description of ``soil bodies'' as discrete, homogeneous 
+entities \citep{ScullEtAl2003}. Such weakness was evidenced by the fact that different soil 
+scientists would produce considerably different soil maps \citep{Legros2006}. As such, many soil 
+scientists decided to employ the new developments in the fields of mathematics, statistics, and 
+informatics, already successfully explored by the mining industry, to explain the spatial variation 
+of soil properties \citep{Matheron1969}. The new model, the \textit{continuous model of spatial 
+variation} assumes that the spatial variation of soil properties is gradual and depends only on the 
+spatial distances \cite{WebsterEtAl1990, Heuvelink1996}.
+
+
+
 
 In general terms, the DSM framework can be described as a series of seven steps 
 as follows:
@@ -172,16 +209,16 @@ as follows:
 
 Soil-mapping models, like any other model, are nothing more than a gross simplification of reality.
 This means that soil-mapping models are unable to explain the spatio-temporal soil variation in 
-its entirety, but only a small part of it \citep{Heuvelink1998a}. When we use a soil-mapping model
-to produce continuous representations of soil properties across space and/or time, i.e. soil
-maps, these continuous representations will inexorably deviate from the ``truth''. What the soil map
-presents is our most likely expectation about the soil properties -- not our \textit{certainty}
-about them. The deviation from the ``truth'' is what we call \textit{error}. Many examples from the 
-soil-mapping literature show that, irrespective of the soil property, soil-mapping models have a 
-quite variable predictive performance, usually explaining between 15\% (or less) and (rarely more 
-than) 75\% of the spatio-temporal soil variation \citep{MooreEtAl1993, OdehEtAl1994, GesslerEtAl1995, 
-McKenzieEtAl1999, GobinEtAl2001, SumflethEtAl2008, SunEtAl2012, ViscarraRosselEtAl2013, 
-NussbaumEtAl2014, HenglEtAl2015, GaschEtAl2015, HeungEtAl2016}.
+its entirety, but only a small part of it \citep{Heuvelink1998a, Legros2006}. When we use a 
+soil-mapping model to produce continuous representations of soil properties across space and/or time,
+i.e. soil maps, these continuous representations will inexorably deviate from the ``truth''. What 
+the soil map presents is our most likely expectation about the soil properties -- not our 
+\textit{certainty} about them. The deviation from the ``truth'' is what we call \textit{error}. Many
+examples from the soil-mapping literature show that, irrespective of the soil property, soil-mapping
+models have a quite variable predictive performance, usually explaining between 15\% (or less) and 
+(rarely more than) 75\% of the spatio-temporal soil variation \citep{MooreEtAl1993, OdehEtAl1994, 
+GesslerEtAl1995, McKenzieEtAl1999, GobinEtAl2001, SumflethEtAl2008, SunEtAl2012, 
+ViscarraRosselEtAl2013, NussbaumEtAl2014, HenglEtAl2015, GaschEtAl2015, HeungEtAl2016}.
 
 The main reason for a soil map to be in error is that the background knowledge and data used to 
 construct the soil-mapping model is very limited -- we have to try our best with the available 
