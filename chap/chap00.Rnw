@@ -13,10 +13,10 @@ Soil scientists have complained for many years about the lack of government fund
 and soil-related research, not only in Brazil \citep{Dalmolin1999, Ker1999, KerEtAl2003, 
 Mendonca-SantosEtAl2003, Ramos2003, Espindola2008}, but in many countries around the world 
 \citep{Basher1997, HarteminkEtAl2008, Grunwald2009, SanchezEtAl2009, Finke2012}. They pointed out 
-several scientific, psychological, and cultural reasons to explain the general lack of interest in 
-soil information after the 1980's. But all of them seem to agree on one point: cutting down the 
-budget for soil mapping and soil-related research fundamentally was an economic decision in which 
-the general public was not given the chance to participate \citep{SamuelRosa2012}.
+several reasons to explain the general lack of interest in soil information by governments after the
+1980's. But all of them seem to agree on one point: cutting down the budget for soil mapping and 
+soil-related research fundamentally was an economic decision in which the general public was not 
+given the chance to participate \citep{SamuelRosa2012}.
 
 The soil science landscape has changed dramatically since the last decade. Soil science is now 
 experiencing a period of renaissance \citep{HarteminkEtAl2008}. Soils are back on the agenda 
@@ -45,9 +45,8 @@ for production of open soil data''. In Brazil, soil scientists created the Brazi
 Research in Digital Soil Mapping (\href{https://goo.gl/m8QWUm}{RedeMDS}) with the objective of 
 ``generating synergy among Brazilian soil scientists to advance the research in digital soil mapping
 in Brazil''. And the Federal Court of Accounts held a \href{https://www.governancadosolo.gov.br/}{
-Soil Governance Conference}, where the National Program for Soil Survey and Interpretation of Brazil 
-(\href{https://goo.gl/zbMK24}{PRONASOLOS}) was announced: the program shall have a 
-\SI{8}[R\$]~billion budget.
+Soil Governance Conference}, where a new National Program for Soil Survey and Interpretation of 
+Brazil (\href{https://goo.gl/zbMK24}{PRONASOLOS}) was announced.
 
 Most soil scientists seem to agree that there is a renewed recognition of the importance of soils 
 for humanity and the environment, a global understanding that soil information is needed to solve 
@@ -57,29 +56,41 @@ This renewed recognition would be the reason for an increasing worldwide societa
 up-to-date, high resolution soil information \citep{OmutoEtAl2013}. Although it is out of the scope 
 of this thesis to analyse whether this demand exists or not, it is worth pointing that the above 
 mentioned initiatives are coordinated by soil scientists themselves, where, again, the general 
-public seem not to be involved. Perhaps, the current increased funding for soil mapping and 
+public seem not to be involved. Thus, perhaps the current increased funding for soil mapping and 
 soil-related research is more a result of a growing presence of (soil) scientists in all levels of 
 public administration (e.g. scientific and technical advisory boards) than of a global understanding
 of the importance of soils for humanity and the environment. Otherwise we could expect soil 
-degradation to have been significantly diminished in the last years considering the already existing
-body of knowledge on soil management and conservation \citep{Blanco-CanquiEtAl2010}. One could also 
-argue whether soil information is really needed to find a solution to major issues such as 
-food insecurity. FAO itself has already recognized many times that the problem of food insecurity 
-is more due to the lack of political will than to the lack of food \citep{FAO2005, FAO2009, FAO2015}.
--- it is long known that about \SI{50}{\percent} of what is produced is lost, even in rich countries
-such as Switzerland \citep{BerettaEtAl2013}.
-
-
+degradation to have been diminished, at least marginally, in the last years considering the already 
+existing body of knowledge on soil management and conservation \citep{Blanco-CanquiEtAl2010}. A good
+example (i.e. the Netherlands) of this \textit{science-driven} demand for soil information is given 
+by \citet{Kempen2011} in the third paragraph of the introduction of his thesis.
 
 In Brazil, the main reason for restarting the national soil survey program, today called PRONASOLOS,
-seems to be the same reason of about half a century ago: the (inter)national pressure to occupy the 
-the Cerrado and Amazon biomes
+which is expected to have a budget of \SI{8}[R\$]~billions, seems to be the same old reason: the
+economic pressure of large multinational corporations to occupy the Cerrado and Amazon biomes, 
+``the last agriculture frontier''. One could argue that transforming these biomes into agricultural 
+land is needed to feed a growing world population which is expected to reach about nine billion 
+people by 2050 \citep{SanchezEtAl2009}. But FAO has already recognized many times that the problem 
+of food insecurity is more due to the lack of political will than to the lack of food 
+\citep{FAO2005, FAO2009, FAO2015} -- it is well known that about \SI{50}{\percent} of what is 
+produced is lost, even in rich countries such as Switzerland \citep{BerettaEtAl2013}. The Brazilian 
+states that compose the ``the last agriculture frontier'', called MATOPIBA (States of Marranhão, 
+Tocantins, Piauí, and Bahia), are among the poorest Brazilian states and have a long history of land
+conflicts due to the conservative development model adopted in Brazil. Many Brazilian politicians 
+are in favour of changing the Brazilian legislation to easy the acquisition of agricultural land 
+(up to \SI{100000}{\hectare}) by multinational corporations in this region, using the discourse 
+that foreign investments are needed to solve the major issues in the region. Simply put, it seems 
+that the growing demand for up-to-date, high resolution soil information in Brazil has an economic
+motivation which is not necessarily beneficial for the general Brazilian population. It is in this 
+contradictory scenario that this thesis is presented.
 
-, specially in the north and north-eastern states of Marranhão, Tocantins,
-Piauí, and Bahia (MATOPIBA)  into agricultural land 
+The next two sections present an overview of modern soil mapping techniques 
+(\refsec{intro-soil-mapping}) and its mains sources of uncertainty (uncertainty). Then, an 
+ 
 
 
 \subsection{Modern soil mapping} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:intro-soil-mapping}
 
 Technology plays a determinant role on how we perceive the world around us. When early farmers during the Neolithic Revolution (ca. 10,000 years ago) first observed that soil properties varied in space, they probably saw that such variation was related to other environmental features. This understanding was first formalized using scientific parlance (i.e. mathematization) about 150 years ago \cite{Florinsky2012}, being revisited ca. 75 year ago \cite{Jenny1941}. Today we call this the discrete model of spatial variation, which explains the variation of soil properties in space by creating mutually exclusive units separated by crisp boundaries \cite{Legros2006}. Postwar technological developments in the fields of mathematics, statistics, and informatics, specially in the mining industry, showed that the variation of soil properties could be successfully explained using a continuous model of spatial variation. This model assumes that the spatial variation of soil properties is gradual and depend only on the spatial distances \cite{WebsterEtAl1990}.
 
@@ -154,6 +165,7 @@ as follows:
 \end{description}
 
 \subsection{Sources of uncertainty}
+\label{sec:uncertainty}
 
 Soil-mapping models, like any other model, are nothing more than a gross simplification of reality.
 This means that soil-mapping models are unable to explain the spatio-temporal soil variation in 
