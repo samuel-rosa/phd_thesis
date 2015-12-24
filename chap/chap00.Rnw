@@ -68,28 +68,31 @@ by \citet{Kempen2011} in the third paragraph of the introduction of his thesis.
 In Brazil, the main reason for restarting the national soil survey program, today called PRONASOLOS,
 which is expected to have a budget of \SI{8}[R\$]~billions, seems to be the same old reason: the
 economic pressure of large multinational corporations to occupy the Cerrado and Amazon biomes, 
-``the last agriculture frontier''. One could argue that transforming these biomes into agricultural 
-land is needed to feed a growing world population which is expected to reach about nine billion 
-people by 2050 \citep{SanchezEtAl2009}. But FAO has already recognized many times that the problem 
-of food insecurity is more due to the lack of political will than to the lack of food 
-\citep{FAO2005, FAO2009, FAO2015} -- it is well known that about \SI{50}{\percent} of what is 
-produced is lost, even in rich countries such as Switzerland \citep{BerettaEtAl2013}. The Brazilian 
-states that compose the ``the last agriculture frontier'', called MATOPIBA (States of Marranhão, 
-Tocantins, Piauí, and Bahia), are among the poorest Brazilian states and have a long history of land
-conflicts due to the conservative development model adopted in Brazil. Many Brazilian politicians 
-are in favour of changing the Brazilian legislation to easy the acquisition of agricultural land 
-(up to \SI{100000}{\hectare}) by multinational corporations in this region, using the discourse 
-that foreign investments are needed to solve the major issues in the region. Simply put, it seems 
-that the growing demand for up-to-date, high resolution soil information in Brazil has an economic
-motivation which is not necessarily beneficial for the general Brazilian population. It is in this 
-contradictory scenario that this thesis is presented.
+``the last agriculture frontier'' \citep{Macarini2005, Silva2005}. One could argue that transforming
+these biomes into agricultural land is needed to feed a growing world population which is expected 
+to reach about nine billion people by 2050 \citep{SanchezEtAl2009}. But FAO has already recognized 
+many times that the problem of food insecurity is more due to the lack of political will than to the
+lack of food \citep{FAO2005, FAO2009, FAO2015} -- it is well known that about \SI{50}{\percent} of 
+what is produced is lost, even in rich countries such as Switzerland \citep{BerettaEtAl2013}. The 
+Brazilian states that compose the ``the last agriculture frontier'', called MATOPIBA (States of 
+Marranhão, Tocantins, Piauí, and Bahia), are among the poorest Brazilian states and have a long 
+history of land conflicts due to the conservative development model adopted in Brazil 
+\citep{ComissaoPastoraldaTerra2015}. Many Brazilian politicians are in favour of changing the 
+Brazilian legislation to easy the acquisition of agricultural land (up to \SI{100000}{\hectare}) by 
+multinational corporations in this region, using the discourse that foreign investments are needed 
+to solve the major issues in the region \citep{SECOM2015}. Simply put, it seems that the growing 
+demand for up-to-date, high resolution soil information in Brazil has an economic motivation which 
+is not necessarily beneficial for the general Brazilian population \citep{ComissaoPastoraldaTerra2015, 
+SECOM2015}. It is in this contradictory scenario that this thesis is presented.
 
 The next two sections present an overview of modern soil mapping techniques 
-(\refsec{intro-soil-mapping}) and its mains sources of uncertainty (uncertainty). Then, an 
+(\refsec{intro-soil-mapping}) and its mains sources of uncertainty (uncertainty). The content of the
+thesis is presented in \refsec{thesis-content}, including the objectives and research questions 
+that drove the development of this thesis (\refsec{thesis-objectives}), and the study area 
+(\refsec{intro-study-area}) and database (\refsec{intro-database}) used to develop the case studies.
+Finally, the outline of the thesis is presented in \refsec{thesis-outline}.
  
-
-
-\subsection{Modern soil mapping} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Modern soil mapping}
 \label{sec:intro-soil-mapping}
 
 Technology plays a determinant role on how we perceive the world around us. When early farmers during the Neolithic Revolution (ca. 10,000 years ago) first observed that soil properties varied in space, they probably saw that such variation was related to other environmental features. This understanding was first formalized using scientific parlance (i.e. mathematization) about 150 years ago \cite{Florinsky2012}, being revisited ca. 75 year ago \cite{Jenny1941}. Today we call this the discrete model of spatial variation, which explains the variation of soil properties in space by creating mutually exclusive units separated by crisp boundaries \cite{Legros2006}. Postwar technological developments in the fields of mathematics, statistics, and informatics, specially in the mining industry, showed that the variation of soil properties could be successfully explained using a continuous model of spatial variation. This model assumes that the spatial variation of soil properties is gradual and depend only on the spatial distances \cite{WebsterEtAl1990}.
@@ -352,9 +355,11 @@ human knowledge must recognize the urgent need to stop neglecting, perhaps consc
 we already known -- the \textit{unknown knowns} \citep{Zizek2006}.
 
 \section{Content of the thesis}
+\label{sec:thesis-content}
+
 
 \subsection{Objectives and research questions}
-\label{sec:objectives}
+\label{sec:thesis-objectives}
 
 There are several sources of uncertainty that affect the development of soil-mapping models. Many 
 of this sources are known, others are still unknown, and some are disregarded due to our ignorance
@@ -759,10 +764,11 @@ the more detailed satellite image comes from the RapidEye constellation, acquire
 end of this thesis (\autoref{apen:database}).
 
 \subsection{Outline}
+\label{sec:thesis-outline}
 
 This thesis is composed of five chapters: this \textit{General introduction}, where the scope of the
 thesis is presented, three core chapters that address the objectives and research questions presented
-in \refsec{objectives}, and the last, a \hyperref[chap:conclusion]{\textit{General conclusion}}
+in \refsec{thesis-objectives}, and the last, a \hyperref[chap:conclusion]{\textit{General conclusion}}
 of the work that was developed during the last four years. The second chapter 
 (\hyperref[chap:chapter01]{\textit{Chapter I}}), is based on an article published in the peer 
 reviewed journal \href{http://www.journals.elsevier.com/geoderma/}{Geoderma}. The chapter compares 
