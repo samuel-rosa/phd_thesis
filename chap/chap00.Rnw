@@ -109,45 +109,45 @@ for taxation purposes \citep{BrevikEtAl2010} -- a practice that lasts till today
 A lot happened since the Neolithic Revolution \citep{BrevikEtAl2010} -- from bone to spacecraft, as 
 in Kubrick's \href{https://www.youtube.com/watch?v=qtbOmpTnyOc}{\textit{2001: A Space Odyssey}} --, 
 and the knowledge constructed with the multiple ``soil studies'' was fundamental for the development 
-of agriculture and increase of food production. Soil maps produced during this long period of human 
-history seem to fit into what we call today the \texit{discrete model of spatial variation} 
-\citep{Heuvelink1996}. The discrete model of spatial variation explains the variation of soil 
-properties in space using mutually exclusive mapping units that are separated by sharply defined, 
-crisp boundaries (i.e. polygons) \citep{Legros2006}. The soil in each mapping unit is more or less 
-homogeneous with regard to its properties at the time in which the map was produced. These 
-properties, which are generally used to name the mapping unit, can be characterized using one or 
-more direct observations made within the domain of the mapping unit \citep{WebsterEtAl1990, 
-Legros2006}.
+of agriculture and increase of food production -- although many farmers still live in Neolithic 
+conditions. Soil maps produced during this long period of human history seem to fit into what we 
+call today the \texit{discrete model of spatial variation}. The discrete model of spatial variation 
+explains the variation of soil properties in space using mutually exclusive mapping units that are 
+separated by sharply defined, crisp boundaries (i.e. polygons) \citep{Heuvelink1996, Legros2006}. 
+The soil in each mapping unit is more or less homogeneous with regard to its properties at the time 
+in which the map was produced. These properties, which are generally used to name the mapping unit, 
+can be characterized using one or more direct observations made within the domain of the mapping 
+unit \citep{WebsterEtAl1990, Legros2006}.
 
 A key step was given about \num{130}~years ago with the formalization of the approximate 
-understanding of the spatial soil variation using scientific parlance (i.e. mathematization) for the
-first time, which was continuously enhanced till about \num{75}~year ago \citep{Jenny1941, 
-Florinsky2012}. Accordingly, soil properties ($s$) at any point in space are a function of the 
-so-called \textit{soil-forming factors},
+understanding of the spatial soil variation using scientific parlance (i.e. mathematization), which 
+was continuously enhanced till about \num{75}~year ago \citep{Jenny1941, Florinsky2012}. 
+Accordingly, a soil property $s$ at any point in space is a function of the so-called 
+\textit{soil-forming factors},
 
 \begin{equation}
 s = f(cl, o, r, p, t, \ldots),
 \end{equation}\label{eqn:intro-clorpt}
 
-i.e. soil properties are \textit{determined} by the interplay of the environmental conditions 
-defined by the climate ($cl$), organisms ($o$), relief ($r$), parent material ($p$), time ($t$), 
-and other unknown players ($\ldots$) \citep{Jenny1941}. The goal of \citet{Jenny1941} was to 
-organize the large volume of already existing soil data/knowledge by means of numerical laws and 
-quantitative theories -- instead of soil maps, taxonomic classifications, and soil-forming processes
--- to enable treating it mathematically (i.e. empirical correlation). \citet{Jenny1941} proposed 
-that solving \autoref{eqn:intro-clorpt} depended on the soil scientist' skills to select suitable 
-study areas and locations for making field observation. He also new that direct application of 
+i.e. a soil property is \textit{determined} by the interplay of environmental conditions defined by 
+climate ($cl$), organisms ($o$), relief ($r$), parent material ($p$), time ($t$), and other unknown 
+players ($\ldots$) \citep{Jenny1941}. The goal of \citet{Jenny1941} was to organize the large volume
+of already existing soil data/knowledge by means of numerical laws and quantitative theories -- 
+instead of soil maps, taxonomic classifications, and soil-forming processes -- to enable treating 
+it mathematically (i.e. empirical correlation). \citet{Jenny1941} proposed that solving 
+\autoref{eqn:intro-clorpt} depended on the soil scientist' skills to select suitable study areas 
+and locations for making observation. He also new that direct application of 
 \autoref{eqn:intro-clorpt} for soil mapping was impossible at his time because it required the 
-soil-forming factors to be exhaustively known everywhere. The idea of soil-forming factors was 
+soil-forming factors to be exhaustively known everywhere. The concept of soil-forming factors was 
 employed in most of the subsequent soil studies around the world, resulting in the enhancement of 
 taxonomic classifications, theories about soil-forming processes, and production of soil maps using 
 the discrete model of spatial variation \citep{Schelling1970, Hudson1992, BockheimEtAl2000, 
 Legros2006, KrasilnikovEtAl2009b, HarteminkEtAl2013}.
 
 Soil mapping using the discrete model of spatial variation and the idea that soil properties were 
-determined by soil-forming factors was not without drawbacks. Postwar scientific/technological 
-developments provided the tools to deal with its three (interrelated) main weakness 
-\citep{Webster1994, HeuvelinkEtAl2001, McBratneyEtAl2003, ScullEtAl2003}:
+determined by soil-forming factors had its weaknesses. Those that today are pointed as the three 
+main weaknesses were recognized or understood only using postwar scientific/technological 
+developments \citep{Webster1994, HeuvelinkEtAl2001, McBratneyEtAl2003, ScullEtAl2003}:
 
 \begin{enumerate}
 \item ``soil bodies'' were described as discrete, homogeneous entities,
@@ -161,43 +161,56 @@ considerably different soil maps without being able to explain why \citep{Legros
 BazagliaFilhoEtAl2013}. As such, many soil scientists decided to explore the new developments in the
 fields of mathematics, statistics, and informatics, already successfully employed by the mining 
 industry \citep{Matheron1969}, to explain the spatial variation of soil properties 
-\citep{WebsterEtAl1990}. Because the soil map was now produced using a computer, soil-mapping rules 
-would have to be formalized in the form of a computer script, meaning that they could be effectively
-shared with others -- provided they had a computer. It also became clear that a soil property could
-be treated as a stochastic variable $Y$, i.e. as if it was impossible to be completely certain about
+\citep{WebsterEtAl1990}. This is the so-called field of geostatistics.
+
+Producing soil maps using a computer required soil-mapping rules to be formalized in the form of a 
+computer script. This meant that soil-mapping rules could be effectively shared with others -- 
+provided they had a computer and understood geostatistics. Taking the uncertainty of the mapped
+soil property was also possible. The only requirement was that a soil property be treated as a 
+stochastic variable \citep{Cressie1993}, i.e. as if it was impossible to be completely certain about
 its absolute value but only to have an idea of its most likely value. As such, the definition of 
-mapping units could be viewed as a process that aims at minimizing the within-unit variance of $Y$, 
-while maximizing the between-unit variance \citep{VoltzEtAl1990}. Accordingly,
+mapping units, which was based on using the knowledge of the soil-forming factors, could be viewed 
+as a process that aims at minimizing the within-unit variance, and maximizing the between-unit 
+variance \citep{VoltzEtAl1990}. Accordingly, the most likely value of a soil property in a mapping 
+unit, and its associated uncertainty, is defined as it mean and variance over the multiple 
+observations made in the mapping unit \citep{VoltzEtAl1990, Cressie1993}. 
 
-\begin{equation}
-Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}),
-\end{equation}\label{eqn:intro-general-model-spatial-variation}
-
-\noindent
-where $Y(\boldsymbol{s})$ is the value of a soil property at location $\boldsymbol{s}$, 
-$m(\boldsymbol{s})$ is the (deterministic) mean of the mapping unit in which $\boldsymbol{s}$ falls,
-and e(\boldsymbol{s}) is a spatially uncorrelated residual with a mean of zero defined as the 
-difference between $m(\boldsymbol{s})$ and observed values \citep{Cressie1993}. The sample variance 
-of $e(\boldsymbol{s})$ estimates the uncertainty about the mapped soil property in a given mapping 
-unit \citep{VoltzEtAl1990}.
-
-This implementation of \autoref{eqn:intro-general-model-spatial-variation} still requires the 
-description of ``soil bodies'' as discrete, homogeneous entities, and introduces the assumption that
-the residuals $e(\boldsymbol{s})$ are spatially uncorrelated, i.e. that the value of a soil property
-at nearby locations are unrelated. A solution is to use the \textit{continuous model of spatial 
-variation}, which states that the spatial variation of soil properties is gradual and depends on the
-spatial distances \citep{WebsterEtAl1990, Cressie1993}. Accordingly, $m(\boldsymbol{s})$ now is the 
-(deterministic) mean of the entire mapping region, and $e(\boldsymbol{s})$ is a spatially correlated
-residual with a mean of zero and spatial (autoco)variance dependent on a vector $\boldsymbol{h}$ 
-that separates locations $\boldsymbol{s}$ and $\boldsymbol{s} + \boldsymbol{h}$, i.e. 
-$\text{Var}[Y(\boldsymbol{s}) - Y(\boldsymbol{s} + \boldsymbol{h}]$ \citep{Cressie1993}. The idea 
-behind the continuous model of spatial variation is that soil properties at nearby locations (short 
-$\boldsymbol{h}$) are more similar (small variance) than at distant locations (large variance). It 
-follows that the uncertainty about the mapped soil property is larger the farther from existing soil
-observations \citep{Cressie1993}.
+The solution for eliminating the description of ``soil bodies'' as discrete, homogeneous entities
+is to use the \textit{continuous model of spatial variation}, which states that the spatial 
+variation of soil properties is gradual and depends only on the spatial distances, and possibly on a
+spatial trend defined by the geographic coordinates \citep{WebsterEtAl1990, Cressie1993}. In the 
+simplest case, most likely value of a soil property in a given location is defined as the mean over 
+all observations made in the mapping region, plus a random variable wit mean zero and spatial 
+(autoco)variance that depends on the separation distance between two locations \citep{Cressie1993}.
+The main idea underlying the continuous model of spatial variation is that soil properties at nearby
+locations (short separation distances) are more similar (small autocovariance) than at distant 
+locations (large autocovariance). It follows that the uncertainty about the mapped soil property is 
+larger the farther from existing soil observations \citep{Cressie1993}.
 
 Availability of general-purpose computers fuelled the use and development of the continuous model of
-spatial variation, specially in Europe, USA, and Australia \citep{Webster1994, McBratneyEtAl2000}. 
+spatial variation in rich European, North American, and Oceanic countries \citep{HeuvelinkEtAl2001, 
+McBratneyEtAl2003, ScullEtAl2003}. But recent developments in remote sensing and machine-learning 
+algorithms helped many soil scientists to understand that the continuous model of spatial variation 
+had limitations too. For instance, it is unable to capture abrupt changes in the values of soil 
+properties that occur, for example, at the boundaries of agricultural fields \citep{VoltzEtAl1990}. 
+Besides, contrary to the discrete model of spatial variation, it largely ignores the existing 
+pedological knowledge \citep{Grunwald2009, Lark2012}. Soil scientists also understood that the 
+discrete model of spatial variation was more efficient than previously thought. First, because it 
+was now possible to employ Jenny's equation of soil-forming factors for soil mapping using remote 
+sensing products as surrogates of the factors of soil formation \citep{MooreEtAl1993}. Second, 
+machine-learning algorithms enabled identifying complex spatial patterns that before could only be 
+identified by an experienced soil scientist \citep{Grunwald2009}. The new model -- the \textit{mixed
+model of spatial variation} -- combined the strengths of both discrete and continuous models of
+spatial variation, that is inclusion of the existing pedological knowledge and consideration of the 
+spatial continuity soil property values, as well as included newly developed technologies, generally
+resulting in a better performance than its constituent models \citep{OdehEtAl1994, OdehEtAl1995, 
+Heuvelink1996, McBratneyEtAl2000, HenglEtAl2004, HenglEtAl2015}.
+
+
+
+
+
+
 Some state that these developments resulted in a new scientific paradigm \citep{McBratneyEtAl2003}, 
 apparently neglecting the connection with earlier developments made by the Russian school and 
 contemporaries of \citet{Jenny1941} \citep{MinasnyEtAl2016}, that has been adopted everywhere 
@@ -213,10 +226,6 @@ created a negative atmosphere among soil scientists in many countries (see examp
 
 
 
-Recent developments in remote sensing and machine-learning algorithms made those soil scientists 
-shift their attention back to μ(s) (MooreEtAl1993) – but without forgetting of  (OdehEtAl1994) –, 
-which now usually explains a considerably large proportion of the variation of  compared to . Besides,
- it is in  where we can incorporate most of our pedological knowledge (Lark2012).
 
 
 
