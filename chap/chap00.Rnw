@@ -7,53 +7,54 @@
 
 \section{Background and motivation}
 
-\subsection{Demand for soil information}
+\subsection{Need for soil information}
 \label(sec:intro-demand)
 
 Soil scientists have complained for many years about the lack of government funding for soil mapping
-and soil-related research, not only in Brazil \citep{Dalmolin1999, Ker1999, KerEtAl2003, 
+(and soil-related research), not only in Brazil \citep{Dalmolin1999, Ker1999, KerEtAl2003, 
 Mendonca-SantosEtAl2003, Ramos2003, Espindola2008}, but in many countries around the world 
 \citep{Basher1997, HarteminkEtAl2008, Grunwald2009, SanchezEtAl2009, Finke2012}. They pointed out 
 several reasons to explain the general lack of interest in soil information by governments after the
 1980's. But all of them seem to agree on one point: cutting down the budget for soil mapping and 
-soil-related research fundamentally was an economic decision in which the general public was not 
-given the chance to participate \citep{SamuelRosa2012}.
+fundamentally was an economic decision in which the general public was not given the chance to 
+participate \citep{SamuelRosa2012}.
 
 The soil science landscape has changed dramatically since the last decade. Soil science is now 
 experiencing a period of renaissance \citep{HarteminkEtAl2008}. Soils are back on the agenda 
-\citep{Kempen2011}. Soil is now a hot topic. The United Nations 
+\citep{Kempen2011}. I suggest that soil is now a hot topic. For example, the United Nations 
 (\href{http://www.un.org/apps/news/story.asp?NewsID=49520#.VnremV6alz0}{UN}) declared 5 December 
-the World Soil Day and 2015 the International Year of Soils ``in an effort to raise awareness and 
-promote more sustainable use of this critical resource''. A global consortium, the 
-\href{http://www.globalsoilmap.net/}{GlobalSoilMap}, was created with the goal of producing ``a 
-new digital soil map of the world using state-of-the-art and emerging technologies''. The Food and 
-Agriculture Organization (\href{http://www.fao.org/index_en.htm}{FAO}) launched a Global Soil 
-Partnership (\href{http://www.fao.org/globalsoilpartnership/}{GSP}) for ``leading to the adoption
-of sustainable development goals for soils''. The International Union of Soil Sciences created a 
-working group, funded by the United States Department of Agriculture 
+the World Soil Day and 2015 the International Year of Soils ``\textit{in an effort to raise 
+awareness and promote more sustainable use of this critical resource}''. A global consortium, the 
+\href{http://www.globalsoilmap.net/}{GlobalSoilMap}, was created with the goal of producing 
+``\textit{a new digital soil map of the world using state-of-the-art and emerging technologies}''. 
+The Food and Agriculture Organization (\href{http://www.fao.org/index_en.htm}{FAO}) launched a 
+Global Soil Partnership (\href{http://www.fao.org/globalsoilpartnership/}{GSP}) for 
+``\textit{leading to the adoption of sustainable development goals for soils}''. The International 
+Union of Soil Sciences created a working group, funded by the United States Department of Agriculture 
 (\href{http://www.nrcs.usda.gov/wps/portal/nrcs/main/soils/survey/class/}{USDA}) to develop a 
-Universal Soil Classification System, ``a common language to describe soils that can be used 
-internationally''. An Intergovernmental Technical Panel on Soils 
+Universal Soil Classification System, ``\textit{a common language to describe soils that can be used 
+internationally}''. An Intergovernmental Technical Panel on Soils 
 (\href{http://www.fao.org/globalsoilpartnership/intergovernmental-technical-panel-on-soils/}{ITPS})
-was composed, counting with soil experts from all regions of the world ``to provide scientific and 
-technical advice and guidance on global soil issues to the Global Soil Partnership''. The 
-\href{http://www.gatesfoundation.org/what-we-do/global-development/agricultural-development}{Bill 
-\& Melinda Gates foundation} handed out an \SI{18}[\$]~million grant ``to map most parts in 
-Sub-Sahara Africa, and make all Sub-Saharan Africa data available''. The International Soil 
+was composed, counting with soil experts from all regions of the world ``\textit{to provide 
+scientific and technical advice and guidance on global soil issues to the Global Soil Partnership}''.
+The \href{http://www.gatesfoundation.org/what-we-do/global-development/agricultural-development}{Bill 
+\& Melinda Gates} foundation handed out an \SI{18}[\$]~million grant ``\textit{to map most parts in 
+Sub-Sahara Africa, and make all Sub-Saharan Africa data available}''. The International Soil 
 Reference and Information Centre (ISRIC) launched its Global Soil Information Facilities 
-(\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}), a ``framework 
-for production of open soil data''. In Brazil, soil scientists created the Brazilian Network for 
-Research in Digital Soil Mapping (\href{https://goo.gl/m8QWUm}{RedeMDS}) with the objective of 
-``generating synergy among Brazilian soil scientists to advance the research in digital soil mapping
-in Brazil''. And the Federal Court of Accounts held a \href{https://www.governancadosolo.gov.br/}{
-Soil Governance Conference}, where a new National Program for Soil Survey and Interpretation of 
-Brazil (\href{https://goo.gl/zbMK24}{PRONASOLOS}) was announced.
+(\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}), a 
+``\textit{framework for production of open soil data}''. In Brazil, soil scientists created the 
+Brazilian Network for Research in Digital Soil Mapping (\href{https://goo.gl/m8QWUm}{RedeMDS}) with 
+the objective of ``\textit{generating synergy among Brazilian soil scientists to advance the 
+research in digital soil mapping}''. And the Federal Court of Accounts held a 
+\href{https://www.governancadosolo.gov.br/}{Soil Governance Conference}, where a new National 
+Program for Soil Survey and Interpretation of Brazil (\href{https://goo.gl/zbMK24}{PRONASOLOS}) was 
+announced.
 
-Most soil scientists seem to agree that there is a renewed recognition of the importance of soils 
+Most soil scientists seem to agree that there is a ``renewed recognition'' of the importance of soils 
 for humanity and the environment, a global understanding that soil information is needed to solve 
 those that have been named as the five major problems of our time: food insecurity, climate change, 
 environmental degradation, water scarcity, and threats to the biodiversity \citep{SanchezEtAl2009}. 
-This renewed recognition would be the reason for an increasing worldwide societal demand for 
+This ``renewed recognition'' would be the reason for an increasing worldwide societal demand for 
 up-to-date, high resolution soil information \citep{OmutoEtAl2013}. Although it is out of the scope 
 of this thesis to analyse whether this demand exists or not, it is worth pointing that the above 
 mentioned initiatives are coordinated by soil scientists themselves, where, again, the general 
@@ -71,11 +72,11 @@ which is expected to have a budget of \SI{8}[R\$]~billions, seems to be the same
 economic pressure of large multinational corporations to occupy the Cerrado and Amazon biomes, 
 ``the last agriculture frontier'' \citep{Macarini2005, Silva2005}. One could argue that transforming
 these biomes into agricultural land is needed to feed a growing world population which is expected 
-to reach about nine billion people by 2050 \citep{SanchezEtAl2009}. But FAO has already recognized 
+to reach about nine billion people by \num{2050} \citep{SanchezEtAl2009}. But FAO has already recognized 
 many times that the problem of food insecurity is more due to the lack of political will than to the
 lack of food \citep{FAO2005, FAO2009, FAO2015} -- it is well known that about \SI{50}{\percent} of 
 what is produced is lost, even in rich countries such as Switzerland \citep{BerettaEtAl2013}. The 
-Brazilian states that compose the ``the last agriculture frontier'', called MATOPIBA (States of 
+Brazilian states that compose ``the last agriculture frontier'', called MATOPIBA (States of 
 Marranhão, Tocantins, Piauí, and Bahia), are among the poorest Brazilian states and have a long 
 history of land conflicts due to the conservative development model adopted in Brazil 
 \citep{ComissaoPastoraldaTerra2015}. Many Brazilian politicians are in favour of changing the 
@@ -84,25 +85,27 @@ multinational corporations in this region, using the discourse that foreign inve
 to solve the major issues in the region \citep{SECOM2015}. Simply put, it seems that the growing 
 demand for up-to-date, high resolution soil information in Brazil has an economic motivation which 
 is not necessarily beneficial for the general Brazilian population \citep{ComissaoPastoraldaTerra2015, 
-SECOM2015}. It is in this contradictory scenario that this thesis is presented.
+SECOM2015}. It is in this contradictory scenario that I present this thesis!
 
-The next two sections present an overview of modern soil mapping techniques 
-(\refsec{intro-soil-mapping}) and its mains sources of uncertainty (uncertainty). The content of the
-thesis is presented in \refsec{thesis-content}, including the objectives and research questions 
-that drove the development of this thesis (\refsec{thesis-objectives}), and the study area 
-(\refsec{intro-study-area}) and database (\refsec{intro-database}) used to develop the case studies.
-Finally, the outline of the thesis is presented in \refsec{thesis-outline}.
- 
-\subsection{Soil mapping models}
+In the next two sections I give an overview of the models of spatial variation used for soil mapping
+(\refsec{intro-soil-mapping}) and discuss about some of the main sources of uncertainty in
+soil-mapping projects (\refsec{uncertainty}). Then I present the content of the thesis 
+(\refsec{thesis-content}), including the objectives and research questions that guided my work 
+during most of the past four years (\refsec{thesis-objectives}), and the study area 
+(\refsec{intro-study-area}) and database (\refsec{intro-database}) that I used to develop the case 
+studies. I end this \textit{General Introduction} with the outline of the thesis 
+(\refsec{thesis-outline}).
+
+\subsection{Mapping the soil}
 \label{sec:intro-soil-mapping}
 
 Technology plays a determinant role on how we perceive the world around us -- see, for example, 
 \citet{Hartemink2009}. When early farmers, during the Neolithic Revolution, ca.~\num{10000}~years 
-ago, first observed that soil properties varied in space, they probably soon figured out 
+ago, first observed that soil properties varied in space, I guess they soon figured out 
 that such variation was related to other environmental features and affected crop yields. This 
 early, rough, approximate understanding -- a ``model'' -- of the spatial soil variation was 
 fundamental for choosing -- ``predicting'' -- the most appropriate locations to start and maintain 
-human settlements, some of which became great, long standing empires \citep{MazoyerEtAl2008, 
+human settlements, some of which became great, long-standing empires \citep{MazoyerEtAl2008, 
 BrevikEtAl2010, Churchman2010}. Archaeological research provides evidence that several of these 
 empires had more formal ``soil classification systems'' and ``soil survey programs'', in most cases 
 for taxation purposes \citep{Barrera-BassolsEtAl2003} -- a practice that lasts till today.
@@ -111,14 +114,14 @@ A lot happened since the Neolithic Revolution \citep{BrevikEtAl2010} -- from bon
 in Kubrick's \href{https://www.youtube.com/watch?v=qtbOmpTnyOc}{\textit{2001: A Space Odyssey}} --, 
 and the knowledge constructed with the multiple ``soil studies'' was fundamental for the development 
 of agriculture and increase of food production -- although many farmers still live in Neolithic 
-conditions \citep{MazoyerEtAl2008}. Soil maps produced during this long period of human history seem
-to fit into what we call today the \texit{discrete model of spatial variation}. The discrete model 
-of spatial variation explains the variation of soil properties in space using mutually exclusive 
-mapping units that are separated by sharply defined, crisp boundaries (i.e. polygons) 
-\citep{Heuvelink1996, Legros2006}. The soil in each mapping unit is more or less homogeneous with 
-regard to its properties at the time of mapping. These properties, which are generally used to name 
-the mapping unit, can be characterized using one or more direct observations made within the domain 
-of the mapping unit \citep{WebsterEtAl1990, Legros2006}.
+conditions \citep{MazoyerEtAl2008}. If we adopt an integrative view, soil maps produced during this 
+long period of human history seem to fit into what we call today the \texit{discrete model of 
+spatial variation}. The discrete model of spatial variation explains the variation of soil 
+properties in space using mutually exclusive mapping units that are separated by sharply defined, 
+crisp boundaries (i.e. polygons) \citep{Heuvelink1996, Legros2006}. The soil in each mapping unit 
+is more or less homogeneous with regard to its properties at the time of mapping. These properties, 
+which are generally used to name the mapping unit, can be characterized using one or more direct
+observations made within the domain of the mapping unit \citep{WebsterEtAl1990, Legros2006}.
 
 A key step was given about \num{130}~years ago with the formalization of the approximate 
 understanding of the spatial soil variation using scientific parlance (i.e. mathematization), which 
@@ -126,9 +129,9 @@ was continuously enhanced till about \num{75}~year ago \citep{Jenny1941, Florins
 Accordingly, a soil property $s$ at any point in space is a function of the so-called 
 \textit{soil-forming factors},
 
-\begin{equation}
+\begin{equation}\label{eqn:intro-clorpt}
 s = f(cl, o, r, p, t, \ldots),
-\end{equation}\label{eqn:intro-clorpt}
+\end{equation}
 
 \noindent
 i.e. a soil property $s$ is \textit{determined} by the interplay of environmental conditions defined
@@ -138,7 +141,7 @@ his goal was to organize the large volume of already existing soil data/knowledg
 numerical laws and quantitative theories -- instead of soil maps, taxonomic classifications, and 
 soil-forming processes -- to enable treating it mathematically (i.e. using empirical correlation). 
 \citet{Jenny1941} proposed that solving \autoref{eqn:intro-clorpt} depended on the soil scientist' 
-skills to select suitable study areas and locations for making observation. He also new that direct 
+skills to select suitable study areas and locations for making observation. He also knew that direct 
 application of \autoref{eqn:intro-clorpt} for soil mapping was impossible at his time because it 
 required the soil-forming factors to be exhaustively known everywhere. \autoref{eqn:intro-clorpt} 
 remains unsolved, but the concept of soil-forming factors was employed in most of the subsequent soil 
@@ -164,11 +167,11 @@ considerably different soil maps without being able to explain why \citep{Legros
 BazagliaFilhoEtAl2013}. As such, many soil scientists decided to explore the new developments in the
 fields of mathematics, statistics, and informatics, already successfully employed by the mining 
 industry \citep{Matheron1969}, to explain the spatial variation of soil properties 
-\citep{WebsterEtAl1990} -- the so-called field of geostatistics.
+\citep{WebsterEtAl1990} -- this is the so-called field of geostatistics.
 
 Soil maps were now produced using a computer, requiring soil-mapping rules to be formalized in the 
 form of a computer script, which is the mean used to establish the communication between the soil 
-modeller/mapper (a human being) and the data processing environment (a computer) where the 
+modeller/mapper (a human being) and the data processing environment (a computer) where 
 geostatistical models are implemented. This meant that soil-mapping rules could be effectively 
 shared with others -- provided they had a computer. Taking the uncertainty about the mapped soil 
 property into account was also possible. The only requirement was that a soil property be treated as
@@ -178,9 +181,10 @@ of mapping units, which was based on using the knowledge of the soil-forming fac
 viewed as a process that aims at minimizing the within-unit variance (and maximizing the between-unit
 variance) of that stochastic variable \citep{VoltzEtAl1990}. Accordingly, the most likely value of a
 soil property in a given mapping unit is the mean over the multiple observations made in that 
-mapping unit \citep{VoltzEtAl1990, Cressie1993}. It follows that the uncertainty about the mapped 
-soil property in a mapping unit is a measure of how much in error we are if an observed value is 
-replaced with the mean of all values observed in the mapping unit, i.e. is the same everywhere.
+mapping unit \citep{VoltzEtAl1990, Cressie1993}. It follows that the uncertainty about the value of
+the mapped soil property at a given location is a measure of how much in error we are if the true
+value is replaced with the mean of all values observed in the mapping unit, i.e. is the same 
+everywhere.
 
 The only solution for avoiding the description of ``soil bodies'' as discrete, homogeneous entities 
 was to ignore the soil-forming factors and use the \textit{continuous model of spatial variation}.
@@ -192,41 +196,42 @@ soil property in a given location is defined by a constant mean computed over al
 in the mapping region, plus a random variable with mean zero and (spatial) variance that depends on 
 the separation distance between locations \citep{Cressie1993}. The main idea underlying the 
 continuous model of spatial variation is that soil properties at nearby locations are more similar 
-than at locations that are far apart \citep{WebsterEtAl1990}. Thus, we err less if we replace an 
-observed value with a value observed at a nearby location than with a value observed at a distant 
-location. It follows that the uncertainty about the mapped soil property is larger the farther from 
-existing soil observations, i.e. it is spatially varying \citep{Cressie1993}.
+than at locations that are far apart \citep{WebsterEtAl1990}. Thus, we err less if we replace the
+true value of the mapped soil property at a given location with a value observed at a nearby 
+location than with a value observed at a distant location. It follows that the uncertainty about 
+the mapped soil property is larger the farther from existing soil observations, i.e. it is 
+spatially varying \citep{Cressie1993}.
 
 Availability of general-purpose computers fuelled the use and development of the continuous model of
-spatial variation in rich European, North American, and Oceanian countries \citep{HeuvelinkEtAl2001, 
-McBratneyEtAl2003, ScullEtAl2003}. But limitations in its prediction performance and recent developments
-in remote sensing and machine-learning algorithms helped many soil scientists to understand that the
-continuous model of spatial variation had limitations too. For instance, it is unable to capture 
-abrupt changes in the values of soil properties that occur, for example, between agricultural fields,
-parent materials, land uses, and so on \citep{SteinEtAl1988, VoltzEtAl1990}. Because, contrary to 
-the discrete model of spatial variation, the continuous model of spatial variation largely ignores 
-the existing pedological knowledge \citep{Grunwald2009, Lark2012}. Soil scientists also understood 
-that the discrete model of spatial variation was more efficient than previously thought 
-\citep{BregtEtAl1987}. First, because it was now possible to employ Jenny's equation of soil-forming
-factors for soil mapping using remote sensing products as surrogates of the factors of soil formation
-\citep{MooreEtAl1993}. Second, machine-learning algorithms enabled identifying complex spatial 
-patterns that before could only be identified by an experienced soil scientist \citep{McKenzieEtAl1999}.
-The most logical step was to combine the strengths of both discrete and continuous models of spatial
-variation into a single model -- the \textit{mixed model of spatial variation} --, that is inclusion
-of the existing pedological knowledge and consideration of the spatial continuity of soil property 
-values.
+spatial variation, specially in rich European, North American, and Oceanian countries 
+\citep{HeuvelinkEtAl2001, McBratneyEtAl2003, ScullEtAl2003}. But limitations in its prediction 
+performance and developments in remote sensing and machine-learning algorithms helped many soil 
+scientists to understand that the continuous model of spatial variation had limitations too. For 
+instance, it is unable to capture abrupt changes in the values of soil properties that occur, for 
+example, between agricultural fields, parent materials, land uses, and so on \citep{SteinEtAl1988,
+VoltzEtAl1990}. Because, contrary to the discrete model of spatial variation, the continuous model 
+of spatial variation largely ignores the existing pedological knowledge \citep{Grunwald2009, 
+Lark2012}. Soil scientists also understood that the discrete model of spatial variation was more 
+efficient than previously thought \citep{BregtEtAl1987}. First, because it was now possible to 
+employ Jenny's equation of soil-forming factors for soil mapping using remote sensing products as 
+surrogates of the factors of soil formation \citep{MooreEtAl1993}. Second, machine-learning 
+algorithms enabled identifying complex spatial patterns that before could only be identified by an 
+experienced soil scientist \citep{McKenzieEtAl1999}. The most logical step was to combine the 
+strengths of both discrete and continuous models of spatial variation into a single model -- the 
+\textit{mixed model of spatial variation} --, that is inclusion of the existing pedological 
+knowledge and consideration of the spatial continuity of soil property values.
 
 The mixed model of spatial variation -- also called regression-kriging, kriging with external drift,
 universal kriging, hybrid approach for soil mapping, pedometric mapping, digital soil mapping, 
 predictive soil mapping, and so on \citep{Hengl2003, McBratneyEtAl2003, ScullEtAl2003} -- can be 
 viewed as a generalization of previously existing models of spatial variation, by which a soil 
 property $Y(\boldsymbol{s})$ at a given location $\boldsymbol{s}$ is modelled as the outcome of a 
-spatial stochastic process \citep{Cressie1993, HeuvelinkEtAl2001, LarkEtAl2006, NussbaumEtAl2014}. 
-Accordingly, the model is composed of \textit{fixed} and \textit{random effects}. The fixed effects,
+spatial stochastic process \citep{Cressie1993, HeuvelinkEtAl2001, LarkEtAl2006}. Accordingly, the 
+model is composed of \textit{fixed} and \textit{random effects}. The fixed effects,
 a deterministic large-scale spatial trend, $m(\boldsymbol{s})$, describes the portion of the spatial
 variation of the soil property that is explained with the factors of soil formation as suggested by 
 the empirical correlation calculated using point soil observations and spatially exhaustive 
-covariates $\boldsymbol{x}$. The random effects, also known as stochastic residuals or latent 
+covariates. The random effects, also known as stochastic residuals or latent 
 variables, $e(\boldsymbol{s})$, describe the portion of the spatial variation of the soil property 
 that cannot be explained with the covariates but is spatially correlated, the form and degree of 
 this spatial correlation possibly being interpreted pedologically \citep{Lark2012}. Thus
@@ -263,15 +268,16 @@ and informatics \citep{Webster2001, SamuelRosa2012}.
 
 Although all that is very common when a new theory or method appears \citep{Russell1932, 
 Feyerabend1977, Kuhn2011}, I think we have reached a point in which nothing else can be gained by 
-playing one soil scientist against the other. Such a noble understanding was already shared by 
+playing one soil scientist against the other. Such a (noble) understanding was already shared by 
 \citet{Jenny1941} when comparing ``soil geographers'' and ``soil functionalists''. The view that I
 try to maintain from beginning to end of this thesis is that, despite the technological developments,
 the activity of mapping the soil remained essentially the same throughout human history. Soil maps 
 still serve the same old purpose of representing our limited understanding about the spatial 
 organization of the soil in the natural environment in a simplified manner, as well as giving 
-insights about how the soil came to be \citep{Hudson1992, Legros2006, Grunwald2010}. As such, based
-on the currently existing body of knowledge on soil mapping, I have tentatively defined a general 
-sequence of seven steps taken in a soil mapping project.
+insights about how the soil came to be \citep{Hudson1992, Legros2006, Grunwald2010}. In support to 
+this view, based on the existing body of knowledge on soil mapping and the currently available 
+technology, I have tentatively defined a general (didactic) sequence of seven steps that I believe 
+are (or should be) commonly followed in a soil-mapping project.
 
 \noindent\textit{Step 0}. Identify a reality or problem entity, the geographic region for which 
 there is a demand of spatial soil information. Target soil properties (categorical, ordinal, 
