@@ -46,8 +46,9 @@
 
 \usepackage{Sweave}
 
-\bibliographystyle{abbrvnat}
-\setcitestyle{authoryear,round}
+%\bibliographystyle{abbrvnat}
+%\setcitestyle{authoryear,round}
+\usepackage[alf]{abntex2cite}
 
 %%==============================================================================
 %% Pacotes - formatação de hyperlinks
@@ -124,7 +125,7 @@
 \newcommand{\reffig}[1]{\hyperref[fig:#1]{Figure \ref{sec:#1}}} % link to a figure in the document
 \newcommand{\scale}[1]{cartographic scale of 1:\num{#1}} % scale
 \newcommand{\scales}[2]{cartographic scales of 1:\num{#1} and 1:\num{#2}} % scales
-\newcommand{\q}[1]{``#1''}} % double quotes
+\newcommand{\q}[1]{``#1''} % double quotes
 \newcommand{\cited}[1]{\q{#1}} % direct citation
 
 \def\geoderma{\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}}
@@ -362,7 +363,7 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 
 % Adiciona cada capitulo
 \include{chap/chap00}
-\include{chap/chap01}
+%\include{chap/chap01}
 % \include{chap/chap02}
 % \include{chap/chap03}
 % \include{chap/chap04}
@@ -384,11 +385,11 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-\appendix
-\include{chap/apena} % description of the database
-\include{chap/apenb} % conceptual model of pedogenesis
+%\appendix
+%\include{chap/apena} % description of the database
+%\include{chap/apenb} % conceptual model of pedogenesis
 %\include{chap/apenc} % R-package spsann
-\include{chap/apend} % R-package pedometrics
+%\include{chap/apend} % R-package pedometrics
 
 %%=============================================================================
 %% Anexos
