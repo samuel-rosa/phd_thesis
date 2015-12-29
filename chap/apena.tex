@@ -15,7 +15,10 @@ The Santa Maria dataset contains $n = 410$ point soil observations made between 
 different projects. These projects aimed at producing semi-detailed soil and land use maps (\scale{25000})
 \cite{Pedron2005,Miguel2010,SamuelRosaEtAl2011a,MiguelEtAl2012}, and predicting topsoil carbon stock and 
 vulnerability to erosion \cite{Samuel-Rosa2009,MouraBueno2012,Miguel2013}. As such, the dataset is composed 
-of three subsets which are described in the next sections.
+of three subsets which are described in the next three sections. Together, these subsets yield a sampling 
+density of \num{\pm0.18}~observations per hectare, with an average separation distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation distances of \num{18} and 
+\SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by more than 
+\SI{49}{\metre}.
 
 \tocless\subsubsection{Subset I}
 
@@ -63,75 +66,55 @@ Every observation was identified with a number in increasing order, following th
 the observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out,
 yielding an observation density of about \num{18}~observations per \si{\kilo\metre\squared}.
 
-\tocless\subsubsection{Subset 02}
+\tocless\subsubsection{Subset II}
 
-The second subset ($n = 60$) was produced in the years of \num{2012} and \num{2013}, which was intended to 
+The second subset ($n = 60$) was produced in the years of \num{2012} and \num{2013}, and was intended to 
 constitute an independent dataset for validation purposes. Because of the many many access limitations 
 (geographic barriers and prohibition by landowners) and shortage of workforce, budget, infrastructure and 
-time, researchers chose to employ transect sampling 
-\cite{MiguelEtAl2012,Moura-BuenoEtAl2012,Samuel-RosaEtAl2013}. First, they defined the population of 
-transects using their knowledge of the study area, taking into account the factors that determine the 
-spatial distribution of soil properties. Each researcher (three) delineated $m = 60$ easy accessible, 
-straight transects of \SI{400}{\metre} following the spatial gradients of environmental features (elevation, 
-geology, vegetation, land use, and soils). Accordingly, knowledge of exiting roads, human settlements, water
-bodies, and other access limitations was used as well. This activity was carried out using Google 
-Earth\textregistered{} imagery of the years of \num{2008} and \num{2009}.
+time faced in previous field campaigns, researchers chose to employ transect (cluster) sampling 
+\cite{MiguelEtAl2012,Moura-BuenoEtAl2012,Samuel-RosaEtAl2013}. They started defining the population of 
+transects using their knowledge of the study area, taking into account the factors that they thought 
+determined the spatial distribution of soil properties. Each researcher (three) delineated $m = 60$ easily 
+accessible, straight transects of \SI{400}{\metre} following the spatial gradients of environmental features 
+(topography, geology, vegetation, land use, and soils). Accordingly, knowledge of exiting roads, human 
+settlements, water bodies, and other access limitations was used as well. The activity was carried out using 
+Google Earth\textregistered{} imagery of the years of \num{2008} and \num{2009}.
+
+% TODO: add a figure with all transects highlighting the selected ones.
+% \caption{Three experts drawn 180 linear transects aligned in the direction of maximum expected 
+% spatial variance of environmental features. They avoided locations were it was known that geographic 
+% barriers or land owners would impede the access to collect soil samples. Using probability sampling, 12 
+% transects were selected to collect validation observations (red).}
 
 Twelve out of the $m = 180$ transects were randomly selected using as many iterations as necessary until 
 there were no intersecting transects, and there was at least one transect in each of the three major 
 geomorphological units of the study area (Planalto, Rebordo do Planalto, and Depressão Periférica). 
 Finally, $n = 5$ observation locations, separated by equidistant intervals of \SI{100}{\metre}, were 
 selected in each transect. Observation locations were named with a number in increasing order, 
-following the order in which the observations were made (\num{341}--\num{400}).
+following the order in which the observations were made, starting from \num{341} (\num{341}--\num{400}).
 
-Observation locations were identified in the field using a GNSS signal receiver with a horizontal 
-precision of more than \SI{\pm8}{\metre}. A soil pit was opened within a radius of \SI{2}{\metre} from 
-the predefined observation location. Soil sampling and description was carried out using the same procedure 
-used with \emph{Subset \num{01}}. Georeferencing was performed using a Differential Global Positioning 
-System (DGPS) with centimetric positional accuracy.
+Observation locations were identified in the field using a GNSS receiver with a horizontal positional error
+of less than \SI{\pm8}{\metre}. A soil pit was opened within a radius of \SI{2}{\metre} from the predefined 
+observation location. Soil sampling and description was carried out using the same procedure used with 
+\emph{Subset I}. Georeferencing was performed using a Differential Global Positioning System (DGPS) with 
+a horizontal positional error of less than \SI{1}{\centi\metre}.
 
-\subsubsection{Subset 03}
+\tocless\subsubsection{Subset III}
 
 The third subset ($n = 10$) contains data compiled from the studies of \citeonline{Pedron2005} and
 \citeonline{Miguel2010}, specifically from the uppermost A horizon of modal soil profiles whose locations 
 were purposively selected after a preliminary area-class soil map had been produced and/or the observations
-that generated the first subset ($n = 340$) had been made. \citeonline{Pedron2005} and 
-\citeonline{Miguel2010}
-aimed at locations that they understood as being most representative of the soil mapping units depicted 
-in theirs area-class soil maps. A single soil sample was taken from each of the described soil horizon and 
-used for laboratory analysis. The resulting depth of the uppermost A horizons varies from \num{12} to 
-\SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried out as described
-for Subsets \num{1} and \num{2}, the difference being that GNSS signal receiver was positioned at the
-observation location. Every data point is identified in the Santa Maria database with the same 
-identification that was used in the studies from where they were compiled.
+included in \emph{Subset I} had been made. The researchers aimed at observation locations that they 
+understood as being most representative of the soil mapping units depicted in their respective area-class 
+soil maps. A single soil sample was taken from each of the described soil horizon and used for laboratory 
+analysis (see bellow). The resulting depth of the uppermost A horizons varies from \num{12} to 
+\SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried using a GNSS 
+receiver with a horizontal positional error of less than \SI{\pm8}{\metre} positioned at the observation 
+location. Data are identified in the \emph{Santa Maria database} using the same identification that was 
+used in the studies from where they were compiled.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-% TODO: provide a better description of the purposive sampling strategy used.
-The soil database is composed by 350 point observations. They were sampled during soil and land use surveys carried out between 2003 and 2012 \cite{Pedron2005, SamuelRosaEtAl2011a, MiguelEtAl2012}. Sampling locations were selected using expert knowledge (purposive sampling). Soil scientists made soil observations in most common geomorphological features and land uses, and in patches with similar soil taxa, trying to obtain a somehow uniform coverage of the geographic and feature spaces. Resulting sampling density is of about 0.18 observations per hectare. Average separation distance between two neighboring points is 181 m. Minimum and maximum separation distances are, respectively, 18 and 328 m. Standard deviation is 80 m, and 95\% of neighboring point-pairs are separated by more than 49 m.
-
-
-
-Sixty (60) validation samples were collected at regular spacings of 100 m from 12 linear transects of 400 m during the years 2012 and 2013. Sampled transects were randomly selected from a set of 180 transects drawn by three experts in Google Earth (Figure \ref{fig:transects}). They were located in areas where experts were almost certain that soil samples could be collected, and aligned in the direction of maximum expected spatial variance of environmental features. Sampling sites were located in the field using a GNSS navigation receiver with horizontal accuracy of about 8 m. A differential GNSS signal receiver with centimetric horizontal precision was used for georeferencing and collection of altimetric data. A single soil sample was collected to a depth of 20 cm (or down to the bedrock when soil depth was smaller than 20 cm) in a soil pit opened within a radius of 2 m.
-
-% TODO: add a figure with all transects highlighting the selected ones.
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=,height=]{fig/transects}
-%   \caption{\small Three experts drawn 180 linear transects aligned in the direction of maximum expected spatial variance of environmental features. They avoided locations were it was known that geographic barriers or land owners would impede the access to collect soil samples. Using probability sampling, 12 transects were selected to collect validation observations (red).}
-%   \label{fig:transects}
-% \end{figure}
 
 \tocless\subsection{Laboratory analysis}
 
