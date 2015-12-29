@@ -9,6 +9,14 @@
 
 \tocless\section{Point soil data}
 
+Every soil property 
+is identified in the database with a code composed of three or four capital letters. For example, soil 
+organic carbon is identified with \texttt{ORCA}. A column contains the number of 
+laboratory replicates is identified with the code of the soil property followed by the letter \q{N}. The 
+column containing the sample standard deviation is identified in the same manner, but using \q{SD}. For
+example, \q{ORCA\_N} and \q{ORCA\_SD}.
+
+
 \tocless\subsection{Soil sampling}
 
 The Santa Maria dataset contains $n = 410$ point soil observations made between 2004 and 2011 as part of
@@ -113,10 +121,53 @@ receiver with a horizontal positional error of less than \SI{\pm8}{\metre} posit
 location. Data are identified in the \emph{Santa Maria database} using the same identification that was 
 used in the studies from where they were compiled.
 
-
+\tocless\subsection{Field description}
 
 
 \tocless\subsection{Laboratory analysis}
+
+Soil samples were air dried, crushed and passed through a \SI{2}{\milli\metre}-sieve prior to laboratory 
+analyses using the methods described in the next sections. One or more laboratory replicates were used to 
+calculate analytical errors.
+
+\tocless\subsubsection{Soil organic fraction}
+
+The soil organic carbon content (ORCA, \si{\gram\per\kilo\gram}) was determined using the method of
+\citeonline{Mebius1960} modified by \citeonline{YeomansEtAl1988} as described by
+\citeonline{ClaessenEtAl1997}.
+
+Sample aliquots of \num{0.050} to \SI{0.500}{\gram} were placed in glass digestion tubes 
+(\SI{80}{\milli\litre}). The amount of sample used varied according to the ORCA estimated by visual 
+interpretation of soil colour. Every digestion tube received an aliquot of \SI{10}{\milli\litre} of 
+sulfochromic solution\footnote{See more about the sulfochromic solution, or chromic acid, at
+\url{http://en.wikipedia.org/wiki/Chromic_acid}} [\SI{0.067}{\molle\per\litre} potassium bichromate solution
+(\ce{K2Cr2O7}) in the presence of concentrated sulphuric acid (\ce{H2SO4})] and a small reflux funnel 
+to avoid loss of reagent during digestion. A digestion block with capacity for \num{40}~samples was used:
+\num{36}~tubes with soil sample plus \num{3}~tubes with blank plus \num{1}~tube with \ce{H2SO4} and a
+thermometer for temperature control. Digestion at \SI{150}{\celsius} last \SI{30}{\minute}. Three blanks 
+were prepared and set aside at room temperature to estimate the loss of reagent due to heat in the digestion 
+block. After digestion the tubes were set aside at room temperature to cool down. Next, the solution was 
+transferred to Erlenmeyer flasks (\SI{250}{\milli\litre}) with \SI{60}{\milli\litre} of distilled water and
+\SI{2}{\milli\litre} of concentrated orthophosphoric acid [\ce{H3PO4}] and \num{3}~drops of 
+\SI{1}{\percent}~diphenylamine). The solution was titrated using \SI{0.1}{\molle\per\litre} ammonium ferrous
+sulphate (\ce{FeSO4(NH4)2 * 6H2O}) until persistent green colour. The results were multiplied by \num{1.11}
+to correct to the standard method (dry combustion) \cite{Samuel-RosaEtAl2011}.
+
+The soil organic matter content of the observations compiled from \citeonline{Pedron2005} was determined 
+using the method described by \citeonline{TedescoEtAl1995}. Sample aliquots of \SI{2.5}{\milli\litre}
+were placed in Erlenmeyer flasks (\SI{50}{\milli\litre}). Every Erlenmeyer flask received an aliquot of 
+\SI{15}{\milli\litre} of \SI{0.067}{\molle\per\litre} sulfochromic solution (\ce{Na2Cr2O7 + H2SO4}). The 
+flasks were heated in a water bath at \num{75} to \SI{80}{\celsius} during \SI{30}{\minute} and shaken 
+for \SI{5}{\minute}. A water aliquot of \SI{15}{\milli\litre} was added to the flask and let overnight 
+(\num{15} to \SI{18}{\hour}). In the next day, an aliquot of \SI{3.0}{\milli\litre} was sampled to a 
+small cup with \SI{3.0}{\milli\litre} of distilled water. The absorbency of the supernatant was measured 
+at \SI{645}{\nano\metre}. The results were transformed to organic carbon content using the Van Bemmelen 
+factor (\num{1.724}), the result assumed to be equivalent to soil organic carbon content measured using the standard method. The results are expressed using a volume-basis and were converted to a mass-basis using a
+1:1 relation because the mass of the sample aliquot used in the analyses is unknown.
+
+
+
+
 
 Soil samples were air dried, crushed and passed through a 2 mm-sieve prior to laboratory analysis. One laboratory replicate was used to calculate analytical errors. Only a few soil observations from \cite{Pedron2005, MiguelEtAl2012} lack estimates of analytical errors.
 
