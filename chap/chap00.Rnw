@@ -64,7 +64,7 @@ public administration (e.g. scientific and technical advisory boards) than of a 
 of the importance of soils for humanity and the environment. Otherwise we could expect soil 
 degradation to have been diminished, at least marginally, in the last years considering the already 
 existing body of knowledge on soil management and conservation \cite{Blanco-CanquiEtAl2010}. A good
-example of this \emph{science-driven} demand for soil information is given by \citet{Kempen2011} in the 
+example of this \emph{science-driven} demand for soil information is given by \citeonline{Kempen2011} in the 
 third paragraph of the introduction of his thesis.
 
 In Brazil, I guess the main reason for restarting the national soil survey program, today called 
@@ -100,7 +100,7 @@ studies. I end this \textit{General Introduction} with the outline of the thesis
 \label{sec:intro-soil-mapping}
 
 Technology plays a determinant role on how we perceive the world around us -- see, for example, 
-\citet{Hartemink2009}. When early farmers, during the Neolithic Revolution, ca.~\num{10000}~years 
+\citeonline{Hartemink2009}. When early farmers, during the Neolithic Revolution, ca.~\num{10000}~years 
 ago, first observed that soil properties varied in space, I guess they soon figured out 
 that such variation was related to other environmental features and affected crop yields. This 
 early, rough, approximate understanding -- a \emph{model} -- of the spatial soil variation was 
