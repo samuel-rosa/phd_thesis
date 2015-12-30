@@ -22,13 +22,16 @@
 \usepackage[utf8]{inputenc} %% Para acentuação correta
 
 %%==============================================================================
-%% Pacotes - formatação de equações e números
+%% Pacotes - formatação de equações, números, elementos químicos
 %%==============================================================================
 
 \usepackage{amsmath,latexsym,amssymb}
-\usepackage{siunitx} %% Sistema Internacional de Unidades
+\usepackage[range-phrase = --]{siunitx} %% Sistema Internacional de Unidades
 % Access bold symbols in maths mode
 \usepackage{bm}
+
+% Elementos químicos
+\usepackage[version=4]{mhchem}
 
 %%==============================================================================
 %% Pacotes - formatação de figuras
@@ -129,6 +132,7 @@
 \newcommand{\cited}[1]{\q{#1}} % direct citation
 
 \def\geoderma{\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}}
+
 
 %%==============================================================================
 %% Identificação do trabalho
@@ -363,7 +367,7 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 
 % Adiciona cada capitulo
 \include{chap/chap00}
-%\include{chap/chap01}
+\include{chap/chap01}
 % \include{chap/chap02}
 % \include{chap/chap03}
 % \include{chap/chap04}
@@ -386,8 +390,8 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %% Apêndices
 %%=============================================================================
 %\appendix
-%\include{chap/apena} % description of the database
-%\include{chap/apenb} % conceptual model of pedogenesis
+\include{chap/apena} % description of the database
+\include{chap/apenb} % conceptual model of pedogenesis
 %\include{chap/apenc} % R-package spsann
 %\include{chap/apend} % R-package pedometrics
 
