@@ -1,5 +1,6 @@
+ATTENTION: lines starting with “%”  will not be included in the document!
 \artigofalse
-\chapter{The Santa Maria data set -- soil data (v.1)}
+\chapter{The Santa Maria dataset -- soil data (v.1)}
 \label{apen:soil-data}
 
 \tocless\section{Introduction}
@@ -14,7 +15,7 @@ producing semi-detailed soil and land use maps (\scale{25000})
 \cite{Pedron2005,Miguel2010,SamuelRosaEtAl2011a,MiguelEtAl2012}, and predicting topsoil carbon 
 stock and vulnerability to erosion \cite{Samuel-Rosa2009,MouraBueno2012,Miguel2013}.
 
-This document (v.1) presents a description of the soil data contained in the Santa Maria data set, 
+This document (v.1) presents a description of the soil data contained in the Santa Maria dataset, 
 including the procedures for soil sampling and description, as well as the analytical methods 
 employed. The soil data is freely available as CSV files in a repository hosted in
 \href{https://github.com/samuel-rosa/dnos-sm-rs-general/tree/master/data}{GitHub}. Files 
@@ -24,7 +25,7 @@ fieldMetadata.csv and labMetadata.csv contain the metadata. Every soil property 
 code composed of three or four capital letters. For example, soil organic carbon is identified with 
 \texttt{ORCA}. A column contains the number of laboratory replicates is identified with the code of 
 the soil property followed by the letter \q{N}. The column containing the sample standard deviation 
-is identified in the same manner, but using \q{SD}. For example, \q{ORCA\_N} and \q{ORCA\_SD}.
+is identified in the same manner, but using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
 
 The reader should be aware that soil science evolved in Brazil following a somewhat different 
 pathway than in the countries of the northern hemisphere due to the specific features of 
@@ -33,7 +34,7 @@ mismatches. The reader is invited to contribute to solve any problems in this do
 
 \tocless\section{Field sampling}
 
-The Santa Maria data set is composed of three subsets which are described in the next three 
+The Santa Maria dataset is composed of three subsets which are described in the next three 
 sections. Together, these subsets yield a sampling density of \num{\pm0.18}~observations per 
 hectare, with an average separation distance between two neighbouring points of \SI{180}{\metre}, 
 minimum and maximum separation distances of \num{18} and \SI{328}{\metre}, \SI{95}{\percent} of 
@@ -66,7 +67,7 @@ support was not a problem for the researchers because their goal was to sample t
 practices and land use changes.
 
 Soil samples from the three pits opened in each sampling area were used to produce a composite sample
-which was used for laboratory analyses (see bellow). Subsurface soil features were observed with an auger 
+which was used for laboratory analyses (see below). Subsurface soil features were observed with an auger 
 in each pit, and the average (continuous variables) or most common (categorical variables) value recorded.
 Note that soil sampling was done using an areal support -- an area of \SI{\pm100}{\metre\squared}. However, 
 the shape and exact area of the sampling units are unknown, and georeferencing took place at point 
@@ -79,7 +80,7 @@ sampling area. Sometimes, the horizontal positional error was larger than \SI{\p
 of vegetation biomass, terrain features, and satellite configuration. In this cases, observation locations 
 were georeferenced in the office using \SI{1}{\metre} spatial resolution Google Earth\textregistered{} 
 imagery of the years of 2008 and 2009. The positional horizontal error of these images imagery is 
-\SI{\pm6}{\metre} (see bellow).
+\SI{\pm6}{\metre} (see below).
 
 Every observation was identified with a number in increasing order, following the order in which 
 the observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out,
@@ -95,14 +96,14 @@ time faced in previous field campaigns, researchers chose to employ transect (cl
 transects using their knowledge of the study area, taking into account the factors that they thought 
 determined the spatial distribution of soil properties. Each researcher (three) delineated $m = 60$ easily 
 accessible, straight transects of \SI{400}{\metre} following the spatial gradients of environmental features 
-(topography, geology, vegetation, land use, and soils). Accordingly, knowledge of exiting roads, human 
+(topography, geology, vegetation, land use, and soils). Accordingly, knowledge of existing roads, human 
 settlements, water bodies, and other access limitations was used as well. The activity was carried out using 
 Google Earth\textregistered{} imagery of the years of \num{2008} and \num{2009}.
 
 % TODO: add a figure with all transects highlighting the selected ones.
 % \caption{Three experts drawn 180 linear transects aligned in the direction of maximum expected 
-% spatial variance of environmental features. They avoided locations were it was known that geographic 
-% barriers or land owners would impede the access to collect soil samples. Using probability sampling, 12 
+% spatial variance of environmental features. They avoided locations where it was known that geographic 
+% barriers or landowners would impede the access to collect soil samples. Using probability sampling, 12 
 % transects were selected to collect validation observations (red).}
 
 Twelve out of the $m = 180$ transects were randomly selected using as many iterations as necessary until 
@@ -126,7 +127,7 @@ were purposively selected after a preliminary area-class soil map had been produ
 included in \emph{Subset I} had been made. The researchers aimed at observation locations that they 
 understood as being most representative of the soil mapping units depicted in their respective area-class 
 soil maps. A single soil sample was taken from each of the described soil horizon and used for laboratory 
-analysis (see bellow). The resulting depth of the uppermost A horizons varies from \num{12} to 
+analysis (see below). The resulting depth of the uppermost A horizons varies from \num{12} to 
 \SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried using a GNSS 
 receiver with a horizontal positional error of less than \SI{\pm8}{\metre} positioned at the observation 
 location. Data are identified in the \emph{Santa Maria database} using the same identification that was 
@@ -183,7 +184,7 @@ auger using the classification scheme proposed by \citeonline{SantosEtAl2013}.
 
 Presence of coarse fragments (\texttt{FRAG}) -- soil material of diameter \SI{>2}{\centi\metre} -- was described 
 as a binary variable, that is, a value of \num{1} (one) was annotated when coarse fragments were present, and 
-\num{0} (zero) otherwise. The approach was addopted to describe the presence of rock outcrops (\texttt{ROCK}). The 
+\num{0} (zero) otherwise. The approach was adopted to describe the presence of rock outcrops (\texttt{ROCK}). The 
 quantity of gravel (\texttt{GRAVEL}, \si{percent}) was estimated visually.
 
 The employed to describe the presence of coarse fragments and rock outcrops is not in line with the soil 
@@ -193,7 +194,7 @@ importance given to these soil properties in the respective research projects.
 \tocless\subsection{Canopy}
 
 % TODO: add three figures as examples of each class.
-Soil coverage with vegetation (\textt) was inferred visually in the field using three classes: 
+Soil coverage with vegetation (\texttt{CANOPY}) was inferred visually in the field using three classes: 
 low (\SI{<25}{\percent}), medium (\SIrange{25}{75}{\percent}), and high (\SI{>75}{\percent}).
 
 \tocless\subsection{Additional information}
@@ -214,30 +215,30 @@ The soil organic carbon content (\texttt{ORCA}, \si{\gram\per\kilo\gram}) was de
 \citeonline{ClaessenEtAl1997}.
 
 Sample aliquots of \num{0.050} to \SI{0.500}{\gram} were placed in glass digestion tubes 
-(\SI{80}{\milli\litre}). The amount of sample used varied according to the ORCA estimated by visual 
-interpretation of soil colour. Every digestion tube received an aliquot of \SI{10}{\milli\litre} of 
+(\SI{80}{\milli\liter}). The amount of sample used varied according to the ORCA estimated by visual 
+interpretation of soil colour. Every digestion tube received an aliquot of \SI{10}{\milli\liter} of 
 sulfochromic solution\footnote{See more about the sulfochromic solution, or chromic acid, at
-\url{http://en.wikipedia.org/wiki/Chromic_acid}} [\SI{0.067}{\molle\per\litre} potassium bichromate solution
+\url{http://en.wikipedia.org/wiki/Chromic_acid}} [\SI{0.067}{\mole\per\liter} potassium bichromate solution
 (\ce{K2Cr2O7}) in the presence of concentrated sulphuric acid (\ce{H2SO4})] and a small reflux funnel 
 to avoid loss of reagent during digestion. A digestion block with capacity for \num{40}~samples was used:
 \num{36}~tubes with soil sample plus \num{3}~tubes with blank plus \num{1}~tube with \ce{H2SO4} and a
 thermometer for temperature control. Digestion at \SI{150}{\celsius} last \SI{30}{\minute}. Three blanks 
 were prepared and set aside at room temperature to estimate the loss of reagent due to heat in the digestion 
 block. After digestion the tubes were set aside at room temperature to cool down. Next, the solution was 
-transferred to Erlenmeyer flasks (\SI{250}{\milli\litre}) with \SI{60}{\milli\litre} of distilled water and
-\SI{2}{\milli\litre} of concentrated orthophosphoric acid [\ce{H3PO4}] and \num{3}~drops of 
-\SI{1}{\percent}~diphenylamine). The solution was titrated using \SI{0.1}{\molle\per\litre} ammonium ferrous
+transferred to Erlenmeyer flasks (\SI{250}{\milli\liter}) with \SI{60}{\milli\liter} of distilled water and
+\SI{2}{\milli\liter} of concentrated orthophosphoric acid [\ce{H3PO4}] and \num{3}~drops of 
+\SI{1}{\percent}~diphenylamine). The solution was titrated using \SI{0.1}{\mole\per\liter} ammonium ferrous
 sulphate (\ce{FeSO4(NH4)2 * 6H2O}) until persistent green colour. The results were multiplied by \num{1.11}
 to correct to the standard method (dry combustion).
 
 The soil organic matter content of the observations compiled from \citeonline{Pedron2005} was determined 
-using the method described by \citeonline{TedescoEtAl1995}. Sample aliquots of \SI{2.5}{\milli\litre}
-were placed in Erlenmeyer flasks (\SI{50}{\milli\litre}). Every Erlenmeyer flask received an aliquot of 
-\SI{15}{\milli\litre} of \SI{0.067}{\molle\per\litre} sulfochromic solution (\ce{Na2Cr2O7 + H2SO4}). The 
+using the method described by \citeonline{TedescoEtAl1995}. Sample aliquots of \SI{2.5}{\milli\liter}
+were placed in Erlenmeyer flasks (\SI{50}{\milli\liter}). Every Erlenmeyer flask received an aliquot of 
+\SI{15}{\milli\liter} of \SI{0.067}{\mole\per\liter} sulfochromic solution (\ce{Na2Cr2O7 + H2SO4}). The 
 flasks were heated in a water bath at \num{75} to \SI{80}{\celsius} during \SI{30}{\minute} and shaken 
-for \SI{5}{\minute}. A water aliquot of \SI{15}{\milli\litre} was added to the flask and let overnight 
-(\num{15} to \SI{18}{\hour}). In the next day, an aliquot of \SI{3.0}{\milli\litre} was sampled to a 
-small cup with \SI{3.0}{\milli\litre} of distilled water. The absorbency of the supernatant was measured 
+for \SI{5}{\minute}. A water aliquot of \SI{15}{\milli\liter} was added to the flask and let overnight 
+(\num{15} to \SI{18}{\hour}). In the next day, an aliquot of \SI{3.0}{\milli\liter} was sampled to a 
+small cup with \SI{3.0}{\milli\liter} of distilled water. The absorbency of the supernatant was measured 
 at \SI{645}{\nano\metre}. The results were transformed to organic carbon content using the Van Bemmelen 
 factor (\num{1.724}), the result assumed to be equivalent to soil organic carbon content measured using the 
 standard method. The results are expressed using a volume-basis and were converted to a mass-basis using a
@@ -246,7 +247,7 @@ standard method. The results are expressed using a volume-basis and were convert
 \tocless\subsection{Particle size analysis}
 
 Particle size analysis was performed using the pipette method, with the sand fraction 
-(\texttt{SAND}, \SIrange{0.053}{2}{\milli\metre}}, \si{\gram\per\kilo\gram}) determined by wet sieving, and the silt 
+(\texttt{SAND}, \SIrange{0.053}{2}{\milli\metre}, \si{\gram\per\kilo\gram}) determined by wet sieving, and the silt 
 fraction (\texttt{SILT}, \SIrange{0.002}{0.053}{\milli\metre}, \si{\gram\per\kilo\gram}) calculated by difference. 
 The analytical procedure is an adaptation of the method of the Soil Conservation Service of the United States
 Department of Agriculture \cite{UnitedStates1972} made by the Soil Physics Laboratory of the Universidate
@@ -255,20 +256,20 @@ published so far, neither in Portugues nor in English. You can visit the homepag
 of the Universidate Federal de Santa Maria at \url{https://coral.ufsm.br/fisicadosolo/} to get more information
 about the method or contact their developers.} \cite{SuzukiEtAl2004,SuzukiEtAl2004a}.
 
-First, a sample aliquot of \SI{20}{\gram} was placed in a \SI{100}{\milli\litre} glass container 
+First, a sample aliquot of \SI{20}{\gram} was placed in a \SI{100}{\milli\liter} glass container 
 (height: \SI{10.5}{\centi\metre}; diameter: \SI{2.75}{\centi\metre}; weight: \SI{85}{\gram}). Two nylon
 spheres with a diameter of \SI{1.71}{\centi\metre} and weighting \SI{3.04}{\gram} (density: 
 \SI{1.11}{\gram\per\centi\metre\cubic}) were added to act as physical disaggregating agents. Then, an 
-aliquot of \SI{10}{\milli\litre} of \SI{1}{\molle\per\litre} sodium hydroxide (\ce{NaOH}) solution was 
-added to act as chemical dispersing agent along with \SI{40}{\milli\litre} of distilled water. The glass 
+aliquot of \SI{10}{\milli\liter} of \SI{1}{\mole\per\liter} sodium hydroxide (\ce{NaOH}) solution was 
+added to act as chemical dispersing agent along with \SI{40}{\milli\liter} of distilled water. The glass 
 container was closed with a plastic cap, manually shaken for \SI{10}{\second}, and placed in a horizontal
 mechanical shaker with capacity for \num{85}~samples. The suspension was left to stand overnight 
 (\SI{10}{\hour}). In the next day the suspension was submitted to horizontal mechanical agitation during 
 \SI{4}{\hour} at \si{120} cycles per minute \cite{SuzukiEtAl2004,SuzukiEtAl2004a}.
 
 After horizontal agitation, the suspension was poured in a plastic graduated cylinder with capacity for 
-\SI{1000}{\milli\litre} using a glass funnel and a metal sieve to hold the two nylon spheres. The 
-suspension in the graduated cylinder was completed to \SI{1000}{\milli\litre} and homogenized using a
+\SI{1000}{\milli\liter} using a glass funnel and a metal sieve to hold the two nylon spheres. The 
+suspension in the graduated cylinder was completed to \SI{1000}{\milli\liter} and homogenized using a
 hand stirrer (\SI{30}{\second}). The suspension was allowed to stand until sedimentation was complete. 
 The time needed was calculated using the Stokes law with the temperature measured in a graduated cylinder 
 filled with distilled water.
@@ -278,7 +279,7 @@ filled with distilled water.
 
 The clay fraction (\texttt{CLAY}, \SI{<0.002}{\milli\metre}, \si{\gram\per\kilo\gram}) was determined by the 
 pipette method. Soil samples with organic matter content \SI{>5}{\percent} were submitted to oxidative 
-treatment with hydrogen peroxide (\ce{H2O2) prior to the analysis following the recommendations of
+treatment with hydrogen peroxide (\ce{H2O2} prior to the analysis following the recommendations of
 \citeonline{ClaessenEtAl1997}.
 
 %The sand fraction was separated into five size classes:
@@ -303,7 +304,7 @@ treatment with hydrogen peroxide (\ce{H2O2) prior to the analysis following the 
 \tocless\subsection{Soil density}
 
 % TODO: Provide a more detailed description of how this is done.
-The bulk soil density (\texttt{BUDE}, \si{\mega\gram\per\metre\cubic}) was determined using the core method with a 
+The bulk soil density (\texttt{BUDE}, \si{\mega\gram\per\cubic\metre}) was determined using the core method with a 
 metallic ring (height: \SI{3}{\centi\metre}; diameter: \SI{5}{\centi\metre}) as described by 
 \citeonline{ClaessenEtAl1997}. The bulk soil density was not determined in the locations where the soil was very 
 shallow or stony.
@@ -312,20 +313,20 @@ shallow or stony.
 
 The exchangeable calcium (\texttt{CALC}, \si{\milli\mole\per\kilo\gram}) and magnesium (\texttt{MAGN}, 
 \si{\milli\mole\per\kilo\gram}) were determined by atomic absorption spectroscopy after extraction with 
-\SI{1.0}{\mole\per\litre} \ce{KCl} solution using the method described by \citeonline{ClaessenEtAl1997}. 
+\SI{1.0}{\mole\per\liter} \ce{KCl} solution using the method described by \citeonline{ClaessenEtAl1997}. 
 The exchangeable sodium (\texttt{SODI}, \si{\milli\mole\per\kilo\gram}) and potassium (\texttt{POTA}, 
-\si{\milli\mole\per\kilo\gram}) were extracted with a \SI{0.05}{\mole\per\litre} \ce{HCl} solution plus 
-\SI{0.025}{\mole\per\litre} \ce{H2SO} (Mehlich-\num{1} solution). Both were quantified by means of flame 
+\si{\milli\mole\per\kilo\gram}) were extracted with a \SI{0.05}{\mole\per\liter} \ce{HCl} solution plus 
+\SI{0.025}{\mole\per\liter} \ce{H2SO} (Mehlich-\num{1} solution). Both were quantified by means of flame 
 atomic emission spectrometry using the method described by \citeonline{TedescoEtAl1995}.
 
 The exchangeable acidity (\texttt{EXAC}, \si{\milli\mole\per\kilo\gram}), also known in Brazil as exchangeable 
-aluminium, was extracted using the same \SI{1.0}{\mole\per\litre} \ce{KCl} solution used to extract the 
-exchangeable calcium and magnesium. It was determined by titrimetry with \SI{0.025}{\mole\per\litre} 
+aluminium, was extracted using the same \SI{1.0}{\mole\per\liter} \ce{KCl} solution used to extract the 
+exchangeable calcium and magnesium. It was determined by titrimetry with \SI{0.025}{\mole\per\liter} 
 \ce{NaOH} solution as described by \citeonline{ClaessenEtAl1997}.
 
 % TODO: Include POAC in the database and improve the description of how it was determined.
-% The potential acidity (POAC, \si{\milli\mole\per\kilo\gram}) was determined with \SI{1.0}{\mole\per\litre} 
-% calcium acetate solution at pH~\num{7.0} and titrated with \SI{0.0606}{\mole\per\litre} \ce{NaOH} solution 
+% The potential acidity (POAC, \si{\milli\mole\per\kilo\gram}) was determined with \SI{1.0}{\mole\per\liter} 
+% calcium acetate solution at pH~\num{7.0} and titrated with \SI{0.0606}{\mole\per\liter} \ce{NaOH} solution 
 % as described by \citeonline{ClaessenEtAl1997}.
 
 The effective cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}) was defined as the sum of 
@@ -352,3 +353,5 @@ Collaborated in the preparation of this document (in order of importance): Pablo
 Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia 
 Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink 
 (ISRIC -- World Soil Information), and Ad van Oostrum (ISRIC -- World Soil Information).
+
+
