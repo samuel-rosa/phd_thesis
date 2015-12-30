@@ -1,28 +1,43 @@
 \artigofalse
-\chapter{The Santa Maria dataset -- soil data}
-\label{apen:database-soil-data}
+\chapter{The Santa Maria data set -- soil data (v.1)}
+\label{apen:soil-data}
 
-\tocless\section{Presentation}
+\tocless\section{Introduction}
 
-Every soil property 
-is identified in the database with a code composed of three or four capital letters. For example, soil 
-organic carbon is identified with \texttt{ORCA}. A column contains the number of 
-laboratory replicates is identified with the code of the soil property followed by the letter \q{N}. The 
-column containing the sample standard deviation is identified in the same manner, but using \q{SD}. For
-example, \q{ORCA\_N} and \q{ORCA\_SD}.
+The Santa Maria dataset is a data set comprising soil data from $n = 410$ point soil observations 
+made between 2004 and 2013 in the catchment of the DNOS/CORSAN reservoir, located in the southern 
+border of the plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio 
+Grande do Sul, Brazil. These point soil observations cover the northern sector of the catchment -- 
+an area of \SI{\pm2000}{\hectare}, which corresponds to \SI{\pm60}{\percent} of the entire 
+catchment. These soil data was produced during the development of research projects that aimed at 
+producing semi-detailed soil and land use maps (\scale{25000}) 
+\cite{Pedron2005,Miguel2010,SamuelRosaEtAl2011a,MiguelEtAl2012}, and predicting topsoil carbon 
+stock and vulnerability to erosion \cite{Samuel-Rosa2009,MouraBueno2012,Miguel2013}.
 
+This document (v.1) presents a description of the soil data contained in the Santa Maria data set, 
+including the procedures for soil sampling and description, as well as the analytical methods 
+employed. The soil data is freely available as CSV files in a repository hosted in
+\href{https://github.com/samuel-rosa/dnos-sm-rs-general/tree/master/data}{GitHub}. Files 
+fieldData.csv and labData.csv contain the identification of each observation locations, their 
+geographic coordinates (latlong, WGS1984), and field and laboratory data, respectively. Files 
+fieldMetadata.csv and labMetadata.csv contain the metadata. Every soil property is identified with a 
+code composed of three or four capital letters. For example, soil organic carbon is identified with 
+\texttt{ORCA}. A column contains the number of laboratory replicates is identified with the code of 
+the soil property followed by the letter \q{N}. The column containing the sample standard deviation 
+is identified in the same manner, but using \q{SD}. For example, \q{ORCA\_N} and \q{ORCA\_SD}.
+
+The reader should be aware that soil science evolved in Brazil following a somewhat different 
+pathway than in the countries of the northern hemisphere due to the specific features of 
+\emph{tropical soils}. Methods have been adapted along the years, possibly leading to nomenclature 
+mismatches. The reader is invited to contribute to solve any problems in this document.
 
 \tocless\section{Field sampling}
 
-The Santa Maria dataset contains $n = 410$ point soil observations made between 2004 and 2011 as part of
-different projects. These projects aimed at producing semi-detailed soil and land use maps (\scale{25000})
-\cite{Pedron2005,Miguel2010,SamuelRosaEtAl2011a,MiguelEtAl2012}, and predicting topsoil carbon stock and 
-vulnerability to erosion \cite{Samuel-Rosa2009,MouraBueno2012,Miguel2013}. As such, the dataset is composed 
-of three subsets which are described in the next three sections. Together, these subsets yield a sampling 
-density of \num{\pm0.18}~observations per hectare, with an average separation distance between two neighbouring 
-points of \SI{180}{\metre}, minimum and maximum separation distances of \num{18} and 
-\SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by more than 
-\SI{49}{\metre}.
+The Santa Maria data set is composed of three subsets which are described in the next three 
+sections. Together, these subsets yield a sampling density of \num{\pm0.18}~observations per 
+hectare, with an average separation distance between two neighbouring points of \SI{180}{\metre}, 
+minimum and maximum separation distances of \num{18} and \SI{328}{\metre}, \SI{95}{\percent} of 
+neighbouring observations being separated by more than \SI{49}{\metre}.
 
 \tocless\subsection{Subset I}
 
@@ -119,56 +134,50 @@ used in the studies from where they were compiled.
 
 \tocless\section{Field description}
 
+Several environmental features were described at the observation locations. The next sections 
+present a description of how this was done.
+
 \tocless\subsection{Land use}
 
-O uso da terra na foi avaliado no período 2008-2009 usando de observações de campo (expedições para coleta das amostras de solo) e imagens de satélite disponibilizadas pelo Google Earth\textregistered. Cinco classes de uso da terra foram identificadas, nas quais foram coletadas amostras de solo conforme descrito acima: floresta nativa (primária ou secundária); capoeira (lavouras, pastagens e campos abandonados, com predomínio de vegetação de porte arbustivo); campo sujo (pastagens naturais mal manejadas, com predomínio de vegetação de porte herbáceo-arbustivo); campo limpo (pastagens naturais e perenes bem manejadas e pomares); lavoura (cultivos agrícolas anuais e bianuais, pastagens cultivadas anuais); floresta exótica (cultivo de \textit{Eucalyptus} sp. e \textit{Pinus} sp.). Também foram identificadas áreas de uso urbano (construções, estradas, etc), mas nesses locais não foram coletadas amostras de solo. Outro uso da terra identificado foi reservatórios de água.
+Land use (\texttt{LAND}) was assessed in the years of \num{2008} and \num{2009} using data 
+collected in the field and Google Earth\textregistered imagery. Five land uses were identified: 
+native forest (primary or secondary), shrubland (abandoned areas with predominance of shrub-sized 
+vegetation, known in Brazil as \emph{capoeira}), animal husbandry (grasslands), forestry 
+(\textit{Eucalyptus} sp. and \textit{Pinus} sp.), and crop agriculture. Other land uses such as 
+human settlements and water bodies were not observed/sampled.
 
 \tocless\subsection{Geology}
 
-Soil parent material (sedimentary or volcanic) was inferred from soil characteristics and local environmental 
-features. Geologic map \cite{MacielFilho1990} was used only when soil characteristics and environmental features 
-were insufficient to accurately determine the soil parent material.
+Soil parent material (\texttt{PARENT}, sedimentary or igneous), geological formation (\texttt{GEO}),
+and lithology (\texttt{LITHO}) was inferred from direct observation of soil properties and local 
+environmental features in the field. Existing geological maps were used only when soil 
+characteristics and environmental features were insufficient to reach an agreement about the most 
+likely soil parent material, geological formation, and lithology.
 
 \tocless\subsection{Soil classification}
 
-Os solos foram classificados de acordo com o Sistema Brasileiro de Classificação de Solos (Santos et al., 2013) até o segundo nível categórico pelo uso da observação das trincheiras abertas para coleta das amostras de solo e tradagens até o horizonte diagnóstico subsuperficial ou até o contato lítico. A decisão por classificar os solos até o segundo nível categórico se deve ao fato de as características diagnósticas poderem ser facilmente identificadas no campo. As classes de solos são identificadas pelas seguintes abreviaturas: 
+The most likely soil classification (\texttt{TAXON}) was inferred in the field using direct 
+observation of soil properties (\SI{20}{\centi\metre}-deep soil pits and auger holes down to the 
+diagnostic subsurface horizon or bedrock) and local environmental features. Soil taxon was inferred 
+only till the second categorical level of the Brazilian System of Soil Classification 
+\cite{SantosEtAl2013a} because further levels require data that cannot be easily identified in the 
+field.
 
-\begin{description}
-\item [RF] Neossolo Flúvico;
-\item [RL] Neossolo Litólico;
-\item [RR] Neossolo Regolítico;
-\item [RQ] Neossolo Quartzarênico;
-\item [PV] Argissolo Vermelho;
-\item [PVA] Argissolo Vermelho-Amarelo;
-\item [PA] Argissolo Amarelo;
-\item [PBAC] Argissolo Bruno-Acinzentado;
-\item [SX] Planossolo Háplico;
-\item [CX] Cambissolo Háplico.
-\end{description}
+% TODO: move this description of the soil taxa to the metadata file.
+% RF - Neossolo Flúvico, RL - Neossolo Litólico, RR - Neossolo Regolítico, RQ - Neossolo 
+% Quartzarênico, PV - Argissolo Vermelho, PVA - Argissolo Vermelho-Amarelo, PA - Argissolo 
+% Amarelo, PBAC - Argissolo Bruno-Acinzentado, SX - Planossolo Háplico, CX - Cambissolo Háplico.
 
-\subsubsection{Slope}
+\tocless\subsection{Slope}
 
-The slope gradient (\%) was measured using a \clinometer, the observer
-and target being at a constant height above the ground. The distance 
-between observer and target was between 30~m (dense forests) and 50~m
-(open fields). The slope gradient was classified in seven classes
-\cite{SantosEtAl2005, SantosEtAl2013}:
-
-\begin{tabular}{ll}
-\textbf{Slope gradient (\%)} & \textbf{Classification} \\
-0 to 3  & plano \\
-3 to 8  & suave ondulado \\
-8 to 13 & moderadamente ondulado \\
-13 to 20 & ondulado \\
-20 to 45 & forte ondulado \\
-45 to 100 & montanhoso \\
-\greater100 & escarpado \\
-\end{tabular}
+The slope gradient (\texttt{SLOPE}, \si{\percent}) was measured using a clinometer, the observer
+and target being at a constant height above the ground. The distance between observer and target was 
+between \SI{30}{\metre} (dense forests) and \SI{50}{\metre} (open fields).
 
 \tocless\subsection{Drainage}
 
-Soil drainage status (\texttt{DRAIN}) was inferred visually from soil features observed with an auger using the 
-classification scheme proposed by \citeonline{SantosEtAl2013}.
+Soil drainage status (\texttt{DRAIN}) was inferred visually from soil features observed with an 
+auger using the classification scheme proposed by \citeonline{SantosEtAl2013}.
 
 \tocless\subsection{Coarse fragments and rock outcrops}
 
@@ -183,10 +192,9 @@ importance given to these soil properties in the respective research projects.
 
 \tocless\subsection{Canopy}
 
-% TODO:
-A cobertura vegetal do solo foi definida visualmente como baixa (\SI{<25}{\percent}), média 
-(\SIrange{25}{75}{\percent}) e alta (\SI{>75}{\percent}). O registro dessa variável teve como objetivo avaliar
-a existência de correlação entre a cobertura vegetal do solo e o conteúdo de carbono orgânico.
+% TODO: add three figures as examples of each class.
+Soil coverage with vegetation (\textt) was inferred visually in the field using three classes: 
+low (\SI{<25}{\percent}), medium (\SIrange{25}{75}{\percent}), and high (\SI{>75}{\percent}).
 
 \tocless\subsection{Additional information}
 
@@ -340,9 +348,7 @@ exchangeable bases and exchangeable acidity, i.e.
 
 \tocless\section{Acknowledgements}
 
-This document is coauthored with Pablo Miguel (Universidade Federal de Pelotas -- UFPel) and Jean Michel Moura 
-Bueno (Universidade Federal de Santa Maria -- UFSM). Collaborated in the preparation of this document (in order 
-of importance): Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ),
-Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and 
-Ad van Oostrum (ISRIC -- World Soil Information). The CAPES Foundation, Ministry of Education of Brazil, and the 
-CNPq foundation, Ministry of Science and Technology of Brazil, supported the production of this document.
+Collaborated in the preparation of this document (in order of importance): Pablo Miguel (UFPel), 
+Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia 
+Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink 
+(ISRIC -- World Soil Information), and Ad van Oostrum (ISRIC -- World Soil Information).
