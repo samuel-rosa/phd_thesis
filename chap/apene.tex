@@ -651,79 +651,116 @@ sizes used to calculate previous terrain attributes. A minimum radius value of t
 in all calculations.
 
 \tocless\section{Geological maps}
+\label{sec:covar-data-geo-maps}
 
-Data on geology and soil parent material data comes from most recent geological maps published in the scales of 1:25,000 \cite{MacielFilho1990} and 1:50,000 \cite{GasparettoEtAl1988}.
+Data on geology and soil parent material data comes from most recent geological maps published in 
+the \scales{25000}{50000} \cite{MacielFilho1990,GasparettoEtAl1988}.
 
-Both geological maps were produced based on the most recent topographic maps produced by the Brazilian Army at the scales of 1:50,000 and 1:25,000. Alike topographic maps, geological maps were also available only in the analogical format, and were hand digitalized and georeferenced in QGIS. Intersections between all meridians and parallels (a total of 16) were used as control points to adjust a second order polynomial model. Resampling was performed using the cubic resampling method. After manual digitalization of geological formations, the original coordinate reference system (EPSG:31982 - SIRGAS 2000 / UTM zone 22S) of all vector files was transformed to WGS 1984 / UTM zone 22S (EPSG:32722) using the R-package \textit{rgdal} \cite{BivandEtAl2013a}.
+Both geological maps were produced based on the most recent topographic maps produced by the 
+Brazilian Army at the \scales{50000}{25000}. Alike topographic maps, geological maps were also 
+available only in the analogical format, and were hand digitalized and georeferenced in QGIS. 
+Intersections between all meridians and parallels (a total of 16) were used as control points to 
+adjust a second order polynomial model. Resampling was performed using the cubic resampling method. 
+After manual digitalization of geological formations, the original coordinate reference system 
+(EPSG:31982 - SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / UTM zone 
+22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
-The positional validation of geological maps was performed using 8 (\texttt{GEO\_50}) and 5 (\texttt{GEO\_25}) GCPs located at easily identifiable geographical markers. Table \ref{tab:geology-geo-val} shows that the positional accuracy of both geological maps does not meet the current regulations of the Brazilian legislation. Estimated RMSE is 147 m and 69 m, respectively, for \texttt{GEO\_50} and \texttt{GEO\_25}, when the maximum RMSE accepted is 30 m and 15 m. For \texttt{GEO\_50}, the lowest accuracy is found in the y coordinate, while for \texttt{GEO\_25}, the x coordinate is the less accurate. Figure \ref{fig:geology-azim} suggest that the low positional accuracy  of both geological maps is due to a systematic error. This systematic error probably was propagated from the topographic maps used to produce the geological maps. Therefore, the same strategy (affine transformation ) used to remove the systematic positional error of the topographic map above was employed on geological maps. Due to the lack of GCPs, model parameters were adjusted using the same set of GCP's used for the validation in the geographic space. The estimated uncertainty of the affine transformation is RMSE = 86 m and RMSE = 22 m, respectively, for \texttt{GEO\_50} and \texttt{GEO\_25}.
+The positional validation of geological maps was performed using eight (\texttt{GEO\_50}) and five 
+(\texttt{GEO\_25}) GCPs located at easily identifiable geographical markers. 
+\autoref{tab:covar-data-geology-geo-val} shows that the positional accuracy of both geological maps 
+does not meet the current regulations of the Brazilian legislation. Estimated RMSE are \SI{147}{\m} 
+and \SI{69}{\m} for \texttt{GEO\_50} and \texttt{GEO\_25}, respectively, when the maximum RMSE 
+accepted is \SI{30}{\m} and \SI{15}{\m}. For \texttt{GEO\_50}, the lowest accuracy is found in the 
+y-coordinate, while for \texttt{GEO\_25}, the x-coordinate is the less accurate. 
+\autoref{fig:covar-data-geology-azim} suggests that the low positional accuracy  of both geological 
+maps is due to a systematic error. This systematic error probably was propagated from the 
+topographic maps used to produce the geological maps. Therefore, the same strategy (affine 
+transformation ) used to remove the systematic positional error of the topographic map above was 
+employed on geological maps. Due to the lack of GCPs, model parameters were adjusted using the same 
+set of GCPs used for the validation in the geographic space. The estimated uncertainty of the 
+affine transformation is $RMSE = \SI{86}{\m}$ and $RMSE = \SI{22}{\m}$ for 
+\texttt{GEO\_50} and \texttt{GEO\_25}, respectively.
 
 \begin{table}[ht]
-  \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of geological maps GEO\_50 and GEO\_25 in the geographic space. Validation statistics were estimated using, respectively, eight and five ground control points located in easily identifiable geographical markers (purposive sampling). Estimates were corrected to the size of the population.}
-  \label{tab:geology-geo-val}
-  \centering
-  {\small
-  \begin{tabular}{lrrrr}
-    \hline
-    Statistics           & X coordinate & Y coordinate  & Error vector  & Azimuth                  \\
-    \hline
-    \multicolumn{5}{l}{\texttt{GEO\_50} (n = 8)}                                                   \\
-    \hline
-    Mean, m              & 10   (58)    & -102  (87)    & 140   (44)    & 169$^\circ$ (47$^\circ$) \\ 
-    Absolute mean, m     & 43   (40)    & 125   (50)    & -             & -                        \\ 
-    Squared mean, m$^2$  & 3431 (5914)  & 18067 (13243) & 21498 (12316) & -                        \\
-    \hline
-    \multicolumn{5}{l}{\texttt{GEO\_25} (n = 5)}                                                   \\
-    \hline
-    Mean, m              & 51    (29)   & 29    (22)    & 67    (16)    & 58$^\circ$  (30$^\circ$) \\ 
-    Absolute mean, m     & 51    (29)   & 29    (22)    & -             & -                        \\ 
-    Squared mean, m$^2$  & 3457  (2976) & 1312  (1612)  & 4769  (2306)  & -                        \\
-    \hline
-  \end{tabular}}
+ \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
+ geological maps GEO\_50 and GEO\_25 in the geographic space. Validation statistics were estimated 
+ using, respectively, eight and five ground control points located in easily identifiable 
+ geographical markers (purposive sampling).}
+ \label{tab:covar-data-geology-geo-val}
+ \centering
+ {\small
+ \begin{tabular}{lrrrr}
+  \hline
+  Statistics & X coordinate & Y coordinate & Error vector & Azimuth \\
+  \hline
+  \multicolumn{5}{l}{\texttt{GEO\_50} ($n = 8$)}\\
+  \hline
+  Mean, \si{\m} & 10 (58) & -102 (87) & 140 (44) & \ang{169} (\ang{47}) \\ 
+  Absolute mean, \si{\m}  & 43   (40) & 125 (50) & -         & -          \\ 
+  Squared mean, \si{\m\square} & 3431 (5914)  & 18067 (13243) & 21498 (12316) & - \\
+  \hline
+  \multicolumn{5}{l}{\texttt{GEO\_25} ($n = 5$)} \\
+  \hline
+  Mean, \si{\m} & 51 (29) & 29 (22) & 67 (16) & \ang{58} (\ang{30}) \\ 
+  Absolute mean, \si{\m} & 51 (29) & 29 (22) & -  & - \\ 
+  Squared mean, \si{\m\square} & 3457 (2976) & 1312 (1612) & 4769 (2306) & - \\
+  \hline
+ \end{tabular}}
 \end{table}
 
 % \begin{figure}[ht]
-%   \centering
-%   \includegraphics[width=0.45\textwidth]{fig/azim-geo50}
-%   \includegraphics[width=0.45\textwidth]{fig/azim-geo25}
-%   \caption{Histogram of the azimuth distribution of the validation of geological maps \texttt{GEO\_50} (left) and \texttt{GEO\_25} (right) in the attribute space. Azimuth values were estimated using, respectively, eight and five GCPs located in easily identifiable geographical markers. Estimates were corrected to the size of the population. The graph was produced using R-package \textit{VecStatGraphs2D}.}
-%   \label{fig:geology-azim}
+%  \centering
+%  TODO: Include R code to produce figures on the go.
+%  \caption{Histogram of the azimuth distribution of the validation of geological maps 
+%  \texttt{GEO\_50} (left) and \texttt{GEO\_25} (right) in the attribute space. Azimuth values were 
+%  estimated using, respectively, eight and five GCPs located in easily identifiable geographical 
+%  markers. The graph was produced using \Rpackage{VecStatGraphs2D}.}
+%  \label{fig:covar-data-geology-azim}
 % \end{figure}
 
 \begin{table}[ht]
-  \caption{Estimated error statistics of the validation of geological maps \texttt{GEO\_50} and \texttt{GEO\_25} in the attribute space. Validation statistics were estimated using 60 validation points located in 12 linear transects (clustered samples).}
-  \label{tab:geology-attr-val}
-  \centering
-  \begin{tabular}{lrrr}
-    \hline
-    Geological map        & LCB95Pct & Estimate & UCB95Pct \\
-    \hline
-    \texttt{GEO\_50}      & 76.88    & 83.33    & 89.78    \\
-    \texttt{GEO\_25}      & 70.10    & 76.67    & 83.24    \\
-    \hline
-  \end{tabular}
+ \caption{Estimated error statistics of the validation of geological maps \texttt{GEO\_50} and 
+ \texttt{GEO\_25} in the attribute space. Validation statistics were estimated using $n = 60$ 
+ validation points located along $m = 12$ linear transects (clustered samples).}
+ \label{tab:covar-data-geology-attr-val}
+ \centering
+ \begin{tabular}{lrrr}
+  \hline
+  Geological map        & LCB95Pct & Estimate & UCB95Pct \\
+  \hline
+  \texttt{GEO\_50}      & 76.88    & 83.33    & 89.78    \\
+  \texttt{GEO\_25}      & 70.10    & 76.67    & 83.24    \\
+  \hline
+ \end{tabular}
 \end{table}
 
-Three environmental covariates were derived from \texttt{GEO\_50}:
+Three covariates were derived from \texttt{GEO\_50}:
 
 \begin{description}
-  \item[\texttt{GEO\_50a}] This covariate includes the Inferior Sequence of the Serra Geral Formation, which is composed mainly by basic igneous rocks (tholeiitic basalt and andesite). It is likely to be related with high clay content and ECEC;
+ \item[\texttt{GEO\_50a}] Inferior Sequence of the Serra Geral Formation. Composed mainly by basic 
+ igneous rocks (tholeiitic basalt and andesite). It is likely to be related with high CLAY and 
+ ECEC;
  
-  \item[\texttt{GEO\_50b}] This covariate includes the Superior Sequence of the Serra Geral Formation, which is also composed mainly by acid  igneous rocks (granophyric rhyolite and rhyodacite). It is likely to be related with moderate to high CLAY and ECEC;
+ \item[\texttt{GEO\_50b}] Superior Sequence of the Serra Geral Formation. Composed mainly by acid 
+ igneous rocks (granophyric rhyolite and rhyodacite). It is likely to be related with moderate to 
+ high CLAY and ECEC;
  
-  \item[\texttt{GEO\_50c}] This covariate includes the Botucatu Formation, which is composed mainly by aeolian sandstones. It is likely to ne related with low CLAY and ECEC;
+ \item[\texttt{GEO\_50c}] Botucatu Formation. Composed mainly by aeolian sandstones. It is likely 
+ to be related with low CLAY and ECEC;
 \end{description}
 
-Four environmental covariates were derived from \texttt{GEO\_25}, five of them having the same meaning of those derived from \texttt{GEO\_50}:
+Four covariates were derived from \texttt{GEO\_25}, the first three of them having the same meaning 
+of those derived from \texttt{GEO\_50}:
 
 \begin{description}
-  \item[\texttt{GEO\_25a}] This covariate includes the Inferior Sequence of the Serra Geral Formation;
+ \item[\texttt{GEO\_25a}] Inferior Sequence of the Serra Geral Formation;
  
-  \item[\texttt{GEO\_25b}] This covariate includes the Superior Sequence of the Serra Geral Formation;
+ \item[\texttt{GEO\_25b}] Superior Sequence of the Serra Geral Formation;
  
-  \item[\texttt{GEO\_25c}] This covariate includes the Botucatu Formation;
+ \item[\texttt{GEO\_25c}] Botucatu Formation;
  
-  \item[\texttt{GEO\_25d}] This covariate includes all Quaternary deposits of fluvial, alluvial, and colluvial origin. It can help explaining the low clay content of soils supposedly derived from igneous rocks and vice-versa.
+ \item[\texttt{GEO\_25d}] Quaternary deposits of fluvial, alluvial, and colluvial 
+ origin. It can help explaining the low CLAY of soils supposedly derived from igneous rocks.
 \end{description}
 
 \tocless\section{Land use maps}
