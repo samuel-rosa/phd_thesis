@@ -766,58 +766,79 @@ of those derived from \texttt{GEO\_50}:
 \tocless\section{Land use maps}
 \label{sec:covar-data-land-use}
 
-A land use map for the year of 1980 comes from the most recent topographic map produced by the Brazilian Army (scale of 1:25,000). A second land use map is available for the years of 2008 and 2009 and was published at a scale of 1:30,000 \cite{SamuelRosaEtAl2011a}.
+The land use map for the year of \num{1980} was produced by manually digitizing land use data included in the most 
+recent topographic map produced by the Brazilian Army (\scale{25000}), and that were used to produce the more detailed 
+pedological and geologic maps. The most up-to-date land use map was prepared using high resolution orbital images
+(Quick Bird satellite). It covers the years of \num{2008} and \num{2009}, and was prepared at a \scale{2000} 
+\cite{SamuelRosaEtAl2011a}.
+
+Land use maps were registered and geocoded with the prediction grid using the nearest neighbour resampling method.
+This method was used to avoid changing raster values. Systematic positional errors \cite{Samuel-RosaEtAl2014} were 
+corrected using affine transformation (\Rpackage{vec2dtransf} \cite{Carrillo2012}).
 
 \begin{table}[ht]
-\caption{Estimated error statistics (standard deviation between parenthesis) of the validation of Google Earth imagery in the geographic space. Validation statistics were estimated using 14 ground control points located in easily identifiable geographical markers (purposive sampling). Estimates were corrected to the size of the population.}
-\label{tab:google-geo-val}
-\centering
-{\small
-\begin{tabular}{lrrrr}
-\hline
-Statistics           & X coordinate & Y coordinate & Error vector  & Azimuth                   \\
-\hline
-Mean, m              & -1 (4)       & 3  (7)       & 6  (6)        & 184$^\circ$ (125$^\circ$) \\ 
-Absolute mean, m     & 3  (2)       & 5  (6)       & -             & -                         \\ 
-Squared mean, m$^2$  & 14 (22)      & 57 (132)     & 71 (153)      & -                         \\ 
-\hline
-\end{tabular}}
+ \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of Google 
+ Earth\textregistered imagery in the geographic space. Validation statistics were estimated using \num{14} ground
+ control points located in easily identifiable geographical markers (purposive sampling).}
+ \label{tab:covar-data-google-geo-val}
+ \centering
+ {\small
+ \begin{tabular}{lrrrr}
+  \hline
+  Statistics           & X coordinate & Y coordinate & Error vector  & Azimuth \\
+  \hline
+  Mean, \si{\m} & -1 (4) & 3 (7) & 6 (6) & \ang{184} (\ang{125}) \\ 
+  Absolute mean, \si{\m} & 3 (2) & 5 (6) & - & - \\ 
+  Squared mean, \si{\m\square} & 14 (22) & 57 (132) & 71 (153) & - \\ 
+  \hline
+ \end{tabular}}
 \end{table}
 
 \begin{table}[ht]
-\caption{Estimated error statistics of the validation of land use maps LU1980 and LU2009 in the attribute space. Validation statistics were estimated using 60 validation points located in 12 linear transects (clustered samples).}
-\label{tab:land-attr-val}
-\centering
-{\small
-\begin{tabular}{lrrr}
-\hline
-Soil map     & LCB95Pct & Estimate & UCB95Pct \\
-\hline
-LU1980       & 58.52    & 66.67    & 74.82    \\
-LU2009       & 61.16    & 70.00    & 78.84    \\
-\hline
-\end{tabular}}
+ \caption{Estimated error statistics of the validation of land use maps \texttt{LU1980} and  \texttt{LU2009} in the 
+ attribute space. Validation statistics were estimated using $n = 60$  validation points located in $m = 12$ linear 
+ transects (clustered samples).}
+ \label{tab:covar-data-land-attr-val}
+ \centering
+ {\small
+ \begin{tabular}{lrrr}
+  \hline
+  Land use map & LCB95Pct & Estimate & UCB95Pct \\
+  \hline
+  \texttt{LU1980} & 58.52    & 66.67    & 74.82    \\
+  \texttt{LU2009} & 61.16    & 70.00    & 78.84    \\
+  \hline
+ \end{tabular}}
 \end{table}
 
-Alike area-class soil maps and geological maps, environment covariates derived from both land use maps are indicator variables of individual or grouped land use classes. Two indicator variables were derived from \texttt{LU1980}, and five from \texttt{LU2009}.
+Two indicator variables were derived from \texttt{LU1980}, with plantation forests (PF) and human settlements 
+(S) being grouped together due to their small importance in terms of covered area (PF) and for containing any soil 
+observation (S). These are:
 
 \begin{description}
-  \item[\texttt{LU1980a}] This covariate includes the areas occupied with native forest, which can be related with high soil organic carbon content and ECEC;
+ \item[\texttt{LU1980a}] Native forest (FS), which is likely to have soils with higher fertility.
   
-  \item[\texttt{LU1980b}] This covariate includes the areas used with animal husbandry, which is expected to have a fertility status lower than native forests;
+ \item[\texttt{LU1980b}] Animal husbandry (H), which is likely to have a soil fertility status lower than native 
+ forests and is the second most important land use in the study area.
 \end{description}
 
+Five indicator covariates were derived from \texttt{LU2009}, with plantation forests (PF), human settlements 
+(S), and other land uses (O), which comprise natural and artificial water bodies, being grouped together due to their
+small importance in terms of covered area (PF) and for containing any soil observation (S and O). These are:
 
 \begin{description}
-  \item[\texttt{LU2009a}] This covariate depicts the areas covered with native forest, which can be related with high soil organic carbon content and ECEC;
+ \item[\texttt{LU2009a}] Native forest (FS).
+ 
+ \item[\texttt{LU2009b}] Shrubland (SS), which is likely to have SOC and ECEC level above  those found in areas used 
+ with annual crop agriculture and animal husbandry, but lower than in native forests.
+ 
+ \item[\texttt{LU2009c}] Animal husbandry (H).
   
-  \item[\texttt{LU2009b}] This covariate includes the areas covered with shrubland, which is expected to have soil organic carbon content and ECEC level above those found in areas used with crop agriculture, but lower than in native forests;
-  
-  \item[\texttt{LU2009c}] This covariate includes the areas used with animal husbandry, where the soil can have characteristics similar to shrublands and crop agriculture, depending on the management practices;
-  
-  \item[\texttt{LU2009d}] This covariate includes the areas used for crop agriculture, which are expected to have the lowest fertility due to the usually poor management practices employed;
-  
-  \item[\texttt{LUdiff}] This covariate depicts the areas in which there was a change in land use between 1980 and 2009. It can be useful to explain, for example, low organic carbon content in forest soils due to previous use with crop agriculture or animal husbandry.
+ \item[\texttt{LU2009d}] Annual crop agriculture (AA), which is likely to have the lowest soil fertility due to 
+ the usually poor management practices employed.
+ 
+ \item[\texttt{LUdiff}] Land use difference between \num{1980} and \num{2009}. It can be useful to explain, for 
+ example, low \texttt{ORCA} in forest soils due to previous use with crop agriculture or animal husbandry.
 \end{description}
 
 \tocless\section{Orbital images}
