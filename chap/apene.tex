@@ -357,26 +357,48 @@ Covariates derived from \texttt{SOIL\_25} are the following:
 \tocless\section{Digital elevation models}
 \label{sec:dem}
 
-Digital elevation models (DEMs) are one of the main sources of environmental co-variates used to build predictive models of soil properties. This is due to their extensive availability and the usually strong correlation between DEM derivatives and soil properties \cite{BishopEtAl2001, Grunwald2009}.
+Three DEMs are include in the Santa Maria data set as sources of covariates. The first DEM 
+(\texttt{ELEV\_10}) is the result of the interpolation of the contour lines of the most recent 
+topographic maps produced by the Brazilian Army (\scale{25000}) \cite{DSG1980,DSG1992,DSG1992a}. 
+Because all three topographic maps needed to cover the study area are available only in the 
+analogical format, their digitalization was necessary. Georeferencing was carried out using the GDAL 
+Georeferencer plug-in in QGIS \cite{GDAL2013,QGIS2013}. Intersections between all meridians and 
+parallels (about \num{160} per topographic map) were used as control points to adjust a third order 
+polynomial model. Resampling was performed using the cubic resampling method. All contour lines, 
+peaks, lakes and rivers, and their respective attributes within a distance of \SI{1000}{\metre} 
+from the boundary of the study area were also manually digitalized and stored in the vector format. 
+After digitalization, the original coordinate reference system (EPSG:31982 -- SIRGAS2000 / UTM 
+zone 22S) of all vector files was transformed to WGS1984 / UTM zone 22S (EPSG:32722) using the 
+\Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
-Three DEMs are used in the present study as sources of environmental co-variates. The first DEM (\texttt{ELEV\_10}) is the result of the interpolation of the contour lines of the most recent topographic maps produced by the Brazilian Army (scale of 1:25,000) \cite{DSG1980, DSG1992, DSG1992a}. Because all three topographic maps needed to cover the study area are available only in the analogical format, their digitalization was necessary. Georeferencing was carried out using the GDAL Georeferencer plug-in in QGIS \cite{GDAL2013, QGIS2013}. Intersections between all meridians and parallels (about 160 per topographic map) were used as control points to adjust a third order polynomial model. Resampling was performed using the cubic resampling method. All contour lines, peaks, lakes and rivers, and their respective attributes within a distance of 1000 m from the boundary of the study area were also manually digitalized and stored in the vector format. After digitalization, the original coordinate reference system (EPSG:31982 - SIRGAS 2000 / UTM zone 22S) of all vector files was transformed to WGS 1984 / UTM zone 22S (EPSG:32722) using the R-package \textit{rgdal} \cite{BivandEtAl2013a}.
-
-The positional validation of topographic maps was performed using 14 GCPs located at easily identifiable geographical markers. According to Brazilian legislation, the positional accuracy of these topographic maps is expected to be of, at least, 15 m \cite{Brasil1984}. Estimated validation statistics show that the observed positional error (RMSE = 65 m) is larger than established by current regulations (Table \ref{tab:topomap-geo-val}). The mean error vector (module) is larger than 60 m with an azimuth of 63 $^{\circ}$ (Figure \ref{fig:topomap-azim}). Both x and y coordinates are positively biased, but the largest error occurs in the x coordinate (50 m). Similar mean and mean absolute errors suggest that there is a systematic positional error. An affine transformation was employed using the R-package \textit{vec2dtransf} \cite{Carrillo2012} to eliminate this systematic error. Model parameters were adjusted using the same set of GCP's used for the validation in the geographic space.
+The positional validation of topographic maps was performed using \num{14} GCPs located at easily 
+identifiable geographical markers. According to Brazilian legislation, the positional accuracy of 
+these topographic maps is expected to be of, at least, \SI{15}{\metre} \cite{Brasil1984}. Estimated 
+validation statistics show that the observed \SI{RMSE = 65}{\metre} is larger than 
+established by current regulations (\autoref{tab:covar-data-topomap-geo-val}). The mean error 
+vector (module) is larger than \SI{60}{\metre} with an azimuth of \SI{63}{\degree}. Both x- and 
+y-coordinates are positively biased, but the largest error occurs in the x-coordinate 
+(\SI{50}{\metre}). Similar mean and mean absolute errors suggest that there is a systematic 
+positional error. An affine transformation was employed using the \Rpackage{vec2dtransf} 
+\cite{Carrillo2012} to eliminate this systematic error. Model parameters were adjusted using the 
+same set of GCPs used for the validation in the geographic space.
 
 \begin{table}[ht]
-  \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of topographic maps (scale of 1:25,000) in the geographic space. Validation statistics were estimated using 14 GCPs located in easily identifiable geographical markers. Estimates were corrected to the size of the population.}
-  \label{tab:topomap-geo-val}
-  \centering
-  {\small
-  \begin{tabular}{lrrrr}
-    \hline
-    Statistics          & X coordinate & Y coordinate & Error vector & Azimuth                 \\
-    \hline
-    Mean, m             & 50   (25)    & 27   (22)    & 63   (19)    & 63$^\circ$ (30$^\circ$) \\ 
-    Absolute mean, m    & 50   (25)    & 32   (13)    & -            & -                       \\ 
-    Squared mean, m$^2$ & 3088 (3034)  & 1180 (820)   & 4268 (2825)  & -                       \\ 
-    \hline
-  \end{tabular}}
+ \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
+ topographic maps (\scale{25000}) in the geographic space. Validation statistics were 
+ estimated using \num{14} GCPs located in easily identifiable geographical markers.}
+ \label{tab:tab:covar-data-topomap-geo-val}
+ \centering
+ {\small
+ \begin{tabular}{lrrrr}
+  \hline
+  Statistics & X coordinate & Y coordinate & Error vector & Azimuth \\
+  \hline
+  Mean, \si{\metre} & 50 (25) & 27 (22) & 63 (19) & \SI{63}{\degree} (\SI{30}{\degree}) \\ 
+  Absolute mean, \si{\metre} & 50 (25) & 32 (13) & - & - \\ 
+  Squared mean, \si{\metre\squared} & 3088 (3034) & 1180 (820) & 4268 (2825) & - \\ 
+  \hline
+ \end{tabular}}
 \end{table}
 
 % \begin{figure}[!ht]
@@ -386,56 +408,122 @@ The positional validation of topographic maps was performed using 14 GCPs locate
 %   \label{fig:topomap-azim}
 % \end{figure}
 
-Interpolation of the raster surface with 5-m pixel size was performed using the function \texttt{Topo to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation method based on the ANUDEM program developed by \cite{Hutchinson1989}. Vector files of contour lines (multiline), drainage network (multiline), lakes (polygons) and peaks (points) were used to generate an hydrologically correct DEM, that is, a DEM without spurious depressions and giving an accurate representation of the real hydrology. Next, the interpolated DEM was imported into GRASS GIS \cite{GRASS2012}, where a neighborhood average filter was used to remove stair-like artifacts. A window of 7 x 7 pixels was used because it removed a significant amount of the artifacts and did not affect the derived boundary of the study area (see more bellow).
+Interpolation of the raster surface with \SI{5}{\metre} pixel size was performed using the function 
+\texttt{Topo to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation 
+method based on the ANUDEM program developed by \citeonlin{Hutchinson1989}. Vector files of contour 
+lines (\texttt{multiline}), drainage network (\texttt{multiline}), lakes (\texttt{polygons}) and 
+peaks (\texttt{points}) were used to generate an hydrologically correct DEM, that is, a DEM without 
+spurious depressions and giving an accurate representation of the real hydrology. Next, the 
+interpolated DEM was imported into GRASS GIS \cite{GRASS2012}, where a neighbourhood average filter 
+was used to remove stair-like artefacts. A window of \num{7 \times 7} pixels was used because it 
+removed a significant amount of the artefacts and did not affect the derived boundary of the study 
+area (see more bellow).
 
-The vertical datum of the DEM was transformed from the local datum to a global datum. The geoidal models MAPGEO 2010 \cite{IBGE2010a} and EGM 1996 \cite{LemoineEtAl1998} were used to calculate the geoidal undulation for the local and global datums, respectively. MAPGEO 2010 is optimized to estimate geoidal undulations in the Brazilian territory, while EGM 1996 is a gravitational model of the Earth and is used as the vertical datum for SRTM products. The following equation was used:
+The vertical datum of the DEM was transformed from the local datum to a global datum. The geoidal 
+models MAPGEO2010 \cite{IBGE2010a} and EGM1996 \cite{LemoineEtAl1998} were used to calculate the 
+geoidal undulation for the local and global datums, respectively. MAPGEO2010 is optimized to 
+estimate geoidal undulations in the Brazilian territory, while EGM1996 is a gravitational model of 
+the Earth and is used as the vertical datum for SRTM products. The following equation was used:
 
-\begin{center}
-  \label{eq:geoidal}
-  \begin{equation}
-    h = H + N,
-  \end{equation}
-\end{center}
+\begin{equation}
+ h = H + N,
+\end{equation}
 
-\noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that approximates the surface of the planet), $H$ is the orthometric height (height above the imaginary surface called geoid and commonly referred as mean sea level), and $N$ is the geoidal undulation. Ellipsoidal heights estimated by MAPGEO 2010 are referenced to the world ellipsoid of 1980, while EGM 1996 estimates ellipsoidal heights referenced to the world ellipsoid of 1984. Because the difference between both ellipsoids is of the order of millimeters, it can be assumed that both models estimate the same ellipsoidal height. Therefore, if $h_{EGM 1996} = h_{\text{MAPGEO 2010}}$, then orthometric heights referenced to the local vertical datum can be transformed to the global vertical datum using the following equation:
+\noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that 
+approximates the surface of the planet), $H$ is the orthometric height (height above the imaginary 
+surface called geoid and commonly referred as mean sea level), and $N$ is the geoidal undulation. 
+Ellipsoidal heights estimated by MAPGEO2010 are referenced to the world ellipsoid of 1980, while 
+EGM1996 estimates ellipsoidal heights referenced to the world ellipsoid of 1984. Because the 
+difference between both ellipsoids is of the order of millimetres, it can be assumed that both 
+models estimate the same ellipsoidal height. Therefore, if 
+$h_{\text{EGM1996}} = h_{\text{MAPGEO2010}}$, then orthometric heights referenced to the local 
+vertical datum can be transformed to the global vertical datum using the following equation:
 
-\begin{center}
-  \begin{equation}
-    H_{\text{EGM 1996}} = H_{\text{MAPGEO 2010}} + N_{\text{MAPGEO 2010}} - N_{\text{EGM 1996}}.
-  \end{equation}
-\end{center}
+\begin{equation}\label{eq:geoidal}
+ H_{\text{EGM1996}} = H_{\text{MAPGEO2010}} + N_{\text{MAPGEO2010}} - N_{\text{EGM1996}}.
+\end{equation}
 
-The difference in the geoidal undulation estimated by both models is of about one meter in the entire study area. Thus, transforming the vertical datum was done adding one meter to the raster surface interpolated from contour lines, yielding the first DEM used in this study (\texttt{ELEV\_10}).
+The difference in the geoidal undulation estimated by both models is of about one meter in the 
+entire study area. Thus, transforming the vertical datum was done adding one meter to the raster 
+surface interpolated from contour lines, yielding the first DEM included in the Santa Maria data set
+(\texttt{ELEV\_10}).
 
-The second DEM (\texttt{ELEV\_90}) used in this study is the well known SRTM DEM (3 arc-seconds $\approx$ 90 m spatial resolution) produced by NASA’s Jet Propulsion Laboratory in collaboration with the National Geospatial-Intelligence Agency \cite{RodriguezEtAl2006}. The SRTM DEM version used here is the \textit{hole-filled SRTM version 4}, prepared by \href{http://www.cgiar.org/}{CGIAR} using the same hydrologically correct interpolation method that was used above to produce \texttt{ELEV\_10} \cite{ReuterEtAl2007, JarvisEtAl2008}. However, the only data source used was the original SRTM DEM converted to point data.
+The second DEM (\texttt{ELEV\_90}) used in this study is the well known SRTM DEM 
+(\SI{3}{\arcsecond} $\approx$ \SI{90}{\metre} spatial resolution) produced by NASA’s Jet 
+Propulsion Laboratory in collaboration with the National Geospatial-Intelligence Agency 
+\cite{RodriguezEtAl2006}. The SRTM DEM version used here is the \emph{hole-filled SRTM version 
+\num{4}}, prepared by \href{http://www.cgiar.org/}{CGIAR} using the same hydrologically correct 
+interpolation method that was used above to produce \texttt{ELEV\_10} \cite{ReuterEtAl2007, 
+JarvisEtAl2008}. However, the only data source used was the original SRTM DEM converted to point 
+data.
 
-Prior to processing, the SRTM DEM was cropped to the extent of the study area and the coordinate reference system was transformed from WGS 1984 (EPSG:4326) to WGS 1984 / UTM zone 22S (EPSG:32722) using cubic resampling in GDAL (module \texttt{gdalwarp}). This resampling method was used because it is efficient in minimizing the double-oblique stripping present in SRTM products \cite{Samuel-RosaEtAl2013c}. Next, the DEM was resampled to 15 m (GRASS module \texttt{r.resamp.interp}) using cubic resampling. Sinks produced during the datum transformation were filled using the GRASS module \texttt{r.fill.dir}. Vertical datum transformation was not necessary because elevation values of the SRTM DEM already are referenced to the global geoidal model EGM 1996 (orthometric heights).
+Prior to processing, the SRTM DEM was cropped to the extent of the study area and the coordinate 
+reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
+using cubic resampling in GDAL (module \texttt{gdalwarp}). This resampling method was used because 
+it is efficient in minimizing the double-oblique stripping present in SRTM products 
+\cite{Samuel-RosaEtAl2013c}. Next, the DEM was resampled to \SI{15}{\metre} 
+(\grass{r.resamp.interp}) using cubic resampling. Sinks produced during the datum transformation 
+were filled using the \grass{r.fill.dir}. Vertical datum transformation was not necessary because 
+elevation values of the SRTM DEM already are referenced to the global geoidal model EGM1996 
+(orthometric heights).
 
-The third DEM (\texttt{ELEV\_30}) used in this study was produced by the Brazilian National Institute for Space Research (\href{http://www.inpe.br/}{INPE}). This DEM is the result of refining the original SRTM DEM to 1 arc-second spatial resolution ($\approx$30 m) using ordinary kriging with a Gaussian model of spatial covariance \cite{ValerianoEtAl2012}. Different from \texttt{ELEV\_90}, \texttt{ELEV\_30} was not used to calculate DEM derivatives. Instead it was used in the orthorectification and topographic correction of satellite images (\ref{sec:sat}).
+The third DEM (\texttt{ELEV\_30}) used in this study was produced by the Brazilian National 
+Institute for Space Research (\href{http://www.inpe.br/}{INPE}). This DEM is the result of refining 
+the original SRTM DEM to \SI{1}{\arcsecond} spatial resolution (\SI{\pm30}{\metre}) using ordinary 
+kriging with a Gaussian model of spatial covariance \cite{ValerianoEtAl2012}. Different from 
+\texttt{ELEV\_90}, \texttt{ELEV\_30} was not used to calculate DEM derivatives. Instead it was used 
+in the orthorectification and topographic correction of satellite images (\ref{sec:covar-data-sat}).
 
-Eight tiles were downloaded from the \href{http://www.dsr.inpe.br/topodata/}{TOPODATA} website, imported into QGIS and mosaicked using GDAL module \texttt{gdal\_translate}. The coordinate reference system was transformed from WGS 1984 (EPSG:4326) to WGS 1984 / UTM zone 22S (EPSG:32722) using cubic resampling (GDAL module \texttt{gdalwarp}). Again, this resampling method was used because it is efficient in minimizing the double-oblique stripping present in SRTM products \cite{Samuel-RosaEtAl2013c}. Sinks produced during the datum transformation were filled using GRASS module \texttt{r.fill.dir} implemented in the SEXTANTE library \cite{SEXTANTE2012}.
+Eight tiles were downloaded from the \href{http://www.dsr.inpe.br/topodata/}{TOPODATA} website, 
+imported into QGIS and mosaicked using GDAL module \texttt{gdal\_translate}. The coordinate 
+reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
+using cubic resampling (GDAL module \texttt{gdalwarp}). Again, this resampling method was used 
+because it is efficient in minimizing the double-oblique stripping present in SRTM products 
+\cite{Samuel-RosaEtAl2013c}. Sinks produced during the datum transformation were filled using 
+\grass{r.fill.dir} implemented in the SEXTANTE library \cite{SEXTANTE2012}.
 
-Because orbital satellites use the WGS 1984 ellipsoid as vertical datum, orthorectification of satellite images has to be done using a DEM with ellipsoidal heights. Conversion from orthometric heights was performed using Equation \ref{eq:geoidal}, with geoidal undulation calculated with the gravitational model EGM 1996. The original DEM with orthometric heights was cropped to the boundary of the study area and resampled to five meters using GRASS GIS module \texttt{r.resamp.interp} with the bicubic resampling method. This DEM was used only to estimated error statistics for the validation in the attribute space.
+Because orbital satellites use the WGS1984 ellipsoid as vertical datum, orthorectification of 
+satellite images has to be done using a DEM with ellipsoidal heights. Conversion from orthometric 
+heights was performed using \autoref{eq:geoidal}, with geoidal undulation calculated with 
+the gravitational model EGM1996. The original DEM with orthometric heights was cropped to the 
+boundary of the study area and resampled to five meters using \grass{r.resamp.interp} with the 
+bicubic resampling method. This DEM was used only to estimated error statistics for the validation 
+in the attribute space.
 
-Table \ref{tab:dem-attr-val} shows that the three DEMs present similar accuracy estimates in the attribute space (RMSE $\approx$ 19 m). In the case of the ELEV\_10, which was derived from contour lines published at a scale of 1:25,000, the estimated accuracy does not meet current Brazilian legislation, which states that the accuracy should be of, at least, 5 m (1/2 of the distance between contour lines) \cite{Brasil1984}.
+Table \ref{tab:covar-data-dem-attr-val} shows that the three DEMs present similar accuracy 
+estimates in the attribute space (\SI{RMSE \approx 19}{\metre}). In the case of the ELEV\_10, which 
+was derived from contour lines published at a \scale{25000}, the estimated accuracy does not 
+meet current Brazilian legislation, which states that the accuracy should be of, at least, 
+\SI{5}{\metre} (\num{1/2} of the distance between contour lines) \cite{Brasil1984}.
  
 \begin{table}[ht]
-  \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30} and \texttt{ELEV\_10} in the attribute space. Validation statistics were estimated using 60 validation points located in 12 linear transects (clustered samples).}
-  \label{tab:dem-attr-val}
-  \centering
-  {\small
-  \begin{tabular}{lrrrrrr}
-    \hline
-    Statistics           & \texttt{ELEV\_90} & \texttt{ELEV\_30} & \texttt{ELEV\_10} \\
-    \hline
-    Mean, m              & -15 (10)          & -17 (9)           & -16 (10)          \\ 
-    Absolute mean, m     & 15  (10)          & 17  (9)           & 16  (10)          \\ 
-    Squared mean, m$^2$  & 350 (428)         & 361 (406)         & 374 (431)         \\ 
-    \hline
-  \end{tabular}}
+ \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
+ digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30} and \texttt{ELEV\_10} in the 
+ attribute space. Validation statistics were estimated using $n = 60$ validation points located 
+ along $m = 12$ linear transects (clustered samples).}
+ \label{tab:covar-data-dem-attr-val}
+ \centering
+ {\small
+ \begin{tabular}{lrrrrrr}
+  \hline
+  Statistics & \texttt{ELEV\_90} & \texttt{ELEV\_30} & \texttt{ELEV\_10} \\
+  \hline
+  Mean, \si{\metre} & -15 (10) & -17 (9) & -16 (10) \\ 
+  Absolute mean, \si{\metre} & 15 (10) & 17 (9) & 16 (10) \\ 
+  Squared mean, \si{\metre\square} & 350 (428) & 361 (406) & 374 (431) \\ 
+  \hline
+ \end{tabular}}
 \end{table}
 
-Figure \ref{fig:cdf-elev} shows that estimated validation statistics have different cumulative distribution functions (CDF). The estimates are more uniformly distributed along the interval of values for \texttt{ELEV\_10} than for \texttt{ELEV\_90} and \texttt{ELEV\_30}. While \texttt{ELEV\_10} has a 50\% probability that absolute errors are bellow 15 m, \texttt{ELEV\_90} has a 70\% probability that absolute errors are bellow 15 m. This suggests that the accuracy of \texttt{ELEV\_90} is very consistent across the study area, with a few extreme values, while the accuracy of \texttt{ELEV\_10} have a stronger spatial variation. For \texttt{ELEV\_30}, the interpolation method used to refine the original SRTM DEM to 30 m \cite{ValerianoEtAl2012} seems to have produced a spatial redistribution of the errors.
+% Figure \ref{fig:cdf-elev} shows that estimated validation statistics have different cumulative 
+% distribution functions (CDF). The estimates are more uniformly distributed along the interval of 
+% values for \texttt{ELEV\_10} than for \texttt{ELEV\_90} and \texttt{ELEV\_30}. While 
+% \texttt{ELEV\_10} has a 50\% probability that absolute errors are bellow 15 m, \texttt{ELEV\_90} has 
+% a 70\% probability that absolute errors are bellow 15 m. This suggests that the accuracy of 
+% \texttt{ELEV\_90} is very consistent across the study area, with a few extreme values, while the 
+% accuracy of \texttt{ELEV\_10} have a stronger spatial variation. For \texttt{ELEV\_30}, the 
+% interpolation method used to refine the original SRTM DEM to 30 m \cite{ValerianoEtAl2012} seems to 
+% have produced a spatial redistribution of the errors.
 
 % \begin{figure}[!ht]
 %   \centering
@@ -446,7 +534,17 @@ Figure \ref{fig:cdf-elev} shows that estimated validation statistics have differ
 %   \label{fig:cdf-elev}
 % \end{figure}
 
-Despite the similar accuracy estimates in the feature space, \texttt{ELEV\_10} is used in this study as a more accurate DEM than \texttt{ELEV\_90}. The main argument is that \texttt{ELEV\_10} provides a better hydrological representation of the study area because it was produced using information about the drainage network and location of lakes and natural depressions. This is evidenced by the shape of the boundaries derived from each DEM using the GRASS modules \texttt{r.watershed} and \texttt{r.water.outlet} (Figure \ref{fig:elev-maps}). The boundary derived from \texttt{ELEV\_90} is clearly unable to capture all hydrological features of the study area. Therefore, the boundary derived using \texttt{ELEV\_10} is used throughout this study with the addition of a 30-m buffer, which is the estimated uncertainty (RMSE = 29.55 m) of the affine transformation used to correct the systematic error identified in topographic maps. The water outlet point used to derive the boundary is located on the bridge that crosses the main drainage channel (-29.65868$^\circ$, -53.78969$^\circ$).
+Despite the similar accuracy in the feature space, \texttt{ELEV\_10} is used in this study 
+because it provides a better hydrological representation of the study area because it was 
+produced using information about the drainage network and location of lakes and natural depressions. 
+This is evidenced by the shape of the boundaries derived from each DEM using the \grass{r.watershed} 
+and \texttt{r.water.outlet} (\autoref{fig:covar-data-elev-maps}). The boundary derived from 
+\texttt{ELEV\_90} is clearly unable to capture all hydrological features of the study area. 
+Therefore, the boundary derived using \texttt{ELEV\_10} is used throughout this study with the 
+addition of a \SI{30}{\metre} buffer, which is the estimated uncertainty 
+(\SI{RMSE = 29.55}{\metre}) of the affine transformation used to correct the systematic error 
+identified in topographic maps. The water outlet point used to derive the boundary is located on the 
+bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969}).
 
 % TODO: figure with both digital elevation models, including the real drainage network and the boundary of the study area.
 % \begin{figure}[!ht]
@@ -457,70 +555,100 @@ Despite the similar accuracy estimates in the feature space, \texttt{ELEV\_10} i
 %   \label{fig:elev-maps}
 % \end{figure}
 
-Eight terrain attributes were derived from each of \texttt{ELEV\_90} and \texttt{ELEV\_10}, the first of them being the elevation (\texttt{ELEV}). The others are slope, aspect, northernness, flow accumulation, topographic wetness index, stream power index, and topographic position index.
+Eight terrain attributes were derived from each of \texttt{ELEV\_90} and \texttt{ELEV\_10}, the 
+first of them being the elevation (\texttt{ELEV}). The others are slope, aspect, northernness, flow 
+accumulation, topographic wetness index, stream power index, and topographic position index.
 
-Slope (\texttt{SLP}) and aspect (\texttt{ASP}) were calculated using GRASS module \texttt{r.param.scale}. This module calculates terrain attributes fitting a bivariate quadratic polynomial using least squares \cite{Wood1996}. It allows using different window sizes to fit the bivariate quadratic polynomial, thus including the effect of scale in the calculation of terrain attributes. In the present study, seven window sizes were used (3, 7, 15, 31, 63, 127, and 255) and the results for calculated slope can be seen in Figure \ref{fig:slope}. Larger window sizes result in a smoothed version of the terrain attribute, while smaller windows sizes result in raster maps with more (small-scale) details. Several flat surfaces (slope equal to 0$^\circ$) were produced in the slope raster maps calculated using \texttt{ELEV\_90} as a result of resampling the original DEM from 90 to 5 m. A value of 0.1$^\circ$ was added to the rasters to remove these flat surfaces.
+Slope (\texttt{SLP}) and aspect (\texttt{ASP}) were calculated using \grass{r.param.scale}. This 
+module calculates terrain attributes fitting a bivariate quadratic polynomial using least squares 
+\cite{Wood1996}. It allows using different window sizes to fit the bivariate quadratic polynomial, 
+thus including the effect of scale in the calculation of terrain attributes. In the present study, 
+seven window sizes were used (\numlist{3;7;15;31;63;127;255}) and the results for calculated slope 
+can be seen in \autoref{fig:covar-data-slope}. Larger window sizes result in a smoothed version of 
+the terrain attribute, while smaller windows sizes result in raster maps with more (small-scale) 
+details. Several flat surfaces (slope equal to \ang{0}) were produced in the slope raster 
+maps calculated using \texttt{ELEV\_90} as a result of resampling the original DEM from \num{90} to 
+\SI{5}{\metre}. A value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 
 % \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.25\textwidth]{fig/SLP_10_3}
-%   \includegraphics[width=0.25\textwidth]{fig/SLP_10_7}
-%   \includegraphics[width=0.25\textwidth]{fig/SLP_10_15}
-%   \includegraphics[width=0.25\textwidth]{fig/SLP_10_31}
-%   \includegraphics[width=0.25\textwidth]{fig/SLP_10_63}
-%   \includegraphics[width=0.25\textwidth]{fig/SLP_10_127}
-%   \includegraphics[width=0.25\textwidth]{fig/SLP_10_255}
-%   \caption{Slope \texttt{SLP}} raster maps derived from \texttt{ELEV\_10} using seven window sizes (3, 7, 15, 31, 63, 127, 255) to include the effect of scale in the derived terrain attributes.}
-%   \label{fig:slope}
+%  \centering
+%  % TODO: Include R code to produce figures on the go.
+%  \caption{\label{fig:covar-data-slope}Slope \texttt{SLP}} raster maps derived from \texttt{ELEV\_10} 
+%  using seven window sizes  (\numlist{3;7;15;31;63;127;255}) to include the effect of scale in the 
+%  derived terrain attributes.}
 % \end{figure}
 
-Aspect values were also corrected before use. The first correction refers to the fact that \texttt{r.param.scale} stores aspect values in the range 0 to +180 from West to North to East, and 0 to -180 degree from West to South to East, when the standard procedure is to work with aspect values ranging from 0 to 360$^\circ$ clockwise. This correction was done using expressions \texttt{if(asp < 0, aspect + 360, aspect)} and \texttt{if(aspect < 90, aspect + 270, aspect - 90)} in \texttt{r.mapcalc}. Mathematically,
+Aspect values were also corrected before use. The first correction refers to the fact that 
+\grass{r.param.scale} stores aspect values in the range \SIrange{0}{+180}{\degree} from West to 
+North to East, and \SIrange{0}{-180}{\degree} from West to South to East, when the standard 
+procedure is to work with aspect values ranging from \SIrange{0}{360}{\degree} clockwise. This 
+correction was done using the following expressions in in \grass{r.mapcalc}:
+
+\begin{verbatim}
+ if(asp < 0, aspect + 360, aspect)
+ if(aspect < 90, aspect + 270, aspect - 90)
+\end{verbatim}
+
+\noindent Mathematically,
 
 \begin{equation}
-  \texttt{ASP}_{beta} =
-  \begin{cases}
-    aspect + 360^\circ & \text{if}\;\; aspect < 0^\circ, \\
-    aspect             & \text{else},
-  \end{cases}
+ \texttt{ASP}_{beta} =
+ \begin{cases}
+  aspect + \ang{360} & \text{if}\;\; aspect < \ang{0}, \\
+  aspect             & \text{else},
+ \end{cases}
 \end{equation}
 
 \noindent and
 
 \begin{equation}
-  \texttt{ASP} =
-  \begin{cases}
-    \texttt{ASP}_{beta} + 270^\circ & \text{if}\;\; \texttt{ASP}_{beta} < 90^\circ, \\
-    \texttt{ASP}_{beta} - 90^\circ  & \text{else}.
-  \end{cases}
+ \texttt{ASP} =
+ \begin{cases}
+  \texttt{ASP}_{beta} + \ang{270} & \text{if}\;\; \texttt{ASP}_{beta} < \ang{90}, \\
+  \texttt{ASP}_{beta} - \ang{90}  & \text{else}.
+ \end{cases}
 \end{equation}
 
-\noindent The second correction involved linearizing aspect values. This is necessary because aspect is a circular variable, that is, the beginning (0$^\circ$) and the end (360$^\circ$) of the measurement scale have the same physical meaning. Aspect values were transformed to northernness (\texttt{NOR}), a measure of the degree of exposition of a given surface to the North, a linear variable, using the equation
+\noindent The second correction involved linearizing aspect values. This is necessary because 
+aspect is a circular variable, that is, the begging (\ang{0}) and end (\ang{360}) of the
+measurement scale have the same physical meaning. Aspect values were transformed to northernness 
+(\texttt{NOR}), a measure of the degree of exposition of a given surface to the North, a linear 
+variable, using the equation
 
 \begin{equation}
-  \texttt{NOR}_i = abs(180^\circ - \texttt{ASP}_i),
+ \texttt{NOR}_i = abs(\ang{180} - \texttt{ASP}_i),
 \end{equation}\label{eq:NOR}
 
-\noindent where $i$ is the window size used to calculate \texttt{ASP}, with $i$ = 3, 7, 15, 31, 63, 127, and 255.   
+\noindent where $i$ is the window size used to calculate \texttt{ASP}, with 
+$i = \numlist{3;7;15;31;63;127;255}$.   
 
-Flow accumulation (\texttt{ACC}), also known as catchment area and contributing area, was calculated using GRASS module \texttt{r.watershed}. The resulting raster map was multiplied by the square of the cell size (5 m). This raster map was used to calculate the topographic wetness index (\texttt{TWI}) and the stream power index (\texttt{SPI}) using the following equations:
+Flow accumulation (\texttt{ACC}), also known as catchment area and contributing area, was calculated 
+using \grass{r.watershed}. The resulting raster map was multiplied by the square of the cell size 
+(\SI{5}{\metre}). This raster map was used to calculate the topographic wetness index (\texttt{TWI}) 
+and the stream power index (\texttt{SPI}) using the following equations:
 
 \begin{equation}
-  A = \dfrac{\texttt{ACC}}{\textit{cell}},
+ A = \dfrac{\texttt{ACC}}{\textit{cell}},
 \end{equation}\label{eq:sACC}
 
 \begin{equation}
-  \texttt{TWI}_i = log \dfrac{A}{tan(\texttt{SLP}_i)},
+ \texttt{TWI}_i = log \dfrac{A}{tan(\texttt{SLP}_i)},
 \end{equation}\label{eq:TWI}
 
 \noindent and
 
 \begin{equation}
-  \texttt{SPI}_i = log(A \times tan(\texttt{SLP}_i)),
+ \texttt{SPI}_i = log(A \times tan(\texttt{SLP}_i)),
 \end{equation}\label{eq:SPI}
 
-\noindent where $A$ is the specific catchment area, \textit{cell} is the cell size (5 m), and $i$ is the window size used to calculate \texttt{SLP}, with $i$ = 3, 7, 15, 31, 63, 127, and 255.
+\noindent where $A$ is the specific catchment area, \textit{cell} is the cell size 
+(\SI{5}{\metre}), and $i$ is the window size used to calculate \texttt{SLP}, with 
+$i = \numlist{3;7;15;31;63;127;255}$.
 
-The topographic position index \texttt{TPI} was calculated in SAGA GIS using the library \texttt{ta\_morphometry}. Different values of maximum radius were used to include the effect of scale, all of them related to the window sizes used to calculate previous terrain attributes. A minimum radius value of three meters was used in all calculations.
+The topographic position index \texttt{TPI} was calculated in \saga{ta\_morphometry}. Different 
+values of maximum radius were used to include the effect of scale, all of them related to the window 
+sizes used to calculate previous terrain attributes. A minimum radius value of three meters was used 
+in all calculations.
 
 \tocless\section{Geological maps}
 
