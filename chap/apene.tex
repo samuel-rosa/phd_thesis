@@ -1,38 +1,178 @@
+% The first area-class soil map was published at a \scale{100000} \cite{AzolinEtAl1988}, while the
+% second was prepared at the more detailed \scale{25000} \cite{MiguelEtAl2012}. The first digital
+% elevation model is the result of interpolating the contour lines of the most recent topographic maps
+% produced by the Brazilian Army (\scale{25000}) \cite{DSG1980,DSG1992,DSG1992a}, while second
+% digital elevation model is the well known SRTM DEM (3 arc-seconds \SI{\approx90}{\metre} spatial
+% resolution) produced by NASA’s Jet Propulsion Laboratory in collaboration with the National
+% Geospatial-Intelligence Agency \cite{RodriguezEtAl2006}. Data on geology and soil parent material
+% comes from most recent geological maps published in the \scales{25000}{50000} 
+% \cite{MacielFilho1990,GasparettoEtAl1988}. The land use map of the year of 1980 comes from the most 
+% recent topographic map produced by the Brazilian Army already mentioned above. The second land use 
+% map refers to the years of 2008 and 2009, and was prepared at a \scale{2000} 
+% \cite{SamuelRosaEtAl2011a}. The less detailed satellite image was acquired by the Landsat-5 Thematic 
+% Mapper on December 26, 2010, while the more detailed satellite image comes from the RapidEye 
+% constellation, acquired on November 16, 2012.
+
 \artigofalse
 \chapter{The Santa Maria dataset -- covariate data}
-\label{apen:covariate-data}
+\label{apen:covar-data}
 
-\tocless\section{Presentation}
+\tocless\section{Introduction}
+\label{sec:covar-data-intro}
 
-\tocless\section{Environmental co-variates}
+The Santa Maria dataset contains five sources of spatially exhaustive covariates. These are 
+area-class soil maps, geological maps, land use maps, digital elevation models (DEM), and 
+imagery of orbital satellite sensors. Each of these sources is freely available in two levels of 
+spatial detail.
 
-Environmental co-variates are used to build predictive models of soil properties because they are proxies of soil forming processes. They provide information about topography, vegetation, land use, geology, soil parent material, climate, soil itself and other intimately-associated surface conditions. In the present study, more than 100 environmental co-variates are used. All of them were derived from freely available sources, including area-class soil maps, digital elevation models, geological maps, land use maps, and orbital images.
-%TODO: include a description of the GCPs used to validate the environmental covariates and to orthorectify satellite images. Also, present the equations used to calculate validation statistics.
 
-\tocless\subsection{Area-class soil maps}
 
-Most soil maps available use the area-class model of representation. It is a discrete model of spatial variation that divides the survey area into internally more homogeneous polygons sharing sharp and well-defined boundaries \cite{Rossiter2000}. Each polygon receives a class name and is defined as a mapping unit in the map legend. The main objective of the area-class model is to minimize the within-class variance and maximize the between-class variance \cite{WebsterEtAl1990}.
+% TODO: include a description of the GCPs used to validate the environmental covariates and to 
+% orthorectify satellite images. Also, present the equations used to calculate validation statistics.
 
-Several area-class soil maps are available for the study area, but only two are used in the present study. The first of them (\texttt{SOIL\_100}) was published at a scale of 1:100,000 \cite{AzolinEtAl1988} (Figure \ref{fig:soil-maps}, left). Existing area-class soil maps and technical reports \cite{Brasil1973, Azolin1977, MacielEtAl1987a, MacielEtAl1987, AbraoEtAl1988}, and sparse field visits were used to elaborate the preliminary legend of the soil map. Aerial photographs (1:60,000) were used to produce the first draft of the map. Field verification of soil polygons was done along the road network (convenience sampling). These observations were used to estimate the composition (occurrence and spatial distribution of soil taxa) of soil mapping units. They were also used to revise the first draft of the map. The final version of the map was prepared using topographic maps originally published at a scale of 1:50,000 and resampled to a scale of 1:100,000. Soil classification followed the criteria adopted by the Brazilian soil science community at that time \cite{Brasil1973, CamargoEtAl1982, Carvalho1982, LemosEtAl1982, OlmosEtAl1982}. Identification of soil classes was performed based on morphological features, analytical data compiled from existing technical reports and analysis of soil profiles collected along the road network. Description of each soil mapping unit includes the estimated area (in hectares) and the approximate taxonomic composition (in percentage). Validation statistics are absent in the survey report.
+\tocless\section{Ground control points}
+\label{sec:covar-data-gcp}
 
-The second area-class soil map (\texttt{SOIL\_25}) used in the present study is authored by \cite{Miguel2010} and was prepared at a scale of 1:25,000 (Figure \ref{fig:soil-maps}, right). Orbital images produced by Digital Globe\textregistered{} (Quick Bird satellite) freely available for visualization in Google Earth\textregistered{} were used to produce the first draft of the soil map. Existing area-class soil maps and technical reports \cite{Pedron2005, Poelking2007, Sturmer2008} were used to help defining the preliminary map legend. Field observations (auger holes) were done in approximately 350 locations using a purposive sampling approach. These observations helped to identify six representative soil profiles. Soil sampling and description of representative soil profiles, and laboratory analysis of soil samples, followed the standard protocol adopted in Brazil \cite{ClaessenEtAl1997, SantosEtAl2005}. Soil classification was done following the criteria of the Brazilian System of Soil Classification \cite{SantosEtAl2006}. The final version of the map was prepared using orbital images freely available for visualization in Google Earth\textregistered{} and manually-digitalized topographic maps published at a scale of 1:25,000 \cite{DSG1992a, DSG1992}. Description of soil mapping units include only the most common soil taxon, followed by morphological and laboratory data of representative soil profiles. Alike \texttt{SOIL\_100} described above, validation statistics are absent in the survey report of \texttt{SOIL\_25}.
+\begin{itemize}
+\item Describe how the ground control points (GCPs) were selected;
+\item Present a figure with the spatial distribution of the GCPs;
+\item Describe how the location of the GCPs was described - we could 
+      add a few images to use as example;
+\item Describe how the data was processed.
+\item Include link to the dataset;
+\end{itemize}
 
-Both area-class soil maps went through different preprocessing routines. The original \texttt{SOIL\_100} is available only in the analogical format, what required its digitalization prior to this study. Georeferencing was carried out using the GDAL Georeferencer plug-in in QGIS \cite{GDAL2013, QGIS2013}. Intersections between all meridians and parallels (a total of nine) were used as control points to adjust a second order polynomial model. Resampling was performed using the cubic resampling method. Soil polygons and their attributes were also manually digitalized in QGIS. Because of the coarseness on the map scale, most geographical markers used to locate validation GCPs could not be identified and positional validation was performed using only four GCPs. Estimated error statistics suggest that there can exist large positional errors in all directions, with an estimated accuracy of RMSE = 114 m and a mean azimuth of 128$^{\circ}$ (Table \ref{tab:soil-geo-val} and Figure \ref{fig:soil-azim}).
+\begin{description}
+\item [GCP 01] Em Santa Maria, no lado direito da barragem de concreto do reservatório do 
+DNOS/CORSAN, seis metros antes de chegar à ponte sobre o vertedouro, há três metros de distância do 
+centro da estrada que desce da rodovia federal BR 158. Coletado em 03 de janeiro de 2013 por 
+Alessandro Samuel Rosa e Jean Michel Moura Bueno.
+
+\item [GCP 02] Na entrada da Estrada do Perau, Rua Gralha Azul, em Itaara, no centro do canteiro, 
+entre o outdoor e a árvore (Cedrella fissilis), junto à rodovia federal BR 158.
+
+\item [GCP 03] Na entrada de Itaara, próximo ao equipamento estático de fiscalização eletrônica de 
+velocidade, na rodovia federal BR 158, à 520 metros do Museu de Ufologia, em frente à Fruteira da 
+Esquina. Do outro lado da rodovia há uma torre, possivelmente de telefonia celular, e entrada para a 
+mina de extração de brita DallaPasqua, localizada à 4 km do local.
+
+\item [GCP 04] Em Santa Maria, na entrada da estrada de acesso ao cemitério do Bairro Campestre do 
+Menino Deus, do lado direito da Estrada do Perau (subindo), alinhado (erro de 50 cm) com a frente 
+das casas, há 2,2 metros do muro, há 6,5 metros do meio-fio da Esrada do Perau, há 50 metros da 
+ponte sobre o Rio Vacacaí-Mirim.
+
+\item [GCP 05] Na entrada do Rancho do Amaral, junto à porteira, no lado direito, fora da estrada, 
+distante um metro de uma palmeira e um metro do muro.
+
+\item [GCP 06] Em Itaara, na Avenida Etelvina, na beira da estrada, aproximadamente 2,5 metros do 
+centro da estrada, alinhado (acurácia de 20 cm) com a cerca que separa a floresta nativa do pomar de 
+citrus localizado do outro lado da estrada. Medir a distância em relação à entrada na rodovia 
+federal BR 158.
+
+\item [GCP 07] Em Itaara, no lado esquerdo da entrada da estrada que da acesso à mina de extração de 
+brita DallaPasqua. Localidade de Estação Pinhal. Obs,: sob a rede de transmissão de eletricidade → 
+verificar efeito.
+
+\item [GCP 08] No 10º Distrito de Santo Antão, na entrada da estrada para a Central de Tratamento de 
+Resíduos da Caturita, em frente à Escola Municipal de Ensino Fundamental Intendente Manoel Ribas.
+
+\item [GCP 09] Em São Martinho da Serra, na localidade de Água Negra, na bifurcação da estrada que 
+vem de Santa Maria e que dá acesso à localidade de Campinas, junto à parada de ônibus, no canteiro 
+no meio da bifurcação, à 40 metros distante do Piquete Laçador Jorge R. da Silva, em frente ao 
+Mercado do Ronaldo. Obs.: coletado em 15 de janeiro de 2013.
+
+\item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, 
+próximo a duas pequenas árvores, alinhado (acurácia de 1 m) com cerca que marca a divisa entre duas 
+propriedades com campo nativo. Determina a distância, em km, em relação a ponto de referência em 
+Santa Maria. Em frente à propriedade com duas casas, uma delas com dois andares, e quatro pequenos 
+lagos nos fundos. Depois da capela Santo Antão.
+
+\item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia 
+federal BR 185, ao lado do corte no terreno expondo a rocha de arenito da Formação Botucatu, 
+distante 5 metros, aproximadamente 15 metros distante do poste da linha de transmissão de 
+eletricidade da companhia AES, na entrada para a localidade de Rincão dos Minello.
+
+\item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto à rodovia federal 
+BR 158, próximo ao Bar e Armazém Ricardo, deslocado em 1 metro para dentro do passeio em relação ao 
+alinhamento dos postes da rede elétrica.
+
+\item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (acurácia de 30 cm) que divide duas 
+terras, à esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas 
+anuais. O ponto está locado no lado oposto. Determinar a distância até algum ponto de referência. 
+Plantação de videiras logo acima, no divisor de águas.
+
+\item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após 
+o término da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do 
+campo nativo, alinhado (acurácia de 20 cm) com a cerca dos dois lados da estrada. Locado 1 metro 
+distante do moirão da cerca do lado esquerdo subindo, no interior da estrada.
+\end{description}
+
+\tocless\section{Area-class soil maps}
+\label{sec:covar-data-soil-maps}
+
+There are several area-class soil maps available for the catchment of the DNOS/CORSAN reservoir, but 
+only two are included in the Santa Maria data set. The first of them (\texttt{SOIL\_100}) was 
+published at a \scale{100000} \cite{AzolinEtAl1988}. Existing area-class soil maps and technical 
+reports \cite{Brasil1973,Azolin1977,MacielEtAl1987a,MacielEtAl1987,AbraoEtAl1988}, and sparse field 
+observations were used to elaborate the preliminary legend of the soil map. Aerial photographs 
+(\scale{60000}) were used to produce the first draft of the soil map. Field verification of soil 
+polygons was done along the road network (i.e. convenience sampling). These observations were used 
+to estimate the composition (occurrence and spatial distribution of soil taxa) of soil mapping 
+units. They were also used to revise the first draft of the soil map. The final version of the soil 
+map was prepared using topographic maps originally published at a \scale{50000} and resampled to a 
+\scale{100000}. Soil classification followed the criteria adopted by the Brazilian soil science 
+community at that time \cite{Brasil1973,CamargoEtAl1982,Carvalho1982,LemosEtAl1982,OlmosEtAl1982}. 
+Identification of soil taxa was performed based on morphological features, analytical data compiled 
+from existing technical reports and analysis of soil profiles collected along the road network. 
+Description of each soil mapping unit includes the estimated area (\si{\hectare}) and the 
+approximate taxonomic composition (\si{\percent}). Validation statistics are absent in the survey 
+report.
+
+The second area-class soil map (\texttt{SOIL\_25}) included in the Santa Maria data set is 
+authored by \cite{Miguel2010} and was prepared at a \scale{25000}. Orbital images produced by 
+Digital Globe\textregistered{} (Quick Bird satellite) freely available for visualization in Google 
+Earth\textregistered{} were used to produce the first draft of the soil map. Existing area-class 
+soil maps and technical reports \cite{Pedron2005,Poelking2007,Sturmer2008} were used to help 
+defining the preliminary soil map legend. Punctual field observations (auger holes) were carried 
+out in more that \num{350} locations using a purposive sampling approach. These observations helped 
+to identify six representative soil profiles. Soil sampling and description of representative soil 
+profiles, and laboratory analysis of soil samples, followed the standard protocol adopted in Brazil 
+\cite{ClaessenEtAl1997,SantosEtAl2005}. Soil classification was done following the criteria of the 
+Brazilian System of Soil Classification \cite{SantosEtAl2006}. The final version of the map was 
+prepared using orbital images freely available for visualization in Google Earth\textregistered{} 
+and manually-digitalized topographic maps published at a \scale{25000} \cite{DSG1992a,DSG1992}. 
+Description of soil mapping units include only the most common soil taxon, followed by morphological 
+and laboratory data of representative soil profiles. Alike \texttt{SOIL\_100} described above, 
+validation statistics are absent in the survey report of \texttt{SOIL\_25}.
+
+Both area-class soil maps went through different preprocessing routines. The original 
+\texttt{SOIL\_100} is available only in the analogical format, what required its digitalization.
+Georeferencing was carried out using the GDAL Georeferencer plug-in in QGIS 2.0.1
+\cite{GDAL2013,QGIS2013}. Intersections between all meridians and parallels (a total of nine) were 
+used as control points to adjust a second order polynomial model. Resampling was performed using the 
+cubic resampling method. Soil polygons and their attributes were also manually digitalized in QGIS 
+2.0.1. Because of the coarseness on the cartographic map scale, most geographical markers used to 
+locate validation GCPs could not be identified and positional validation was performed using only 
+four GCPs. Estimated error statistics suggest that there can exist large positional errors in all 
+directions, with an \SI{RMSE = 114}{\metre} and a mean azimuth of \SI{128}{\degree} 
+(\autoref{tab:covar-data-soil-geo-val}).
 
 \begin{table}[ht]
-  \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of area-class soil map \texttt{SOIL\_100} in the geographic space. Validation statistics were estimated using four GCPs located in easily identifiable geographical markers. Estimates were corrected to the size of the population.}
-  \label{tab:soil-geo-val}
-  \centering
-  {\small
-  \begin{tabular}{lrrrr}
-    \hline
-    Statistics           & X coordinate & Y coordinate & Error vector & Azimuth                  \\
-    \hline
-    Mean, m              & 30   (79)    & -36  (67)    & 105   (43)   & 128$^\circ$ (80$^\circ$) \\ 
-    Absolute mean, m     & 58   (63)    & 64   (40)    & -            & -                        \\ 
-    Squared mean, m$^2$  & 7241 (11353) & 5712 (6197)  & 12953 (9613) & -                        \\ 
-    \hline
-  \end{tabular}}
+ \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of
+ area-class soil map \texttt{SOIL\_100} in the geographic space. Validation statistics were 
+ estimated using four GCPs located in easily identifiable geographical markers.}
+ \label{tab:covar-data-soil-geo-val}
+ \centering
+ {\small
+ \begin{tabular}{lrrrr}
+  \hline
+  Statistics           & X coordinate & Y coordinate & Error vector & Azimuth                  \\
+  \hline
+  Mean, m              & 30   (79)    & -36  (67)    & 105   (43)   & 128$^\circ$ (80$^\circ$) \\ 
+  Absolute mean, m     & 58   (63)    & 64   (40)    & -            & -                        \\ 
+  Squared mean, m$^2$  & 7241 (11353) & 5712 (6197)  & 12953 (9613) & -                        \\ 
+  \hline
+ \end{tabular}}
 \end{table}
 
 % \begin{figure}[!ht]
@@ -43,25 +183,61 @@ Both area-class soil maps went through different preprocessing routines. The ori
 %   \label{fig:soil-azim}
 % \end{figure}
 
-The original \texttt{SOIL\_25} is available in digital format in the personal database of the author \cite{Miguel2010}. A topology check (Topology Checker plug-in in QGIS) identified that it presents many gaps and overlaps between polygons. This required a topological edition prior to the use of \texttt{SOIL\_25}. There also is a mismatch between the boundary of the survey area used to produce \texttt{SOIL\_25} and the actual boundary of the study area estimated using \texttt{ELEV\_10} (Section \ref{sec:dem}). This occurred because the database used to produce \texttt{SOIL\_25} included Google Earth imagery\textregistered{} and topographic maps, which are data sources that differ considerably in their positional accuracy (Sections \ref{sec:dem} and \ref{sec:land}). To avoid data losses, all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil polygons were defined based on land use (\texttt{LU2009}, Section \ref{sec:land}) and topographic data (contour lines, Section \ref{sec:dem}) as it was done for the original map \cite{Miguel2010}. New delineations were checked and approved without modifications by the author of the original map. Because \texttt{SOIL\_25} includes very few geographical markers, its positional validation was not possible with the available GCPs. However, the positional accuracy (RMSE) is expected to vary between 8 m and 114 m across the map as a result of the different errors present in the data sources used in its production.
+The original \texttt{SOIL\_25} is available in digital format in the personal database of the author 
+\cite{Miguel2010}. A topology check (Topology Checker plug-in in QGIS 2.0.1) identified that there
+were many gaps and overlaps between polygons. This required a topological edition prior to the 
+use of \texttt{SOIL\_25}. There also was a mismatch between the boundary of \texttt{SOIL\_25} and 
+the actual boundary of the catchment of the DNOS/CORSAN reservoir as estimated using 
+\texttt{ELEV\_10} (\autoref{sec:covar-data-dem}). This occurred because the database used to 
+produce \texttt{SOIL\_25} included Google Earth imagery\textregistered{} and topographic maps, which 
+are data sources that differ considerably in their positional accuracy 
+(\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). To avoid data losses, all 
+boundary gaps were manually filled using the closest mapping unit. Boundaries of soil polygons were 
+defined based on land use (\texttt{LU2009}, \autoref{sec:covar-data-land-use}) and topographic data 
+(contour lines, \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. 
+New delineations were checked and approved without modifications by the author of the original map. 
+Because \texttt{SOIL\_25} includes very few geographical markers, its positional validation was not 
+possible with the available GCPs. However, the RMSE is expected to vary between 
+\SIrange{8}{114}{\metre} across the soil map as a result of the different errors present in the 
+data sources used in its production.
 
-Both \texttt{SOIL\_100} and \texttt{SOIL\_25} were imported into GRASS GIS, cropped to the bounding box of the study area, and geometrically corrected to match the prediction grid (5 meters pixel size). Registration and geocoding was performed using the nearest neighbor resampling method. Each category was named with the code of respective mapping units in the original maps. Prior to validation in the attribute space, class codes of \texttt{SOIL\_100} were changed to match soil taxa codes of the current Brazilian System of Soil Classification using a standard correlation table \cite{SantosEtAl2006}.
+Both \texttt{SOIL\_100} and \texttt{SOIL\_25} were imported into GRASS GIS 6.4, cropped to the 
+bounding box of the catchment of the DNOS/CORSAN reservoir, and geometrically corrected to match the 
+prediction grid (\SI{5}{\metre} grid size). Registration and geocoding was performed using the 
+nearest neighbour resampling method. Each category was named with the code of the respective 
+mapping unit in the original map. Prior to validation in the attribute space, class codes of 
+\texttt{SOIL\_100} were changed to match soil taxa codes of the current Brazilian System of Soil 
+Classification using a standard correlation table \cite{SantosEtAl2006}.
 
-Table \ref{tab:soil-attr-val} shows that the overall purity of both soil maps is not significantly different. The main reason for this is that validation was performed considering only the second level of the Brazilian System of Soil Classification. It is expected that \texttt{SOIL\_25} would outperform \texttt{SOIL\_100} if validation data included soil classification up to the fourth level of the Brazilian System of Soil Classification. Estimated overall purity values are also very low (< 35\%). The main reason can be the fact that very few soil profiles were described and sampled to produce both maps. There also are two minor potential sources of error. First, because \texttt{SOIL\_100} does not include analytical soil data in the survey report, all soil taxa had to be translated to the current Brazilian System of Soil Classification based only on a standard correlation table \cite{SantosEtAl2006} and expert knowledge. Second, soil taxa described at the validation points was obtained analyzing only morphological soil properties and the basis and concepts of the Brazilian System of Soil Classification (expert knowledge).
+Table \ref{tab:covar-data-soil-attr-val} shows that the overall purity of both soil maps is not 
+significantly different. The main reason for this is that validation was performed considering only 
+the second level of the Brazilian System of Soil Classification. It is expected that 
+\texttt{SOIL\_25} would outperform \texttt{SOIL\_100} if validation data included soil 
+classification up to the fourth level of the Brazilian System of Soil Classification. Estimated 
+overall purity values are also very low (\SI{<35}{\percent}). The main reason can be the fact that 
+very few soil profiles were described and sampled to produce both maps. There also are two minor 
+potential sources of error. First, because \texttt{SOIL\_100} does not include analytical soil data 
+in the survey report, all soil taxa had to be translated to the current Brazilian System of Soil 
+Classification based only on a standard correlation table \cite{SantosEtAl2006} and expert 
+knowledge. Second, soil taxa described at the validation points was obtained analysing only 
+morphological soil properties and the basis and concepts of the Brazilian System of Soil 
+Classification.
 
 \begin{table}[ht]
-\caption{Estimated error statistics of the validation of area-class soil maps \texttt{SOIL\_100} and \texttt{SOIL\_25} in the attribute space. Validation statistics were estimated using 60 validation points located in 12 linear transects (clustered samples).}
-\label{tab:soil-attr-val}
-\centering
-{\small
-\begin{tabular}{lrrr}
-\hline
-Soil map              & LCB95Pct & Estimate & UCB95Pct \\
-\hline
-\texttt{SOIL\_100}    & 21.69    & 31.67    & 41.65    \\
-\texttt{SOIL\_25}     & 20.81    & 30.00    & 39.19    \\
-\hline
-\end{tabular}}
+ \caption{Estimated error statistics of the validation of area-class soil maps \texttt{SOIL\_100}
+ and \texttt{SOIL\_25} in the attribute space. Validation statistics were estimated using $n = 60$ 
+ observation locations placed along $m = 12$ linear transects (clustered samples).}
+ \label{tab:covar-data-soil-attr-val}
+ \centering
+ {\small
+ \begin{tabular}{lrrr}
+  \hline
+  Soil map              & LCB95Pct & Estimate & UCB95Pct \\
+  \hline
+  \texttt{SOIL\_100}    & 21.69    & 31.67    & 41.65    \\
+  \texttt{SOIL\_25}     & 20.81    & 30.00    & 39.19    \\
+  \hline
+ \end{tabular}}
 \end{table}
 
 % TODO: figure with both area-class soil maps
@@ -73,20 +249,40 @@ Soil map              & LCB95Pct & Estimate & UCB95Pct \\
 %   \label{fig:soil-maps}
 % \end{figure}
 
-The main advantage of \texttt{SOIL\_25} in relation to \texttt{SOIL\_100} is the level of detail. While \texttt{SOIL\_100} has only five classes covering the study area, \texttt{SOIL\_25} has eight classes. This enabled the derivation of six environmental covariates from \texttt{SOIL\_100} and ten environmental covariates from \texttt{SOIL\_25}. Environmental covariates derived from \texttt{SOIL\_100} are the following:
+The main advantage of \texttt{SOIL\_25} in relation to \texttt{SOIL\_100} is the level of detail. 
+While \texttt{SOIL\_100} has only five mapping units covering catchment of the DNOS/CORSAN 
+reservoir, \texttt{SOIL\_25} has seven mapping units. This enabled the derivation of six 
+covariates from \texttt{SOIL\_100} and ten covariates from \texttt{SOIL\_25}. Covariates derived 
+from \texttt{SOIL\_100} are the following:
 
 \begin{description}
-  \item[\texttt{SOIL\_100a}] This covariate separates map unit Rd1 from other map units. It is composed mainly by shallow soils with low to high base saturation (Solo Litólico distrófico/eutrófico; Neossolo Litólico distrófico/eutrófico; Distric/Eutric Leptosol) located in slopping terrain;
+%  \item[\texttt{SOIL\_100a}] This covariate separates map unit Rd1 from other map units. It is 
+%  composed mainly by shallow soils with low to high base saturation (Solo Litólico 
+%  distrófico/eutrófico; Neossolo Litólico distrófico/eutrófico; Distric/Eutric Leptosol) located in 
+%  slopping terrain;
   
-  \item[\texttt{SOIL\_100b}] This covariate separates map unit Re4 from other map units. It is also composed mainly by shallow soils with low to high base saturation (Solo Litólico eutrófico/distrófico relevo montanhoso; Neossolo Litólico distrófico/eutrófico; Distric/Eutric Leptosol), the difference being that it covers mountainous terrain;
+ \item[\texttt{SOIL\_100b}] Shallow soils with low to high base saturation covering mountainous 
+ terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico 
+ Distrófico/Eutrófico; Distric/Eutric Leptosol);
   
-  \item[\texttt{SOIL\_100c}] This covariate separates map unit Re-C-Co from other map units. It is a map unit composed by shallow soils with high base saturation located in strongly sloping terrain (Solo Litólico eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric Leptosol), low weathered soils (Cambissolo eutrófico; Cambissolo Háplico eutrófico; Eutric Cambisol), and colluvial deposits;
+ \item[\texttt{SOIL\_100c}] Shallow soils with high base saturation located in strongly sloping 
+ terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric 
+ Leptosol), low weathered soils (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric 
+ Cambisol), and colluvial deposits;
   
-  \item[\texttt{SOIL\_100d}] This covariate separates map unit TBa-Rd from other map units. It is a map unit composed by deep, well-structured, low base saturation soils (Terra Bruna Estruturada álica; Nitossolo; Nitisol), and shallow soils (Solo Litólico; Neossolo Litólico; Leptosol);
+ \item[\texttt{SOIL\_100d}] Deep, well-structured, low base saturation soils (Terra Bruna 
+ Estruturada álica; Nitossolo; Nitisol), and shallow soils (Solo Litólico; Neossolo Litólico; 
+ Leptosol);
   
-  \item[\texttt{SOIL\_100e}] This covariate was produced combining map units Rd1 and Re4. Thus, it includes mapping units composed by shallow soils in both sloping and mountainous terrain;
+ \item[\texttt{SOIL\_100e}] \textit{Rd1} is composed mainly by shallow soils with low to high base 
+ saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; 
+ Distric/Eutric Leptosol) located in slopping terrain. This dummy predictor variable is composed by 
+ shallow soils in both sloping and mountainous terrain;
   
-  \item[\texttt{SOIL\_100f}] This covariate was produced combining map units TBa-Rd and C1. The last is composed by low weathered soils developed in lower landscape positions, close to drainage channels (Cambissolo eutrófico; Cambissolo Eutrófico; Eutric Cambisol). Thus, this covariate includes the best soil types for agricultural practices among those identified in the survey.
+ \item[\texttt{SOIL\_100f}] \textit{C1} is composed by low weathered soils developed in lower 
+ landscape positions, close to drainage channels (Cambissolo Eutrófico; Cambissolo Eutrófico; 
+ Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop 
+ agriculture among those identified in the soil survey.
 \end{description}
 
 % TODO: figure with covariates derived from SOIL_100
@@ -102,28 +298,43 @@ The main advantage of \texttt{SOIL\_25} in relation to \texttt{SOIL\_100} is the
 %   \label{fig:soil100-covars}
 % \end{figure}
 
-Environmental covariates derived from \texttt{SOIL\_25} are the following:
+Covariates derived from \texttt{SOIL\_25} are the following:
 
 \begin{description}
-  \item[\texttt{SOIL\_25a}] This covariate separates map unit PBAC from other map units. It is composed mainly by moderately deep soils derived from sedimentary rocks, with abrupt textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol);
+ \item[\texttt{SOIL\_25a}] Moderately deep soils derived from sedimentary rocks, with abrupt 
+ textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol);
 
-  \item[\texttt{SOIL\_25b}] This covariate separates map unit PV from other map units. It is composed mainly by deep soils derived from igneous rocks, with moderate textural gradient, and low base saturation (Argissolo Vermelho; Acrisol);
+ \item[\texttt{SOIL\_25b}] Deep soils derived from igneous rocks, with moderate textural gradient, 
+ and low base saturation (Argissolo Vermelho; Acrisol);
  
-  \item[\texttt{SOIL\_25c}] This covariate separates map unit C-R from other map units. It is composed mainly by low weathered soils (Cambissolo; Cambisol) and shallow soils with low to high base saturation (Neossolo Litólico/Regolítico eutrófico/distrófico; Eutric/Distric Leptosol/Regosol);
+ \item[\texttt{SOIL\_25c}] Low weathered soils (Cambissolo; Cambisol) and shallow soils with low to 
+ high base saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric 
+ Leptosol/Regosol);
  
-  \item[\texttt{SOIL\_25d}] This covariate separates map unit RL from other map units. It is composed mainly by shallow soils with low to high base saturation (Neossolo Litólico eutrófico/distrófico; Eutric/Distric Leptosol);
+ \item[\texttt{SOIL\_25d}] Shallow soils with low to high base saturation (Neossolo Litólico 
+ Eutrófico/Distrófico; Eutric/Distric Leptosol);
  
-  \item[\texttt{SOIL\_25e}] This covariate separates map unit RL-RR from other map units. It is composed mainly by shallow soils (Neossolo Litólico + Neossolo Regolítico; Leptosol + Regosol) with low to high base saturation;
+%  \item[\texttt{SOIL\_25e}] This covariate separates map unit RL-RR from other map units. It is 
+%  composed mainly by shallow soils (Neossolo Litólico + Neossolo Regolítico; Leptosol + Regosol) 
+%  with low to high base saturation;
  
-  \item[\texttt{SOIL\_25f}] This covariate separates map unit RR from other map units. It is composed mainly by shallow soils (Neossolo Regolítico; Regosol), with low base saturation, developed on sedimentary rocks;
+%  \item[\texttt{SOIL\_25f}] This covariate separates map unit RR from other map units. It is composed 
+%  mainly by shallow soils (Neossolo Regolítico; Regosol), with low base saturation, developed on 
+%  sedimentary rocks;
  
-  \item[\texttt{SOIL\_25g}] This covariate separates map unit RY from other map units. It is composed mainly by soils developed from fluvial deposits (Neossolo Flúvico; Fluvisol);
+%  \item[\texttt{SOIL\_25g}] This covariate separates map unit RY from other map units. It is composed 
+%  mainly by soils developed from fluvial deposits (Neossolo Flúvico; Fluvisol);
  
-  \item[\texttt{SOIL\_25h}] This covariate was produced combining map units PBAC, PV, and SX. The last is composed mainly by moderately deep soils derived from sedimentary rocks, with abrupt textural change, low base saturation, and which are saturated with water for long periods of the year (Planossolo Háplico; Planosol). Thus, this covariate includes the best soil types for agricultural practices among those identified in the survey;
+ \item[\texttt{SOIL\_25h}] \textit{SX} is composed by moderately deep soils derived from sedimentary 
+ rocks, with abrupt textural change, low base saturation, and which are saturated with water for 
+ long periods of the year (Planossolo Háplico; Planosol). This dummy predictor variable includes 
+ the best soil mapping units for crop agriculture among those identified in the soil survey;
  
-  \item[\texttt{SOIL\_25i}] This covariate was produced combining map units RL, RL-RR, and RR. Thus, this covariate includes all three map units composed mainly by shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol);
+ \item[\texttt{SOIL\_25i}] This dummy predictor variable includes all three mapping units composed 
+ mainly by shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol);
   
-  \item[\texttt{SOIL\_25j}] This covariate was produced combining map units PV, RL, RL-RR, and C-R. Thus, it includes all four map units composed mainly by soils derived from igneous rocks.
+ \item[\texttt{SOIL\_25j}] This dummy predictor variable includes all four mapping units composed 
+ mainly by soils derived from igneous rocks.
 \end{description}
 
 % TODO: figure with covariates derived from SOIL_25
@@ -143,7 +354,8 @@ Environmental covariates derived from \texttt{SOIL\_25} are the following:
 %   \label{fig:soil25-covars}
 % \end{figure}
 
-\tocless\subsection{Digital elevation models}\label{sec:dem}
+\tocless\section{Digital elevation models}
+\label{sec:dem}
 
 Digital elevation models (DEMs) are one of the main sources of environmental co-variates used to build predictive models of soil properties. This is due to their extensive availability and the usually strong correlation between DEM derivatives and soil properties \cite{BishopEtAl2001, Grunwald2009}.
 
@@ -310,7 +522,7 @@ Flow accumulation (\texttt{ACC}), also known as catchment area and contributing 
 
 The topographic position index \texttt{TPI} was calculated in SAGA GIS using the library \texttt{ta\_morphometry}. Different values of maximum radius were used to include the effect of scale, all of them related to the window sizes used to calculate previous terrain attributes. A minimum radius value of three meters was used in all calculations.
 
-\tocless\subsection{Geological maps} 
+\tocless\section{Geological maps}
 
 Data on geology and soil parent material data comes from most recent geological maps published in the scales of 1:25,000 \cite{MacielFilho1990} and 1:50,000 \cite{GasparettoEtAl1988}.
 
@@ -386,7 +598,8 @@ Four environmental covariates were derived from \texttt{GEO\_25}, five of them h
   \item[\texttt{GEO\_25d}] This covariate includes all Quaternary deposits of fluvial, alluvial, and colluvial origin. It can help explaining the low clay content of soils supposedly derived from igneous rocks and vice-versa.
 \end{description}
 
-\tocless\subsection{Land use maps}\label{sec:land}
+\tocless\section{Land use maps}
+\label{sec:covar-data-land-use}
 
 A land use map for the year of 1980 comes from the most recent topographic map produced by the Brazilian Army (scale of 1:25,000). A second land use map is available for the years of 2008 and 2009 and was published at a scale of 1:30,000 \cite{SamuelRosaEtAl2011a}.
 
@@ -442,7 +655,8 @@ Alike area-class soil maps and geological maps, environment covariates derived f
   \item[\texttt{LUdiff}] This covariate depicts the areas in which there was a change in land use between 1980 and 2009. It can be useful to explain, for example, low organic carbon content in forest soils due to previous use with crop agriculture or animal husbandry.
 \end{description}
 
-\tocless\subsection{Orbital images}\label{sec:sat}
+\tocless\section{Orbital images}
+\label{sec:covar-data-sat-image}
 
 Satellite images is one of the sources of environmental covariates most used to build predictive models of soil properties. This is due to their extensive spatial and temporal availability, easiness of acquisition, and generally moderate to strong correlation between derived environmental covariates and soil properties \cite{BishopEtAl2001, Grunwald2009}.
 
