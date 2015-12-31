@@ -393,12 +393,9 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-%IMPORTANTE: Se precisar usar alguma seção ou subseção dentro dos apêndices ou
-%anexos, utilizar o comando \tocless para não adicionar no Sumário
-%Exemplos: 
-% \tocless\section{Histórico}
-
-%\appendix
+\appendix
+% \include{chap/} % Introdução Geral
+% \include{chap/} % Conclusão Geral
 \include{chap/apenb} % conceptual model of pedogenesis
 \include{chap/apena} % The Santa Maria dataset -- soil data
 \include{chap/apene} % The Santa Maria dataset -- covariate data
@@ -408,7 +405,6 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 %% Referências
 %%=============================================================================
-% \bibliographystyle{abnt}
 \bibliography{ref/biblio}\label{chap:references}
 
 %%=============================================================================
