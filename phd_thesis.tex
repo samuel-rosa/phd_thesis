@@ -26,7 +26,7 @@
 %%==============================================================================
 
 \usepackage{amsmath,latexsym,amssymb}
-\usepackage[range-phrase = --]{siunitx} %% Sistema Internacional de Unidades
+\usepackage[range-phrase = --, binary-units = true]{siunitx} %% Sistema Internacional de Unidades
 % Access bold symbols in maths mode
 \usepackage{bm}
 
@@ -51,7 +51,7 @@
 
 %\bibliographystyle{abbrvnat}
 %\setcitestyle{authoryear,round}
-\usepackage[alf]{abntex2cite}
+
 
 %%==============================================================================
 %% Pacotes - formatação de hyperlinks
@@ -68,6 +68,7 @@
             pdfsubject={Tese de Doutorado},
             pdfkeywords={Pedometria, Modelos, Incerteza}
             ]{hyperref}
+\usepackage[hyphenbreaks]{breakurl} % lidar com url longa
 
 %%TODO: Margens conforme MDT UFSM 7ª edição. Corrigir no arquivo UFRuralRJ.cls 
 %%      para funcionar a opção twoside *PENDENTE*
@@ -77,6 +78,14 @@
 %% hora de montar o sumário da lista de figuras e tabelas. Comente a linha se o
 %% pacote 'hyperref' não foi carregado.
 \input{macros/bugcaption}
+
+%%==============================================================================
+%% Pacotes - formatação da bibliografia de acordo com as normas da ABNT
+%%==============================================================================
+
+% IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
+% depois do pacote 'hyperref'
+\usepackage[alf]{abntex2cite}
 
 %%==============================================================================
 %% Pacotes - formatação de verbatim
@@ -130,9 +139,14 @@
 \newcommand{\scales}[2]{cartographic scales of 1:\num{#1} and 1:\num{#2}} % scales
 \newcommand{\q}[1]{``#1''} % double quotes
 \newcommand{\cited}[1]{\q{#1}} % direct citation
+\newcommand{\grass}[1]{GRASS GIS module \texttt{#1}} % GRASS GIS modules
+\newcommand{\saga}[1]{SAGA GIS library \texttt{#1}}  % SAGA GIS libraries
+\newcommand{\covar}[1]{\texttt{#1}} % covariates
 
-\def\geoderma{\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}}
-
+\def\geoderma{\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}} % Geoderma
+\def\inpe{\href{http://www.inpe.br/}{INPE}} % INPE
+\def\inpedgi{\href{http://www.dgi.inpe.br/siteDgi_EN/index_EN.php}{INPE-DGI}} % INPE-DGI
+\def\atcorrbug{\href{http://lists.osgeo.org/pipermail/grass-dev/2014-February/067540.html}{bug}} % GRASS GIS atcorr bug
 
 %%==============================================================================
 %% Identificação do trabalho
@@ -366,8 +380,8 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 \setlength{\baselineskip}{1.5\baselineskip}
 
 % Adiciona cada capitulo
-\include{chap/chap00}
-\include{chap/chap01}
+% \include{chap/chap00}
+% \include{chap/chap01}
 % \include{chap/chap02}
 % \include{chap/chap03}
 % \include{chap/chap04}
@@ -376,24 +390,25 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
-%% Referências
+%% Apêndices
 %%=============================================================================
-% \bibliographystyle{abnt}
-\bibliography{ref/biblio}\label{chap:references}
-
 %IMPORTANTE: Se precisar usar alguma seção ou subseção dentro dos apêndices ou
 %anexos, utilizar o comando \tocless para não adicionar no Sumário
 %Exemplos: 
 % \tocless\section{Histórico}
 
-%%=============================================================================
-%% Apêndices
-%%=============================================================================
 %\appendix
-\include{chap/apena} % description of the database
 \include{chap/apenb} % conceptual model of pedogenesis
+\include{chap/apena} % The Santa Maria dataset -- soil data
+\include{chap/apene} % The Santa Maria dataset -- covariate data
 %\include{chap/apenc} % R-package spsann
 %\include{chap/apend} % R-package pedometrics
+
+%%=============================================================================
+%% Referências
+%%=============================================================================
+% \bibliographystyle{abnt}
+\bibliography{ref/biblio}\label{chap:references}
 
 %%=============================================================================
 %% Anexos
