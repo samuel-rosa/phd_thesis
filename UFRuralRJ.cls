@@ -39,7 +39,7 @@
 %% Identificação
 %%==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[08/10/2015 v.0.3 Formatação de documentos acadêmicos 
+\ProvidesClass{UFRuralRJ}[21/10/2015 v.0.4 Formatação de documentos acadêmicos 
                           da UFRuralRJ]
 
 %%==============================================================================
@@ -101,7 +101,15 @@
 }
 
 \DeclareOption{english}{
- \@englishtrue\OptionNotUsed}\newif\if@english\@englishfalse
+  \@englishtrue\OptionNotUsed}\newif\if@english\@englishfalse
+
+%% Usar cabeçalho com título curto do capítulo
+\DeclareOption{header}{
+  \@headertrue\OptionNotUsed}\newif\if@header\@headerfalse
+
+%% Usar margens otimizadas
+\DeclareOption{newmargins}{
+  \@newmarginstrue\OptionNotUsed}\newif\if@newmargins\@newmarginsfalse
 
 %% TODO: incluir opção 'twoside'
 \DeclareOption{oneside}{\AtEndOfClass{\@twosidefalse}\OptionNotUsed}
@@ -123,6 +131,18 @@
 \newcommand{\nivel}[1]{\gdef\@nivel{#1}}
 \newcommand{\trabalhoNumero}[1] {\gdef\@trabalhoNumero{#1}}
 \newcommand{\local}[3]{\gdef\@city{#1}\gdef\@state{#2}\gdef\@country{#3}}
+
+%% Institutos
+\def\IA{Instituto de Agronomia}
+\def\IB{Instituto de Ciências Biológicas e da Saúde}
+\def\ICE{Instituto de Ciências Exatas}
+\def\ICHS{Instituto de Ciências Humanas e Sociais}
+\def\IE{Instituto de Educação}
+\def\IF{Instituto de Florestas}
+\def\IM{Instituto Multidisciplinar}
+\def\IT{Instituto de Tecnologia}
+\def\IV{Instituto de Veterinária}
+\def\IZ{Instituto de Zootecnia}
 
 %% Definição do tamanho da fonte
 \newcommand\LargeA{\@setfontsize\LargeA{24pt}{24.1pt}}
@@ -156,49 +176,129 @@
 \LoadClass[12pt,a4paper,oneside]{report}
 \RequirePackage[english,brazilian]{babel}
 \input{brazilian.babel} %% definições para textos em português
-\input{english.babel}   %% definições para textos em inglês
+\input{english.babel} %% definições para textos em inglês
 \if@english
   \selectlanguage{english}
   \AtBeginDocument{\selectlanguage{english}}
 \fi
 \RequirePackage{lastpage}
 \RequirePackage{indentfirst} 
-%\RequirePackage{natbib}
-\RequirePackage{eso-pic}%para importar arquivos .pdf (catalogação \includeCIP{})
+% \RequirePackage{natbib}
+\RequirePackage{eso-pic} % para importar arquivos .pdf (catalogação \includeCIP{})
 \RequirePackage{color, xcolor}
-\RequirePackage{fix-cm}%para funcionar corretamente o tamanho das fontes da capa
+\RequirePackage{fix-cm} % para funcionar corretamente o tamanho das fontes da capa
 
 %%=============================================================================
 %% Margens do texto
 %%=============================================================================
 
-\newlength{\mdt@topmargin}\setlength{\mdt@topmargin}{30mm}
-\newlength{\mdt@pagenummargin}\setlength{\mdt@pagenummargin}{20mm}
-\newlength{\mdt@bottommargin}\setlength{\mdt@bottommargin}{20mm}
-\newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{30mm}
-\setlength{\marginparwidth}{25mm}
+\if@newmargins
+  %% Definições gerais
+  \newlength{\mdt@topmargin}\setlength{\mdt@topmargin}{25mm}
+  \newlength{\mdt@bottommargin}\setlength{\mdt@bottommargin}{25mm}
+  \newlength{\mdt@pagenummargin}\setlength{\mdt@pagenummargin}{15mm}
+  \newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{20mm}
+  \setlength{\marginparwidth}{25mm}
+  %% Ajuste das medidas verticais
+  \setlength{\topmargin}{\mdt@pagenummargin}
+  \addtolength{\topmargin}{-1em}
+  \addtolength{\topmargin}{-1in}
+  \setlength{\headheight}{1em}
+  \setlength{\headsep}{\mdt@topmargin}
+  \addtolength{\headsep}{-\mdt@pagenummargin}
+  \setlength{\textheight}{\paperheight}
+  \addtolength{\textheight}{-\mdt@topmargin}
+  \addtolength{\textheight}{-\mdt@bottommargin}
+  \setlength{\footskip}{\mdt@bottommargin}
+  \addtolength{\footskip}{-\mdt@pagenummargin}
+  %% Ajuste das medidas horizontais
+  \setlength{\oddsidemargin}{\mdt@sidemargin}
+  \addtolength{\oddsidemargin}{-1in}
+  \setlength{\evensidemargin}{\oddsidemargin}
+  \setlength{\textwidth}{\paperwidth}
+  \addtolength{\textwidth}{-2\mdt@sidemargin}
+  \setlength{\marginparsep}{\mdt@sidemargin}
+  \addtolength{\marginparsep}{-\marginparwidth}
+  \setlength{\marginparsep}{.5\marginparsep}
+\else
+  %% Definições gerais
+  \newlength{\mdt@topmargin}\setlength{\mdt@topmargin}{30mm}
+  \newlength{\mdt@bottommargin}\setlength{\mdt@bottommargin}{20mm}
+  \newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{30mm}
+  \newlength{\mdt@pagenummargin}\setlength{\mdt@pagenummargin}{15mm}
+  \setlength{\marginparwidth}{25mm}
+  \newlength{\mdt@insidemargin}\setlength{\mdt@insidemargin}{30mm}
+  \newlength{\mdt@outsidemargin}\setlength{\mdt@outsidemargin}{20mm}
+  %% Ajuste das medidas verticais
+  \setlength{\topmargin}{\mdt@pagenummargin}
+  \addtolength{\topmargin}{-1em}
+  \addtolength{\topmargin}{-1in}
+  \setlength{\headheight}{1em}
+  \setlength{\headsep}{\mdt@topmargin}
+  \addtolength{\headsep}{-\mdt@pagenummargin}
+  \setlength{\textheight}{\paperheight}
+  \addtolength{\textheight}{-\mdt@topmargin}
+  \addtolength{\textheight}{-\mdt@bottommargin}
+  \setlength{\footskip}{\mdt@bottommargin}
+  \addtolength{\footskip}{-\mdt@pagenummargin}
+  %% Ajuste das medidas horizontais
+  \setlength{\oddsidemargin}{\mdt@insidemargin}
+  \addtolength{\oddsidemargin}{-1in}
+  \setlength{\evensidemargin}{\mdt@outsidemargin}
+  \setlength{\textwidth}{\paperwidth}
+  \addtolength{\textwidth}{-\mdt@insidemargin}
+  \addtolength{\textwidth}{-\mdt@outsidemargin}
+  \setlength{\marginparsep}{\mdt@sidemargin}
+  \addtolength{\marginparsep}{-\marginparwidth}
+  \setlength{\marginparsep}{.5\marginparsep}
+\fi
 
-%% Ajuste das medidas verticais
-\setlength{\topmargin}{\mdt@pagenummargin}
-\addtolength{\topmargin}{-1em} % altura do número da página (quando no topo)
-\addtolength{\topmargin}{-1in}
-\setlength{\headheight}{1em}
-\setlength{\headsep}{\mdt@topmargin}
-\addtolength{\headsep}{-\mdt@pagenummargin}
-\setlength{\textheight}{\paperheight}
-\addtolength{\textheight}{-\mdt@topmargin}
-\addtolength{\textheight}{-\mdt@bottommargin}
-\setlength{\footskip}{\mdt@bottommargin}
-
-%% Ajuste das medidas horizontais
-\setlength{\oddsidemargin}{\mdt@sidemargin}
-\addtolength{\oddsidemargin}{-1in}
-\setlength{\evensidemargin}{\oddsidemargin}
-\setlength{\textwidth}{\paperwidth}
-\addtolength{\textwidth}{-2\mdt@sidemargin}
-\setlength{\marginparsep}{\mdt@sidemargin}
-\addtolength{\marginparsep}{-\marginparwidth}
-\setlength{\marginparsep}{.5\marginparsep}
+% %% Original
+% \newlength{\mdt@topmargin}\setlength{\mdt@topmargin}{30mm}
+% \newlength{\mdt@bottommargin}\setlength{\mdt@bottommargin}{20mm}
+% % \newlength{\mdt@pagenummargin}\setlength{\mdt@pagenummargin}{20mm}
+% \newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{30mm}
+% \setlength{\marginparwidth}{25mm}
+% 
+% %% MDT (margem interna diferente da margem externa)
+% \newlength{\mdt@insidemargin}\setlength{\mdt@insidemargin}{30mm}
+% \newlength{\mdt@outsidemargin}\setlength{\mdt@outsidemargin}{20mm}
+% 
+% %% Otimizada
+% %% Margens menores, todas elas de 25 mm. O número da página fica a
+% %% 15 mm da borda da página.
+% % \newlength{\mdt@topmargin}\setlength{\mdt@topmargin}{25mm}
+% % \newlength{\mdt@bottommargin}\setlength{\mdt@bottommargin}{25mm}
+% \newlength{\mdt@pagenummargin}\setlength{\mdt@pagenummargin}{15mm}
+% % \newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{25mm}
+% 
+% 
+% %% Ajuste das medidas verticais
+% \setlength{\topmargin}{\mdt@pagenummargin}
+% \addtolength{\topmargin}{-1em} % altura do número da página (quando no topo)
+% \addtolength{\topmargin}{-1in}
+% \setlength{\headheight}{1em}
+% \setlength{\headsep}{\mdt@topmargin}
+% \addtolength{\headsep}{-\mdt@pagenummargin}
+% \setlength{\textheight}{\paperheight}
+% \addtolength{\textheight}{-\mdt@topmargin}
+% \addtolength{\textheight}{-\mdt@bottommargin}
+% \setlength{\footskip}{\mdt@bottommargin}
+% \addtolength{\footskip}{-\mdt@pagenummargin}
+% 
+% %% Ajuste das medidas horizontais
+% % \setlength{\oddsidemargin}{\mdt@sidemargin}
+% \setlength{\oddsidemargin}{\mdt@insidemargin} %% MDT
+% \addtolength{\oddsidemargin}{-1in}
+% % \setlength{\evensidemargin}{\oddsidemargin}
+% \setlength{\evensidemargin}{\mdt@outsidemargin} %% MDT
+% \setlength{\textwidth}{\paperwidth}
+% % \addtolength{\textwidth}{-2\mdt@sidemargin}
+% \addtolength{\textwidth}{-\mdt@insidemargin} %% MDT
+% \addtolength{\textwidth}{-\mdt@outsidemargin} %% MDT
+% \setlength{\marginparsep}{\mdt@sidemargin}
+% \addtolength{\marginparsep}{-\marginparwidth}
+% \setlength{\marginparsep}{.5\marginparsep}
 
 %indentar em 1,25 o primeiro parágrafo
 \setlength{\parindent}{1.25cm}%
@@ -206,13 +306,29 @@
 %%==============================================================================
 %% Numeração das páginas
 %%==============================================================================
+%% O número da página é colocado no canto superior direito porque a margem 
+%% superior, que é de 30 mm, possui mais espaço para acomodar o número da página
+%% do que a margem inferior, que é de 20 mm.
 
 %% Canto direito superior
+% \def\ps@UFRuralRJ{
+%   \let\@oddfoot\@empty
+%   \let\@evenfoot\@empty
+%   \def\@evenhead{{\small\thepage}}
+%   \def\@oddhead{\hspace*{\fill}{\small\thepage}}
+% }
+
+%% Canto direito inferior
 \def\ps@UFRuralRJ{
-  \let\@oddfoot\@empty
-  \let\@evenfoot\@empty
-  \def\@evenhead{{\small\thepage}}
-  \def\@oddhead{\hspace*{\fill}{\small\thepage}}
+  \def\@oddfoot{\hspace*{\fill}{\small\thepage}}
+  \def\@evenfoot{{\small\thepage}}
+  \if@header
+    \def\@evenhead{\hrulefill~\scriptsize\@chaptertitle}
+    \def\@oddhead{\hrulefill~\scriptsize\@chaptertitle}
+  \else
+    \let\@evenhead\@empty
+    \let\@oddhead\@empty
+  \fi
 }
 
 \pagestyle{empty}
@@ -322,7 +438,8 @@
 }
 \date{\monthname}{\number\year}
 
-% \newcommand{\dateingles}[2]{{#1}~$\text{\@publday}^{\text{#2}}$,~\@publyear} %% Obsoleto
+%% Obsoleto
+% \newcommand{\dateingles}[2]{{#1}~$\text{\@publday}^{\text{#2}}$,~\@publyear}
 
 %%=============================================================================
 %% Definições comuns à capa e à folha de rosto.
@@ -418,8 +535,6 @@
     \@ifundefined{@advisor}{}{
       \vfill{\LargeE\textbf{\@advisor}}}\\ %% Orientador(a)
     \@ifundefined{@coadvisora}{}{
-      % adicionar espaço entre o nome do(a) orientador(a) e os nomes dos(as)
-      % co-orientadores(as)
       \vspace{2ex}
       \sobcoorienta\par{\LargeE\textbf{\@coadvisora}}} %% Co-orientador 1
 
@@ -487,7 +602,7 @@
     \setlength{\parskip}{1.4ex}%
     \noindent \@authoralast, \@authorafirst\par
     %\@title\ / por \@authora.\ -- \@publyear.\\
-    \@titulo\ / \byname \@authora.\ -- \@publyear.\\            
+    \@titulo\ / \byname \@authora.\ -- \@publyear.\\
                 \indent\pageref{LastPage}~f.: il.; 30~cm. \par
 				\indent\iforientadora\advisornamef\else
 				 \advisorname\fi: \@advisorfirst\ \@advisorlast
@@ -787,18 +902,32 @@
 %% formatação dos títulos propriamente ditos.
 %%=============================================================================
 
-        %  \settowidth{\ii@chapnumindent}{{\textbf{\@chapapp}}}
-        %  \addtolength{\ii@chapnumindent}{1.8em}
+%% Título curto para cabeçalho (header)
+\newcommand{\shorttitle}[1]{\gdef\@shorttitle{#1}}
+
+% \settowidth{\ii@chapnumindent}{{\textbf{\@chapapp}}}
+% \addtolength{\ii@chapnumindent}{1.8em}
 \newcommand{\ii@chapterfont}{\@setfontsize\Large{14}{20}}
 \def\@chapapp{}
 \def\@chapter[#1]#2{%
-        \refstepcounter{chapter}%
-        \ifchap\addcontentsline{toc}{chapter}{
-          \protect\numberline{\@chapapp\thechapter}#1}\fi%
-        \addtocontents{lof}{\protect\addvspace{0\p@}}%original = 10\p@ 
-        \addtocontents{lot}{\protect\addvspace{0\p@}}%
-        \pagestyle{UFRuralRJ}\let\ps@plain\ps@UFRuralRJ%
-        \@makechapterhead{#2}\@afterheading
+      %% Formatação do cabeçalho (header)
+      \ifappendix
+        \gdef\@chaptertitle{\@chapapp\thechapter.~\@shorttitle}
+      \else
+        \ifannex
+          \gdef\@chaptertitle{\@chapapp\thechapter.~\@shorttitle}
+        \else
+          \gdef\@chaptertitle{\chaptername~\@chapapp\thechapter.~\@shorttitle}
+        \fi
+      \fi
+      \refstepcounter{chapter}%
+      \ifchap\addcontentsline{toc}{chapter}{
+        \protect\numberline{\@chapapp\thechapter}#1}\fi%
+      \addtocontents{lof}{\protect\addvspace{0\p@}}%original = 10\p@ 
+      \addtocontents{lot}{\protect\addvspace{0\p@}}%
+      %\pagestyle{UFRuralRJ}\let\ps@plain\ps@UFRuralRJ%
+      \pagestyle{UFRuralRJ}\let\ps@empty\ps@UFRuralRJ% Omitir número de página
+      \@makechapterhead{#2}\@afterheading
 }
 
 %% Colocar título de capítulos no formato de artigo 
@@ -831,7 +960,7 @@
   \else
     %\@setfontsize\Large{12}{20} se for o padrão da seção
     \reset@font\noindent{\ii@chapterfont\centering\textbf{
-      \MakeUppercase{\@chapapp}
+      \LargeF\MakeUppercase{\@chapapp}
         \thechapter\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}\par}
   \fi
   \ifappendix
@@ -849,18 +978,18 @@
 
 %% Formatação da versão estrelada (*) dos capítulos
 \def\@schapter#1{%
-        %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo 
-        %%      mundo alinhado na toc
-        \ifchap\if@aftertoc\addcontentsline{toc}{chapter}{\hspace*{0.35em}#1}\fi\fi%
-        \addtocontents{lof}{\protect\addvspace{0\p@}}%Original = 10\p@
-        \addtocontents{lot}{\protect\addvspace{0\p@}}%
-        \@makeschapterhead{#1}\@afterheading
+  %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo 
+  %%      mundo alinhado na toc
+  \ifchap\if@aftertoc\addcontentsline{toc}{chapter}{\hspace*{0.35em}#1}\fi\fi%
+  \addtocontents{lof}{\protect\addvspace{0\p@}}%Original = 10\p@
+  \addtocontents{lot}{\protect\addvspace{0\p@}}%
+  \@makeschapterhead{#1}\@afterheading
 }
 
 \def\@makeschapterhead#1{%
-	\vspace*{5mm}
-	\reset@font\centerline{\LargeF\centering\textbf{\MakeUppercase{#1}}}
-        \addvspace{25pt}
+  \vspace*{5mm}
+  \reset@font\centerline{\LargeF\centering\textbf{\MakeUppercase{#1}}}
+  \addvspace{25pt}
 }
 
 %%==============================================================================
@@ -964,9 +1093,10 @@
 %% Ajuste do formato das citações e referências
 %%=============================================================================
 
-%\setlength{\bibhang}{0pt}
-%\let\cite\citep
-%{}
+% Necessário para o pacote 'natbib'
+% \setlength{\bibhang}{0pt}
+% \let\cite\citep
+% {}
 
 %%=============================================================================
 %% Formatação dos Apêndices 
@@ -1006,10 +1136,12 @@
   \appendixpage
   \setcounter{chapter}{0}%
   \setcounter{section}{0}%
-  \renewcommand{\thechapter}{\LargeF\Alph{chapter}}%
+%   \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
+  \renewcommand{\thechapter}{\Alph{chapter}}%
   \setcounter{tocdepth}{0}%
   \@captionlistingfalse%
-  \gdef\@chapapp{\LargeF#1\space}%
+%   \gdef\@chapapp{\LargeF#1\space}% Tamanho agora definido em @chapter
+  \gdef\@chapapp{#1\space}%
 }
 
 \newcommand\listofappendix{%
@@ -1060,16 +1192,17 @@
 }	
 
 \newcommand{\annex}[1][\annexname]{%
-        \chapfalse
-				\appendixfalse
-				\annextrue
-				\annexpage
-        \setcounter{chapter}{0}%
-				\setcounter{section}{0}%
-        \renewcommand{\thechapter}{\LargeF\Alph{chapter}}%
-        \setcounter{tocdepth}{0}%
-        \@captionlistingfalse%
-        \gdef\@chapapp{#1\space}%
+  \chapfalse
+  \appendixfalse
+  \annextrue
+  \annexpage
+  \setcounter{chapter}{0}%
+  \setcounter{section}{0}%
+%   \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
+  \renewcommand{\thechapter}{\Alph{chapter}}%
+  \setcounter{tocdepth}{0}%
+  \@captionlistingfalse%
+  \gdef\@chapapp{#1\space}%
 }
 
 \newcommand\listofannex{%

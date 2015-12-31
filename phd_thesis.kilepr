@@ -171,10 +171,17 @@ order=-1
 
 [item:chap/apena.tex]
 archive=true
+<<<<<<< HEAD
 column=17
 encoding=UTF-8
 highlight=LaTeX
 line=309
+=======
+column=26
+encoding=UTF-8
+highlight=LaTeX
+line=306
+>>>>>>> 9bd3fa39e38bfac9e9ac39b353b4b430ed0c8db8
 mode=LaTeX
 open=false
 order=0
@@ -362,10 +369,17 @@ JumpList=
 ViMarks=.,50,0,[,50,0,],50,0
 
 [view-settings,view=0,item:chap/apena.tex]
+<<<<<<< HEAD
 CursorColumn=17
 CursorLine=309
 JumpList=
 ViMarks=.,328,82,[,328,82,],328,87
+=======
+CursorColumn=26
+CursorLine=306
+JumpList=
+ViMarks=.,336,13,[,336,13,],336,13
+>>>>>>> 9bd3fa39e38bfac9e9ac39b353b4b430ed0c8db8
 
 [view-settings,view=0,item:chap/apenb.tex]
 CursorColumn=2
