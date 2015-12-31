@@ -72,7 +72,7 @@
 
 %%TODO: Margens conforme MDT UFSM 7ª edição. Corrigir no arquivo UFRuralRJ.cls 
 %%      para funcionar a opção twoside *PENDENTE*
-\usepackage[inner = 30mm, outer = 20mm, top = 30mm, bottom = 20mm]{geometry}
+%\usepackage[inner = 30mm, outer = 20mm, top = 30mm, bottom = 20mm]{geometry}
 
 %% Se o pacote 'hyperref' acima foi carregado, a linha abaixo corrige um bug na 
 %% hora de montar o sumário da lista de figuras e tabelas. Comente a linha se o
@@ -86,6 +86,7 @@
 % IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
 % depois do pacote 'hyperref'
 \usepackage[alf]{abntex2cite}
+%\renewcommand{\authorcapstyle}{\small}
 
 %%==============================================================================
 %% Pacotes - formatação de verbatim
@@ -97,7 +98,7 @@
 \let\oldendv\endverbatim
 \def\verbatim{\par\setbox0\vbox\bgroup\oldv}
 \def\endverbatim{\oldendv\egroup\fboxsep0pt 
-                 \noindent\colorbox[gray]{0.8}{\usebox0}\par}
+                 \noindent\colorbox[gray]{0.95}{\usebox0}\par}
 
 %%==============================================================================
 %% Packages - other
@@ -342,7 +343,7 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
-% \listofappendix
+\listofappendix
 
 %%=============================================================================
 %% Lista de Anexos (comentar se não houver)
@@ -380,8 +381,8 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 \setlength{\baselineskip}{1.5\baselineskip}
 
 % Adiciona cada capitulo
-% \include{chap/chap00}
-% \include{chap/chap01}
+\include{chap/chap00}
+\include{chap/chap01}
 % \include{chap/chap02}
 % \include{chap/chap03}
 % \include{chap/chap04}
