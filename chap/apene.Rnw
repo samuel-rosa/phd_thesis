@@ -36,7 +36,7 @@ covariates, including road intersection, fence corners, and property entrances.
 
 \begin{figure}[!ht]
  \centering
-<<fig:covar-data-field-gcps, fig = TRUE, echo = FALSE>>=
+<<covar-data-field-gcps, fig = TRUE, echo = FALSE>>=
 gcps <- read.table(
   "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/gcpData.csv", sep = "\t",
   header = TRUE, na.strings = "na")
@@ -49,7 +49,6 @@ invisible(capture.output(
     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)
 ))
 invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
-invisible(capture.output(drain <- rgeos::gIntersection(drain, pol, byid = TRUE)))
 p <- sp::spplot(
   pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
   scales = list(draw = TRUE), colorkey = FALSE, aspect = "iso",
@@ -68,6 +67,8 @@ p <- sp::spplot(
       col = "gray", lty = "dashed", lwd = 0.5)
   })
 print(p)
+rm(gcps, p, pol)
+gc()
 @
 \caption{Spatial distribution of the ground control points ($n = 14$, red) used to validate the sources of the
 covariates included in the Santa Maria dataset.}
