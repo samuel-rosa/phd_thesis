@@ -100,7 +100,7 @@ thesis!
 
 In the next two sections I give an overview of the models of spatial variation used for soil
 modelling (\refsec{intro-soil-mapping}) and discuss about some of the sources of uncertainty in
-soil-mapping projects (\refsec{uncertainty}). Then I present the content of the thesis
+soil-mapping projects (\refsec{intro-uncertainty}). Then I present the content of the thesis
 (\refsec{thesis-content}), including the objectives and research questions that guided my work
 during most of the past four years (\refsec{thesis-objectives}), and the study area
 (\refsec{intro-study-area}) and database (\refsec{intro-database}) that I used to develop the case
@@ -806,166 +806,30 @@ discontinuities \cite{PieriniEtAl2002,MiguelEtAl2012}.
 \subsection{Database}
 \label{sec:intro-database}
 
-The soil database used to develop the case studies is part of the \emph{Santa Maria dataset}
-(\autoref{apen:soil-data}), a dataset composed of $n = 410$ soil observations made between \num{2004}
-and \num{2013} as part of different research projects. These projects aimed at producing semi-detailed
-soil and land use maps (\scale{25000})
-\cite{Pedron2005,Miguel2010,SamuelRosaEtAl2011a,MiguelEtAl2012,Samuel-RosaEtAl2013}, and predicting topsoil
-carbon stock and vulnerability to erosion \cite{Samuel-Rosa2009,MouraBueno2012,Miguel2013}. The Santa Maria 
-dataset,
-which is freely available at ISRIC World Soil Information Service 
-(\href{http://www.isric.org/data/wosis}{WoSIS}), and is
-fully documented at the end of this thesis (\autoref{apen:soil-data}), is composed of three subsets, but only 
-two of them are
-used here (\reffig{intro-database}).
+The soil data used to develop the case studies is part of the \emph{Santa Maria dataset} 
+(\autoref{apen:soil-data}), a dataset composed of $n = 410$ soil observations made between \num{2004} and 
+\num{2013} as part of different research projects. These projects aimed at producing semi-detailed soil and 
+land use maps (\scale{25000}) \cite{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012, 
+Samuel-RosaEtAl2013}, and predicting topsoil carbon stock and vulnerability to erosion \cite{Samuel-Rosa2009, 
+MouraBueno2012, Miguel2013}. The Santa Maria dataset, which is freely available at ISRIC World Soil Information 
+Service (\href{http://www.isric.org/data/wosis}{WoSIS}), and is fully documented at the end of this thesis 
+(\autoref{apen:soil-data}), is composed of three subsets, but only two of them (\emph{Subset I} and 
+\emph{Subset III}) are used here (\autoref{fig:soil-data-subsets-I-III}).
 
-\begin{figure}[!ht]
-\centering
-<<intro-database, fig = TRUE, echo = FALSE>>=
-cal_data <- read.table(
- "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
- header = TRUE, na.strings = "na")[1:350, c("longitude", "latitude")]
-sp::coordinates(cal_data) <- ~ longitude + latitude
-sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
-cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
-pts <- data.frame(slot(cal_data, "coords"))
-pts[, "id"] <- c(rep("black", 340), rep("red", 10))
-invisible(capture.output(
- spgrass6::initGRASS(
-   gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
-   location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(),
-   override = TRUE)
-))
-invisible(capture.output(
- pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)
-))
-invisible(capture.output(
- drain <- spgrass6::readVECT6("STREAM_10", ignore.stderr = TRUE)
-))
-invisible(capture.output(
- drain <- rgeos::gIntersection(drain, pol, byid = TRUE)
-))
-p <- sp::spplot(
- pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
- scales = list(draw = TRUE),
- colorkey = FALSE, aspect = "iso",
- xlim = c(cal_data@bbox[1, 1] * 0.9998, cal_data@bbox[1, 2] * 1.0005),
- ylim = c(cal_data@bbox[2, 1] * 0.99999, cal_data@bbox[2, 2] * 1.00001),
- par.settings = list(
-   fontsize = list(text = 12, points = 8),
-   layout.widths = list(left.padding = 0, right.padding = 0),
-   layout.heights = list(top.padding = 0, bottom.padding = 0)),
- panel = function(x, y, ...) {
-   sp::panel.polygonsplot(x, y, ...)
-   lattice::panel.points(
-     x = pts[, "longitude"], y = pts[, "latitude"], pch = 20, col = pts[, "id"])
-   lattice::panel.abline(
-     v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
-     col = "gray", lty = "dashed", lwd = 0.5)
-   }) +
- latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed"))
-print(p)
-@
-\caption{Spatial distribution of the $n = 340$ (black) and $n = 10$ (red) soil observations from
-the Santa Maria dataset used in this thesis. The drainage network is shown in the background to
-give an idea of how sampling locations are related to terrain features.}
-\label{fig:intro-database}
-\end{figure}
-
-The first dataset ($n = 340$) was produced using purposively selected observation locations (free
-survey). The main goal of the researchers was to obtain a sample that they understood as being
-representative of the different landforms, land uses, and soil taxa present in the study area. They
-also wanted the sample to cover the entire study area. At the observation locations, they defined
-an area of \SI{\approx100}{\metre\squared} within which they opened three soil pits. Soil samples
-were collected up to a depth of \SI{20}{\centi\metre}. The resulting sampling depth varies from
-\num{2} to \SI{20}{\centi\metre}, with a mean of \SI{17}{\centi\metre}. Soil samples from the three
-pits were used to produce a composite sample which was used for laboratory analysis. Georeferencing
-took place in the field using a GNSS signal receiver with a horizontal precision of more than
-\SI{\pm8}{\metre} positioned approximately at the centre of the sampling area. When the GNSS signal
-was affected by vegetation biomass, terrain features and satellite configuration, resulting in a
-horizontal positional error larger than \SI{\pm8}{\metre}, georeferencing was carried out in the
-office using \SI{1}{\metre} spatial resolution Google Earth\textregistered{} satellite image with
-a positional horizontal error of less than \SI{\pm6}{\metre}.
-
-The second dataset ($n = 10$) contains data from the uppermost A horizon of modal soil profiles
-whose locations were purposively selected after the observations of the first dataset had been made,
-and a preliminary area-class soil map had been produced. The researchers aimed at locations that
-they understood as being most representative of the soil mapping units depicted in the area-class
-soil map. A single soil sample was taken from the each described soil horizon and used for
-laboratory analysis. The resulting depth of the uppermost A horizons varies from \num{12} to
-\SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried out as
-described above, the difference being that GNSS signal receiver was positioned at the observation
-location.
-
-Four soil properties contained in the Santa Maria dataset are explored in this thesis: clay content
-(CLAY, \si{\gram\per\kilo\gram}), organic carbon content (ORCA, \si{\gram\per\kilo\gram}), effective
-cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}), and bulk density (BUDE,
-\si{\mega\gram\per\cubic\metre}). CLAY was determined by the pipette method. ORCA was determined
-using wet digestion. ECEC was calculated as the sum of exchangeable bases plus exchangeable acidity.
-BUDE was determined using the core method. The first three soil properties were selected because
-they were expected to present different patterns of spatial variation and correlation with the
-dominant factors of soil formation in the study area: organisms (\textit{O}), relief (\textit{R}),
-and parent material (\textit{P}). CLAY was presumed to have a stronger relation with \textit{P},
-while ORCA was expected to be more correlated with \textit{O}. Because the soils of the study area
-were strongly eroded due to intense agriculture in the 20th century, both CLAY and ORCA were also
-expected to be closely related with \textit{R}. Finally, ECEC was expected to be strongly correlated
-with \textit{P} and \textit{O}, which is supported by its natural relationship with both CLAY and
-ORCA. BUDE was selected because it was the only soil property that approximately follows a normal
-frequency distribution, while the other three have a right-tailed frequency distribution
-(\autoref{intro-soil-properties}). The main weakness of the BUDE data is that it is available at
-only $n = 282$ observations due to soil stoniness.
-
-\begin{figure}[!ht]
-\centering
-<<echo = FALSE>>=
-options(useFancyQuotes = FALSE)
-tmp <- read.table(
- '~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv', sep = ";",
- header = TRUE, na.strings = 'na')
-lattice::trellis.par.set(
- fontsize = list(text = 16, points = 15), axis.line = list(lwd = 0.01),
- layout.widths = list(left.padding = 0, right.padding = 0),
- layout.heights = list(top.padding = 0, bottom.padding = 0))
-aa <- pedometrics::plotHD(tmp$CLAY, xlab = 'CLAY')
-bb <- pedometrics::plotHD(tmp$ORCA, xlab = 'ORCA')
-cc <- pedometrics::plotHD(tmp$ECEC, xlab = 'ECEC')
-dd <- pedometrics::plotHD(na.exclude(tmp$BUDE), xlab = "BUDE")
-@
-\begin{minipage}[b]{63mm}
-\subcaption{}
-\centering
-<<intro-clay, fig = TRUE, echo = FALSE>>=
-print(aa)
-@
-\end{minipage}
-\begin{minipage}[b]{63mm}
-\subcaption{}
-\centering
-<<intro-orca, fig = TRUE, echo = FALSE>>=
-print(bb)
-@
-\end{minipage}
-\begin{minipage}[b]{63mm}
-\subcaption{}
-\centering
-<<intro-ecec, fig = TRUE, echo = FALSE>>=
-print(cc)
-@
-\end{minipage}
-\begin{minipage}[b]{63mm}
-\subcaption{}
-\centering
-<<intro-bude, fig = TRUE, echo = FALSE>>=
-print(dd)
-@
-\end{minipage}
-\caption{The four soil properties explored in this thesis: (a) clay content, (b) organic carbon
-content, (c) effective cation exchange capacity, and (d) bulk density. Each panel shows the sample
-histogram and summary statistics of the soil properties in their original scale ($\lambda = 1$), as
-well as the theoretical probability density function so that we can assess how good is the fit of
-the normal distribution to the data -- a product of the \Rpackage{pedometrics}.}
-\label{fig:intro-soil-properties}
-\end{figure}
+Four soil properties contained in the Santa Maria dataset are explored in this thesis: clay content (CLAY, 
+\si{\gram\per\kilo\gram}, \autoref{apen:soil-data-clay}), organic carbon content (ORCA, 
+\si{\gram\per\kilo\gram}, autoref{apen:soil-data-orca}), effective cation exchange capacity (ECEC, 
+\si{\milli\mole\per\kilo\gram}, \autoref{apen:soil-data-ecec}), and bulk density (BUDE, 
+\si{\mega\gram\per\cubic\metre}, \autoref{apen:soil-data-bude}). The first three soil properties were selected 
+because they were expected to present different patterns of spatial variation and correlation with the dominant 
+factors of soil formation in the study area: organisms (\textit{O}), relief (\textit{R}), and parent material 
+(\textit{P}). CLAY was presumed to have a stronger relation with \textit{P}, while ORCA was expected to be more 
+correlated with \textit{O}. Because the soils of the study area were strongly eroded due to intense agriculture 
+in the 20th century, both CLAY and ORCA were also expected to be closely related with \textit{R}. Finally, ECEC 
+was expected to be strongly correlated with \textit{P} and \textit{O}, which is supported by its natural 
+relationship with both CLAY and
+ORCA. BUDE was selected because it was the only soil property that approximately follows a normal frequency 
+distribution, while the other three have a right-tailed frequency distribution.
 
 A list of more than \num{100} covariates was used in this thesis. All of them were derived from five freely 
 available sources: area-class soil maps, digital elevation models, geological maps, land use maps, and orbital 
