@@ -174,34 +174,20 @@ order=-1
 
 [item:chap/apena.tex]
 archive=true
-<<<<<<< HEAD
-column=95
+column=26
 encoding=UTF-8
 highlight=LaTeX
-line=326
-=======
-column=68
-encoding=UTF-8
-highlight=LaTeX
-line=142
->>>>>>> 05277479a98a2887e9e87ccb00f1e020a3866b40
+line=306
 mode=LaTeX
 open=true
 order=0
 
 [item:chap/apenb.tex]
 archive=true
-<<<<<<< HEAD
-column=0
-encoding=UTF-8
-highlight=LaTeX
-line=5
-=======
 column=12
 encoding=UTF-8
 highlight=LaTeX
 line=2
->>>>>>> 05277479a98a2887e9e87ccb00f1e020a3866b40
 mode=LaTeX
 open=false
 order=-1
@@ -365,25 +351,14 @@ JumpList=
 ViMarks=.,50,0,[,50,0,],50,0
 
 [view-settings,view=0,item:chap/apena.tex]
-<<<<<<< HEAD
-CursorColumn=95
-CursorLine=326
+CursorColumn=26
+CursorLine=306
 JumpList=
-ViMarks=.,326,94,[,326,0,],326,94
-
-[view-settings,view=0,item:chap/apenb.tex]
-CursorColumn=0
-CursorLine=5
-=======
-CursorColumn=68
-CursorLine=142
-JumpList=
-ViMarks=.,142,72,[,142,71,],142,72
+ViMarks=.,336,13,[,336,13,],336,13
 
 [view-settings,view=0,item:chap/apenb.tex]
 CursorColumn=12
 CursorLine=2
->>>>>>> 05277479a98a2887e9e87ccb00f1e020a3866b40
 JumpList=
 ViMarks=.,1,65,[,1,65,],1,65
 
