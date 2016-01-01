@@ -1,6 +1,7 @@
-ATTENTION: lines starting with “\%”  will not be included in the document!
+% ATTENTION: lines starting with “%”  will not be included in the document!
+
 \artigofalse
-\chapter{The Santa Maria dataset -- soil data (v.1)}
+\chapter{The Santa Maria dataset -- soil data}
 \label{apen:soil-data}
 
 \tocless\section{Introduction}
@@ -11,9 +12,9 @@ border of the plateau of the Paraná Sedimentary Basin, in the city of Santa Mar
 Grande do Sul, Brazil. These point soil observations cover the northern sector of the catchment -- 
 an area of \SI{\pm2000}{\hectare}, which corresponds to \SI{\pm60}{\percent} of the entire 
 catchment. These soil data was produced during the development of research projects that aimed at 
-producing semi-detailed soil and land use maps (\scale{25000}) 
-\cite{Pedron2005,Miguel2010,SamuelRosaEtAl2011a,MiguelEtAl2012}, and predicting topsoil carbon 
-stock and vulnerability to erosion \cite{Samuel-Rosa2009,MouraBueno2012,Miguel2013}.
+producing semi-detailed soil and land use maps (\scale{25000}) \cite{Pedron2005, Miguel2010, 
+SamuelRosaEtAl2011a, MiguelEtAl2012}, and predicting topsoil carbon stock and vulnerability to erosion 
+\cite{Samuel-Rosa2009, MouraBueno2012, Miguel2013}.
 
 This document (v.1) presents a description of the soil data contained in the Santa Maria dataset, 
 including the procedures for soil sampling and description, as well as the analytical methods 
@@ -42,11 +43,12 @@ neighbouring observations being separated by more than \SI{49}{\metre}.
 
 \tocless\subsection{Subset I}
 
-The first subset ($n = 340$) was produced by \citeonline{Samuel-Rosa2009}, \citeonline{SamuelRosaEtAl2011a}, 
-\citeonline{MiguelEtAl2012}, \citeonline{Moura-BuenoEtAl2012}, and \citeonline{Samuel-RosaEtAl2013} as part
-of projects that aimed at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock 
-and vulnerability to erosion. The researchers faced several difficulties with a budget cut and shortage 
-of workforce. They also had restricted access to several areas due to geographic barriers and prohibition of 
+The first subset ($n = 340$, \autoref{fig:soil-data-subsets-I-III}) was produced by 
+\citeonline{Samuel-Rosa2009}, \citeonline{SamuelRosaEtAl2011a}, \citeonline{MiguelEtAl2012}, 
+\citeonline{Moura-BuenoEtAl2012}, and \citeonline{Samuel-RosaEtAl2013} as part of projects that aimed at 
+producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
+erosion. The researchers faced several difficulties with a budget cut and shortage of workforce. They also had 
+restricted access to several areas due to geographic barriers and prohibition of 
 access by some landowners. These difficulties forced the researchers to reduce the originally aimed number of 
 observations ($n = 500$) during the development of the project.
 
@@ -73,6 +75,53 @@ Note that soil sampling was done using an areal support -- an area of \SI{\pm100
 the shape and exact area of the sampling units are unknown, and georeferencing took place at point 
 support. Thus, the use of this subset requires to make the assumption that it was obtained using a point
 sampling support. The possible negative consequences of this assumption have not been explored so far.
+
+\begin{figure}[!ht]
+\centering
+<<fig:soil-data-subsets-I-III, fig = TRUE, echo = FALSE>>=
+cal_data <- read.table(
+ "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
+ header = TRUE, na.strings = "na")[1:350, c("longitude", "latitude")]
+sp::coordinates(cal_data) <- ~ longitude + latitude
+sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
+cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
+pts <- data.frame(slot(cal_data, "coords"))
+pts[, "id"] <- c(rep("black", 340), rep("red", 10))
+invisible(capture.output(
+ spgrass6::initGRASS(
+   gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+   location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(),
+   override = TRUE)
+))
+invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
+invisible(capture.output(drain <- spgrass6::readVECT6("STREAM_10", ignore.stderr = TRUE)))
+invisible(capture.output(drain <- rgeos::gIntersection(drain, pol, byid = TRUE)))
+p <- sp::spplot(
+ pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
+ scales = list(draw = TRUE),
+ colorkey = FALSE, aspect = "iso",
+ xlim = c(cal_data@bbox[1, 1] * 0.9998, cal_data@bbox[1, 2] * 1.0005),
+ ylim = c(cal_data@bbox[2, 1] * 0.99999, cal_data@bbox[2, 2] * 1.00001),
+ par.settings = list(
+   fontsize = list(text = 12, points = 8),
+   layout.widths = list(left.padding = 0, right.padding = 0),
+   layout.heights = list(top.padding = 0, bottom.padding = 0)),
+ panel = function(x, y, ...) {
+   sp::panel.polygonsplot(x, y, ...)
+   lattice::panel.points(
+     x = pts[, "longitude"], y = pts[, "latitude"], pch = 20, col = pts[, "id"])
+   lattice::panel.abline(
+     v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
+     col = "gray", lty = "dashed", lwd = 0.5)
+   }) +
+ latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed"))
+print(p)
+@
+\caption{Spatial distribution of the point soil observations contained in \emph{Subset I} ($n = 340$, black) 
+and \emph{Subset III} ($n = 10$, red) of the Santa Maria dataset. The drainage network is shown in the 
+background to give an idea of how the locations of soil observations is related to terrain features.}
+\label{fig:soil-data-subsets-I-III}
+\end{figure}
 
 Georeferencing was done in the field using a Global Navigation Satellite System (GNSS) receiver with a 
 horizontal positional error of less than \SI{\pm8}{\metre} positioned approximately at the centre of the
@@ -182,9 +231,11 @@ auger using the classification scheme proposed by \citeonline{SantosEtAl2013}.
 
 \tocless\subsection{Coarse fragments and rock outcrops}
 
-Presence of coarse fragments (\texttt{FRAG}) -- soil material of diameter \SI{>2}{\centi\metre} -- was described 
+Presence of coarse fragments (\texttt{FRAG}) -- soil material of diameter \SI{>2}{\centi\metre} -- was 
+described 
 as a binary variable, that is, a value of \num{1} (one) was annotated when coarse fragments were present, and 
-\num{0} (zero) otherwise. The approach was adopted to describe the presence of rock outcrops (\texttt{ROCK}). The 
+\num{0} (zero) otherwise. The approach was adopted to describe the presence of rock outcrops (\texttt{ROCK}). 
+The 
 quantity of gravel (\texttt{GRAVEL}, \si{percent}) was estimated visually.
 
 The employed to describe the presence of coarse fragments and rock outcrops is not in line with the soil 
@@ -209,6 +260,7 @@ analyses using the methods described in the next sections. One or more laborator
 calculate analytical errors.
 
 \tocless\subsection{Soil organic fraction}
+\label{apen:soil-data-orca}
 
 The soil organic carbon content (\texttt{ORCA}, \si{\gram\per\kilo\gram}) was determined using the method of
 \citeonline{Mebius1960} modified by \citeonline{YeomansEtAl1988} as described by
@@ -245,14 +297,18 @@ standard method. The results are expressed using a volume-basis and were convert
 1:1 relation because the mass of the sample aliquot used in the analyses is unknown.
 
 \tocless\subsection{Particle size analysis}
+\label{apen:soil-data-clay}
 
 Particle size analysis was performed using the pipette method, with the sand fraction 
-(\texttt{SAND}, \SIrange{0.053}{2}{\milli\metre}, \si{\gram\per\kilo\gram}) determined by wet sieving, and the silt 
-fraction (\texttt{SILT}, \SIrange{0.002}{0.053}{\milli\metre}, \si{\gram\per\kilo\gram}) calculated by difference. 
+(\texttt{SAND}, \SIrange{0.053}{2}{\milli\metre}, \si{\gram\per\kilo\gram}) determined by wet sieving, and the 
+silt 
+fraction (\texttt{SILT}, \SIrange{0.002}{0.053}{\milli\metre}, \si{\gram\per\kilo\gram}) calculated by 
+difference. 
 The analytical procedure is an adaptation of the method of the Soil Conservation Service of the United States
 Department of Agriculture \cite{UnitedStates1972} made by the Soil Physics Laboratory of the Universidate
 Federal de Santa Maria \footnote{As far as I know, a comprehensive description of this method has not been 
-published so far, neither in Portugues nor in English. You can visit the homepage of the Soil Physics Laboratory 
+published so far, neither in Portugues nor in English. You can visit the homepage of the Soil Physics 
+Laboratory 
 of the Universidate Federal de Santa Maria at \url{https://coral.ufsm.br/fisicadosolo/} to get more information
 about the method or contact their developers.} \cite{SuzukiEtAl2004,SuzukiEtAl2004a}.
 
@@ -279,7 +335,7 @@ filled with distilled water.
 
 The clay fraction (\texttt{CLAY}, \SI{<0.002}{\milli\metre}, \si{\gram\per\kilo\gram}) was determined by the 
 pipette method. Soil samples with organic matter content \SI{>5}{\percent} were submitted to oxidative 
-treatment with hydrogen peroxide (\ce{H2O2} prior to the analysis following the recommendations of
+treatment with hydrogen peroxide (\ce{H2O2) prior to the analysis following the recommendations of
 \citeonline{ClaessenEtAl1997}.
 
 %The sand fraction was separated into five size classes:
@@ -302,14 +358,18 @@ treatment with hydrogen peroxide (\ce{H2O2} prior to the analysis following the 
 % agente dispersante (NaOH) e o agente desagregante (esferas de nylon) \cite{ClaessenEtAl1997}.
 
 \tocless\subsection{Soil density}
+\label{apen:soil-data-bude}
 
 % TODO: Provide a more detailed description of how this is done.
-The bulk soil density (\texttt{BUDE}, \si{\mega\gram\per\cubic\metre}) was determined using the core method with a 
+The bulk soil density (\texttt{BUDE}, \si{\mega\gram\per\cubic\metre}) was determined using the core method 
+with a 
 metallic ring (height: \SI{3}{\centi\metre}; diameter: \SI{5}{\centi\metre}) as described by 
-\citeonline{ClaessenEtAl1997}. The bulk soil density was not determined in the locations where the soil was very 
+\citeonline{ClaessenEtAl1997}. The bulk soil density was not determined in the locations where the soil was 
+very 
 shallow or stony.
 
 \tocless\subsection{Exchangeable bases and acidity}
+\label{apen:soil-data-ecec}
 
 The exchangeable calcium (\texttt{CALC}, \si{\milli\mole\per\kilo\gram}) and magnesium (\texttt{MAGN}, 
 \si{\milli\mole\per\kilo\gram}) were determined by atomic absorption spectroscopy after extraction with 
@@ -332,20 +392,26 @@ exchangeable calcium and magnesium. It was determined by titrimetry with \SI{0.0
 The effective cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}) was defined as the sum of 
 exchangeable bases and exchangeable acidity, i.e. 
 
-\begin{equation}
+\begin{equation*}
  \texttt{ECEC} = \texttt{CALC} + \texttt{MAGN} + \texttt{POTA} + \texttt{SODI} + \texttt{EXAC}.
-\end{equation}
+\end{equation*}
 
 
 % TODO: Provide a more detailed description of how these are calculated and include the data in the database.
 % The sum of exchangeable bases (BASES) is given by the sum of the exchangeable calcium, magnesium, sodium and 
-% potassium. The effective cation exchange capacity (ECEC) is the given by the exchangeable acidity plus the sum of 
-% exchangeable bases. The potential cation exchange capacity (CEC) is given by the potential acidity plus the sum of 
-% exchangeable bases. Note that the standard method for determining exchangeable bases relies on the use of barium 
+% potassium. The effective cation exchange capacity (ECEC) is the given by the exchangeable acidity plus the 
+sum of 
+% exchangeable bases. The potential cation exchange capacity (CEC) is given by the potential acidity plus the 
+sum of 
+% exchangeable bases. Note that the standard method for determining exchangeable bases relies on the use of 
+barium 
 % chloride [BaCl$_2$].
-% The base saturation (BASA) is given by the sum of exchangeable bases divided by the potential cation exchange 
-% capacity. The saturation of the ECEC with exchangeable acidity, or the aluminum saturation (ALSA), is given by the 
-% sum of exchangeable bases divided by the effective cation exchange capacity. The results are multiplied by 100. 
+% The base saturation (BASA) is given by the sum of exchangeable bases divided by the potential cation 
+exchange 
+% capacity. The saturation of the ECEC with exchangeable acidity, or the aluminum saturation (ALSA), is given 
+by the 
+% sum of exchangeable bases divided by the effective cation exchange capacity. The results are multiplied by 
+100. 
 
 \tocless\section{Acknowledgements}
 
@@ -354,4 +420,55 @@ Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Ba
 Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink 
 (ISRIC -- World Soil Information), and Ad van Oostrum (ISRIC -- World Soil Information).
 
+% \begin{figure}[!ht]
+% \centering
+% <<echo = FALSE>>=
+% options(useFancyQuotes = FALSE)
+% tmp <- read.table(
+%  '~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv', sep = ";",
+%  header = TRUE, na.strings = 'na')
+% lattice::trellis.par.set(
+%  fontsize = list(text = 16, points = 15), axis.line = list(lwd = 0.01),
+%  layout.widths = list(left.padding = 0, right.padding = 0),
+%  layout.heights = list(top.padding = 0, bottom.padding = 0))
+% aa <- pedometrics::plotHD(tmp$CLAY, xlab = 'CLAY')
+% bb <- pedometrics::plotHD(tmp$ORCA, xlab = 'ORCA')
+% cc <- pedometrics::plotHD(tmp$ECEC, xlab = 'ECEC')
+% dd <- pedometrics::plotHD(na.exclude(tmp$BUDE), xlab = "BUDE")
+% @
+% \begin{minipage}[b]{63mm}
+% \subcaption{}
+% \centering
+% <<intro-clay, fig = TRUE, echo = FALSE>>=
+% print(aa)
+% @
+% \end{minipage}
+% \begin{minipage}[b]{63mm}
+% \subcaption{}
+% \centering
+% <<intro-orca, fig = TRUE, echo = FALSE>>=
+% print(bb)
+% @
+% \end{minipage}
+% \begin{minipage}[b]{63mm}
+% \subcaption{}
+% \centering
+% <<intro-ecec, fig = TRUE, echo = FALSE>>=
+% print(cc)
+% @
+% \end{minipage}
+% \begin{minipage}[b]{63mm}
+% \subcaption{}
+% \centering
+% <<intro-bude, fig = TRUE, echo = FALSE>>=
+% print(dd)
+% @
+% \end{minipage}
+% \caption{The four soil properties explored in this thesis: (a) clay content, (b) organic carbon
+% content, (c) effective cation exchange capacity, and (d) bulk density. Each panel shows the sample
+% histogram and summary statistics of the soil properties in their original scale ($\lambda = 1$), as
+% well as the theoretical probability density function so that we can assess how good is the fit of
+% the normal distribution to the data -- a product of the \Rpackage{pedometrics}.}
+% \label{fig:intro-soil-properties}
+% \end{figure}
 

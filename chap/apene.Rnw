@@ -4,7 +4,7 @@
 \chapter{The Santa Maria dataset -- covariate data}
 \label{apen:covar-data}
 \usepackage[utf8]{inputenc}
-
+\SweaveOpts{prefix.string = fig/apene}
 
 \tocless\section{Introduction}
 \label{sec:covar-data-intro}
@@ -28,122 +28,137 @@ covariate data are freely available at the producers databases or in public libr
 \tocless\section{Ground control points}
 \label{sec:covar-data-gcp}
 
-All sources of covariates were validated prior to their use. Horizontal (positional) validation was performed 
-using a set of $n = 14$ validation points, here called ground control points (GCP), spread throughout and 
-beyond the limits of the study area (\autoref{fig:covar-data-field-gcps}). The location of the GCPs was 
-defined based on the existence of easily identifiable geographical markers autocross the sources of 
-covariates, including road intersection, fence corners, and property entrances.
+All covariates were validated prior to their use. Horizontal (positional) validation was performed using a set 
+of $n = 14$ validation points, here called ground control points (GCP), spread throughout and beyond the limits 
+of the study area (\autoref{fig:covar-data-field-gcps}). The location of the GCPs was defined based on the 
+existence of easily identifiable geographical markers across the covariates, including road intersection, fence 
+corners, and property entrances.
 
 \begin{figure}[!ht]
  \centering
-\begin{Schunk}
-\begin{Soutput}
-         used (Mb) gc trigger (Mb) max used (Mb)
-Ncells 586009 31.3     940480 50.3   885505 47.3
-Vcells 760374  5.9    1650153 12.6  1308379 10.0
-\end{Soutput}
-\end{Schunk}
-\includegraphics{fig/apene-covar-data-field-gcps}
-\caption{Spatial distribution of the ground control points ($n = 14$, red) used to validate the sources of the
-covariates included in the Santa Maria dataset.}
+<<covar-data-field-gcps, fig = TRUE, echo = FALSE>>=
+gcps <- read.table(
+  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/gcpData.csv", sep = "\t",
+  header = TRUE, na.strings = "na")
+gcps <- gcps[which(gcps$source == "field"), c("x", "y")]
+sp::coordinates(gcps) <- ~ x + y
+sp::proj4string(gcps) <- sp::CRS("+init=epsg:32722") # wgs1984utm22s
+invisible(capture.output(
+  spgrass6::initGRASS(
+    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
+invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
+p <- sp::spplot(
+  pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
+  scales = list(draw = TRUE), colorkey = FALSE, aspect = "iso",
+  xlim = c(gcps@bbox[1, 1] * 0.998, gcps@bbox[1, 2] * 1.005),
+  ylim = c(gcps@bbox[2, 1] * 0.9999, gcps@bbox[2, 2] * 1.0001),
+  par.settings = list(
+    fontsize = list(text = 12, points = 8),
+    layout.widths = list(left.padding = 0, right.padding = 0),
+    layout.heights = list(top.padding = 0, bottom.padding = 0)),
+  panel = function(x, y, ...) {
+    sp::panel.polygonsplot(x, y, ...)
+    lattice::panel.points(
+      x = gcps@coords[, "x"], y = gcps@coords[, "y"], pch = 20, col = "red")
+    lattice::panel.abline(
+      v = seq(222000, 233000, 1000), h = seq(6712000, 6725000, 1000),
+      col = "gray", lty = "dashed", lwd = 0.5)
+  })
+print(p)
+rm(gcps, p, pol)
+gc()
+@
+\caption{Spatial distribution of the ground control points ($n = 14$, red) used to validate the covariates 
+included in the Santa Maria dataset.}
 \label{fig:covar-data-field-gcps}
 \end{figure}
 
+Horizontal validation was performed comparing the x- and y-coordinates of GCPs (observed value) with the 
+coordinates of the respective geographical markers visually identified on the covariates (predicted value). The 
+differences in the observed and predicted x- and y-coordinates were used to calculate the mean error (ME, 
+\si{\m}), mean absolute error (MAE, \si{\m}), and mean squared error (MSE, \si{\m\square}) to evaluate if 
+there were differences in the accuracy and precision between coordinates. The error vector (or module, the 
+euclidean distance between two points) and its azimuth (the orientation of the error vector) were computed as 
+well for every point. The mean of the error vector and its azimuth give the size and orientation of the 
+systematic error present in the covariates, while the square root of the mean squared error vector (RMSE) is a 
+measure of the uncertainty about the true position of the covariate in the geographic space.
+
+The field location of the GCPs is as follows (in Portuguese):
+
+\begin{description}
+ \item [GCP 01] Em Santa Maria, no lado direito da barragem de concreto do reservatório do DNOS/CORSAN, 
+ \SI{6}{\m} antes de chegar a ponte sobre o vertedouro, a \SI{3}{\m} de distância do centro da estrada que 
+ desce da rodovia federal BR158.
+ 
+ \item [GCP 02] Na entrada da Estrada do Perau, Rua Gralha Azul, em Itaara, no centro do canteiro, entre o 
+ outdoor e a árvore (\it{Cedrella fissilis}), junto a rodovia federal BR158.
+ 
+ \item [GCP 03] Na entrada de Itaara, próximo ao equipamento estático de fiscalização eletrônica de 
+ velocidade, na rodovia federal BR158, a \SI{520}{\m} do Museu de Ufologia, em frente à Fruteira da 
+ Esquina. Do outro lado da rodovia há uma torre, possivelmente de telefonia celular, e entrada para a mina de 
+ extração de brita DallaPasqua, localizada a \SI{4}{\km} do local.
+ 
+ \item [GCP 04] Em Santa Maria, na entrada da estrada de acesso ao cemitério do Bairro Campestre do Menino 
+ Deus, do lado direito da Estrada do Perau (subindo), alinhado (\SI{\pm{50}{\cm}) com a frente das casas, a
+ \SI{2,2}{\m} do muro, a \SI{6,5}{\m} do meio-fio da Esrada do Perau, a \SI{50}{\m} da ponte sobre o Rio
+ Vacacaí-Mirim.
+ 
+ \item [GCP 05] Na entrada do Rancho do Amaral, junto a porteira, no lado direito, fora da estrada, distante 
+ \SI{1}{\m} de uma palmeira e \SI{1}{\m} do muro de pedras.
+ 
+ \item [GCP 06] Em Itaara, na Avenida Etelvina, na beira da estrada, \SI{2,5}{\m} do centro da estrada,
+ alinhado (\SI{\pm20}{\cm}) com a cerca que separa a floresta nativa do pomar de \it{Citrus}~sp.~localizado 
+ do outro lado da estrada.
+ 
+ \item [GCP 07] Em Itaara, no lado esquerdo da entrada da estrada que da acesso à mina de extração de brita
+ DallaPasqua. Localidade de Estação Pinhal. Obs.: receptor de GNSS instalado sob a rede de transmissão de
+ eletricidade.
+ 
+ \item [GCP 08] No 10 Distrito de Santo Antão, na entrada da estrada para a Central de Tratamento de Resíduos
+ da Caturita, em frente à Escola Municipal de Ensino Fundamental Intendente Manoel Ribas.
+ 
+ \item [GCP 09] Em São Martinho da Serra, na localidade de Água Negra, na bifurcação da estrada que vem de
+ Santa Maria e que dá acesso à localidade de Campinas, junto à parada de ônibus, no canteiro no meio da
+ bifurcação, há 40 metros distante do Piquete Laçador Jorge R. da Silva, em frente ao 
+Mercado do Ronaldo. Obs.: coletado em 15 de janeiro de 2013.
+
+\item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, 
+próximo a duas pequenas árvores, alinhado (acurácia de 1 m) com cerca que marca a divisa entre duas 
+propriedades com campo nativo. Determina a distância, em km, em relação a ponto de referência em 
+Santa Maria. Em frente à propriedade com duas casas, uma delas com dois andares, e quatro pequenos 
+lagos nos fundos. Depois da capela Santo Antão.
+
+\item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia 
+federal BR 185, ao lado do corte no terreno expondo a rocha de arenito da Formação Botucatu, 
+distante 5 metros, aproximadamente 15 metros distante do poste da linha de transmissão de 
+eletricidade da companhia AES, na entrada para a localidade de Rincão dos Minello.
+
+\item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto à rodovia federal 
+BR 158, próximo ao Bar e Armazém Ricardo, deslocado em 1 metro para dentro do passeio em relação ao 
+alinhamento dos postes da rede elétrica.
+
+\item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (acurácia de 30 cm) que divide duas 
+terras, à esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas 
+anuais. O ponto está locado no lado oposto. Determinar a distância até algum ponto de referência. 
+Plantação de videiras logo acima, no divisor de águas.
+
+\item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após 
+o término da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do 
+campo nativo, alinhado (acurácia de 20 cm) com a cerca dos dois lados da estrada. Locado 1 metro 
+distante do moirão da cerca do lado esquerdo subindo, no interior da estrada.
+\end{description}
+
+% Vertical validation exercises are interested in comparing the measured value of a variable at a given location 
+% with that predicted by some model. In this case, error statistics are calculated only for the the vertical 
+% displacement (error) in the ‘z’ coordinate. Both objects measured and predicted used with function gcpDiff() 
+% must be of class SpatialPointsDataFrame. They also must have a column named ‘siteID’ giving the identification 
+% of evary case. Again, matching of case IDs is mandatory. However, both objects must have a column named ‘z’ 
+% which contains the values of the ‘z’ coordinate. Other columns are discarded.
 
 
 
 
-This function estimates the difference, absolute difference, and squared difference on x, y and z coordinates 
-of two sets of ground control points (GCP). It also estimates the module (difference vector), its square and 
-azimuth. The result is a data frame ready to be used to define a object of class spsurvey.object.
-
-Horizontal (positional) validation was performed comparing the position of measured point data (ground control 
-point, GCP) with the position of predicted point data. Horizontal displacement (error) is measured in both x- 
-and y-coordinates, and is used to calculate the error vector (module) and its azimuth.
-
-Vertical validation exercises are interested in comparing the measured value of a variable at a given location 
-with that predicted by some model. In this case, error statistics are calculated only for the the vertical 
-displacement (error) in the ‘z’ coordinate. Both objects measured and predicted used with function gcpDiff() 
-must be of class SpatialPointsDataFrame. They also must have a column named ‘siteID’ giving the identification 
-of evary case. Again, matching of case IDs is mandatory. However, both objects must have a column named ‘z’ 
-which contains the values of the ‘z’ coordinate. Other columns are discarded.
-
-
-% 
-% \begin{itemize}
-% \item Describe how the ground control points (GCPs) were selected;
-% \item Present a figure with the spatial distribution of the GCPs;
-% \item Describe how the location of the GCPs was described - we could 
-%       add a few images to use as example;
-% \item Describe how the data was processed.
-% \item Include link to the dataset;
-% \end{itemize}
-% 
-% \begin{description}
-% \item [GCP 01] Em Santa Maria, no lado direito da barragem de concreto do reservatório do 
-% DNOS/CORSAN, seis metros antes de chegar à ponte sobre o vertedouro, há três metros de distância do 
-% centro da estrada que desce da rodovia federal BR 158. Coletado em 03 de janeiro de 2013 por 
-% Alessandro Samuel Rosa e Jean Michel Moura Bueno.
-% 
-% \item [GCP 02] Na entrada da Estrada do Perau, Rua Gralha Azul, em Itaara, no centro do canteiro, 
-% entre o outdoor e a árvore (Cedrella fissilis), junto à rodovia federal BR 158.
-% 
-% \item [GCP 03] Na entrada de Itaara, próximo ao equipamento estático de fiscalização eletrônica de 
-% velocidade, na rodovia federal BR 158, à 520 metros do Museu de Ufologia, em frente à Fruteira da 
-% Esquina. Do outro lado da rodovia há uma torre, possivelmente de telefonia celular, e entrada para a 
-% mina de extração de brita DallaPasqua, localizada à 4 km do local.
-% 
-% \item [GCP 04] Em Santa Maria, na entrada da estrada de acesso ao cemitério do Bairro Campestre do 
-% Menino Deus, do lado direito da Estrada do Perau (subindo), alinhado (erro de 50 cm) com a frente 
-% das casas, há 2,2 metros do muro, há 6,5 metros do meio-fio da Esrada do Perau, há 50 metros da 
-% ponte sobre o Rio Vacacaí-Mirim.
-% 
-% \item [GCP 05] Na entrada do Rancho do Amaral, junto à porteira, no lado direito, fora da estrada, 
-% distante um metro de uma palmeira e um metro do muro.
-% 
-% \item [GCP 06] Em Itaara, na Avenida Etelvina, na beira da estrada, aproximadamente 2,5 metros do 
-% centro da estrada, alinhado (acurácia de 20 cm) com a cerca que separa a floresta nativa do pomar de 
-% citrus localizado do outro lado da estrada. Medir a distância em relação à entrada na rodovia 
-% federal BR 158.
-% 
-% \item [GCP 07] Em Itaara, no lado esquerdo da entrada da estrada que da acesso à mina de extração de 
-% brita DallaPasqua. Localidade de Estação Pinhal. Obs,: sob a rede de transmissão de eletricidade → 
-% verificar efeito.
-% 
-% \item [GCP 08] No 10º Distrito de Santo Antão, na entrada da estrada para a Central de Tratamento de 
-% Resíduos da Caturita, em frente à Escola Municipal de Ensino Fundamental Intendente Manoel Ribas.
-% 
-% \item [GCP 09] Em São Martinho da Serra, na localidade de Água Negra, na bifurcação da estrada que 
-% vem de Santa Maria e que dá acesso à localidade de Campinas, junto à parada de ônibus, no canteiro 
-% no meio da bifurcação, à 40 metros distante do Piquete Laçador Jorge R. da Silva, em frente ao 
-% Mercado do Ronaldo. Obs.: coletado em 15 de janeiro de 2013.
-% 
-% \item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, 
-% próximo a duas pequenas árvores, alinhado (acurácia de 1 m) com cerca que marca a divisa entre duas 
-% propriedades com campo nativo. Determina a distância, em km, em relação a ponto de referência em 
-% Santa Maria. Em frente à propriedade com duas casas, uma delas com dois andares, e quatro pequenos 
-% lagos nos fundos. Depois da capela Santo Antão.
-% 
-% \item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia 
-% federal BR 185, ao lado do corte no terreno expondo a rocha de arenito da Formação Botucatu, 
-% distante 5 metros, aproximadamente 15 metros distante do poste da linha de transmissão de 
-% eletricidade da companhia AES, na entrada para a localidade de Rincão dos Minello.
-% 
-% \item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto à rodovia federal 
-% BR 158, próximo ao Bar e Armazém Ricardo, deslocado em 1 metro para dentro do passeio em relação ao 
-% alinhamento dos postes da rede elétrica.
-% 
-% \item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (acurácia de 30 cm) que divide duas 
-% terras, à esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas 
-% anuais. O ponto está locado no lado oposto. Determinar a distância até algum ponto de referência. 
-% Plantação de videiras logo acima, no divisor de águas.
-% 
-% \item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após 
-% o término da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do 
-% campo nativo, alinhado (acurácia de 20 cm) com a cerca dos dois lados da estrada. Locado 1 metro 
-% distante do moirão da cerca do lado esquerdo subindo, no interior da estrada.
-% \end{description}
-% 
 \tocless\section{Area-class soil maps}
 \label{sec:covar-data-soil-maps}
 
