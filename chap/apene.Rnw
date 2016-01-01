@@ -156,21 +156,20 @@ The field location of the GCPs is as follows (in Portuguese):
 \tocless\section{Area-class soil maps}
 \label{sec:covar-data-soil-maps}
 
-There are several area-class soil maps available for the study area, but only two are included in the Santa 
-Maria dataset. The first of them (\soilOld{}) was published at a \scale{100000} \cite{AzolinEtAl1988}. 
-Existing area-class soil maps and technical reports \cite{Brasil1973, Azolin1977, MacielEtAl1987a, 
-MacielEtAl1987, AbraoEtAl1988}, and sparse field observations were used to elaborate the preliminary legend of 
-the soil map. Aerial photographs (\scale{60000}) were used to produce the first draft of the soil map. Field 
-checks of soil polygons was done along the road network (i.e. convenience sampling). These observations were 
-used to estimate the composition (occurrence and spatial distribution of soil taxa) of soil mapping units. They 
-were also used to review the first draft of the soil map. The final version of \soilOld{} was prepared using 
-topographic maps originally published at a \scale{50000} and resampled to a \scale{100000}. Soil classification 
-followed the criteria adopted by the Brazilian soil science community at that time \cite{Brasil1973, 
-CamargoEtAl1982, Carvalho1982, LemosEtAl1982, OlmosEtAl1982}. Identification of soil taxa was performed based 
-on morphological features, analytical data compiled from existing technical reports, and analysis of soil 
-samples collected from soil profiles observed along the road network. Description of each soil mapping unit 
-includes the estimated area (\si{\hectare}) and the approximate taxonomic composition (\si{\percent}). 
-Validation statistics are absent in the survey report.
+Two area-class soil maps are included in the Santa Maria dataset. The first of them (\soilOld{}) was published 
+at a \scale{100000} \cite{AzolinEtAl1988}. Existing area-class soil maps and technical reports 
+\cite{Brasil1973, Azolin1977, MacielEtAl1987a, MacielEtAl1987, AbraoEtAl1988}, and sparse field observations 
+were used to elaborate the preliminary legend of the soil map. Aerial photographs (\scale{60000}) were used to 
+produce the first draft of the soil map. Field checks of soil polygons was done along the road network (i.e. 
+convenience sampling). These observations were used to estimate the composition (occurrence and spatial 
+distribution of soil taxa) of soil mapping units. They were also used to review the first draft of the soil 
+map. The final version of \soilOld{} was prepared using topographic maps originally published at a 
+\scale{50000} and resampled to a \scale{100000}. Soil classification followed the criteria adopted by the 
+Brazilian soil science community at that time \cite{Brasil1973, CamargoEtAl1982, Carvalho1982, LemosEtAl1982, 
+OlmosEtAl1982}. Identification of soil taxa was performed based on morphological features, analytical data 
+compiled from existing technical reports, and analysis of soil samples collected from soil profiles observed 
+along the road network. Description of each soil mapping unit includes the estimated area (\si{\hectare}) and 
+the approximate taxonomic composition (\si{\percent}). Validation statistics are absent in the survey report.
 
 The second area-class soil map (\soilNew{}) included in the Santa Maria dataset \cite{Miguel2010} was prepared 
 at a \scale{25000}. Orbital images produced by Digital Globe\textregistered{} (Quick Bird satellite), freely 
@@ -194,25 +193,21 @@ total of nine) were used as control points to adjust a second order polynomial m
 using the cubic resampling method. Soil polygons and their attributes were also manually digitalized in QGIS. 
 Because of the coarseness on the cartographic map scale, most geographical markers used to locate validation 
 GCPs could not be identified and positional validation was performed using only four GCPs. Estimated error 
-statistics suggest that there are large positional errors in all directions, with an $\text{RMSE} = 
-\SI{114}{\m}$ and a mean azimuth of \SI{128}{\degree} (\autoref{tab:covar-data-soil-geo-val}).
-
-Error statistics include the mean error (ME, \si{\m}), mean absolute error (MAE, \si{m}), and mean squared 
-error (MSE, \si{\m\square}), and their respective standard deviation, in the x- and y-coordinates. 
+statistics suggest that there are large positional errors in all directions, with an RMSE of \SI{114}{\m} and 
+a mean azimuth of \SI{128}{\degree} (\autoref{tab:covar-data-soil-geo-val}).
 
 \begin{table}[ht]
- \caption{Validation of the area-class soil map \soilOld{} in the geographic space using $n = 4$ ground 
- control points. }
+ \caption{Error statistics of the horizontal validation of \soilOld{} using $n = 4$ GCPs. }
  \label{tab:covar-data-soil-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics           & X coordinate & Y coordinate & Error vector & Azimuth                  \\
+  Statistics                  & x-coord      & y-coord      & Error vector & Azimuth              \\
   \hline
-  Mean, m              & 30   (79)    & -36  (67)    & 105   (43)   & 128$^\circ$ (80$^\circ$) \\ 
-  Absolute mean, m     & 58   (63)    & 64   (40)    & -            & -                        \\ 
-  Squared mean, m$^2$  & 7241 (11353) & 5712 (6197)  & 12953 (9613) & -                        \\ 
+  Mean, \si{\m}               & 30   (79)    & -36  (67)    & 105   (43)   & \ang{128} (\ang{80}) \\ 
+  Absolute mean, \si{\m}      & 58   (63)    & 64   (40)    & -            & -                    \\ 
+  Squared mean, \si{\m\square}& 7241 (11353) & 5712 (6197)  & 12953 (9613) & -                    \\ 
   \hline
  \end{tabular}}
 \end{table}
@@ -221,47 +216,50 @@ error (MSE, \si{\m\square}), and their respective standard deviation, in the x- 
 %   \centering
 %   \includegraphics[width=0.45\textwidth]{azim-soil100}
 %   \includegraphics[width=0.45\textwidth]{azim-soil25}
-%   \caption{Histogram of the azimuth distribution of the validation of area-class soil maps \texttt{SOIL\_100} 
-% and \texttt{SOIL\_25} in the attribute space. Azimuth values were estimated using, respectively, four and ... 
+%   \caption{Histogram of the azimuth distribution of the validation of area-class soil maps \soilOld{} 
+% and \soilNew{} in the attribute space. Azimuth values were estimated using, respectively, four and 
+... 
 % GCPs located in easily identifiable geographical markers. Estimates were corrected to the size of the 
 % population. The graph was produced using R-package \textit{VecStatGraphs2D}.}
 %   \label{fig:soil-azim}
 % \end{figure}
 
-The original \texttt{SOIL\_25} is available in digital format in the personal database of the author 
-\cite{Miguel2010}. A topology check (Topology Checker plug-in in QGIS 2.0.1) identified that there
-were many gaps and overlaps between polygons. This required a topological edition prior to the 
-use of \texttt{SOIL\_25}. There also was a mismatch between the boundary of \texttt{SOIL\_25} and 
-the actual boundary of the catchment of the DNOS/CORSAN reservoir as estimated using 
-\texttt{ELEV\_10} (\autoref{sec:covar-data-dem}). This occurred because the database used to 
-produce \texttt{SOIL\_25} included Google Earth imagery\textregistered{} and topographic maps, which 
-are data sources that differ considerably in their positional accuracy 
-(\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). To avoid data losses, all 
-boundary gaps were manually filled using the closest mapping unit. Boundaries of soil polygons were 
-defined based on land use (\texttt{LU2009}, \autoref{sec:covar-data-land-use}) and topographic data 
-(contour lines, \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. 
-New delineations were checked and approved without modifications by the author of the original map. 
-Because \texttt{SOIL\_25} includes very few geographical markers, its positional validation was not 
-possible with the available GCPs. However, the RMSE is expected to vary between 
-\SIrange{8}{114}{\metre} across the soil map as a result of the different errors present in the 
-data sources used in its production.
+The original \soilNew{} is available in digital format in the personal database of the author 
+\cite{Miguel2010}. A topology check (Topology Checker plug-in in QGIS) identified that there were many gaps 
+and overlaps between polygons. This required a topological edition prior to the use of \soilNew{}. There also 
+was a mismatch between the boundary of \soilNew{} and the actual boundary of the study area as estimated using 
+\demNew{} (\autoref{sec:covar-data-dem}). This occurred because the database used to produce \soilNew{} 
+included Google Earth imagery\textregistered{} and topographic maps, which are data sources that differ 
+considerably in their positional accuracy (\autoref{sec:covar-data-dem} and 
+\autoref{sec:covar-data-land-use}). To avoid data losses, all boundary gaps were manually filled using the 
+closest mapping unit. Boundaries of soil polygons were defined based on land use (\landNew{}, 
+\autoref{sec:covar-data-land-use}) and topographic data 
+(contour lines, \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. New 
+delineations were checked and approved without modifications by the author of the original map. Because 
+\soilNew{} includes very few geographical markers, its positional validation was not possible with the 
+available GCPs. However, the RMSE is expected to vary between \SIrange{8}{114}{\m} across the study area as a 
+result of the different errors present in the data sources used in its production.
 
-Both \texttt{SOIL\_100} and \texttt{SOIL\_25} were imported into GRASS GIS 6.4, cropped to the 
-bounding box of the catchment of the DNOS/CORSAN reservoir, and geometrically corrected to match the 
-prediction grid (\SI{5}{\metre} grid size). Registration and geocoding was performed using the 
-nearest neighbour resampling method. Each category was named with the code of the respective 
-mapping unit in the original map. Prior to validation in the attribute space, class codes of 
-\texttt{SOIL\_100} were changed to match soil taxa codes of the current Brazilian System of Soil 
+Both \soilOld{} and \soilNew{} were imported into GRASS GIS, cropped to the bounding box of the study area, 
+and geometrically corrected to match the prediction grid (\SI{5}{\metre} grid size). Registration and geocoding 
+was performed using the nearest neighbour resampling method to maintain data integrity. Each category was named 
+with the code of the respective mapping unit in the original soil map. Prior to validation in the attribute 
+space, class codes of \soilOld{} were changed to match soil taxa codes of the current Brazilian System of Soil 
 Classification using a standard correlation table \cite{SantosEtAl2006}.
+
+
+
+
+
 
 Table \ref{tab:covar-data-soil-attr-val} shows that the overall purity of both soil maps is not 
 significantly different. The main reason for this is that validation was performed considering only 
 the second level of the Brazilian System of Soil Classification. It is expected that 
-\texttt{SOIL\_25} would outperform \texttt{SOIL\_100} if validation data included soil 
+\soilNew{} would outperform \soilOld{} if validation data included soil 
 classification up to the fourth level of the Brazilian System of Soil Classification. Estimated 
 overall purity values are also very low (\SI{<35}{\percent}). The main reason can be the fact that 
 very few soil profiles were described and sampled to produce both maps. There also are two minor 
-potential sources of error. First, because \texttt{SOIL\_100} does not include analytical soil data 
+potential sources of error. First, because \soilOld{} does not include analytical soil data 
 in the survey report, all soil taxa had to be translated to the current Brazilian System of Soil 
 Classification based only on a standard correlation table \cite{SantosEtAl2006} and expert 
 knowledge. Second, soil taxa described at the validation points was obtained analysing only 
@@ -269,8 +267,8 @@ morphological soil properties and the basis and concepts of the Brazilian System
 Classification.
 
 \begin{table}[ht]
- \caption{Estimated error statistics of the validation of area-class soil maps \texttt{SOIL\_100}
- and \texttt{SOIL\_25} in the attribute space. Validation statistics were estimated using $n = 60$ 
+ \caption{Estimated error statistics of the validation of area-class soil maps \soilOld{}
+ and \soilNew{} in the attribute space. Validation statistics were estimated using $n = 60$ 
  observation locations placed along $m = 12$ linear transects (clustered samples).}
  \label{tab:covar-data-soil-attr-val}
  \centering
@@ -279,8 +277,8 @@ Classification.
   \hline
   Soil map              & LCB95Pct & Estimate & UCB95Pct \\
   \hline
-  \texttt{SOIL\_100}    & 21.69    & 31.67    & 41.65    \\
-  \texttt{SOIL\_25}     & 20.81    & 30.00    & 39.19    \\
+  \soilOld{}    & 21.69    & 31.67    & 41.65    \\
+  \soilNew{}     & 20.81    & 30.00    & 39.19    \\
   \hline
  \end{tabular}}
 \end{table}
@@ -291,16 +289,16 @@ Classification.
 %   \includegraphics[width=0.3\textwidth]{fig/soil-100}
 %   \includegraphics[width=0.3\textwidth]{fig/soil-25}
 %   \caption{Area-class soil maps used as sources of environmental co-variates. On the left, the area-class 
-% soil map produced by \cite{AzolinEtAl1988} and published at a scale of 1:100,000 (\texttt{SOIL\_100}). On the 
-% right, the area-class soil map produced by \cite{Miguel2010} at a scale of 1:25,000 (\texttt{SOIL\_25}).}
+% soil map produced by \cite{AzolinEtAl1988} and published at a scale of 1:100,000 (\soilOld{}). On the 
+% right, the area-class soil map produced by \cite{Miguel2010} at a scale of 1:25,000 (\soilNew{}).}
 %   \label{fig:soil-maps}
 % \end{figure}
 
-The main advantage of \texttt{SOIL\_25} in relation to \texttt{SOIL\_100} is the level of detail. 
-While \texttt{SOIL\_100} has only five mapping units covering catchment of the DNOS/CORSAN 
-reservoir, \texttt{SOIL\_25} has seven mapping units. This enabled the derivation of six 
-covariates from \texttt{SOIL\_100} and ten covariates from \texttt{SOIL\_25}. Covariates derived 
-from \texttt{SOIL\_100} are the following:
+The main advantage of \soilNew{} in relation to \soilOld{} is the level of detail. 
+While \soilOld{} has only five mapping units covering catchment of the DNOS/CORSAN 
+reservoir, \soilNew{} has seven mapping units. This enabled the derivation of six 
+covariates from \soilOld{} and ten covariates from \soilNew{}. Covariates derived 
+from \soilOld{} are the following:
 
 \begin{description}
 %  \item[\texttt{SOIL\_100a}] This covariate separates map unit Rd1 from other map units. It is 
@@ -342,11 +340,11 @@ from \texttt{SOIL\_100} are the following:
 %   \includegraphics[width=0.3\textwidth]{fig/soil-100e}
 %   \includegraphics[width=0.3\textwidth]{fig/soil-100f}
 %   \caption{Environmental covariates derived from the area-class soil map produced by \cite{AzolinEtAl1988} 
-% and published at a scale of 1:100,000 (\texttt{SOIL\_100}).}
+% and published at a scale of 1:100,000 (\soilOld{}).}
 %   \label{fig:soil100-covars}
 % \end{figure}
 
-Covariates derived from \texttt{SOIL\_25} are the following:
+Covariates derived from \soilNew{} are the following:
 
 \begin{description}
  \item[\texttt{SOIL\_25a}] Moderately deep soils derived from sedimentary rocks, with abrupt 
@@ -399,7 +397,7 @@ Covariates derived from \texttt{SOIL\_25} are the following:
 %   \includegraphics[width=0.3\textwidth]{fig/soil-25i}
 %   \includegraphics[width=0.3\textwidth]{fig/soil-25j}
 %   \caption{Environmental covariates derived from the area-class soil map produced by \cite{Miguel2010} at a 
-% scale of 1:25,000 (\texttt{SOIL\_25}).}
+% scale of 1:25,000 (\soilNew{}).}
 %   \label{fig:soil25-covars}
 % \end{figure}
 
