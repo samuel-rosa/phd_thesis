@@ -109,7 +109,7 @@ The field location of the GCPs is as follows (in Portuguese):
  
  \item [GCP 06] Em Itaara, na Avenida Etelvina, na beira da estrada, \SI{2,5}{\m} do centro da estrada,
  alinhado (\SI{\pm20}{\cm}) com a cerca que separa a floresta nativa do pomar de \it{Citrus}~sp.~localizado 
- do outro lado da estrada.
+ do outro lado da estrada.há{
  
  \item [GCP 07] Em Itaara, no lado esquerdo da entrada da estrada que da acesso à mina de extração de brita
  DallaPasqua. Localidade de Estação Pinhal. Obs.: receptor de GNSS instalado sob a rede de transmissão de
@@ -119,34 +119,31 @@ The field location of the GCPs is as follows (in Portuguese):
  da Caturita, em frente à Escola Municipal de Ensino Fundamental Intendente Manoel Ribas.
  
  \item [GCP 09] Em São Martinho da Serra, na localidade de Água Negra, na bifurcação da estrada que vem de
- Santa Maria e que dá acesso à localidade de Campinas, junto à parada de ônibus, no canteiro no meio da
- bifurcação, há 40 metros distante do Piquete Laçador Jorge R. da Silva, em frente ao 
-Mercado do Ronaldo. Obs.: coletado em 15 de janeiro de 2013.
-
-\item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, 
-próximo a duas pequenas árvores, alinhado (acurácia de 1 m) com cerca que marca a divisa entre duas 
-propriedades com campo nativo. Determina a distância, em km, em relação a ponto de referência em 
-Santa Maria. Em frente à propriedade com duas casas, uma delas com dois andares, e quatro pequenos 
-lagos nos fundos. Depois da capela Santo Antão.
-
-\item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia 
-federal BR 185, ao lado do corte no terreno expondo a rocha de arenito da Formação Botucatu, 
-distante 5 metros, aproximadamente 15 metros distante do poste da linha de transmissão de 
-eletricidade da companhia AES, na entrada para a localidade de Rincão dos Minello.
-
-\item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto à rodovia federal 
-BR 158, próximo ao Bar e Armazém Ricardo, deslocado em 1 metro para dentro do passeio em relação ao 
-alinhamento dos postes da rede elétrica.
-
-\item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (acurácia de 30 cm) que divide duas 
-terras, à esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas 
-anuais. O ponto está locado no lado oposto. Determinar a distância até algum ponto de referência. 
-Plantação de videiras logo acima, no divisor de águas.
-
-\item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após 
-o término da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do 
-campo nativo, alinhado (acurácia de 20 cm) com a cerca dos dois lados da estrada. Locado 1 metro 
-distante do moirão da cerca do lado esquerdo subindo, no interior da estrada.
+ Santa Maria e que dá acesso à localidade de Campinas, junto a parada de ônibus, no canteiro no meio da
+ bifurcação, a \SI{40}{\m} distante do Piquete Laçador Jorge R.~da Silva, em frente ao Mercado do Ronaldo.
+ 
+ \item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, próximo a
+ duas pequenas árvores, alinhado (\SI{\pm1}{\m}) com cerca que marca a divisa entre duas propriedades com campo
+ nativo. Em frente a propriedade com duas casas, uma delas com dois andares, e quatro pequenos lagos nos
+ fundos. Depois da capela Santo Antão.
+ 
+ \item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia federal BR185,
+ ao lado (distante \SI{5}{\m}) do corte no terreno expondo a rocha de arenito da Formação Botucatu,
+ \SI{\pm15}{\m} distante do poste da linha de transmissão de eletricidade da companhia AES, na entrada para a
+ localidade de Rincão dos Minello.
+ 
+ \item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto a rodovia federal BR158,
+ próximo ao Bar e Armazém Ricardo, deslocado em \SI{1}{\m} para dentro do passeio em relação ao alinhamento dos 
+ postes da rede elétrica.
+ 
+ \item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (\SI{\pm30}{\cm}) que divide duas terras, à 
+ esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas anuais. O ponto está 
+ locado no lado oposto. Plantação de videiras logo acima, no divisor de águas.
+ 
+ \item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após o término 
+ da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do campo nativo, alinhado 
+ (\SI{\pm20}{\cm}) com a cerca dos dois lados da estrada. Locado \SI{1}{\m} distante do moirão da cerca do lado 
+ esquerdo subindo, no interior da estrada.
 \end{description}
 
 % Vertical validation exercises are interested in comparing the measured value of a variable at a given location 
@@ -155,9 +152,6 @@ distante do moirão da cerca do lado esquerdo subindo, no interior da estrada.
 % must be of class SpatialPointsDataFrame. They also must have a column named ‘siteID’ giving the identification 
 % of evary case. Again, matching of case IDs is mandatory. However, both objects must have a column named ‘z’ 
 % which contains the values of the ‘z’ coordinate. Other columns are discarded.
-
-
-
 
 \tocless\section{Area-class soil maps}
 \label{sec:covar-data-soil-maps}
