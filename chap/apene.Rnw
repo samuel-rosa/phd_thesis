@@ -31,6 +31,10 @@ covariate data are freely available at the producers databases or in public libr
 Reference grid
  (\SI{5}{\metre} grid size)
  imported into GRASS, 
+ 
+ Prior to processing, the SRTM DEM was cropped to the extent of the study area and the coordinate 
+reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
+using cubic resampling in GDAL (module \texttt{gdalwarp}).
 
 \tocless\section{Ground control points}
 \label{sec:covar-data-gcp}
@@ -215,11 +219,11 @@ a mean azimuth of \SI{128}{\degree} (\autoref{tab:covar-data-soil-geo-val}).
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics                  & x-coord & y-coord & Error vector & Azimuth   \\
+  Statistics                   & x-coord & y-coord & Error vector & Azimuth   \\
   \hline
-  Mean, \si{\m}               & 30      & -36     & 105          & \ang{128} \\ 
-  Absolute mean, \si{\m}      & 58      & 64      & -            & -         \\ 
-  Squared mean, \si{\m\square}& 7241    & 5712    & 12953        & -         \\ 
+  Mean, \si{\m}                & 30      & -36     & 105          & \ang{128} \\ 
+  Absolute mean, \si{\m}       & 58      & 64      & -            & -         \\ 
+  Squared mean, \si{\m\square} & 7241    & 5712    & 12953        & -         \\ 
   \hline
  \end{tabular}}
 \end{table}
@@ -375,46 +379,40 @@ using only morphological soil properties and the concepts of the SiBCS.
 \tocless\section{Digital elevation models}
 \label{sec:covar-data-dem}
 
-Three DEMs are include in the Santa Maria dataset as sources of covariates. The first DEM 
-(\texttt{ELEV\_10}) is the result of the interpolation of the contour lines of the most recent 
-topographic maps produced by the Brazilian Army (\scale{25000}) \cite{DSG1980, DSG1992, DSG1992a}. 
-Because all three topographic maps needed to cover the study area are available only in the 
-analogical format, their digitalization was necessary. Georeferencing was carried out using the GDAL 
-Georeferencer plug-in in QGIS \cite{GDAL2013, QGIS2013}. Intersections between all meridians and 
-parallels (about \num{160} per topographic map) were used as control points to adjust a third order 
-polynomial model. Resampling was performed using the cubic resampling method. All contour lines, 
-peaks, lakes and rivers, and their respective attributes within a distance of \SI{1000}{\metre} 
-from the boundary of the study area were also manually digitalized and stored in the vector format. 
-After digitalization, the original coordinate reference system (EPSG:31982 -- SIRGAS2000 / UTM 
-zone 22S) of all vector files was transformed to WGS1984 / UTM zone 22S (EPSG:32722) using the 
-\Rpackage{rgdal} \cite{BivandEtAl2013a}.
+Two DEMs are include in the Santa Maria dataset as sources of covariates. The first DEM (\demNew{}) is the 
+result of the interpolation of the contour lines of the most recent topographic maps produced by the Brazilian 
+Army (\scale{25000}) that cover the study \cite{DSG1980, DSG1992, DSG1992a}. Topographic maps were digitalized
+and georeferenced using the GDAL Georeferencer plug-in in QGIS. Intersections between all meridians and 
+parallels (about \num{160} per topographic map) were used as control points to adjust a third order polynomial 
+model. Resampling was performed using the cubic resampling method. All contour lines, peaks, lakes and rivers, 
+and their respective attributes within a distance of \SI{\pm1000}{\metre} from the boundary of the study area 
+were manually digitalized and stored in the vector format. After digitalization, the original coordinate 
+reference system (EPSG:31982 -- SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / UTM 
+zone 22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
-The positional validation of topographic maps was performed using \num{14} GCPs located at easily 
-identifiable geographical markers. According to Brazilian legislation, the positional accuracy of 
-these topographic maps is expected to be of, at least, \SI{15}{\metre} \cite{Brasil1984}. Estimated 
-validation statistics show that the observed $\text{RMSE} = \SI{65}{\m}$ is larger than 
-established by current regulations (\autoref{tab:covar-data-topomap-geo-val}). The mean error 
-vector (module) is larger than \SI{60}{\metre} with an azimuth of \SI{63}{\degree}. Both x- and 
-y-coordinates are positively biased, but the largest error occurs in the x-coordinate 
-(\SI{50}{\metre}). Similar mean and mean absolute errors suggest that there is a systematic 
-positional error. An affine transformation was employed using the \Rpackage{vec2dtransf} 
-\cite{Carrillo2012} to eliminate this systematic error. Model parameters were adjusted using the 
-same set of GCPs used for the validation in the geographic space.
+The positional validation of topographic maps was performed using $n = 14$ GCPs. According to Brazilian 
+legislation, the positional accuracy of these topographic maps is expected to be of, at least, \SI{15}{\metre} 
+\cite{Brasil1984}. Estimated validation statistics show that the observed error ($\text{RMSE} = \SI{65}{\m}$) 
+is larger than established by current regulations (\autoref{tab:covar-data-topomap-geo-val}). The mean error 
+vector is larger than \SI{60}{\metre} with an azimuth of \SI{63}{\degree}. Both x- and y-coordinates are 
+positively biased, but the largest error occurs in the x-coordinate (\SI{50}{\metre}). Similar mean and mean 
+absolute errors suggest that there is a strong systematic positional error. An affine transformation was 
+employed using the \Rpackage{vec2dtransf} \cite{Carrillo2012} to correct this systematic error. Model 
+parameters were adjusted using the same set of GCPs used for the validation in the geographic space.
 
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
- topographic maps (\scale{25000}) in the geographic space. Validation statistics were 
- estimated using \num{14} GCPs located in easily identifiable geographical markers.}
+ \caption{Error statistics of the horizontal validation of topographic maps (\scale{25000}) using $n = 14$ 
+ GCPs.}
  \label{tab:tab:covar-data-topomap-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics & X coordinate & Y coordinate & Error vector & Azimuth \\
+  Statistics                    & x-coord & y-coord & Error vector & Azimuth  \\
   \hline
-  Mean, \si{\metre} & 50 (25) & 27 (22) & 63 (19) & \SI{63}{\degree} (\SI{30}{\degree}) \\ 
-  Absolute mean, \si{\metre} & 50 (25) & 32 (13) & - & - \\ 
-  Squared mean, \si{\metre\squared} & 3088 (3034) & 1180 (820) & 4268 (2825) & - \\ 
+  Mean, \si{\m}                 & 50      & 27      & 63           & \ang{63} \\ 
+  Absolute mean, \si{\m}        & 50      & 32      & -            & -        \\ 
+  Squared mean, \si{\m\squared} & 3088    & 1180    & 4268         & -        \\ 
   \hline
  \end{tabular}}
 \end{table}
@@ -429,79 +427,71 @@ same set of GCPs used for the validation in the geographic space.
 %   \label{fig:topomap-azim}
 % \end{figure}
 
-Interpolation of the raster surface with \SI{5}{\metre} pixel size was performed using the function 
-\texttt{Topo to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation 
-method based on the ANUDEM program developed by \citeonline{Hutchinson1989}. Vector files of contour 
-lines (\texttt{multiline}), drainage network (\texttt{multiline}), lakes (\texttt{polygons}) and 
-peaks (\texttt{points}) were used to generate an hydrologically correct DEM, that is, a DEM without 
-spurious depressions and giving an accurate representation of the real hydrology. Next, the 
-interpolated DEM was imported into GRASS \cite{GRASS2012}, where a neighbourhood average filter 
-was used to remove stair-like artefacts. A window of $7 \times 7$ pixels was used because it 
-removed a significant amount of the artefacts and did not affect the derived boundary of the study 
-area (see more bellow).
+Interpolation of the raster surface with \SI{5}{\metre} grid size was performed using the function \tt{Topo 
+to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation method based on the 
+ANUDEM program developed by \citeonline{Hutchinson1989}. Vector files of contour lines (\tt{multiline}), 
+drainage network (\tt{multiline}), lakes (\tt{polygons}) and peaks (\tt{points}) were used to generate a 
+hydrologically correct DEM, that is, a DEM without spurious depressions and giving a precise representation 
+of the hydrological data. Next, the interpolated DEM was imported into GRASS, where a neighbourhood average 
+filter was used to remove stair-like artefacts. A window of $7 \times 7$ pixels was used because it removed a 
+significant amount of the artefacts and did not affect the derived boundary of the study area (see more 
+bellow).
 
-The vertical datum of the DEM was transformed from the local datum to a global datum. The geoidal 
-models MAPGEO2010 \cite{IBGE2010a} and EGM1996 \cite{LemoineEtAl1998} were used to calculate the 
-geoidal undulation for the local and global datums, respectively. MAPGEO2010 is optimized to 
-estimate geoidal undulations in the Brazilian territory, while EGM1996 is a gravitational model of 
-the Earth and is used as the vertical datum for SRTM products. The following equation was used:
+The vertical datum of the DEM was transformed from the local datum to a global datum. The geoidal models 
+MAPGEO2010 \cite{IBGE2010a} and EGM1996 \cite{LemoineEtAl1998} were used to calculate the geoidal undulation 
+for the local and global datums, respectively. MAPGEO2010 is optimized to estimate geoidal undulations in the 
+Brazilian territory, while EGM1996 is a gravitational model of the Earth and is used as the vertical datum for 
+SRTM products. The following equation was used:
 
 \begin{equation}
  h = H + N,
 \end{equation}
 
-\noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that 
-approximates the surface of the planet), $H$ is the orthometric height (height above the imaginary 
-surface called geoid and commonly referred as mean sea level), and $N$ is the geoidal undulation. 
-Ellipsoidal heights estimated by MAPGEO2010 are referenced to the world ellipsoid of 1980, while 
-EGM1996 estimates ellipsoidal heights referenced to the world ellipsoid of 1984. Because the 
-difference between both ellipsoids is of the order of millimetres, it can be assumed that both 
-models estimate the same ellipsoidal height. Therefore, if 
-$h_{\text{EGM1996}} = h_{\text{MAPGEO2010}}$, then orthometric heights referenced to the local 
-vertical datum can be transformed to the global vertical datum using the following equation:
+\noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that approximates the 
+surface of the planet), $H$ is the orthometric height (height above the imaginary surface called geoid and 
+commonly referred as mean sea level), and $N$ is the geoidal undulation. Ellipsoidal heights estimated by 
+MAPGEO2010 are referenced to the world ellipsoid of 1980, while EGM1996 estimates ellipsoidal heights 
+referenced to the world ellipsoid of 1984. Because the difference between both ellipsoids is of the order of 
+millimetres, it can be assumed that both models estimate the same ellipsoidal height. Therefore, if 
+$h_{\text{EGM1996}} = h_{\text{MAPGEO2010}}$, then orthometric heights referenced to the local vertical datum 
+can be transformed to the global vertical datum using the following equation:
 
 \begin{equation}
  H_{\text{EGM1996}} = H_{\text{MAPGEO2010}} + N_{\text{MAPGEO2010}} - N_{\text{EGM1996}}.
 \end{equation}\label{eqn:geoidal}
 
-The difference in the geoidal undulation estimated by both models is of about one meter in the 
-entire study area. Thus, transforming the vertical datum was done adding one meter to the raster 
-surface interpolated from contour lines, yielding the first DEM included in the Santa Maria dataset
-(\texttt{ELEV\_10}).
+\noindent The difference in the geoidal undulation estimated by both models is of about one meter in the 
+entire study area. Thus, transforming the vertical datum was done adding one meter to the raster surface 
+interpolated from contour lines, yielding the first DEM included in the Santa Maria dataset (\demNew{}).
 
-The second DEM (\texttt{ELEV\_90}) used in this study is the well known SRTM DEM 
-(\SI{3}{\arcsecond} $\approx$ \SI{90}{\metre} spatial resolution) produced by NASA’s Jet 
-Propulsion Laboratory in collaboration with the National Geospatial-Intelligence Agency 
-\cite{RodriguezEtAl2006}. The SRTM DEM version used here is the \emph{hole-filled SRTM version 
-\num{4}}, prepared by \href{http://www.cgiar.org/}{CGIAR} using the same hydrologically correct 
-interpolation method that was used above to produce \texttt{ELEV\_10} \cite{ReuterEtAl2007, 
-JarvisEtAl2008}. However, the only data source used was the original SRTM DEM converted to point 
-data.
+The second DEM (\demOld{}) is the well known SRTM DEM ($\SI{3}{\arcsecond} \approx \SI{\pm90}{\m}$ spatial 
+resolution) produced by NASA’s Jet Propulsion Laboratory in collaboration with the National 
+Geospatial\-/Intelligence Agency \cite{RodriguezEtAl2006}. The SRTM DEM version used here is the 
+\emph{hole\-/filled SRTM version \num{4}}, prepared by the Consultative Group for International Agricultural 
+Research (\cgiar) using the same hydrologically correct interpolation method that was used above to produce 
+\demNew{} \cite{ReuterEtAl2007, JarvisEtAl2008}. However, the only data source used was the original SRTM DEM 
+converted to point data.
 
-Prior to processing, the SRTM DEM was cropped to the extent of the study area and the coordinate 
-reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
-using cubic resampling in GDAL (module \texttt{gdalwarp}). This resampling method was used because 
-it is efficient in minimizing the double-oblique stripping present in SRTM products 
-\cite{Samuel-RosaEtAl2013c}. Next, the DEM was resampled to \SI{15}{\metre} 
-(\grass{r.resamp.interp}) using cubic resampling. Sinks produced during the datum transformation 
-were filled using the \grass{r.fill.dir}. Vertical datum transformation was not necessary because 
-elevation values of the SRTM DEM already are referenced to the global geoidal model EGM1996 
+The SRTM DEM was processed to match the reference grid using cubic resampling (\gdal{gdalwarp} and 
+\grass{r.resamp.interp}). This resampling method was used because it is efficient in minimizing the 
+double-oblique stripping present in SRTM products \cite{Samuel-RosaEtAl2013c}. Sinks produced during datum 
+transformation were filled using the \grass{r.fill.dir}. Vertical datum transformation was not necessary 
+because elevation values of the SRTM DEM already are referenced to the global geoidal model EGM1996 
 (orthometric heights).
 
-The third DEM (\texttt{ELEV\_30}) used in this study was produced by the Brazilian National 
-Institute for Space Research (\href{http://www.inpe.br/}{INPE}). This DEM is the result of refining 
-the original SRTM DEM to \SI{1}{\arcsecond} spatial resolution (\SI{\pm30}{\metre}) using ordinary 
-kriging with a Gaussian model of spatial covariance \cite{ValerianoEtAl2012}. Different from 
-\texttt{ELEV\_90}, \texttt{ELEV\_30} was not used to calculate DEM derivatives. Instead it was used 
-in the orthorectification and topographic correction of satellite images (\autoref{sec:covar-data-sat-image}).
+A third DEM was used to produce the covariate data included in the Santa Maria dataset. However, instead of 
+calculating DEM derivatives, it was used in the orthorectification and topographic correction of satellite 
+images (\autoref{sec:covar-data-sat-image}). The third DEM (\topodata) was produced by the Brazilian National 
+Institute for Space Research (\inpe) by refining the original SRTM DEM to $\SI{1}{\arcsecond} \approx 
+\SI{\pm30}{\m}$ spatial resolution using ordinary kriging with a Gaussian spatial autocorrelation model 
+\cite{ValerianoEtAl2012}. Eight tiles were mosaicked using \gdal{gdal\_translate}. The CRS was transformed from 
+WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) using cubic resampling (\gdal{gdalwarp}). This 
+resampling method was used for the same reasons presented above. Sinks produced during datum transformation 
+were filled using \grass{r.fill.dir}.
 
-Eight tiles were downloaded from the \href{http://www.dsr.inpe.br/topodata/}{TOPODATA} website, 
-imported into QGIS and mosaicked using GDAL module \texttt{gdal\_translate}. The coordinate 
-reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
-using cubic resampling (GDAL module \texttt{gdalwarp}). Again, this resampling method was used 
-because it is efficient in minimizing the double-oblique stripping present in SRTM products 
-\cite{Samuel-RosaEtAl2013c}. Sinks produced during the datum transformation were filled using 
-\grass{r.fill.dir} implemented in the SEXTANTE library \cite{SEXTANTE2012}.
+
+
+
 
 Because orbital satellites use the WGS1984 ellipsoid as vertical datum, orthorectification of 
 satellite images has to be done using a DEM with ellipsoidal heights. Conversion from orthometric 
@@ -511,27 +501,29 @@ boundary of the study area and resampled to five meters using \grass{r.resamp.in
 bicubic resampling method. This DEM was used only to estimated error statistics for the validation 
 in the attribute space.
 
-\autoref{tab:covar-data-dem-attr-val} shows that the three DEMs present similar accuracy 
-estimates in the attribute space ($\text{RMSE} \approx \SI{19}{\m}$). In the case of the ELEV\_10, which 
-was derived from contour lines published at a \scale{25000}, the estimated accuracy does not 
-meet current Brazilian legislation, which states that the accuracy should be of, at least, 
-\SI{5}{\metre} (\num{1/2} of the distance between contour lines) \cite{Brasil1984}.
+
+The three DEMs present similar vertical accuracy (\autoref{tab:covar-data-dem-attr-val}). In the case of 
+\demNew{}, which was derived from contour lines published at a \scale{25000}, the estimated accuracy does not 
+meet current Brazilian legislation, which states that the accuracy should be of, at least, \SI{5}{\metre}, i.e.
+\num{1/2} of the distance between contour lines \cite{Brasil1984}.
+
+
  
+
+
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
- digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30} and \texttt{ELEV\_10} in the 
- attribute space. Validation statistics were estimated using $n = 60$ validation points located 
- along $m = 12$ linear transects (clustered samples).}
+ \caption{Error statistics of the vertical validation of \demOld{}, TOPODATA, and \demNew{} using $n = 60$
+ validation points located along $m = 12$ linear transects.}
  \label{tab:covar-data-dem-attr-val}
  \centering
  {\small
  \begin{tabular}{lrrrrrr}
   \hline
-  Statistics & \texttt{ELEV\_90} & \texttt{ELEV\_30} & \texttt{ELEV\_10} \\
+  Statistics                   & \demOld{} & TOPODATA & \demNew{} \\
   \hline
-  Mean, \si{\metre} & -15 (10) & -17 (9) & -16 (10) \\ 
-  Absolute mean, \si{\metre} & 15 (10) & 17 (9) & 16 (10) \\ 
-  Squared mean, \si{\metre\square} & 350 (428) & 361 (406) & 374 (431) \\ 
+  Mean, \si{\m}                & -15       & -17      & -16       \\ 
+  Absolute mean, \si{\m}       & 15        & 17       & 16        \\ 
+  Squared mean, \si{\m\square} & 350       & 361      & 374       \\ 
   \hline
  \end{tabular}}
 \end{table}
