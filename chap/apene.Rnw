@@ -444,6 +444,7 @@ Brazilian territory, while EGM1996 is a gravitational model of the Earth and is 
 SRTM products. The following equation was used:
 
 \begin{equation}
+ \label{eq:geoidal}
  h = H + N,
 \end{equation}
 
@@ -458,7 +459,7 @@ can be transformed to the global vertical datum using the following equation:
 
 \begin{equation}
  H_{\text{EGM1996}} = H_{\text{MAPGEO2010}} + N_{\text{MAPGEO2010}} - N_{\text{EGM1996}}.
-\end{equation}\label{eqn:geoidal}
+\end{equation}
 
 \noindent The difference in the geoidal undulation estimated by both models is of about one meter in the 
 entire study area. Thus, transforming the vertical datum was done adding one meter to the raster surface 
@@ -480,37 +481,22 @@ because elevation values of the SRTM DEM already are referenced to the global ge
 (orthometric heights).
 
 A third DEM was used to produce the covariate data included in the Santa Maria dataset. However, instead of 
-calculating DEM derivatives, it was used in the orthorectification and topographic correction of satellite 
+calculating DEM derivatives, it was used in the orthorectification and topographic correction of orbital 
 images (\autoref{sec:covar-data-sat-image}). The third DEM (\topodata) was produced by the Brazilian National 
 Institute for Space Research (\inpe) by refining the original SRTM DEM to $\SI{1}{\arcsecond} \approx 
 \SI{\pm30}{\m}$ spatial resolution using ordinary kriging with a Gaussian spatial autocorrelation model 
-\cite{ValerianoEtAl2012}. Eight tiles were mosaicked using \gdal{gdal\_translate}. The CRS was transformed from 
-WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) using cubic resampling (\gdal{gdalwarp}). This 
-resampling method was used for the same reasons presented above. Sinks produced during datum transformation 
-were filled using \grass{r.fill.dir}.
-
-
-
-  ,   \texttt{ELEV\_30}  above with the vertical datum corrected with 
-the EGM1996 geoidal model. 
-
-Because orbital satellites use the WGS1984 ellipsoid as vertical datum, orthorectification of 
-satellite images has to be done using a DEM with ellipsoidal heights. Conversion from orthometric 
-heights was performed using \autoref{eqn:geoidal}, with geoidal undulation calculated with 
-the gravitational model EGM1996. The original DEM with orthometric heights was cropped to the 
-boundary of the study area and resampled to five meters using \grass{r.resamp.interp} with the 
-bicubic resampling method. This DEM was used only to estimated error statistics for the validation 
-in the attribute space.
-
+\cite{ValerianoEtAl2012}. Eight tiles were mosaicked (\gdal{gdal\_translate}) and the CRS transformed from 
+WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) using cubic resampling (\gdal{gdalwarp}), the
+sinks filled using \grass{r.fill.dir}. Before the atmospheric correction of orbital images, orthometric 
+heights were converted to ellipsoidal heights using \autoref{eqn:geoidal}, the geoidal undulation calculated 
+with the gravitational model EGM1996. This conversion was done because because orbital satellites use the 
+WGS1984 ellipsoid as vertical datum. For the topographic correction of orbital images, TOPODATA was then 
+processed using \grass{r.resamp.interp} with the bicubic resampling method to match the reference grid.
 
 The three DEMs present similar vertical accuracy (\autoref{tab:covar-data-dem-attr-val}). In the case of 
 \demNew{}, which was derived from contour lines published at a \scale{25000}, the estimated accuracy does not 
 meet current Brazilian legislation, which states that the accuracy should be of, at least, \SI{5}{\metre}, i.e.
 \num{1/2} of the distance between contour lines \cite{Brasil1984}.
-
-
- 
-
 
 \begin{table}[ht]
  \caption{Error statistics of the vertical validation of \demOld{}, TOPODATA, and \demNew{} using $n = 60$
@@ -544,23 +530,25 @@ meet current Brazilian legislation, which states that the accuracy should be of,
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-90} 
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-30}
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-10}
-%   \caption{Cumulative distribution functions of mean error, mean absolute error, and squared error of elevation values estimates by digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30}, and \texttt{ELEV\_10}.}
+%   \caption{Cumulative distribution functions of mean error, mean absolute error, and squared error of 
+% elevation values estimates by digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30}, and 
+% \texttt{ELEV\_10}.}
 %   \label{fig:cdf-elev}
 % \end{figure}
 
-Despite the similar accuracy in the feature space, \texttt{ELEV\_10} is used in this study 
-because it provides a better hydrological representation of the study area because it was 
-produced using information about the drainage network and location of lakes and natural depressions. 
-This is evidenced by the shape of the boundaries derived from each DEM using the \grass{r.watershed} 
-and \texttt{r.water.outlet} (\autoref{fig:covar-data-elev-maps}). The boundary derived from 
-\texttt{ELEV\_90} is clearly unable to capture all hydrological features of the study area. 
-Therefore, the boundary derived using \texttt{ELEV\_10} is used throughout this study with the 
-addition of a \SI{30}{\metre} buffer, which is the estimated uncertainty 
-($\text{RMSE} = \SI{29.55}{\metre}$) of the affine transformation used to correct the systematic error 
-identified in topographic maps. The water outlet point used to derive the boundary is located on the 
-bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969}).
+Despite all DEMs present a similar vertical accuracy, \demNew{} is considered the highest quality DEM in the 
+Santa Maria dataset. Because it was produced using information about the drainage network and location of lakes
+and natural depressions, it is likely to provide a better hydrological representation of the study area. As 
+such, \demNew{} was used to estimate the geographical limits (boundary) of the catchment that constitute the 
+study area (\autoref{fig:covar-data-elev-maps}), for which GRASS modules \tt{r.watershed} and 
+\tt{r.water.outlet} were employed. Because the overall deviation between the affine-corrected coordinates of 
+topographic maps and target coordinates of GCPs is $\text{RMSE} = \SI{29.55}{\m}$ -- there still is an 
+uncertainty about the correct position of topographic maps -- a \SI{30}{\m} buffer was added to the estimate of 
+the geographical limits of the catchment. The water outlet point used to estimate the boundary is located on 
+the bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969}).
 
-% TODO: figure with both digital elevation models, including the real drainage network and the boundary of the study area.
+% TODO: figure with both digital elevation models, including the real drainage network and the boundary of the
+% study area.
 % \begin{figure}[!ht]
 %   \centering
 %   \includegraphics[width=0.3\textwidth]{fig/elev-90}
@@ -572,100 +560,91 @@ bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969})
 %   \label{fig:elev-maps}
 % \end{figure}
 
-Eight terrain attributes were derived from each of \texttt{ELEV\_90} and \texttt{ELEV\_10}, the 
-first of them being the elevation (\texttt{ELEV}). The others are slope, aspect, northernness, flow 
-accumulation, topographic wetness index, stream power index, and topographic position index.
+Eight terrain attributes were derived from each of \demOld{} and \demNew{} to produce the covariate data 
+included in the Santa Maria dataset, the first of them being elevation (\tt{ELEV}). The others are slope, 
+aspect, northernness, flow accumulation, topographic wetness index, stream power index, and topographic 
+position index.
 
-Slope (\texttt{SLP}) and aspect (\texttt{ASP}) were calculated using \grass{r.param.scale}. This 
-module calculates terrain attributes fitting a bivariate quadratic polynomial using least squares 
-\cite{Wood1996}. It allows using different window sizes to fit the bivariate quadratic polynomial, 
-thus including the effect of scale in the calculation of terrain attributes. In the present study, 
-seven window sizes were used (\numlist{3;7;15;31;63;127;255}) and the results for calculated slope 
-can be seen in \autoref{fig:covar-data-slope}. Larger window sizes result in a smoothed version of 
-the terrain attribute, while smaller windows sizes result in raster maps with more (small-scale) 
-details. Several flat surfaces (slope equal to \ang{0}) were produced in the slope raster 
-maps calculated using \texttt{ELEV\_90} as a result of resampling the original DEM from \num{90} to 
-\SI{5}{\metre}. A value of \ang{0.1} was added to the rasters to remove these flat surfaces.
+Slope (\tt{SLP}) and aspect (\tt{ASP}) were calculated using \grass{r.param.scale}. This module calculates 
+terrain attributes fitting a bivariate quadratic polynomial using least squares \cite{Wood1996}. It allows 
+using different window sizes to fit the bivariate quadratic polynomial, thus including the effect of scale in 
+the calculation of terrain attributes. Seven window sizes were used (3, 7, 15, 31, 63, 127, and 255) and the 
+results for calculated slope can be seen in \autoref{fig:covar-data-slope}. Larger window sizes result in a 
+smoothed version of the terrain attribute, while smaller windows sizes result in raster maps with more 
+(small-scale) details. Several flat surfaces (slope of \ang{0}) were produced in the slope raster maps 
+calculated using \tt{ELEV\_90} as a result of resampling the original DEM from \num{90} to \SI{5}{\m}. A 
+value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 
 % \begin{figure}[!ht]
 %  \centering
 %  % TODO: Include R code to produce figures on the go.
-%  \caption{\label{fig:covar-data-slope}Slope \texttt{SLP}} raster maps derived from \texttt{ELEV\_10} 
-%  using seven window sizes  (\numlist{3;7;15;31;63;127;255}) to include the effect of scale in the 
-%  derived terrain attributes.}
+%  \caption{Slope \tt{SLP}} raster maps derived from \tt{ELEV\_10} using three window sizes (3, 31, and 255).}
+% \label{fig:covar-data-slope}
 % \end{figure}
 
-Aspect values were also corrected before use. The first correction refers to the fact that 
-\grass{r.param.scale} stores aspect values in the range \SIrange{0}{+180}{\degree} from West to 
-North to East, and \SIrange{0}{-180}{\degree} from West to South to East, when the standard 
-procedure is to work with aspect values ranging from \SIrange{0}{360}{\degree} clockwise. This 
-correction was done using the following expressions in in \grass{r.mapcalc}:
-
-\begin{verbatim}
- if(asp < 0, aspect + 360, aspect)
- if(aspect < 90, aspect + 270, aspect - 90)
-\end{verbatim}
-
-\noindent Mathematically,
+Aspect values had to be corrected before use because \grass{r.param.scale} stores aspect values in the range 
+\SIrange{0}{+180}{\degree} from West to North to East, and \SIrange{0}{-180}{\degree} from West to South to 
+East, when the standard procedure is to work with aspect values ranging from \SIrange{0}{360}{\degree} 
+clockwise. This correction was done using
 
 \begin{equation}
- \texttt{ASP}_{beta} =
+ \tt{ASP}_{0} =
  \begin{cases}
-  aspect + \ang{360} & \text{if}\;\; aspect < \ang{0}, \\
-  aspect             & \text{else},
+  \tt{ASP}_{GRASS} + \ang{360} & \text{if}\;\; \tt{ASP}_{GRASS} < \ang{0}, \\
+  \tt{ASP}_{GRASS}             & \text{else},
  \end{cases}
 \end{equation}
 
 \noindent and
 
 \begin{equation}
- \texttt{ASP} =
+ \tt{ASP} =
  \begin{cases}
-  \texttt{ASP}_{beta} + \ang{270} & \text{if}\;\; \texttt{ASP}_{beta} < \ang{90}, \\
-  \texttt{ASP}_{beta} - \ang{90}  & \text{else}.
+  \tt{ASP}_{0} + \ang{270} & \text{if}\;\; \tt{ASP}_{0} < \ang{90}, \\
+  \tt{ASP}_{0} - \ang{90}  & \text{else}.
  \end{cases}
 \end{equation}
 
-\noindent The second correction involved linearizing aspect values. This is necessary because 
-aspect is a circular variable, that is, the begging (\ang{0}) and end (\ang{360}) of the
-measurement scale have the same physical meaning. Aspect values were transformed to northernness 
-(\texttt{NOR}), a measure of the degree of exposition of a given surface to the North, a linear 
-variable, using the equation
+\noindent A second correction of aspect values involved their linearization. This is necessary because aspect 
+is a circular variable, that is, the begging (\ang{0}) and end (\ang{360}) of the measurement scale have the 
+same physical meaning. Aspect values were transformed to northernness (\tt{NOR}), a measure of the degree 
+of exposition of a given surface to the North, a linear variable, using the equation
 
 \begin{equation}
- \texttt{NOR}_i = abs(\ang{180} - \texttt{ASP}_i),
+ \tt{NOR} = abs(\ang{180} - \tt{ASP}).
 \end{equation}\label{eq:NOR}
 
-\noindent where $i$ is the window size used to calculate \texttt{ASP}, with 
-$i = \numlist{3;7;15;31;63;127;255}$.   
+% \noindent where $i$ is the window size used to calculate \texttt{ASP}, with 
+% $i = \numlist{3;7;15;31;63;127;255}$.   
 
-Flow accumulation (\texttt{ACC}), also known as catchment area and contributing area, was calculated 
-using \grass{r.watershed}. The resulting raster map was multiplied by the square of the cell size 
-(\SI{5}{\metre}). This raster map was used to calculate the topographic wetness index (\texttt{TWI}) 
-and the stream power index (\texttt{SPI}) using the following equations:
+Flow accumulation (ACC), also known as catchment area and contributing area, was calculated using 
+\grass{r.watershed}, the resulting raster surface being multiplied by the square of the cell size. This raster 
+surface was used to calculate the topographic wetness index (\tt{TWI}) and the stream power index (\tt{SPI}) 
+using
 
 \begin{equation}
- A = \dfrac{\texttt{ACC}}{\textit{cell}},
+ \text{sACC} = \dfrac{\text{ACC}}{5},
 \end{equation}\label{eq:sACC}
 
 \begin{equation}
- \texttt{TWI}_i = log \dfrac{A}{tan(\texttt{SLP}_i)},
+ \tt{TWI} = log \dfrac{\text{sACC}}{tan(\tt{SLP})},
 \end{equation}\label{eq:TWI}
 
 \noindent and
 
 \begin{equation}
- \texttt{SPI}_i = log(A \times tan(\texttt{SLP}_i)),
+ \tt{SPI} = log(\text{sACC} \times tan(\tt{SLP})),
 \end{equation}\label{eq:SPI}
 
-\noindent where $A$ is the specific catchment area, \textit{cell} is the cell size 
-(\SI{5}{\metre}), and $i$ is the window size used to calculate \texttt{SLP}, with 
-$i = \numlist{3;7;15;31;63;127;255}$.
+\noindent where sACC is the specific catchment area, \SI{5}{\m} is the cell size, and \tt{SLP} is the slope 
+raster surface calculated using seven different window sizes.
 
-The topographic position index \texttt{TPI} was calculated in \saga{ta\_morphometry}. Different 
-values of maximum radius were used to include the effect of scale, all of them related to the window 
-sizes used to calculate previous terrain attributes. A minimum radius value of three meters was used 
-in all calculations.
+The topographic position index \tt{TPI} was calculated with \saga{ta\_morphometry}. Different values of maximum 
+radius were used to include the effect of scale, all of them related to the window sizes used to calculate 
+previous terrain attributes. A minimum radius value of \SI{3}{\m} was used in all calculations.
+
+A total of $1 \times \tt{ELEV} + 7 \times (\tt{NOR}, \tt{SLP}, \tt{TWI}, \tt{SPI}, \tt{TPI}) = 36$ covariates 
+were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 
 \tocless\section{Geological maps}
 \label{sec:covar-data-geo-maps}
