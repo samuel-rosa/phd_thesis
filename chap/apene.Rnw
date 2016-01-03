@@ -577,7 +577,31 @@ value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 
 % \begin{figure}[!ht]
 %  \centering
-%  % TODO: Include R code to produce figures on the go.
+%  <<covar-data-slope, fig = TRUE, echo = FALSE>>=
+% invisible(capture.output(
+%   spgrass6::initGRASS(
+%     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+%     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
+% system("g.region rast=dnos.raster")
+% system("g.remove MASK")
+% system("r.mask dnos.raster")
+% invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
+% invisible(capture.output(slp <- spgrass6::readRAST6("SLP_10_3", ignore.stderr = TRUE)))
+% colnames(slp@data) <- "SLP_10_3"
+% slp@data[, "SLP_10_31"] <- invisible(
+%   capture.output(spgrass6::readRAST6("SLP_10_31", ignore.stderr = TRUE)@data[, 1]))
+% slp@data[, "SLP_10_255"] <- invisible(
+%   capture.output(spgrass6::readRAST6("SLP_10_255", ignore.stderr = TRUE)@data[, 1]))
+% p <- sp::spplot(
+%   slp, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
+%   par.settings = list(
+%     fontsize = list(text = 12, points = 8),
+%     layout.widths = list(left.padding = 0, right.padding = 0),
+%     layout.heights = list(top.padding = 0, bottom.padding = 0))
+%   }) + latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
+% print(p)
+% rm(pol, slp, p)
+% @
 %  \caption{Slope \tt{SLP}} raster maps derived from \tt{ELEV\_10} using three window sizes (3, 31, and 255).}
 % \label{fig:covar-data-slope}
 % \end{figure}
@@ -612,10 +636,7 @@ of exposition of a given surface to the North, a linear variable, using the equa
 
 \begin{equation}
  \tt{NOR} = abs(\ang{180} - \tt{ASP}).
-\end{equation}\label{eq:NOR}
-
-% \noindent where $i$ is the window size used to calculate \texttt{ASP}, with 
-% $i = \numlist{3;7;15;31;63;127;255}$.   
+\end{equation}\label{eq:NOR}  
 
 Flow accumulation (ACC), also known as catchment area and contributing area, was calculated using 
 \grass{r.watershed}, the resulting raster surface being multiplied by the square of the cell size. This raster 
