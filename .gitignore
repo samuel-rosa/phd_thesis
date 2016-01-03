@@ -111,3 +111,5 @@ other
 *.html
 *.ini
 *.kilepr
+phd_thesis.kilepr
+.phd_thesis.tex.kate-swp
