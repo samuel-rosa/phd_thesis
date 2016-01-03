@@ -491,7 +491,8 @@ were filled using \grass{r.fill.dir}.
 
 
 
-
+  ,   \texttt{ELEV\_30}  above with the vertical datum corrected with 
+the EGM1996 geoidal model. 
 
 Because orbital satellites use the WGS1984 ellipsoid as vertical datum, orthorectification of 
 satellite images has to be done using a DEM with ellipsoidal heights. Conversion from orthometric 
@@ -862,21 +863,21 @@ small importance in terms of covered area (PF) and for containing any soil obser
 \tocless\section{Orbital images}
 \label{sec:covar-data-sat-image}
 
-Two sources of satellite images were used. The first is the longest-operating Earth observation satellite 
-Landsat-5 Thematic Mapper, launched on \num{1} March \num{1984}. The satellite image used was acquired on 
-\num{26} December \num{2010} and is available at the database of the Division of Image Generation of the 
-National Institute for Space Research (\inpedgi). The image contains seven spectral bands 
-\autoref{tab:covar-data-satellites}, including a thermal band (which was not used in this study), with eight 
-bits radiometric resolution (digital numbers from \numrange{0}{255}) and approximately \SI{30}{\m} spatial 
-resolution. Orthorectification was performed using Geomatica\textregistered{} OrthoEngine\textregistered{} with 
-the Landsat rigorous model (Toutin's Model). A set of \num{28} GCPs were manually collected in Google 
-Earth\textregistered{} due to the absence of field GCPs and the high accuracy of Google Earth\textregistered{} 
-imagery in the region covered by the image (\autoref{tab:covar-data-google-geo-val}). GCPs were located at 
-easily identifiable geographical markers (road intersection, bridges), evenly distributed throughout the image 
-and covering a variety of elevations, following standard recommendations \cite{PCIGeomatics2007} 
-(\autoref{fig:covar-data-ortho-gcps}). The DEM used is \texttt{ELEV\_30} described in 
-\autoref{sec:covar-data-dem} above with the vertical datum corrected with the EGM1996 geoidal model. Resampling 
-was done using the nearest neighbour method to avoid changes in the digital numbers.
+Two sources of orbital images were used to produce covariate data included in the Santa Maria dataset. The 
+first is the longest-operating Earth observation satellite Landsat-5 Thematic Mapper, launched on \num{1} March 
+\num{1984}. The orbital image used was acquired on \num{26} December \num{2010} and is available at the 
+database of the Division of Image Generation of the National Institute for Space Research (\inpedgi). The 
+image contains seven spectral bands (\autoref{tab:covar-data-satellites}) (including a thermal band that is not
+included in the Santa Maria dataset), with \SI{8}{\bit} radiometric resolution (digital numbers from 
+\numrange{0}{255}) and \SI{\pm30}{\m} spatial resolution. The orbital image was orthorectified using 
+Geomatica\textregistered{} OrthoEngine\textregistered{} with the Landsat rigorous model (Toutin's Model). Due 
+to the absence of field GCPs, $n = 28$ GCPs were collected from Google Earth\textregistered{} imagery, which 
+have a high positional accuracy in the study area (\autoref{tab:covar-data-google-geo-val}). GCPs were located 
+at easily identifiable geographical markers such as road intersection and bridges, evenly distributed 
+throughout the image, and covering a variety of elevations, following standard recommendations 
+\cite{PCIGeomatics2007} (\autoref{fig:covar-data-ortho-gcps}). The DEM used for orthorectification is TOPODATA 
+after preprocessing as described in \autoref{sec:covar-data-dem}. Resampling was done using the nearest 
+neighbour method to avoid changing the digital numbers.
 
 % TODO: figure with GCPs used to ortorectify orbital images. Show the bounding box of the image and the 
 % boundary 
@@ -889,144 +890,97 @@ was done using the nearest neighbour method to avoid changes in the digital numb
 %  \label{fig:covar-data-ortho-gcps}
 % \end{figure}
 
-After orthorectification, all bands were imported into GRASS GIS, where all other necessary corrections were 
-performed. Radiometric correction (conversion from digital numbers to top-of-atmosphere reflectance) was 
-performed using \grass{i.landsat.toar}. Atmospheric correction (removal of the effects of the atmosphere on 
-the reflectance values) was performed using the 6S atmospheric model \cite{VermoteEtAl1997} using 
-\grass{i.atcorr}. The correction was performed using the tropical atmospheric model, the continental aerosols 
-model, an image-based visibility estimate of \SI{20}{\km}, and a fixed elevation of \SI{300}{\m}. Afterwards, 
-all bands were cropped to the bounding box of the study area and geometrically corrected to match the 
-prediction grid (\SI{5}{\m} grid size). Registration and geocoding was performed using the nearest neighbour 
-resampling method. Topographic correction (removal of the effects of the topography -- illumination -- on the 
-reflectance values) was performed using \grass{i.topo.corr} with \texttt{ELEV\_30} geometrically corrected to 
-match the prediction grid.
+After orthorectification, all bands were imported into GRASS, where all other necessary corrections were 
+performed. Radiometric correction (conversion from digital numbers to top-of-atmosphere reflectance) was done
+using \grass{i.landsat.toar}. Atmospheric correction (removal of the effects of the atmosphere on the 
+reflectance values) was done with the 6S atmospheric model \cite{VermoteEtAl1997} as implemented in 
+\grass{i.atcorr} using the tropical atmospheric model, the continental aerosols model, an image-based 
+visibility estimate of \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
 
 The second source of orbital images is the RapidEye constellation of five satellites, launched in August 
-\num{2008}. It is available through the Brazilian Ministry of the Environment \cite{Brasil2012}, who has a 
-full coverage of the Brazilian territory with images from the RapidEye satellite constellation for the years of 
-\num{2011} and \num{2012}. The orbital image used (tile number \num{2225403}) was acquired on \num{16} November 
-\num{2012} (second coverage). It contains five spectral bands \ref{tab:covar-data-satellites}, featuring among 
-them the so called red edge band, located between the red and the near-infrared bands. This spectral band is 
-the main feature distinguishing RapidEye images from most other sources of orbital images, considered to 
-provide additional information about the vegetation \cite{WeicheltEtAl2013}. The orbital image has 
-\SI{16}{\bit} radiometric resolution and \SI{6.5}{\m} spatial resolution, and was orthorrectified in the source 
-to \SI{5}{\m} spatial resolution using the hole-filled SRTM version \num{4} \cite{RapidEye2013}.
-
-Atmospheric correction was performed using the 6S atmospheric model \cite{VermoteEtAl1997} using the Fortran 
-code developed by Dr. \href{http://lattes.cnpq.br/3818721407909667}{Mauro Antonio Homem Antunes}, from the 
-Rural University of Rio de Janeiro. The \grass{i.atcorr} was not used because a \atcorrbug{} was found when 
-trying to correct images from the RapidEye satellite constellation. The correction was performed using the 
-tropical atmospheric model, the continental aerosols model, an image-based visibility estimate of \SI{20}{\km}, 
-and a fixed elevation of \SI{300}{\m}. Afterwards, all bands were cropped to the bounding box of the study area 
-and geometrically corrected to match the prediction grid (\SI{5}{\m} grid size). Registration and geocoding was 
-performed using the nearest neighbour resampling method. Topographic correction was performed using 
-\grass{i.topo.corr} with \texttt{ELEV\_30} geometrically corrected to match the prediction grid 
-(\autoref{sec:covar-data-dem}).
+\num{2008}. Images are available through the Brazilian Ministry of the Environment \cite{Brasil2012}, who 
+has a full coverage of the Brazilian territory with images from the RapidEye satellite constellation for the 
+years of \num{2011} and \num{2012}. The orbital image used (tile number \num{2225403}) was acquired on \num{16} 
+November \num{2012} (second coverage). It contains five spectral bands (\autoref{tab:covar-data-satellites}), 
+featuring among them the so-called red-edge band, located between the red and the near-infrared bands. This 
+spectral band is the main feature distinguishing RapidEye images from most other sources of orbital images, 
+considered to provide additional information about the vegetation \cite{WeicheltEtAl2013}. The orbital image 
+has \SI{16}{\bit} radiometric resolution and \SI{6.5}{\m} spatial resolution, and was orthorrectified in the 
+source to \SI{5}{\m} spatial resolution using the hole-filled SRTM version \num{4} \cite{RapidEye2013}.
 
 \begin{table}[ht]
- \caption{Comparison between satellite images produced by Landsat 5 TM and RapidEye constellation used in the 
- present study and derived covariates.}
+ \caption{Comparison between satellite images produced by Landsat 5 TM and RapidEye constellation and 
+ the derived covariates.}
  \label{tab:covar-data-satellites}
  \centering
  {\small
  \begin{tabular}{llllll}
   \hline
-  \multicolumn{3}{l}{Landsat 5 TM}                         & \multicolumn{3}{l}{RapidEye} \\
-  Band & Interval, \si{nm} & Covariate & Band & Interval, \si{\nm} & Covariate \\
+  \multicolumn{3}{l}{Landsat 5 TM}                       & \multicolumn{3}{l}{RapidEye}                     \\
+  Band            & Interval, \si{nm}    & Covariate     & Band         & Interval, \si{\nm} & Covariate    \\
   \hline
-  Band 1 Visible &\numrange{450}{520} &\covar{BLUE\_30}  &Blue band  &\numrange{440}{510} &\covar{BLUE\_5}\\
-  Band 2 Visible &\numrange{520}{600} &\covar{GREEN\_30} &Green band &\numrange{520}{590} &\covar{GREEN\_5}\\
-  Band 3 Visible &\numrange{630}{690} &\covar{RED\_30}   &Red band   &\numrange{630}{685} &\covar{RED\_5}\\
-  -              &-            & -                   & Red edge band &\numrange{690}{730} &\covar{EDGE\_5}   \\
-  Band 4 Near-Infrared &\numrange{760}{900} &\covar{NIR\_30a} & Near-infrared band &\numrange{760}{850}& 
-  \covar{NIR\_5}\\
-  Band 5 Near-Infrared &\numrange{1550}{1750} &\covar{NIR\_30b} & -                  & -            & -         
-  
-       \\
-  Band 7 Mid-Infrared  &\numrange{2080}{2350} &\covar{MIR\_30}  & -                  & -            & -         
- 
-        \\
+  1 Visible       &\numrange{450}{520}   &\tt{BLUE\_30}  &Blue          &\numrange{440}{510} &\tt{BLUE\_5}  \\
+  2 Visible       &\numrange{520}{600}   &\tt{GREEN\_30} &Green         &\numrange{520}{590} &\tt{GREEN\_5} \\
+  3 Visible       &\numrange{630}{690}   &\tt{RED\_30}   &Red           &\numrange{630}{685} &\tt{RED\_5}   \\
+  -               &-                     & -             &Red-edge      &\numrange{690}{730} &\tt{EDGE\_5}  \\
+  4 Near-infrared &\numrange{760}{900}   &\tt{NIR\_30a}  &Near-infrared &\numrange{760}{850} &\tt{NIR\_5}   \\
+  5 Near-infrared &\numrange{1550}{1750} &\tt{NIR\_30b}  & -            & -                  & -            \\
+  7 Mid-infrared  &\numrange{2080}{2350} &\tt{MIR\_30}   & -            & -                  & -            \\
   \hline
  \end{tabular}}
 \end{table}
 
+RapidEye constellation image was atmospherically corrected using the 6S atmospheric model 
+\cite{VermoteEtAl1997} employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- \grass{i.atcorr} 
+was not used because a \atcorrbug{} was found when trying to correct images from the RapidEye constellation -- 
+assuming a tropical atmospheric model, the continental aerosols model, an image-based visibility estimate of 
+\SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
+
+After atmospheric correction, both Landsat 5 TM and RapidEye constellation images were resampled using the 
+nearest neighbour method to match the reference grid. Topographic correction (removal of the effects of the 
+topography -- illumination -- on the reflectance values) was performed using \grass{i.topo.corr} with TOPODATA 
+geometrically corrected to match the reference grid as described in \autoref{sec:covar-data-dem}.
+
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the horizontal validation of 
- orbital images produced by Landsat 5 TM and RapidEye constellation. Validation statistics were estimated 
- using $n = 14$ GCPs located in easily identifiable geographical markers.}
+ \caption{Error statistics of the horizontal validation of orbital images produced by Landsat 5 TM and
+ RapidEye constellation using $n = 14$ GCPs.}
  \label{tab:covar-data-satellite-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics           & X coordinate & Y coordinate  & Error vector  & Azimuth              \\
+  Statistics                   & x-coord & y-coord  & Error vector  & Azimuth   \\
   \hline
-  \multicolumn{5}{l}{Landsat 5 TM}                                                           \\
+  \multicolumn{5}{l}{Landsat 5 TM}                                              \\
   \hline
-  Mean, \si{\m} & 31   (23)   & -11  (33)   & 45   (26)   & \ang{136} (\ang{89}) \\ 
-  Absolute mean, \si{\m}     & 33   (21)   & 25   (25)   & -           & -                         \\ 
-  Squared mean, \si{\m\square}  & 1494 (1436) & 1223 (2082) & 2717 (2706) & -                         \\ 
+  Mean, \si{\m}                & 31      & -11      & 45            & \ang{136} \\ 
+  Absolute mean, \si{\m}       & 33      & 25       & -             & -         \\ 
+  Squared mean, \si{\m\square} & 1494    & 1223     & 2717          & -         \\ 
   \hline
-  \multicolumn{5}{l}{RapidEye}                                                               \\
+  \multicolumn{5}{l}{RapidEye}                                                  \\
   \hline
-  Mean, \si{\m}              & -25  (7)     & -25 (10)   & 36   (8)     & \ang{226} (\ang{12}) \\ 
-  Absolute mean, \si{\m}& 25   (7)     & 25  (10)   & -            & -                        \\ 
-  Squared mean, \si{\m\square}  & 680  (347)   & 708 (692)  & 1388 (703)   & -                        \\ 
+  Mean, \si{\m}                & -25     & -25      & 36            & \ang{226} \\ 
+  Absolute mean, \si{\m}       & 25      & 25       & -             & -         \\ 
+  Squared mean, \si{\m\square} & 680     & 708      & 1388          & -         \\ 
   \hline
  \end{tabular}}
 \end{table}
 
-In the present study, the orbital image produced by the RapidEye constellation is considered to be of higher 
-quality than the orbital image produced by the satellite Landsat 5 TM. This is mainly due to its finer 
-resolution and thus larger amount of detail. The two-years difference in the acquisition time between the two 
-satellite images is believed to have only a minor effect on the results since land use changes were not 
-significant in the period and soil observations cover the period from \num{2008} to \num{2013}.
-
-Each band of the orbital images was used to derive an environmental covariate, totalling six from Landsat 5 TM 
-and five from RapidEye (Table \ref{tab:covar-data-satellites}). Individual bands were also used to calculate 
-two vegetation indexes: the normalized difference vegetation index (NDVI) and the soil-adjusted vegetation 
-index (SAVI). For Landsat images, NDVI and SAVI were calculated using equations
+Individual bands of both orbital images were defined as covariates, totalling $p = 6$ from Landsat 5 TM and 
+$p = 5$ from RapidEye constellation (Table \ref{tab:covar-data-satellites}). Another $p = 6$ covariates ($p = 
+2$ from Landsat 5 TM and $p = 4$ from RapidEye constellation) were defined using two vegetation indexes: the 
+normalized difference vegetation index (NDVI) and the soil-adjusted vegetation index (SAVI), calculated as
 
 \begin{equation}
-  \covar{NDVI\_30} = \frac{\covar{NIR\_30a} - \covar{RED\_30}}{\covar{NIR\_30a} + \covar{RED\_30}}
-\end{equation}\label{eq:NDVI30}
+ \text{NDVI} = \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED}}
+\end{equation}\label{eq:ndvi}
 
-\noindent and
-
-\begin{equation}
-  \covar{SAVI\_30} = (1.0 + 0.5) \times \frac{\covar{NIR\_30a} - \covar{RED\_30}}{\covar{NIR\_30a} + 
-  \covar{RED\_30} + 0.5}
-\end{equation}\label{eq:SAVI30}
-
-\noindent where \covar{NIR\_30a} is the first near-infrared band (\SIrange{750}{900}{\nm}) and \covar{RED\_30} 
-is the red band (\SIrange{630}{690}{\nm}). For RapidEye image, NDVI and SAVI were calculated using the 
-standard equations
+\noindent and 
 
 \begin{equation}
-  \covar{NDVI\_5a} = \frac{\covar{NIR\_5} - \covar{RED\_5}}{\covar{NIR\_5} + \covar{RED\_5}}
-\end{equation}\label{eq:NDVI5a}
+  \text{SAVI} = (1.0 + 0.5) \times \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED} + 0.5},
+\end{equation}\label{eq:savi}
 
-\noindent and
-
-\begin{equation}
-  \covar{SAVI\_5a} = (1.0 + 0.5) \times \frac{\covar{NIR\_5} - \covar{RED\_5}}{\covar{NIR\_5} + \covar{RED\_5} 
-  + 0.5}
-\end{equation}\label{eq:SAVI5a}
-
-\noindent with the red (\SIrange{630}{685}{\nm}) (\covar{RED\_5}) and near-infrared (\SIrange{760}{850}{\nm}) 
-(\covar{NIR\_5}), and also using the red-edge band (\SIrange{690}{730}{\nm}) (\covar{EDGE\_5}) instead of the 
-near-infrared band as follows:
-
-\begin{equation}
-  \covar{NDVI\_5b} = \frac{\covar{EDGE\_5} - \covar{RED\_5}}{\covar{EDGE\_5} + \covar{RED\_5}}
-\end{equation}\label{eq:NDVI5a}
-
-\noindent and
-
-\begin{equation}
-  \texttt{SAVI\_5b} = (1.0 + 0.5) \times \frac{\covar{EDGE\_5} - \covar{RED\_5}}{\covar{EDGE\_5} + 
-  \covar{RED\_5} + 0.5}
-\end{equation}\label{eq:SAVI5a}
-
-The final number of covariates derived from orbital images is eight, for the Landsat 5 TM, and nine, for 
-the RapidEye constellation.
+\noindent where $\text{NIR} = \tt{NIR\_30a}$ and $\text{RED} = \tt{RED\_30}$ for Landsat 5 TM image, and 
+$\text{NIR} = \tt{NIR\_5}$ and $\text{RED} = \tt{RED\_5}$ or $\text{RED} = \tt{EDGE\_5}$ for RapidEye 
+constellation image.
