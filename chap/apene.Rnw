@@ -25,6 +25,13 @@ covariate data are freely available at the producers databases or in public libr
 % TODO: include a description of the GCPs used to validate the environmental covariates and to 
 % orthorectify satellite images. Also, present the equations used to calculate validation statistics.
 
+\tocless\section{Coordinate reference system}
+\label{sec:covar-data-crs}
+
+Reference grid
+ (\SI{5}{\metre} grid size)
+ imported into GRASS, 
+
 \tocless\section{Ground control points}
 \label{sec:covar-data-gcp}
 
@@ -153,6 +160,12 @@ The field location of the GCPs is as follows (in Portuguese):
 % of evary case. Again, matching of case IDs is mandatory. However, both objects must have a column named ‘z’ 
 % which contains the values of the ‘z’ coordinate. Other columns are discarded.
 
+Alike \soilOld{} 
+described above, validation statistics are absent in the survey report of \soilNew{}. Validation statistics 
+are 
+absent in the survey report.
+
+
 \tocless\section{Area-class soil maps}
 \label{sec:covar-data-soil-maps}
 
@@ -169,7 +182,7 @@ Brazilian soil science community at that time \cite{Brasil1973, CamargoEtAl1982,
 OlmosEtAl1982}. Identification of soil taxa was performed based on morphological features, analytical data 
 compiled from existing technical reports, and analysis of soil samples collected from soil profiles observed 
 along the road network. Description of each soil mapping unit includes the estimated area (\si{\hectare}) and 
-the approximate taxonomic composition (\si{\percent}). Validation statistics are absent in the survey report.
+the approximate taxonomic composition (\si{\percent}).
 
 The second area-class soil map (\soilNew{}) included in the Santa Maria dataset \cite{Miguel2010} was prepared 
 at a \scale{25000}. Orbital images produced by Digital Globe\textregistered{} (Quick Bird satellite), freely 
@@ -180,11 +193,10 @@ than \num{350} locations using a purposive sampling approach. These observations
 modal (representative) soil profiles. Soil sampling and description of modal soil profiles, and laboratory 
 analyses of soil samples, followed the standard protocols adopted in Brazil \cite{ClaessenEtAl1997, 
 SantosEtAl2005}. Soil classification was done following the criteria of the Brazilian System of Soil 
-Classification \cite{SantosEtAl2006}. The final version of the map was prepared using orbital images freely 
-available for visualization in Google Earth\textregistered{} and manually-digitalized topographic maps 
+Classification (SiBCS) \cite{SantosEtAl2006}. The final version of the map was prepared using orbital images 
+freely available for visualization in Google Earth\textregistered{} and manually-digitalized topographic maps 
 published at a \scale{25000} \cite{DSG1992a, DSG1992}. Description of soil mapping units includes only the 
-most common soil taxon, followed by morphological and laboratory data of modal soil profiles. Alike \soilOld{} 
-described above, validation statistics are absent in the survey report of \soilNew{}.
+most common soil taxon, followed by morphological and laboratory data of modal soil profiles.
 
 Both area-class soil maps went through different preprocessing routines. The original \soilOld{} is available 
 only in the analogical format, what required its digitalization. Georeferencing was carried out using the GDAL 
@@ -197,17 +209,17 @@ statistics suggest that there are large positional errors in all directions, wit
 a mean azimuth of \SI{128}{\degree} (\autoref{tab:covar-data-soil-geo-val}).
 
 \begin{table}[ht]
- \caption{Error statistics of the horizontal validation of \soilOld{} using $n = 4$ GCPs. }
+ \caption{Error statistics of the horizontal validation of \soilOld{} using $n = 4$ GCPs.}
  \label{tab:covar-data-soil-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics                  & x-coord      & y-coord      & Error vector & Azimuth              \\
+  Statistics                  & x-coord & y-coord & Error vector & Azimuth   \\
   \hline
-  Mean, \si{\m}               & 30   (79)    & -36  (67)    & 105   (43)   & \ang{128} (\ang{80}) \\ 
-  Absolute mean, \si{\m}      & 58   (63)    & 64   (40)    & -            & -                    \\ 
-  Squared mean, \si{\m\square}& 7241 (11353) & 5712 (6197)  & 12953 (9613) & -                    \\ 
+  Mean, \si{\m}               & 30      & -36     & 105          & \ang{128} \\ 
+  Absolute mean, \si{\m}      & 58      & 64      & -            & -         \\ 
+  Squared mean, \si{\m\square}& 7241    & 5712    & 12953        & -         \\ 
   \hline
  \end{tabular}}
 \end{table}
@@ -217,8 +229,7 @@ a mean azimuth of \SI{128}{\degree} (\autoref{tab:covar-data-soil-geo-val}).
 %   \includegraphics[width=0.45\textwidth]{azim-soil100}
 %   \includegraphics[width=0.45\textwidth]{azim-soil25}
 %   \caption{Histogram of the azimuth distribution of the validation of area-class soil maps \soilOld{} 
-% and \soilNew{} in the attribute space. Azimuth values were estimated using, respectively, four and 
-... 
+% and \soilNew{} in the attribute space. Azimuth values were estimated using, respectively, four and
 % GCPs located in easily identifiable geographical markers. Estimates were corrected to the size of the 
 % population. The graph was produced using R-package \textit{VecStatGraphs2D}.}
 %   \label{fig:soil-azim}
@@ -230,58 +241,30 @@ and overlaps between polygons. This required a topological edition prior to the 
 was a mismatch between the boundary of \soilNew{} and the actual boundary of the study area as estimated using 
 \demNew{} (\autoref{sec:covar-data-dem}). This occurred because the database used to produce \soilNew{} 
 included Google Earth imagery\textregistered{} and topographic maps, which are data sources that differ 
-considerably in their positional accuracy (\autoref{sec:covar-data-dem} and 
-\autoref{sec:covar-data-land-use}). To avoid data losses, all boundary gaps were manually filled using the 
-closest mapping unit. Boundaries of soil polygons were defined based on land use (\landNew{}, 
-\autoref{sec:covar-data-land-use}) and topographic data 
+considerably in their positional accuracy (\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). 
+To avoid data losses, all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil 
+polygons were defined based on land use (\landNew{}, \autoref{sec:covar-data-land-use}) and topographic data 
 (contour lines, \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. New 
 delineations were checked and approved without modifications by the author of the original map. Because 
 \soilNew{} includes very few geographical markers, its positional validation was not possible with the 
 available GCPs. However, the RMSE is expected to vary between \SIrange{8}{114}{\m} across the study area as a 
 result of the different errors present in the data sources used in its production.
 
-Both \soilOld{} and \soilNew{} were imported into GRASS GIS, cropped to the bounding box of the study area, 
-and geometrically corrected to match the prediction grid (\SI{5}{\metre} grid size). Registration and geocoding 
-was performed using the nearest neighbour resampling method to maintain data integrity. Each category was named 
-with the code of the respective mapping unit in the original soil map. Prior to validation in the attribute 
-space, class codes of \soilOld{} were changed to match soil taxa codes of the current Brazilian System of Soil 
-Classification using a standard correlation table \cite{SantosEtAl2006}.
-
-
-
-
-
-
-Table \ref{tab:covar-data-soil-attr-val} shows that the overall purity of both soil maps is not 
-significantly different. The main reason for this is that validation was performed considering only 
-the second level of the Brazilian System of Soil Classification. It is expected that 
-\soilNew{} would outperform \soilOld{} if validation data included soil 
-classification up to the fourth level of the Brazilian System of Soil Classification. Estimated 
-overall purity values are also very low (\SI{<35}{\percent}). The main reason can be the fact that 
-very few soil profiles were described and sampled to produce both maps. There also are two minor 
-potential sources of error. First, because \soilOld{} does not include analytical soil data 
-in the survey report, all soil taxa had to be translated to the current Brazilian System of Soil 
-Classification based only on a standard correlation table \cite{SantosEtAl2006} and expert 
-knowledge. Second, soil taxa described at the validation points was obtained analysing only 
-morphological soil properties and the basis and concepts of the Brazilian System of Soil 
-Classification.
-
-\begin{table}[ht]
- \caption{Estimated error statistics of the validation of area-class soil maps \soilOld{}
- and \soilNew{} in the attribute space. Validation statistics were estimated using $n = 60$ 
- observation locations placed along $m = 12$ linear transects (clustered samples).}
- \label{tab:covar-data-soil-attr-val}
- \centering
- {\small
- \begin{tabular}{lrrr}
-  \hline
-  Soil map              & LCB95Pct & Estimate & UCB95Pct \\
-  \hline
-  \soilOld{}    & 21.69    & 31.67    & 41.65    \\
-  \soilNew{}     & 20.81    & 30.00    & 39.19    \\
-  \hline
- \end{tabular}}
-\end{table}
+Both \soilOld{} and \soilNew{} were cropped to the bounding box of the study area, and geometrically corrected 
+to match the reference grid. Registration and geocoding was performed using the nearest neighbour resampling 
+method to maintain data integrity. Each category was named with the code of the respective mapping unit in the 
+original map. Prior to validation in the attribute space, class codes of \soilOld{} were changed to match soil 
+taxa codes of the current Brazilian System of Soil Classification using a standard correlation table 
+\cite{SantosEtAl2006}. The overall purity of both soil maps is not considerably different 
+(\autoref{tab:covar-data-soil-attr-val}). A reason for this could be that validation was performed considering 
+only the second level of the SiBCS -- it is likely that \soilNew{} would outperform \soilOld{} if validation 
+data included soil taxa up to the fourth level of the SiBCS. The low overall purity of \soilOld{} and 
+\soilNew{} (\num{31.67} and \SI{30.00}{\percent}, respectively) is likely due to several sources of error. 
+First, the small number of modal soil profiles used to produce both maps which might resulted in an optimistic 
+view of the homogeneity of each mapping unit. Second, soil taxa of \soilOld{} was translated to the current 
+SiBCS using only a standard correlation table \cite{SantosEtAl2006} and expert knowledge because the survey 
+report does not include analytical soil data. Last, soil taxa at validation points was inferred in the field 
+using only morphological soil properties and the concepts of the SiBCS.
 
 % TODO: figure with both area-class soil maps
 % \begin{figure}[!ht]
@@ -293,42 +276,44 @@ Classification.
 % right, the area-class soil map produced by \cite{Miguel2010} at a scale of 1:25,000 (\soilNew{}).}
 %   \label{fig:soil-maps}
 % \end{figure}
-
-The main advantage of \soilNew{} in relation to \soilOld{} is the level of detail. 
-While \soilOld{} has only five mapping units covering catchment of the DNOS/CORSAN 
-reservoir, \soilNew{} has seven mapping units. This enabled the derivation of six 
-covariates from \soilOld{} and ten covariates from \soilNew{}. Covariates derived 
-from \soilOld{} are the following:
-
-\begin{description}
+% 
+%  The main advantage of \soilNew{} over 
+% \soilOld{} is the level of detail. While \soilOld{} has only five mapping units covering the study area, 
+% \soilNew{} has seven mapping units.
+% This enabled the derivation of five 
+% covariates from \soilOld{} as described bellow (including the soil taxa according to the original and 
+% updated classification \cite{AzolinEtAl1988, SantosEtAl2013a}, and the international classification 
+% \cite{IUSSWorkingGroupWRB2007}):
+% 
+% \begin{description}
 %  \item[\texttt{SOIL\_100a}] This covariate separates map unit Rd1 from other map units. It is 
 %  composed mainly by shallow soils with low to high base saturation (Solo Litólico 
 %  distrófico/eutrófico; Neossolo Litólico distrófico/eutrófico; Distric/Eutric Leptosol) located in 
 %  slopping terrain;
-  
- \item[\texttt{SOIL\_100b}] Shallow soils with low to high base saturation covering mountainous 
- terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico 
- Distrófico/Eutrófico; Distric/Eutric Leptosol);
-  
- \item[\texttt{SOIL\_100c}] Shallow soils with high base saturation located in strongly sloping 
- terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric 
- Leptosol), low weathered soils (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric 
- Cambisol), and colluvial deposits;
-  
- \item[\texttt{SOIL\_100d}] Deep, well-structured, low base saturation soils (Terra Bruna 
- Estruturada álica; Nitossolo; Nitisol), and shallow soils (Solo Litólico; Neossolo Litólico; 
- Leptosol);
-  
- \item[\texttt{SOIL\_100e}] \textit{Rd1} is composed mainly by shallow soils with low to high base 
- saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; 
- Distric/Eutric Leptosol) located in slopping terrain. This dummy predictor variable is composed by 
- shallow soils in both sloping and mountainous terrain;
-  
- \item[\texttt{SOIL\_100f}] \textit{C1} is composed by low weathered soils developed in lower 
- landscape positions, close to drainage channels (Cambissolo Eutrófico; Cambissolo Eutrófico; 
- Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop 
- agriculture among those identified in the soil survey.
-\end{description}
+%   
+%  \item[\texttt{SOIL\_100b}] Shallow soils (Re4) with low to high base saturation covering mountainous 
+%  terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico 
+%  Distrófico/Eutrófico; Distric/Eutric Leptosol);
+%   
+%  \item[\texttt{SOIL\_100c}] Shallow soils with high base saturation located in strongly sloping 
+%  terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric 
+%  Leptosol), low weathered soils (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric 
+%  Cambisol), and colluvial deposits;
+%   
+%  \item[\texttt{SOIL\_100d}] Deep, well-structured, low base saturation soils (Terra Bruna 
+%  Estruturada álica; Nitossolo; Nitisol), and shallow soils (Solo Litólico; Neossolo Litólico; 
+%  Leptosol);
+%   
+%  \item[\texttt{SOIL\_100e}] \textit{Rd1} is composed mainly by shallow soils with low to high base 
+%  saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; 
+%  Distric/Eutric Leptosol) located in slopping terrain. This dummy predictor variable is composed by 
+%  shallow soils in both sloping and mountainous terrain;
+%   
+%  \item[\texttt{SOIL\_100f}] \textit{C1} is composed by low weathered soils developed in lower 
+%  landscape positions, close to drainage channels (Cambissolo Eutrófico; Cambissolo Eutrófico; 
+%  Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop 
+%  agriculture among those identified in the soil survey.
+% \end{description}
 
 % TODO: figure with covariates derived from SOIL_100
 % \begin{figure}[!ht]
@@ -343,63 +328,49 @@ from \soilOld{} are the following:
 % and published at a scale of 1:100,000 (\soilOld{}).}
 %   \label{fig:soil100-covars}
 % \end{figure}
-
-Covariates derived from \soilNew{} are the following:
-
-\begin{description}
- \item[\texttt{SOIL\_25a}] Moderately deep soils derived from sedimentary rocks, with abrupt 
- textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol);
-
- \item[\texttt{SOIL\_25b}] Deep soils derived from igneous rocks, with moderate textural gradient, 
- and low base saturation (Argissolo Vermelho; Acrisol);
- 
- \item[\texttt{SOIL\_25c}] Low weathered soils (Cambissolo; Cambisol) and shallow soils with low to 
- high base saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric 
- Leptosol/Regosol);
- 
- \item[\texttt{SOIL\_25d}] Shallow soils with low to high base saturation (Neossolo Litólico 
- Eutrófico/Distrófico; Eutric/Distric Leptosol);
- 
+% 
+% 
+% and seven covariates from \soilNew{}. Covariates derived from \soilOld{} are the 
+% following:
+% 
+% Covariates derived from \soilNew{} are the following:
+% 
+% \begin{description}
+%  \item[\texttt{SOIL\_25a}] Moderately deep soils derived from sedimentary rocks, with abrupt 
+%  textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol);
+% 
+%  \item[\texttt{SOIL\_25b}] Deep soils derived from igneous rocks, with moderate textural gradient, 
+%  and low base saturation (Argissolo Vermelho; Acrisol);
+%  
+%  \item[\texttt{SOIL\_25c}] Low weathered soils (Cambissolo; Cambisol) and shallow soils with low to 
+%  high base saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric 
+%  Leptosol/Regosol);
+%  
+%  \item[\texttt{SOIL\_25d}] Shallow soils with low to high base saturation (Neossolo Litólico 
+%  Eutrófico/Distrófico; Eutric/Distric Leptosol);
+%  
 %  \item[\texttt{SOIL\_25e}] This covariate separates map unit RL-RR from other map units. It is 
 %  composed mainly by shallow soils (Neossolo Litólico + Neossolo Regolítico; Leptosol + Regosol) 
 %  with low to high base saturation;
- 
+%  
 %  \item[\texttt{SOIL\_25f}] This covariate separates map unit RR from other map units. It is composed 
 %  mainly by shallow soils (Neossolo Regolítico; Regosol), with low base saturation, developed on 
 %  sedimentary rocks;
- 
+%  
 %  \item[\texttt{SOIL\_25g}] This covariate separates map unit RY from other map units. It is composed 
 %  mainly by soils developed from fluvial deposits (Neossolo Flúvico; Fluvisol);
- 
- \item[\texttt{SOIL\_25h}] \textit{SX} is composed by moderately deep soils derived from sedimentary 
- rocks, with abrupt textural change, low base saturation, and which are saturated with water for 
- long periods of the year (Planossolo Háplico; Planosol). This dummy predictor variable includes 
- the best soil mapping units for crop agriculture among those identified in the soil survey;
- 
- \item[\texttt{SOIL\_25i}] This dummy predictor variable includes all three mapping units composed 
- mainly by shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol);
-  
- \item[\texttt{SOIL\_25j}] This dummy predictor variable includes all four mapping units composed 
- mainly by soils derived from igneous rocks.
-\end{description}
-
-% TODO: figure with covariates derived from SOIL_25
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25a}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25b}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25c}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25d}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25e}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25f}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25g}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25h}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25i}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25j}
-%   \caption{Environmental covariates derived from the area-class soil map produced by \cite{Miguel2010} at a 
-% scale of 1:25,000 (\soilNew{}).}
-%   \label{fig:soil25-covars}
-% \end{figure}
+%  
+%  \item[\texttt{SOIL\_25h}] \textit{SX} is composed by moderately deep soils derived from sedimentary 
+%  rocks, with abrupt textural change, low base saturation, and which are saturated with water for 
+%  long periods of the year (Planossolo Háplico; Planosol). This dummy predictor variable includes 
+%  the best soil mapping units for crop agriculture among those identified in the soil survey;
+%  
+%  \item[\texttt{SOIL\_25i}] This dummy predictor variable includes all three mapping units composed 
+%  mainly by shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol);
+%   
+%  \item[\texttt{SOIL\_25j}] This dummy predictor variable includes all four mapping units composed 
+%  mainly by soils derived from igneous rocks.
+% \end{description}
 
 \tocless\section{Digital elevation models}
 \label{sec:covar-data-dem}
@@ -464,7 +435,7 @@ method based on the ANUDEM program developed by \citeonline{Hutchinson1989}. Vec
 lines (\texttt{multiline}), drainage network (\texttt{multiline}), lakes (\texttt{polygons}) and 
 peaks (\texttt{points}) were used to generate an hydrologically correct DEM, that is, a DEM without 
 spurious depressions and giving an accurate representation of the real hydrology. Next, the 
-interpolated DEM was imported into GRASS GIS \cite{GRASS2012}, where a neighbourhood average filter 
+interpolated DEM was imported into GRASS \cite{GRASS2012}, where a neighbourhood average filter 
 was used to remove stair-like artefacts. A window of $7 \times 7$ pixels was used because it 
 removed a significant amount of the artefacts and did not affect the derived boundary of the study 
 area (see more bellow).
