@@ -318,21 +318,6 @@ using only morphological soil properties and the concepts of the SiBCS.
 %  Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop 
 %  agriculture among those identified in the soil survey.
 % \end{description}
-
-% TODO: figure with covariates derived from SOIL_100
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100a}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100b}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100c}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100d}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100e}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100f}
-%   \caption{Environmental covariates derived from the area-class soil map produced by \cite{AzolinEtAl1988} 
-% and published at a scale of 1:100,000 (\soilOld{}).}
-%   \label{fig:soil100-covars}
-% \end{figure}
-% 
 % 
 % and seven covariates from \soilNew{}. Covariates derived from \soilOld{} are the 
 % following:
@@ -602,7 +587,8 @@ value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 % print(p)
 % rm(pol, slp, p)
 % @
-%  \caption{Slope \tt{SLP}} raster maps derived from \tt{ELEV\_10} using three window sizes (3, 31, and 255).}
+%  \caption{Slope \tt{SLP}} raster surfaces derived from \tt{ELEV\_10} using three window sizes (3, 31, and 
+% 255).}
 % \label{fig:covar-data-slope}
 % \end{figure}
 
@@ -783,82 +769,68 @@ of those derived from \texttt{GEO\_50}:
 \tocless\section{Land use maps}
 \label{sec:covar-data-land-use}
 
-The land use map for the year of \num{1980} was produced by manually digitizing land use data included in the 
-most recent topographic map produced by the Brazilian Army (\scale{25000}), and that were used to produce the 
-more detailed pedological and geologic maps. The most up-to-date land use map was prepared using high 
-resolution orbital images (Quick Bird satellite). It covers the years of \num{2008} and \num{2009}, and was 
-prepared at a \scale{2000} \cite{SamuelRosaEtAl2011a}.
+The first land use map used to derive covariate data included in the Santa Maria dataset was produced by 
+manually digitizing land use data of the year of \num{1980} (\landOld{}) published in the most recent 
+topographic map produced by the Brazilian Army (\scale{25000}) \cite{DSG1992a, DSG1992}. As such, several 
+processing steps, including the correction of positional bias, are as in \autoref{sec:covar-data-dem}, except 
+for the use of the nearest neighbour resampling method to match \landOld{} to the reference grid.
 
-Land use maps were registered and geocoded with the prediction grid using the nearest neighbour resampling 
-method. This method was used to avoid changing raster values. Systematic positional errors 
-\cite{Samuel-RosaEtAl2014} were corrected using affine transformation (\Rpackage{vec2dtransf} 
-\cite{Carrillo2012}).
+The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution orbital images of 
+the years of \num{2008} and \num{2009} available at Google Earth\textregistered{} \cite{SamuelRosaEtAl2011a}. 
+Identification of land uses and delineation of mapping units was done manually, on the computer screen, without 
+using any automated classification routine. Positional validation of Google Earth\textregistered{} imagery 
+revealed that they have only minor systematic positional errors (\autoref{tab:covar-data-google-geo-val}). 
+Attribute validation of both land use maps showed that they have similar overall accuracy, \tt{LU1980} 
+(\SI{70.00}{\percent}) slightly outperforming \tt{LU2009} (\SI{66.67}{\percent}).
 
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of Google 
- Earth\textregistered imagery in the geographic space. Validation statistics were estimated using \num{14} 
- ground
- control points located in easily identifiable geographical markers (purposive sampling).}
+ \caption{Error statistics of the horizontal validation of Google Earth\textregistered imagery using $n = 14$ 
+ GCPs.}
  \label{tab:covar-data-google-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics           & X coordinate & Y coordinate & Error vector  & Azimuth \\
+  Statistics                   & x-coord & y-coord & Error vector & Azimuth   \\
   \hline
-  Mean, \si{\m} & -1 (4) & 3 (7) & 6 (6) & \ang{184} (\ang{125}) \\ 
-  Absolute mean, \si{\m} & 3 (2) & 5 (6) & - & - \\ 
-  Squared mean, \si{\m\square} & 14 (22) & 57 (132) & 71 (153) & - \\ 
-  \hline
- \end{tabular}}
-\end{table}
-
-\begin{table}[ht]
- \caption{Estimated error statistics of the validation of land use maps \texttt{LU1980} and  \texttt{LU2009} in 
- the attribute space. Validation statistics were estimated using $n = 60$  validation points located in 
- $m = 12$ linear transects (clustered samples).}
- \label{tab:covar-data-land-attr-val}
- \centering
- {\small
- \begin{tabular}{lrrr}
-  \hline
-  Land use map & LCB95Pct & Estimate & UCB95Pct \\
-  \hline
-  \texttt{LU1980} & 58.52    & 66.67    & 74.82    \\
-  \texttt{LU2009} & 61.16    & 70.00    & 78.84    \\
+  Mean, \si{\m}                & -1      & 3       & 6            & \ang{184} \\ 
+  Absolute mean, \si{\m}       & 3       & 5       & -            & -         \\ 
+  Squared mean, \si{\m\square} & 14      & 57      & 71           & -         \\ 
   \hline
  \end{tabular}}
 \end{table}
 
-Two indicator variables were derived from \texttt{LU1980}, with plantation forests (PF) and human settlements 
-(S) being grouped together due to their small importance in terms of covered area (PF) and for containing any soil 
-observation (S). These are:
-
-\begin{description}
- \item[\texttt{LU1980a}] Native forest (FS), which is likely to have soils with higher fertility.
-  
- \item[\texttt{LU1980b}] Animal husbandry (H), which is likely to have a soil fertility status lower than native 
- forests and is the second most important land use in the study area.
-\end{description}
-
-Five indicator covariates were derived from \texttt{LU2009}, with plantation forests (PF), human settlements 
-(S), and other land uses (O), which comprise natural and artificial water bodies, being grouped together due to their
-small importance in terms of covered area (PF) and for containing any soil observation (S and O). These are:
-
-\begin{description}
- \item[\texttt{LU2009a}] Native forest (FS).
- 
- \item[\texttt{LU2009b}] Shrubland (SS), which is likely to have SOC and ECEC level above  those found in areas used 
- with annual crop agriculture and animal husbandry, but lower than in native forests.
- 
- \item[\texttt{LU2009c}] Animal husbandry (H).
-  
- \item[\texttt{LU2009d}] Annual crop agriculture (AA), which is likely to have the lowest soil fertility due to 
- the usually poor management practices employed.
- 
- \item[\texttt{LUdiff}] Land use difference between \num{1980} and \num{2009}. It can be useful to explain, for 
- example, low \texttt{ORCA} in forest soils due to previous use with crop agriculture or animal husbandry.
-\end{description}
+% \landOld{} was used to derive $p = 2$ covariates defined as indicator variables, with plantation forests 
+% (PF) and human settlements (S) being grouped together due to their small importance in terms of covered area 
+% (PF) and for not containing any soil observation (S). These are:
+% 
+% \begin{description}
+%  \item[\texttt{LU1980a}] Native forest (FS), which is likely to have soils with higher fertility.
+%   
+%  \item[\texttt{LU1980b}] Animal husbandry (H), which is likely to have a soil fertility status lower than  
+%  native forests and is the second most important land use in the study area.
+% \end{description}
+% 
+% Five indicator covariates were derived from \texttt{LU2009}, with plantation forests (PF), human settlements 
+% (S), and other land uses (O), which comprise natural and artificial water bodies, being grouped together due 
+% to their small importance in terms of covered area (PF) and for containing any soil observation (S and O). 
+% These are:
+% 
+% \begin{description}
+%  \item[\texttt{LU2009a}] Native forest (FS).
+%  
+%  \item[\texttt{LU2009b}] Shrubland (SS), which is likely to have SOC and ECEC level above  those found in 
+%  areas used with annual crop agriculture and animal husbandry, but lower than in native forests.
+%  
+%  \item[\texttt{LU2009c}] Animal husbandry (H).
+%   
+%  \item[\texttt{LU2009d}] Annual crop agriculture (AA), which is likely to have the lowest soil fertility due 
+%  to the usually poor management practices employed.
+%  
+%  \item[\texttt{LUdiff}] Land use difference between \num{1980} and \num{2009}. It can be useful to explain, 
+%  for example, low \texttt{ORCA} in forest soils due to previous use with crop agriculture or animal 
+% husbandry.
+% \end{description}
 
 \tocless\section{Orbital images}
 \label{sec:covar-data-sat-image}
