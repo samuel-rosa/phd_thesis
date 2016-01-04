@@ -18,23 +18,13 @@ are the outcome of projects that aimed at modelling various environmental featur
 part of local (soil, geology, land use), regional (terrain, land use), and global (terrain, land use) 
 initiatives.
 
+Covariate data was standardized to A reference grid of \SI{5}{\m} grid size. The coordinate reference 
+system (CRS) is WGS1984 / UTM zone 22S, coded \href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} 
+by the European Petroleum Survey Group (\href{http://www.epsg.org/}{EPSG}).
+
 This document presents a description of the covariate data contained in the Santa Maria dataset, including the 
 procedures for their production, as well as the processing methods employed. The original sources of the 
 covariate data are freely available at the producers databases or in public libraries.
-
-% TODO: include a description of the GCPs used to validate the environmental covariates and to 
-% orthorectify satellite images. Also, present the equations used to calculate validation statistics.
-
-\tocless\section{Coordinate reference system}
-\label{sec:covar-data-crs}
-
-Reference grid
- (\SI{5}{\metre} grid size)
- imported into GRASS, 
- 
- Prior to processing, the SRTM DEM was cropped to the extent of the study area and the coordinate 
-reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
-using cubic resampling in GDAL (module \texttt{gdalwarp}).
 
 \tocless\section{Ground control points}
 \label{sec:covar-data-gcp}
@@ -80,12 +70,12 @@ print(p)
 rm(gcps, p, pol)
 gc()
 @
-\caption{Spatial distribution of the ground control points ($n = 14$, red) used to validate the covariates 
-included in the Santa Maria dataset.}
+\caption{Spatial distribution of the ground control points ($n = 14$, red) used for the positional validation 
+of covariates included in the Santa Maria dataset.}
 \label{fig:covar-data-field-gcps}
 \end{figure}
 
-Horizontal validation was performed comparing the x- and y-coordinates of GCPs (observed value) with the 
+Positional validation was performed comparing the x- and y-coordinates of GCPs (observed value) with the 
 coordinates of the respective geographical markers visually identified on the covariates (predicted value). The 
 differences in the observed and predicted x- and y-coordinates were used to calculate the mean error (ME, 
 \si{\m}), mean absolute error (MAE, \si{\m}), and mean squared error (MSE, \si{\m\square}) to evaluate if 
@@ -157,18 +147,10 @@ The field location of the GCPs is as follows (in Portuguese):
  esquerdo subindo, no interior da estrada.
 \end{description}
 
-% Vertical validation exercises are interested in comparing the measured value of a variable at a given location 
-% with that predicted by some model. In this case, error statistics are calculated only for the the vertical 
-% displacement (error) in the ‘z’ coordinate. Both objects measured and predicted used with function gcpDiff() 
-% must be of class SpatialPointsDataFrame. They also must have a column named ‘siteID’ giving the identification 
-% of evary case. Again, matching of case IDs is mandatory. However, both objects must have a column named ‘z’ 
-% which contains the values of the ‘z’ coordinate. Other columns are discarded.
-
-Alike \soilOld{} 
-described above, validation statistics are absent in the survey report of \soilNew{}. Validation statistics 
-are 
-absent in the survey report.
-
+Attribute validation of soil, geological, and land use maps, and DEMs was done using a set of $n = 60$ 
+validation points located along $m = 12$ linear transects. The procedures for obtaining soil, geological, land 
+use, and elevation data at these validation points is described in \autoref{apen:soil-data}. Such a validation 
+exercise was carried out because these maps originally have no accompanying validation information.
 
 \tocless\section{Area-class soil maps}
 \label{sec:covar-data-soil-maps}
@@ -244,7 +226,7 @@ The original \soilNew{} is available in digital format in the personal database 
 and overlaps between polygons. This required a topological edition prior to the use of \soilNew{}. There also 
 was a mismatch between the boundary of \soilNew{} and the actual boundary of the study area as estimated using 
 \demNew{} (\autoref{sec:covar-data-dem}). This occurred because the database used to produce \soilNew{} 
-included Google Earth imagery\textregistered{} and topographic maps, which are data sources that differ 
+included Google Earth imagery and topographic maps, which are data sources that differ 
 considerably in their positional accuracy (\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). 
 To avoid data losses, all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil 
 polygons were defined based on land use (\landNew{}, \autoref{sec:covar-data-land-use}) and topographic data 
@@ -281,85 +263,62 @@ using only morphological soil properties and the concepts of the SiBCS.
 %   \label{fig:soil-maps}
 % \end{figure}
 % 
-%  The main advantage of \soilNew{} over 
-% \soilOld{} is the level of detail. While \soilOld{} has only five mapping units covering the study area, 
-% \soilNew{} has seven mapping units.
-% This enabled the derivation of five 
-% covariates from \soilOld{} as described bellow (including the soil taxa according to the original and 
-% updated classification \cite{AzolinEtAl1988, SantosEtAl2013a}, and the international classification 
-% \cite{IUSSWorkingGroupWRB2007}):
-% 
-% \begin{description}
-%  \item[\texttt{SOIL\_100a}] This covariate separates map unit Rd1 from other map units. It is 
-%  composed mainly by shallow soils with low to high base saturation (Solo Litólico 
-%  distrófico/eutrófico; Neossolo Litólico distrófico/eutrófico; Distric/Eutric Leptosol) located in 
-%  slopping terrain;
-%   
-%  \item[\texttt{SOIL\_100b}] Shallow soils (Re4) with low to high base saturation covering mountainous 
-%  terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico 
-%  Distrófico/Eutrófico; Distric/Eutric Leptosol);
-%   
-%  \item[\texttt{SOIL\_100c}] Shallow soils with high base saturation located in strongly sloping 
-%  terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric 
-%  Leptosol), low weathered soils (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric 
-%  Cambisol), and colluvial deposits;
-%   
-%  \item[\texttt{SOIL\_100d}] Deep, well-structured, low base saturation soils (Terra Bruna 
-%  Estruturada álica; Nitossolo; Nitisol), and shallow soils (Solo Litólico; Neossolo Litólico; 
-%  Leptosol);
-%   
-%  \item[\texttt{SOIL\_100e}] \textit{Rd1} is composed mainly by shallow soils with low to high base 
-%  saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; 
-%  Distric/Eutric Leptosol) located in slopping terrain. This dummy predictor variable is composed by 
-%  shallow soils in both sloping and mountainous terrain;
-%   
-%  \item[\texttt{SOIL\_100f}] \textit{C1} is composed by low weathered soils developed in lower 
-%  landscape positions, close to drainage channels (Cambissolo Eutrófico; Cambissolo Eutrófico; 
-%  Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop 
-%  agriculture among those identified in the soil survey.
-% \end{description}
-% 
-% and seven covariates from \soilNew{}. Covariates derived from \soilOld{} are the 
-% following:
-% 
-% Covariates derived from \soilNew{} are the following:
-% 
-% \begin{description}
-%  \item[\texttt{SOIL\_25a}] Moderately deep soils derived from sedimentary rocks, with abrupt 
-%  textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol);
-% 
-%  \item[\texttt{SOIL\_25b}] Deep soils derived from igneous rocks, with moderate textural gradient, 
-%  and low base saturation (Argissolo Vermelho; Acrisol);
-%  
-%  \item[\texttt{SOIL\_25c}] Low weathered soils (Cambissolo; Cambisol) and shallow soils with low to 
-%  high base saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric 
-%  Leptosol/Regosol);
-%  
-%  \item[\texttt{SOIL\_25d}] Shallow soils with low to high base saturation (Neossolo Litólico 
-%  Eutrófico/Distrófico; Eutric/Distric Leptosol);
-%  
-%  \item[\texttt{SOIL\_25e}] This covariate separates map unit RL-RR from other map units. It is 
-%  composed mainly by shallow soils (Neossolo Litólico + Neossolo Regolítico; Leptosol + Regosol) 
-%  with low to high base saturation;
-%  
-%  \item[\texttt{SOIL\_25f}] This covariate separates map unit RR from other map units. It is composed 
-%  mainly by shallow soils (Neossolo Regolítico; Regosol), with low base saturation, developed on 
-%  sedimentary rocks;
-%  
-%  \item[\texttt{SOIL\_25g}] This covariate separates map unit RY from other map units. It is composed 
-%  mainly by soils developed from fluvial deposits (Neossolo Flúvico; Fluvisol);
-%  
-%  \item[\texttt{SOIL\_25h}] \textit{SX} is composed by moderately deep soils derived from sedimentary 
-%  rocks, with abrupt textural change, low base saturation, and which are saturated with water for 
-%  long periods of the year (Planossolo Háplico; Planosol). This dummy predictor variable includes 
-%  the best soil mapping units for crop agriculture among those identified in the soil survey;
-%  
-%  \item[\texttt{SOIL\_25i}] This dummy predictor variable includes all three mapping units composed 
-%  mainly by shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol);
-%   
-%  \item[\texttt{SOIL\_25j}] This dummy predictor variable includes all four mapping units composed 
-%  mainly by soils derived from igneous rocks.
-% \end{description}
+
+Five ($p = 5$) covariates were derived from \soilOld{} as described bellow (including the soil taxa according 
+to the original and updated classification \cite{AzolinEtAl1988, SantosEtAl2013a}, and the international 
+classification \cite{IUSSWorkingGroupWRB2007}):
+
+\begin{description}
+ \item[\tt{SOIL\_100b}] Shallow soil (\it{Re4}) with low to high base saturation covering mountainous 
+ terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico Distrófico/Eutrófico;
+ Distric/Eutric Leptosol).
+  
+ \item[\tt{SOIL\_100c}] Association (\it{Re-C-Co}) of shallow soil with high base saturation located in
+ strongly sloping terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric
+ Leptosol), low weathered soil (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric Cambisol), and
+ colluvial deposits.
+  
+ \item[\tt{SOIL\_100d}] Association (\it{TBa-Rd}) of deep, well-structured, low base saturation soil (Terra
+ Bruna Estruturada álica; Nitossolo; Nitisol), and shallow soil (Solo Litólico; Neossolo Litólico; Leptosol).
+  
+ \item[\tt{SOIL\_100e}] Composed of shallow soil (\it{Rd1} and \textit{Re4}) with low to high base
+ saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; Distric/Eutric
+ Leptosol) located in slopping and mountainous terrain.
+  
+ \item[\tt{SOIL\_100f}] This covariate includes the best soil mapping units for crop agriculture among those 
+ identified in the soil survey, such as \it{TBa-Rd}, already described above, and \it{C1}, which is composed
+ of low weathered soils developed in lower landscape positions, close to drainage channels (Cambissolo
+ Eutrófico; Cambissolo Eutrófico; Eutric Cambisol).
+\end{description}
+
+Covariates derived from \soilNew{} are the following (mapping unit \it{RY}, composed mainly of soils developed 
+from fluvial deposits (Neossolo Flúvico; Fluvisol) is does not appear due to the small area that it occupies):
+
+\begin{description}
+  \item[\tt{SOIL\_25a}] Moderately deep soil (\it{PBAC}) derived from sedimentary rocks, with abrupt textural
+  change and low base saturation (Argissolo Bruno-Acinzentado; Alisol).
+  
+  \item[\tt{SOIL\_25b}] Deep soil (\it{PV}) derived from igneous rocks, with moderate textural gradient,
+  and low base saturation (Argissolo Vermelho; Acrisol).
+ 
+  \item[\tt{SOIL\_25c}] Low weathered soil (Cambissolo; Cambisol) and shallow soil with low to high base
+  saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric Leptosol/Regosol) (\it{C-R}).
+ 
+  \item[\tt{SOIL\_25d}] Shallow soil (\it{RL}) with low to high base saturation (Neossolo Litólico 
+  Eutrófico/Distrófico; Eutric/Distric Leptosol).
+ 
+  \item[\texttt{SOIL\_25h}] This covariate includes the mapping units with the best soil for crop agriculture
+  among those identified in the soil survey (\it{PBAC}, \it{PV}, and \it{SX}). \it{PBAC} and \it{PV} are as
+  described above. \textit{SX} is composed of moderately deep soil derived from sedimentary rocks, with abrupt 
+  textural change, low base saturation, and which are saturated with water for long periods of the year 
+  (Planossolo Háplico; Planosol).
+  
+  \item[\texttt{SOIL\_25i}] This covariate includes all three mapping units (\it{RL}, \it{RL-RR}, and \it{RR})
+  composed mainly of shallow soil (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol).
+  
+  \item[\texttt{SOIL\_25j}] This covariate includes all four mapping units (\it{PV}, \it{RL}, \it{RL-RR}, and 
+  \it{C-R}) composed mainly of soil derived from igneous rocks.
+\end{description}
 
 \tocless\section{Digital elevation models}
 \label{sec:covar-data-dem}
@@ -567,9 +526,6 @@ value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 %   spgrass6::initGRASS(
 %     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
 %     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
-% system("g.region rast=dnos.raster")
-% system("g.remove MASK")
-% system("r.mask dnos.raster")
 % invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
 % invisible(capture.output(slp <- spgrass6::readRAST6("SLP_10_3", ignore.stderr = TRUE)))
 % colnames(slp@data) <- "SLP_10_3"
@@ -656,57 +612,51 @@ were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 \tocless\section{Geological maps}
 \label{sec:covar-data-geo-maps}
 
-Data on geology and soil parent material data comes from most recent geological maps published in 
-the \scales{25000}{50000} \cite{MacielFilho1990, GasparettoEtAl1988}.
+Geological and soil parent material data comes from the two most recent geological maps published in the 
+\scales{25000}{50000} \cite{MacielFilho1990, GasparettoEtAl1988}. Both of them were produced based on the most 
+recent topographic maps produced by the Brazilian Army at the \scales{25000}{50000} \cite{DSG1980, DSG1992, 
+DSG1992a}. Alike topographic maps, geological maps were available only in the analogical format, and were hand 
+digitalized and georeferenced in QGIS. Intersections between all meridians and parallels ($n = 16$) were used 
+as control points to adjust a second order polynomial model. Resampling was performed using the cubic 
+resampling method. After manual digitalization of geological formations, the original coordinate reference 
+system (EPSG:31982 - SIRGAS2000 / UTM zone 22S) was transformed to match the reference grid using the 
+\Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
-Both geological maps were produced based on the most recent topographic maps produced by the 
-Brazilian Army at the \scales{50000}{25000}. Alike topographic maps, geological maps were also 
-available only in the analogical format, and were hand digitalized and georeferenced in QGIS. 
-Intersections between all meridians and parallels (a total of 16) were used as control points to 
-adjust a second order polynomial model. Resampling was performed using the cubic resampling method. 
-After manual digitalization of geological formations, the original coordinate reference system 
-(EPSG:31982 - SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / UTM zone 
-22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
-
-The positional validation of geological maps was performed using eight (\texttt{GEO\_50}) and five 
-(\texttt{GEO\_25}) GCPs located at easily identifiable geographical markers. 
-\autoref{tab:covar-data-geology-geo-val} shows that the positional accuracy of both geological maps 
-does not meet the current regulations of the Brazilian legislation. Estimated RMSE are \SI{147}{\m} 
-and \SI{69}{\m} for \texttt{GEO\_50} and \texttt{GEO\_25}, respectively, when the maximum RMSE 
-accepted is \SI{30}{\m} and \SI{15}{\m}. For \texttt{GEO\_50}, the lowest accuracy is found in the 
-y-coordinate, while for \texttt{GEO\_25}, the x-coordinate is the less accurate. 
-\autoref{fig:covar-data-geology-azim} suggests that the low positional accuracy  of both geological 
-maps is due to a systematic error. This systematic error probably was propagated from the 
-topographic maps used to produce the geological maps. Therefore, the same strategy (affine 
-transformation ) used to remove the systematic positional error of the topographic map above was 
-employed on geological maps. Due to the lack of GCPs, model parameters were adjusted using the same 
-set of GCPs used for the validation in the geographic space. The estimated uncertainty of the 
-affine transformation is $RMSE = \SI{86}{\m}$ and $RMSE = \SI{22}{\m}$ for 
-\texttt{GEO\_50} and \texttt{GEO\_25}, respectively.
+The positional validation of geological maps was performed using $n = 8$ (\geoOld{}) and $n = 5$ (\geoNew{}) 
+GCPs. Validation statistics show that the positional accuracy of both geological maps does not meet the current
+regulations of the Brazilian legislation (\autoref{tab:covar-data-geology-geo-val}). Estimated RMSE are 
+\SI{147}{\m} and \SI{69}{\m} for \geoOld{} and \geoNew{}, respectively, when the maximum RMSE accepted is 
+\SI{30}{\m} and \SI{15}{\m}. For \geoOld{}, the lowest accuracy is found in the y-coordinate, while for 
+\geoNew{}, the x-coordinate is the least accurate. Validation statistics suggest that there is a strong 
+systematic error, which probably was propagated from the topographic maps used to produce the geological maps.
+Therefore, the same strategy (affine transformation ) used to remove the systematic positional error of the 
+topographic maps was employed on geological maps. Due to the lack of GCPs, model parameters were adjusted 
+using the same set of GCPs used for the validation. The estimated uncertainty of the affine transformation is 
+$RMSE = \SI{86}{\m}$ and $RMSE = \SI{22}{\m}$ for \geoOld{} and \geoNew{}, respectively. Curiously enough, the
+attribute validation indicates that \geoOld{} is more accurate (\SI{83.33}{\percent} than \geoNew{} 
+\SI{76.67}{\percent}. 
 
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
- geological maps GEO\_50 and GEO\_25 in the geographic space. Validation statistics were estimated 
- using, respectively, eight and five ground control points located in easily identifiable 
- geographical markers (purposive sampling).}
+ \caption{Error statistics of the horizontal validation of geological maps \geoOld{} and \geoNew{} using 
+ $n = 8$ and $n = 5$ GCPs.}
  \label{tab:covar-data-geology-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics & X coordinate & Y coordinate & Error vector & Azimuth \\
+  Statistics                   & x-coord & y-coord & Error vector & Azimuth   \\
   \hline
-  \multicolumn{5}{l}{\texttt{GEO\_50} ($n = 8$)}\\
+  \multicolumn{5}{l}{\geoOld{} ($n = 8$)}                                     \\
   \hline
-  Mean, \si{\m} & 10 (58) & -102 (87) & 140 (44) & \ang{169} (\ang{47}) \\ 
-  Absolute mean, \si{\m}  & 43   (40) & 125 (50) & -         & -          \\ 
-  Squared mean, \si{\m\square} & 3431 (5914)  & 18067 (13243) & 21498 (12316) & - \\
+  Mean, \si{\m}                & 10      & -102    & 140          & \ang{169} \\ 
+  Absolute mean, \si{\m}       & 43      & 125     & -            & -         \\ 
+  Squared mean, \si{\m\square} & 3431    & 18067   & 21498        & -         \\
   \hline
-  \multicolumn{5}{l}{\texttt{GEO\_25} ($n = 5$)} \\
+  \multicolumn{5}{l}{\geoNew{} ($n = 5$)}                                     \\
   \hline
-  Mean, \si{\m} & 51 (29) & 29 (22) & 67 (16) & \ang{58} (\ang{30}) \\ 
-  Absolute mean, \si{\m} & 51 (29) & 29 (22) & -  & - \\ 
-  Squared mean, \si{\m\square} & 3457 (2976) & 1312 (1612) & 4769 (2306) & - \\
+  Mean, \si{\m}                & 51      & 29      & 67           & \ang{58}  \\ 
+  Absolute mean, \si{\m}       & 51      & 29      & -            & -         \\ 
+  Squared mean, \si{\m\square} & 3457    & 1312    & 4769         & -         \\
   \hline
  \end{tabular}}
 \end{table}
@@ -720,22 +670,6 @@ affine transformation is $RMSE = \SI{86}{\m}$ and $RMSE = \SI{22}{\m}$ for
 %  markers. The graph was produced using \Rpackage{VecStatGraphs2D}.}
 %  \label{fig:covar-data-geology-azim}
 % \end{figure}
-
-\begin{table}[ht]
- \caption{Estimated error statistics of the validation of geological maps \texttt{GEO\_50} and 
- \texttt{GEO\_25} in the attribute space. Validation statistics were estimated using $n = 60$ 
- validation points located along $m = 12$ linear transects (clustered samples).}
- \label{tab:covar-data-geology-attr-val}
- \centering
- \begin{tabular}{lrrr}
-  \hline
-  Geological map        & LCB95Pct & Estimate & UCB95Pct \\
-  \hline
-  \texttt{GEO\_50}      & 76.88    & 83.33    & 89.78    \\
-  \texttt{GEO\_25}      & 70.10    & 76.67    & 83.24    \\
-  \hline
- \end{tabular}
-\end{table}
 
 Three covariates were derived from \texttt{GEO\_50}:
 
