@@ -6,6 +6,32 @@
 \usepackage[utf8]{inputenc}
 \SweaveOpts{prefix.string = fig/apene}
 
+<<R-settings, echo = FALSE>>=
+ 
+ # Start GRASS
+ invisible(capture.output(
+   spgrass6::initGRASS(
+     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
+ 
+ # Load polygon with the boundary of the study area
+ invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
+ 
+ # Load calibration points
+ pts <- read.table(
+  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
+  header = TRUE, na.strings = "na")[, c("longitude", "latitude")]
+ sp::coordinates(pts) <- ~ longitude + latitude
+ sp::proj4string(pts) <- sp::CRS("+init=epsg:4674") # sirgas2000
+ pts <- sp::spTransform(pts, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
+ #pts <- data.frame(slot(pts, "coords"))
+ 
+ # Trellis settings
+ trellis.par.set(fontsize = list(text = 12, points = 8),
+      layout.widths = list(left.padding = 0, right.padding = 0),
+      layout.heights = list(top.padding = 0, bottom.padding = 0))
+@
+
 \tocless\section{Introduction}
 \label{sec:covar-data-intro}
 
@@ -37,42 +63,42 @@ corners, and property entrances.
 
 \begin{figure}[!ht]
  \centering
-<<covar-data-field-gcps, fig = TRUE, echo = FALSE>>=
-gcps <- read.table(
-  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/gcpData.csv", sep = "\t",
-  header = TRUE, na.strings = "na")
-gcps <- gcps[which(gcps$source == "field"), c("x", "y")]
-sp::coordinates(gcps) <- ~ x + y
-sp::proj4string(gcps) <- sp::CRS("+init=epsg:32722") # wgs1984utm22s
-invisible(capture.output(
-  spgrass6::initGRASS(
-    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
-    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
-invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
-p <- sp::spplot(
-  pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
-  scales = list(draw = TRUE), colorkey = FALSE, aspect = "iso",
-  xlim = c(gcps@bbox[1, 1] * 0.998, gcps@bbox[1, 2] * 1.005),
-  ylim = c(gcps@bbox[2, 1] * 0.9999, gcps@bbox[2, 2] * 1.0001),
-  par.settings = list(
-    fontsize = list(text = 12, points = 8),
-    layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)),
-  panel = function(x, y, ...) {
-    sp::panel.polygonsplot(x, y, ...)
-    lattice::panel.points(
-      x = gcps@coords[, "x"], y = gcps@coords[, "y"], pch = 20, col = "red")
-    lattice::panel.abline(
-      v = seq(222000, 233000, 1000), h = seq(6712000, 6725000, 1000),
-      col = "gray", lty = "dashed", lwd = 0.5)
-  })
-print(p)
-rm(gcps, p, pol)
-gc()
-@
-\caption{Spatial distribution of the ground control points ($n = 14$, red) used for the positional validation 
-of covariates included in the Santa Maria dataset.}
-\label{fig:covar-data-field-gcps}
+ <<covar-data-field-gcps, fig = TRUE, echo = FALSE>>=
+  
+  # Load ground control points collected in the field
+  gcps <- read.table(
+    "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/gcpData.csv", sep = "\t",
+    header = TRUE, na.strings = "na")
+  gcps <- gcps[which(gcps$source == "field"), c("x", "y")]
+  sp::coordinates(gcps) <- ~ x + y
+  sp::proj4string(gcps) <- sp::CRS("+init=epsg:32722") # wgs1984utm22s
+  
+  # Prepare plot
+  p <- sp::spplot(
+    pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
+    scales = list(draw = TRUE), colorkey = FALSE, aspect = "iso",
+    xlim = c(gcps@bbox[1, 1] * 0.998, gcps@bbox[1, 2] * 1.005),
+    ylim = c(gcps@bbox[2, 1] * 0.9999, gcps@bbox[2, 2] * 1.0001),
+    par.settings = list(
+      fontsize = list(text = 12, points = 8),
+      layout.widths = list(left.padding = 0, right.padding = 0),
+      layout.heights = list(top.padding = 0, bottom.padding = 0)),
+    panel = function(x, y, ...) {
+      sp::panel.polygonsplot(x, y, ...)
+      lattice::panel.points(x = gcps@coords[, "x"], y = gcps@coords[, "y"], pch = 20, col = "red")
+      lattice::panel.abline(
+        v = seq(222000, 233000, 1000), h = seq(6712000, 6725000, 1000),
+        col = "gray", lty = "dashed", lwd = 0.5)
+    })
+  
+  # Plot and clean workspace
+  print(p)
+  rm(gcps, p)
+  gc()
+ @
+ \caption{Spatial distribution of the ground control points ($n = 14$, red) used for the positional validation 
+ of covariates included in the Santa Maria dataset.}
+ \label{fig:covar-data-field-gcps}
 \end{figure}
 
 Positional validation was performed comparing the x- and y-coordinates of GCPs (observed value) with the 
@@ -152,6 +178,17 @@ validation points located along $m = 12$ linear transects. The procedures for ob
 use, and elevation data at these validation points is described in \autoref{apen:soil-data}. Such a validation 
 exercise was carried out because these maps originally have no accompanying validation information.
 
+% TODO: figure with GCPs used to ortorectify orbital images. Show the bounding box of the image and the 
+% boundary 
+% of the study area.
+% \begin{figure}
+%  \centering
+%  \includegraphics[width=\textwidth]{fig/ortho-gcps}
+%  \caption{Ground control points used to orthorectify orbital the image produced by Landsat-5 Thematic 
+% Mapper.}
+%  \label{fig:covar-data-ortho-gcps}
+% \end{figure}
+
 \tocless\section{Area-class soil maps}
 \label{sec:covar-data-soil-maps}
 
@@ -169,6 +206,33 @@ OlmosEtAl1982}. Identification of soil taxa was performed based on morphological
 compiled from existing technical reports, and analysis of soil samples collected from soil profiles observed 
 along the road network. Description of each soil mapping unit includes the estimated area (\si{\hectare}) and 
 the approximate taxonomic composition (\si{\percent}).
+
+%TODO: complete R code!!!
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed soil map
+   
+  @
+ \end{minipage}
+ 
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed soil map
+   
+  @
+ \end{minipage} 
+ \caption{Area-class soil maps (a) \soilOld{} and (b) \soilNew{} used to derive indicator covariates included 
+ in the Santa Maria dataset.}
+\label{fig:covar-data-soil-maps}
+\end{figure}
 
 The second area-class soil map (\soilNew{}) included in the Santa Maria dataset \cite{Miguel2010} was prepared 
 at a \scale{25000}. Orbital images produced by Digital Globe\textregistered{} (Quick Bird satellite), freely 
@@ -252,18 +316,6 @@ SiBCS using only a standard correlation table \cite{SantosEtAl2006} and expert k
 report does not include analytical soil data. Last, soil taxa at validation points was inferred in the field 
 using only morphological soil properties and the concepts of the SiBCS.
 
-% TODO: figure with both area-class soil maps
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25}
-%   \caption{Area-class soil maps used as sources of environmental co-variates. On the left, the area-class 
-% soil map produced by \cite{AzolinEtAl1988} and published at a scale of 1:100,000 (\soilOld{}). On the 
-% right, the area-class soil map produced by \cite{Miguel2010} at a scale of 1:25,000 (\soilNew{}).}
-%   \label{fig:soil-maps}
-% \end{figure}
-% 
-
 Five ($p = 5$) covariates were derived from \soilOld{} as described bellow (including the soil taxa according 
 to the original and updated classification \cite{AzolinEtAl1988, SantosEtAl2013a}, and the international 
 classification \cite{IUSSWorkingGroupWRB2007}):
@@ -292,7 +344,7 @@ classification \cite{IUSSWorkingGroupWRB2007}):
 \end{description}
 
 Covariates derived from \soilNew{} are the following (mapping unit \it{RY}, composed mainly of soils developed 
-from fluvial deposits (Neossolo Flúvico; Fluvisol) is does not appear due to the small area that it occupies):
+from fluvial deposits (Neossolo Flúvico; Fluvisol) does not appear due to the small area that it occupies):
 
 \begin{description}
   \item[\tt{SOIL\_25a}] Moderately deep soil (\it{PBAC}) derived from sedimentary rocks, with abrupt textural
@@ -307,16 +359,16 @@ from fluvial deposits (Neossolo Flúvico; Fluvisol) is does not appear due to th
   \item[\tt{SOIL\_25d}] Shallow soil (\it{RL}) with low to high base saturation (Neossolo Litólico 
   Eutrófico/Distrófico; Eutric/Distric Leptosol).
  
-  \item[\texttt{SOIL\_25h}] This covariate includes the mapping units with the best soil for crop agriculture
+  \item[\tt{SOIL\_25h}] This covariate includes the mapping units with the best soil for crop agriculture
   among those identified in the soil survey (\it{PBAC}, \it{PV}, and \it{SX}). \it{PBAC} and \it{PV} are as
   described above. \textit{SX} is composed of moderately deep soil derived from sedimentary rocks, with abrupt 
   textural change, low base saturation, and which are saturated with water for long periods of the year 
   (Planossolo Háplico; Planosol).
   
-  \item[\texttt{SOIL\_25i}] This covariate includes all three mapping units (\it{RL}, \it{RL-RR}, and \it{RR})
+  \item[\tt{SOIL\_25i}] This covariate includes all three mapping units (\it{RL}, \it{RL-RR}, and \it{RR})
   composed mainly of shallow soil (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol).
   
-  \item[\texttt{SOIL\_25j}] This covariate includes all four mapping units (\it{PV}, \it{RL}, \it{RL-RR}, and 
+  \item[\tt{SOIL\_25j}] This covariate includes all four mapping units (\it{PV}, \it{RL}, \it{RL-RR}, and 
   \it{C-R}) composed mainly of soil derived from igneous rocks.
 \end{description}
 
@@ -331,8 +383,8 @@ parallels (about \num{160} per topographic map) were used as control points to a
 model. Resampling was performed using the cubic resampling method. All contour lines, peaks, lakes and rivers, 
 and their respective attributes within a distance of \SI{\pm1000}{\metre} from the boundary of the study area 
 were manually digitalized and stored in the vector format. After digitalization, the original coordinate 
-reference system (EPSG:31982 -- SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / UTM 
-zone 22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
+reference system (EPSG:31982 -- SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / 
+UTM zone 22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
 The positional validation of topographic maps was performed using $n = 14$ GCPs. According to Brazilian 
 legislation, the positional accuracy of these topographic maps is expected to be of, at least, \SI{15}{\metre} 
@@ -424,6 +476,33 @@ transformation were filled using the \grass{r.fill.dir}. Vertical datum transfor
 because elevation values of the SRTM DEM already are referenced to the global geoidal model EGM1996 
 (orthometric heights).
 
+%TODO: complete R code!!!
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed DEM
+   
+  @
+ \end{minipage}
+ 
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed DEM
+   
+  @
+ \end{minipage} 
+ \caption{Digital elevation models (a) \demOld{} and (b) \demNew{} used to derive covariates included 
+ in the Santa Maria dataset.}
+\label{fig:covar-data-dem}
+\end{figure}
+
 A third DEM was used to produce the covariate data included in the Santa Maria dataset. However, instead of 
 calculating DEM derivatives, it was used in the orthorectification and topographic correction of orbital 
 images (\autoref{sec:covar-data-sat-image}). The third DEM (\topodata) was produced by the Brazilian National 
@@ -461,11 +540,11 @@ meet current Brazilian legislation, which states that the accuracy should be of,
 
 % Figure \ref{fig:cdf-elev} shows that estimated validation statistics have different cumulative 
 % distribution functions (CDF). The estimates are more uniformly distributed along the interval of 
-% values for \texttt{ELEV\_10} than for \texttt{ELEV\_90} and \texttt{ELEV\_30}. While 
-% \texttt{ELEV\_10} has a 50\% probability that absolute errors are bellow 15 m, \texttt{ELEV\_90} has 
+% values for \tt{ELEV\_10} than for \tt{ELEV\_90} and \tt{ELEV\_30}. While 
+% \tt{ELEV\_10} has a 50\% probability that absolute errors are bellow 15 m, \tt{ELEV\_90} has 
 % a 70\% probability that absolute errors are bellow 15 m. This suggests that the accuracy of 
-% \texttt{ELEV\_90} is very consistent across the study area, with a few extreme values, while the 
-% accuracy of \texttt{ELEV\_10} have a stronger spatial variation. For \texttt{ELEV\_30}, the 
+% \tt{ELEV\_90} is very consistent across the study area, with a few extreme values, while the 
+% accuracy of \tt{ELEV\_10} have a stronger spatial variation. For \tt{ELEV\_30}, the 
 % interpolation method used to refine the original SRTM DEM to 30 m \cite{ValerianoEtAl2012} seems to 
 % have produced a spatial redistribution of the errors.
 
@@ -475,8 +554,8 @@ meet current Brazilian legislation, which states that the accuracy should be of,
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-30}
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-10}
 %   \caption{Cumulative distribution functions of mean error, mean absolute error, and squared error of 
-% elevation values estimates by digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30}, and 
-% \texttt{ELEV\_10}.}
+% elevation values estimates by digital elevation models \tt{ELEV\_90}, \tt{ELEV\_30}, and 
+% \tt{ELEV\_10}.}
 %   \label{fig:cdf-elev}
 % \end{figure}
 
@@ -487,22 +566,9 @@ such, \demNew{} was used to estimate the geographical limits (boundary) of the c
 study area (\autoref{fig:covar-data-elev-maps}), for which GRASS modules \tt{r.watershed} and 
 \tt{r.water.outlet} were employed. Because the overall deviation between the affine-corrected coordinates of 
 topographic maps and target coordinates of GCPs is $\text{RMSE} = \SI{29.55}{\m}$ -- there still is an 
-uncertainty about the correct position of topographic maps -- a \SI{30}{\m} buffer was added to the estimate of 
-the geographical limits of the catchment. The water outlet point used to estimate the boundary is located on 
-the bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969}).
-
-% TODO: figure with both digital elevation models, including the real drainage network and the boundary of the
-% study area.
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/elev-90}
-%   \includegraphics[width=0.3\textwidth]{fig/elev-10}
-%   \caption{Digital elevations models used as sources of environmental co-variates. On the left, the SRTM 
-% digital elevation models prepared by CGIAR and published at a resolution of about 90 m (\texttt{ELEV\_90}). 
-% On the right, the digital elevation models produced interpolating contour lines manually digitalized from 
-% topographic maps published at a scale of 1:25,000 (\texttt{ELEV\_10}).}
-%   \label{fig:elev-maps}
-% \end{figure}
+uncertainty about the correct position of topographic maps -- a \SI{30}{\m} buffer was added to the estimate 
+of the geographical limits of the catchment. The water outlet point used to estimate the boundary is located 
+on the bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969}).
 
 Eight terrain attributes were derived from each of \demOld{} and \demNew{} to produce the covariate data 
 included in the Santa Maria dataset, the first of them being elevation (\tt{ELEV}). The others are slope, 
@@ -519,34 +585,36 @@ smoothed version of the terrain attribute, while smaller windows sizes result in
 calculated using \tt{ELEV\_90} as a result of resampling the original DEM from \num{90} to \SI{5}{\m}. A 
 value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 
-% \begin{figure}[!ht]
-%  \centering
-%  <<covar-data-slope, fig = TRUE, echo = FALSE>>=
-% invisible(capture.output(
-%   spgrass6::initGRASS(
-%     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
-%     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
-% invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
-% invisible(capture.output(slp <- spgrass6::readRAST6("SLP_10_3", ignore.stderr = TRUE)))
-% colnames(slp@data) <- "SLP_10_3"
-% slp@data[, "SLP_10_31"] <- invisible(
-%   capture.output(spgrass6::readRAST6("SLP_10_31", ignore.stderr = TRUE)@data[, 1]))
-% slp@data[, "SLP_10_255"] <- invisible(
-%   capture.output(spgrass6::readRAST6("SLP_10_255", ignore.stderr = TRUE)@data[, 1]))
-% p <- sp::spplot(
-%   slp, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
-%   par.settings = list(
-%     fontsize = list(text = 12, points = 8),
-%     layout.widths = list(left.padding = 0, right.padding = 0),
-%     layout.heights = list(top.padding = 0, bottom.padding = 0))
-%   }) + latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
-% print(p)
-% rm(pol, slp, p)
-% @
-%  \caption{Slope \tt{SLP}} raster surfaces derived from \tt{ELEV\_10} using three window sizes (3, 31, and 
-% 255).}
-% \label{fig:covar-data-slope}
-% \end{figure}
+\begin{figure}[!ht]
+ \centering
+ <<covar-data-slope, fig = TRUE, echo = FALSE>>=
+  
+  # Load slope raster surfaces from GRASS
+  invisible(capture.output(slp <- spgrass6::readRAST6("SLP_10_3", ignore.stderr = TRUE)))
+  colnames(slp@data) <- "SLP_10_3"
+  slp@data[, "SLP_10_31"] <- invisible(
+    capture.output(spgrass6::readRAST6("SLP_10_31", ignore.stderr = TRUE)@data[, 1]))
+  slp@data[, "SLP_10_255"] <- invisible(
+    capture.output(spgrass6::readRAST6("SLP_10_255", ignore.stderr = TRUE)@data[, 1]))
+  
+  # Prepare plots
+  slp <- sp::spplot(
+    slp, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
+    par.settings = list(
+      fontsize = list(text = 12, points = 8),
+      layout.widths = list(left.padding = 0, right.padding = 0),
+      layout.heights = list(top.padding = 0, bottom.padding = 0))
+    }) + latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  
+  # Plot and clean workspace
+  print(slp)
+  rm(slp)
+  gc()
+@
+ \caption{Slope \tt{SLP}} raster surfaces derived from \demNew{} using windows of sizes (from left to right) 
+ $3 \times 3$, $31 times 31$, and $255 \times 255$.}
+\label{fig:covar-data-slope}
+\end{figure}
 
 Aspect values had to be corrected before use because \grass{r.param.scale} stores aspect values in the range 
 \SIrange{0}{+180}{\degree} from West to North to East, and \SIrange{0}{-180}{\degree} from West to South to 
@@ -602,9 +670,9 @@ using
 \noindent where sACC is the specific catchment area, \SI{5}{\m} is the cell size, and \tt{SLP} is the slope 
 raster surface calculated using seven different window sizes.
 
-The topographic position index \tt{TPI} was calculated with \saga{ta\_morphometry}. Different values of maximum 
-radius were used to include the effect of scale, all of them related to the window sizes used to calculate 
-previous terrain attributes. A minimum radius value of \SI{3}{\m} was used in all calculations.
+The topographic position index \tt{TPI} was calculated with \saga{ta\_morphometry}. Different values of 
+maximum radius were used to include the effect of scale, all of them related to the window sizes used to 
+calculate previous terrain attributes. A minimum radius value of \SI{3}{\m} was used in all calculations.
 
 A total of $1 \times \tt{ELEV} + 7 \times (\tt{NOR}, \tt{SLP}, \tt{TWI}, \tt{SPI}, \tt{TPI}) = 36$ covariates 
 were defined using the terrain attributes derived from \demOld{} and \demNew{}.
@@ -612,29 +680,106 @@ were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 \tocless\section{Geological maps}
 \label{sec:covar-data-geo-maps}
 
-Geological and soil parent material data comes from the two most recent geological maps published in the 
-\scales{25000}{50000} \cite{MacielFilho1990, GasparettoEtAl1988}. Both of them were produced based on the most 
-recent topographic maps produced by the Brazilian Army at the \scales{25000}{50000} \cite{DSG1980, DSG1992, 
-DSG1992a}. Alike topographic maps, geological maps were available only in the analogical format, and were hand 
-digitalized and georeferenced in QGIS. Intersections between all meridians and parallels ($n = 16$) were used 
-as control points to adjust a second order polynomial model. Resampling was performed using the cubic 
-resampling method. After manual digitalization of geological formations, the original coordinate reference 
-system (EPSG:31982 - SIRGAS2000 / UTM zone 22S) was transformed to match the reference grid using the 
+Geological data comes from the two most recent geological maps (\geoOld{} and \geoNew{}) published in the 
+\scales{50000}{25000} \cite{GasparettoEtAl1988, MacielFilho1990} (\autoref{fig:covar-data-geo-maps}). Both of 
+them were produced based on the most recent topographic maps produced by the Brazilian Army at the 
+\scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, geological maps were available 
+only in the analogical format, and were hand digitalized and georeferenced in QGIS. Intersections between all 
+meridians and parallels ($n = 16$) were used as control points to adjust a second order polynomial model. 
+Resampling was performed using the cubic resampling method. The original coordinate reference system 
+(EPSG:31982 -- SIRGAS2000 / UTM zone 22S) was transformed to match the reference grid using the 
 \Rpackage{rgdal} \cite{BivandEtAl2013a}.
+
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed geological map
+   map <- spgrass6::readRAST6("recGEO_50")
+   
+   # Prepare data
+   map@bbox <- pts@bbox
+   map@data[, 1] <- as.factor(map@data[, 1])
+   levels(map@data[, 1])
+   map@data[, 1] <- revalue(
+     map@data[, 1], c("1" = "SG-I",  # Serra Geral (inferior)
+                      "2" = "BT",    # Botucatu
+                      "3" = "CT",    # Caturrita
+                      "4" = "SG-S")) # Serra Geral (superior)
+   
+   # Prepare plot
+   map <- spplot(
+     map, main = "", col.regions = topo.colors(4), asp = 1) +
+     latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+   names(map$legend) <- "inside"
+   map$legend$inside$x <- 0.795
+   map$legend$inside$y <- 0.875
+   map$legend$inside$args$key$space <- "left"
+   
+   # Plot
+   plot(map)
+  @
+ \end{minipage}
+ 
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed geological map
+   map <- spgrass6::readRAST6("predGEO_25")
+   map@bbox <- pts@bbox
+   map@data[, 1] <- as.factor(map@data[, 1])
+   map@data[, 1] <- revalue(
+     map@data[, 1], c("1" = "SG-I",  # Serra Geral (inferior)
+                      "2" = "BT",    # Botucatu
+                      "3" = "CT",    # Caturrita
+                      "4" = "SG-S")) # Serra Geral (superior)
+   map <- as(map, "SpatialPixelsDataFrame")
+   system("r.to.vect --o in=GEO_25d out=poly feature=area")
+   poly <- spgrass6::readVECT6("poly")
+   poly@bbox <- pts@bbox
+   map <- spplot(
+     map, main = "", col.regions = topo.colors(4), asp = 1, 
+     sp.layout = list("sp.polygons", poly, first = FALSE, 
+     col = ifelse(poly$value == 0, "transparent", " black"), 
+     fill = ifelse(poly$value == 0, "transparent", "lightgray"), alpha = 0.5))
+   names(map$legend) <- "inside"
+   map$legend$inside$x <- 0.795
+   map$legend$inside$y <- 0.875
+   map$legend$inside$args$key$space <- "left"
+   map$legend$inside$args$key$at <- c(map$legend$inside$args$key$at, 5.5)
+   map$legend$inside$args$key$col <- c(map$legend$inside$args$key$col, "lightgray")
+   map$legend$inside$args$key$labels$at <- c(map$legend$inside$args$key$labels$at, 5)
+   map$legend$inside$args$key$labels$labels <- c(map$legend$inside$args$key$labels$labels, "QD")
+   
+   # Plot and clean workspace
+   plot(map)
+   rm(map, poly)
+   gc()
+  @
+ \end{minipage} 
+ \caption{Geological maps (a) \geoOld{} and (b) \geoNew{} used to derive indicator covariates included in the 
+ Santa Maria dataset.}
+\label{fig:covar-data-geo-maps}
+\end{figure}
 
 The positional validation of geological maps was performed using $n = 8$ (\geoOld{}) and $n = 5$ (\geoNew{}) 
 GCPs. Validation statistics show that the positional accuracy of both geological maps does not meet the current
 regulations of the Brazilian legislation (\autoref{tab:covar-data-geology-geo-val}). Estimated RMSE are 
-\SI{147}{\m} and \SI{69}{\m} for \geoOld{} and \geoNew{}, respectively, when the maximum RMSE accepted is 
-\SI{30}{\m} and \SI{15}{\m}. For \geoOld{}, the lowest accuracy is found in the y-coordinate, while for 
+\num{147} and \SI{69}{\m} for \geoOld{} and \geoNew{}, respectively, when the maximum RMSE accepted is 
+\num{30} and \SI{15}{\m}. For \geoOld{}, the lowest accuracy is found in the y-coordinate, while for 
 \geoNew{}, the x-coordinate is the least accurate. Validation statistics suggest that there is a strong 
 systematic error, which probably was propagated from the topographic maps used to produce the geological maps.
-Therefore, the same strategy (affine transformation ) used to remove the systematic positional error of the 
+Therefore, the same strategy (affine transformation) used to remove the systematic positional error of the 
 topographic maps was employed on geological maps. Due to the lack of GCPs, model parameters were adjusted 
-using the same set of GCPs used for the validation. The estimated uncertainty of the affine transformation is 
-$RMSE = \SI{86}{\m}$ and $RMSE = \SI{22}{\m}$ for \geoOld{} and \geoNew{}, respectively. Curiously enough, the
+using the same set of GCPs used for the validation. The estimated uncertainty (RMSE) of the affine 
+transformation is \num{86} and \SI{22}{\m} for \geoOld{} and \geoNew{}, respectively. Curiously enough, the
 attribute validation indicates that \geoOld{} is more accurate (\SI{83.33}{\percent} than \geoNew{} 
-\SI{76.67}{\percent}. 
+\SI{76.67}{\percent}.
 
 \begin{table}[ht]
  \caption{Error statistics of the horizontal validation of geological maps \geoOld{} and \geoNew{} using 
@@ -663,41 +808,40 @@ attribute validation indicates that \geoOld{} is more accurate (\SI{83.33}{\perc
 
 % \begin{figure}[ht]
 %  \centering
-%  TODO: Include R code to produce figures on the go.
 %  \caption{Histogram of the azimuth distribution of the validation of geological maps 
-%  \texttt{GEO\_50} (left) and \texttt{GEO\_25} (right) in the attribute space. Azimuth values were 
+%  \tt{GEO\_50} (left) and \tt{GEO\_25} (right) in the attribute space. Azimuth values were 
 %  estimated using, respectively, eight and five GCPs located in easily identifiable geographical 
 %  markers. The graph was produced using \Rpackage{VecStatGraphs2D}.}
 %  \label{fig:covar-data-geology-azim}
 % \end{figure}
 
-Three covariates were derived from \texttt{GEO\_50}:
+Three ($p = 3$) covariates were derived from \geoOld{}:
 
 \begin{description}
- \item[\texttt{GEO\_50a}] Inferior Sequence of the Serra Geral Formation. Composed mainly by basic 
- igneous rocks (tholeiitic basalt and andesite). It is likely to be related with high CLAY and 
- ECEC;
+ \item[\tt{GEO\_50a}] Inferior Sequence of the Serra Geral Formation. Composed mainly by basic 
+ igneous rocks (tholeiitic basalt and andesite). It is likely to be related with high \tt{CLAY} and 
+ \tt{ECEC};
  
- \item[\texttt{GEO\_50b}] Superior Sequence of the Serra Geral Formation. Composed mainly by acid 
+ \item[\tt{GEO\_50b}] Superior Sequence of the Serra Geral Formation. Composed mainly by acid 
  igneous rocks (granophyric rhyolite and rhyodacite). It is likely to be related with moderate to 
- high CLAY and ECEC;
+ high \tt{CLAY} and \tt{ECEC};
  
- \item[\texttt{GEO\_50c}] Botucatu Formation. Composed mainly by aeolian sandstones. It is likely 
- to be related with low CLAY and ECEC;
+ \item[\tt{GEO\_50c}] Botucatu Formation. Composed mainly by aeolian sandstones. It is likely 
+ to be related with low \tt{CLAY} and \tt{ECEC};
 \end{description}
 
-Four covariates were derived from \texttt{GEO\_25}, the first three of them having the same meaning 
-of those derived from \texttt{GEO\_50}:
+Four ($p = 4$) covariates were derived from \geoNew{}, the first three of them having the same meaning 
+of those derived from \geoOld{}:
 
 \begin{description}
- \item[\texttt{GEO\_25a}] Inferior Sequence of the Serra Geral Formation;
+ \item[\tt{GEO\_25a}] Inferior Sequence of the Serra Geral Formation;
  
- \item[\texttt{GEO\_25b}] Superior Sequence of the Serra Geral Formation;
+ \item[\tt{GEO\_25b}] Superior Sequence of the Serra Geral Formation;
  
- \item[\texttt{GEO\_25c}] Botucatu Formation;
+ \item[\tt{GEO\_25c}] Botucatu Formation;
  
- \item[\texttt{GEO\_25d}] Quaternary deposits of fluvial, alluvial, and colluvial 
- origin. It can help explaining the low CLAY of soils supposedly derived from igneous rocks.
+ \item[\tt{GEO\_25d}] Quaternary deposits of fluvial, alluvial, and colluvial 
+ origin. It can help explaining the low \tt{CLAY} of soils supposedly derived from igneous rocks.
 \end{description}
 
 \tocless\section{Land use maps}
@@ -709,67 +853,95 @@ topographic map produced by the Brazilian Army (\scale{25000}) \cite{DSG1992a, D
 including the correction of positional bias, are described in \autoref{sec:covar-data-dem}, except for the use 
 of the nearest neighbour resampling method to match \landOld{} to the reference grid.
 
-% \begin{figure}[!ht]
-%  \centering
-% \begin{minipage}[b]{63mm}
-% \subcaption{}
-% \centering
-% <<covar-data-land-use-1, fig = TRUE, echo = FALSE>>=
-% invisible(capture.output(
-%   spgrass6::initGRASS(
-%     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
-%     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
-% system("g.region rast=dnos.raster")
-% system("g.remove MASK")
-% system("r.mask dnos.raster")
-% invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
-% invisible(capture.output(land <- spgrass6::readRAST6("LU1980", ignore.stderr = TRUE)))
-% land <- sp::spplot(
-%   land, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
-%   par.settings = list(
-%     fontsize = list(text = 12, points = 8),
-%     layout.widths = list(left.padding = 0, right.padding = 0),
-%     layout.heights = list(top.padding = 0, bottom.padding = 0))
-%   }) + latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
-% print(land)
-% @
-% \end{minipage}
-% \begin{minipage}[b]{63mm}
-% \subcaption{}
-% \centering
-% <<covar-data-land-use-2, fig = TRUE, echo = FALSE>>=
-% invisible(capture.output(land <- spgrass6::readRAST6("LU2009", ignore.stderr = TRUE)))
-% land <- sp::spplot(
-%   land, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
-%   par.settings = list(
-%     fontsize = list(text = 12, points = 8),
-%     layout.widths = list(left.padding = 0, right.padding = 0),
-%     layout.heights = list(top.padding = 0, bottom.padding = 0))
-%   }) + latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
-% print(land)
-% @
-% \end{minipage}
-% \begin{minipage}[b]{63mm}
-% \subcaption{}
-% \centering
-% <<covar-data-land-use-3, fig = TRUE, echo = FALSE>>=
-% invisible(capture.output(land <- spgrass6::readRAST6("LUdiff", ignore.stderr = TRUE)))
-% land <- sp::spplot(
-%   land, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
-%   par.settings = list(
-%     fontsize = list(text = 12, points = 8),
-%     layout.widths = list(left.padding = 0, right.padding = 0),
-%     layout.heights = list(top.padding = 0, bottom.padding = 0))
-%   }) + latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
-% print(land)
-% rm(land, pol)
-% @
-% \end{minipage}
-%  \caption{Land use maps (a) \landOld{} and (b) \landNew{} used to derive indicator covariates included in 
-%  the Santa Maria dataset such as (c) \tt{LUdiff}, the land use difference between the years of 1980 and 
-%  2009.}
-% \label{fig:covar-data-land-use}
-% \end{figure}
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+ \subcaption{}
+ \centering
+ <<covar-data-land-use-1, fig = TRUE, echo = FALSE>>=
+ 
+  # Load less detailed land use map
+  invisible(capture.output(map <- spgrass6::readRAST6("LU1980", ignore.stderr = TRUE)))
+  
+  # Prepare data
+  map@bbox <- pts@bbox
+  map@data[, 1] <- as.factor(map@data[, 1])
+  data(plotKML::worldgrids_pal)
+  map@data[, 1] <- revalue(
+    map@data[, 1], c("1" = "FS",  # Semi-deciduous forest
+                     "2" = "H",   # animal husbandry
+                     "3" = "PF",  # Plantation forestry
+                     "4" = "S"))  # urban (Settlement)
+  
+  # Prepare plot
+  map <- spplot(
+    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 13, 4, 22)], asp = 1) +
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  names(map$legend) <- "inside"
+  map$legend$inside$x <- 0.84
+  map$legend$inside$y <- 0.875
+  map$legend$inside$args$key$space <- "left"
+    
+  # Plot
+  print(map)
+ @
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+ \subcaption{}
+ \centering
+ <<covar-data-land-use-2, fig = TRUE, echo = FALSE>>=
+  
+  # Load more detailed land use map
+  invisible(capture.output(map <- spgrass6::readRAST6("LU2009", ignore.stderr = TRUE)))
+  
+  # Prepare data
+  map@bbox <- pts@bbox
+  map@data[, 1] <- as.factor(map@data[, 1])
+  map@data[, 1] <- revalue(
+    map@data[, 1], c("1" = "FS",  # Semi-deciduous forest
+                     "2" = "SS",  # Semi-deciduous shrub
+                     "3" = "H",   # animal husbandry
+                     "4" = "AA",  # Crop agriculture (Annual field cropping)
+                     "5" = "PF",  # Plantation forestry
+                     "6" = "S",   # Urban (Settlement)
+                     "7" = "O"))  # Other land uses (water reservoir)
+  
+  # Prepare plot
+  map <- spplot(
+    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 12, 13, 16, 4, 22, 20)], asp = 1) +
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  names(map$legend) <- "inside"
+  map$legend$inside$x <- 0.84
+  map$legend$inside$y <- 0.80
+  map$legend$inside$args$key$space <- "left"
+  
+  # Plot
+  print(map)
+ @
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+ \subcaption{}
+ \centering
+ <<covar-data-land-use-3, fig = TRUE, echo = FALSE>>=
+  
+  # Load land use change raster surface
+  invisible(capture.output(land <- spgrass6::readRAST6("LUdiff", ignore.stderr = TRUE)))
+  
+  # Prepare plot
+  land <- sp::spplot(
+    land, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64)) + 
+      latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
+  
+  # Plot and clean workspace
+  print(land)
+  rm(land)
+ @
+ \end{minipage}
+  \caption{Land use maps (a) \landOld{} and (b) \landNew{} used to derive indicator covariates included in 
+  the Santa Maria dataset such as (c) \tt{LUdiff}, the land use difference between the years of 1980 and 
+  2009.}
+ \label{fig:covar-data-land-use}
+\end{figure}
 
 The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution (\SI{2.4}{\m}) 
 orbital images, produced by QuickBird satellite launched in 2001, of the years of \num{2008} and \num{2009}, 
@@ -830,8 +1002,6 @@ land use difference between \num{1980} and \num{2009}, computed by checking if t
 remained the same (0) in every grid cell after the 29-year period. \tt{LUdiff} can be useful, for example, to 
 explain the low \tt{ORCA} in forest soils due to previous use with crop agriculture or animal husbandry.
 
-
-
 \tocless\section{Orbital images}
 \label{sec:covar-data-sat-image}
 
@@ -851,17 +1021,6 @@ throughout the image, and covering a variety of elevations, following standard r
 after preprocessing as described in \autoref{sec:covar-data-dem}. Resampling was done using the nearest 
 neighbour method to avoid changing the digital numbers.
 
-% TODO: figure with GCPs used to ortorectify orbital images. Show the bounding box of the image and the 
-% boundary 
-% of the study area.
-% \begin{figure}
-%  \centering
-%  \includegraphics[width=\textwidth]{fig/ortho-gcps}
-%  \caption{Ground control points used to orthorectify orbital the image produced by Landsat-5 Thematic 
-% Mapper.}
-%  \label{fig:covar-data-ortho-gcps}
-% \end{figure}
-
 After orthorectification, all bands were imported into GRASS, where all other necessary corrections were 
 performed. Radiometric correction (conversion from digital numbers to top-of-atmosphere reflectance) was done
 using \grass{i.landsat.toar}. Atmospheric correction (removal of the effects of the atmosphere on the 
@@ -879,6 +1038,39 @@ spectral band is the main feature distinguishing RapidEye images from most other
 considered to provide additional information about the vegetation \cite{WeicheltEtAl2013}. The orbital image 
 has \SI{16}{\bit} radiometric resolution and \SI{6.5}{\m} spatial resolution, and was orthorrectified in the 
 source to \SI{5}{\m} spatial resolution using the hole-filled SRTM version \num{4} \cite{RapidEye2013}.
+
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed orbital image
+   map <- spgrass6::readRAST6("NDVI_30")
+   map <- sp::spplot(
+    map, scales = list(draw = TRUE), aspect = "iso", main = "", col.regions = ndvi$colors, at = ndvi$breaks) + 
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  
+   # Plot
+   print(map)
+  @
+ \end{minipage}
+ 
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed orbital image
+   map <- spgrass6::readRAST6("NDVI_5b")
+   
+  @
+ \end{minipage} 
+ \caption{Orbital images used to derive covariates such as (a) \tt{NDVI_30} and (b) \tt{NDVI_5b} included in 
+ the Santa Maria dataset.}
+\label{fig:covar-data-sat-image}
+\end{figure}
 
 \begin{table}[ht]
  \caption{Comparison between satellite images produced by Landsat 5 TM and RapidEye constellation and 
