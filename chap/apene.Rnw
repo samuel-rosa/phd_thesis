@@ -26,7 +26,11 @@
  pts <- sp::spTransform(pts, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
  #pts <- data.frame(slot(pts, "coords"))
  
+ # Set bounding box
+ dnos_bbox <- rbind(range(c(pts@bbox[1, ], pol@bbox[1, ])), range(c(pts@bbox[2, ], pol@bbox[2, ])))
+ 
  # Trellis settings
+ require(lattice)
  trellis.par.set(fontsize = list(text = 12, points = 8),
       layout.widths = list(left.padding = 0, right.padding = 0),
       layout.heights = list(top.padding = 0, bottom.padding = 0))
@@ -590,25 +594,26 @@ value of \ang{0.1} was added to the rasters to remove these flat surfaces.
  <<covar-data-slope, fig = TRUE, echo = FALSE>>=
   
   # Load slope raster surfaces from GRASS
-  invisible(capture.output(slp <- spgrass6::readRAST6("SLP_10_3", ignore.stderr = TRUE)))
-  colnames(slp@data) <- "SLP_10_3"
-  slp@data[, "SLP_10_31"] <- invisible(
-    capture.output(spgrass6::readRAST6("SLP_10_31", ignore.stderr = TRUE)@data[, 1]))
-  slp@data[, "SLP_10_255"] <- invisible(
-    capture.output(spgrass6::readRAST6("SLP_10_255", ignore.stderr = TRUE)@data[, 1]))
+  invisible(capture.output(slp1 <- spgrass6::readRAST6("SLP_10_3", ignore.stderr = TRUE)))
+  invisible(capture.output(slp2 <- spgrass6::readRAST6("SLP_10_31", ignore.stderr = TRUE)))
+  invisible(capture.output(slp3 <- spgrass6::readRAST6("SLP_10_255", ignore.stderr = TRUE)))
+  
+  # Prepare data
+  slp <- raster::stack(list(raster::raster(slp1), raster::raster(slp2), raster::raster(slp3)))
+  slp <- as(slp, "SpatialPixelsDataFrame")
+  rm(slp1, slp2, slp3)
+  gc()
+  slp@bbox <- dnos_bbox
   
   # Prepare plots
-  slp <- sp::spplot(
-    slp, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
-    par.settings = list(
-      fontsize = list(text = 12, points = 8),
-      layout.widths = list(left.padding = 0, right.padding = 0),
-      layout.heights = list(top.padding = 0, bottom.padding = 0))
-    }) + latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  map <- sp::spplot(
+    slp, scales = list(draw = FALSE), aspect = "iso", col.regions = terrain.colors(64), 
+    colorkey = list(space = "bottom")) +
+    latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20, cex = 0.3))
   
   # Plot and clean workspace
-  print(slp)
-  rm(slp)
+  print(map)
+  rm(slp, map)
   gc()
 @
  \caption{Slope \tt{SLP}} raster surfaces derived from \demNew{} using windows of sizes (from left to right) 
@@ -701,19 +706,19 @@ Resampling was performed using the cubic resampling method. The original coordin
    map <- spgrass6::readRAST6("recGEO_50")
    
    # Prepare data
-   map@bbox <- pts@bbox
+   map@bbox[1, ] <- dnos_bbox[1, ]
+   map@bbox[2, ] <- dnos_bbox[2, ]
    map@data[, 1] <- as.factor(map@data[, 1])
-   levels(map@data[, 1])
-   map@data[, 1] <- revalue(
+   map@data[, 1] <- plyr::revalue(
      map@data[, 1], c("1" = "SG-I",  # Serra Geral (inferior)
                       "2" = "BT",    # Botucatu
                       "3" = "CT",    # Caturrita
                       "4" = "SG-S")) # Serra Geral (superior)
    
    # Prepare plot
-   map <- spplot(
+   map <- sp::spplot(
      map, main = "", col.regions = topo.colors(4), asp = 1) +
-     latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+     latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20, cex = 0.3))
    names(map$legend) <- "inside"
    map$legend$inside$x <- 0.795
    map$legend$inside$y <- 0.875
@@ -731,9 +736,10 @@ Resampling was performed using the cubic resampling method. The original coordin
    
    # Load more detailed geological map
    map <- spgrass6::readRAST6("predGEO_25")
-   map@bbox <- pts@bbox
+   map@bbox[1, ] <- dnos_bbox[1, ]
+   map@bbox[2, ] <- dnos_bbox[2, ]
    map@data[, 1] <- as.factor(map@data[, 1])
-   map@data[, 1] <- revalue(
+   map@data[, 1] <- plyr::revalue(
      map@data[, 1], c("1" = "SG-I",  # Serra Geral (inferior)
                       "2" = "BT",    # Botucatu
                       "3" = "CT",    # Caturrita
@@ -742,11 +748,12 @@ Resampling was performed using the cubic resampling method. The original coordin
    system("r.to.vect --o in=GEO_25d out=poly feature=area")
    poly <- spgrass6::readVECT6("poly")
    poly@bbox <- pts@bbox
-   map <- spplot(
+   map <- sp::spplot(
      map, main = "", col.regions = topo.colors(4), asp = 1, 
      sp.layout = list("sp.polygons", poly, first = FALSE, 
      col = ifelse(poly$value == 0, "transparent", " black"), 
-     fill = ifelse(poly$value == 0, "transparent", "lightgray"), alpha = 0.5))
+     fill = ifelse(poly$value == 0, "transparent", "lightgray"), alpha = 0.5)) +
+     latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20, cex = 0.3))
    names(map$legend) <- "inside"
    map$legend$inside$x <- 0.795
    map$legend$inside$y <- 0.875
@@ -864,19 +871,20 @@ of the nearest neighbour resampling method to match \landOld{} to the reference 
   invisible(capture.output(map <- spgrass6::readRAST6("LU1980", ignore.stderr = TRUE)))
   
   # Prepare data
-  map@bbox <- pts@bbox
+  map@bbox[1, ] <- dnos_bbox[1, ]
+  map@bbox[2, ] <- dnos_bbox[2, ]
   map@data[, 1] <- as.factor(map@data[, 1])
-  data(plotKML::worldgrids_pal)
-  map@data[, 1] <- revalue(
+  data(worldgrids_pal, package = "plotKML")
+  map@data[, 1] <- plyr::revalue(
     map@data[, 1], c("1" = "FS",  # Semi-deciduous forest
                      "2" = "H",   # animal husbandry
                      "3" = "PF",  # Plantation forestry
                      "4" = "S"))  # urban (Settlement)
   
   # Prepare plot
-  map <- spplot(
-    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 13, 4, 22)], asp = 1) +
-      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  map <- sp::spplot(
+    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 13, 4, 18)], asp = 1) +
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20, cex = 0.3))
   names(map$legend) <- "inside"
   map$legend$inside$x <- 0.84
   map$legend$inside$y <- 0.875
@@ -895,9 +903,10 @@ of the nearest neighbour resampling method to match \landOld{} to the reference 
   invisible(capture.output(map <- spgrass6::readRAST6("LU2009", ignore.stderr = TRUE)))
   
   # Prepare data
-  map@bbox <- pts@bbox
+  map@bbox[1, ] <- dnos_bbox[1, ]
+  map@bbox[2, ] <- dnos_bbox[2, ]
   map@data[, 1] <- as.factor(map@data[, 1])
-  map@data[, 1] <- revalue(
+  map@data[, 1] <- plyr::revalue(
     map@data[, 1], c("1" = "FS",  # Semi-deciduous forest
                      "2" = "SS",  # Semi-deciduous shrub
                      "3" = "H",   # animal husbandry
@@ -907,9 +916,9 @@ of the nearest neighbour resampling method to match \landOld{} to the reference 
                      "7" = "O"))  # Other land uses (water reservoir)
   
   # Prepare plot
-  map <- spplot(
-    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 12, 13, 16, 4, 22, 20)], asp = 1) +
-      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  map <- sp::spplot(
+    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 12, 13, 16, 4, 18, 20)], asp = 1) +
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20, cex = 0.3))
   names(map$legend) <- "inside"
   map$legend$inside$x <- 0.84
   map$legend$inside$y <- 0.80
@@ -925,16 +934,26 @@ of the nearest neighbour resampling method to match \landOld{} to the reference 
  <<covar-data-land-use-3, fig = TRUE, echo = FALSE>>=
   
   # Load land use change raster surface
-  invisible(capture.output(land <- spgrass6::readRAST6("LUdiff", ignore.stderr = TRUE)))
+  invisible(capture.output(map <- spgrass6::readRAST6("LUdiff", ignore.stderr = TRUE)))
+  
+  # Prepare data
+  map@bbox[1, ] <- dnos_bbox[1, ]
+  map@bbox[2, ] <- dnos_bbox[2, ]
+  map@data[, 1] <- as.factor(map@data[, 1])
   
   # Prepare plot
-  land <- sp::spplot(
-    land, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64)) + 
-      latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
+  map <- sp::spplot(
+    map, main = "", aspect = 1, col.regions = c("lightgreen", "wheat")) +
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20, cex = 0.3))
+  names(map$legend) <- "inside"
+  map$legend$inside$x <- 0.84
+  map$legend$inside$y <- 0.875
+  map$legend$inside$args$key$space <- "left"
   
   # Plot and clean workspace
-  print(land)
-  rm(land)
+  print(map)
+  rm(map)
+  gc()
  @
  \end{minipage}
   \caption{Land use maps (a) \landOld{} and (b) \landNew{} used to derive indicator covariates included in 
