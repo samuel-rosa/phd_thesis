@@ -44,7 +44,14 @@ Highlighting=LaTeX
 Indentation Mode=normal
 Mode=LaTeX
 
-[document-settings,item:chap/apene.tex]
+[document-settings,item:chap/apene.Rnw]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
+[document-settings,item:chap/chap00.Rnw]
 Bookmarks=
 Encoding=UTF-8
 Highlighting=LaTeX
@@ -151,10 +158,10 @@ Mode=LaTeX
 
 [item:UFRuralRJ.cls]
 archive=true
-column=9
+column=23
 encoding=UTF-8
 highlight=LaTeX
-line=731
+line=106
 mode=LaTeX
 open=false
 order=3
@@ -171,17 +178,10 @@ order=-1
 
 [item:chap/apena.tex]
 archive=true
-<<<<<<< HEAD
-column=17
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=309
-=======
-column=26
-encoding=UTF-8
-highlight=LaTeX
-line=306
->>>>>>> 9bd3fa39e38bfac9e9ac39b353b4b430ed0c8db8
+line=6
 mode=LaTeX
 open=false
 order=0
@@ -193,35 +193,45 @@ encoding=UTF-8
 highlight=LaTeX
 line=61
 mode=LaTeX
-open=true
+open=false
 order=4
 
-[item:chap/apene.tex]
+[item:chap/apene.Rnw]
 archive=true
-column=56
+column=57
 encoding=UTF-8
 highlight=LaTeX
-line=16
+line=118
 mode=LaTeX
-open=true
+open=false
 order=1
+
+[item:chap/chap00.Rnw]
+archive=true
+column=39
+encoding=UTF-8
+highlight=LaTeX
+line=5
+mode=LaTeX
+open=false
+order=-1
 
 [item:chap/chap00.tex]
 archive=true
-column=13
+column=2
 encoding=UTF-8
 highlight=LaTeX
-line=904
+line=4
 mode=LaTeX
 open=false
 order=1
 
 [item:chap/chap01.tex]
 archive=true
-column=0
+column=62
 encoding=UTF-8
 highlight=LaTeX
-line=24
+line=265
 mode=LaTeX
 open=false
 order=2
@@ -268,20 +278,20 @@ order=-1
 
 [item:chap/preliminaries.tex]
 archive=true
-column=0
+column=62
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=7
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:chap/tab/chap01TAB1.tex]
 archive=true
-column=197
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=26
+line=27
 mode=LaTeX
 open=false
 order=-1
@@ -303,7 +313,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=14
 mode=LaTeX
-open=true
+open=false
 order=2
 
 [item:chap/tab/chap01TAB4.tex]
@@ -348,17 +358,17 @@ order=-1
 
 [item:phd_thesis.tex]
 archive=true
-column=0
+column=11
 encoding=UTF-8
 highlight=LaTeX
-line=198
+line=152
 mode=LaTeX
-open=true
+open=false
 order=3
 
 [view-settings,view=0,item:UFRuralRJ.cls]
-CursorColumn=9
-CursorLine=731
+CursorColumn=23
+CursorLine=106
 JumpList=
 ViMarks=.,731,11,[,731,11,],731,11
 
@@ -369,17 +379,10 @@ JumpList=
 ViMarks=.,50,0,[,50,0,],50,0
 
 [view-settings,view=0,item:chap/apena.tex]
-<<<<<<< HEAD
-CursorColumn=17
-CursorLine=309
+CursorColumn=0
+CursorLine=6
 JumpList=
-ViMarks=.,328,82,[,328,82,],328,87
-=======
-CursorColumn=26
-CursorLine=306
-JumpList=
-ViMarks=.,336,13,[,336,13,],336,13
->>>>>>> 9bd3fa39e38bfac9e9ac39b353b4b430ed0c8db8
+ViMarks=.,412,109,[,413,0,],-1,-1
 
 [view-settings,view=0,item:chap/apenb.tex]
 CursorColumn=2
@@ -387,23 +390,29 @@ CursorLine=61
 JumpList=
 ViMarks=.,61,0,[,61,0,],61,1
 
-[view-settings,view=0,item:chap/apene.tex]
-CursorColumn=56
-CursorLine=16
+[view-settings,view=0,item:chap/apene.Rnw]
+CursorColumn=57
+CursorLine=118
 JumpList=
-ViMarks=.,16,55,[,16,50,],16,55
+ViMarks=.,106,54,[,106,54,],106,54
+
+[view-settings,view=0,item:chap/chap00.Rnw]
+CursorColumn=39
+CursorLine=5
+JumpList=
+ViMarks=.,102,31,[,102,31,],102,36
 
 [view-settings,view=0,item:chap/chap00.tex]
-CursorColumn=13
-CursorLine=904
+CursorColumn=2
+CursorLine=4
 JumpList=
-ViMarks=.,920,0,[,920,0,],920,0
+ViMarks=.,4,0,[,4,0,],4,1
 
 [view-settings,view=0,item:chap/chap01.tex]
-CursorColumn=0
-CursorLine=24
+CursorColumn=62
+CursorLine=265
 JumpList=
-ViMarks=.,24,0,[,24,0,],24,0
+ViMarks=.,8,0,[,8,0,],8,0
 
 [view-settings,view=0,item:chap/chap02.tex]
 CursorColumn=0
@@ -430,14 +439,14 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:chap/preliminaries.tex]
-CursorColumn=0
-CursorLine=0
+CursorColumn=62
+CursorLine=7
 JumpList=
-ViMarks=
+ViMarks=.,7,62,[,7,62,],7,62
 
 [view-settings,view=0,item:chap/tab/chap01TAB1.tex]
-CursorColumn=197
-CursorLine=26
+CursorColumn=0
+CursorLine=27
 JumpList=
 ViMarks=.,15,0,[,15,0,],15,0
 
@@ -472,7 +481,7 @@ JumpList=
 ViMarks=.,49,0,[,49,0,],49,0
 
 [view-settings,view=0,item:phd_thesis.tex]
-CursorColumn=0
-CursorLine=198
+CursorColumn=11
+CursorLine=152
 JumpList=
-ViMarks=.,400,0,[,400,0,],400,0
+ViMarks=.,152,10,[,152,0,],152,10
