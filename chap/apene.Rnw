@@ -6,6 +6,32 @@
 \usepackage[utf8]{inputenc}
 \SweaveOpts{prefix.string = fig/apene}
 
+<<R-settings, echo = FALSE>>=
+ 
+ # Start GRASS
+ invisible(capture.output(
+   spgrass6::initGRASS(
+     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
+ 
+ # Load polygon with the boundary of the study area
+ invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
+ 
+ # Load calibration points
+ pts <- read.table(
+  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
+  header = TRUE, na.strings = "na")[, c("longitude", "latitude")]
+ sp::coordinates(pts) <- ~ longitude + latitude
+ sp::proj4string(pts) <- sp::CRS("+init=epsg:4674") # sirgas2000
+ pts <- sp::spTransform(pts, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
+ #pts <- data.frame(slot(pts, "coords"))
+ 
+ # Trellis settings
+ trellis.par.set(fontsize = list(text = 12, points = 8),
+      layout.widths = list(left.padding = 0, right.padding = 0),
+      layout.heights = list(top.padding = 0, bottom.padding = 0))
+@
+
 \tocless\section{Introduction}
 \label{sec:covar-data-intro}
 
@@ -18,12 +44,13 @@ are the outcome of projects that aimed at modelling various environmental featur
 part of local (soil, geology, land use), regional (terrain, land use), and global (terrain, land use) 
 initiatives.
 
+Covariate data was standardized to A reference grid of \SI{5}{\m} grid size. The coordinate reference 
+system (CRS) is WGS1984 / UTM zone 22S, coded \href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} 
+by the European Petroleum Survey Group (\href{http://www.epsg.org/}{EPSG}).
+
 This document presents a description of the covariate data contained in the Santa Maria dataset, including the 
 procedures for their production, as well as the processing methods employed. The original sources of the 
 covariate data are freely available at the producers databases or in public libraries.
-
-% TODO: include a description of the GCPs used to validate the environmental covariates and to 
-% orthorectify satellite images. Also, present the equations used to calculate validation statistics.
 
 \tocless\section{Ground control points}
 \label{sec:covar-data-gcp}
@@ -36,45 +63,45 @@ corners, and property entrances.
 
 \begin{figure}[!ht]
  \centering
-<<covar-data-field-gcps, fig = TRUE, echo = FALSE>>=
-gcps <- read.table(
-  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/gcpData.csv", sep = "\t",
-  header = TRUE, na.strings = "na")
-gcps <- gcps[which(gcps$source == "field"), c("x", "y")]
-sp::coordinates(gcps) <- ~ x + y
-sp::proj4string(gcps) <- sp::CRS("+init=epsg:32722") # wgs1984utm22s
-invisible(capture.output(
-  spgrass6::initGRASS(
-    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
-    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
-invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
-p <- sp::spplot(
-  pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
-  scales = list(draw = TRUE), colorkey = FALSE, aspect = "iso",
-  xlim = c(gcps@bbox[1, 1] * 0.998, gcps@bbox[1, 2] * 1.005),
-  ylim = c(gcps@bbox[2, 1] * 0.9999, gcps@bbox[2, 2] * 1.0001),
-  par.settings = list(
-    fontsize = list(text = 12, points = 8),
-    layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)),
-  panel = function(x, y, ...) {
-    sp::panel.polygonsplot(x, y, ...)
-    lattice::panel.points(
-      x = gcps@coords[, "x"], y = gcps@coords[, "y"], pch = 20, col = "red")
-    lattice::panel.abline(
-      v = seq(222000, 233000, 1000), h = seq(6712000, 6725000, 1000),
-      col = "gray", lty = "dashed", lwd = 0.5)
-  })
-print(p)
-rm(gcps, p, pol)
-gc()
-@
-\caption{Spatial distribution of the ground control points ($n = 14$, red) used to validate the covariates 
-included in the Santa Maria dataset.}
-\label{fig:covar-data-field-gcps}
+ <<covar-data-field-gcps, fig = TRUE, echo = FALSE>>=
+  
+  # Load ground control points collected in the field
+  gcps <- read.table(
+    "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/gcpData.csv", sep = "\t",
+    header = TRUE, na.strings = "na")
+  gcps <- gcps[which(gcps$source == "field"), c("x", "y")]
+  sp::coordinates(gcps) <- ~ x + y
+  sp::proj4string(gcps) <- sp::CRS("+init=epsg:32722") # wgs1984utm22s
+  
+  # Prepare plot
+  p <- sp::spplot(
+    pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
+    scales = list(draw = TRUE), colorkey = FALSE, aspect = "iso",
+    xlim = c(gcps@bbox[1, 1] * 0.998, gcps@bbox[1, 2] * 1.005),
+    ylim = c(gcps@bbox[2, 1] * 0.9999, gcps@bbox[2, 2] * 1.0001),
+    par.settings = list(
+      fontsize = list(text = 12, points = 8),
+      layout.widths = list(left.padding = 0, right.padding = 0),
+      layout.heights = list(top.padding = 0, bottom.padding = 0)),
+    panel = function(x, y, ...) {
+      sp::panel.polygonsplot(x, y, ...)
+      lattice::panel.points(x = gcps@coords[, "x"], y = gcps@coords[, "y"], pch = 20, col = "red")
+      lattice::panel.abline(
+        v = seq(222000, 233000, 1000), h = seq(6712000, 6725000, 1000),
+        col = "gray", lty = "dashed", lwd = 0.5)
+    })
+  
+  # Plot and clean workspace
+  print(p)
+  rm(gcps, p)
+  gc()
+ @
+ \caption{Spatial distribution of the ground control points ($n = 14$, red) used for the positional validation 
+ of covariates included in the Santa Maria dataset.}
+ \label{fig:covar-data-field-gcps}
 \end{figure}
 
-Horizontal validation was performed comparing the x- and y-coordinates of GCPs (observed value) with the 
+Positional validation was performed comparing the x- and y-coordinates of GCPs (observed value) with the 
 coordinates of the respective geographical markers visually identified on the covariates (predicted value). The 
 differences in the observed and predicted x- and y-coordinates were used to calculate the mean error (ME, 
 \si{\m}), mean absolute error (MAE, \si{\m}), and mean squared error (MSE, \si{\m\square}) to evaluate if 
@@ -109,7 +136,7 @@ The field location of the GCPs is as follows (in Portuguese):
  
  \item [GCP 06] Em Itaara, na Avenida Etelvina, na beira da estrada, \SI{2,5}{\m} do centro da estrada,
  alinhado (\SI{\pm20}{\cm}) com a cerca que separa a floresta nativa do pomar de \it{Citrus}~sp.~localizado 
- do outro lado da estrada.
+ do outro lado da estrada.há{
  
  \item [GCP 07] Em Itaara, no lado esquerdo da entrada da estrada que da acesso à mina de extração de brita
  DallaPasqua. Localidade de Estação Pinhal. Obs.: receptor de GNSS instalado sob a rede de transmissão de
@@ -119,64 +146,93 @@ The field location of the GCPs is as follows (in Portuguese):
  da Caturita, em frente à Escola Municipal de Ensino Fundamental Intendente Manoel Ribas.
  
  \item [GCP 09] Em São Martinho da Serra, na localidade de Água Negra, na bifurcação da estrada que vem de
- Santa Maria e que dá acesso à localidade de Campinas, junto à parada de ônibus, no canteiro no meio da
- bifurcação, há 40 metros distante do Piquete Laçador Jorge R. da Silva, em frente ao 
-Mercado do Ronaldo. Obs.: coletado em 15 de janeiro de 2013.
-
-\item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, 
-próximo a duas pequenas árvores, alinhado (acurácia de 1 m) com cerca que marca a divisa entre duas 
-propriedades com campo nativo. Determina a distância, em km, em relação a ponto de referência em 
-Santa Maria. Em frente à propriedade com duas casas, uma delas com dois andares, e quatro pequenos 
-lagos nos fundos. Depois da capela Santo Antão.
-
-\item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia 
-federal BR 185, ao lado do corte no terreno expondo a rocha de arenito da Formação Botucatu, 
-distante 5 metros, aproximadamente 15 metros distante do poste da linha de transmissão de 
-eletricidade da companhia AES, na entrada para a localidade de Rincão dos Minello.
-
-\item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto à rodovia federal 
-BR 158, próximo ao Bar e Armazém Ricardo, deslocado em 1 metro para dentro do passeio em relação ao 
-alinhamento dos postes da rede elétrica.
-
-\item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (acurácia de 30 cm) que divide duas 
-terras, à esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas 
-anuais. O ponto está locado no lado oposto. Determinar a distância até algum ponto de referência. 
-Plantação de videiras logo acima, no divisor de águas.
-
-\item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após 
-o término da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do 
-campo nativo, alinhado (acurácia de 20 cm) com a cerca dos dois lados da estrada. Locado 1 metro 
-distante do moirão da cerca do lado esquerdo subindo, no interior da estrada.
+ Santa Maria e que dá acesso à localidade de Campinas, junto a parada de ônibus, no canteiro no meio da
+ bifurcação, a \SI{40}{\m} distante do Piquete Laçador Jorge R.~da Silva, em frente ao Mercado do Ronaldo.
+ 
+ \item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, próximo a
+ duas pequenas árvores, alinhado (\SI{\pm1}{\m}) com cerca que marca a divisa entre duas propriedades com campo
+ nativo. Em frente a propriedade com duas casas, uma delas com dois andares, e quatro pequenos lagos nos
+ fundos. Depois da capela Santo Antão.
+ 
+ \item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia federal BR185,
+ ao lado (distante \SI{5}{\m}) do corte no terreno expondo a rocha de arenito da Formação Botucatu,
+ \SI{\pm15}{\m} distante do poste da linha de transmissão de eletricidade da companhia AES, na entrada para a
+ localidade de Rincão dos Minello.
+ 
+ \item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto a rodovia federal BR158,
+ próximo ao Bar e Armazém Ricardo, deslocado em \SI{1}{\m} para dentro do passeio em relação ao alinhamento dos 
+ postes da rede elétrica.
+ 
+ \item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (\SI{\pm30}{\cm}) que divide duas terras, à 
+ esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas anuais. O ponto está 
+ locado no lado oposto. Plantação de videiras logo acima, no divisor de águas.
+ 
+ \item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após o término 
+ da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do campo nativo, alinhado 
+ (\SI{\pm20}{\cm}) com a cerca dos dois lados da estrada. Locado \SI{1}{\m} distante do moirão da cerca do lado 
+ esquerdo subindo, no interior da estrada.
 \end{description}
 
-% Vertical validation exercises are interested in comparing the measured value of a variable at a given location 
-% with that predicted by some model. In this case, error statistics are calculated only for the the vertical 
-% displacement (error) in the ‘z’ coordinate. Both objects measured and predicted used with function gcpDiff() 
-% must be of class SpatialPointsDataFrame. They also must have a column named ‘siteID’ giving the identification 
-% of evary case. Again, matching of case IDs is mandatory. However, both objects must have a column named ‘z’ 
-% which contains the values of the ‘z’ coordinate. Other columns are discarded.
+Attribute validation of soil, geological, and land use maps, and DEMs was done using a set of $n = 60$ 
+validation points located along $m = 12$ linear transects. The procedures for obtaining soil, geological, land 
+use, and elevation data at these validation points is described in \autoref{apen:soil-data}. Such a validation 
+exercise was carried out because these maps originally have no accompanying validation information.
 
-
-
+% TODO: figure with GCPs used to ortorectify orbital images. Show the bounding box of the image and the 
+% boundary 
+% of the study area.
+% \begin{figure}
+%  \centering
+%  \includegraphics[width=\textwidth]{fig/ortho-gcps}
+%  \caption{Ground control points used to orthorectify orbital the image produced by Landsat-5 Thematic 
+% Mapper.}
+%  \label{fig:covar-data-ortho-gcps}
+% \end{figure}
 
 \tocless\section{Area-class soil maps}
 \label{sec:covar-data-soil-maps}
 
-There are several area-class soil maps available for the study area, but only two are included in the Santa 
-Maria dataset. The first of them (\soilOld{}) was published at a \scale{100000} \cite{AzolinEtAl1988}. 
-Existing area-class soil maps and technical reports \cite{Brasil1973, Azolin1977, MacielEtAl1987a, 
-MacielEtAl1987, AbraoEtAl1988}, and sparse field observations were used to elaborate the preliminary legend of 
-the soil map. Aerial photographs (\scale{60000}) were used to produce the first draft of the soil map. Field 
-checks of soil polygons was done along the road network (i.e. convenience sampling). These observations were 
-used to estimate the composition (occurrence and spatial distribution of soil taxa) of soil mapping units. They 
-were also used to review the first draft of the soil map. The final version of \soilOld{} was prepared using 
-topographic maps originally published at a \scale{50000} and resampled to a \scale{100000}. Soil classification 
-followed the criteria adopted by the Brazilian soil science community at that time \cite{Brasil1973, 
-CamargoEtAl1982, Carvalho1982, LemosEtAl1982, OlmosEtAl1982}. Identification of soil taxa was performed based 
-on morphological features, analytical data compiled from existing technical reports, and analysis of soil 
-samples collected from soil profiles observed along the road network. Description of each soil mapping unit 
-includes the estimated area (\si{\hectare}) and the approximate taxonomic composition (\si{\percent}). 
-Validation statistics are absent in the survey report.
+Two area-class soil maps are included in the Santa Maria dataset. The first of them (\soilOld{}) was published 
+at a \scale{100000} \cite{AzolinEtAl1988}. Existing area-class soil maps and technical reports 
+\cite{Brasil1973, Azolin1977, MacielEtAl1987a, MacielEtAl1987, AbraoEtAl1988}, and sparse field observations 
+were used to elaborate the preliminary legend of the soil map. Aerial photographs (\scale{60000}) were used to 
+produce the first draft of the soil map. Field checks of soil polygons was done along the road network (i.e. 
+convenience sampling). These observations were used to estimate the composition (occurrence and spatial 
+distribution of soil taxa) of soil mapping units. They were also used to review the first draft of the soil 
+map. The final version of \soilOld{} was prepared using topographic maps originally published at a 
+\scale{50000} and resampled to a \scale{100000}. Soil classification followed the criteria adopted by the 
+Brazilian soil science community at that time \cite{Brasil1973, CamargoEtAl1982, Carvalho1982, LemosEtAl1982, 
+OlmosEtAl1982}. Identification of soil taxa was performed based on morphological features, analytical data 
+compiled from existing technical reports, and analysis of soil samples collected from soil profiles observed 
+along the road network. Description of each soil mapping unit includes the estimated area (\si{\hectare}) and 
+the approximate taxonomic composition (\si{\percent}).
+
+%TODO: complete R code!!!
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed soil map
+   
+  @
+ \end{minipage}
+ 
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed soil map
+   
+  @
+ \end{minipage} 
+ \caption{Area-class soil maps (a) \soilOld{} and (b) \soilNew{} used to derive indicator covariates included 
+ in the Santa Maria dataset.}
+\label{fig:covar-data-soil-maps}
+\end{figure}
 
 The second area-class soil map (\soilNew{}) included in the Santa Maria dataset \cite{Miguel2010} was prepared 
 at a \scale{25000}. Orbital images produced by Digital Globe\textregistered{} (Quick Bird satellite), freely 
@@ -187,11 +243,10 @@ than \num{350} locations using a purposive sampling approach. These observations
 modal (representative) soil profiles. Soil sampling and description of modal soil profiles, and laboratory 
 analyses of soil samples, followed the standard protocols adopted in Brazil \cite{ClaessenEtAl1997, 
 SantosEtAl2005}. Soil classification was done following the criteria of the Brazilian System of Soil 
-Classification \cite{SantosEtAl2006}. The final version of the map was prepared using orbital images freely 
-available for visualization in Google Earth\textregistered{} and manually-digitalized topographic maps 
+Classification (SiBCS) \cite{SantosEtAl2006}. The final version of the map was prepared using orbital images 
+freely available for visualization in Google Earth\textregistered{} and manually-digitalized topographic maps 
 published at a \scale{25000} \cite{DSG1992a, DSG1992}. Description of soil mapping units includes only the 
-most common soil taxon, followed by morphological and laboratory data of modal soil profiles. Alike \soilOld{} 
-described above, validation statistics are absent in the survey report of \soilNew{}.
+most common soil taxon, followed by morphological and laboratory data of modal soil profiles.
 
 Both area-class soil maps went through different preprocessing routines. The original \soilOld{} is available 
 only in the analogical format, what required its digitalization. Georeferencing was carried out using the GDAL 
@@ -200,25 +255,21 @@ total of nine) were used as control points to adjust a second order polynomial m
 using the cubic resampling method. Soil polygons and their attributes were also manually digitalized in QGIS. 
 Because of the coarseness on the cartographic map scale, most geographical markers used to locate validation 
 GCPs could not be identified and positional validation was performed using only four GCPs. Estimated error 
-statistics suggest that there are large positional errors in all directions, with an $\text{RMSE} = 
-\SI{114}{\m}$ and a mean azimuth of \SI{128}{\degree} (\autoref{tab:covar-data-soil-geo-val}).
-
-Error statistics include the mean error (ME, \si{\m}), mean absolute error (MAE, \si{m}), and mean squared 
-error (MSE, \si{\m\square}), and their respective standard deviation, in the x- and y-coordinates. 
+statistics suggest that there are large positional errors in all directions, with an RMSE of \SI{114}{\m} and 
+a mean azimuth of \SI{128}{\degree} (\autoref{tab:covar-data-soil-geo-val}).
 
 \begin{table}[ht]
- \caption{Validation of the area-class soil map \soilOld{} in the geographic space using $n = 4$ ground 
- control points. }
+ \caption{Error statistics of the horizontal validation of \soilOld{} using $n = 4$ GCPs.}
  \label{tab:covar-data-soil-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics           & X coordinate & Y coordinate & Error vector & Azimuth                  \\
+  Statistics                   & x-coord & y-coord & Error vector & Azimuth   \\
   \hline
-  Mean, m              & 30   (79)    & -36  (67)    & 105   (43)   & 128$^\circ$ (80$^\circ$) \\ 
-  Absolute mean, m     & 58   (63)    & 64   (40)    & -            & -                        \\ 
-  Squared mean, m$^2$  & 7241 (11353) & 5712 (6197)  & 12953 (9613) & -                        \\ 
+  Mean, \si{\m}                & 30      & -36     & 105          & \ang{128} \\ 
+  Absolute mean, \si{\m}       & 58      & 64      & -            & -         \\ 
+  Squared mean, \si{\m\square} & 7241    & 5712    & 12953        & -         \\ 
   \hline
  \end{tabular}}
 \end{table}
@@ -227,231 +278,137 @@ error (MSE, \si{\m\square}), and their respective standard deviation, in the x- 
 %   \centering
 %   \includegraphics[width=0.45\textwidth]{azim-soil100}
 %   \includegraphics[width=0.45\textwidth]{azim-soil25}
-%   \caption{Histogram of the azimuth distribution of the validation of area-class soil maps \texttt{SOIL\_100} 
-% and \texttt{SOIL\_25} in the attribute space. Azimuth values were estimated using, respectively, four and ... 
+%   \caption{Histogram of the azimuth distribution of the validation of area-class soil maps \soilOld{} 
+% and \soilNew{} in the attribute space. Azimuth values were estimated using, respectively, four and
 % GCPs located in easily identifiable geographical markers. Estimates were corrected to the size of the 
 % population. The graph was produced using R-package \textit{VecStatGraphs2D}.}
 %   \label{fig:soil-azim}
 % \end{figure}
 
-The original \texttt{SOIL\_25} is available in digital format in the personal database of the author 
-\cite{Miguel2010}. A topology check (Topology Checker plug-in in QGIS 2.0.1) identified that there
-were many gaps and overlaps between polygons. This required a topological edition prior to the 
-use of \texttt{SOIL\_25}. There also was a mismatch between the boundary of \texttt{SOIL\_25} and 
-the actual boundary of the catchment of the DNOS/CORSAN reservoir as estimated using 
-\texttt{ELEV\_10} (\autoref{sec:covar-data-dem}). This occurred because the database used to 
-produce \texttt{SOIL\_25} included Google Earth imagery\textregistered{} and topographic maps, which 
-are data sources that differ considerably in their positional accuracy 
-(\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). To avoid data losses, all 
-boundary gaps were manually filled using the closest mapping unit. Boundaries of soil polygons were 
-defined based on land use (\texttt{LU2009}, \autoref{sec:covar-data-land-use}) and topographic data 
-(contour lines, \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. 
-New delineations were checked and approved without modifications by the author of the original map. 
-Because \texttt{SOIL\_25} includes very few geographical markers, its positional validation was not 
-possible with the available GCPs. However, the RMSE is expected to vary between 
-\SIrange{8}{114}{\metre} across the soil map as a result of the different errors present in the 
-data sources used in its production.
+The original \soilNew{} is available in digital format in the personal database of the author 
+\cite{Miguel2010}. A topology check (Topology Checker plug-in in QGIS) identified that there were many gaps 
+and overlaps between polygons. This required a topological edition prior to the use of \soilNew{}. There also 
+was a mismatch between the boundary of \soilNew{} and the actual boundary of the study area as estimated using 
+\demNew{} (\autoref{sec:covar-data-dem}). This occurred because the database used to produce \soilNew{} 
+included Google Earth imagery and topographic maps, which are data sources that differ 
+considerably in their positional accuracy (\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). 
+To avoid data losses, all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil 
+polygons were defined based on land use (\landNew{}, \autoref{sec:covar-data-land-use}) and topographic data 
+(contour lines, \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. New 
+delineations were checked and approved without modifications by the author of the original map. Because 
+\soilNew{} includes very few geographical markers, its positional validation was not possible with the 
+available GCPs. However, the RMSE is expected to vary between \SIrange{8}{114}{\m} across the study area as a 
+result of the different errors present in the data sources used in its production.
 
-Both \texttt{SOIL\_100} and \texttt{SOIL\_25} were imported into GRASS GIS 6.4, cropped to the 
-bounding box of the catchment of the DNOS/CORSAN reservoir, and geometrically corrected to match the 
-prediction grid (\SI{5}{\metre} grid size). Registration and geocoding was performed using the 
-nearest neighbour resampling method. Each category was named with the code of the respective 
-mapping unit in the original map. Prior to validation in the attribute space, class codes of 
-\texttt{SOIL\_100} were changed to match soil taxa codes of the current Brazilian System of Soil 
-Classification using a standard correlation table \cite{SantosEtAl2006}.
+Both \soilOld{} and \soilNew{} were cropped to the bounding box of the study area, and geometrically corrected 
+to match the reference grid. Registration and geocoding was performed using the nearest neighbour resampling 
+method to maintain data integrity. Each category was named with the code of the respective mapping unit in the 
+original map. Prior to validation in the attribute space, class codes of \soilOld{} were changed to match soil 
+taxa codes of the current Brazilian System of Soil Classification using a standard correlation table 
+\cite{SantosEtAl2006}. The overall purity of both soil maps is not considerably different 
+(\autoref{tab:covar-data-soil-attr-val}). A reason for this could be that validation was performed considering 
+only the second level of the SiBCS -- it is likely that \soilNew{} would outperform \soilOld{} if validation 
+data included soil taxa up to the fourth level of the SiBCS. The low overall purity of \soilOld{} and 
+\soilNew{} (\num{31.67} and \SI{30.00}{\percent}, respectively) is likely due to several sources of error. 
+First, the small number of modal soil profiles used to produce both maps which might resulted in an optimistic 
+view of the homogeneity of each mapping unit. Second, soil taxa of \soilOld{} was translated to the current 
+SiBCS using only a standard correlation table \cite{SantosEtAl2006} and expert knowledge because the survey 
+report does not include analytical soil data. Last, soil taxa at validation points was inferred in the field 
+using only morphological soil properties and the concepts of the SiBCS.
 
-Table \ref{tab:covar-data-soil-attr-val} shows that the overall purity of both soil maps is not 
-significantly different. The main reason for this is that validation was performed considering only 
-the second level of the Brazilian System of Soil Classification. It is expected that 
-\texttt{SOIL\_25} would outperform \texttt{SOIL\_100} if validation data included soil 
-classification up to the fourth level of the Brazilian System of Soil Classification. Estimated 
-overall purity values are also very low (\SI{<35}{\percent}). The main reason can be the fact that 
-very few soil profiles were described and sampled to produce both maps. There also are two minor 
-potential sources of error. First, because \texttt{SOIL\_100} does not include analytical soil data 
-in the survey report, all soil taxa had to be translated to the current Brazilian System of Soil 
-Classification based only on a standard correlation table \cite{SantosEtAl2006} and expert 
-knowledge. Second, soil taxa described at the validation points was obtained analysing only 
-morphological soil properties and the basis and concepts of the Brazilian System of Soil 
-Classification.
-
-\begin{table}[ht]
- \caption{Estimated error statistics of the validation of area-class soil maps \texttt{SOIL\_100}
- and \texttt{SOIL\_25} in the attribute space. Validation statistics were estimated using $n = 60$ 
- observation locations placed along $m = 12$ linear transects (clustered samples).}
- \label{tab:covar-data-soil-attr-val}
- \centering
- {\small
- \begin{tabular}{lrrr}
-  \hline
-  Soil map              & LCB95Pct & Estimate & UCB95Pct \\
-  \hline
-  \texttt{SOIL\_100}    & 21.69    & 31.67    & 41.65    \\
-  \texttt{SOIL\_25}     & 20.81    & 30.00    & 39.19    \\
-  \hline
- \end{tabular}}
-\end{table}
-
-% TODO: figure with both area-class soil maps
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25}
-%   \caption{Area-class soil maps used as sources of environmental co-variates. On the left, the area-class 
-% soil map produced by \cite{AzolinEtAl1988} and published at a scale of 1:100,000 (\texttt{SOIL\_100}). On the 
-% right, the area-class soil map produced by \cite{Miguel2010} at a scale of 1:25,000 (\texttt{SOIL\_25}).}
-%   \label{fig:soil-maps}
-% \end{figure}
-
-The main advantage of \texttt{SOIL\_25} in relation to \texttt{SOIL\_100} is the level of detail. 
-While \texttt{SOIL\_100} has only five mapping units covering catchment of the DNOS/CORSAN 
-reservoir, \texttt{SOIL\_25} has seven mapping units. This enabled the derivation of six 
-covariates from \texttt{SOIL\_100} and ten covariates from \texttt{SOIL\_25}. Covariates derived 
-from \texttt{SOIL\_100} are the following:
+Five ($p = 5$) covariates were derived from \soilOld{} as described bellow (including the soil taxa according 
+to the original and updated classification \cite{AzolinEtAl1988, SantosEtAl2013a}, and the international 
+classification \cite{IUSSWorkingGroupWRB2007}):
 
 \begin{description}
-%  \item[\texttt{SOIL\_100a}] This covariate separates map unit Rd1 from other map units. It is 
-%  composed mainly by shallow soils with low to high base saturation (Solo Litólico 
-%  distrófico/eutrófico; Neossolo Litólico distrófico/eutrófico; Distric/Eutric Leptosol) located in 
-%  slopping terrain;
+ \item[\tt{SOIL\_100b}] Shallow soil (\it{Re4}) with low to high base saturation covering mountainous 
+ terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico Distrófico/Eutrófico;
+ Distric/Eutric Leptosol).
   
- \item[\texttt{SOIL\_100b}] Shallow soils with low to high base saturation covering mountainous 
- terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico 
- Distrófico/Eutrófico; Distric/Eutric Leptosol);
+ \item[\tt{SOIL\_100c}] Association (\it{Re-C-Co}) of shallow soil with high base saturation located in
+ strongly sloping terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric
+ Leptosol), low weathered soil (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric Cambisol), and
+ colluvial deposits.
   
- \item[\texttt{SOIL\_100c}] Shallow soils with high base saturation located in strongly sloping 
- terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric 
- Leptosol), low weathered soils (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric 
- Cambisol), and colluvial deposits;
+ \item[\tt{SOIL\_100d}] Association (\it{TBa-Rd}) of deep, well-structured, low base saturation soil (Terra
+ Bruna Estruturada álica; Nitossolo; Nitisol), and shallow soil (Solo Litólico; Neossolo Litólico; Leptosol).
   
- \item[\texttt{SOIL\_100d}] Deep, well-structured, low base saturation soils (Terra Bruna 
- Estruturada álica; Nitossolo; Nitisol), and shallow soils (Solo Litólico; Neossolo Litólico; 
- Leptosol);
+ \item[\tt{SOIL\_100e}] Composed of shallow soil (\it{Rd1} and \textit{Re4}) with low to high base
+ saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; Distric/Eutric
+ Leptosol) located in slopping and mountainous terrain.
   
- \item[\texttt{SOIL\_100e}] \textit{Rd1} is composed mainly by shallow soils with low to high base 
- saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; 
- Distric/Eutric Leptosol) located in slopping terrain. This dummy predictor variable is composed by 
- shallow soils in both sloping and mountainous terrain;
-  
- \item[\texttt{SOIL\_100f}] \textit{C1} is composed by low weathered soils developed in lower 
- landscape positions, close to drainage channels (Cambissolo Eutrófico; Cambissolo Eutrófico; 
- Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop 
- agriculture among those identified in the soil survey.
+ \item[\tt{SOIL\_100f}] This covariate includes the best soil mapping units for crop agriculture among those 
+ identified in the soil survey, such as \it{TBa-Rd}, already described above, and \it{C1}, which is composed
+ of low weathered soils developed in lower landscape positions, close to drainage channels (Cambissolo
+ Eutrófico; Cambissolo Eutrófico; Eutric Cambisol).
 \end{description}
 
-% TODO: figure with covariates derived from SOIL_100
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100a}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100b}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100c}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100d}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100e}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-100f}
-%   \caption{Environmental covariates derived from the area-class soil map produced by \cite{AzolinEtAl1988} 
-% and published at a scale of 1:100,000 (\texttt{SOIL\_100}).}
-%   \label{fig:soil100-covars}
-% \end{figure}
-
-Covariates derived from \texttt{SOIL\_25} are the following:
+Covariates derived from \soilNew{} are the following (mapping unit \it{RY}, composed mainly of soils developed 
+from fluvial deposits (Neossolo Flúvico; Fluvisol) does not appear due to the small area that it occupies):
 
 \begin{description}
- \item[\texttt{SOIL\_25a}] Moderately deep soils derived from sedimentary rocks, with abrupt 
- textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol);
-
- \item[\texttt{SOIL\_25b}] Deep soils derived from igneous rocks, with moderate textural gradient, 
- and low base saturation (Argissolo Vermelho; Acrisol);
- 
- \item[\texttt{SOIL\_25c}] Low weathered soils (Cambissolo; Cambisol) and shallow soils with low to 
- high base saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric 
- Leptosol/Regosol);
- 
- \item[\texttt{SOIL\_25d}] Shallow soils with low to high base saturation (Neossolo Litólico 
- Eutrófico/Distrófico; Eutric/Distric Leptosol);
- 
-%  \item[\texttt{SOIL\_25e}] This covariate separates map unit RL-RR from other map units. It is 
-%  composed mainly by shallow soils (Neossolo Litólico + Neossolo Regolítico; Leptosol + Regosol) 
-%  with low to high base saturation;
- 
-%  \item[\texttt{SOIL\_25f}] This covariate separates map unit RR from other map units. It is composed 
-%  mainly by shallow soils (Neossolo Regolítico; Regosol), with low base saturation, developed on 
-%  sedimentary rocks;
- 
-%  \item[\texttt{SOIL\_25g}] This covariate separates map unit RY from other map units. It is composed 
-%  mainly by soils developed from fluvial deposits (Neossolo Flúvico; Fluvisol);
- 
- \item[\texttt{SOIL\_25h}] \textit{SX} is composed by moderately deep soils derived from sedimentary 
- rocks, with abrupt textural change, low base saturation, and which are saturated with water for 
- long periods of the year (Planossolo Háplico; Planosol). This dummy predictor variable includes 
- the best soil mapping units for crop agriculture among those identified in the soil survey;
- 
- \item[\texttt{SOIL\_25i}] This dummy predictor variable includes all three mapping units composed 
- mainly by shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol);
+  \item[\tt{SOIL\_25a}] Moderately deep soil (\it{PBAC}) derived from sedimentary rocks, with abrupt textural
+  change and low base saturation (Argissolo Bruno-Acinzentado; Alisol).
   
- \item[\texttt{SOIL\_25j}] This dummy predictor variable includes all four mapping units composed 
- mainly by soils derived from igneous rocks.
+  \item[\tt{SOIL\_25b}] Deep soil (\it{PV}) derived from igneous rocks, with moderate textural gradient,
+  and low base saturation (Argissolo Vermelho; Acrisol).
+ 
+  \item[\tt{SOIL\_25c}] Low weathered soil (Cambissolo; Cambisol) and shallow soil with low to high base
+  saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric Leptosol/Regosol) (\it{C-R}).
+ 
+  \item[\tt{SOIL\_25d}] Shallow soil (\it{RL}) with low to high base saturation (Neossolo Litólico 
+  Eutrófico/Distrófico; Eutric/Distric Leptosol).
+ 
+  \item[\tt{SOIL\_25h}] This covariate includes the mapping units with the best soil for crop agriculture
+  among those identified in the soil survey (\it{PBAC}, \it{PV}, and \it{SX}). \it{PBAC} and \it{PV} are as
+  described above. \textit{SX} is composed of moderately deep soil derived from sedimentary rocks, with abrupt 
+  textural change, low base saturation, and which are saturated with water for long periods of the year 
+  (Planossolo Háplico; Planosol).
+  
+  \item[\tt{SOIL\_25i}] This covariate includes all three mapping units (\it{RL}, \it{RL-RR}, and \it{RR})
+  composed mainly of shallow soil (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol).
+  
+  \item[\tt{SOIL\_25j}] This covariate includes all four mapping units (\it{PV}, \it{RL}, \it{RL-RR}, and 
+  \it{C-R}) composed mainly of soil derived from igneous rocks.
 \end{description}
-
-% TODO: figure with covariates derived from SOIL_25
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25a}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25b}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25c}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25d}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25e}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25f}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25g}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25h}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25i}
-%   \includegraphics[width=0.3\textwidth]{fig/soil-25j}
-%   \caption{Environmental covariates derived from the area-class soil map produced by \cite{Miguel2010} at a 
-% scale of 1:25,000 (\texttt{SOIL\_25}).}
-%   \label{fig:soil25-covars}
-% \end{figure}
 
 \tocless\section{Digital elevation models}
 \label{sec:covar-data-dem}
 
-Three DEMs are include in the Santa Maria dataset as sources of covariates. The first DEM 
-(\texttt{ELEV\_10}) is the result of the interpolation of the contour lines of the most recent 
-topographic maps produced by the Brazilian Army (\scale{25000}) \cite{DSG1980, DSG1992, DSG1992a}. 
-Because all three topographic maps needed to cover the study area are available only in the 
-analogical format, their digitalization was necessary. Georeferencing was carried out using the GDAL 
-Georeferencer plug-in in QGIS \cite{GDAL2013, QGIS2013}. Intersections between all meridians and 
-parallels (about \num{160} per topographic map) were used as control points to adjust a third order 
-polynomial model. Resampling was performed using the cubic resampling method. All contour lines, 
-peaks, lakes and rivers, and their respective attributes within a distance of \SI{1000}{\metre} 
-from the boundary of the study area were also manually digitalized and stored in the vector format. 
-After digitalization, the original coordinate reference system (EPSG:31982 -- SIRGAS2000 / UTM 
-zone 22S) of all vector files was transformed to WGS1984 / UTM zone 22S (EPSG:32722) using the 
-\Rpackage{rgdal} \cite{BivandEtAl2013a}.
+Two DEMs are include in the Santa Maria dataset as sources of covariates. The first DEM (\demNew{}) is the 
+result of the interpolation of the contour lines of the most recent topographic maps produced by the Brazilian 
+Army (\scale{25000}) that cover the study \cite{DSG1980, DSG1992, DSG1992a}. Topographic maps were digitalized
+and georeferenced using the GDAL Georeferencer plug-in in QGIS. Intersections between all meridians and 
+parallels (about \num{160} per topographic map) were used as control points to adjust a third order polynomial 
+model. Resampling was performed using the cubic resampling method. All contour lines, peaks, lakes and rivers, 
+and their respective attributes within a distance of \SI{\pm1000}{\metre} from the boundary of the study area 
+were manually digitalized and stored in the vector format. After digitalization, the original coordinate 
+reference system (EPSG:31982 -- SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / 
+UTM zone 22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
-The positional validation of topographic maps was performed using \num{14} GCPs located at easily 
-identifiable geographical markers. According to Brazilian legislation, the positional accuracy of 
-these topographic maps is expected to be of, at least, \SI{15}{\metre} \cite{Brasil1984}. Estimated 
-validation statistics show that the observed $\text{RMSE} = \SI{65}{\m}$ is larger than 
-established by current regulations (\autoref{tab:covar-data-topomap-geo-val}). The mean error 
-vector (module) is larger than \SI{60}{\metre} with an azimuth of \SI{63}{\degree}. Both x- and 
-y-coordinates are positively biased, but the largest error occurs in the x-coordinate 
-(\SI{50}{\metre}). Similar mean and mean absolute errors suggest that there is a systematic 
-positional error. An affine transformation was employed using the \Rpackage{vec2dtransf} 
-\cite{Carrillo2012} to eliminate this systematic error. Model parameters were adjusted using the 
-same set of GCPs used for the validation in the geographic space.
+The positional validation of topographic maps was performed using $n = 14$ GCPs. According to Brazilian 
+legislation, the positional accuracy of these topographic maps is expected to be of, at least, \SI{15}{\metre} 
+\cite{Brasil1984}. Estimated validation statistics show that the observed error ($\text{RMSE} = \SI{65}{\m}$) 
+is larger than established by current regulations (\autoref{tab:covar-data-topomap-geo-val}). The mean error 
+vector is larger than \SI{60}{\metre} with an azimuth of \SI{63}{\degree}. Both x- and y-coordinates are 
+positively biased, but the largest error occurs in the x-coordinate (\SI{50}{\metre}). Similar mean and mean 
+absolute errors suggest that there is a strong systematic positional error. An affine transformation was 
+employed using the \Rpackage{vec2dtransf} \cite{Carrillo2012} to correct this systematic error. Model 
+parameters were adjusted using the same set of GCPs used for the validation in the geographic space.
 
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
- topographic maps (\scale{25000}) in the geographic space. Validation statistics were 
- estimated using \num{14} GCPs located in easily identifiable geographical markers.}
+ \caption{Error statistics of the horizontal validation of topographic maps (\scale{25000}) using $n = 14$ 
+ GCPs.}
  \label{tab:tab:covar-data-topomap-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics & X coordinate & Y coordinate & Error vector & Azimuth \\
+  Statistics                    & x-coord & y-coord & Error vector & Azimuth  \\
   \hline
-  Mean, \si{\metre} & 50 (25) & 27 (22) & 63 (19) & \SI{63}{\degree} (\SI{30}{\degree}) \\ 
-  Absolute mean, \si{\metre} & 50 (25) & 32 (13) & - & - \\ 
-  Squared mean, \si{\metre\squared} & 3088 (3034) & 1180 (820) & 4268 (2825) & - \\ 
+  Mean, \si{\m}                 & 50      & 27      & 63           & \ang{63} \\ 
+  Absolute mean, \si{\m}        & 50      & 32      & -            & -        \\ 
+  Squared mean, \si{\m\squared} & 3088    & 1180    & 4268         & -        \\ 
   \hline
  \end{tabular}}
 \end{table}
@@ -466,120 +423,128 @@ same set of GCPs used for the validation in the geographic space.
 %   \label{fig:topomap-azim}
 % \end{figure}
 
-Interpolation of the raster surface with \SI{5}{\metre} pixel size was performed using the function 
-\texttt{Topo to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation 
-method based on the ANUDEM program developed by \citeonline{Hutchinson1989}. Vector files of contour 
-lines (\texttt{multiline}), drainage network (\texttt{multiline}), lakes (\texttt{polygons}) and 
-peaks (\texttt{points}) were used to generate an hydrologically correct DEM, that is, a DEM without 
-spurious depressions and giving an accurate representation of the real hydrology. Next, the 
-interpolated DEM was imported into GRASS GIS \cite{GRASS2012}, where a neighbourhood average filter 
-was used to remove stair-like artefacts. A window of $7 \times 7$ pixels was used because it 
-removed a significant amount of the artefacts and did not affect the derived boundary of the study 
-area (see more bellow).
+Interpolation of the raster surface with \SI{5}{\metre} grid size was performed using the function \tt{Topo 
+to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation method based on the 
+ANUDEM program developed by \citeonline{Hutchinson1989}. Vector files of contour lines (\tt{multiline}), 
+drainage network (\tt{multiline}), lakes (\tt{polygons}) and peaks (\tt{points}) were used to generate a 
+hydrologically correct DEM, that is, a DEM without spurious depressions and giving a precise representation 
+of the hydrological data. Next, the interpolated DEM was imported into GRASS, where a neighbourhood average 
+filter was used to remove stair-like artefacts. A window of $7 \times 7$ pixels was used because it removed a 
+significant amount of the artefacts and did not affect the derived boundary of the study area (see more 
+bellow).
 
-The vertical datum of the DEM was transformed from the local datum to a global datum. The geoidal 
-models MAPGEO2010 \cite{IBGE2010a} and EGM1996 \cite{LemoineEtAl1998} were used to calculate the 
-geoidal undulation for the local and global datums, respectively. MAPGEO2010 is optimized to 
-estimate geoidal undulations in the Brazilian territory, while EGM1996 is a gravitational model of 
-the Earth and is used as the vertical datum for SRTM products. The following equation was used:
+The vertical datum of the DEM was transformed from the local datum to a global datum. The geoidal models 
+MAPGEO2010 \cite{IBGE2010a} and EGM1996 \cite{LemoineEtAl1998} were used to calculate the geoidal undulation 
+for the local and global datums, respectively. MAPGEO2010 is optimized to estimate geoidal undulations in the 
+Brazilian territory, while EGM1996 is a gravitational model of the Earth and is used as the vertical datum for 
+SRTM products. The following equation was used:
 
 \begin{equation}
+ \label{eq:geoidal}
  h = H + N,
 \end{equation}
 
-\noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that 
-approximates the surface of the planet), $H$ is the orthometric height (height above the imaginary 
-surface called geoid and commonly referred as mean sea level), and $N$ is the geoidal undulation. 
-Ellipsoidal heights estimated by MAPGEO2010 are referenced to the world ellipsoid of 1980, while 
-EGM1996 estimates ellipsoidal heights referenced to the world ellipsoid of 1984. Because the 
-difference between both ellipsoids is of the order of millimetres, it can be assumed that both 
-models estimate the same ellipsoidal height. Therefore, if 
-$h_{\text{EGM1996}} = h_{\text{MAPGEO2010}}$, then orthometric heights referenced to the local 
-vertical datum can be transformed to the global vertical datum using the following equation:
+\noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that approximates the 
+surface of the planet), $H$ is the orthometric height (height above the imaginary surface called geoid and 
+commonly referred as mean sea level), and $N$ is the geoidal undulation. Ellipsoidal heights estimated by 
+MAPGEO2010 are referenced to the world ellipsoid of 1980, while EGM1996 estimates ellipsoidal heights 
+referenced to the world ellipsoid of 1984. Because the difference between both ellipsoids is of the order of 
+millimetres, it can be assumed that both models estimate the same ellipsoidal height. Therefore, if 
+$h_{\text{EGM1996}} = h_{\text{MAPGEO2010}}$, then orthometric heights referenced to the local vertical datum 
+can be transformed to the global vertical datum using the following equation:
 
 \begin{equation}
  H_{\text{EGM1996}} = H_{\text{MAPGEO2010}} + N_{\text{MAPGEO2010}} - N_{\text{EGM1996}}.
-\end{equation}\label{eqn:geoidal}
+\end{equation}
 
-The difference in the geoidal undulation estimated by both models is of about one meter in the 
-entire study area. Thus, transforming the vertical datum was done adding one meter to the raster 
-surface interpolated from contour lines, yielding the first DEM included in the Santa Maria dataset
-(\texttt{ELEV\_10}).
+\noindent The difference in the geoidal undulation estimated by both models is of about one meter in the 
+entire study area. Thus, transforming the vertical datum was done adding one meter to the raster surface 
+interpolated from contour lines, yielding the first DEM included in the Santa Maria dataset (\demNew{}).
 
-The second DEM (\texttt{ELEV\_90}) used in this study is the well known SRTM DEM 
-(\SI{3}{\arcsecond} $\approx$ \SI{90}{\metre} spatial resolution) produced by NASA’s Jet 
-Propulsion Laboratory in collaboration with the National Geospatial-Intelligence Agency 
-\cite{RodriguezEtAl2006}. The SRTM DEM version used here is the \emph{hole-filled SRTM version 
-\num{4}}, prepared by \href{http://www.cgiar.org/}{CGIAR} using the same hydrologically correct 
-interpolation method that was used above to produce \texttt{ELEV\_10} \cite{ReuterEtAl2007, 
-JarvisEtAl2008}. However, the only data source used was the original SRTM DEM converted to point 
-data.
+The second DEM (\demOld{}) is the well known SRTM DEM ($\SI{3}{\arcsecond} \approx \SI{\pm90}{\m}$ spatial 
+resolution) produced by NASA’s Jet Propulsion Laboratory in collaboration with the National 
+Geospatial\-/Intelligence Agency \cite{RodriguezEtAl2006}. The SRTM DEM version used here is the 
+\emph{hole\-/filled SRTM version \num{4}}, prepared by the Consultative Group for International Agricultural 
+Research (\cgiar) using the same hydrologically correct interpolation method that was used above to produce 
+\demNew{} \cite{ReuterEtAl2007, JarvisEtAl2008}. However, the only data source used was the original SRTM DEM 
+converted to point data.
 
-Prior to processing, the SRTM DEM was cropped to the extent of the study area and the coordinate 
-reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
-using cubic resampling in GDAL (module \texttt{gdalwarp}). This resampling method was used because 
-it is efficient in minimizing the double-oblique stripping present in SRTM products 
-\cite{Samuel-RosaEtAl2013c}. Next, the DEM was resampled to \SI{15}{\metre} 
-(\grass{r.resamp.interp}) using cubic resampling. Sinks produced during the datum transformation 
-were filled using the \grass{r.fill.dir}. Vertical datum transformation was not necessary because 
-elevation values of the SRTM DEM already are referenced to the global geoidal model EGM1996 
+The SRTM DEM was processed to match the reference grid using cubic resampling (\gdal{gdalwarp} and 
+\grass{r.resamp.interp}). This resampling method was used because it is efficient in minimizing the 
+double-oblique stripping present in SRTM products \cite{Samuel-RosaEtAl2013c}. Sinks produced during datum 
+transformation were filled using the \grass{r.fill.dir}. Vertical datum transformation was not necessary 
+because elevation values of the SRTM DEM already are referenced to the global geoidal model EGM1996 
 (orthometric heights).
 
-The third DEM (\texttt{ELEV\_30}) used in this study was produced by the Brazilian National 
-Institute for Space Research (\href{http://www.inpe.br/}{INPE}). This DEM is the result of refining 
-the original SRTM DEM to \SI{1}{\arcsecond} spatial resolution (\SI{\pm30}{\metre}) using ordinary 
-kriging with a Gaussian model of spatial covariance \cite{ValerianoEtAl2012}. Different from 
-\texttt{ELEV\_90}, \texttt{ELEV\_30} was not used to calculate DEM derivatives. Instead it was used 
-in the orthorectification and topographic correction of satellite images (\autoref{sec:covar-data-sat-image}).
-
-Eight tiles were downloaded from the \href{http://www.dsr.inpe.br/topodata/}{TOPODATA} website, 
-imported into QGIS and mosaicked using GDAL module \texttt{gdal\_translate}. The coordinate 
-reference system was transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) 
-using cubic resampling (GDAL module \texttt{gdalwarp}). Again, this resampling method was used 
-because it is efficient in minimizing the double-oblique stripping present in SRTM products 
-\cite{Samuel-RosaEtAl2013c}. Sinks produced during the datum transformation were filled using 
-\grass{r.fill.dir} implemented in the SEXTANTE library \cite{SEXTANTE2012}.
-
-Because orbital satellites use the WGS1984 ellipsoid as vertical datum, orthorectification of 
-satellite images has to be done using a DEM with ellipsoidal heights. Conversion from orthometric 
-heights was performed using \autoref{eqn:geoidal}, with geoidal undulation calculated with 
-the gravitational model EGM1996. The original DEM with orthometric heights was cropped to the 
-boundary of the study area and resampled to five meters using \grass{r.resamp.interp} with the 
-bicubic resampling method. This DEM was used only to estimated error statistics for the validation 
-in the attribute space.
-
-\autoref{tab:covar-data-dem-attr-val} shows that the three DEMs present similar accuracy 
-estimates in the attribute space ($\text{RMSE} \approx \SI{19}{\m}$). In the case of the ELEV\_10, which 
-was derived from contour lines published at a \scale{25000}, the estimated accuracy does not 
-meet current Brazilian legislation, which states that the accuracy should be of, at least, 
-\SI{5}{\metre} (\num{1/2} of the distance between contour lines) \cite{Brasil1984}.
+%TODO: complete R code!!!
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed DEM
+   
+  @
+ \end{minipage}
  
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed DEM
+   
+  @
+ \end{minipage} 
+ \caption{Digital elevation models (a) \demOld{} and (b) \demNew{} used to derive covariates included 
+ in the Santa Maria dataset.}
+\label{fig:covar-data-dem}
+\end{figure}
+
+A third DEM was used to produce the covariate data included in the Santa Maria dataset. However, instead of 
+calculating DEM derivatives, it was used in the orthorectification and topographic correction of orbital 
+images (\autoref{sec:covar-data-sat-image}). The third DEM (\topodata) was produced by the Brazilian National 
+Institute for Space Research (\inpe) by refining the original SRTM DEM to $\SI{1}{\arcsecond} \approx 
+\SI{\pm30}{\m}$ spatial resolution using ordinary kriging with a Gaussian spatial autocorrelation model 
+\cite{ValerianoEtAl2012}. Eight tiles were mosaicked (\gdal{gdal\_translate}) and the CRS transformed from 
+WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) using cubic resampling (\gdal{gdalwarp}), the
+sinks filled using \grass{r.fill.dir}. Before the atmospheric correction of orbital images, orthometric 
+heights were converted to ellipsoidal heights using \autoref{eqn:geoidal}, the geoidal undulation calculated 
+with the gravitational model EGM1996. This conversion was done because because orbital satellites use the 
+WGS1984 ellipsoid as vertical datum. For the topographic correction of orbital images, TOPODATA was then 
+processed using \grass{r.resamp.interp} with the bicubic resampling method to match the reference grid.
+
+The three DEMs present similar vertical accuracy (\autoref{tab:covar-data-dem-attr-val}). In the case of 
+\demNew{}, which was derived from contour lines published at a \scale{25000}, the estimated accuracy does not 
+meet current Brazilian legislation, which states that the accuracy should be of, at least, \SI{5}{\metre}, i.e.
+\num{1/2} of the distance between contour lines \cite{Brasil1984}.
+
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
- digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30} and \texttt{ELEV\_10} in the 
- attribute space. Validation statistics were estimated using $n = 60$ validation points located 
- along $m = 12$ linear transects (clustered samples).}
+ \caption{Error statistics of the vertical validation of \demOld{}, TOPODATA, and \demNew{} using $n = 60$
+ validation points located along $m = 12$ linear transects.}
  \label{tab:covar-data-dem-attr-val}
  \centering
  {\small
  \begin{tabular}{lrrrrrr}
   \hline
-  Statistics & \texttt{ELEV\_90} & \texttt{ELEV\_30} & \texttt{ELEV\_10} \\
+  Statistics                   & \demOld{} & TOPODATA & \demNew{} \\
   \hline
-  Mean, \si{\metre} & -15 (10) & -17 (9) & -16 (10) \\ 
-  Absolute mean, \si{\metre} & 15 (10) & 17 (9) & 16 (10) \\ 
-  Squared mean, \si{\metre\square} & 350 (428) & 361 (406) & 374 (431) \\ 
+  Mean, \si{\m}                & -15       & -17      & -16       \\ 
+  Absolute mean, \si{\m}       & 15        & 17       & 16        \\ 
+  Squared mean, \si{\m\square} & 350       & 361      & 374       \\ 
   \hline
  \end{tabular}}
 \end{table}
 
 % Figure \ref{fig:cdf-elev} shows that estimated validation statistics have different cumulative 
 % distribution functions (CDF). The estimates are more uniformly distributed along the interval of 
-% values for \texttt{ELEV\_10} than for \texttt{ELEV\_90} and \texttt{ELEV\_30}. While 
-% \texttt{ELEV\_10} has a 50\% probability that absolute errors are bellow 15 m, \texttt{ELEV\_90} has 
+% values for \tt{ELEV\_10} than for \tt{ELEV\_90} and \tt{ELEV\_30}. While 
+% \tt{ELEV\_10} has a 50\% probability that absolute errors are bellow 15 m, \tt{ELEV\_90} has 
 % a 70\% probability that absolute errors are bellow 15 m. This suggests that the accuracy of 
-% \texttt{ELEV\_90} is very consistent across the study area, with a few extreme values, while the 
-% accuracy of \texttt{ELEV\_10} have a stronger spatial variation. For \texttt{ELEV\_30}, the 
+% \tt{ELEV\_90} is very consistent across the study area, with a few extreme values, while the 
+% accuracy of \tt{ELEV\_10} have a stronger spatial variation. For \tt{ELEV\_30}, the 
 % interpolation method used to refine the original SRTM DEM to 30 m \cite{ValerianoEtAl2012} seems to 
 % have produced a spatial redistribution of the errors.
 
@@ -588,490 +553,598 @@ meet current Brazilian legislation, which states that the accuracy should be of,
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-90} 
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-30}
 %   \includegraphics[width=0.9\textwidth]{fig/cdf-ELEV-10}
-%   \caption{Cumulative distribution functions of mean error, mean absolute error, and squared error of elevation values estimates by digital elevation models \texttt{ELEV\_90}, \texttt{ELEV\_30}, and \texttt{ELEV\_10}.}
+%   \caption{Cumulative distribution functions of mean error, mean absolute error, and squared error of 
+% elevation values estimates by digital elevation models \tt{ELEV\_90}, \tt{ELEV\_30}, and 
+% \tt{ELEV\_10}.}
 %   \label{fig:cdf-elev}
 % \end{figure}
 
-Despite the similar accuracy in the feature space, \texttt{ELEV\_10} is used in this study 
-because it provides a better hydrological representation of the study area because it was 
-produced using information about the drainage network and location of lakes and natural depressions. 
-This is evidenced by the shape of the boundaries derived from each DEM using the \grass{r.watershed} 
-and \texttt{r.water.outlet} (\autoref{fig:covar-data-elev-maps}). The boundary derived from 
-\texttt{ELEV\_90} is clearly unable to capture all hydrological features of the study area. 
-Therefore, the boundary derived using \texttt{ELEV\_10} is used throughout this study with the 
-addition of a \SI{30}{\metre} buffer, which is the estimated uncertainty 
-($\text{RMSE} = \SI{29.55}{\metre}$) of the affine transformation used to correct the systematic error 
-identified in topographic maps. The water outlet point used to derive the boundary is located on the 
-bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969}).
+Despite all DEMs present a similar vertical accuracy, \demNew{} is considered the highest quality DEM in the 
+Santa Maria dataset. Because it was produced using information about the drainage network and location of lakes
+and natural depressions, it is likely to provide a better hydrological representation of the study area. As 
+such, \demNew{} was used to estimate the geographical limits (boundary) of the catchment that constitute the 
+study area (\autoref{fig:covar-data-elev-maps}), for which GRASS modules \tt{r.watershed} and 
+\tt{r.water.outlet} were employed. Because the overall deviation between the affine-corrected coordinates of 
+topographic maps and target coordinates of GCPs is $\text{RMSE} = \SI{29.55}{\m}$ -- there still is an 
+uncertainty about the correct position of topographic maps -- a \SI{30}{\m} buffer was added to the estimate 
+of the geographical limits of the catchment. The water outlet point used to estimate the boundary is located 
+on the bridge that crosses the main drainage channel (\ang{-29.65868}, \ang{-53.78969}).
 
-% TODO: figure with both digital elevation models, including the real drainage network and the boundary of the study area.
-% \begin{figure}[!ht]
-%   \centering
-%   \includegraphics[width=0.3\textwidth]{fig/elev-90}
-%   \includegraphics[width=0.3\textwidth]{fig/elev-10}
-%   \caption{Digital elevations models used as sources of environmental co-variates. On the left, the SRTM 
-% digital elevation models prepared by CGIAR and published at a resolution of about 90 m (\texttt{ELEV\_90}). 
-% On the right, the digital elevation models produced interpolating contour lines manually digitalized from 
-% topographic maps published at a scale of 1:25,000 (\texttt{ELEV\_10}).}
-%   \label{fig:elev-maps}
-% \end{figure}
+Eight terrain attributes were derived from each of \demOld{} and \demNew{} to produce the covariate data 
+included in the Santa Maria dataset, the first of them being elevation (\tt{ELEV}). The others are slope, 
+aspect, northernness, flow accumulation, topographic wetness index, stream power index, and topographic 
+position index.
 
-Eight terrain attributes were derived from each of \texttt{ELEV\_90} and \texttt{ELEV\_10}, the 
-first of them being the elevation (\texttt{ELEV}). The others are slope, aspect, northernness, flow 
-accumulation, topographic wetness index, stream power index, and topographic position index.
+Slope (\tt{SLP}) and aspect (\tt{ASP}) were calculated using \grass{r.param.scale}. This module calculates 
+terrain attributes fitting a bivariate quadratic polynomial using least squares \cite{Wood1996}. It allows 
+using different window sizes to fit the bivariate quadratic polynomial, thus including the effect of scale in 
+the calculation of terrain attributes. Seven window sizes were used (3, 7, 15, 31, 63, 127, and 255) and the 
+results for calculated slope can be seen in \autoref{fig:covar-data-slope}. Larger window sizes result in a 
+smoothed version of the terrain attribute, while smaller windows sizes result in raster maps with more 
+(small-scale) details. Several flat surfaces (slope of \ang{0}) were produced in the slope raster maps 
+calculated using \tt{ELEV\_90} as a result of resampling the original DEM from \num{90} to \SI{5}{\m}. A 
+value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 
-Slope (\texttt{SLP}) and aspect (\texttt{ASP}) were calculated using \grass{r.param.scale}. This 
-module calculates terrain attributes fitting a bivariate quadratic polynomial using least squares 
-\cite{Wood1996}. It allows using different window sizes to fit the bivariate quadratic polynomial, 
-thus including the effect of scale in the calculation of terrain attributes. In the present study, 
-seven window sizes were used (\numlist{3;7;15;31;63;127;255}) and the results for calculated slope 
-can be seen in \autoref{fig:covar-data-slope}. Larger window sizes result in a smoothed version of 
-the terrain attribute, while smaller windows sizes result in raster maps with more (small-scale) 
-details. Several flat surfaces (slope equal to \ang{0}) were produced in the slope raster 
-maps calculated using \texttt{ELEV\_90} as a result of resampling the original DEM from \num{90} to 
-\SI{5}{\metre}. A value of \ang{0.1} was added to the rasters to remove these flat surfaces.
+\begin{figure}[!ht]
+ \centering
+ <<covar-data-slope, fig = TRUE, echo = FALSE>>=
+  
+  # Load slope raster surfaces from GRASS
+  invisible(capture.output(slp <- spgrass6::readRAST6("SLP_10_3", ignore.stderr = TRUE)))
+  colnames(slp@data) <- "SLP_10_3"
+  slp@data[, "SLP_10_31"] <- invisible(
+    capture.output(spgrass6::readRAST6("SLP_10_31", ignore.stderr = TRUE)@data[, 1]))
+  slp@data[, "SLP_10_255"] <- invisible(
+    capture.output(spgrass6::readRAST6("SLP_10_255", ignore.stderr = TRUE)@data[, 1]))
+  
+  # Prepare plots
+  slp <- sp::spplot(
+    slp, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64),
+    par.settings = list(
+      fontsize = list(text = 12, points = 8),
+      layout.widths = list(left.padding = 0, right.padding = 0),
+      layout.heights = list(top.padding = 0, bottom.padding = 0))
+    }) + latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  
+  # Plot and clean workspace
+  print(slp)
+  rm(slp)
+  gc()
+@
+ \caption{Slope \tt{SLP}} raster surfaces derived from \demNew{} using windows of sizes (from left to right) 
+ $3 \times 3$, $31 times 31$, and $255 \times 255$.}
+\label{fig:covar-data-slope}
+\end{figure}
 
-% \begin{figure}[!ht]
-%  \centering
-%  % TODO: Include R code to produce figures on the go.
-%  \caption{\label{fig:covar-data-slope}Slope \texttt{SLP}} raster maps derived from \texttt{ELEV\_10} 
-%  using seven window sizes  (\numlist{3;7;15;31;63;127;255}) to include the effect of scale in the 
-%  derived terrain attributes.}
-% \end{figure}
-
-Aspect values were also corrected before use. The first correction refers to the fact that 
-\grass{r.param.scale} stores aspect values in the range \SIrange{0}{+180}{\degree} from West to 
-North to East, and \SIrange{0}{-180}{\degree} from West to South to East, when the standard 
-procedure is to work with aspect values ranging from \SIrange{0}{360}{\degree} clockwise. This 
-correction was done using the following expressions in in \grass{r.mapcalc}:
-
-\begin{verbatim}
- if(asp < 0, aspect + 360, aspect)
- if(aspect < 90, aspect + 270, aspect - 90)
-\end{verbatim}
-
-\noindent Mathematically,
+Aspect values had to be corrected before use because \grass{r.param.scale} stores aspect values in the range 
+\SIrange{0}{+180}{\degree} from West to North to East, and \SIrange{0}{-180}{\degree} from West to South to 
+East, when the standard procedure is to work with aspect values ranging from \SIrange{0}{360}{\degree} 
+clockwise. This correction was done using
 
 \begin{equation}
- \texttt{ASP}_{beta} =
+ \tt{ASP}_{0} =
  \begin{cases}
-  aspect + \ang{360} & \text{if}\;\; aspect < \ang{0}, \\
-  aspect             & \text{else},
+  \tt{ASP}_{GRASS} + \ang{360} & \text{if}\;\; \tt{ASP}_{GRASS} < \ang{0}, \\
+  \tt{ASP}_{GRASS}             & \text{else},
  \end{cases}
 \end{equation}
 
 \noindent and
 
 \begin{equation}
- \texttt{ASP} =
+ \tt{ASP} =
  \begin{cases}
-  \texttt{ASP}_{beta} + \ang{270} & \text{if}\;\; \texttt{ASP}_{beta} < \ang{90}, \\
-  \texttt{ASP}_{beta} - \ang{90}  & \text{else}.
+  \tt{ASP}_{0} + \ang{270} & \text{if}\;\; \tt{ASP}_{0} < \ang{90}, \\
+  \tt{ASP}_{0} - \ang{90}  & \text{else}.
  \end{cases}
 \end{equation}
 
-\noindent The second correction involved linearizing aspect values. This is necessary because 
-aspect is a circular variable, that is, the begging (\ang{0}) and end (\ang{360}) of the
-measurement scale have the same physical meaning. Aspect values were transformed to northernness 
-(\texttt{NOR}), a measure of the degree of exposition of a given surface to the North, a linear 
-variable, using the equation
+\noindent A second correction of aspect values involved their linearization. This is necessary because aspect 
+is a circular variable, that is, the begging (\ang{0}) and end (\ang{360}) of the measurement scale have the 
+same physical meaning. Aspect values were transformed to northernness (\tt{NOR}), a measure of the degree 
+of exposition of a given surface to the North, a linear variable, using the equation
 
 \begin{equation}
- \texttt{NOR}_i = abs(\ang{180} - \texttt{ASP}_i),
-\end{equation}\label{eq:NOR}
+ \tt{NOR} = abs(\ang{180} - \tt{ASP}).
+\end{equation}\label{eq:NOR}  
 
-\noindent where $i$ is the window size used to calculate \texttt{ASP}, with 
-$i = \numlist{3;7;15;31;63;127;255}$.   
-
-Flow accumulation (\texttt{ACC}), also known as catchment area and contributing area, was calculated 
-using \grass{r.watershed}. The resulting raster map was multiplied by the square of the cell size 
-(\SI{5}{\metre}). This raster map was used to calculate the topographic wetness index (\texttt{TWI}) 
-and the stream power index (\texttt{SPI}) using the following equations:
+Flow accumulation (ACC), also known as catchment area and contributing area, was calculated using 
+\grass{r.watershed}, the resulting raster surface being multiplied by the square of the cell size. This raster 
+surface was used to calculate the topographic wetness index (\tt{TWI}) and the stream power index (\tt{SPI}) 
+using
 
 \begin{equation}
- A = \dfrac{\texttt{ACC}}{\textit{cell}},
+ \text{sACC} = \dfrac{\text{ACC}}{5},
 \end{equation}\label{eq:sACC}
 
 \begin{equation}
- \texttt{TWI}_i = log \dfrac{A}{tan(\texttt{SLP}_i)},
+ \tt{TWI} = log \dfrac{\text{sACC}}{tan(\tt{SLP})},
 \end{equation}\label{eq:TWI}
 
 \noindent and
 
 \begin{equation}
- \texttt{SPI}_i = log(A \times tan(\texttt{SLP}_i)),
+ \tt{SPI} = log(\text{sACC} \times tan(\tt{SLP})),
 \end{equation}\label{eq:SPI}
 
-\noindent where $A$ is the specific catchment area, \textit{cell} is the cell size 
-(\SI{5}{\metre}), and $i$ is the window size used to calculate \texttt{SLP}, with 
-$i = \numlist{3;7;15;31;63;127;255}$.
+\noindent where sACC is the specific catchment area, \SI{5}{\m} is the cell size, and \tt{SLP} is the slope 
+raster surface calculated using seven different window sizes.
 
-The topographic position index \texttt{TPI} was calculated in \saga{ta\_morphometry}. Different 
-values of maximum radius were used to include the effect of scale, all of them related to the window 
-sizes used to calculate previous terrain attributes. A minimum radius value of three meters was used 
-in all calculations.
+The topographic position index \tt{TPI} was calculated with \saga{ta\_morphometry}. Different values of 
+maximum radius were used to include the effect of scale, all of them related to the window sizes used to 
+calculate previous terrain attributes. A minimum radius value of \SI{3}{\m} was used in all calculations.
+
+A total of $1 \times \tt{ELEV} + 7 \times (\tt{NOR}, \tt{SLP}, \tt{TWI}, \tt{SPI}, \tt{TPI}) = 36$ covariates 
+were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 
 \tocless\section{Geological maps}
 \label{sec:covar-data-geo-maps}
 
-Data on geology and soil parent material data comes from most recent geological maps published in 
-the \scales{25000}{50000} \cite{MacielFilho1990, GasparettoEtAl1988}.
+Geological data comes from the two most recent geological maps (\geoOld{} and \geoNew{}) published in the 
+\scales{50000}{25000} \cite{GasparettoEtAl1988, MacielFilho1990} (\autoref{fig:covar-data-geo-maps}). Both of 
+them were produced based on the most recent topographic maps produced by the Brazilian Army at the 
+\scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, geological maps were available 
+only in the analogical format, and were hand digitalized and georeferenced in QGIS. Intersections between all 
+meridians and parallels ($n = 16$) were used as control points to adjust a second order polynomial model. 
+Resampling was performed using the cubic resampling method. The original coordinate reference system 
+(EPSG:31982 -- SIRGAS2000 / UTM zone 22S) was transformed to match the reference grid using the 
+\Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
-Both geological maps were produced based on the most recent topographic maps produced by the 
-Brazilian Army at the \scales{50000}{25000}. Alike topographic maps, geological maps were also 
-available only in the analogical format, and were hand digitalized and georeferenced in QGIS. 
-Intersections between all meridians and parallels (a total of 16) were used as control points to 
-adjust a second order polynomial model. Resampling was performed using the cubic resampling method. 
-After manual digitalization of geological formations, the original coordinate reference system 
-(EPSG:31982 - SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / UTM zone 
-22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed geological map
+   map <- spgrass6::readRAST6("recGEO_50")
+   
+   # Prepare data
+   map@bbox <- pts@bbox
+   map@data[, 1] <- as.factor(map@data[, 1])
+   levels(map@data[, 1])
+   map@data[, 1] <- revalue(
+     map@data[, 1], c("1" = "SG-I",  # Serra Geral (inferior)
+                      "2" = "BT",    # Botucatu
+                      "3" = "CT",    # Caturrita
+                      "4" = "SG-S")) # Serra Geral (superior)
+   
+   # Prepare plot
+   map <- spplot(
+     map, main = "", col.regions = topo.colors(4), asp = 1) +
+     latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+   names(map$legend) <- "inside"
+   map$legend$inside$x <- 0.795
+   map$legend$inside$y <- 0.875
+   map$legend$inside$args$key$space <- "left"
+   
+   # Plot
+   plot(map)
+  @
+ \end{minipage}
+ 
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed geological map
+   map <- spgrass6::readRAST6("predGEO_25")
+   map@bbox <- pts@bbox
+   map@data[, 1] <- as.factor(map@data[, 1])
+   map@data[, 1] <- revalue(
+     map@data[, 1], c("1" = "SG-I",  # Serra Geral (inferior)
+                      "2" = "BT",    # Botucatu
+                      "3" = "CT",    # Caturrita
+                      "4" = "SG-S")) # Serra Geral (superior)
+   map <- as(map, "SpatialPixelsDataFrame")
+   system("r.to.vect --o in=GEO_25d out=poly feature=area")
+   poly <- spgrass6::readVECT6("poly")
+   poly@bbox <- pts@bbox
+   map <- spplot(
+     map, main = "", col.regions = topo.colors(4), asp = 1, 
+     sp.layout = list("sp.polygons", poly, first = FALSE, 
+     col = ifelse(poly$value == 0, "transparent", " black"), 
+     fill = ifelse(poly$value == 0, "transparent", "lightgray"), alpha = 0.5))
+   names(map$legend) <- "inside"
+   map$legend$inside$x <- 0.795
+   map$legend$inside$y <- 0.875
+   map$legend$inside$args$key$space <- "left"
+   map$legend$inside$args$key$at <- c(map$legend$inside$args$key$at, 5.5)
+   map$legend$inside$args$key$col <- c(map$legend$inside$args$key$col, "lightgray")
+   map$legend$inside$args$key$labels$at <- c(map$legend$inside$args$key$labels$at, 5)
+   map$legend$inside$args$key$labels$labels <- c(map$legend$inside$args$key$labels$labels, "QD")
+   
+   # Plot and clean workspace
+   plot(map)
+   rm(map, poly)
+   gc()
+  @
+ \end{minipage} 
+ \caption{Geological maps (a) \geoOld{} and (b) \geoNew{} used to derive indicator covariates included in the 
+ Santa Maria dataset.}
+\label{fig:covar-data-geo-maps}
+\end{figure}
 
-The positional validation of geological maps was performed using eight (\texttt{GEO\_50}) and five 
-(\texttt{GEO\_25}) GCPs located at easily identifiable geographical markers. 
-\autoref{tab:covar-data-geology-geo-val} shows that the positional accuracy of both geological maps 
-does not meet the current regulations of the Brazilian legislation. Estimated RMSE are \SI{147}{\m} 
-and \SI{69}{\m} for \texttt{GEO\_50} and \texttt{GEO\_25}, respectively, when the maximum RMSE 
-accepted is \SI{30}{\m} and \SI{15}{\m}. For \texttt{GEO\_50}, the lowest accuracy is found in the 
-y-coordinate, while for \texttt{GEO\_25}, the x-coordinate is the less accurate. 
-\autoref{fig:covar-data-geology-azim} suggests that the low positional accuracy  of both geological 
-maps is due to a systematic error. This systematic error probably was propagated from the 
-topographic maps used to produce the geological maps. Therefore, the same strategy (affine 
-transformation ) used to remove the systematic positional error of the topographic map above was 
-employed on geological maps. Due to the lack of GCPs, model parameters were adjusted using the same 
-set of GCPs used for the validation in the geographic space. The estimated uncertainty of the 
-affine transformation is $RMSE = \SI{86}{\m}$ and $RMSE = \SI{22}{\m}$ for 
-\texttt{GEO\_50} and \texttt{GEO\_25}, respectively.
+The positional validation of geological maps was performed using $n = 8$ (\geoOld{}) and $n = 5$ (\geoNew{}) 
+GCPs. Validation statistics show that the positional accuracy of both geological maps does not meet the current
+regulations of the Brazilian legislation (\autoref{tab:covar-data-geology-geo-val}). Estimated RMSE are 
+\num{147} and \SI{69}{\m} for \geoOld{} and \geoNew{}, respectively, when the maximum RMSE accepted is 
+\num{30} and \SI{15}{\m}. For \geoOld{}, the lowest accuracy is found in the y-coordinate, while for 
+\geoNew{}, the x-coordinate is the least accurate. Validation statistics suggest that there is a strong 
+systematic error, which probably was propagated from the topographic maps used to produce the geological maps.
+Therefore, the same strategy (affine transformation) used to remove the systematic positional error of the 
+topographic maps was employed on geological maps. Due to the lack of GCPs, model parameters were adjusted 
+using the same set of GCPs used for the validation. The estimated uncertainty (RMSE) of the affine 
+transformation is \num{86} and \SI{22}{\m} for \geoOld{} and \geoNew{}, respectively. Curiously enough, the
+attribute validation indicates that \geoOld{} is more accurate (\SI{83.33}{\percent} than \geoNew{} 
+\SI{76.67}{\percent}.
 
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of 
- geological maps GEO\_50 and GEO\_25 in the geographic space. Validation statistics were estimated 
- using, respectively, eight and five ground control points located in easily identifiable 
- geographical markers (purposive sampling).}
+ \caption{Error statistics of the horizontal validation of geological maps \geoOld{} and \geoNew{} using 
+ $n = 8$ and $n = 5$ GCPs.}
  \label{tab:covar-data-geology-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics & X coordinate & Y coordinate & Error vector & Azimuth \\
+  Statistics                   & x-coord & y-coord & Error vector & Azimuth   \\
   \hline
-  \multicolumn{5}{l}{\texttt{GEO\_50} ($n = 8$)}\\
+  \multicolumn{5}{l}{\geoOld{} ($n = 8$)}                                     \\
   \hline
-  Mean, \si{\m} & 10 (58) & -102 (87) & 140 (44) & \ang{169} (\ang{47}) \\ 
-  Absolute mean, \si{\m}  & 43   (40) & 125 (50) & -         & -          \\ 
-  Squared mean, \si{\m\square} & 3431 (5914)  & 18067 (13243) & 21498 (12316) & - \\
+  Mean, \si{\m}                & 10      & -102    & 140          & \ang{169} \\ 
+  Absolute mean, \si{\m}       & 43      & 125     & -            & -         \\ 
+  Squared mean, \si{\m\square} & 3431    & 18067   & 21498        & -         \\
   \hline
-  \multicolumn{5}{l}{\texttt{GEO\_25} ($n = 5$)} \\
+  \multicolumn{5}{l}{\geoNew{} ($n = 5$)}                                     \\
   \hline
-  Mean, \si{\m} & 51 (29) & 29 (22) & 67 (16) & \ang{58} (\ang{30}) \\ 
-  Absolute mean, \si{\m} & 51 (29) & 29 (22) & -  & - \\ 
-  Squared mean, \si{\m\square} & 3457 (2976) & 1312 (1612) & 4769 (2306) & - \\
+  Mean, \si{\m}                & 51      & 29      & 67           & \ang{58}  \\ 
+  Absolute mean, \si{\m}       & 51      & 29      & -            & -         \\ 
+  Squared mean, \si{\m\square} & 3457    & 1312    & 4769         & -         \\
   \hline
  \end{tabular}}
 \end{table}
 
 % \begin{figure}[ht]
 %  \centering
-%  TODO: Include R code to produce figures on the go.
 %  \caption{Histogram of the azimuth distribution of the validation of geological maps 
-%  \texttt{GEO\_50} (left) and \texttt{GEO\_25} (right) in the attribute space. Azimuth values were 
+%  \tt{GEO\_50} (left) and \tt{GEO\_25} (right) in the attribute space. Azimuth values were 
 %  estimated using, respectively, eight and five GCPs located in easily identifiable geographical 
 %  markers. The graph was produced using \Rpackage{VecStatGraphs2D}.}
 %  \label{fig:covar-data-geology-azim}
 % \end{figure}
 
-\begin{table}[ht]
- \caption{Estimated error statistics of the validation of geological maps \texttt{GEO\_50} and 
- \texttt{GEO\_25} in the attribute space. Validation statistics were estimated using $n = 60$ 
- validation points located along $m = 12$ linear transects (clustered samples).}
- \label{tab:covar-data-geology-attr-val}
- \centering
- \begin{tabular}{lrrr}
-  \hline
-  Geological map        & LCB95Pct & Estimate & UCB95Pct \\
-  \hline
-  \texttt{GEO\_50}      & 76.88    & 83.33    & 89.78    \\
-  \texttt{GEO\_25}      & 70.10    & 76.67    & 83.24    \\
-  \hline
- \end{tabular}
-\end{table}
-
-Three covariates were derived from \texttt{GEO\_50}:
+Three ($p = 3$) covariates were derived from \geoOld{}:
 
 \begin{description}
- \item[\texttt{GEO\_50a}] Inferior Sequence of the Serra Geral Formation. Composed mainly by basic 
- igneous rocks (tholeiitic basalt and andesite). It is likely to be related with high CLAY and 
- ECEC;
+ \item[\tt{GEO\_50a}] Inferior Sequence of the Serra Geral Formation. Composed mainly by basic 
+ igneous rocks (tholeiitic basalt and andesite). It is likely to be related with high \tt{CLAY} and 
+ \tt{ECEC};
  
- \item[\texttt{GEO\_50b}] Superior Sequence of the Serra Geral Formation. Composed mainly by acid 
+ \item[\tt{GEO\_50b}] Superior Sequence of the Serra Geral Formation. Composed mainly by acid 
  igneous rocks (granophyric rhyolite and rhyodacite). It is likely to be related with moderate to 
- high CLAY and ECEC;
+ high \tt{CLAY} and \tt{ECEC};
  
- \item[\texttt{GEO\_50c}] Botucatu Formation. Composed mainly by aeolian sandstones. It is likely 
- to be related with low CLAY and ECEC;
+ \item[\tt{GEO\_50c}] Botucatu Formation. Composed mainly by aeolian sandstones. It is likely 
+ to be related with low \tt{CLAY} and \tt{ECEC};
 \end{description}
 
-Four covariates were derived from \texttt{GEO\_25}, the first three of them having the same meaning 
-of those derived from \texttt{GEO\_50}:
+Four ($p = 4$) covariates were derived from \geoNew{}, the first three of them having the same meaning 
+of those derived from \geoOld{}:
 
 \begin{description}
- \item[\texttt{GEO\_25a}] Inferior Sequence of the Serra Geral Formation;
+ \item[\tt{GEO\_25a}] Inferior Sequence of the Serra Geral Formation;
  
- \item[\texttt{GEO\_25b}] Superior Sequence of the Serra Geral Formation;
+ \item[\tt{GEO\_25b}] Superior Sequence of the Serra Geral Formation;
  
- \item[\texttt{GEO\_25c}] Botucatu Formation;
+ \item[\tt{GEO\_25c}] Botucatu Formation;
  
- \item[\texttt{GEO\_25d}] Quaternary deposits of fluvial, alluvial, and colluvial 
- origin. It can help explaining the low CLAY of soils supposedly derived from igneous rocks.
+ \item[\tt{GEO\_25d}] Quaternary deposits of fluvial, alluvial, and colluvial 
+ origin. It can help explaining the low \tt{CLAY} of soils supposedly derived from igneous rocks.
 \end{description}
 
 \tocless\section{Land use maps}
 \label{sec:covar-data-land-use}
 
-The land use map for the year of \num{1980} was produced by manually digitizing land use data included in the 
-most recent topographic map produced by the Brazilian Army (\scale{25000}), and that were used to produce the 
-more detailed pedological and geologic maps. The most up-to-date land use map was prepared using high 
-resolution orbital images (Quick Bird satellite). It covers the years of \num{2008} and \num{2009}, and was 
-prepared at a \scale{2000} \cite{SamuelRosaEtAl2011a}.
+The first land use map used to derive covariate data included in the Santa Maria dataset was produced by 
+manually digitizing land use data of the year of \num{1980} (\landOld{}) published in the most recent 
+topographic map produced by the Brazilian Army (\scale{25000}) \cite{DSG1992a, DSG1992}. Most processing steps, 
+including the correction of positional bias, are described in \autoref{sec:covar-data-dem}, except for the use 
+of the nearest neighbour resampling method to match \landOld{} to the reference grid.
 
-Land use maps were registered and geocoded with the prediction grid using the nearest neighbour resampling 
-method. This method was used to avoid changing raster values. Systematic positional errors 
-\cite{Samuel-RosaEtAl2014} were corrected using affine transformation (\Rpackage{vec2dtransf} 
-\cite{Carrillo2012}).
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+ \subcaption{}
+ \centering
+ <<covar-data-land-use-1, fig = TRUE, echo = FALSE>>=
+ 
+  # Load less detailed land use map
+  invisible(capture.output(map <- spgrass6::readRAST6("LU1980", ignore.stderr = TRUE)))
+  
+  # Prepare data
+  map@bbox <- pts@bbox
+  map@data[, 1] <- as.factor(map@data[, 1])
+  data(plotKML::worldgrids_pal)
+  map@data[, 1] <- revalue(
+    map@data[, 1], c("1" = "FS",  # Semi-deciduous forest
+                     "2" = "H",   # animal husbandry
+                     "3" = "PF",  # Plantation forestry
+                     "4" = "S"))  # urban (Settlement)
+  
+  # Prepare plot
+  map <- spplot(
+    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 13, 4, 22)], asp = 1) +
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  names(map$legend) <- "inside"
+  map$legend$inside$x <- 0.84
+  map$legend$inside$y <- 0.875
+  map$legend$inside$args$key$space <- "left"
+    
+  # Plot
+  print(map)
+ @
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+ \subcaption{}
+ \centering
+ <<covar-data-land-use-2, fig = TRUE, echo = FALSE>>=
+  
+  # Load more detailed land use map
+  invisible(capture.output(map <- spgrass6::readRAST6("LU2009", ignore.stderr = TRUE)))
+  
+  # Prepare data
+  map@bbox <- pts@bbox
+  map@data[, 1] <- as.factor(map@data[, 1])
+  map@data[, 1] <- revalue(
+    map@data[, 1], c("1" = "FS",  # Semi-deciduous forest
+                     "2" = "SS",  # Semi-deciduous shrub
+                     "3" = "H",   # animal husbandry
+                     "4" = "AA",  # Crop agriculture (Annual field cropping)
+                     "5" = "PF",  # Plantation forestry
+                     "6" = "S",   # Urban (Settlement)
+                     "7" = "O"))  # Other land uses (water reservoir)
+  
+  # Prepare plot
+  map <- spplot(
+    map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 12, 13, 16, 4, 22, 20)], asp = 1) +
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  names(map$legend) <- "inside"
+  map$legend$inside$x <- 0.84
+  map$legend$inside$y <- 0.80
+  map$legend$inside$args$key$space <- "left"
+  
+  # Plot
+  print(map)
+ @
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+ \subcaption{}
+ \centering
+ <<covar-data-land-use-3, fig = TRUE, echo = FALSE>>=
+  
+  # Load land use change raster surface
+  invisible(capture.output(land <- spgrass6::readRAST6("LUdiff", ignore.stderr = TRUE)))
+  
+  # Prepare plot
+  land <- sp::spplot(
+    land, scales = list(draw = TRUE), aspect = "iso", col = topo.colors(64)) + 
+      latticeExtra::layer(sp::sp.polygons(pol, col = "red", lty = "dashed"))
+  
+  # Plot and clean workspace
+  print(land)
+  rm(land)
+ @
+ \end{minipage}
+  \caption{Land use maps (a) \landOld{} and (b) \landNew{} used to derive indicator covariates included in 
+  the Santa Maria dataset such as (c) \tt{LUdiff}, the land use difference between the years of 1980 and 
+  2009.}
+ \label{fig:covar-data-land-use}
+\end{figure}
+
+The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution (\SI{2.4}{\m}) 
+orbital images, produced by QuickBird satellite launched in 2001, of the years of \num{2008} and \num{2009}, 
+made publicly available in Google Earth \cite{SamuelRosaEtAl2011a}. Identification of land uses and delineation 
+of mapping units was done manually, on the computer screen, without using any automated classification routine. 
+Positional validation of Google Earth imagery revealed that they have only minor systematic positional errors 
+(\autoref{tab:covar-data-google-geo-val}). Despite of this, the attribute validation of both land use maps, 
+using $n = 60$ validation points placed along $m = 12 linear transects$, showed that they have similar 
+overall accuracy, \tt{LU1980} (\SI{70.00}{\percent}) slightly outperforming \tt{LU2009} (\SI{66.67}{\percent}).
 
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the validation of Google 
- Earth\textregistered imagery in the geographic space. Validation statistics were estimated using \num{14} 
- ground
- control points located in easily identifiable geographical markers (purposive sampling).}
+ \caption{Error statistics of the horizontal validation of Google Earth\textregistered imagery using $n = 14$ 
+ GCPs.}
  \label{tab:covar-data-google-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics           & X coordinate & Y coordinate & Error vector  & Azimuth \\
+  Statistics                   & x-coord & y-coord & Error vector & Azimuth   \\
   \hline
-  Mean, \si{\m} & -1 (4) & 3 (7) & 6 (6) & \ang{184} (\ang{125}) \\ 
-  Absolute mean, \si{\m} & 3 (2) & 5 (6) & - & - \\ 
-  Squared mean, \si{\m\square} & 14 (22) & 57 (132) & 71 (153) & - \\ 
-  \hline
- \end{tabular}}
-\end{table}
-
-\begin{table}[ht]
- \caption{Estimated error statistics of the validation of land use maps \texttt{LU1980} and  \texttt{LU2009} in 
- the attribute space. Validation statistics were estimated using $n = 60$  validation points located in 
- $m = 12$ linear transects (clustered samples).}
- \label{tab:covar-data-land-attr-val}
- \centering
- {\small
- \begin{tabular}{lrrr}
-  \hline
-  Land use map & LCB95Pct & Estimate & UCB95Pct \\
-  \hline
-  \texttt{LU1980} & 58.52    & 66.67    & 74.82    \\
-  \texttt{LU2009} & 61.16    & 70.00    & 78.84    \\
+  Mean, \si{\m}                & -1      & 3       & 6            & \ang{184} \\ 
+  Absolute mean, \si{\m}       & 3       & 5       & -            & -         \\ 
+  Squared mean, \si{\m\square} & 14      & 57      & 71           & -         \\ 
   \hline
  \end{tabular}}
 \end{table}
 
-Two indicator variables were derived from \texttt{LU1980}, with plantation forests (PF) and human settlements 
-(S) being grouped together due to their small importance in terms of covered area (PF) and for containing any soil 
-observation (S). These are:
+\landOld{} was used to derive $p = 2$ covariates defined as indicator variables, with plantation forests 
+(\it{PF}) and human settlements (\it{S}) being grouped together due to their small importance in terms of 
+covered area (\it{PF}) and for not containing any soil observation (\it{S}). These covariates are:
 
 \begin{description}
- \item[\texttt{LU1980a}] Native forest (FS), which is likely to have soils with higher fertility.
+ \item[\tt{LU1980a}] Native forest (\it{FS}), which is likely to have soils with higher fertility.
   
- \item[\texttt{LU1980b}] Animal husbandry (H), which is likely to have a soil fertility status lower than native 
- forests and is the second most important land use in the study area.
+ \item[\tt{LU1980b}] Animal husbandry (\it{H}), the second most important land use in the study area, which is
+ likely to have a soil fertility status lower than native forests.
 \end{description}
 
-Five indicator covariates were derived from \texttt{LU2009}, with plantation forests (PF), human settlements 
-(S), and other land uses (O), which comprise natural and artificial water bodies, being grouped together due to their
-small importance in terms of covered area (PF) and for containing any soil observation (S and O). These are:
+Four ($p = 4$) indicator covariates were derived from \landNew{}, with plantation forests (\it{PF}), human 
+settlements (\it{S}), and other land uses (\it{O}), which comprise natural and artificial water bodies, being 
+grouped together due to their small importance in terms of covered area (\it{PF}) and for not containing any 
+soil observation (\it{S} and \it{O}). These covariates are:
 
 \begin{description}
- \item[\texttt{LU2009a}] Native forest (FS).
+ \item[\tt{LU2009a}] Native forest (\it{FS}), as described above.
  
- \item[\texttt{LU2009b}] Shrubland (SS), which is likely to have SOC and ECEC level above  those found in areas used 
- with annual crop agriculture and animal husbandry, but lower than in native forests.
+ \item[\tt{LU2009b}] Shrubland (\it{SS}), which is likely to have a soil fertility level above those found in
+ areas used with annual crop agriculture and animal husbandry, but lower than in native forests.
  
- \item[\texttt{LU2009c}] Animal husbandry (H).
+ \item[\ttt{LU2009c}] Animal husbandry (\it{H}), as described above.
   
- \item[\texttt{LU2009d}] Annual crop agriculture (AA), which is likely to have the lowest soil fertility due to 
- the usually poor management practices employed.
- 
- \item[\texttt{LUdiff}] Land use difference between \num{1980} and \num{2009}. It can be useful to explain, for 
- example, low \texttt{ORCA} in forest soils due to previous use with crop agriculture or animal husbandry.
+ \item[\tt{LU2009d}] Annual crop agriculture (\it{AA}), which is likely to present the lowest soil fertility 
+ levels due to the usually poor management practices employed.
 \end{description}
+
+A seventh indicator covariate (\tt{LUdiff}) was derived using data from both land use maps. It consists of the 
+land use difference between \num{1980} and \num{2009}, computed by checking if the land use has changed (1) or 
+remained the same (0) in every grid cell after the 29-year period. \tt{LUdiff} can be useful, for example, to 
+explain the low \tt{ORCA} in forest soils due to previous use with crop agriculture or animal husbandry.
 
 \tocless\section{Orbital images}
 \label{sec:covar-data-sat-image}
 
-Two sources of satellite images were used. The first is the longest-operating Earth observation satellite 
-Landsat-5 Thematic Mapper, launched on \num{1} March \num{1984}. The satellite image used was acquired on 
-\num{26} December \num{2010} and is available at the database of the Division of Image Generation of the 
-National Institute for Space Research (\inpedgi). The image contains seven spectral bands 
-\autoref{tab:covar-data-satellites}, including a thermal band (which was not used in this study), with eight 
-bits radiometric resolution (digital numbers from \numrange{0}{255}) and approximately \SI{30}{\m} spatial 
-resolution. Orthorectification was performed using Geomatica\textregistered{} OrthoEngine\textregistered{} with 
-the Landsat rigorous model (Toutin's Model). A set of \num{28} GCPs were manually collected in Google 
-Earth\textregistered{} due to the absence of field GCPs and the high accuracy of Google Earth\textregistered{} 
-imagery in the region covered by the image (\autoref{tab:covar-data-google-geo-val}). GCPs were located at 
-easily identifiable geographical markers (road intersection, bridges), evenly distributed throughout the image 
-and covering a variety of elevations, following standard recommendations \cite{PCIGeomatics2007} 
-(\autoref{fig:covar-data-ortho-gcps}). The DEM used is \texttt{ELEV\_30} described in 
-\autoref{sec:covar-data-dem} above with the vertical datum corrected with the EGM1996 geoidal model. Resampling 
-was done using the nearest neighbour method to avoid changes in the digital numbers.
+Two sources of orbital images were used to produce covariate data included in the Santa Maria dataset. The 
+first is the longest-operating Earth observation satellite Landsat-5 Thematic Mapper, launched on \num{1} March 
+\num{1984}. The orbital image used was acquired on \num{26} December \num{2010} and is available at the 
+database of the Division of Image Generation of the National Institute for Space Research (\inpedgi). The 
+image contains seven spectral bands (\autoref{tab:covar-data-satellites}) (including a thermal band that is not
+included in the Santa Maria dataset), with \SI{8}{\bit} radiometric resolution (digital numbers from 
+\numrange{0}{255}) and \SI{\pm30}{\m} spatial resolution. The orbital image was orthorectified using 
+Geomatica\textregistered{} OrthoEngine\textregistered{} with the Landsat rigorous model (Toutin's Model). Due 
+to the absence of field GCPs, $n = 28$ GCPs were collected from Google Earth\textregistered{} imagery, which 
+have a high positional accuracy in the study area (\autoref{tab:covar-data-google-geo-val}). GCPs were located 
+at easily identifiable geographical markers such as road intersection and bridges, evenly distributed 
+throughout the image, and covering a variety of elevations, following standard recommendations 
+\cite{PCIGeomatics2007} (\autoref{fig:covar-data-ortho-gcps}). The DEM used for orthorectification is TOPODATA 
+after preprocessing as described in \autoref{sec:covar-data-dem}. Resampling was done using the nearest 
+neighbour method to avoid changing the digital numbers.
 
-% TODO: figure with GCPs used to ortorectify orbital images. Show the bounding box of the image and the 
-% boundary 
-% of the study area.
-% \begin{figure}
-%  \centering
-%  \includegraphics[width=\textwidth]{fig/ortho-gcps}
-%  \caption{Ground control points used to orthorectify orbital the image produced by Landsat-5 Thematic 
-% Mapper.}
-%  \label{fig:covar-data-ortho-gcps}
-% \end{figure}
-
-After orthorectification, all bands were imported into GRASS GIS, where all other necessary corrections were 
-performed. Radiometric correction (conversion from digital numbers to top-of-atmosphere reflectance) was 
-performed using \grass{i.landsat.toar}. Atmospheric correction (removal of the effects of the atmosphere on 
-the reflectance values) was performed using the 6S atmospheric model \cite{VermoteEtAl1997} using 
-\grass{i.atcorr}. The correction was performed using the tropical atmospheric model, the continental aerosols 
-model, an image-based visibility estimate of \SI{20}{\km}, and a fixed elevation of \SI{300}{\m}. Afterwards, 
-all bands were cropped to the bounding box of the study area and geometrically corrected to match the 
-prediction grid (\SI{5}{\m} grid size). Registration and geocoding was performed using the nearest neighbour 
-resampling method. Topographic correction (removal of the effects of the topography -- illumination -- on the 
-reflectance values) was performed using \grass{i.topo.corr} with \texttt{ELEV\_30} geometrically corrected to 
-match the prediction grid.
+After orthorectification, all bands were imported into GRASS, where all other necessary corrections were 
+performed. Radiometric correction (conversion from digital numbers to top-of-atmosphere reflectance) was done
+using \grass{i.landsat.toar}. Atmospheric correction (removal of the effects of the atmosphere on the 
+reflectance values) was done with the 6S atmospheric model \cite{VermoteEtAl1997} as implemented in 
+\grass{i.atcorr} using the tropical atmospheric model, the continental aerosols model, an image-based 
+visibility estimate of \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
 
 The second source of orbital images is the RapidEye constellation of five satellites, launched in August 
-\num{2008}. It is available through the Brazilian Ministry of the Environment \cite{Brasil2012}, who has a 
-full coverage of the Brazilian territory with images from the RapidEye satellite constellation for the years of 
-\num{2011} and \num{2012}. The orbital image used (tile number \num{2225403}) was acquired on \num{16} November 
-\num{2012} (second coverage). It contains five spectral bands \ref{tab:covar-data-satellites}, featuring among 
-them the so called red edge band, located between the red and the near-infrared bands. This spectral band is 
-the main feature distinguishing RapidEye images from most other sources of orbital images, considered to 
-provide additional information about the vegetation \cite{WeicheltEtAl2013}. The orbital image has 
-\SI{16}{\bit} radiometric resolution and \SI{6.5}{\m} spatial resolution, and was orthorrectified in the source 
-to \SI{5}{\m} spatial resolution using the hole-filled SRTM version \num{4} \cite{RapidEye2013}.
+\num{2008}. Images are available through the Brazilian Ministry of the Environment \cite{Brasil2012}, who 
+has a full coverage of the Brazilian territory with images from the RapidEye satellite constellation for the 
+years of \num{2011} and \num{2012}. The orbital image used (tile number \num{2225403}) was acquired on \num{16} 
+November \num{2012} (second coverage). It contains five spectral bands (\autoref{tab:covar-data-satellites}), 
+featuring among them the so-called red-edge band, located between the red and the near-infrared bands. This 
+spectral band is the main feature distinguishing RapidEye images from most other sources of orbital images, 
+considered to provide additional information about the vegetation \cite{WeicheltEtAl2013}. The orbital image 
+has \SI{16}{\bit} radiometric resolution and \SI{6.5}{\m} spatial resolution, and was orthorrectified in the 
+source to \SI{5}{\m} spatial resolution using the hole-filled SRTM version \num{4} \cite{RapidEye2013}.
 
-Atmospheric correction was performed using the 6S atmospheric model \cite{VermoteEtAl1997} using the Fortran 
-code developed by Dr. \href{http://lattes.cnpq.br/3818721407909667}{Mauro Antonio Homem Antunes}, from the 
-Rural University of Rio de Janeiro. The \grass{i.atcorr} was not used because a \atcorrbug{} was found when 
-trying to correct images from the RapidEye satellite constellation. The correction was performed using the 
-tropical atmospheric model, the continental aerosols model, an image-based visibility estimate of \SI{20}{\km}, 
-and a fixed elevation of \SI{300}{\m}. Afterwards, all bands were cropped to the bounding box of the study area 
-and geometrically corrected to match the prediction grid (\SI{5}{\m} grid size). Registration and geocoding was 
-performed using the nearest neighbour resampling method. Topographic correction was performed using 
-\grass{i.topo.corr} with \texttt{ELEV\_30} geometrically corrected to match the prediction grid 
-(\autoref{sec:covar-data-dem}).
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load less detailed orbital image
+   map <- spgrass6::readRAST6("NDVI_30")
+   map <- sp::spplot(
+    map, scales = list(draw = TRUE), aspect = "iso", main = "", col.regions = ndvi$colors, at = ndvi$breaks) + 
+      latticeExtra::layer(sp::sp.points(pts, col = "red", pch = 20))
+  
+   # Plot
+   print(map)
+  @
+ \end{minipage}
+ 
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  <<fig = TRUE, echo = FALSE>>=
+   
+   # Load more detailed orbital image
+   map <- spgrass6::readRAST6("NDVI_5b")
+   
+  @
+ \end{minipage} 
+ \caption{Orbital images used to derive covariates such as (a) \tt{NDVI_30} and (b) \tt{NDVI_5b} included in 
+ the Santa Maria dataset.}
+\label{fig:covar-data-sat-image}
+\end{figure}
 
 \begin{table}[ht]
- \caption{Comparison between satellite images produced by Landsat 5 TM and RapidEye constellation used in the 
- present study and derived covariates.}
+ \caption{Comparison between satellite images produced by Landsat 5 TM and RapidEye constellation and 
+ the derived covariates.}
  \label{tab:covar-data-satellites}
  \centering
  {\small
  \begin{tabular}{llllll}
   \hline
-  \multicolumn{3}{l}{Landsat 5 TM}                         & \multicolumn{3}{l}{RapidEye} \\
-  Band & Interval, \si{nm} & Covariate & Band & Interval, \si{\nm} & Covariate \\
+  \multicolumn{3}{l}{Landsat 5 TM}                       & \multicolumn{3}{l}{RapidEye}                     \\
+  Band            & Interval, \si{nm}    & Covariate     & Band         & Interval, \si{\nm} & Covariate    \\
   \hline
-  Band 1 Visible &\numrange{450}{520} &\covar{BLUE\_30}  &Blue band  &\numrange{440}{510} &\covar{BLUE\_5}\\
-  Band 2 Visible &\numrange{520}{600} &\covar{GREEN\_30} &Green band &\numrange{520}{590} &\covar{GREEN\_5}\\
-  Band 3 Visible &\numrange{630}{690} &\covar{RED\_30}   &Red band   &\numrange{630}{685} &\covar{RED\_5}\\
-  -              &-            & -                   & Red edge band &\numrange{690}{730} &\covar{EDGE\_5}   \\
-  Band 4 Near-Infrared &\numrange{760}{900} &\covar{NIR\_30a} & Near-infrared band &\numrange{760}{850}& 
-  \covar{NIR\_5}\\
-  Band 5 Near-Infrared &\numrange{1550}{1750} &\covar{NIR\_30b} & -                  & -            & -         
-  
-       \\
-  Band 7 Mid-Infrared  &\numrange{2080}{2350} &\covar{MIR\_30}  & -                  & -            & -         
- 
-        \\
+  1 Visible       &\numrange{450}{520}   &\tt{BLUE\_30}  &Blue          &\numrange{440}{510} &\tt{BLUE\_5}  \\
+  2 Visible       &\numrange{520}{600}   &\tt{GREEN\_30} &Green         &\numrange{520}{590} &\tt{GREEN\_5} \\
+  3 Visible       &\numrange{630}{690}   &\tt{RED\_30}   &Red           &\numrange{630}{685} &\tt{RED\_5}   \\
+  -               &-                     & -             &Red-edge      &\numrange{690}{730} &\tt{EDGE\_5}  \\
+  4 Near-infrared &\numrange{760}{900}   &\tt{NIR\_30a}  &Near-infrared &\numrange{760}{850} &\tt{NIR\_5}   \\
+  5 Near-infrared &\numrange{1550}{1750} &\tt{NIR\_30b}  & -            & -                  & -            \\
+  7 Mid-infrared  &\numrange{2080}{2350} &\tt{MIR\_30}   & -            & -                  & -            \\
   \hline
  \end{tabular}}
 \end{table}
 
+RapidEye constellation image was atmospherically corrected using the 6S atmospheric model 
+\cite{VermoteEtAl1997} employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- \grass{i.atcorr} 
+was not used because a \atcorrbug{} was found when trying to correct images from the RapidEye constellation -- 
+assuming a tropical atmospheric model, the continental aerosols model, an image-based visibility estimate of 
+\SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
+
+After atmospheric correction, both Landsat 5 TM and RapidEye constellation images were resampled using the 
+nearest neighbour method to match the reference grid. Topographic correction (removal of the effects of the 
+topography -- illumination -- on the reflectance values) was performed using \grass{i.topo.corr} with TOPODATA 
+geometrically corrected to match the reference grid as described in \autoref{sec:covar-data-dem}.
+
 \begin{table}[ht]
- \caption{Estimated error statistics (standard deviation between parenthesis) of the horizontal validation of 
- orbital images produced by Landsat 5 TM and RapidEye constellation. Validation statistics were estimated 
- using $n = 14$ GCPs located in easily identifiable geographical markers.}
+ \caption{Error statistics of the horizontal validation of orbital images produced by Landsat 5 TM and
+ RapidEye constellation using $n = 14$ GCPs.}
  \label{tab:covar-data-satellite-geo-val}
  \centering
  {\small
  \begin{tabular}{lrrrr}
   \hline
-  Statistics           & X coordinate & Y coordinate  & Error vector  & Azimuth              \\
+  Statistics                   & x-coord & y-coord  & Error vector  & Azimuth   \\
   \hline
-  \multicolumn{5}{l}{Landsat 5 TM}                                                           \\
+  \multicolumn{5}{l}{Landsat 5 TM}                                              \\
   \hline
-  Mean, \si{\m} & 31   (23)   & -11  (33)   & 45   (26)   & \ang{136} (\ang{89}) \\ 
-  Absolute mean, \si{\m}     & 33   (21)   & 25   (25)   & -           & -                         \\ 
-  Squared mean, \si{\m\square}  & 1494 (1436) & 1223 (2082) & 2717 (2706) & -                         \\ 
+  Mean, \si{\m}                & 31      & -11      & 45            & \ang{136} \\ 
+  Absolute mean, \si{\m}       & 33      & 25       & -             & -         \\ 
+  Squared mean, \si{\m\square} & 1494    & 1223     & 2717          & -         \\ 
   \hline
-  \multicolumn{5}{l}{RapidEye}                                                               \\
+  \multicolumn{5}{l}{RapidEye}                                                  \\
   \hline
-  Mean, \si{\m}              & -25  (7)     & -25 (10)   & 36   (8)     & \ang{226} (\ang{12}) \\ 
-  Absolute mean, \si{\m}& 25   (7)     & 25  (10)   & -            & -                        \\ 
-  Squared mean, \si{\m\square}  & 680  (347)   & 708 (692)  & 1388 (703)   & -                        \\ 
+  Mean, \si{\m}                & -25     & -25      & 36            & \ang{226} \\ 
+  Absolute mean, \si{\m}       & 25      & 25       & -             & -         \\ 
+  Squared mean, \si{\m\square} & 680     & 708      & 1388          & -         \\ 
   \hline
  \end{tabular}}
 \end{table}
 
-In the present study, the orbital image produced by the RapidEye constellation is considered to be of higher 
-quality than the orbital image produced by the satellite Landsat 5 TM. This is mainly due to its finer 
-resolution and thus larger amount of detail. The two-years difference in the acquisition time between the two 
-satellite images is believed to have only a minor effect on the results since land use changes were not 
-significant in the period and soil observations cover the period from \num{2008} to \num{2013}.
-
-Each band of the orbital images was used to derive an environmental covariate, totalling six from Landsat 5 TM 
-and five from RapidEye (Table \ref{tab:covar-data-satellites}). Individual bands were also used to calculate 
-two vegetation indexes: the normalized difference vegetation index (NDVI) and the soil-adjusted vegetation 
-index (SAVI). For Landsat images, NDVI and SAVI were calculated using equations
+Individual bands of both orbital images were defined as covariates, totalling $p = 6$ from Landsat 5 TM and 
+$p = 5$ from RapidEye constellation (Table \ref{tab:covar-data-satellites}). Another $p = 6$ covariates ($p = 
+2$ from Landsat 5 TM and $p = 4$ from RapidEye constellation) were defined using two vegetation indexes: the 
+normalized difference vegetation index (NDVI) and the soil-adjusted vegetation index (SAVI), calculated as
 
 \begin{equation}
-  \covar{NDVI\_30} = \frac{\covar{NIR\_30a} - \covar{RED\_30}}{\covar{NIR\_30a} + \covar{RED\_30}}
-\end{equation}\label{eq:NDVI30}
+ \text{NDVI} = \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED}}
+\end{equation}\label{eq:ndvi}
 
-\noindent and
-
-\begin{equation}
-  \covar{SAVI\_30} = (1.0 + 0.5) \times \frac{\covar{NIR\_30a} - \covar{RED\_30}}{\covar{NIR\_30a} + 
-  \covar{RED\_30} + 0.5}
-\end{equation}\label{eq:SAVI30}
-
-\noindent where \covar{NIR\_30a} is the first near-infrared band (\SIrange{750}{900}{\nm}) and \covar{RED\_30} 
-is the red band (\SIrange{630}{690}{\nm}). For RapidEye image, NDVI and SAVI were calculated using the 
-standard equations
+\noindent and 
 
 \begin{equation}
-  \covar{NDVI\_5a} = \frac{\covar{NIR\_5} - \covar{RED\_5}}{\covar{NIR\_5} + \covar{RED\_5}}
-\end{equation}\label{eq:NDVI5a}
+  \text{SAVI} = (1.0 + 0.5) \times \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED} + 0.5},
+\end{equation}\label{eq:savi}
 
-\noindent and
-
-\begin{equation}
-  \covar{SAVI\_5a} = (1.0 + 0.5) \times \frac{\covar{NIR\_5} - \covar{RED\_5}}{\covar{NIR\_5} + \covar{RED\_5} 
-  + 0.5}
-\end{equation}\label{eq:SAVI5a}
-
-\noindent with the red (\SIrange{630}{685}{\nm}) (\covar{RED\_5}) and near-infrared (\SIrange{760}{850}{\nm}) 
-(\covar{NIR\_5}), and also using the red-edge band (\SIrange{690}{730}{\nm}) (\covar{EDGE\_5}) instead of the 
-near-infrared band as follows:
-
-\begin{equation}
-  \covar{NDVI\_5b} = \frac{\covar{EDGE\_5} - \covar{RED\_5}}{\covar{EDGE\_5} + \covar{RED\_5}}
-\end{equation}\label{eq:NDVI5a}
-
-\noindent and
-
-\begin{equation}
-  \texttt{SAVI\_5b} = (1.0 + 0.5) \times \frac{\covar{EDGE\_5} - \covar{RED\_5}}{\covar{EDGE\_5} + 
-  \covar{RED\_5} + 0.5}
-\end{equation}\label{eq:SAVI5a}
-
-The final number of covariates derived from orbital images is eight, for the Landsat 5 TM, and nine, for 
-the RapidEye constellation.
+\noindent where $\text{NIR} = \tt{NIR\_30a}$ and $\text{RED} = \tt{RED\_30}$ for Landsat 5 TM image, and 
+$\text{NIR} = \tt{NIR\_5}$ and $\text{RED} = \tt{RED\_5}$ or $\text{RED} = \tt{EDGE\_5}$ for RapidEye 
+constellation image.

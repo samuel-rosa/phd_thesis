@@ -1,28 +1,29 @@
 [General]
-def_graphic_ext=pdf
+def_graphic_ext=
 img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.1.3
-lastDocument=phd_thesis.tex
+lastDocument=
 masterDocument=
 name=phd_thesis
 pkg_extIsRegExp=false
 pkg_extensions=.cls .sty .bbx .cbx .lbx
 src_extIsRegExp=false
-src_extensions=.tex .ltx .latex .dtx .ins
+src_extensions=.tex .ltx .latex .dtx .ins .Rnw
 
 [Tools]
 MakeIndex=
 QuickBuild=
 
-[document-settings,item:UFRuralRJ.cls]
+[document-settings,item:chap/chap00.Rnw]
 Bookmarks=
 Encoding=UTF-8
 Highlighting=LaTeX
 Indentation Mode=normal
 Mode=LaTeX
 
+<<<<<<< HEAD
 [document-settings,item:brazilian.babel]
 Bookmarks=
 Encoding=UTF-8
@@ -254,9 +255,19 @@ highlight=LaTeX
 line=0
 mode=LaTeX
 open=false
+=======
+[item:chap/apene.Rnw]
+archive=true
+column=0
+encoding=
+highlight=
+line=1150
+mode=
+open=true
+>>>>>>> 80a99f452a74cba8936a89ebb5060fbcb4efff06
 order=-1
 
-[item:chap/chap04.tex]
+[item:chap/chap00.Rnw]
 archive=true
 column=0
 encoding=UTF-8
@@ -266,6 +277,7 @@ mode=LaTeX
 open=false
 order=-1
 
+<<<<<<< HEAD
 [item:chap/chap05.tex]
 archive=true
 column=0
@@ -421,10 +433,14 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:chap/chap03.tex]
+=======
+[view-settings,view=0,item:chap/chap00.Rnw]
+>>>>>>> 80a99f452a74cba8936a89ebb5060fbcb4efff06
 CursorColumn=0
 CursorLine=0
 JumpList=
 ViMarks=
+<<<<<<< HEAD
 
 [view-settings,view=0,item:chap/chap04.tex]
 CursorColumn=0
@@ -485,3 +501,5 @@ CursorColumn=11
 CursorLine=152
 JumpList=
 ViMarks=.,152,10,[,152,0,],152,10
+=======
+>>>>>>> 80a99f452a74cba8936a89ebb5060fbcb4efff06
