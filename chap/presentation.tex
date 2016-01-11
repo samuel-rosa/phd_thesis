@@ -1,0 +1,150 @@
+\chapter*{Preface}
+
+I was never sure about what a thesis should consist of: I worked on so many things during the four years of 
+my doctorate that I found myself somewhat lost when I had to decide what to write in the thesis. There are 
+official documents suggesting \emph{how} the thesis should be written, but not \emph{what} exactly should be 
+written -- I find the definitions somewhat vague. For example, the manual of our university states that a 
+thesis consists of the result of a research which is presented as the final requirement for the completion of a 
+doctorate course \cite{UFRRJ2006}, which is quite the same thing said by the International Organization for 
+Standardization (\iso): a \q{document which presents the author's research and findings and submitted by him in 
+support of his candidature for a degree or professional qualification} \cite{ISO1986}. I tried -- without 
+success -- reading other theses to see if I could get an inspiration. I also discussed with my patient 
+supervisors but, for one reason or another, we could never reach a complete agreement.
+
+At first, I was a bit desperate. Have I failed? Has everyone failed? Hum... Perhaps not! Perhaps the lack of 
+an objective, ultimate, universal definition of what a thesis should consist of meant that, as a doctorate 
+student, it was my responsibility to construct such a definition. This idea gave me back the long-lost 
+excitement to write my thesis. I did not want to follow a boring ritual. I wanted to have fun and be 
+completely honest with the reader, as Richard Webster\footnote{\cite{Webster2003}} had once suggested. As 
+such, I decided that I would tell the \emph{story} of the research that I have carried out in collaboration 
+with my supervisors and co-authors during my doctorate course. This obviously would include a lot of mistakes 
+and failures, and a few successes -- because I learned more with the former than with the last.
+
+\subsection{Objectives and research questions}
+
+As the title says, this thesis tells the \q{story} of a research on some of the sources of uncertainty in soil 
+spatial models, i.e. factors determining a soil map to be more or less accurate. Many of these sources are 
+known, others are still unknown, and some are disregarded due to our ignorance -- or by convenience. When I 
+wrote my doctorate research project, it seemed appropriate to aim at evaluating what I understood as being the 
+main sources of uncertainty in soil spatial modelling. The reason was simple: soil spatial modelling was a 
+growing activity in Brazilian universities and I felt that many soil spatial modellers were inclined towards 
+using the most expensive data sources and most complex methods/models as the only way of producing higher 
+accuracy soil maps of the Brazilian territory. I must confess that I was preoccupied about these ideas -- which 
+appeared to be due to sort of an euphoria about new technologies (remote sensors and machine learning) -- 
+because I believed that high quality soil maps could be produced if we simply started using the data and 
+models at hand.
+
+Defining the main sources of uncertainty in soil spatial modelling required an operational definition, which 
+which was given based on the observation that, in general, the main decisions made by soil spatial modellers 
+are with regard to the
+
+\begin{enumerate}[label=(\alph*)]
+ \item calibration observations,
+ \item covariates, and
+ \item model structure.
+\end{enumerate}
+
+I then divided the general objective of evaluating these three mains sources of uncertainty into five specific 
+objectives with their respective research questions:
+
+\begin{enumerate}
+\item Identify appropriate calibration sample sizes and designs for soil spatial modelling.\newline
+Research question: How do calibration sample size and design influence which covariates enter soil spatial 
+models, their prediction accuracy, and monetary cost of soil spatial modelling?
+
+\item Determine the accuracy of freely available covariates and their suitability to calibrate soil spatial
+models.\newline
+Research question: How accurate are freely available covariates and how much uncertainty reduction in soil 
+spatial models is achieved when more accurate covariates are used?
+
+\item Identify appropriate covariate selection methods to build linear soil spatial models.\newline
+Research question: How do covariate selection methods influence which covariates enter soil spatial models and 
+their prediction accuracy?
+
+\item Assess the effect of multicollinearity among covariates on the performance of linear soil spatial 
+models.\newline
+Research question: How strongly correlated are the freely available covariates and is prediction accuracy 
+improved when they are transformed to their principal components?
+
+\item Identify database scenarios in which non-linear soil spatial models are more efficient than linear soil 
+spatial models.\newline
+Research question: In which database scenarios do non-linear soil spatial models have better performance than 
+linear soil spatial models?
+\end{enumerate}
+
+The main expected result was the definition of a sound \emph{working protocol} that would allow the 
+construction of efficient soil spatial models. My goal was to contribute to national (Brazilian Research 
+Network on Digital Soil Mapping) and international (GlobalSoilMap and Global Soil Information Facilities) 
+initiatives, while generating a significant amount of bibliographic material to support the teaching of modern 
+soil spatial modelling techniques in soil classes at Brazilian universities, which is still incipient these 
+days.
+
+With time it became clear that the five objectives and the expected results were too ambitious. I certainly 
+was overwhelmed by the knowledge of the multiple sources of uncertainty, and felt compelled to develop a very 
+through study. But I forgot that a doctorate course includes more activities than those planed in the 
+research project: you take classes, prepare grant proposals, write reports, help colleagues, get involved in 
+other projects, publish the papers of your master thesis, train undergraduate students, and so on. When you 
+see, two years are already gone by, and you still are preparing the database with which you will develop your 
+case studies. I know that was particularly lucky for most of the soil and covariate data already being 
+available for my use. However, I spent a lot of time to organize it and make a through description of all 
+processing steps before I could actually use it. This effort was in line with my original intent of 
+defining a working protocol for constructing soil spatial models.
+
+A significant amount of time was also spent preparing a description of the soil-forming factors and processes
+that determine the spatio-temporal distribution of soil properties in the study area where the case studies 
+were to be developed. Such a description is called in this thesis a \emph{conceptual model of pedogenesis}. 
+This was another effort in accordance with the definition of a working protocol. But it was also expected to 
+serve the development of a experiment devoted to answering the third research question (see above). My intent 
+was to compare automated covariate selection methods with the use of expert knowledge. Preliminary tests were 
+conducted with a few experts to help planning the experiment. Later, I visited Murray Lark at the the British 
+Geological Survey (\bgs) headquarters in Nottingham, UK, who agreed to discuss about the experiment. 
+Unfortunately, the available resources did not allow carrying out the planned experiment, resulting in the 
+third objective being dropped off the research project.
+
+There also was my poor knowledge on some known topics, which sometimes took me to the wrong direction. For 
+example, I wanted to evaluate how much more accurate a soil map is when more accurate covariates are used 
+(see the second objective above), the reason being that I was concern with the fact that the covariates too 
+are in error. As such, I collected field data to validate the covariates and correct for any systematic 
+errors. Only later, discussing with my supervisor Gerard Heuvelink, I understood that 1) the validation data 
+was poor, and 2) in soil spatial modelling the covariates generally are assumed to be measured without error 
+-- otherwise a technique called error propagation analysis (or uncertainty analysis) is employed to take that 
+error into account. In the end, we reformulated the second objective of the research project, which now was 
+about using \emph{more detailed} covariates, a concept that is explained later in the thesis.
+
+Devising an experiment to evaluate the influence of sample size and design on the accuracy of soil maps also 
+was a challenge. Because most of the soil data available was produced by soil spatial modellers in the past 
+century (legacy data), I wanted to build an algorithm composed of a set of decision rules that would produce 
+spatial samples similar to those produced by a soil spatial modeller. The idea was to simulate budget 
+scenarios and see how each spatial sample would perform regarding soil map accuracy. But how to devise such an 
+algorithm? I interviewed the soil spatial modellers that produced the soil data used in the doctorate research 
+project, carried out a point pattern analysis of the resulting spatial sample configuration, and explored 
+psychological concepts to understand the whys of the locations of the sampling points. A lengthy study was 
+carried out without finding a practical solution. It was more appropriate to work with existing, less complex 
+algorithms that produce spatial samples using more objective decision rules, which are being used more and 
+more.
+
+
+
+
+Having decided on which sampling algorithms to work, we only needed to choose a sound method to take sampling 
+costs into account. Because the access time to sampling points usually is the major cost component in soil 
+sampling, my supervisor Gerard Heuvelink and I thought of building an algorithm to solve the problem of 
+travelling from one sampling point to the next with the least cost\footnote{See about the \emph{travelling 
+salesman problem} at \href{https://en.wikipedia.org/wiki/Travelling_salesman_problem}{Wikipedia}}. 
+Fortunately we soon realized that, given the available resources, solving this problem was infeasible and we 
+dropped it off. We then invited Dick Brus to participate devising the experiment.
+
+
+
+First, a few unknown sources of error were uncovered during the development of this study, and I decided to 
+confront them because they were closely linked to the sources that were originally planned to be studied. 
+
+There also was my poor knowledge on some known topics, which sometimes took me to the wrong direction, and my 
+blind optimism regarding the available (personal, material, financial, and psychological) resources.
+
+Finally, I came to learn only late that many well known methods of data analysis/processing are not used 
+simply because they are not implemented in a software package -- programming took a lot of my time.
+
+As a consequence of these events, the resulting thesis deals only with a modified version of the first and 
+second, and only scratches the surface of the third and fifth, above-mentioned specific objectives and their 
+respective research questions, i.e.
