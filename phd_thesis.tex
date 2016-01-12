@@ -1,7 +1,7 @@
 %\listfiles
 
 %% Tipo de documento e a classe a ser usada para sua formatação.
-\documentclass[tese,english]{UFRuralRJ}
+\documentclass[tese]{UFRuralRJ}
 
 %% Um tipo específico de monografia pode ser informado como parâmetro opcional:
 %\documentclass[tese]{UFRuralRJ}
@@ -154,6 +154,10 @@
 \def\topodata{\href{http://www.dsr.inpe.br/topodata/}{TOPODATA}}
 \def\iso{\href{http://www.iso.org/iso/catalogue_detail.htm?csnumber=13736}{ISO}}
 \def\bgs{\href{http://www.bgs.ac.uk/}{BGS}}
+\def\redemds{\href{https://goo.gl/m8QWUm}{RedeMDS}}
+\def\gsif{\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}}
+\def\globalsoilmap{\href{http://www.globalsoilmap.net/}{GlobalSoilMap}}
+
 
 % Variables
 \def\geoNew{\texttt{GEO\_25}}
@@ -242,8 +246,9 @@
 % }\end{flushright}\end{minipage}
 
 %%=============================================================================
-%% Agradecimentos (opcional)
+%% Agradecimentos ou Prefácio (opcional)
 %%=============================================================================
+\include{chap/presentation}
 % \chapter*{Acknowledgements}
 % 
 % Ao Curso de Pós-Graduação em Agronomia-Ciência do Solo (CPGA-CS) e ao Departamento de Solos da Universidade Federal Rural do Rio de Janeiro (UFRuralRJ).
@@ -349,17 +354,17 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 %% Lista de figuras
 %%=============================================================================
-\listoffigures
+% \listoffigures
 
 %%=============================================================================
 %% Lista de tabelas (comentar se não houver)
 %%=============================================================================
-\listoftables
+% \listoftables
 
 %%=============================================================================
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
-\listofappendix
+% \listofappendix
 
 %%=============================================================================
 %% Lista de Anexos (comentar se não houver)
@@ -392,12 +397,6 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 \tableofcontents
 
 %%=============================================================================
-%% Apresentação
-%%=============================================================================
-\setlength{\baselineskip}{1.5\baselineskip}
-\include{chap/presentation}
-
-%%=============================================================================
 %% Início da tese
 %%=============================================================================
 \setlength{\baselineskip}{1.5\baselineskip}
@@ -415,12 +414,12 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-\appendix
+% \appendix
 % \include{chap/} % Introdução Geral
 % \include{chap/} % Conclusão Geral
-\include{chap/apenb} % conceptual model of pedogenesis
-\include{chap/apena} % The Santa Maria dataset -- soil data
-\include{chap/apene} % The Santa Maria dataset -- covariate data
+% \include{chap/apenb} % conceptual model of pedogenesis
+% \include{chap/apena} % The Santa Maria dataset -- soil data
+% \include{chap/apene} % The Santa Maria dataset -- covariate data
 %\include{chap/apenc} % R-package spsann
 %\include{chap/apend} % R-package pedometrics
 
