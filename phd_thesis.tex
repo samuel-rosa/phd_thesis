@@ -158,7 +158,6 @@
 \def\gsif{\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}}
 \def\globalsoilmap{\href{http://www.globalsoilmap.net/}{GlobalSoilMap}}
 
-
 % Variables
 \def\geoNew{\texttt{GEO\_25}}
 \def\geoOld{\texttt{GEO\_50}}
@@ -248,18 +247,8 @@
 %%=============================================================================
 %% Agradecimentos ou Prefácio (opcional)
 %%=============================================================================
-\include{chap/presentation}
-% \chapter*{Acknowledgements}
-% 
-% Ao Curso de Pós-Graduação em Agronomia-Ciência do Solo (CPGA-CS) e ao Departamento de Solos da Universidade Federal Rural do Rio de Janeiro (UFRuralRJ).
-% 
-% Ao CNPq e à CAPES.
-% 
-% À Wageningen University and Research Centre (WUR) e ao International Soil Reference Information Centre (ISRIC).
-% 
-% Aos orientadores Dr\textsuperscript{a}. Lúcia Helena Cunha dos Anjos, Dr. Gustavo de Mattos Vasques e Dr. Gerard B M Heuvelink.
-% 
-% Á todos que, direta ou indiretamente, contribuíram para a construção deste trabalho.
+%% Usar versão estrelada do comando 'chapter'.
+\include{chap/preface}
 
 %%=============================================================================
 %% Biografia (opcional)
@@ -275,40 +264,6 @@
 % \par
 % Autor desconhecido
 % }\end{flushright}\end{minipage}
-
-%%=============================================================================
-%% Resumo geral em inglês
-%%=============================================================================
-\def\tituloingles{Analysis of Sources of Uncertainty in Soil Mapping}
-\def\chavesingles{Pedometrics, Predictive Models, Uncertainty}
-\generalabstracttrue
-\begin{generalabstract}{english}{\tituloingles}{\chavesingles}
-Translating verbal representations of conceptual models that describe reality 
-into mathematical representations of these models is a key step in digital soil 
-mapping (DSM). The development of such mathematical representations is affected 
-by several sources of uncertainty. These sources can be classified into three 
-categories for didactic purposes: a) calibration observations, b) environmental
-co-variates and c) model structure. The general objective of this PhD research 
-proposal is to evaluate these three main sources of uncertainty in DSM under 
-different database scenarios regarding the number of calibration observations 
-and the quality of environmental co-variates used to fit DSM models. A database 
-from a pilot area in DSM studies in southern Brazil will be used to develop a 
-series of empirical tests to meet these objective. First, the quality of freely 
-available environmental co-variates and their suitability for DSM will be 
-assessed. Next, seven sets of calibration observations of varying sizes will be 
-evaluated as to how they affect the performance of DSM models. Co-variate 
-selection methods will also be evaluated on how they comply with the conceptual 
-model of pedogenesis. Multicollinearity effects on linear trend models and the 
-orthogonalization solution will be deeply evaluated. Last, but not least, 
-non-linear models will be evaluated if they present better performance than 
-linear models in poor database scenarios. The results will enable to understand 
-how uncertain factors influence DSM models and the definition of a proper 
-working protocol. This will be a direct contribution to the Brazilian Research 
-Network on Digital Soil Mapping, the GlobalSoilMap.net consortium, the Global 
-Soil Information Facilities, and of FAO's project Global Soil Partnership. 
-Besides, it will ensure the use of the soil information with greater confidence 
-about its reliability, which is critical for decision makers.
-\end{generalabstract}
 
 %%=============================================================================
 %% Resumo geral em português
@@ -347,6 +302,40 @@ Solo. Além disso, permitirá o uso da informação do solo com maior segurança
 sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 \end{generalabstract}
 
+%%=============================================================================
+%% Resumo geral em inglês
+%%=============================================================================
+\def\tituloingles{Analysis of Sources of Uncertainty in Soil Mapping}
+\def\chavesingles{Pedometrics, Predictive Models, Uncertainty}
+\generalabstracttrue
+\begin{generalabstract}{english}{\tituloingles}{\chavesingles}
+Translating verbal representations of conceptual models that describe reality 
+into mathematical representations of these models is a key step in digital soil 
+mapping (DSM). The development of such mathematical representations is affected 
+by several sources of uncertainty. These sources can be classified into three 
+categories for didactic purposes: a) calibration observations, b) environmental
+co-variates and c) model structure. The general objective of this PhD research 
+proposal is to evaluate these three main sources of uncertainty in DSM under 
+different database scenarios regarding the number of calibration observations 
+and the quality of environmental co-variates used to fit DSM models. A database 
+from a pilot area in DSM studies in southern Brazil will be used to develop a 
+series of empirical tests to meet these objective. First, the quality of freely 
+available environmental co-variates and their suitability for DSM will be 
+assessed. Next, seven sets of calibration observations of varying sizes will be 
+evaluated as to how they affect the performance of DSM models. Co-variate 
+selection methods will also be evaluated on how they comply with the conceptual 
+model of pedogenesis. Multicollinearity effects on linear trend models and the 
+orthogonalization solution will be deeply evaluated. Last, but not least, 
+non-linear models will be evaluated if they present better performance than 
+linear models in poor database scenarios. The results will enable to understand 
+how uncertain factors influence DSM models and the definition of a proper 
+working protocol. This will be a direct contribution to the Brazilian Research 
+Network on Digital Soil Mapping, the GlobalSoilMap.net consortium, the Global 
+Soil Information Facilities, and of FAO's project Global Soil Partnership. 
+Besides, it will ensure the use of the soil information with greater confidence 
+about its reliability, which is critical for decision makers.
+\end{generalabstract}
+
 %% Lista de Ilustrações (opc)
 %% Lista de Símbolos (opc)
 %% Lista de Anexos e Apêndices (opc)
@@ -354,17 +343,17 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %%=============================================================================
 %% Lista de figuras
 %%=============================================================================
-% \listoffigures
+\listoffigures
 
 %%=============================================================================
 %% Lista de tabelas (comentar se não houver)
 %%=============================================================================
-% \listoftables
+\listoftables
 
 %%=============================================================================
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
-% \listofappendix
+\listofappendix
 
 %%=============================================================================
 %% Lista de Anexos (comentar se não houver)
@@ -378,7 +367,6 @@ sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
 %   \item [DSM] Digital Soil Mapping
 %   \item [UbiComp] Computação Ubíqua
 %\end{listofabbrv}
-
 
 %%=============================================================================
 %% Lista de simbolos (opcional)
