@@ -1,6 +1,8 @@
 \artigotrue
 \chapter{The Santa Maria dataset -- soil data}
 \label{chap:chap03}
+\usepackage[utf8]{inputenc}
+\SweaveOpts{prefix.string = fig/chap03}
 
 \def\portuguesekeys{}
 \begin{chapterabstract}{brazilian}{\portuguesekeys}

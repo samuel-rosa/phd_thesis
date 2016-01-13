@@ -1,12 +1,8 @@
-% ATTENTION: 
-% lines starting with “%”  will not be included in the document
-% skip text (code) in red
-
-\artigofalse
+\artigotrue
 \chapter{The Santa Maria dataset -- covariate data}
-\label{apen:covar-data}
+\label{chap:chap04}
 \usepackage[utf8]{inputenc}
-\SweaveOpts{prefix.string = fig/apene}
+\SweaveOpts{prefix.string = fig/chap04}
 
 <<R-settings, echo = FALSE>>=
  

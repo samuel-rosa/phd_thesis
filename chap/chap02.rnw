@@ -1,6 +1,8 @@
 \artigotrue
 \chapter{Modelo Conceitual de Pedogênese}
 \label{chap:chap02}
+\usepackage[utf8]{inputenc}
+\SweaveOpts{prefix.string = fig/chap02}
 
 \def\itaara{\href{http://pt.wikipedia.org/wiki/Itaara}{Itaara}}
 \def\santamaria{\href{http://pt.wikipedia.org/wiki/Santa_Maria_\%28Rio_Grande_do_Sul\%29}{Santa Maria}}
