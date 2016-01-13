@@ -1,0 +1,70 @@
+\setcounter{page}{1}
+\artigofalse
+\chapter{General Introduction}
+\label{chap:introduction}
+
+
+\section{Objectives and research questions}
+\label{sec:thesis-objectives}
+
+\begin{enumerate}
+ \item Determine the suitability of freely available covariates to calibrate soil spatial models.
+
+  \begin{enumerate}[label=(\alph*)]
+   \item Does the use of more detailed covariates result in considerably more accurate soil maps?
+   
+   \item How does incorporation of spatial dependence in a soil spatial model compare to the gain in 
+   prediction accuracy obtained with using more detailed covariates?
+   
+   \item Are the answers to these research questions consistent across soil properties?
+  \end{enumerate}
+\end{enumerate}
+
+
+
+
+\section{Outline}
+\label{sec:thesis-outline}
+
+The thesis is composed of eight chapters where each of the above mentioned objectives are met 
+(\autoref{sec:thesis-objectives}). Although there is a logical sequence in their presentation, all chapters 
+were planned so that they could be read separately. This means that there is some overlap between them, i.e. 
+repeated information. References to specific sections of other chapters using coloured (blue) hyperlinks are 
+common.
+
+\emph{Chapter I}
+
+\autoref{chap:chap02} presents the conceptual model of pedogenesis (in Portuguese), which consists of a 
+description of the study area that includes an explicit description of soil-forming factors (climate, geology, 
+geomorphology, hydrology, land use, and vegetation) and processes that determine the soil spatio-temporal 
+distribution. \autoref{chap:chap03} describes the soil data included in the \emph{Santa Maria dataset}, which 
+was used to develop the case studies presented in this thesis. The Santa Maria dataset is composed of 
+$n = 410$ soil observations compiled from studies carried out between \num{2004} and \num{2013}. These studies 
+aimed at producing semi-detailed soil and land use maps, and modelling topsoil carbon stock and vulnerability 
+to erosion. A comprehensive description of the covariate data included in the Santa Maria dataset, and their 
+processing, is given in \autoref{chap:chap04}. The goal of these three chapters is to provide the bases for 
+future soil spatial modelling exercises in the study area and to serve as examples for new soil spatial 
+modelling studies developed elsewhere.
+
+Based on an article published in the peer reviewed journal \geoderma, \autoref{chap:chap05} serves the purpose 
+of meeting the first objective of the thesis and answering its respective research questions. There, the 
+prediction performance of linear soil spatial models calibrated using covariates (area-class soil maps, land 
+use maps, geological maps, digital elevation models, and orbital images) available in two levels of detail is 
+evaluated. The influence of taking the spatial dependence of the residuals into account is assessed as well. 
+
+\emph{Chapter VI} presents the results of the experiment devised to evaluate if improving a popular sampling 
+algorithm results in more accurate spatial predictions. The comparison of five sampling algorithms on how they 
+affect estimated model parameters and prediction accuracy is presented in \emph{Chapter VII}. The chapter also
+introduces a new general purpose sampling algorithm. Both chapters contain only partial results, and will be 
+the basis of manuscripts to be submitted to peer reviewed journals, both dealing with the second objective of 
+this thesis and its respective research questions.
+
+\autoref{chap:chap08}
+
+The sequence of eight chapters is closed with a \emph{General Conclusion} where I highlight the main results 
+of the research, contributions and merits of the study. Next, there are two appendices, both devoted to the 
+description of the two packages for \texttt{R} developed to support the case studies: \texttt{pedometrics} 
+(\autoref{apen:pedometrics}) and \texttt{spsann} (\autoref{apen:spsann}). The first includes miscellaneous 
+functions that were put together for ease of use. The second was designed for the optimization of sample 
+configurations using spatial simulated annealing. All literature references are presented under a unique 
+\emph{Bibliographic References} chapter (\autoref{chap:references}) at the end of the thesis.
