@@ -1,4 +1,6 @@
-% ATTENTION: lines starting with “%”  will not be included in the document!
+% ATTENTION: 
+% lines starting with “%”  will not be included in the document
+% skip text (code) in red
 
 \artigofalse
 \chapter{The Santa Maria dataset -- covariate data}
@@ -60,9 +62,11 @@ covariate data are freely available at the producers databases or in public libr
 \label{sec:covar-data-gcp}
 
 All covariates were validated prior to their use. Horizontal (positional) validation was performed using a set 
-of $n = 14$ validation points, here called ground control points (GCP), spread throughout and beyond the limits 
+of $n = 14$ validation points, here called ground control points (GCP), spread throughout and beyond the 
+limits 
 of the study area (\autoref{fig:covar-data-field-gcps}). The location of the GCPs was defined based on the 
-existence of easily identifiable geographical markers across the covariates, including road intersection, fence 
+existence of easily identifiable geographical markers across the covariates, including road intersection, 
+fence 
 corners, and property entrances.
 
 \begin{figure}[!ht]
@@ -106,7 +110,8 @@ corners, and property entrances.
 \end{figure}
 
 Positional validation was performed comparing the x- and y-coordinates of GCPs (observed value) with the 
-coordinates of the respective geographical markers visually identified on the covariates (predicted value). The 
+coordinates of the respective geographical markers visually identified on the covariates (predicted value). 
+The 
 differences in the observed and predicted x- and y-coordinates were used to calculate the mean error (ME, 
 \si{\m}), mean absolute error (MAE, \si{\m}), and mean squared error (MSE, \si{\m\square}) to evaluate if 
 there were differences in the accuracy and precision between coordinates. The error vector (or module, the 
@@ -164,7 +169,8 @@ The field location of the GCPs is as follows (in Portuguese):
  localidade de Rincão dos Minello.
  
  \item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto a rodovia federal BR158,
- próximo ao Bar e Armazém Ricardo, deslocado em \SI{1}{\m} para dentro do passeio em relação ao alinhamento dos 
+ próximo ao Bar e Armazém Ricardo, deslocado em \SI{1}{\m} para dentro do passeio em relação ao alinhamento 
+dos 
  postes da rede elétrica.
  
  \item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (\SI{\pm30}{\cm}) que divide duas terras, à 
@@ -173,7 +179,8 @@ The field location of the GCPs is as follows (in Portuguese):
  
  \item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após o término 
  da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do campo nativo, alinhado 
- (\SI{\pm20}{\cm}) com a cerca dos dois lados da estrada. Locado \SI{1}{\m} distante do moirão da cerca do lado 
+ (\SI{\pm20}{\cm}) com a cerca dos dois lados da estrada. Locado \SI{1}{\m} distante do moirão da cerca do 
+lado 
  esquerdo subindo, no interior da estrada.
 \end{description}
 
@@ -241,7 +248,8 @@ the approximate taxonomic composition (\si{\percent}).
 The second area-class soil map (\soilNew{}) included in the Santa Maria dataset \cite{Miguel2010} was prepared 
 at a \scale{25000}. Orbital images produced by Digital Globe\textregistered{} (Quick Bird satellite), freely 
 available for visualization in Google Earth\textregistered{}, were used to produce the first draft of the soil 
-map. Existing area-class soil maps and technical reports \cite{Pedron2005, Poelking2007, Sturmer2008} were used 
+map. Existing area-class soil maps and technical reports \cite{Pedron2005, Poelking2007, Sturmer2008} were 
+used 
 to help defining the preliminary soil map legend. Punctual field observations (auger holes) were made in more 
 than \num{350} locations using a purposive sampling approach. These observations helped to identify six 
 modal (representative) soil profiles. Soil sampling and description of modal soil profiles, and laboratory 
@@ -295,8 +303,10 @@ and overlaps between polygons. This required a topological edition prior to the 
 was a mismatch between the boundary of \soilNew{} and the actual boundary of the study area as estimated using 
 \demNew{} (\autoref{sec:covar-data-dem}). This occurred because the database used to produce \soilNew{} 
 included Google Earth imagery and topographic maps, which are data sources that differ 
-considerably in their positional accuracy (\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). 
-To avoid data losses, all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil 
+considerably in their positional accuracy (\autoref{sec:covar-data-dem} and 
+\autoref{sec:covar-data-land-use}). 
+To avoid data losses, all boundary gaps were manually filled using the closest mapping unit. Boundaries of 
+soil 
 polygons were defined based on land use (\landNew{}, \autoref{sec:covar-data-land-use}) and topographic data 
 (contour lines, \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. New 
 delineations were checked and approved without modifications by the author of the original map. Because 
@@ -545,8 +555,8 @@ meet current Brazilian legislation, which states that the accuracy should be of,
 % Figure \ref{fig:cdf-elev} shows that estimated validation statistics have different cumulative 
 % distribution functions (CDF). The estimates are more uniformly distributed along the interval of 
 % values for \tt{ELEV\_10} than for \tt{ELEV\_90} and \tt{ELEV\_30}. While 
-% \tt{ELEV\_10} has a 50\% probability that absolute errors are bellow 15 m, \tt{ELEV\_90} has 
-% a 70\% probability that absolute errors are bellow 15 m. This suggests that the accuracy of 
+% \tt{ELEV\_10} has a 50\% probability that absolute errors are below 15 m, \tt{ELEV\_90} has 
+% a 70\% probability that absolute errors are below 15 m. This suggests that the accuracy of 
 % \tt{ELEV\_90} is very consistent across the study area, with a few extreme values, while the 
 % accuracy of \tt{ELEV\_10} have a stronger spatial variation. For \tt{ELEV\_30}, the 
 % interpolation method used to refine the original SRTM DEM to 30 m \cite{ValerianoEtAl2012} seems to 
@@ -688,7 +698,8 @@ were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 Geological data comes from the two most recent geological maps (\geoOld{} and \geoNew{}) published in the 
 \scales{50000}{25000} \cite{GasparettoEtAl1988, MacielFilho1990} (\autoref{fig:covar-data-geo-maps}). Both of 
 them were produced based on the most recent topographic maps produced by the Brazilian Army at the 
-\scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, geological maps were available 
+\scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, geological maps were 
+available 
 only in the analogical format, and were hand digitalized and georeferenced in QGIS. Intersections between all 
 meridians and parallels ($n = 16$) were used as control points to adjust a second order polynomial model. 
 Resampling was performed using the cubic resampling method. The original coordinate reference system 
@@ -856,7 +867,8 @@ of those derived from \geoOld{}:
 
 The first land use map used to derive covariate data included in the Santa Maria dataset was produced by 
 manually digitizing land use data of the year of \num{1980} (\landOld{}) published in the most recent 
-topographic map produced by the Brazilian Army (\scale{25000}) \cite{DSG1992a, DSG1992}. Most processing steps, 
+topographic map produced by the Brazilian Army (\scale{25000}) \cite{DSG1992a, DSG1992}. Most processing 
+steps, 
 including the correction of positional bias, are described in \autoref{sec:covar-data-dem}, except for the use 
 of the nearest neighbour resampling method to match \landOld{} to the reference grid.
 
@@ -964,8 +976,10 @@ of the nearest neighbour resampling method to match \landOld{} to the reference 
 
 The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution (\SI{2.4}{\m}) 
 orbital images, produced by QuickBird satellite launched in 2001, of the years of \num{2008} and \num{2009}, 
-made publicly available in Google Earth \cite{SamuelRosaEtAl2011a}. Identification of land uses and delineation 
-of mapping units was done manually, on the computer screen, without using any automated classification routine. 
+made publicly available in Google Earth \cite{SamuelRosaEtAl2011a}. Identification of land uses and 
+delineation 
+of mapping units was done manually, on the computer screen, without using any automated classification 
+routine. 
 Positional validation of Google Earth imagery revealed that they have only minor systematic positional errors 
 (\autoref{tab:covar-data-google-geo-val}). Despite of this, the attribute validation of both land use maps, 
 using $n = 60$ validation points placed along $m = 12 linear transects$, showed that they have similar 
@@ -1025,7 +1039,8 @@ explain the low \tt{ORCA} in forest soils due to previous use with crop agricult
 \label{sec:covar-data-sat-image}
 
 Two sources of orbital images were used to produce covariate data included in the Santa Maria dataset. The 
-first is the longest-operating Earth observation satellite Landsat-5 Thematic Mapper, launched on \num{1} March 
+first is the longest-operating Earth observation satellite Landsat-5 Thematic Mapper, launched on \num{1} 
+March 
 \num{1984}. The orbital image used was acquired on \num{26} December \num{2010} and is available at the 
 database of the Division of Image Generation of the National Institute for Space Research (\inpedgi). The 
 image contains seven spectral bands (\autoref{tab:covar-data-satellites}) (including a thermal band that is not
@@ -1050,7 +1065,8 @@ visibility estimate of \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
 The second source of orbital images is the RapidEye constellation of five satellites, launched in August 
 \num{2008}. Images are available through the Brazilian Ministry of the Environment \cite{Brasil2012}, who 
 has a full coverage of the Brazilian territory with images from the RapidEye satellite constellation for the 
-years of \num{2011} and \num{2012}. The orbital image used (tile number \num{2225403}) was acquired on \num{16} 
+years of \num{2011} and \num{2012}. The orbital image used (tile number \num{2225403}) was acquired on 
+\num{16} 
 November \num{2012} (second coverage). It contains five spectral bands (\autoref{tab:covar-data-satellites}), 
 featuring among them the so-called red-edge band, located between the red and the near-infrared bands. This 
 spectral band is the main feature distinguishing RapidEye images from most other sources of orbital images, 
@@ -1114,7 +1130,8 @@ source to \SI{5}{\m} spatial resolution using the hole-filled SRTM version \num{
 \end{table}
 
 RapidEye constellation image was atmospherically corrected using the 6S atmospheric model 
-\cite{VermoteEtAl1997} employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- \grass{i.atcorr} 
+\cite{VermoteEtAl1997} employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- 
+\grass{i.atcorr} 
 was not used because a \atcorrbug{} was found when trying to correct images from the RapidEye constellation -- 
 assuming a tropical atmospheric model, the continental aerosols model, an image-based visibility estimate of 
 \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
