@@ -1,7 +1,7 @@
 %\listfiles
 
 %% Tipo de documento e a classe a ser usada para sua formatação.
-\documentclass[tese]{UFRuralRJ}
+\documentclass[tese,english]{UFRuralRJ}
 
 %% Um tipo específico de monografia pode ser informado como parâmetro opcional:
 %\documentclass[tese]{UFRuralRJ}
@@ -27,6 +27,8 @@
 
 \usepackage{amsmath,latexsym,amssymb}
 \usepackage[range-phrase = --, binary-units = true]{siunitx} %% Sistema Internacional de Unidades
+\DeclareSIUnit\pp{pp} % pencentual point
+
 % Access bold symbols in maths mode
 \usepackage{bm}
 
@@ -144,20 +146,35 @@
 \newcommand{\gdal}[1]{GDAL module \texttt{#1}} % GDAL modules
 \newcommand{\saga}[1]{SAGA library \texttt{#1}}  % SAGA libraries
 \newcommand{\covar}[1]{\texttt{#1}} % covariates
+\newcommand\titlenote[1]{%
+ \begingroup
+ \renewcommand\thefootnote{}\footnote{#1}%
+ \addtocounter{footnote}{-1}%
+ \endgroup
+}
 
 % Hyperlinks and URLs
+\def\atcorrbug{\href{http://lists.osgeo.org/pipermail/grass-dev/2014-February/067540.html}{bug}} % atcorr bug
+\def\baciaparana{\href{http://pt.wikipedia.org/wiki/Bacia_do_Paran\%C3\%A1}{Bacia Sedimentar do Paraná}}
+\def\bgs{\href{http://www.bgs.ac.uk/}{BGS}}
+\def\cgiar{\href{http://www.cgiar.org/}{CGIAR}} % Consultative Group for International Agricultural Research
+\def\dnosgeneral{\href{https://github.com/samuel-rosa/dnos-sm-rs-general/tree/master/data}{GitHub}}
+\def\gsif{\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}}
+\def\globalsoilmap{\href{http://www.globalsoilmap.net/}{GlobalSoilMap}}
 \def\geoderma{\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}} % Geoderma
 \def\inpe{\href{http://www.inpe.br/}{INPE}} % INPE
 \def\inpedgi{\href{http://www.dgi.inpe.br/siteDgi_EN/index_EN.php}{INPE-DGI}} % INPE-DGI
-\def\atcorrbug{\href{http://lists.osgeo.org/pipermail/grass-dev/2014-February/067540.html}{bug}} % atcorr bug
-\def\cgiar{\href{http://www.cgiar.org/}{CGIAR}} % Consultative Group for International Agricultural Research
-\def\topodata{\href{http://www.dsr.inpe.br/topodata/}{TOPODATA}}
 \def\iso{\href{http://www.iso.org/iso/catalogue_detail.htm?csnumber=13736}{ISO}}
-\def\bgs{\href{http://www.bgs.ac.uk/}{BGS}}
-\def\redemds{\href{https://goo.gl/m8QWUm}{RedeMDS}}
-\def\gsif{\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}}
-\def\globalsoilmap{\href{http://www.globalsoilmap.net/}{GlobalSoilMap}}
+\def\itaara{\href{http://pt.wikipedia.org/wiki/Itaara}{Itaara}}
+\def\lagoadospatos{\href{http://pt.wikipedia.org/wiki/Lagoa_dos_Patos}{Lagoa dos Patos}}
 \def\mma{\href{http://geocatalogo.ibama.gov.br/}{MMA}}
+\def\redemds{\href{https://goo.gl/m8QWUm}{RedeMDS}}
+\def\riovacacaimirim{\href{http://pt.wikipedia.org/wiki/Rio_Vacaca\%C3\%AD-Mirim}{Rio Vacacaí-Mirim}}
+\def\riojacui{\href{http://pt.wikipedia.org/wiki/Rio_Jacu\%C3\%AD}{Rio Jacuí}}
+\def\rioguaiba{\href{http://pt.wikipedia.org/wiki/Lago_Gua\%C3\%ADba}{Rio Guaíba}}
+\def\santamaria{\href{http://pt.wikipedia.org/wiki/Santa_Maria_\%28Rio_Grande_do_Sul\%29}{Santa Maria}}
+\def\topodata{\href{http://www.dsr.inpe.br/topodata/}{TOPODATA}}
+\def\ufsm{\href{http://site.ufsm.br/}{UFSM}}
 
 % Variables
 \def\geoNew{\texttt{GEO\_25}}
@@ -168,6 +185,7 @@
 \def\demOld{\texttt{ELEV\_90}}
 \def\landOld{\texttt{LU1980}}
 \def\landNew{\texttt{LU2009}}
+\def\googleearth{Google Earth\textregistered{}}
 
 %%==============================================================================
 %% Identificação do trabalho
@@ -392,11 +410,13 @@ about its reliability, which is critical for decision makers.
 
 % Adiciona cada capitulo
 \include{chap/chap00}
-\include{chap/chap01}
-% \include{chap/chap02}
+% \include{chap/chap01}
+\selectlanguage{brazilian}
+\include{chap/chap02}
+\selectlanguage{english}
 % \include{chap/chap03}
 % \include{chap/chap04}
-% \include{chap/chap05}
+\include{chap/chap05}
 %\include{capitulos/point-pattern-analysis}
 \setlength{\baselineskip}{\baselineskip}
 
