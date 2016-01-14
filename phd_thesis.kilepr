@@ -16,6 +16,13 @@ src_extensions=.tex .ltx .latex .dtx .ins .Rnw
 MakeIndex=
 QuickBuild=
 
+[document-settings,item:chap/apene.Rnw]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
 [document-settings,item:chap/chap00.Rnw]
 Bookmarks=
 Encoding=UTF-8
@@ -26,11 +33,11 @@ Mode=LaTeX
 [item:chap/apene.Rnw]
 archive=true
 column=0
-encoding=
-highlight=
-line=1150
-mode=
-open=true
+encoding=UTF-8
+highlight=LaTeX
+line=0
+mode=LaTeX
+open=false
 order=-1
 
 [item:chap/chap00.Rnw]
