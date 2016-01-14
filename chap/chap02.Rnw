@@ -2,7 +2,7 @@
 \chapter{Modelo Conceitual de Pedogênese}
 \label{chap:chap02}
 %\SweaveUTF8
-
+\SweaveOpts{prefix.string = fig/chap02}
 
 \def\ptkeys{Província Geológica do Paraná, Bacia do DNOS, Rebordo do Planalto, Fatores de formação do solo, 
 Pedogênese}
@@ -48,11 +48,88 @@ DillEtAl2004, Miguel2010}.
 \centering
 \begin{minipage}[b]{95mm}
 \subcaption{}
-\includegraphics{fig/chap02-location}
+<<location,fig=TRUE,echo=FALSE>>=
+# Start GRASS
+invisible(capture.output(
+  spgrass6::initGRASS(
+    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE))) 
+
+# Load and process polygon with the boundary of Brazilian territory
+brazil <- raster::shapefile("~/projects/dnos-sm-rs/dnos-sm-rs-data/boundaries/brasil.shp")
+bb <- sp::bbox(brazil)
+bb[1, 2] <- -34.7
+slot(brazil, "bbox") <- bb
+
+# Load and process polygon with the boundary of the Paraná Sedimentary Basin
+parana <- raster::shapefile("~/projects/dnos-sm-rs/dnos-sm-rs-data/boundaries/parana-basin.shp")
+parana <- sp::spTransform(parana, sp::proj4string(brazil))
+parana <- list("sp.polygons", parana, col = "gray", fill = "gray", alpha = 0.6, first = FALSE)
+
+# Prepare points for reference cities
+pts <- data.frame(rbind(
+  c(-53.790215, -29.657668), c(-47.887768, -15.788838), c(-46.665337, -23.536445), 
+  c(-51.211134, -30.032484), c(-59.992370, -3.080757)))
+col <- c("blue", rep("black", nrow(pts) - 1))
+colnames(pts) <- c("long", "lat")
+sp::coordinates(pts) <- ~ long + lat
+sp::proj4string(pts) <- sp::proj4string(brazil)
+pts <- list("sp.points", pts, pch = 20, cex = 0.5, col = col)
+
+# set map colors
+brazil$UF_05 <- as.factor(brazil$UF_05)
+rs <- rep("lemonchiffon", length(brazil$UF_05))
+rs[which(brazil$UF_05 == "RS")] = "lightgreen"
+
+# prepare spplot of brazil
+brazil <- sp::spplot(
+  brazil, zcol = "UF_05", aspect = "iso", col = "gray", 
+  scales = list(draw = TRUE, x = list(at = seq(-70, -35, 5)), y = list(at = seq(-30, 5, 5))),
+  col.regions = colorRampPalette(rs)(27), colorkey = FALSE, cex = 0.3, sp.layout = list(parana, pts),
+  par.settings = list(
+    fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
+    layout.heights = list(top.padding = 0, bottom.padding = 0)),
+  panel = function(x, y, ...) {
+    sp::panel.polygonsplot(x, y, ...)
+    lattice::panel.abline(h = seq(-30, 0, 5), v = seq(-70, -40, 5), col = "gray", lty = "dashed", lwd = 0.5)
+    lattice::panel.text(x = -53.790215, y = -29.657668, "Santa Maria", pos = 2, col = "red")
+    lattice::panel.text(x = -47.887768, y = -15.788838, "Brasília", pos = 4)
+    lattice::panel.text(x = -46.665337, y = -23.536445, "São Paulo", pos = 4)
+    lattice::panel.text(x = -51.211134, y = -30.032484, "Porto Alegre", pos = 4)
+    lattice::panel.text(x = -59.992370, y = -3.080757, "Manaus", pos = 4)
+  }
+)
+
+# Print map
+plot(brazil)
+@
 \end{minipage}
 \begin{minipage}[b]{95mm}
 \subcaption{}
-\includegraphics{fig/chap02-perspective}
+<<perspective,echo=FALSE,fig=TRUE>>=
+# Start GRASS
+invisible(capture.output(
+  spgrass6::initGRASS(
+    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE))) 
+    
+# Prepare figure with study area in perspective
+system("g.region rast=ELEV_10", ignore.stdout = TRUE, ignore.stderr = TRUE)
+output <- path.expand("~/projects/phd_thesis/chap/fig/chap02-perspective")
+cmd <- paste(
+  "m.nviz.image elevation_map=ELEV_10 color_map=rapideye_composite arrow_position=600,40 ",
+  "vline=manual_limit_carta,manual_sublimit_carta vline_color=blue,red vline_width=2,2 ",
+  "vline_mode=surface,surface vline_height=0,0 vline_position=0,0,0,0,0,0 perspective=13 ",
+  "light_position=0.85,0.25,0.8 position=0.75,1 height=4500 zexag=3.0 format=tif output=", 
+  output, sep = "")
+system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
+
+# Convert tif file to png
+cmd <- paste("convert ~/projects/phd_thesis/chap/fig/chap02-perspective.tif ",
+             "convert ~/projects/phd_thesis/chap/fig/chap02-perspective.png", sep = "")
+system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
+system("rm ~/projects/phd_thesis/chap/fig/chap02-perspective.tif")
+@
 \end{minipage}
 \caption{Localização da bacia de captação do reservatório do DNOS/CORSAN (a) no Município de Santa Maria, 
 Estado do Rio Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza). A 
