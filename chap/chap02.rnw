@@ -15,53 +15,6 @@
  lattice::trellis.par.set(
    fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
    layout.heights = list(top.padding = 0, bottom.padding = 0))
-@
-
-\def\ptkeys{Província Geológica do Paraná, Bacia do DNOS, Rebordo do Planalto, Fatores de formação do solo, 
-Pedogênese}
-\begin{chapterabstract}{brazilian}{\ptkeys}
- Este é o resumo em português.
-\end{chapterabstract}
-
-\def\enkeys{Paraná Geological Province, DNOS Catchment, Plateau Border, Soil formation factors, Pedogenesis}
-  
-\begin{chapterabstract}{english}{\enkeys}
- This is the English abstract.
-\end{chapterabstract}
-
-\formatchapter
-
-\selectlanguage{brazilian}
-
-\section{Apresentação}
-\label{sec:chap02-apresentacao}
-
-\titlenote{Colaboraram na preparação deste documento (em ordem de importância): Pablo Miguel (UFPel), 
-Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena 
-Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World 
-Soil Information).}
-
-A modelagem espacial do solo inicia com a definição de um \emph{modelo conceitual de pedogênese}. Um modelo 
-conceitual de pedogênese constitui uma representação verbal da realidade sob estudo que inclui a descrição 
-explícita dos fatores e processos de formação do solo que determinam as características do solo e o seu padrão 
-de distribuição espaço-temporal. Isso requer a reunião de toda a informação ambiental disponível e aplicação 
-dos conceitos de relação solo paisagem, desenvolvimento do solo em catenas, ou outro modelo teórico de 
-explicação da variação espacial do solo.
-
-O presente documento apresenta o modelo conceitual de pedogênese da bacia de captação do reservatório do 
-DNOS/CORSAN (Departamento Nacional de Obras de Saneamento/Companhia Riograndense de Saneamento), localizada na 
-divisa entre os municípios de \itaara{} (ao norte) e \santamaria{} (ao sul), na porção sul da \baciaparana{},
-estado do Rio Grande do Sul, Brasil (\autoref{fig:chap02-location}). A bacia de captação do reservatório do 
-DNOS/CORSAN corresponde à cabeceira da bacia hidrográfica do \riovacacaimirim{}, tributário do \riojacui{} e, 
-consequentemente, do \rioguaiba{} e da \lagoadospatos{}. A bacia de captação do reservatório do DNOS/CORSAN
-cobre uma área de \SI{\pm29}{\square\kilo\metre} e alimenta um reservatório com volume máximo 
-de \SI{\pm3800000}{\cubic\metre} em uma área inundada de \SI{0,74}{\square\kilo\metre}. Este reservatório 
-contribui com até \SI{30}{\percent} do abastecimento de água da cidade de Santa Maria \cite{Dias2003, 
-DillEtAl2004, Miguel2010}.
-
-\begin{figure}[!ht]
- \centering
- <<echo = FALSE>>=
  
  # Load and process polygon with the boundary of Brazilian territory
  brazil <- raster::shapefile("~/projects/dnos-sm-rs/dnos-sm-rs-data/boundaries/brasil.shp")
@@ -105,34 +58,77 @@ DillEtAl2004, Miguel2010}.
      }
    )
    
-   # Prepare figure with study area in perspective
-   system("g.region rast=ELEV_10", ignore.stdout = TRUE, ignore.stderr = TRUE)
-   output <- path.expand("~/projects/phd_thesis/chap/fig/chap02-perspective")
-   cmd <- paste(
-     "m.nviz.image elevation_map=ELEV_10 color_map=rapideye_composite arrow_position=600,40 ",
-     "vline=manual_limit_carta,manual_sublimit_carta vline_color=blue,red vline_width=2,2 ",
-     "vline_mode=surface,surface vline_height=0,0 vline_position=0,0,0,0,0,0 perspective=13 ",
-     "light_position=0.85,0.25,0.8 position=0.75,1 height=4500 zexag=3.0 format=tif output=", 
-     output, sep = "")
-   system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
-   
-   # Convert tif file to png
-   cmd <- paste("convert ~/projects/phd_thesis/chap/fig/chap02-perspective.tif ",
-                "convert ~/projects/phd_thesis/chap/fig/chap02-perspective.png", sep = "")
-   system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
-   system("rm ~/projects/phd_thesis/chap/fig/chap02-perspective.tif")
- @
+ # Prepare figure with study area in perspective
+ system("g.region rast=ELEV_10", ignore.stdout = TRUE, ignore.stderr = TRUE)
+ output <- path.expand("~/projects/phd_thesis/chap/fig/chap02-perspective")
+ cmd <- paste(
+   "m.nviz.image elevation_map=ELEV_10 color_map=rapideye_composite arrow_position=600,40 ",
+   "vline=manual_limit_carta,manual_sublimit_carta vline_color=blue,red vline_width=2,2 ",
+   "vline_mode=surface,surface vline_height=0,0 vline_position=0,0,0,0,0,0 perspective=13 ",
+   "light_position=0.85,0.25,0.8 position=0.75,1 height=4500 zexag=3.0 format=tif output=", 
+   output, sep = "")
+ system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
+  
+ # Convert tif file to png
+ cmd <- paste("convert ~/projects/phd_thesis/chap/fig/chap02-perspective.tif ",
+              "convert ~/projects/phd_thesis/chap/fig/chap02-perspective.png", sep = "")
+ system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
+ system("rm ~/projects/phd_thesis/chap/fig/chap02-perspective.tif")
+@
+
+\def\ptkeys{Província Geológica do Paraná, Bacia do DNOS, Rebordo do Planalto, Fatores de formação do solo, 
+Pedogênese}
+\begin{chapterabstract}{brazilian}{\ptkeys}
+ Este é o resumo em português.
+\end{chapterabstract}
+
+\def\enkeys{Paraná Geological Province, DNOS Catchment, Plateau Border, Soil formation factors, Pedogenesis}
+  
+\begin{chapterabstract}{english}{\enkeys}
+ This is the English abstract.
+\end{chapterabstract}
+
+\formatchapter
+
+\section{Apresentação}
+\label{sec:chap02-apresentacao}
+
+\titlenote{Colaboraram na preparação deste documento (em ordem de importância): Pablo Miguel (UFPel), 
+Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena 
+Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World 
+Soil Information).}
+
+A modelagem espacial do solo inicia com a definição de um \emph{modelo conceitual de pedogênese}. Um modelo 
+conceitual de pedogênese constitui uma representação verbal da realidade sob estudo que inclui a descrição 
+explícita dos fatores e processos de formação do solo que determinam as características do solo e o seu padrão 
+de distribuição espaço-temporal. Isso requer a reunião de toda a informação ambiental disponível e aplicação 
+dos conceitos de relação solo paisagem, desenvolvimento do solo em catenas, ou outro modelo teórico de 
+explicação da variação espacial do solo.
+
+O presente documento apresenta o modelo conceitual de pedogênese da bacia de captação do reservatório do 
+DNOS/CORSAN (Departamento Nacional de Obras de Saneamento/Companhia Riograndense de Saneamento), localizada na 
+divisa entre os municípios de \itaara{} (ao norte) e \santamaria{} (ao sul), na porção sul da \baciaparana{},
+estado do Rio Grande do Sul, Brasil (\autoref{fig:chap02-location}). A bacia de captação do reservatório do 
+DNOS/CORSAN corresponde à cabeceira da bacia hidrográfica do \riovacacaimirim{}, tributário do \riojacui{} e, 
+consequentemente, do \rioguaiba{} e da \lagoadospatos{}. A bacia de captação do reservatório do DNOS/CORSAN
+cobre uma área de \SI{\pm29}{\square\kilo\metre} e alimenta um reservatório com volume máximo 
+de \SI{\pm3800000}{\cubic\metre} em uma área inundada de \SI{0,74}{\square\kilo\metre}. Este reservatório 
+contribui com até \SI{30}{\percent} do abastecimento de água da cidade de Santa Maria \cite{Dias2003, 
+DillEtAl2004, Miguel2010}.
+
+\begin{figure}[!ht]
+ \centering
  \begin{minipage}[b]{95mm}
   \subcaption{}
   \centering
   <<location, fig = TRUE, echo = FALSE>>=
-   print(brazil)
+   brazil
   @
  \end{minipage}
  \begin{minipage}[b]{95mm}
   \subcaption{}
   \centering
-  \includegraphics{fig/chap02-perspective}
+  \includegraphics{chap/fig/chap02-perspective}
  \end{minipage}
  \caption{Localização da bacia de captação do reservatório do DNOS/CORSAN (a) no Município de Santa Maria, 
  Estado do Rio Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza). A 
@@ -148,9 +144,9 @@ do DNOS/CORSAN -- iniciaram no ano de \num{2008} com o grupo de pesquisa \emph{G
 comportamento dos solos do RS}\footsolosdors{}, sediado no Departamento de Solos da Universidade Federal 
 de Santa Maria (\ufsm). Devido à limitação de recursos, o grupo de pesquisa optou por restringir seus estudos 
 em modelagem espacial do solo à uma parte da bacia do DNOS. A área escolhida cobre \SI{\pm60}{\percent} de toda 
-a bacia do DNOS, o que corresponde à uma área de \SI{\pm18}\square\kilo\metre}. A área de estudo foi escolhida 
-por apresentar acesso facilitado, além de englobar as todas as formações geológicas, geoformas, usos da terra, 
-e vegetação presentes na bacia do DNOS.
+a bacia do DNOS, o que corresponde à uma área de \SI{\pm18}{\square\kilo\metre}. A área de estudo foi 
+escolhida por apresentar acesso facilitado, além de englobar as todas as formações geológicas, geoformas, usos 
+da terra, e vegetação presentes na bacia do DNOS.
 
 \section{Clima}
 \label{sec:chap02-clima}
@@ -377,7 +373,7 @@ Dado que a declividade e o desnível entre a parte mais baixa e a parte mais alt
 cheias costumam apresentar velocidade e vazão bastante grandes \cite{PaivaEtAl2001, SutiliEtAl2009}. Em média, 
 nos \SI{7}{\km} de extensão do rio Vacacaí-Mirim, da nascente até o reservatório, a declividade média é de 
 \SI{0,03}{\m\per\m}. Isso representa um desnível de \SI{\pm210}{\m}, o que resulta em um tempo de concentração 
-da bacia estimado em \SI{3}{\hours} \cite{PaivaEtAl2001}. Essas características causam erosão severa nas 
+da bacia estimado em \SI{3}{\hour} \cite{PaivaEtAl2001}. Essas características causam erosão severa nas 
 margens dos cursos de água nas áreas mais baixas (depósitos aluviais), sobretudo nos raios externos das 
 curvas, onde a velocidade da água é maior \cite{SutiliEtAl2009}. Em alguns trechos, os cursos de água chegam a 
 ter sua largura duplicada em menos de uma década, resultando no aumento da sinuosidade e do nível de fundo 
