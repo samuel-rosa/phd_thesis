@@ -17,15 +17,16 @@
    layout.heights = list(top.padding = 0, bottom.padding = 0))
 @
 
-\def\ptkeys{}
+\def\ptkeys{Província Geológica do Paraná, Bacia do DNOS, Rebordo do Planalto, Fatores de formação do solo, 
+Pedogênese}
 \begin{chapterabstract}{brazilian}{\ptkeys}
- 
+ Este é o resumo em português.
 \end{chapterabstract}
 
-\def\enkeys{}
+\def\enkeys{Paraná Geological Province, DNOS Catchment, Plateau Border, Soil formation factors, Pedogenesis}
   
 \begin{chapterabstract}{english}{\enkeys}
- 
+ This is the English abstract.
 \end{chapterabstract}
 
 \formatchapter
