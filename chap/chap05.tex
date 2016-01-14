@@ -169,14 +169,13 @@ Three soil properties (fine earth fraction, \SI{<2}{\mm}) were explored: clay co
 \si{\gram\per\kilo\gram}), organic carbon content (SOC, \si{\gram\per\kilo\gram}), and effective cation 
 exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}). CLAY was determined by the pipette method. SOC was 
 determined using wet digestion. ECEC was calculated as the sum of exchangeable bases plus exchangeable 
-acidity. 
-The soil properties selected were expected to present different patterns of spatial variation and correlation 
-with the most dominant factors of soil formation \cite{Jenny1941} in the area: organisms (\textit{O}), relief 
-(\textit{R}), and parent material (\textit{P}). CLAY was presumed to have a stronger relation with \textit{P}, 
-while SOC was expected to be more correlated with \textit{O}. Because the soils of the study area were 
-strongly eroded due to intense agriculture in the \num{20}th century, both CLAY and SOC were also expected to 
-be closely related with \textit{R}. Finally, ECEC was expected to be strongly correlated with \textit{P} and 
-\textit{O}, which is supported by its natural relationship with both CLAY and SOC.
+acidity. The soil properties selected were expected to present different patterns of spatial variation and 
+correlation with the most dominant factors of soil formation \cite{Jenny1941} in the area: organisms 
+(\textit{O}), relief (\textit{R}), and parent material (\textit{P}). CLAY was presumed to have a stronger 
+relation with \textit{P}, while SOC was expected to be more correlated with \textit{O}. Because the soils of 
+the study area were strongly eroded due to intense agriculture in the \num{20}th century, both CLAY and SOC 
+were also expected to be closely related with \textit{R}. Finally, ECEC was expected to be strongly correlated 
+with \textit{P} and \textit{O}, which is supported by its natural relationship with both CLAY and SOC.
 
 \begin{figure}[!ht]
  \centering
@@ -341,12 +340,12 @@ The less detailed DEM (\demOld) is the hole-filled SRTM DEM version~\num{4} \cit
 (\SI{\sim30}{\m}), but elevation data were aggregated to \SI{3}{\arcsecond} (\SI{\sim90}{\m}) for public 
 release in regions outside the United States \cite{ReuterEtAl2007}. The more detailed DEM (\demNew) was 
 produced by interpolating contour lines with vertical spacing of \SI{10}{\m} along with data about the 
-drainage 
-network, lakes and peaks digitized from topographic maps with \scale{25000} (\autoref{fig:chap05-dem-new}). 
-Interpolation to \SI{5}{\m} pixel size was performed using a hydrologically correct algorithm implemented in 
-\arcgis{} software by ESRI \cite{Hutchinson1989}. Contour line artefacts were minimized using a seven by seven 
-low-pass filter (\grass{r.neighbors}). The window size was chosen such that the smoothed DEM best matched the 
-original contour map while also respecting the original drainage network pattern.
+drainage network, lakes and peaks digitized from topographic maps with \scale{25000} 
+(\autoref{fig:chap05-dem-new}). Interpolation to \SI{5}{\m} pixel size was performed using a hydrologically 
+correct algorithm implemented in \arcgis{} software by ESRI \cite{Hutchinson1989}. Contour line artefacts were 
+minimized using a seven by seven low-pass filter (\grass{r.neighbors}). The window size was chosen such that 
+the smoothed DEM best matched the original contour map while also respecting the original drainage network 
+pattern.
 
 \input{chap/tab/chap01TAB1.tex}
 
