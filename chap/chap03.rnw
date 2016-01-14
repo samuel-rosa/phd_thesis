@@ -17,6 +17,8 @@
 
 \formatchapter
 
+\selectlanguage{english}
+
 \section{Introduction}
 \label{sec:chap03-introduction}
 

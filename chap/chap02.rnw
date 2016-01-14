@@ -17,6 +17,8 @@
 
 \formatchapter
 
+\selectlanguage{brazilian}
+
 \section{Apresentação}
 \label{sec:chap02-apresentacao}
 
