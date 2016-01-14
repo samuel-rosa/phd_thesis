@@ -1,24 +1,31 @@
 \ctable[
-   caption  = {Description of the $p=7$ dummy predictor variables derived from the two land use maps.},
-   label    = tab:land-covars,
-   notespar,
-   pos      = !ht,
-   %    doinside = \scriptsize\setstretch{1.1}
-   doinside = \scriptsize
-   ]{l p{0.85\textwidth} l}{
-   \tnote[a]{Minimum Legible Delineation calculated following \citet{Rossiter2000}.}
-   }{                                                                                                                                \FL
-   Code             & Mapping unit(s) included and Description\tmark[a]                                                                       \ML
-   \multicolumn{2}{l}{Source: \citet{DSG1980, DSG1992, DSG1992a}. Cartographic scale: 1:25,000. Minimum Legible Delineation: 2.5~ha.} \NN
-   \texttt{LU1980a} & \textit{FS}. Native forest, which is likely to have soils with higher fertility.                              \NN
-   \texttt{LU1980b} & \textit{H}. Animal husbandry, which is likely to have a soil fertility status lower than native forests and is the second most important land use in the area. \NN
-   Other            & Plantation forests (\textit{PF}) and human settlements (\textit{S}).                                           \NN
-    & \NN
-   \multicolumn{2}{l}{Source: \citet{SamuelRosaEtAl2011a}. Cartographic scale: 1:2,000. Minimum Legible Delineation: 100~m$^2$.}      \NN
-   \texttt{LU2009a} & \textit{FS}. Native forest.                                                                                    \NN
-   \texttt{LU2009b} & \textit{SS}. Shrubland, which is likely to have SOC and ECEC level above those found in areas used with annual crop agriculture and animal husbandry, but lower than in native forests. \NN
-   \texttt{LU2009c} & \textit{H}. Animal husbandry. \NN
-   \texttt{LU2009d} & \textit{AA}. Annual crop agriculture, which is likely to have the lowest soil fertility due to the usually poor management practices employed. \NN
-   \texttt{LUdiff}  & Land use difference between 1980 and 2009. It can be useful to explain, for example, low SOC in forest soils due to previous use with crop agriculture or animal husbandry. \NN
-   Other            & Plantation forests (\textit{PF}), human settlements (\textit{S}), and other land uses (\textit{O}), comprising natural and artificial water bodies. \LL
-   }
+ caption  = {Description of the $p = 7$ dummy predictor variables derived from the two land use maps.},
+ label    = tab:chap05-land-covars,
+ notespar,
+ pos      = !ht,
+ % doinside = \scriptsize\setstretch{1.1}
+ doinside = \scriptsize
+ ]{l p{0.85\textwidth} l}{
+ \tnote[a]{Minimum Legible Delineation calculated following \citeonline{Rossiter2000}.}
+ }{ \FL
+ Code & Mapping unit(s) included and Description\tmark[a] \ML
+ \multicolumn{2}{l}{Source: \citeonline{DSG1980, DSG1992, DSG1992a}. Cartographic scale: \num{1}:\num{25000}.
+ Minimum Legible Delineation: \SI{2.5}{\hectare}.} \NN
+ \texttt{LU1980a} & \textit{FS}. Native forest, which is likely to have soil with higher fertility. \NN
+ \texttt{LU1980b} & \textit{H}. Animal husbandry, which is likely to have soil fertility status lower than 
+ native forests and is the second most important land use in the area. \NN
+ Other & Plantation forests (\textit{PF}) and human settlements (\textit{S}). \NN
+ & \NN
+ \multicolumn{2}{l}{Source: \citeonline{SamuelRosaEtAl2011a}. Cartographic scale: \num{1}:\num{2000}. Minimum 
+ Legible Delineation: \SY{100}{\square\m}.} \NN
+ \texttt{LU2009a} & \textit{FS}. Native forest. \NN
+ \texttt{LU2009b} & \textit{SS}. Shrubland, which is likely to have SOC and ECEC level above those found in 
+ areas used with annual crop agriculture and animal husbandry, but lower than in native forests. \NN
+ \texttt{LU2009c} & \textit{H}. Animal husbandry. \NN
+ \texttt{LU2009d} & \textit{AA}. Annual crop agriculture, which is likely to have the lowest soil fertility 
+ due to the usually poor management practices employed. \NN
+ \texttt{LUdiff}  & Land use difference between 1980 and 2009. It can be useful to explain, for example, low 
+ SOC in forest soil due to previous use with crop agriculture or animal husbandry. \NN
+ Other & Plantation forests (\textit{PF}), human settlements (\textit{S}), and other land uses 
+ (\textit{O}), comprising natural and artificial water bodies. \LL
+ }
