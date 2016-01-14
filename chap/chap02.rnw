@@ -139,29 +139,12 @@ DillEtAl2004, Miguel2010}.
  \label{fig:chap02-location}
 \end{figure}
 
-% TODO: Include figure with location of the study area.
-% \begin{figure}[ht]
-%  \centering
-%  \includegraphics[width=0.45\textwidth]{fig/chap02-location.pdf}
-%  \caption{, 
-%  }
-%  \label{fig:chap02-location}
-% \end{figure}
-% 
-% \begin{figure}[ht]
-%   \centering
-%   \includegraphics[width=0.45\textwidth]{figures/aepsm.pdf}
-%   \caption{A Área de Estudos de Pedologia Quantitativa de Santa Maria (AEPQ-SM) faz parte da bacia 
-%   de captação do reservatório do DNOS/CORSAN.}
-%   \label{fig:aepsm}
-% \end{figure}
-
-\def\solosdors{O grupo está registado no Diretório dos Grupos de Pesquisa no Brasil 
-(\href{http://dgp.cnpq.br/dgp/espelhogrupo/9373361709890764}{DGP}) mantido pelo CNPq.}
+\def\footsolosdors{\footnote{O grupo está registado no Diretório dos Grupos de Pesquisa no Brasil 
+(\href{http://dgp.cnpq.br/dgp/espelhogrupo/9373361709890764}{DGP}) mantido pelo CNPq.}}
 
 Os estudos em modelagem espacial do solo na bacia do DNOS -- abreviatura de bacia de captação do reservatório 
 do DNOS/CORSAN -- iniciaram no ano de \num{2008} com o grupo de pesquisa \emph{Gênese, composição e 
-comportamento dos solos do RS}\footnote{\solosdors}, sediado no Departamento de Solos da Universidade Federal 
+comportamento dos solos do RS}\footsolosdors{}, sediado no Departamento de Solos da Universidade Federal 
 de Santa Maria (\ufsm). Devido à limitação de recursos, o grupo de pesquisa optou por restringir seus estudos 
 em modelagem espacial do solo à uma parte da bacia do DNOS. A área escolhida cobre \SI{\pm60}{\percent} de toda 
 a bacia do DNOS, o que corresponde à uma área de \SI{\pm18}\square\kilo\metre}. A área de estudo foi escolhida 
@@ -171,12 +154,13 @@ e vegetação presentes na bacia do DNOS.
 \section{Clima}
 \label{sec:chap02-clima}
 
-\def\cfa{\href{https://pt.wikipedia.org/wiki/Clima_subtropical_\%C3\%BAmido}{Cfa}}
+\def\footcfa{\footnote{Mais informações sobre o tipo climático Cfa podem ser encontrados na 
+\href{https://pt.wikipedia.org/wiki/Clima_subtropical_\%C3\%BAmido}{Wikipedia}.}}
 
-O clima local é classificado como \cfa{} -- subtropical úmido sem estação seca definida --, com temperatura 
-média anual de \SI{19,1}{\celsius}. As temperaturas podem alcançar \SI{>40}{\celsius}, no verão, e valores 
-negativos no inverno \cite{HeldweinEtAl2009}. A precipitação média anual é de \SI{1708}{\milli\metre} bem 
-distribuídos ao longo do ano \cite{Maluf2000}. Predominam os ventos do quadrante leste (frio, úmido e de 
+O clima local é classificado como Cfa\footcfa{} -- subtropical úmido sem estação seca definida --, com 
+temperatura média anual de \SI{19,1}{\celsius}. As temperaturas podem alcançar \SI{>40}{\celsius}, no verão, e 
+valores negativos no inverno \cite{HeldweinEtAl2009}. A precipitação média anual é de \SI{1708}{\milli\metre} 
+bem distribuídos ao longo do ano \cite{Maluf2000}. Predominam os ventos do quadrante leste (frio, úmido e de 
 intensidade fraca a moderada), oeste (frio, seco e de intensidade fraca a moderada) e norte (quente, seco e de 
 intensidade moderada a forte) \cite{HeldweinEtAl2009}.
 
@@ -306,24 +290,23 @@ Já o Rebordo do Planalto é caracterizado pela ampla variação altimétrica, d
 abruptas, apresentando formas denudacionais com topos convexos (fluxo hídrico divergente), aguçados e em 
 formas de escarpas. Nesses locais, as vertentes assumem forma retilínea com grande desnível 
 \cite{NascimentoEtAl2010}, muitas vezes interrompidas por degraus ou patamares, na maioria das vezes encaixadas 
-em falhas e/ou fraturas. 
-Esses patamares são resultado da ação diferencial dos processos denudacionais sobre a paisagem, geralmente 
-condicionados pela resistência do material de origem, seja ela química/mineralógica (rochas vulcânicas básicas 
-vs. ácidas), seja ela física/granulométrica (rochas vulcânicas vs. sedimentares), ou estrutural (padrão de 
-diaclasamento vertical vs. horizontal das rochas vulcânicas) \cite{Holtz2003, Pedron2007, StreckEtAl2008}. 
-Entretanto, em algumas situações, os patamares são formados por depósitos coluviais -- mesmo nas partes altas 
-do Rebordo do Planalto -- resultantes de movimentos de massa causados por eventos pluviométricos de elevada 
-intensidade e/ou duração \cite{PinheiroEtAl2004, PaisaniEtAl2010}. Nesses casos, os patamares possuem menor 
-dimensão e maior declividade. Em outras situações, os patamares são inteiramente recobertos por colúvios 
-provenientes de áreas à montante, sobretudo dos arenitos da Formação Botucatu, formando vertentes alongadas e 
-com menor inclinação, que chegam até a margem dos cursos de água. Assim, as encostas que apresentam patamares 
-constituem, de modo geral, vertentes mais curtas e inclinadas, muitas vezes escarpadas.
+em falhas e/ou fraturas. Esses patamares são resultado da ação diferencial dos processos denudacionais sobre a 
+paisagem, geralmente condicionados pela resistência do material de origem, seja ela química/mineralógica 
+(rochas vulcânicas básicas vs. ácidas), seja ela física/granulométrica (rochas vulcânicas vs. sedimentares), ou 
+estrutural (padrão de diaclasamento vertical vs. horizontal das rochas vulcânicas) \cite{Holtz2003, Pedron2007, 
+StreckEtAl2008}. Entretanto, em algumas situações, os patamares são formados por depósitos coluviais -- mesmo 
+nas partes altas do Rebordo do Planalto -- resultantes de movimentos de massa causados por eventos 
+pluviométricos de elevada intensidade e/ou duração \cite{PinheiroEtAl2004, PaisaniEtAl2010}. Nesses casos, os 
+patamares possuem menor dimensão e maior declividade. Em outras situações, os patamares são inteiramente 
+recobertos por colúvios provenientes de áreas à montante, sobretudo dos arenitos da Formação Botucatu, formando 
+vertentes alongadas e com menor inclinação, que chegam até a margem dos cursos de água. Assim, as encostas que 
+apresentam patamares constituem, de modo geral, vertentes mais curtas e inclinadas, muitas vezes escarpadas.
 
 % \begin{figure}[h]
 %   \centering
 %   \includegraphics[height=7cm]{figures/dem10}
 %   \caption{Modelo digital de elevação da AEPQ-SM com interpolado de curvas de nível com 10~m de 
-equidistância 
+% equidistância 
 % \citep{DSG1980, DSG1992, DSG1992a}.}
 %   \label{fig:dem10}
 % \end{figure}
@@ -457,7 +440,7 @@ Zalamena2008}.
 %   \includegraphics[height=7cm]{figures/land2009}
 %   \caption{Mapa do uso da terra da AEPQ-SM publicado na escala 1:2.000 \citep{SamuelRosaEtAl2011a}.\\Legenda 
 % de acordo com o guia para descrição do solo da FAO \citep{FAO2006}: O - Outros usos (água), S - 
-Assentamentos 
+% Assentamentos 
 % humanos, PF - Silvicultura, AA - Agricultura anual, H - Pecuária, SS - Vegetação secundária (capoeira), FS - 
 % Floresta nativa.}
 %   \label{fig:land2009}
@@ -519,8 +502,7 @@ condições de degradação do solo costumam ser bastante avançadas, exceto por
 olerícola profissional. Assim como as áreas de agricultura, as florestas exóticas (\textit{Eucalyptus}) são 
 implantadas em áreas de menor declividade e com solo mais profundo, geralmente onde o acesso com máquinas é 
 melhor, sobretudo pela necessidade de escoamento da produção. A área ocupada por essa atividade possui 
-tendência de 
-crescimento, haja vista os novos plantios existentes e o relato de alguns moradores 
+tendência de crescimento, haja vista os novos plantios existentes e o relato de alguns moradores 
 \cite{SamuelRosaEtAl2011a}. Em geral, os novos plantios são implantados em áreas de produção agropecuária, seja 
 pelo elevado nível de degradação do solo já atingido, seja pela redução da força de trabalho das famílias 
 devido ao êxodo rural, ou pela maior lucratividade dessa atividade.
@@ -561,7 +543,7 @@ características do solo são fortemente influenciadas pelo hidromorfismo e depo
 %   \includegraphics[height=7cm]{figures/solo1989}
 %   \caption{Mapa do solo da AEPQ-SM publicado na escala 1:100.000 \citep{AzolinEtAl1988}.\\Legenda de acordo 
 % com o sistema brasileiro de taxonomia do solo \citep{SoaresEtAl2005}: TBa-Rd - Terra Bruna Estruturada 
-álica, 
+% álica, 
 % Re4 - Solo Litólico Eutrófico/Distrófico relevo montanhoso, Re-C-Co - Solo Litólico Eutrófico relevo forte 
 % ondulado, Rd1 - Solo Litólico Distrófico/Eutrófico, C1 - Cambissolo Eutrófico.}
 %   \label{fig:solo1989}
