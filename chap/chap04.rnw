@@ -188,8 +188,8 @@ The field location of the GCPs is as follows (in Portuguese):
  lado esquerdo subindo, no interior da estrada.
 \end{description}
 
-Attribute validation of soil, geological, and land use maps, and DEMs was done using a set of $n = 60$ 
-validation points located along $m = 12$ linear transects. The procedures for obtaining soil, geological, land 
+Attribute validation of soil, geologic, and land use maps, and DEMs was done using a set of $n = 60$ 
+validation points located along $m = 12$ linear transects. The procedures for obtaining soil, geologic, land 
 use, and elevation data at these validation points is described in \autoref{apen:soil-data}. Such a validation 
 exercise was carried out because these maps originally have no accompanying validation information.
 
@@ -306,12 +306,15 @@ and overlaps between polygons. This required a topological edition prior to the 
 was a mismatch between the boundary of \soilNew{} and the actual boundary of the study area as estimated using 
 \demNew{} (\autoref{sec:covar-data-dem}). This occurred because the database used to produce \soilNew{} 
 included \googleearth{} imagery and topographic maps, which are data sources that differ considerably in their 
-positional accuracy (\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). To avoid data losses, 
-all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil polygons were defined 
+positional accuracy (\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). To avoid data 
+losses, 
+all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil polygons were 
+defined 
 based on land use (\landNew{}, \autoref{sec:covar-data-land-use}) and topographic data (contour lines, 
 \autoref{sec:covar-data-dem}) as it was done for the original map \cite{Miguel2010}. New delineations were 
 checked and approved without modifications by the author of the original map. Because \soilNew{} includes very 
-few geographical markers, its positional validation was not possible with the available GCPs. However, the RMSE 
+few geographical markers, its positional validation was not possible with the available GCPs. However, the 
+RMSE 
 is expected to vary between \SIrange{8}{114}{\m} across the study area as a result of the different errors 
 present in the data sources used in its production.
 
@@ -693,13 +696,13 @@ calculate previous terrain attributes. A minimum radius value of \SI{3}{\m} was 
 A total of $1 \times \tt{ELEV} + 7 \times (\tt{NOR}, \tt{SLP}, \tt{TWI}, \tt{SPI}, \tt{TPI}) = 36$ covariates 
 were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 
-\section{Geological maps}
+\section{Geologic maps}
 \label{sec:covar-data-geo-maps}
 
-Geological data comes from the two most recent geological maps (\geoOld{} and \geoNew{}) published in the 
+Geologic data comes from the two most recent geologic maps (\geoOld{} and \geoNew{}) published in the 
 \scales{50000}{25000} \cite{GasparettoEtAl1988, MacielFilho1990} (\autoref{fig:covar-data-geo-maps}). Both of 
 them were produced based on the most recent topographic maps produced by the Brazilian Army at the 
-\scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, geological maps were 
+\scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, geologic maps were 
 available only in the analogical format, and were hand digitalized and georeferenced in QGIS. Intersections 
 between all meridians and parallels ($n = 16$) were used as control points to adjust a second order polynomial 
 model. Resampling was performed using the cubic resampling method. The original coordinate reference system 
@@ -713,7 +716,7 @@ model. Resampling was performed using the cubic resampling method. The original 
   \centering
   <<fig = TRUE, echo = FALSE>>=
    
-   # Load less detailed geological map
+   # Load less detailed geologic map
    map <- spgrass6::readRAST6("recGEO_50")
    
    # Prepare data
@@ -745,7 +748,7 @@ model. Resampling was performed using the cubic resampling method. The original 
   \centering
   <<fig = TRUE, echo = FALSE>>=
    
-   # Load more detailed geological map
+   # Load more detailed geologic map
    map <- spgrass6::readRAST6("predGEO_25")
    map@bbox[1, ] <- dnos_bbox[1, ]
    map@bbox[2, ] <- dnos_bbox[2, ]
@@ -780,27 +783,27 @@ model. Resampling was performed using the cubic resampling method. The original 
    gc()
   @
  \end{minipage} 
- \caption{Geological maps (a) \geoOld{} and (b) \geoNew{} used to derive indicator covariates included in the 
+ \caption{Geologic maps (a) \geoOld{} and (b) \geoNew{} used to derive indicator covariates included in the 
  Santa Maria dataset.}
 \label{fig:covar-data-geo-maps}
 \end{figure}
 
-The positional validation of geological maps was performed using $n = 8$ (\geoOld{}) and $n = 5$ (\geoNew{}) 
-GCPs. Validation statistics show that the positional accuracy of both geological maps does not meet the current
+The positional validation of geologic maps was performed using $n = 8$ (\geoOld{}) and $n = 5$ (\geoNew{}) 
+GCPs. Validation statistics show that the positional accuracy of both geologic maps does not meet the current
 regulations of the Brazilian legislation (\autoref{tab:covar-data-geology-geo-val}). Estimated RMSE are 
 \num{147} and \SI{69}{\m} for \geoOld{} and \geoNew{}, respectively, when the maximum RMSE accepted is 
 \num{30} and \SI{15}{\m}. For \geoOld{}, the lowest accuracy is found in the y-coordinate, while for 
 \geoNew{}, the x-coordinate is the least accurate. Validation statistics suggest that there is a strong 
-systematic error, which probably was propagated from the topographic maps used to produce the geological maps.
+systematic error, which probably was propagated from the topographic maps used to produce the geologic maps.
 Therefore, the same strategy (affine transformation) used to remove the systematic positional error of the 
-topographic maps was employed on geological maps. Due to the lack of GCPs, model parameters were adjusted 
+topographic maps was employed on geologic maps. Due to the lack of GCPs, model parameters were adjusted 
 using the same set of GCPs used for the validation. The estimated uncertainty (RMSE) of the affine 
 transformation is \num{86} and \SI{22}{\m} for \geoOld{} and \geoNew{}, respectively. Curiously enough, the
 attribute validation indicates that \geoOld{} is more accurate (\SI{83.33}{\percent} than \geoNew{} 
 \SI{76.67}{\percent}.
 
 \begin{table}[ht]
- \caption{Error statistics of the horizontal validation of geological maps \geoOld{} and \geoNew{} using 
+ \caption{Error statistics of the horizontal validation of geologic maps \geoOld{} and \geoNew{} using 
  $n = 8$ and $n = 5$ GCPs.}
  \label{tab:covar-data-geology-geo-val}
  \centering
@@ -826,7 +829,7 @@ attribute validation indicates that \geoOld{} is more accurate (\SI{83.33}{\perc
 
 % \begin{figure}[ht]
 %  \centering
-%  \caption{Histogram of the azimuth distribution of the validation of geological maps 
+%  \caption{Histogram of the azimuth distribution of the validation of geologic maps 
 %  \tt{GEO\_50} (left) and \tt{GEO\_25} (right) in the attribute space. Azimuth values were 
 %  estimated using, respectively, eight and five GCPs located in easily identifiable geographical 
 %  markers. The graph was produced using \Rpackage{VecStatGraphs2D}.}

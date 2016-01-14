@@ -211,10 +211,10 @@ land uses such as human settlements and water bodies were not observed/sampled.
 
 \subsection{Geology}
 
-Soil parent material (\texttt{PARENT}, sedimentary or igneous), geological formation (\texttt{GEO}), and 
+Soil parent material (\texttt{PARENT}, sedimentary or igneous), geologic formation (\texttt{GEO}), and 
 lithology (\texttt{LITHO}) was inferred from direct observation of soil properties and local environmental 
-features in the field. Existing geological maps were used only when soil characteristics and environmental 
-features were insufficient to reach an agreement about the most likely soil parent material, geological 
+features in the field. Existing geologic maps were used only when soil characteristics and environmental 
+features were insufficient to reach an agreement about the most likely soil parent material, geologic 
 formation, and lithology.
 
 \subsection{Soil classification}
