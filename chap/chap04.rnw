@@ -176,8 +176,7 @@ The field location of the GCPs is as follows (in Portuguese):
  
  \item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto a rodovia federal BR158,
  próximo ao Bar e Armazém Ricardo, deslocado em \SI{1}{\m} para dentro do passeio em relação ao alinhamento 
-dos 
- postes da rede elétrica.
+ dos postes da rede elétrica.
  
  \item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (\SI{\pm30}{\cm}) que divide duas terras, à 
  esquerda coberta com floresta nativa/exótica, à direita ocupada com lavoura de culturas anuais. O ponto está 
@@ -186,8 +185,7 @@ dos
  \item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após o término 
  da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do campo nativo, alinhado 
  (\SI{\pm20}{\cm}) com a cerca dos dois lados da estrada. Locado \SI{1}{\m} distante do moirão da cerca do 
-lado 
- esquerdo subindo, no interior da estrada.
+ lado esquerdo subindo, no interior da estrada.
 \end{description}
 
 Attribute validation of soil, geological, and land use maps, and DEMs was done using a set of $n = 60$ 
@@ -195,7 +193,7 @@ validation points located along $m = 12$ linear transects. The procedures for ob
 use, and elevation data at these validation points is described in \autoref{apen:soil-data}. Such a validation 
 exercise was carried out because these maps originally have no accompanying validation information.
 
-% TODO: figure with GCPs used to ortorectify orbital images. Show the bounding box of the image and the 
+% TODO: figure with GCPs used to ortorectify satellite images. Show the bounding box of the image and the 
 % boundary 
 % of the study area.
 % \begin{figure}
@@ -252,16 +250,16 @@ the approximate taxonomic composition (\si{\percent}).
 \end{figure}
 
 The second area-class soil map (\soilNew{}) included in the Santa Maria dataset \cite{Miguel2010} was prepared 
-at a \scale{25000}. Orbital images produced by Digital Globe\textregistered{} (Quick Bird satellite), freely 
-available for visualization in Google Earth\textregistered{}, were used to produce the first draft of the soil 
+at a \scale{25000}. Satellite images produced by Digital Globe\textregistered{} (Quick Bird satellite), freely 
+available for visualization in \googleearth, were used to produce the first draft of the soil 
 map. Existing area-class soil maps and technical reports \cite{Pedron2005, Poelking2007, Sturmer2008} were 
 used to help defining the preliminary soil map legend. Punctual field observations (auger holes) were made in 
 more than \num{350} locations using a purposive sampling approach. These observations helped to identify six 
 modal (representative) soil profiles. Soil sampling and description of modal soil profiles, and laboratory 
 analyses of soil samples, followed the standard protocols adopted in Brazil \cite{ClaessenEtAl1997, 
 SantosEtAl2005}. Soil classification was done following the criteria of the Brazilian System of Soil 
-Classification (SiBCS) \cite{SantosEtAl2006}. The final version of the map was prepared using orbital images 
-freely available for visualization in Google Earth\textregistered{} and manually-digitalized topographic maps 
+Classification (SiBCS) \cite{SantosEtAl2006}. The final version of the map was prepared using satellite images 
+freely available for visualization in \googleearth{} and manually-digitalized topographic maps 
 published at a \scale{25000} \cite{DSG1992a, DSG1992}. Description of soil mapping units includes only the 
 most common soil taxon, followed by morphological and laboratory data of modal soil profiles.
 
@@ -307,7 +305,7 @@ The original \soilNew{} is available in digital format in the personal database 
 and overlaps between polygons. This required a topological edition prior to the use of \soilNew{}. There also 
 was a mismatch between the boundary of \soilNew{} and the actual boundary of the study area as estimated using 
 \demNew{} (\autoref{sec:covar-data-dem}). This occurred because the database used to produce \soilNew{} 
-included Google Earth imagery and topographic maps, which are data sources that differ considerably in their 
+included \googleearth{} imagery and topographic maps, which are data sources that differ considerably in their 
 positional accuracy (\autoref{sec:covar-data-dem} and \autoref{sec:covar-data-land-use}). To avoid data losses, 
 all boundary gaps were manually filled using the closest mapping unit. Boundaries of soil polygons were defined 
 based on land use (\landNew{}, \autoref{sec:covar-data-land-use}) and topographic data (contour lines, 
@@ -527,10 +525,10 @@ Institute for Space Research (\inpe) by refining the original SRTM DEM to $\SI{1
 \SI{\pm30}{\m}$ spatial resolution using ordinary kriging with a Gaussian spatial autocorrelation model 
 \cite{ValerianoEtAl2012}. Eight tiles were mosaicked (\gdal{gdal\_translate}) and the CRS transformed from 
 WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) using cubic resampling (\gdal{gdalwarp}), the
-sinks filled using \grass{r.fill.dir}. Before the atmospheric correction of orbital images, orthometric 
+sinks filled using \grass{r.fill.dir}. Before the atmospheric correction of satellite images, orthometric 
 heights were converted to ellipsoidal heights using \autoref{eqn:geoidal}, the geoidal undulation calculated 
 with the gravitational model EGM1996. This conversion was done because because orbital satellites use the 
-WGS1984 ellipsoid as vertical datum. For the topographic correction of orbital images, TOPODATA was then 
+WGS1984 ellipsoid as vertical datum. For the topographic correction of satellite images, TOPODATA was then 
 processed using \grass{r.resamp.interp} with the bicubic resampling method to match the reference grid.
 
 The three DEMs present similar vertical accuracy (\autoref{tab:covar-data-dem-attr-val}). In the case of 
@@ -976,17 +974,17 @@ the use of the nearest neighbour resampling method to match \landOld{} to the re
 \end{figure}
 
 The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution (\SI{2.4}{\m}) 
-orbital images, produced by QuickBird satellite launched in 2001, of the years of \num{2008} and \num{2009}, 
-made publicly available in Google Earth \cite{SamuelRosaEtAl2011a}. Identification of land uses and 
+satellite images, produced by QuickBird satellite launched in 2001, of the years of \num{2008} and \num{2009}, 
+made publicly available in \googleearth{} \cite{SamuelRosaEtAl2011a}. Identification of land uses and 
 delineation of mapping units was done manually, on the computer screen, without using any automated 
-classification routine. Positional validation of Google Earth imagery revealed that they have only minor 
+classification routine. Positional validation of \googleearth{} imagery revealed that they have only minor 
 systematic positional errors (\autoref{tab:covar-data-google-geo-val}). Despite of this, the attribute 
 validation of both land use maps, using $n = 60$ validation points placed along $m = 12 linear transects$, 
 showed that they have similar overall accuracy, \tt{LU1980} (\SI{70.00}{\percent}) slightly outperforming 
 \tt{LU2009} (\SI{66.67}{\percent}).
 
 \begin{table}[ht]
- \caption{Error statistics of the horizontal validation of Google Earth imagery using $n = 14$ GCPs.}
+ \caption{Error statistics of the horizontal validation of \googleearth{} imagery using $n = 14$ GCPs.}
  \label{tab:covar-data-google-geo-val}
  \centering
  {\small
@@ -1034,19 +1032,20 @@ land use difference between \num{1980} and \num{2009}, computed by checking if t
 remained the same (0) in every grid cell after the 29-year period. \tt{LUdiff} can be useful, for example, to 
 explain the low \tt{ORCA} in forest soils due to previous use with crop agriculture or animal husbandry.
 
-\section{Orbital images}
+\section{Satellite images}
 \label{sec:covar-data-sat-image}
 
-Two sources of orbital images were used to produce covariate data included in the Santa Maria dataset. The 
+Two sources of satellite images were used to produce covariate data included in the Santa Maria dataset. The 
 first is the longest-operating Earth observation satellite Landsat-5 Thematic Mapper, launched on \num{1} 
-March \num{1984}. The orbital image used was acquired on \num{26} December \num{2010} and is available at the 
+March \num{1984}. The satellite image used was acquired on \num{26} December \num{2010} and is available at 
+the 
 database of the Division of Image Generation of the National Institute for Space Research (\inpedgi). The 
 image contains seven spectral bands (\autoref{tab:covar-data-satellites}) (including a thermal band that is not
 included in the Santa Maria dataset), with \SI{8}{\bit} radiometric resolution (digital numbers from 
-\numrange{0}{255}) and \SI{\pm30}{\m} spatial resolution. The orbital image was orthorectified using 
+\numrange{0}{255}) and \SI{\pm30}{\m} spatial resolution. The satellite image was orthorectified using 
 Geomatica\textregistered{} OrthoEngine\textregistered{} with the Landsat rigorous model (Toutin's Model). Due 
-to the absence of field GCPs, $n = 28$ GCPs were collected from Google Earth\textregistered{} imagery, which 
-have a high positional accuracy in the study area (\autoref{tab:covar-data-google-geo-val}). GCPs were located 
+to the absence of field GCPs, $n = 28$ GCPs were collected from \googleearth{} imagery, which have a high 
+positional accuracy in the study area (\autoref{tab:covar-data-google-geo-val}). GCPs were located 
 at easily identifiable geographical markers such as road intersection and bridges, evenly distributed 
 throughout the image, and covering a variety of elevations, following standard recommendations 
 \cite{PCIGeomatics2007} (\autoref{fig:covar-data-ortho-gcps}). The DEM used for orthorectification is TOPODATA 
@@ -1060,15 +1059,15 @@ reflectance values) was done with the 6S atmospheric model \cite{VermoteEtAl1997
 \grass{i.atcorr} using the tropical atmospheric model, the continental aerosols model, an image-based 
 visibility estimate of \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
 
-The second source of orbital images is the RapidEye constellation of five satellites, launched in August 
+The second source of satellite images is the RapidEye constellation of five satellites, launched in August 
 \num{2008}. Images are available through the Brazilian Ministry of the Environment \cite{Brasil2012}, who 
 has a full coverage of the Brazilian territory with images from the RapidEye satellite constellation for the 
-years of \num{2011} and \num{2012}. The orbital image used (tile number \num{2225403}) was acquired on 
+years of \num{2011} and \num{2012}. The satellite image used (tile number \num{2225403}) was acquired on 
 \num{16} November \num{2012} (second coverage). It contains five spectral bands 
 (\autoref{tab:covar-data-satellites}), featuring among them the so-called red-edge band, located between the 
 red and the near-infrared bands. This spectral band is the main feature distinguishing RapidEye images from 
-most other sources of orbital images, considered to provide additional information about the vegetation 
-\cite{WeicheltEtAl2013}. The orbital image has \SI{16}{\bit} radiometric resolution and \SI{6.5}{\m} spatial 
+most other sources of satellite images, considered to provide additional information about the vegetation 
+\cite{WeicheltEtAl2013}. The satellite image has \SI{16}{\bit} radiometric resolution and \SI{6.5}{\m} spatial 
 resolution, and was orthorrectified in the source to \SI{5}{\m} spatial resolution using the hole-filled SRTM 
 version \num{4} \cite{RapidEye2013}.
 
@@ -1079,7 +1078,7 @@ version \num{4} \cite{RapidEye2013}.
   \centering
   <<fig = TRUE, echo = FALSE>>=
    
-   # Load less detailed orbital image
+   # Load less detailed satellite image
    map <- spgrass6::readRAST6("NDVI_30")
    map <- sp::spplot(
     map, scales = list(draw = TRUE), aspect = "iso", main = "", col.regions = ndvi$colors, at = ndvi$breaks) + 
@@ -1095,12 +1094,12 @@ version \num{4} \cite{RapidEye2013}.
   \centering
   <<fig = TRUE, echo = FALSE>>=
    
-   # Load more detailed orbital image
+   # Load more detailed satellite image
    map <- spgrass6::readRAST6("NDVI_5b")
    
   @
  \end{minipage} 
- \caption{Orbital images used to derive covariates such as (a) \tt{NDVI_30} and (b) \tt{NDVI_5b} included in 
+ \caption{Satellite images used to derive covariates such as (a) \tt{NDVI_30} and (b) \tt{NDVI_5b} included in 
  the Santa Maria dataset.}
 \label{fig:covar-data-sat-image}
 \end{figure}
@@ -1139,7 +1138,7 @@ topography -- illumination -- on the reflectance values) was performed using \gr
 geometrically corrected to match the reference grid as described in \autoref{sec:covar-data-dem}.
 
 \begin{table}[ht]
- \caption{Error statistics of the horizontal validation of orbital images produced by Landsat 5 TM and
+ \caption{Error statistics of the horizontal validation of satellite images produced by Landsat 5 TM and
  RapidEye constellation using $n = 14$ GCPs.}
  \label{tab:covar-data-satellite-geo-val}
  \centering
@@ -1163,7 +1162,7 @@ geometrically corrected to match the reference grid as described in \autoref{sec
  \end{tabular}}
 \end{table}
 
-Individual bands of both orbital images were defined as covariates, totalling $p = 6$ from Landsat 5 TM and 
+Individual bands of both satellite images were defined as covariates, totalling $p = 6$ from Landsat 5 TM and 
 $p = 5$ from RapidEye constellation (Table \ref{tab:covar-data-satellites}). Another $p = 6$ covariates ($p = 
 2$ from Landsat 5 TM and $p = 4$ from RapidEye constellation) were defined using two vegetation indexes: the 
 normalized difference vegetation index (NDVI) and the soil-adjusted vegetation index (SAVI), calculated as
