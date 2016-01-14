@@ -4,23 +4,14 @@
 \usepackage[utf8]{inputenc}
 \SweaveOpts{prefix.string = fig/chap02}
 
-\def\itaara{\href{http://pt.wikipedia.org/wiki/Itaara}{Itaara}}
-\def\santamaria{\href{http://pt.wikipedia.org/wiki/Santa_Maria_\%28Rio_Grande_do_Sul\%29}{Santa Maria}}
-\def\baciaparana{\href{http://pt.wikipedia.org/wiki/Bacia_do_Paran\%C3\%A1}{Bacia Sedimentar do Paraná}}
-\def\riovacacaimirim{\href{http://pt.wikipedia.org/wiki/Rio_Vacaca\%C3\%AD-Mirim}{Rio Vacacaí-Mirim}}
-\def\riojacui{\href{http://pt.wikipedia.org/wiki/Rio_Jacu\%C3\%AD}{Rio Jacuí}}
-\def\rioguaiba{\href{http://pt.wikipedia.org/wiki/Lago_Gua\%C3\%ADba}{Rio Guaíba}}
-\def\lagoadospatos{\href{http://pt.wikipedia.org/wiki/Lagoa_dos_Patos}{Lagoa dos Patos}}
-\def\ufsm{\href{http://site.ufsm.br/}{UFSM}}
-
-\def\portuguesekeys{}
-\begin{chapterabstract}{brazilian}{\portuguesekeys}
+\def\ptkeys{}
+\begin{chapterabstract}{brazilian}{\ptkeys}
  
 \end{chapterabstract}
 
-\def\englishkeys{}
+\def\enkeys{}
   
-\begin{chapterabstract}{english}{\englishkeys}
+\begin{chapterabstract}{english}{\enkeys}
  
 \end{chapterabstract}
 
@@ -28,6 +19,11 @@
 
 \section{Apresentação}
 \label{sec:chap02-apresentacao}
+
+\titlenote{Colaboraram na preparação deste documento (em ordem de importância): Pablo Miguel (UFPel), 
+Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena 
+Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World 
+Soil Information).}
 
 A modelagem espacial do solo inicia com a definição de um \emph{modelo conceitual de pedogênese}. Um modelo 
 conceitual de pedogênese constitui uma representação verbal da realidade sob estudo que inclui a descrição 

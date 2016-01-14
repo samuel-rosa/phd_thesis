@@ -50,6 +50,10 @@
 \section{Introduction}
 \label{sec:covar-data-intro}
 
+\titlenote{Collaborated in the preparation of this document (in order of importance): Pablo Miguel (UFPel), 
+Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), 
+Gustavo de Mattos Vasques (Embrapa Soils), and Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
+
 The Santa Maria dataset is a data set comprising spatially exhaustive covariate data produced in the 1980s, 
 1990s, and 2000s covering the catchment of the DNOS/CORSAN reservoir, located in the southern border of the 
 plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, Brazil. Some 
