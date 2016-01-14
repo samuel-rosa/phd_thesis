@@ -78,6 +78,12 @@ a more detailed land use map and possibly also a more detailed geologic map and 
 \section{Introduction}
 \label{sec:chap05-intro}
 
+\titlenote{This chapter is based on A.~Samuel-Rosa, G.B.M.~Heuvelink, G.M.~Vasques, L.H.C.~Anjos. Do more 
+detailed covariates deliver more accurate soil maps? \emph{Geoderma}, v.243--244, p.214--227, 2015. Terms and 
+expressions have been modified to match the standard terminology used throughout the thesis without 
+compromising the content of the original text. Footnotes were added where a definition required correction or 
+clarification.}
+
 Modern soil mapping relies on the use of statistical models to produce digital representations of spatial 
 soil distribution using point soil observations and spatially exhaustive covariates \cite{McBratneyEtAl2003, 
 ScullEtAl2003, Florinsky2012}. Three important weaknesses in the statistical soil distribution modelling 
@@ -232,9 +238,12 @@ Thus, the reader should bear in mind that our definition of spatial detail is br
 or spatial scale. It should also not be confounded with spatial support \cite{WebsterEtAl2007} or thematic 
 detail \cite{Rossiter2000}.
 
-The covariates were transformed to predictor variables that were used in the geostatistical modelling. Since 
-the transformation is different for categorical and continuous covariates, the procedures are explained below 
-for each type separately.
+\def\footcovars{\footnote{In statistical terms, the terms \emph{covariate} and \emph{predictor variable} are 
+synonymous, and the reason for the use given in this study is purely operational.}}
+
+The covariates were transformed to predictor variables\footcovars{} that were used in the geostatistical 
+modelling. Since the transformation is different for categorical and continuous covariates, the procedures are 
+explained below for each type separately.
 
 \subsubsection*{Categorical predictor variables}
 \label{subsubsec:chap05-categorical-covars}
@@ -611,8 +620,8 @@ than for SOC (\SI{+0.013}{\pp}) -- see the difference in the mean ranking of \te
 
 \subsection{REML fit of the variogram model}
 
-\def\footnugget{To be more precise, the small number of point observations separated by short distances reduces 
-the ability of modelling the behaviour of the variogram near the origin as a whole.}
+\def\footnugget{\footnote{To be more precise, the small number of point observations separated by short 
+distances reduces the ability of modelling the behaviour of the variogram near the origin as a whole.}}
 
 The small improvement in the prediction accuracy of the CLAY linear mixed model calibrated with the more 
 detailed covariates is evidenced by \autoref{fig:chap05-lmm}. The shape of the experimental variogram is very 
@@ -620,7 +629,7 @@ similar for both \emph{baseline} and \empt{best performing} linear mixed models,
 and ECEC. However, the sill variance had a very small reduction for CLAY compared to SOC and ECEC. The last two 
 showed a more considerable improvement in prediction accuracy. It can also be seen that the number of point 
 observations separated by short distances is very small, reducing the accuracy of the estimate of the nugget 
-variance\footnote{\footnugget}. The result is that the estimated nugget variance changes rather erratically 
+variance\footnugget{}. The result is that the estimated nugget variance changes rather erratically 
 from the \emph{baseline} to the \emph{best performing} models, decreasing for CLAY and SOC, and increasing 
 for ECEC.
 
@@ -955,8 +964,3 @@ used to develop our study. The first author was supported by the CAPES Foundatio
 Brazil (Process BEX 11677/13-9). The last author was supported by the CNPq foundation, Ministry of Science and 
 Technology of Brazil. The use of the RapidEye images is endorsed by the Corporate Commitment Agreement signed 
 between the Federal Rural University of Rio de Janeiro and the Brazilian Ministry of the Environment.
-
-\section*{Note}
-
-This chapter is based on A.~Samuel-Rosa, G.B.M.~Heuvelink, G.M.~Vasques, L.H.C.~Anjos. Do more detailed 
-covariates deliver more accurate soil maps? \textit{Geoderma}, v.243--244, p.214--227, 2015.
