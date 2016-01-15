@@ -1,11 +1,12 @@
 \artigotrue
-\chapter{Modelo Conceitual de Pedogênese}
+\chapter{MODELO CONCEITUAL DE PEDOGÊNESE}
 \label{chap:chap02}
 %\SweaveUTF8
 \SweaveOpts{prefix.string = fig/chap02}
 
 \def\ptkeys{Província Geológica do Paraná, Bacia do DNOS, Rebordo do Planalto, Fatores de formação do solo, 
 Pedogênese}
+
 \begin{chapterabstract}{brazilian}{\ptkeys}
  Este é o resumo em português.
 \end{chapterabstract}
@@ -18,7 +19,7 @@ Pedogênese}
 
 \formatchapter
 
-\section{Apresentação}
+\section{APRESENTAÇÃO}
 \label{sec:chap02-apresentacao}
 
 \titlenote{Colaboraram na preparação deste documento (em ordem de importância): Pablo Miguel (UFPel), 
@@ -149,7 +150,7 @@ a bacia do DNOS, o que corresponde à uma área de \SI{\pm18}{\square\kilo\metre
 escolhida por apresentar acesso facilitado, além de englobar as todas as formações geológicas, geoformas, usos 
 da terra, e vegetação presentes na bacia do DNOS.
 
-\section{Clima}
+\section{CLIMA}
 \label{sec:chap02-clima}
 
 \def\footcfa{\footnote{Mais informações sobre o tipo climático Cfa podem ser encontrados na 
@@ -183,7 +184,7 @@ sobretudo nas partes mais baixas, com valores normais de insolação de \SI{5,1}
 ocorrer diferença na temperatura da ordem de aproximadamente \SI{4}{\celsius} entre a parte mais baixa e a 
 parte mais alta \cite{HeldweinEtAl2009}.
 
-\section{Geologia}
+\section{GEOLOGIA}
 \label{sec:chap02-geologia}
 
 A geologia é bastante complexa, sendo constituída por três formações geológicas, além de depósitos coluvionares 
@@ -261,7 +262,7 @@ entorno do reservatório, encontram-se depósitos fluviais recentes, geralmente 
 arredondados (seixo) de tamanho variável e/ou sedimento arenoso. Em pequenas áreas abaciadas e mal drenadas, 
 os sedimentos apresentam granulometria mais fina.
 
-\section{Geomorfologia}
+\section{GEOMORFOLOGIA}
 \label{sec:chap02-geomorfologia}
 
 A área de estudo está situada na porção sul da Bacia Sedimentar do Paraná. Assim, as geoformas atuais são 
@@ -337,7 +338,7 @@ a construção do reservatório possibilitou a formação de uma área de agrada
 seu entorno, uma vez que o sedimento removido do Planalto e do Rebordo do Planalto não são mais transportados 
 a jusante.
 
-\section{Hidrografia}
+\section{HIDROGRAFIA}
 \label{sec:chap02-hidrografia}
 
 A hidrografia da área é condicionada pelas condições geomorfológicas, geológicas, pedológicas e climáticas, ao 
@@ -383,7 +384,7 @@ públicas localizadas nas margens dos cursos de água. Grande parte do material 
 de água é transportado para dentro do reservatório, que já perdeu mais de \SI{30}{\percent} de sua capacidade 
 inicial de armazenamento de água \cite{DillEtAl2004}.
 
-\section{Uso da terra}
+\section{USO DA TERRA}
 \label{sec:chap02-landuse}
 
 A área de estudo já foi intensamente ocupada em tempos pretéritos. Isso é evidenciado pela grande quantidade, 
@@ -521,7 +522,7 @@ de maior volume estão localizados na porção sul da área, a maior parte dos r
 porção norte \cite{SamuelRosaEtAl2011a}. Além disso, a menor permeabilidade do solo e do substrato rochoso, bem 
 como da condição topográfica, favorecem essa característica.
 
-\section{Pedologia}
+\section{PEDOLOGIA}
 
 O solo da área de estudo possui características com forte dependência do material de origem 
 \cite{NascimentoEtAl2010} que, conforme descrito acima, é um importante condicionante da geomorfologia e da 
@@ -628,7 +629,7 @@ solo por erosão laminar na bacia \cite{Branco1998, MouraBueno2012}. Isso permit
 degradação do solo na área de estudo são de pequena intensidade e bastante pontuais, principalmente nas área 
 de expansão urbana.
 
-\section{Considerações finais}
+\section{CONSIDERAÇÕES FINAIS}
 
 A área de estudos em modelagem espacial do solo da bacia do DNOS apresenta grande diversidade pedológica, 
 fruto da diversidade da geologia e geomorfologia, determinantes dos fluxos hidrológicos na paisagem, bem como 

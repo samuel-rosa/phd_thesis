@@ -1,7 +1,7 @@
 \artigotrue
-\chapter{The Santa Maria dataset -- covariate data}
+\chapter{THE SANTA MARIA DATASET -- COVARIATE DATA}
 \label{chap:chap04}
-\usepackage[utf8]{inputenc}
+%\SweaveUTF8
 \SweaveOpts{prefix.string = fig/chap04}
 
 <<R-settings, echo = FALSE>>=
@@ -34,25 +34,30 @@
       layout.heights = list(top.padding = 0, bottom.padding = 0))
 @
 
-\def\portuguesekeys{}
-\begin{chapterabstract}{brazilian}{\portuguesekeys}
+\def\ptkeys{}
+
+\begin{chapterabstract}{brazilian}{\ptkeys}
  
 \end{chapterabstract}
 
-\def\englishkeys{}
+\def\enkeys{}
   
-\begin{chapterabstract}{english}{\englishkeys}
+\begin{chapterabstract}{english}{\enkeys}
  
 \end{chapterabstract}
 
 \formatchapter
 
-\section{Introduction}
+\section{INTRODUCTION}
 \label{sec:covar-data-intro}
 
-\titlenote{Collaborated in the preparation of this document (in order of importance): Pablo Miguel (UFPel), 
-Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), 
-Gustavo de Mattos Vasques (Embrapa Soils), and Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
+\titlenote{This chapter is based on the studies \textit{Identifying and correcting oblique striping in the 
+Topodata digital elevation model}, presented at the XXXIV Brazilian Congress of Soil Science 
+\cite{Samuel-RosaEtAl2013c}, and \textit{Evaluation of freely available ancillary data used for detailed soil 
+mapping in Brazil}, presented at the EGU General Assembly 2014 \cite{Samuel-RosaEtAl2014}. Also collaborated 
+in the preparation of this document (in order of importance): Pablo Miguel (UFPel), Jean Michel Moura Bueno 
+(UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques 
+(Embrapa Soils), and Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
 
 The Santa Maria dataset is a data set comprising spatially exhaustive covariate data produced in the 1980s, 
 1990s, and 2000s covering the catchment of the DNOS/CORSAN reservoir, located in the southern border of the 
@@ -71,7 +76,7 @@ This document presents a description of the covariate data contained in the Sant
 procedures for their production, as well as the processing methods employed. The original sources of the 
 covariate data are freely available at the producers databases or in public libraries.
 
-\section{Ground control points}
+\section{GROUND CONTROL POINTS}
 \label{sec:covar-data-gcp}
 
 All covariates were validated prior to their use. Horizontal (positional) validation was performed using a set 
@@ -208,7 +213,7 @@ exercise was carried out because these maps originally have no accompanying vali
 %  \label{fig:covar-data-ortho-gcps}
 % \end{figure}
 
-\section{Area-class soil maps}
+\section{AREA-CLASS SOIL MAPS}
 \label{sec:covar-data-soil-maps}
 
 Two area-class soil maps are included in the Santa Maria dataset. The first of them (\soilOld{}) was published 
@@ -394,7 +399,7 @@ from fluvial deposits (Neossolo Flúvico; Fluvisol) does not appear due to the s
   \it{C-R}) composed mainly of soil derived from igneous rocks.
 \end{description}
 
-\section{Digital elevation models}
+\section{DIGITAL ELEVATION MODELS}
 \label{sec:covar-data-dem}
 
 Two DEMs are include in the Santa Maria dataset as sources of covariates. The first DEM (\demNew{}) is the 
@@ -700,7 +705,7 @@ calculate previous terrain attributes. A minimum radius value of \SI{3}{\m} was 
 A total of $1 \times \tt{ELEV} + 7 \times (\tt{NOR}, \tt{SLP}, \tt{TWI}, \tt{SPI}, \tt{TPI}) = 36$ covariates 
 were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 
-\section{Geologic maps}
+\section{GEOLOGIC MAPS}
 \label{sec:covar-data-geo-maps}
 
 Geologic data comes from the two most recent geologic maps (\geoOld{} and \geoNew{}) published in the 
@@ -869,7 +874,7 @@ of those derived from \geoOld{}:
  origin. It can help explaining the low \tt{CLAY} of soils supposedly derived from igneous rocks.
 \end{description}
 
-\section{Land use maps}
+\section{LAND USE MAPS}
 \label{sec:covar-data-land-use}
 
 The first land use map used to derive covariate data included in the Santa Maria dataset was produced by 
@@ -1039,16 +1044,15 @@ land use difference between \num{1980} and \num{2009}, computed by checking if t
 remained the same (0) in every grid cell after the 29-year period. \tt{LUdiff} can be useful, for example, to 
 explain the low \tt{ORCA} in forest soils due to previous use with crop agriculture or animal husbandry.
 
-\section{Satellite images}
+\section{SATELLITE IMAGES}
 \label{sec:covar-data-sat-image}
 
 Two sources of satellite images were used to produce covariate data included in the Santa Maria dataset. The 
 first is the longest-operating Earth observation satellite Landsat-5 Thematic Mapper, launched on \num{1} 
 March \num{1984}. The satellite image used was acquired on \num{26} December \num{2010} and is available at 
-the 
-database of the Division of Image Generation of the National Institute for Space Research (\inpedgi). The 
-image contains seven spectral bands (\autoref{tab:covar-data-satellites}) (including a thermal band that is not
-included in the Santa Maria dataset), with \SI{8}{\bit} radiometric resolution (digital numbers from 
+the database of the Division of Image Generation of the National Institute for Space Research (\inpedgi). The 
+image contains seven spectral bands (\autoref{tab:covar-data-satellites}) (including a thermal band that is 
+not included in the Santa Maria dataset), with \SI{8}{\bit} radiometric resolution (digital numbers from 
 \numrange{0}{255}) and \SI{\pm30}{\m} spatial resolution. The satellite image was orthorectified using 
 Geomatica\textregistered{} OrthoEngine\textregistered{} with the Landsat rigorous model (Toutin's Model). Due 
 to the absence of field GCPs, $n = 28$ GCPs were collected from \googleearth{} imagery, which have a high 
