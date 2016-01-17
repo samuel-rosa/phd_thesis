@@ -152,6 +152,8 @@
  \addtocounter{footnote}{-1}%
  \endgroup
 }
+% \newcommand{\tmp}[1]{\citeonline{#1}
+\let\citet\citeonline
 
 % Hyperlinks and URLs
 \def\atcorrbug{\href{http://lists.osgeo.org/pipermail/grass-dev/2014-February/067540.html}{bug}} % atcorr bug
@@ -418,12 +420,13 @@ about its reliability, which is critical for decision makers.
 % \include{chap/chap04}
 \include{chap/chap05} % Do more detailed covariates deliver more accurate soil maps?
 \include{chap/chap06} % Point patter analysis
+\include{chap/chap07} % Spatial trend estimation
 \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-% \appendix
+\appendix
 % \include{chap/} % Introdução Geral
 % \include{chap/} % Conclusão Geral
 % \include{chap/apenb} % conceptual model of pedogenesis
