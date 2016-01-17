@@ -22,10 +22,9 @@ Pedogênese}
 \section{APRESENTAÇÃO}
 \label{sec:chap02-apresentacao}
 
-\titlenote{Colaboraram na preparação deste documento (em ordem de importância): Pablo Miguel (UFPel), 
-Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena 
-Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World 
-Soil Information).}
+\titlenote{Colaboraram na preparação deste documento: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), 
+Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de 
+Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
 
 A modelagem espacial do solo inicia com a definição de um \emph{modelo conceitual de pedogênese}. Um modelo 
 conceitual de pedogênese constitui uma representação verbal da realidade sob estudo que inclui a descrição 

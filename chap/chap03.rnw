@@ -21,10 +21,10 @@
 \section{INTRODUCTION}
 \label{sec:chap03-introduction}
 
-\titlenote{Collaborated in the preparation of this document (in order of importance): Pablo Miguel (UFPel), 
-Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena 
-Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil 
-Information), and Ad van Oostrum (ISRIC -- World Soil Information).}
+\titlenote{Collaborated in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno 
+(UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), 
+Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and Ad van 
+Oostrum (ISRIC -- World Soil Information).}
 
 The Santa Maria dataset is a data set comprising soil data from $n = 410$ point soil observations made between 
 \num{2004} and \num{2013} in the catchment of the DNOS/CORSAN reservoir, located in the southern border of the 
