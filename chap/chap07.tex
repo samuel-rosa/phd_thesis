@@ -19,7 +19,9 @@
 \section{INTRODUCTION}
 \label{sec:chap07-intro}
 
-\titlenote{Collaborated in the preparation of this document: Dick J. Brus (Alterra, Wageningen University and 
+\titlenote{This chapter is based on the study \textit{spsann -- optimization of sample patterns using spatial 
+simulated annealing}, presented at the EGU General Assembly 2015 \cite{Samuel-RosaEtAl2015a}. Also 
+collaborated in the preparation of this document: Dick J. Brus (Alterra, Wageningen University and 
 Research Centre, the Netherlands), Gustavo M. Vasques (Embrapa Soils, Brazil), and Lúcia Helena Cunha dos 
 Anjos (Universidade Federal Rural do Rio de Janeiro, Brazil)}
 
@@ -27,14 +29,13 @@ Modern soil mapping is based on using a model of spatial variation composed of t
 
 \begin{equation}
  Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
-\end{equation}\label{eq:chap07-standard-model}
+\end{equation}\label{eq:chap07-lmm}
 
 \def\footgerard{\footnote{Gerard Heuvelink shared the same opinion during his Richard Webster Medal speech at 
 the conference of the Pedometrics Commission of the IUSS, which took place from 14--18 September 2015, in 
 Córdoba, Spain.}}
 
-\nointent
-The first term in the right-hand size in \autoref{eq:chap07-standard-model} is the spatial trend, 
+\nointent The first term in the right-hand size in \autoref{eq:chap07-standard-model} is the spatial trend, 
 which corresponds to the spatial variation of the soil property $Y(\boldsymbol{s})$ that is explained 
 deterministically using spatially exhaustive covariates; the remaining spatial variation of 
 $Y(\boldsymbol{s})$ is explained stochastically with the second term \cite{Cressie1993}. Soil scientists 
@@ -110,23 +111,21 @@ function
  \end{cases}
 \end{equation*}
 
-\noindent
-where $i = 1, 2, \ldots, n$, and $j = 1, 2, \ldots, c$, the first and last marginal sampling strata of 
-$\boldsymbol{a}$ will be empty, and the respective $n‘ = 2$ sample points will be allocated among the other 
+\noindent where $i = 1, 2, \ldots, n$, and $j = 1, 2, \ldots, c$, the first and last marginal sampling strata 
+of $\boldsymbol{a}$ will be empty, and the respective $n‘ = 2$ sample points will be allocated among the other 
 three marginal sampling strata, with the set of allocation solutions $\boldsymbol{b}_{sol} = \{(0, 2, 1, 2, 
 0), (0, 1, 2, 2, 0), (0, 2, 2, 1, 0)\}$. Ergo, the CLHS will be unable to find the globally optimum allocation 
 solution $\boldsymbol{b}_{sol} = (1, 1, 1, 1, 1)$.
 
 We propose defining the marginal sampling strata using only the unique values of the sample quantiles 
-estimated 
-with a discontinuous function \cite{HyndmanEtAl1996}. Accordingly, for our example, $\boldsymbol{a}_{mss} = 
-(1, 2, 4, 9)$. The number of sample points that should fall in each marginal sampling strata is directly 
-proportional to the number of sampling units (grids cells of a raster image) in that stratum of the covariate. 
-For $\boldsymbol{a}$, this is $\boldsymbol{b}_{sol} = (2, 1, 2)$. The direct consequence of this 
-modifications is that, given a set of $p$ covariates, each of them will potentially have a different number 
-of (quasi-equal-size) marginal sampling strata, i.e. $c_i \leq n$, where $i = 1, 2, \ldots, p$. This will 
-ultimately depend on the shape of their empirical frequency distribution, on the level of discretization of 
-the covariate values, and on the sample size $n$.
+estimated with a discontinuous function \cite{HyndmanEtAl1996}. Accordingly, for our example, 
+$\boldsymbol{a}_{mss} = (1, 2, 4, 9)$. The number of sample points that should fall in each marginal sampling 
+strata is directly proportional to the number of sampling units (grids cells of a raster image) in that 
+stratum of the covariate. For $\boldsymbol{a}$, this is $\boldsymbol{b}_{sol} = (2, 1, 2)$. The direct 
+consequence of this modifications is that, given a set of $p$ covariates, each of them will potentially have a 
+different number of (quasi-equal-size) marginal sampling strata, i.e. $c_i \leq n$, where $i = 1, 2, \ldots, 
+p$. This will ultimately depend on the shape of their empirical frequency distribution, on the level of 
+discretization of the covariate values, and on the sample size $n$.
 
 \subsection{Measuring the Association/Correlation Between Covariates}
 
@@ -150,7 +149,7 @@ $n$ is the sample size, and $\chi^2$ is the chi-squared statistic
 
 \begin{equation}
  \chi^2 = \sum_{i = 1}^{nrow}\sum_{j=1}^{ncol}\frac{(O_{ij} - E_{ij})^2}{E_{ij}},
-\end{equation}
+\end{equation}\label{eq:chap07-chi-squared}
 
 \noindent where $O_{ij}$ and $E_{ij}$ are the observed and expected frequency, respectively, the marginal 
 proportions of $O$ being the maximum likelihood estimates of the marginal proportions of $E$ 
@@ -176,23 +175,22 @@ MOCOP, one aims at minimizing the vector of $k$ objective functions \cite{Arora2
  \boldsymbol{f}(\boldsymbol{X}) = (f_1(\boldsymbol{X}), f_2(\boldsymbol{X}), \ldots, f_k(\boldsymbol{X})),
 \end{equation}
 
-\noindent where $\boldsymbol{X}$ is a $n \times p$ matrix subject to the implicit constraints imposed by 
-the finiteness of the spatial domain and discreteness of the $p$ design variables. These implicit 
-constraints define the set of values that can be assigned jointly to the design variables, i.e. the 
-$p$-dimensional \emph{feasible design space} $\mathcal{S}$, which, in turn, defines the set of numerical 
+\noindent where $\boldsymbol{X}$ is the design matrix, a $n \times p$ matrix subject to the implicit 
+constraints imposed by the finiteness of the spatial domain and discreteness of the $p$ design variables. 
+These implicit constraints define the set of values that can be assigned jointly to the design variables, i.e. 
+the $p$-dimensional \emph{feasible design space} $\mathcal{S}$, which, in turn, defines the set of numerical 
 values that can be returned by the objective functions, i.e. the $k$-dimensional \emph{feasible objective 
 space} $\mathcal{Z}$ \cite{MarlerEtAl2004}.
 
 Ideally, there is a traceable unique \emph{point cloud} $\boldsymbol{X}^*$ (i.e. a spatial sample with the 
 values of the covariates at its sample points) that minimizes all objective functions simultaneously 
 \cite{MarlerEtAl2009}. However, in practice such a unique point cloud seldom exists, and if it exists it is 
-hard to find. In most cases there is a large set of optima point clouds that map onto a set of points lying on 
-the boundary of $\mathcal{Z}$. Because, for example, multiple point clouds can return the very same objective 
-function value \cite{Arora2011}. The set of optima point clouds is commonly defined using the concept of 
-\emph{Pareto optimality} \cite{MarlerEtAl2004}: a point cloud $\boldsymbol{X}^*$ in $\mathcal{S}$ is 
-Pareto optimum if and only if there is no other point cloud $\boldsymbol{X}$ in $\mathcal{S}$ that 
-decreases the value of at least one objective function without increasing the value of another objective 
-function.
+hard to find. In most cases there is a large set of optima point clouds that map onto a set of optima points 
+on $\mathcal{Z}$ because, for example, multiple point clouds can return the very same objective function value 
+\cite{Arora2011}. The set of optima point clouds is commonly defined using the concept of \emph{Pareto 
+optimality} \cite{MarlerEtAl2004}: a point cloud $\boldsymbol{X}^*$ in $\mathcal{S}$ is Pareto optimum if and 
+only if there is no other point cloud $\boldsymbol{X}$ in $\mathcal{S}$ that decreases the value of at least 
+one objective function without increasing the value of another objective function.
 
 A reasonable strategy to find a single optimum solution is to aggregate the objective functions into a single 
 \emph{utility function} $U$ \cite{MarlerEtAl2005}. The most common aggregation method is the \emph{weighted 
@@ -305,14 +303,14 @@ they performed, for each of the $\mathcal{N}$ sizes, using the confidence interv
 statistic over all $\mathcal{R}$ spatial samples. Here, the random selection of  spatial samples would be the 
 \emph{source of variation} \cite{deGruijterEtAl1990}.
 
-In the real world… Because resources are limited, we decided to create only $\mathcal{R} = 1$ spatial sample 
-with $\mathcal{N} = 3$ sizes with each of the $\mathcal{A} = 4$ sampling algorithms that we want to compare 
-(CORR, DIST, ACDC, and CLHS). The variation had to come from another source: we chose it to be the soil 
-property data. We did so using unconditional sequential Gaussian simulation \cite{Goovaerts2001, Pebesma2004}. 
-To start, we defined a theoretical (or super-population) model, our \emph{soil data generating process}. To be 
-as close to reality as possible, the soil data generating process was defined empirically calibrating a 
-(non)linear mixed model to BUDE. The main calibration steps are as follows \cite{Breiman2001, LiawEtAl2002, 
-DiggleEtAl2007, Lark2012}:
+In the real world\dots Because resources are limited, we decided to create only $\mathcal{R} = 1$ spatial 
+sample with $\mathcal{N} = 3$ sizes with each of the $\mathcal{A} = 4$ sampling algorithms that we want to 
+compare (CORR, DIST, ACDC, and CLHS). The variation had to come from another source: we chose it to be the 
+soil property data. We did so using unconditional sequential Gaussian simulation \cite{Goovaerts2001, 
+Pebesma2004}. To start, we defined a theoretical (or super-population) model, our \emph{soil data generating 
+process}. To be as close to reality as possible, the soil data generating process was defined empirically 
+calibrating a (non)linear mixed model to BUDE. The main calibration steps are as follows \cite{Breiman2001, 
+LiawEtAl2002, DiggleEtAl2007, Lark2012}:
 
 \begin{enumerate}
  \item Random regression forest: grow $n_{\text{trees}} = 500$ regression trees with a maximum terminal node 
@@ -321,10 +319,10 @@ DiggleEtAl2007, Lark2012}:
  unique point soil observations), and $p_{\text{in-bag}} = 4$ covariates randomly selected at each split out 
  of a set of $p = 12$ covariates selected as in \citet{Samuel-RosaEtAl2015}.
  
- \item Out-of-bag predictions: use each of the $n_{\text{trees}} = 500$ regression trees to predict BUDE at 
-the  point soil observations not included (out-of-bag) in the respective calibration dataset (about 
- $n_{\text{out-of-bag}} = 104$ point soil observations), and compute the average of the predicted BUDE at each 
- point soil observation (about 184 predicted values for each out-of-bag point).
+ \item Out-of-bag predictions: use each of the $n_{\text{trees}} = 500$ regression trees from step (1) to 
+ predict BUDE at the  point soil observations not included (out-of-bag) in the respective calibration dataset 
+ (about $n_{\text{out-of-bag}} = 104$ point soil observations), and compute the average of the predicted BUDE 
+ at each point soil observation (about 184 predicted values for each out-of-bag point).
  
  \item Linear mixed model: assume that the average of the out-of-bag predictions from step (2) are linearly 
  related to BUDE and present insignificant conditional bias, and use them as a covariate in the fixed effects 
@@ -343,8 +341,6 @@ $\tau^2 = \SI{349.51}{\mega\gram\per\metre\tothe{6}}$, $\sigma^2 = \SI{97.24}{\m
 $\alpha = \SI{210.99}{\metre}$, $\nu = 2.0$) explained \num{38} and \SI{18}{\percent} of the sample variance of 
 BUDE with $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fig:chap07-bude-vario}).
 
-\SI{349.51}{\mega\gram\per\metre\tothe{6}
-
 \begin{figure}[!ht]
  \centering
  \includegraphics[width=90mm]{fig/chap07-bude-vario}
@@ -355,14 +351,27 @@ BUDE with $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fi
  \label{fig:chap07-bude-vario}
 \end{figure}
 
-\section{RESULTS}
+With the random regression forest and the LMM at hand, we simulated $\mathcal{R} = 1000$ equiprobable 
+realizations of BUDE at a fine grid of \num{\sim800000} points covering the entire study area. It is using 
+this uncertain reality that we tested our $\mathcal{A} = 4$ sampling algorithms.
+
+\subsection{Sampling and Model Calibration}
+
+We then sampled from each realization using the optimized spatial sample configurations. Because we wanted to 
+check the effect of the sample size, each algorithms was run using $$\mathcal{N} = 3$$ sample sizes of $n = 
+(100, 200, 400)$, which amounts to $\mathcal{D} = 3000}$ calibration datasets for each algorithm. Each 
+calibration dataset was used to calibrate a random regression forest using the same covariates as used in 
+simulating the fields.
+
+\section{RESULTS AND DISCUSSION}
 
 \begin{figure}[!ht]
  \centering
  \includegraphics[width=\textwidth]{fig/chap07-energy_corr_dist_acdc_clhs}
- \caption{Objective function values during the optimization of three sample configurations ($n = (100, 200, 
- 400$)) using four sampling algorithms (CORR, DIST, ACDC, and CLHS) against the number of Markov chains of 
- length $n$.}
+ \caption[Objective function values during the optimization of three sample configurations using four sampling 
+ algorithms.]{Objective function values during the optimization of sample configurations of size 
+ $n = (100, 200, 400$) using sampling algorithms CORR, DIST, ACDC, and CLHS against the number of Markov 
+ chains of length $n$.}
  \label{fig:chap07-energy-all}
 \end{figure}
 
@@ -372,15 +381,23 @@ BUDE with $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fi
  \caption[Region of the feasible objective space explored by pairs of objective functions that compose CLHS 
  and ACDC.]{Region of the feasible objective space $\mathcal{Z}$ explored by pairs of objective functions (x 
  vs  y) that compose CLHS ($\mathcal{O}_1$, $\mathcal{O}_2$, and $\mathcal{O}_3$) and ACDC (CORR and DIST)  
- during the optimization of a sample configuration of size $n = 100$ using 500 Markov chains of length $n$.}
+ during the optimization of a sample configuration of size $n = 100$ using $n_{\text{chains}} = 500$ Markov 
+ chains of length $n$.}
  \label{fig:chap07-energy-acdc-clhs}
 \end{figure}
 
 \begin{figure}[!ht]
  \centering
  \includegraphics[width=\textwidth]{fig/chap07-points_corr_dist_acdc_clhs}
- \caption[Sample configurations optimized using four sampling algorithms]{Sample configurations ($n = (100, 
- 200, 400)$) optimized using four sampling algorithms (CORR, DIST,  ACDC, and CLHS) superimposing the drainage 
- network.}
+ \caption[Sample configurations optimized using four sampling algorithms.]{Sample configurations of size 
+ $n = (100, 200, 400)$ optimized using sampling algorithms CORR, DIST,  ACDC, and CLHS superimposing the
+ drainage network.}
  \label{fig:chap07-points}
 \end{figure}
+
+\section{FINAL CONSIDERATIONS}
+
+The main free and open source implementation of the CLHS is the \Rpackage{clhs} \cite{RoudierEtAl2012}. The 
+package extended the CLHS considering the use of a cost surface that penalizes sampling locations that are 
+difficult to access. Other researchers have also implemented the CLHS as to consider a cost function 
+\cite{MulderEtAl2013, CliffordEtAl2014}, but none is available as a free software package.
