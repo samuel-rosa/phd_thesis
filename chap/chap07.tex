@@ -302,7 +302,7 @@ sample the soil, and measure a property to construct $\mathcal{D} = \mathcal{R} 
 selected validation sites. Each calibration dataset would be used to calibrate a model, with which we would 
 predict at the validation sites. The $\mathcal{A}$ sampling algorithms would then be compared on how well 
 they performed, for each of the $\mathcal{N}$ sizes, using the confidence interval of a prediction error 
-statistic over all $\mathcal{R}$ spatial samples. Here, the random selection of  spatial samples would be the 
+statistic over all $\mathcal{R}$ spatial samples. Here, the random selection of spatial samples would be the 
 \emph{source of variation} \cite{deGruijterEtAl1990}.
 
 In the real world\dots Because resources are limited, we decided to create only $\mathcal{R} = 1$ spatial 
@@ -354,13 +354,30 @@ BUDE with $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fi
 \end{figure}
 
 With the random regression forest and the LMM at hand, we simulated $\mathcal{R} = 1000$ equiprobable 
-realizations of BUDE at a fine grid of \num{\sim800000} points covering the entire study area. It is using 
-this uncertain reality that we tested our $\mathcal{A} = 4$ sampling algorithms.
+realizations of BUDE. Each realization is constituted of a collection of BUDE values at a fine grid of 
+\num{\sim800000} regularly spaced (\SI{5}{\metre}) points covering the entire study area. Because we used 
+\emph{unconditional} Gaussian simulation -- a simulation that is only \emph{globally} conditioned to the 
+histogram (and variogram) of the data observed at the calibration locations \cite{Goovaerts1997} -- and a 
+large number of realizations, we expect to find at any point of the simulation grid, over the $\mathcal{R} = 
+1000$ realizations, the whole set of possible BUDE values (i.e. the global histogram). Thus, the variance
+(uncertainty) is the same everywhere. This is in contrast with \emph{conditional} Gaussian simulation -- a 
+simulation that is \emph{locally} conditioned to the data observed at the calibration locations --, which 
+serves the purposes of honouring the data at the calibration locations, thus reducing the variance 
+(uncertainty) of the output realizations \cite{Goovaerts1997}. In our study, \emph{conditional} Gaussian 
+simulation is inappropriate as a model of uncertainty because the sampling algorithms that we evaluate are 
+designed to situations where we know very little, everywhere, about the spatial structure of the soil data 
+generating process.
+
+
+
+
+
+It is using this uncertain reality that we tested our $\mathcal{A} = 4$ sampling algorithms.
 
 \subsection{Sampling and Model Calibration}
 
 We then sampled from each realization using the optimized spatial sample configurations. Because we wanted to 
-check the effect of the sample size, each algorithms was run using $$\mathcal{N} = 3$$ sample sizes of $n = 
+check the effect of the sample size, each algorithms was run using $\mathcal{N} = 3$ sample sizes of $n = 
 (100, 200, 400)$, which amounts to $\mathcal{D} = 3000}$ calibration datasets for each algorithm. Each 
 calibration dataset was used to calibrate a random regression forest using the same covariates as used in 
 simulating the fields.

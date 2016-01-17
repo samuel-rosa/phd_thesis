@@ -213,7 +213,7 @@ and satellite images. All preprocessing steps and methods used to derive the cov
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[width = 90mm]{fig/chap08-location}
+ \includegraphics[draft = true, width = 90mm]{fig/chap08-location}
  \caption{Location of the real-world study area in Santa Maria, southern Brazil.}
  \label{fig:chap08-location}
 \end{figure}
@@ -222,15 +222,67 @@ and satellite images. All preprocessing steps and methods used to derive the cov
 
 We assumed the soil properties ($Y$) to be a function of the interplay of environmental conditions defined by 
 the climate, organisms, relief, parent material, time, and other unknown players \cite{Jenny1994, 
-McBratneyEtAl2003, Florinsky2012}. Because our pedologial knowledge and data available still are limited to 
-build such a complex \emph{mechanistic model}, we assumed the soil properties to be the outcome of a spatial 
-stochastic process composed of the additive combination of fixed and random effects, i.e. $Y(\boldsymbol{s}) = 
-m(\boldsymbol{s}) + e(\boldsymbol{s})$. Here the soil property is a random variable $Y(\boldsymbol{s})$, 
-$m(\boldsymbol{s})$ is a deterministic trend, and $e(\boldsymbol{s})$ is a spatially correlated, Gaussian 
-distributed random variable, that is stationary in the mean and covariance \cite{HeuvelinkEtAl2001}.
+McBratneyEtAl2003, Florinsky2012}. Because our pedologial knowledge and data available still are too limited 
+to build such a complex \emph{mechanistic model}, we assumed the soil properties to be the outcome of a 
+spatial stochastic process composed of the additive combination of fixed and random effects, i.e. 
+$Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s})$. Here the soil property is a random variable 
+$Y(\boldsymbol{s})$, $m(\boldsymbol{s})$ is a deterministic trend, and $e(\boldsymbol{s})$ is a spatially 
+correlated, Gaussian distributed random variable, that is stationary in the mean and covariance 
+\cite{HeuvelinkEtAl2001}.
 
+Using the above formulation of the \emph{mixed model of spatial variation}, we defined two \emph{soil 
+data generating processes} assuming a different form in $m(\bolsymbol{s})$ and $e(\boldsymbol{s})$. In 
+practice, we used the real-world soil data to calibrate (non)linear mixed models that are taken as the exact 
+mathematical representations of the true (stochastic) processes giving rise to the soil and its properties. 
+The linear mixed model is that constructed by \citet{Samuel-RosaEtAl2015} using CLAY ($n = 350$) in the 
+Box-Cox space due to its strong skewness, and corresponds to what the authors called their \emph{best 
+performing} linear mixed model. The non-linear mixed model was constructed by \citet{Samuel-RosaEtAl} using 
+BUDE ($n = 282$) in its original untransformed scale, the non-linear trend being defined using the out-of-bag 
+predictions of a random regression forest model. The spatially dependent stochastic residuals of CLAY and BUDE 
+were modelled using the Whittle-Matérn model, the difference being that the shape parameter was set to $\nu = 
+(0.5, 2)$, respectively. All model parameters were estimated by Gaussian restricted maximum likelihood (REML) 
+\cite{LarkEtAl2004, DiggleEtAl2007}. Both models also differ by the spatially correlated variance (SCV) of the 
+stochastic residuals, which is small for BUDE ($\text{SCV} \cong 0.20$) and large for CLAY ($\text{SCV} \cong 
+0.85$).
 
+Sequential unconditional Gaussian simulation was used to create $\mathcal{R} = 1000$ equiprobable realizations 
+of each soil data generating process with linear and non-linear trends (\autoref{fig:chap08-realizations}) as 
+described by \citet{Samuel-RosaEtAl}.
+ 
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[draft = true, width = \textwidth]{fig/chap08-realizations}
+ \caption{Example realizations of the soil data generating processes with a) linear and b) non-linear trends.}
+ \label{fig:chap08-realizations}
+\end{figure}
 
+\subsection{Sampling Scenarios}
+
+We defined $\mathcal{A} = 6$ sampling designs with $\mathcal{N} = 3$ sample sizes $n = (100, 200, 400)$. These 
+sample sizes correspond to the moderately high inspection density (1 sample point per 20, 10, and 
+\SI{5}{\hectare}, respectively) recommended for the production of soil maps published at a \scale{25000} 
+\cite{Rossiter, 2000}. The baseline design was obtained by simple random sampling (SRS), which we understand as 
+the poorest sampling design. The second sampling design was obtained by systematic grid sampling (SGS), one of 
+the most commonly used sampling design for soil mapping.
+
+Another three sampling designs were defined minimizing each of the three criteria pointed above: ACDC, PPL, and 
+MSSD. Our multi-objective sampling design was obtained minimizing the three criteria simultaneously (SPAN). 
+Since we assumed to be ignorant about the structure of the soil data generating processes, all criteria were 
+considered equally important and received the same weights. Note that for ACDC and SPAN, different sample 
+configurations were optimized for CLAY and BUDE because the algorithms use the same set of covariates used to 
+calibrate the soil data generating processes.
+
+The combination of sampling designs and sample sizes resulted in 18~point sample sets. Each of these point 
+sample sets were used to sample from the $\mathcal{R} = 1000$ simulated realities of CLAY and BUDE. This 
+yielded \num{36000}~calibration datasets. The baseline designs were used to quantify the gain in prediction 
+accuracy with the use of our multi-objective sampling design.
+
+We also defined the true optimum sampling design for CLAY. In this case we assumed the structure of the CLAY 
+data generating process to be known. The criterion minimized was the mean universal kriging variance 
+\cite{BrusEtAl2007a}. The optimum design was also explored at three sample sizes and used to sample from the 
+$\mathcal{R} = 1000$ simulated realities of CLAY with linear trend. This yielded another 3000~calibration 
+datasets. The true optimum sampling designs was used to quantify how suboptimal our multi-objective sampling 
+design is.
 
 \section{FINAL CONSIDERATIONS}
 
