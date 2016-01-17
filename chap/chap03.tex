@@ -1,31 +1,30 @@
 \artigotrue
-\chapter{The Santa Maria dataset -- soil data}
+\chapter{THE SANTA MARIA DATASET -- SOIL DATA}
 \label{chap:chap03}
-\usepackage[utf8]{inputenc}
+%\SweaveUTF8
 
 
-\def\portuguesekeys{}
-\begin{chapterabstract}{brazilian}{\portuguesekeys}
+\def\ptkeys{}
+
+\begin{chapterabstract}{brazilian}{\ptkeys}
  
 \end{chapterabstract}
 
-\def\englishkeys{}
+\def\enkeys{}
   
-\begin{chapterabstract}{english}{\englishkeys}
+\begin{chapterabstract}{english}{\enkeys}
  
 \end{chapterabstract}
 
 \formatchapter
 
-\selectlanguage{english}
-
-\section{Introduction}
+\section{INTRODUCTION}
 \label{sec:chap03-introduction}
 
-\titlenote{Collaborated in the preparation of this document (in order of importance): Pablo Miguel (UFPel), 
-Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena 
-Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil 
-Information), and Ad van Oostrum (ISRIC -- World Soil Information).}
+\titlenote{Collaborated in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno 
+(UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), 
+Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and Ad van 
+Oostrum (ISRIC -- World Soil Information).}
 
 The Santa Maria dataset is a data set comprising soil data from $n = 410$ point soil observations made between 
 \num{2004} and \num{2013} in the catchment of the DNOS/CORSAN reservoir, located in the southern border of the 
@@ -52,7 +51,7 @@ the countries of the northern hemisphere due to the specific features of \emph{t
 been adapted along the years, possibly leading to nomenclature mismatches. The reader is invited to contribute 
 to solve any problems in this document.
 
-\section{Field sampling}
+\section{FIELD SAMPLING}
 \label{sec:chap03-sampling}
 
 The Santa Maria dataset is composed of three subsets which are described in the next three sections. Together, 
@@ -201,12 +200,12 @@ receiver with a horizontal positional error of less than \SI{\pm8}{\metre} posit
 location. Data are identified in the Santa Maria dataset using the same identification that was used in the 
 studies from where they were compiled.
 
-\section{Field description}
+\section{FIELD DESCRIPTION}
 
 Several environmental features were described at the observation locations. The next sections present a 
 description of how this was done.
 
-\subsection{Land use}
+\subsection{Land Use}
 
 Land use (\texttt{LAND}) was assessed in the years of \num{2008} and \num{2009} using data collected in the 
 field and Google Earth imagery. Five land uses were identified: native forest (primary or secondary), shrubland 
@@ -222,7 +221,7 @@ features in the field. Existing geologic maps were used only when soil character
 features were insufficient to reach an agreement about the most likely soil parent material, geologic 
 formation, and lithology.
 
-\subsection{Soil classification}
+\subsection{Soil Classification}
 
 The most likely soil classification (\texttt{TAXON}) was inferred in the field using direct observation of soil 
 properties (\SI{20}{\centi\metre}-deep soil pits and auger holes down to the diagnostic subsurface horizon or 
@@ -246,7 +245,7 @@ being at a constant height above the ground. The distance between observer and t
 Soil drainage status (\texttt{DRAIN}) was inferred visually from soil features observed with an auger using the 
 classification scheme proposed by \citeonline{SantosEtAl2013}.
 
-\subsection{Coarse fragments and rock outcrops}
+\subsection{Coarse Fragments and Rock Outcrops}
 
 Presence of coarse fragments (\texttt{FRAG}) -- soil material of diameter \SI{>2}{\centi\metre} -- was 
 described as a binary variable, that is, a value of \num{1} (one) was annotated when coarse fragments were 
@@ -263,19 +262,19 @@ importance given to these soil properties in the respective research projects.
 Soil coverage with vegetation (\texttt{CANOPY}) was inferred visually in the field using three classes: low 
 (\SI{<25}{\percent}), medium (\SIrange{25}{75}{\percent}), and high (\SI{>75}{\percent}).
 
-\subsection{Additional information}
+\subsection{Additional Information}
 
 Additional information was recorded at each observation location during the field campaigns. They refer to 
 peculiarities of each observation location and were not recorded in a systematic way.
 
-\section{Laboratory analysis}
+\section{LABORATORY ANALYSIS}
 \label{sec:chap03-laboratory}
 
 Soil samples were air dried, crushed and passed through a \SI{2}{\milli\metre}-sieve prior to laboratory 
 analyses using the methods described in the next sections. One or more laboratory replicates were used to 
 calculate analytical errors.
 
-\subsection{Soil organic fraction}
+\subsection{Soil Organic Fraction}
 \label{sec:chap03-organic}
 
 The soil organic carbon content (\texttt{ORCA}, \si{\gram\per\kilo\gram}) was determined using the method of
@@ -313,7 +312,7 @@ factor (\num{1.724}), the result assumed to be equivalent to soil organic carbon
 standard method. The results are expressed using a volume-basis and were converted to a mass-basis using a
 1:1 relation because the mass of the sample aliquot used in the analyses is unknown.
 
-\subsection{Particle size analysis}
+\subsection{Particle Size Analysis}
 \label{chap:chap03-granulometry}
 
 \def\footsuzuki{\footnote{As far as I know, a comprehensive description of this method has not been 
@@ -373,7 +372,7 @@ treatment with hydrogen peroxide (\ce{H2O2) prior to the analysis following the 
 % descrito acima para a fra{\c{c}}{\~{a}}o argila total. A diferen{\c{c}}a {\'{e}} que n{\~{a}}o foi usado o 
 % agente dispersante (NaOH) e o agente desagregante (esferas de nylon) \cite{ClaessenEtAl1997}.
 
-\subsection{Soil density}
+\subsection{Soil Density}
 \label{chap:chap03-bude}
 
 % TODO: Provide a more detailed description of how this is done.
@@ -382,7 +381,7 @@ with a metallic ring (height: \SI{3}{\centi\metre}; diameter: \SI{5}{\centi\metr
 \citeonline{ClaessenEtAl1997}. The bulk soil density was not determined in the locations where the soil was 
 very shallow or stony.
 
-\subsection{Exchangeable bases and acidity}
+\subsection{Exchangeable Bases and Acidity}
 \label{chap:chap03-ecec}
 
 The exchangeable calcium (\texttt{CALC}, \si{\milli\mole\per\kilo\gram}) and magnesium (\texttt{MAGN}, 
