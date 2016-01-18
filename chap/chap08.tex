@@ -2,16 +2,28 @@
 \chapter{SAMPLING FOR SOIL MAPPING IN \emph{TERRA INCOGNITA}}
 \label{chap:chap08}
 
-\def\ptkeys{}
+\def\ptkeys{Recozimento simulato, Otimização multi-objetivo, Estimativa do variogram, Predição espacial}
 
 \begin{chapterabstract}{brazilian}{\ptkeys}
 
 \end{chapterabstract}
 
-\def\enkeys{}
+\def\enkeys{Simulated annealing, Multi-objective optimization, Variogram estimation, Spatial prediction}
   
 \begin{chapterabstract}{english}{\enkeys}
-
+This study addresses a problem that many soil spatial modellers face: how to come up with an efficient spatial 
+sample configuration to 1) estimate the spatial trend, 2) estimate the variogram of the residuals, and 3) make 
+spatial predictions in situations where we know very little? Different sample designs that aim at these three
+objectives individually (ACDC, PPL, and MSSD) are compared using synthetic data derived from a real-world 
+study case in Santa Maria, southern Brazil. The second of these sampling algorithms is introduced in this 
+study as as result of the improvement of an existing sampling algorithm for variogram estimation. A 
+general-purpose sampling algorithm that aims at the three objectives jointly is also presented (SPAN). These 
+sampling algorithms are compared with the outcome of simple random sampling (SRS) and systematic grid sampling 
+(SGS). Evaluations include assessing the variation in model parameter estimation and prediction accuracy. The 
+last is assessed using $n = 1000$ validation points probabilistically selected from 500 quasi-equal-area 
+compact geographic strata. Experimental results are not available yet. So fat, the main outcome of the study 
+is the creation and maintenance of the \Rpackage{spsann}, devoted to the optimization of sample patterns using 
+spatial simulated annealing.
 \end{chapterabstract}
 
 \formatchapter
@@ -39,8 +51,9 @@ of spatial variation, and c) the operational constraints limit sampling to a sin
 evaluate the ability of different sampling configuration types and sample sizes to capture the true form of the 
 model of spatial variation and make accurate predictions. We also quantify the gain in prediction accuracy by 
 combining popular sampling methods in a multi-objective optimization problem. This study addresses a problem 
-that many soil scientists involved in soil mapping projects face: how to come up with a spatial sample 
-configuration that is effective and robust in situations where we know very little?
+that many soil spatial modellers face: how to come up with a spatial sample configuration that is effective and 
+robust in situations where we know very little? To start, we present a short review on the methods for spatial 
+sample optimization.
 
 \section{PURPOSIVE SAMPLING}
 
@@ -89,27 +102,37 @@ each level, respectively, and reproducing the linear correlation of the numeric 
 \cite{MinasnyEtAl2006b}. The method is very flexible and can be easily extended \cite{MinasnyEtAl2010a, 
 RoudierEtAl2012}. Recently, \citet{Samuel-RosaEtAl} proposed conceptual and algorithmic improvements on the 
 CLHS. In short, the proposed improvements concern the definition of the marginal sampling strata, the 
-measurement of the correlation between covariates, and the aggregation of the objective functions.
+measurement of the correlation between covariates, and the aggregation of the objective functions. Preliminary 
+results have shown that the improvement resulted in a more numerically stable sampling algorithm 
+\citet{Samuel-RosaEtAl}.
 
 \subsection{Sampling for Variogram Estimation}
 
 A variogram model explains the spatially correlated random part of the spatial variation of 
 $Y(\boldsymbol{s})$. Several sampling methods exist to identify and/or estimate the variogram and its 
 parameters \cite{BrusEtAl1994, deGruijterEtAl2006, Mueller2007, WebsterEtAl2013}. Modern ones focus on maximum 
-likelihood estimators \cite{Lark2002, Zimmerman2006, Mueller2007}. Their limitation is that a minimum knowledge 
-about the form of the variogram is required. A Bayesian approach was suggested to account for the uncertainty 
-of the estimated variogram \cite{DiggleEtAl2006, MarchantEtAl2006, ZhuEtAl2006}. But it is hard to implement 
-for multiple variables simultaneously, and the uncertainty is likely to increase with the number of parameters 
-that need to be estimated.
+likelihood estimators \cite{Lark2002, Zimmerman2006, Mueller2007}, their limitation being that a minimum 
+knowledge about the form of the variogram is required. A Bayesian approach was suggested to account for the 
+uncertainty of the estimated variogram \cite{DiggleEtAl2006, MarchantEtAl2006, ZhuEtAl2006}. But it is hard to 
+implement for multiple variables simultaneously, and the uncertainty is likely to increase with the number of 
+parameters that need to be estimated.
 
 Sampling for variogram estimation should concentrate on relevant pairwise distances \cite{MuellerEtAl1999, 
 Lark2002}. But how to do that when we are ignorant about the shape of the variogram? \citet{BreslerEtAl1982, 
-Russo1984, WarrickEtAl1987} proposed a conservative solution focusing on the method of moments: the points 
-should be located as to match a uniform distribution of pairwise distances. Their claim was that the sample 
-would be globally optimal for an infinite set of unknown variograms. This has not been proved mathematically 
-nor corroborated by empirical evidence. The resulting sample usually is redundant (poorly informative), 
-concentrating most of the points in a single large cluster, with a few scattered points -- many of the 
-point-pairs are computed using the same subset of points.
+Russo1984, WarrickEtAl1987} proposed a conservative solution: the points should be located as to match a 
+uniform distribution of pairwise distances. Their claim was that the sample would be globally optimal for an 
+infinite set of unknown variograms. This has not been proved mathematically nor corroborated by empirical 
+evidence. The resulting sample usually is redundant (poorly informative), concentrating most of the points in a 
+single large cluster, with a few scattered points -- many of the point-pairs are computed using the same subset 
+of points.
+
+Another critique to the idea of \citet{BreslerEtAl1982, Russo1984, WarrickEtAl1987} is that it was rooted on 
+the use of the method-of-moments to fit a continuous function to the binned empirical variogram. Nowadays we 
+recognize that the estimates of the method-of-moments are affected by the correlation between the sequence 
+of classes of pair-wise distances and that more robust methods exist \citep{DiggleEtAl2002}. Maximum 
+likelihood methods estimate model parameters using all data points, avoiding the need for an \textit{ad hoc} 
+definition of classes of pair-wise distances that generally smooth out the structure of the spatial process  
+\citep{Lark2000}.
 
 \subsection{Sampling for Spatial Interpolation}
 
@@ -135,26 +158,39 @@ point, the nearest neighbouring sample point. This metric can be minimized using
 clustering algorithm \cite{WalvoortEtAl2010}, which is computationally fast, but sensitive to local optima 
 solutions.
 
-\section{PROPOSED INNOVATIONS AND MODIFICATIONS}
+\section{WHICH SAMPLING ALGORITHMS?}
 
-We believe that there is room to improve on the existing methods and propose innovations for sampling for soil 
-mapping in \emph{terra incognita}. Our proposed innovations and modifications have been implemented in the 
-publicly available \Rpackage{spsann} (\url{https://cran.r-project.org/web/packages/spsann}).
+\def\footspsann{\footnote{The \Rpackage{spsann} is publicly available at 
+\url{https://cran.r-project.org/web/packages/spsann}.}}
 
-\subsection{Sampling for Spatial Trend Estimation}
-
-We consider the method of \cite{MinasnyEtAl2006b} to be the most suited to sample for spatial trend estimation 
-for soil mapping in \emph{terra incognita}.
+Our short review suggested that there are efficient and robust methods for designing optimum spatial sample 
+configurations for spatial trend estimation and spatial interpolation in \emph{terra incognita}. The method of 
+\citet{MinasnyEtAl2006b} is the most suited to sample for spatial trend estimation. Because 
+\citet{Samuel-RosaEtAl} produced a more numerically stable sampling algorithm, we opt for using the improved 
+version of the CLHS called ACDC. The MSSD is the most suited criterion to optimize sample configurations for 
+spatial interpolation for soil mapping in \emph{terra incognita} \cite{BrusEtAl2006, WalvoortEtAl2010}. An 
+efficient and robust method for variogram estimation in the same circumstances seem to be missing, as well as a 
+method that takes all three objectives jointly. We now propose a series of innovations and modifications on an 
+existing method so that this gap can be potentially filled. Our proposed innovations and modifications have 
+been implemented in the publicly available \Rpackage{spsann}\footspsann.
 
 \subsection{Sampling for Variogram Estimation}
 
 We propose that sampling to estimate the variogram model for soil mapping in \emph{terra incognita} should be 
 based on placing several small clusters scattered throughout the spatial domain as to maximize the amount of 
-information. The most relevant pairwise distances are those that enable an accurate estimate of the behaviour 
-of the variogram near the origin. We use exponentially spaced lags defined up to the circumradius $r$ of the 
-bounding box of the area. The exponential spacings are created sequentially from the largest to the smallest 
-lag by halving the immediately preceding larger lag, resulting in narrower lags in the left side of the 
-variogram. It works as follows:
+information. The most relevant pairwise distances are those that 1) enable an accurate estimate of the 
+behaviour of the variogram near the origin and 2) produce a low estimate of the nugget variance. Our concern 
+is with the fact that the shape of the variogram and the estimated nugget variance determine the smoothness of 
+the spatial predictions \cite{WebsterEtAl2007}.
+
+The design of our sampling algorithm starts with the method proposed by \citet{WarrickEtAl1987}. The first 
+proposed modification is to aim at a uniform distribution of the number of \emph{unique points} instead of 
+\emph{point-pairs} per lag-distance class. The second modification is based on the idea of 
+\citet{PettittEtAl1993a}, who suggested using linear transect with exponential spacings. Here, we use 
+exponentially spaced lag-distance classes defined up to the circumradius $r$ of the bounding box of the area 
+as proposed by \citet{TruongEtAl2013}. The exponential spacings are created sequentially from the largest to 
+the smallest lag by halving the immediately preceding larger lag, resulting in narrower lags in the left 
+side of the variogram. It works as follows:
 
 \begin{enumerate}
  \item Find $r$. Use the result to define the upper bound (UB) of the first rightmost lag.
@@ -165,33 +201,25 @@ variogram. It works as follows:
  \item Proceed as in 3--5 till the UB and LB of leftmost lag have been defined.
 \end{enumerate}
 
-
-We define seven exponentially spaced lag-distance classes up to half the 
-diagonal of the spatial domain. They are created sequentially by halving the immediately preceding larger lag 
-\cite{TruongEtAl2013}. Our objective is to place the points as to have each of them contributing to all lags. 
-The criterion to be minimized is the sum of differences between the vectors of the pre-specified 
-$\boldsymbol{l}^*$ and observed $\boldsymbol{l}$ distributions of unique \textbf{P}oints \textbf{P}er 
-\textbf{L}ag
+This method usually yields seven lags, depending on the size of the smallest lag. Our objective is to place the 
+points as to have each of them contributing to all lags. The criterion to be minimized is the sum of 
+differences between the vectors of the pre-specified $\boldsymbol{l}^*$ and observed $\boldsymbol{l}$ 
+distributions of unique \textbf{P}oints \textbf{P}er \textbf{L}ag
 
 \begin{equation}
- \text{PPL} = \sum_{i = 1}^{n} w_i (l_i^* - l_i),
+ \text{PPL} = \sum_{i = 1}^{q} w_i (l_i^* - l_i),
 \end{equation}\label{eq:chap08-ppl}
 
-\noindent where $\boldsymbol{w}$ is a vector of weights for the $n$ lag-distance classes.
+\noindent where $\boldsymbol{w}$ is a vector of weights for the $q$ lag-distance classes, and 
+$\boldsymbol{l}^* = n$ for a uniform distribution, $n$ being the number of sample points.
 
-\subsection{Sampling for Spatial Interpolation}
-
-The MSSD seems to be the most suited criterion to optimize sample configurations for spatial interpolation for 
-soil mapping in \emph{terra incognita}. However, the available algorithms cannot be used to formulate 
-multi-objective optimization problems. We suggest using the spatial simulated annealing algorithm instead, 
-eliminating the sensitivity to local optima solutions \cite{KirkpatrickEtAl1983, Groenigen1999a}.
-
-\subsection{Sampling for Soil Mapping in \emph{Terra Incognita}}
+\subsection{Sampling in \emph{Terra Incognita}}
 
 We propose a heuristic, general-purpose method to design sample configurations for soil mapping in \emph{terra 
-incognita}. Like sampling for spatial trend estimation, it is based on solving a MOOP. An utility function is 
-defined aggregating the four objective functions described above so that the sample points SPAN the feature, 
-variogram and geographic spaces,
+incognita}. Like sampling for spatial trend estimation (ACDC), it is based on solving a multi-objective 
+combinatorial optimization problem (MOCOP). An utility function is defined aggregating the three criteria 
+described above so that the sample points cover, extend over, spread over, SPAN the feature, variogram 
+and geographic spaces,
 
 \begin{equation}
 \text{SPAN} = w_1 \text{CORR} + w_2 \text{DIST} + w_3 \text{PPL} + w_4 \text{MSSD}, 
@@ -232,10 +260,10 @@ correlated, Gaussian distributed random variable, that is stationary in the mean
 
 Using the above formulation of the \emph{mixed model of spatial variation}, we defined two \emph{soil 
 data generating processes} assuming a different form in $m(\bolsymbol{s})$ and $e(\boldsymbol{s})$. In 
-practice, we used the real-world soil data to calibrate (non)linear mixed models that are taken as the exact 
-mathematical representations of the true (stochastic) processes giving rise to the soil and its properties. 
-The linear mixed model is that constructed by \citet{Samuel-RosaEtAl2015} using CLAY ($n = 350$) in the 
-Box-Cox space due to its strong skewness, and corresponds to what the authors called their \emph{best 
+practice, we used the real-world soil data to calibrate linear and non-linear mixed models that are taken as 
+the exact mathematical representations of the true (stochastic) processes giving rise to the soil and its 
+properties. The linear mixed model is that constructed by \citet{Samuel-RosaEtAl2015} using CLAY ($n = 350$) in 
+the Box-Cox space due to its strong skewness, and corresponds to what the authors called their \emph{best 
 performing} linear mixed model. The non-linear mixed model was constructed by \citet{Samuel-RosaEtAl} using 
 BUDE ($n = 282$) in its original untransformed scale, the non-linear trend being defined using the out-of-bag 
 predictions of a random regression forest model. The spatially dependent stochastic residuals of CLAY and BUDE 
@@ -246,8 +274,14 @@ stochastic residuals, which is small for BUDE ($\text{SCV} \cong 0.20$) and larg
 0.85$).
 
 Sequential unconditional Gaussian simulation was used to create $\mathcal{R} = 1000$ equiprobable realizations 
-of each soil data generating process with linear and non-linear trends (\autoref{fig:chap08-realizations}) as 
-described in \autoref{subsec:simulation} \cite{Samuel-RosaEtAl}.
+of an isotropic Gaussian random field of CLAY and BUDE (\autoref{fig:chap08-realizations}) using the same 
+settings described in \autoref{subsec:simulation} \cite{Samuel-RosaEtAl}. The sequential Gaussian simulation 
+algorithm proceeded as follows:
+
+\begin{enumerate}
+ \item 
+\end{enumerate}
+
  
 \begin{figure}[!ht]
  \centering
