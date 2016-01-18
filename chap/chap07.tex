@@ -396,6 +396,11 @@ that, simulations were carried out using five different seeds for the pseudo-ran
 
 \subsection{Sampling and Model Calibration}
 
+We compare $\mathcal{A} = 4$ sampling algorithms (CORR, DIST, ACDC, and CLHS) and $\mathcal{N} = 3$ sample 
+sizes $n = (100, 200, 400)$. These sample sizes correspond to the moderately high inspection density (1 sample 
+point per 20, 10, and \SI{5}{\hectare}, respectively) recommended for the production of soil maps published at 
+a \scale{25000} \cite{Rossiter, 2000}.
+
 We then sampled from each realization using the optimized spatial sample configurations. Because we wanted to 
 check the effect of the sample size, each algorithms was run using $\mathcal{N} = 3$ sample sizes of $n = 
 (100, 200, 400)$, which amounts to $\mathcal{D} = 3000}$ calibration datasets for each algorithm. Each 
@@ -404,11 +409,25 @@ simulating the fields.
 
 \subsection{Evaluation of Sampling Algorithms}
 
-The influence of sampling design and sample size on the spatial prediction accuracy was assessed using 
+The influence of sampling design and sample size on the spatial prediction accuracy will be assessed using 
 $n = 1000$ validation points probabilistically selected from 500 quasi-equal-area compact geographic strata. 
 Geographic stratification was obtained using the \textit{k}-means algorithm as implemented in the 
-\Rpackage{spcosa} \cite{WalvoortEtAl2010}. The algorithm was run using three different seeds for the 
-pseudo-random number generator, the resulting stratification with the minimum objective value being selected.
+\Rpackage{spcosa} \cite{WalvoortEtAl2010}. Each strata has $n = 2$ randomly selected validation points. The 
+algorithm was run using three different seeds for the pseudo-random number generator, the resulting 
+stratification with the minimum objective value being selected.
+
+We plan to use the realization-wise mean error (ME) and mean squared error (MSE) at the probabilistically 
+validation points to evaluate the sampling designs. The ME will show the effect of the sampling design 
+on the accuracy of the predictions, while the MSE will indicate how the sampling design influenced the 
+calibration of the variogram model. As such, we can use the mean ratio of (empirical and theoretical) squared 
+errors (MRSE) to see how good our estimate of the prediction errors are. The median of the ratio of squared 
+errors (MedRSE) will also be computed because this ratio has a strong positive skew resulting that when there 
+are have a few positive outliers of the ratio, the mean will be larger than 1 \cite{Lark2000a}. When the errors 
+have normal distribution, the ratio has a chi-square distribution with 1 degree of freedom. So the median of 
+the ratio then should be 0.455. A fifth measure that we plan to use is the amount of variance explained (AVE) 
+by both the spatial trend and variogram model separately. At the end, we will aggregate these measures over the 
+$\mathcal{R} = 1000$ realizations using box-and-whisker plots so that we can check visually how one sampling 
+design compares to another.
 
 \section{RESULTS AND DISCUSSION}
 
