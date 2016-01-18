@@ -239,7 +239,7 @@ We propose using a more robust approach, i.e. the \emph{upper-lower bound approa
  f_i'' = \frac{f_i(\boldsymbol{X}) - f_i^{\circ}}{f_i^{max} - f_i^{\circ}}
 \end{equation}
 
-\nointent where $f_i''$ is the $i$th non-dimensional, scaled objective function constrained between zero 
+\noindent where $f_i''$ is the $i$th non-dimensional, scaled objective function constrained between zero 
 and one \cite{MarlerEtAl2005}. Because of the above-mentioned problems regarding the definition of 
 $\boldsymbol{f}^{max}$, it is more appropriate to use the \emph{Pareto maximum}, $f_i^{max} = max_{1 \leq j 
 \leq k} f_ i(\boldsymbol{X}_j^*)$, where $\boldsymbol{X}_j^*$ is the point cloud that minimizes the $j$th 
@@ -294,6 +294,7 @@ derived from area-class soil maps, digital elevation models, geological maps, la
 images. All processing steps used to derive the covariates were described by \citet{Samuel-RosaEtAl2015}.
 
 \subsection{Soil Data Generating Process}
+\label{subsec:simulation}
 
 In an ideal world, we would create $\mathcal{R} \geq 100$ spatial samples of $\mathcal{N} \geq 2$ sizes 
 with each of the $\mathcal{A} \geq 2$ algorithms that we want to compare. Then we would go to the field, 
@@ -345,34 +346,53 @@ BUDE with $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fi
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[width=90mm]{fig/chap07-bude-vario}
- \caption[Variogram model representing the stochastic term of the linear mixed model fitted to the soil bulk
- density data.]{Variogram model (red line) representing the stochastic term of the linear mixed model fitted
- to the soil bulk density data. Exponential spacings are used to depict the sample variogram (blue dots) along 
- with  the number of point-pairs in each variogram bin.}
+ \begin{minipage}{90mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width = 90mm, draft = true]{fig/chap07-random-forest-fit}
+ \end{minipage}
+ \begin{minipage}{90mm}
+  \centering
+  \subcaption{}
+  \includegraphics[width = 90mm]{fig/chap07-bude-vario}
+ \end{minipage}
+ \caption[(Non)Linear mixed model fitted to the soil bulk density data.]{(Non)Linear mixed model fitted to the 
+ soil bulk density data (BUDE, \si{\mega\gram\per\cubic\metre}) measured at $n = 282$ calibration locations. 
+ The top panel shows the relation between out-of-bag random regression forest predictions and BUDE, here
+ representing the deterministic component $m(\boldsymbol{s})$. The bottom panel shows the REML fit of the 
+ variogram model (red line) to BUDE, i.e. the stochastic component $e(\boldsymbol{s})$. Exponentially spaced
+ lag-distance classes are used to depict the sample variogram (blue dots) along with the number of point-pairs
+ in each variogram lag-distance class.}
  \label{fig:chap07-bude-vario}
 \end{figure}
 
-With the random regression forest and the LMM at hand, we simulated $\mathcal{R} = 1000$ equiprobable 
-realizations of BUDE. Each realization is constituted of a collection of BUDE values at a fine grid of 
-\num{\sim800000} regularly spaced (\SI{5}{\metre}) points covering the entire study area. Because we used 
-\emph{unconditional} Gaussian simulation -- a simulation that is only \emph{globally} conditioned to the 
-histogram (and variogram) of the data observed at the calibration locations \cite{Goovaerts1997} -- and a 
-large number of realizations, we expect to find at any point of the simulation grid, over the $\mathcal{R} = 
-1000$ realizations, the whole set of possible BUDE values (i.e. the global histogram). Thus, the variance
-(uncertainty) is the same everywhere. This is in contrast with \emph{conditional} Gaussian simulation -- a 
-simulation that is \emph{locally} conditioned to the data observed at the calibration locations --, which 
-serves the purposes of honouring the data at the calibration locations, thus reducing the variance 
-(uncertainty) of the output realizations \cite{Goovaerts1997}. In our study, \emph{conditional} Gaussian 
-simulation is inappropriate as a model of uncertainty because the sampling algorithms that we evaluate are 
-designed to situations where we know very little, everywhere, about the spatial structure of the soil data 
+With the random regression forest and the LMM at hand, we produced $\mathcal{R} = 1000$ equiprobable 
+realizations of an isotropic Gaussian random field of BUDE. Each realization is constituted of a collection of 
+BUDE values at a fine grid of \num{\sim800000} regularly spaced (\SI{5}{\metre}) points covering the entire 
+study area. Because we used \emph{unconditional} Gaussian simulation -- a simulation that is only 
+\emph{globally} conditioned to the histogram (and variogram) of the data observed at the calibration locations 
+\cite{Goovaerts1997} -- and a large number of realizations, we expect to find at any point of the simulation 
+grid, over the $\mathcal{R} = 1000$ realizations, the whole set of possible BUDE values (i.e. the global 
+histogram). Thus, the variance -- our uncertainty -- is the same everywhere. This is in contrast with 
+\emph{conditional} Gaussian simulation -- a simulation that is \emph{locally} conditioned to the data observed 
+at the calibration locations --, which serves the purposes of honouring the data at the calibration locations, 
+thus reducing the variance of the output realizations \cite{Goovaerts1997}. In our study, \emph{conditional} 
+Gaussian simulation is inappropriate as a model of uncertainty because the sampling algorithms that we evaluate 
+are designed to situations where we know very little, everywhere, about the spatial structure of the soil data 
 generating process.
 
-
-
-
-
-It is using this uncertain reality that we tested our $\mathcal{A} = 4$ sampling algorithms.
+Unconditional simulation algorithms approximate the globally conditioned distribution of a soil variable at a 
+given point using neighbouring simulated values as local conditioning information \cite{Goovaerts1997}: the 
+larger the neighbourhood, the better the approximation. A sensible criteria to select the nearest simulated 
+values is the practical range of the variogram model \cite{Pebesma2004}. However, as the simulation proceeds, 
+the number of simulated values within this neighbourhood becomes computationally prohibitive 
+\cite{WebsterEtAl2007}. Thus, we chose to use a fixed maximum number of simulated values $n_{max} = 100$ 
+within the practical range of the variogram model that are closest to the point being simulated. Last, but not 
+least, sequential simulations algorithms speed up computations by using the same random path in all 
+simulations, allowing it to reuse the \q{expensive results}: neighbourhood selection and solution to the 
+kriging equations \cite{Pebesma2004}. We believe that following the same random path to generate each of the 
+$\mathcal{R} = 1000$ realizations can introduce a structural component in the approximation errors. To avoid 
+that, simulations were carried out using five different seeds for the pseudo-random number generators.
 
 \subsection{Sampling and Model Calibration}
 
@@ -381,6 +401,14 @@ check the effect of the sample size, each algorithms was run using $\mathcal{N} 
 (100, 200, 400)$, which amounts to $\mathcal{D} = 3000}$ calibration datasets for each algorithm. Each 
 calibration dataset was used to calibrate a random regression forest using the same covariates as used in 
 simulating the fields.
+
+\subsection{Evaluation of Sampling Algorithms}
+
+The influence of sampling design and sample size on the spatial prediction accuracy was assessed using 
+$n = 1000$ validation points probabilistically selected from 500 quasi-equal-area compact geographic strata. 
+Geographic stratification was obtained using the \textit{k}-means algorithm as implemented in the 
+\Rpackage{spcosa} \cite{WalvoortEtAl2010}. The algorithm was run using three different seeds for the 
+pseudo-random number generator, the resulting stratification with the minimum objective value being selected.
 
 \section{RESULTS AND DISCUSSION}
 
