@@ -72,6 +72,15 @@
             ]{hyperref}
 \usepackage[hyphenbreaks]{breakurl} % lidar com url longa
 
+%% Mudar o nome padrão das seções, subseções, e subsubseções mostrados quando usa-se \autoref{label}. Para 
+%% todos os três casos, o padrão passa a ser <Seção>, sempre com a inicial maiúscula.
+%% https://www.tug.org/applications/hyperref/manual.html
+\addto\extrasenglish{%
+  \def\subsubsectionautorefname{Section}%
+  \def\subsectionautorefname{Section}%
+  \def\sectionautorefname{Section}%
+} 
+
 %%TODO: Margens conforme MDT UFSM 7ª edição. Corrigir no arquivo UFRuralRJ.cls 
 %%      para funcionar a opção twoside *PENDENTE*
 %\usepackage[inner = 30mm, outer = 20mm, top = 30mm, bottom = 20mm]{geometry}
@@ -87,7 +96,7 @@
 
 % IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
 % depois do pacote 'hyperref'
-\usepackage[alf]{abntex2cite}
+\usepackage[alf,abnt-and-type=&]{abntex2cite}
 %\renewcommand{\authorcapstyle}{\small}
 
 %%==============================================================================
@@ -414,15 +423,16 @@ about its reliability, which is critical for decision makers.
 % Adiciona cada capitulo
 \include{chap/chap00} % General introduction
 % \include{chap/chap01}
-\selectlanguage{brazilian}
-% \include{chap/chap02} % Modelo conceitual de pedogênese
-\selectlanguage{english}
+\selectlanguage{brazilian}\citeoption{abnt-and-type=e}
+\include{chap/chap02} % Modelo conceitual de pedogênese
+\selectlanguage{english}\citeoption{abnt-and-type=&}
 % \include{chap/chap03} % The Santa Maria dataset -- soil data
 % \include{chap/chap04} % The Santa Maria dataset -- covariate data
 \include{chap/chap05} % Do more detailed covariates deliver more accurate soil maps?
-% \include{chap/chap06} % Spatial point pattern analysis of soil survey sampling locations
+%TODO: 
+\include{chap/chap06} % Spatial point pattern analysis of soil survey sampling locations
 \include{chap/chap07} % Optimization of sample configurations for spatial trend estimation for soil mapping
-% \include{chap/chap08} % Sampling for soil mapping in terra incognita
+\include{chap/chap08} % Sampling for soil mapping in terra incognita
 \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
@@ -434,8 +444,8 @@ about its reliability, which is critical for decision makers.
 % \include{chap/apenb} % conceptual model of pedogenesis
 % \include{chap/apena} % The Santa Maria dataset -- soil data
 % \include{chap/apene} % The Santa Maria dataset -- covariate data
-\include{chap/appenc} % R-package spsann
-\include{chap/append} % R-package pedometrics
+% \include{chap/appenc} % R-package spsann
+% \include{chap/append} % R-package pedometrics
 
 %%=============================================================================
 %% Referências

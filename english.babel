@@ -26,6 +26,11 @@
 \def\proofname{Proof}%
 \def\figurename{Figure}%
 \def\chaptername{Chapter}%
+
+\def\sectionname{Section}%
+\def\subsectionname{Section}%
+\def\subsubsectionname{Section}%
+
 \def\tablename{Table}%
 \def\authorname{Author}%
 \def\authornamef{Author}%

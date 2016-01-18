@@ -27,6 +27,11 @@
 \def\proofname{Prova}%
 \def\figurename{Figura}%
 \def\chaptername{Cap\'{\i}tulo}%
+
+\def\sectionname{Se\c{c}\~{a}o}%
+\def\subsectionname{Se\c{c}\~{a}o}%
+\def\subsubsectionname{Se\c{c}\~{a}o}%
+
 \def\tablename{Tabela}%
 \def\authorname{Autor}%
 \def\authornamef{Autora}%
