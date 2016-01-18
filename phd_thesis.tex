@@ -152,8 +152,9 @@
  \addtocounter{footnote}{-1}%
  \endgroup
 }
-% \newcommand{\tmp}[1]{\citeonline{#1}
+% \def\citet{\citeonline}
 \let\citet\citeonline
+{}
 
 % Hyperlinks and URLs
 \def\atcorrbug{\href{http://lists.osgeo.org/pipermail/grass-dev/2014-February/067540.html}{bug}} % atcorr bug
@@ -411,16 +412,17 @@ about its reliability, which is critical for decision makers.
 \setlength{\baselineskip}{1.5\baselineskip}
 
 % Adiciona cada capitulo
-\include{chap/chap00}
+\include{chap/chap00} % General introduction
 % \include{chap/chap01}
 \selectlanguage{brazilian}
-\include{chap/chap02} % Modelo conceitual de pedogênese
+% \include{chap/chap02} % Modelo conceitual de pedogênese
 \selectlanguage{english}
-% \include{chap/chap03}
-% \include{chap/chap04}
+% \include{chap/chap03} % The Santa Maria dataset -- soil data
+% \include{chap/chap04} % The Santa Maria dataset -- covariate data
 \include{chap/chap05} % Do more detailed covariates deliver more accurate soil maps?
-\include{chap/chap06} % Point patter analysis
-\include{chap/chap07} % Spatial trend estimation
+% \include{chap/chap06} % Spatial point pattern analysis of soil survey sampling locations
+\include{chap/chap07} % Optimization of sample configurations for spatial trend estimation for soil mapping
+% \include{chap/chap08} % Sampling for soil mapping in terra incognita
 \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
