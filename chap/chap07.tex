@@ -2,16 +2,29 @@
 \chapter{OPTIMIZATION OF SAMPLE CONFIGURATIONS FOR SPATIAL TREND ESTIMATION FOR SOIL MAPPING}
 \label{chap:chap07}
 
-\def\ptkeys{}
+\def\ptkeys{Recozimento simulato, Otimização multi-objetivo, Pareto, Amostragem por hypercubo latino 
+condicionado, Covariáveis}
 
 \begin{chapterabstract}{brazilian}{\ptkeys}
-
+Este é o resumo em português.
 \end{chapterabstract}
 
-\def\enkeys{}
+\def\enkeys{Simulated annealing, Multi-objective optimization, Pareto, Conditioned Latin hypercube sampling, 
+Covariates}
   
 \begin{chapterabstract}{english}{\enkeys}
-
+The spatial trend is the part of a soil spatial model that deterministically explains the soil spatial 
+variation using covariates. The sampling method most commonly used to identify and estimate the spatial trend 
+is the \emph{conditioned Latin hypercube sampling} (CLHS). In this study we propose conceptual and algorithmic 
+improvements on the CLHS, which are evaluated using synthetic data derived from a real-world study case in 
+Santa Maria, southern Brazil. The improvements include: 1) using the Pearson's $r$ only when all covariates 
+are numeric, and the Cramér's $v$ when some or all covariates are factors, 2) defining marginal sampling 
+strata using only the unique values of the sample quantiles estimated with a discontinuous function, and 3) 
+scaling the objective functions to the same approximate range of values using the upper-lower bound approach 
+with the Pareto maximum and minimum before aggregating them into a single utility function using a weighted 
+sum. Compared to the original CLHS, our proposed improvements resulted in a sampling algorithm with a better 
+numerical behaviour. It remains to be evaluated if the better numerical behaviour results in more accurate 
+spatial predictions.
 \end{chapterabstract}
 
 \formatchapter
@@ -27,7 +40,7 @@ Wageningen University and Research Centre, the Netherlands), Gerard B. M. Heuvel
 Information), Gustavo M. Vasques (Embrapa Soils, Brazil), and Lúcia Helena Cunha dos Anjos (Universidade 
 Federal Rural do Rio de Janeiro, Brazil).}
 
-Modern soil mapping is based on using a model of spatial variation composed of two terms,
+Modern soil mapping is based on using a model of spatial variation composed of two terms, 
 
 \begin{equation}
  Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
@@ -37,7 +50,7 @@ Modern soil mapping is based on using a model of spatial variation composed of t
 the conference of the Pedometrics Commission of the IUSS, which took place from 14--18 September 2015, in 
 Córdoba, Spain.}}
 
-\nointent The first term in the right-hand size in \autoref{eq:chap07-standard-model} is the spatial trend, 
+\noindent The first term in the right-hand size in \autoref{eq:chap07-lmm} is the spatial trend, 
 which corresponds to the spatial variation of the soil property $Y(\boldsymbol{s})$ that is explained 
 deterministically using spatially exhaustive covariates; the remaining spatial variation of 
 $Y(\boldsymbol{s})$ is explained stochastically with the second term \cite{Cressie1993}. Soil scientists 
@@ -52,7 +65,7 @@ of our pedological knowledge \cite{Lark2012}.
 
 Recent studies have shown that using more detailed covariates or more complex machine-learning algorithms can 
 deliver more accurate soil maps, but the increase in prediction performance may be modest 
-(\cite{Samuel-RosaEtAl2015}) and largely depends on the calibration data \cite{HeungEtAl2016}. Limited to the 
+\cite{Samuel-RosaEtAl2015} and largely depends on the calibration data \cite{HeungEtAl2016}. Limited to the 
 currently available covariates and machine-learning algorithms, and to the existing pedological knowledge, one 
 of the major operational issue that needs to be solved in any soil mapping project is how to design an 
 efficient spatial sample to estimate $m(\boldsymbol{s})$. The sampling method most commonly used to solve this 
@@ -289,7 +302,7 @@ was based on using synthetic data derived from a real-world study case \cite{Sam
 site is a small catchment of about \SI{2000}{\hectare} located on the southern edge of the plateau of the 
 Paraná Geologic Province, Rio Grande do Sul, Brazil. The real-world dataset contains $n = 350$ point soil 
 observations of the topsoil, and includes several soil properties, but only bulk density data 
-(BUDE,~\si{\mega\gram\per\metre\cubic) was used ($n = 282$). The dataset also includes several covariates 
+(BUDE,~\si{\mega\gram\per\metre\cubic} was used ($n = 282$). The dataset also includes several covariates 
 derived from area-class soil maps, digital elevation models, geological maps, land use maps, and satellite 
 images. All processing steps used to derive the covariates were described by \citet{Samuel-RosaEtAl2015}.
 
@@ -349,7 +362,7 @@ BUDE with $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fi
  \begin{minipage}{90mm}
   \subcaption{}
   \centering
-  \includegraphics[width = 90mm, draft = true]{fig/chap07-random-forest-fit}
+  \includegraphics[width = 90mm]{fig/chap07-random-forest-fit}
  \end{minipage}
  \begin{minipage}{90mm}
   \centering
@@ -399,13 +412,13 @@ that, simulations were carried out using five different seeds for the pseudo-ran
 We compare $\mathcal{A} = 4$ sampling algorithms (CORR, DIST, ACDC, and CLHS) and $\mathcal{N} = 3$ sample 
 sizes $n = (100, 200, 400)$. These sample sizes correspond to the moderately high inspection density (1 sample 
 point per 20, 10, and \SI{5}{\hectare}, respectively) recommended for the production of soil maps published at 
-a \scale{25000} \cite{Rossiter, 2000}.
-
-We then sampled from each realization using the optimized spatial sample configurations. Because we wanted to 
-check the effect of the sample size, each algorithms was run using $\mathcal{N} = 3$ sample sizes of $n = 
-(100, 200, 400)$, which amounts to $\mathcal{D} = 3000}$ calibration datasets for each algorithm. Each 
-calibration dataset was used to calibrate a random regression forest using the same covariates as used in 
-simulating the fields.
+a \scale{25000} \cite{Rossiter2000}. Spatial sample configurations were created optimizing each of the 
+objective functions using spatial simulated annealing as implemented in the \Rpackage{spsann}. Spatial 
+simulated annealing is a well known method with widespread use to solve optimization problems in the soil and 
+geo-sciences. This is mainly due to its robustness against local optima and easiness of implementation. We then 
+used each optimized spatial sample configuration to sample from each realization to constitute calibration 
+datasets. Each calibration dataset was used to calibrate a (non)linear mixed model as described above for the 
+soil data generating process.
 
 \subsection{Evaluation of Sampling Algorithms}
 
@@ -431,19 +444,47 @@ design compares to another.
 
 \section{RESULTS AND DISCUSSION}
 
+Due to operational limitations, only the results of the spatial sample optimization are available. 
+\autoref{fig:chap07-energy-all} shows the evolution of the objective function values during the optimization 
+of sample configurations using all four sampling algorithms for all sample sizes. The observed pattern is that 
+expected from a spatial simulated annealing algorithm. High and variable objective function values during the 
+first Markov chains, with low and stable values as the optimization reaches its end. The remarkably larger 
+variation of CLHS at the beginning of the optimization, compared to the other algorithms, is likely due to the 
+fact that it is composed of three objective functions. It is worth pointing that the optimum sample 
+configuration was not found for any of the sampling algorithms after $n_\text{chains} = 500$ of size $n$ as 
+indicated by the descending behaviour of the objective function values at the end of the optimization.
+
 \begin{figure}[!ht]
  \centering
- \includegraphics[width=\textwidth]{fig/chap07-energy_corr_dist_acdc_clhs}
+ \includegraphics[width=\textwidth]{fig/chap07-energy-corr-dist-acdc-clhs}
  \caption[Objective function values during the optimization of three sample configurations using four sampling 
  algorithms.]{Objective function values during the optimization of sample configurations of size 
- $n = (100, 200, 400$) using sampling algorithms CORR, DIST, ACDC, and CLHS against the number of Markov 
+ $n = (100, 200, 400)$ using sampling algorithms CORR, DIST, ACDC, and CLHS against the number of Markov 
  chains of length $n$.}
  \label{fig:chap07-energy-all}
 \end{figure}
 
+Our expectation that the first objective of the CLHS has a numerical dominance over the second and third 
+objective functions was confirmed as shown in \autoref{fig:chap07-energy-acdc-clhs}. Comparing $\mathcal{O}_1$ 
+with $\mathcal{O}_2$ and 
+$\mathcal{O}_3$, we see that the sample configuration is rapidly optimized with respect to $\mathcal{O}_2$ and 
+$\mathcal{O}_3$ during the first 
+Markov chains -- see the descendent vertical point cloud on the right side of both top panels. The bottom left 
+panel suggests that $\mathcal{O}_2$ and $\mathcal{O}_3$ are optimized jointly, with a bias towards 
+$\mathcal{O}_3$. Most of the optimization efforts 
+are spent towards $\mathcal{O}_1$, as suggested by the high point density along the horizontal axis in both 
+top 
+panels.Thus, the bias in the CLHS can be ordered as $\mathcal{O}_1$ > $\mathcal{O}_3$ > $\mathcal{O}_2$. On the 
+other hand, ACDC appear to be 
+unbiased as suggested by the bottom right panel. The sample configuration is optimized with respect to 
+CORR and DIST jointly, as expected. This results suggest our proposed improvements on the CLHS produced a 
+sampling algorithm with a better numerical behaviour. It is worth noting that the results presented in 
+\autoref{fig:chap07-energy-acdc-clhs} refer to sample sizes of $n = 100$, but are representative of what was 
+observed with the other two sample sizes.
+
 \begin{figure}[!ht]
  \centering
- \includegraphics[width=\textwidth]{fig/chap07-energy_acdc_clhs}
+ \includegraphics[width=\textwidth]{fig/chap07-energy-acdc-clhs}
  \caption[Region of the feasible objective space explored by pairs of objective functions that compose CLHS 
  and ACDC.]{Region of the feasible objective space $\mathcal{Z}$ explored by pairs of objective functions (x 
  vs  y) that compose CLHS ($\mathcal{O}_1$, $\mathcal{O}_2$, and $\mathcal{O}_3$) and ACDC (CORR and DIST)  
@@ -452,9 +493,22 @@ design compares to another.
  \label{fig:chap07-energy-acdc-clhs}
 \end{figure}
 
+A snapshot of the optimized sample configurations is presented in \autoref{fig:chap07-points}. We start 
+comparing the spatial samples produced using CORR and DIST regarding their geographic distribution. For all 
+three sample sizes, DIST produces a spatial sample with a better geographic coverage, the difference being 
+smaller as the sample size increases. Although these algorithms do not aim at the coverage of the geographic 
+space, leaving large spaces unsampled can have a negative effect on the prediction accuracy of calibrated 
+models. CORR leaves larger empty spaces because it creates clusters of points, many of which resemble 
+transects. The coverage of the geographic space of DIST samples is degraded when combined with CORR (ACDC). 
+ACDC samples have more clusters of points than DIST, which again resemble transects. Both ACDC and CLHS 
+samples present a similar level of coverage of the geographic space. The difference is that CLHS places 
+clusters of samples in regions others than those targeted by ACDC and vice-versa -- for example, with $n = 
+100$, the central and south-western regions of the study area. This is likely to be due to the numerical 
+dominance of $\mathcal{O}_1$ in CLHS, which results in a bias towards numeric covariates.
+
 \begin{figure}[!ht]
  \centering
- \includegraphics[width=\textwidth]{fig/chap07-points_corr_dist_acdc_clhs}
+ \includegraphics[width=\textwidth]{fig/chap07-points-corr-dist-acdc-clhs}
  \caption[Sample configurations optimized using four sampling algorithms.]{Sample configurations of size 
  $n = (100, 200, 400)$ optimized using sampling algorithms CORR, DIST,  ACDC, and CLHS superimposing the
  drainage network.}
@@ -463,4 +517,7 @@ design compares to another.
 
 \section{FINAL CONSIDERATIONS}
 
-
+An important conclusion of our study is that the proposed improvements on the CLHS resulted in a sampling 
+algorithm with a better numerical behaviour. This means that the first objective of our study has been 
+reached, at least for the case study used here. It remains to be evaluated if our results apply to other 
+combinations of covariates, and if the better numerical behaviour results in more accurate spatial predictions.
