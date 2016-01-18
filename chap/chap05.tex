@@ -461,7 +461,7 @@ of predictor variables initially offered to enter the model instead of the reduc
 variables that entered the model. Next, the five covariates were ranked based on how their level of spatial 
 detail related with the calibration of models with improved predictive performance. The relation between the 
 level of spatial detail of the covariates and model performance was evaluated using a graphical output called 
-\emph{model series plot} (\Rpackage{pedometrics}, \citeonline{Samuel-RosaEtAl2014c}). Pedological evaluation 
+\emph{model series plot} (\Rpackage{pedometrics}, \citet{Samuel-RosaEtAl2014c}). Pedological evaluation 
 of predictor variables included in the models was omitted because this was beyond our objectives.
 
 The multiple linear regression model calibrated using only the less detailed covariates, which we call the 
@@ -577,7 +577,8 @@ detailed satellite image (\texttt{sat}) is close to \num{20} (bottom row). Using
 ranking of the SOC models calibrated using the more detailed version of these two covariates is about 
 \num{15}--\num{16} (second and third rows). Using the more detailed version of the soil map (\texttt{soil}, 
 fourth row) is not as beneficial as using \texttt{land}, \texttt{geo} or \texttt{dem}, but more beneficial 
-than using \texttt{sat}. Because the covariates were ranked based on the mean rankings, the covariate displayed 
+than using \texttt{sat}. Because the covariates were ranked based on the mean rankings, the covariate 
+displayed 
 in the top row of each model series plot is the one which resulted in the largest improvement of the 
 prediction accuracy when the more detailed version was used to calibrate the model -- for SOC this is the land 
 use map.
@@ -620,7 +621,8 @@ the most important covariate in the \emph{baseline} model. But it was the covari
 largest positive shift when the more detailed version was used (\SI{+0.085}{\pp} for SOC and \SI{+0.045}{\pp}
 for ECEC). \texttt{sat} became less important when the more detailed version was used -- see its low ranking 
 in all model series plots. The increase of the importance of \texttt{geo} was larger for ECEC 
-(\SI{+0.026}{\pp}) than for SOC (\SI{+0.013}{\pp}) -- see the difference in the mean ranking of \texttt{geo} in 
+(\SI{+0.026}{\pp}) than for SOC (\SI{+0.013}{\pp}) -- see the difference in the mean ranking of \texttt{geo} 
+in 
 the SOC (\num{14}) and ECEC (\num{12}) model series plots.
 
 \input{chap/tab/chap01TAB4.tex}
@@ -806,7 +808,8 @@ back-transformation of predicted values.
 
 Our main goal was to evaluate whether investing in more spatially detailed covariates improves the accuracy of 
 soil maps. We saw that calibrating the models with more detailed covariates generally has a small to moderate, 
-but positive, impact on the predictions. The magnitude of this benefit depends on the magnitude of the increase 
+but positive, impact on the predictions. The magnitude of this benefit depends on the magnitude of the 
+increase 
 of the spatial detail of the covariate, on the other covariates included in the model, and on the soil 
 property. However, there seems to be a limit above which the increase of spatial detail has a negative impact 
 on the predictions. In the next two subsections we interpret the results from a pedological perspective and 
@@ -820,7 +823,7 @@ detailed covariates. CLAY was expected to have a strong correlation with topogra
 correlation was already considerable when the less detailed DEM and geologic map were used, and improved only 
 marginally with the more detailed version. One sensible explanation is that the effective (actual rather than 
 theoretical) spatial detail of the two geologic maps was similar, although they had a four-fold difference in 
-the size of the minimum legible delineation (see \citeonline{HenglEtAl2006a} for a discussion on effective 
+the size of the minimum legible delineation (see \citet{HenglEtAl2006a} for a discussion on effective 
 scale). For the DEM, many studies have already suggested that its resolution may be of secondary importance 
 when calculating DEM derivatives for soil mapping \cite{ZhuEtAl2008, BehrensEtAl2010a, MillerEtAl2015}. The 
 influence of land use on CLAY is currently small due to reduction of soil erosion in the first decade of the 
@@ -832,8 +835,10 @@ It is worthwhile to consider the influence of the more detailed soil map on pred
 production process, the more detailed soil map derives a large amount of spatial detail from the geologic map, 
 land use map and DEM -- note that the second-best performing model for CLAY included the more detailed 
 geologic map instead of the more detailed soil map (\autoref{fig:chap05-model-series}). However, most of the 
-additional spatial detail included in the more detailed soil map was probably based on the spatial variation of 
-soil texture, because this is a strongly marked soil feature in the area \cite{MiguelEtAl2012}. Soil texture is 
+additional spatial detail included in the more detailed soil map was probably based on the spatial variation 
+of 
+soil texture, because this is a strongly marked soil feature in the area \cite{MiguelEtAl2012}. Soil texture 
+is 
 one of the most important soil properties used by soil surveyors in the field to identify mapping units 
 \cite{Legros2006}. These findings help explain why in the end the more detailed soil map was the most 
 beneficial for CLAY instead of the geologic map.
@@ -877,7 +882,8 @@ thinking and depends on case-specific elements. We generally saw improvement in 
 but the improvement was not large and may not outweigh the costs. Also, the models calibrated with the more 
 detailed versions of all covariates were not the best performing models. Using more detailed satellite images 
 and land use maps degraded CLAY predictions. Although the more detailed soil map had the largest benefit for 
-CLAY, it may be too costly and impractical since its production usually requires having available more detailed 
+CLAY, it may be too costly and impractical since its production usually requires having available more 
+detailed 
 versions of all other covariates. For SOC and ECEC, simply using a more detailed land use map resulted in 
 considerably more accurate predictions. However, the superior performance may not outweigh the extra costs 
 because producing a more detailed land use map usually requires up-to-date field observations and satellite 
@@ -887,11 +893,11 @@ applications of the covariates, but this is not our concern here.
 
 One interesting observation is that if a less detailed covariate yields poor predictions, its more detailed 
 version has the potential to produce larger improvement in model performance. However, this is only a 
-potential, not a guarantee. For instance, \citeonline{EldeiryEtAl2008} were not able to increase the $R^2 = 
+potential, not a guarantee. For instance, \citet{EldeiryEtAl2008} were not able to increase the $R^2 = 
 0.31$ of linear regression models of soil salinity by more than \num{0.07}~points using \num{7.5}~times more 
 detailed satellite images. On the other hand, model performance is likely to be hardly improved using more 
 detailed covariates if their less detailed version has already produced accurate predictions. This agrees with 
-findings by \citeonline{ThompsonEtAl2001} and \citeonline{KimEtAl2014}.
+findings by \citet{ThompsonEtAl2001} and \citet{KimEtAl2014}.
 
 We also observed that the predictions can be degraded when using the more detailed version of covariates. In 
 our study, this happened with the satellite image (all three soil properties), land use map (CLAY) and soil 
@@ -909,7 +915,7 @@ knowledge because empirical evidence from the \emph{baseline} model may be insuf
 covariate is not necessarily that which explained the largest part of the variance in the \emph{baseline} 
 model (see \autoref{tab:chap05-drop}). This occurs because increasing the spatial detail reduces the 
 correlation between the covariate and the soil property. And also because there is little room to improve a 
-correlation that is already high in the \emph{baseline} model. \citeonline{CavazziEtAl2013} suggest that the 
+correlation that is already high in the \emph{baseline} model. \citet{CavazziEtAl2013} suggest that the 
 more detailed covariate has an excess of detail, a \q{noise} that degrades the predictions. This could explain 
 the results for \texttt{sat}: higher resolution images can resolve smaller objects (e.g. individual plants) 
 whose spectral behaviours are highly variable, adding noise to the \texttt{sat}-soil property correlation; on 
@@ -927,7 +933,7 @@ is a \q{conditional optimum} -- conditional on the point soil data available. It
 that the most accurate predictions will be made, but only that there is a level of spatial detail at which the 
 correlation between the covariate and the point soil data is at a maximum. We suggest that instead more 
 comprehensive approaches should be used to explore the full potential of the available covariates (see 
-\citeonline{BehrensEtAl2010a} and \citeonline{MillerEtAl2015} for examples).
+\citet{BehrensEtAl2010a} and \citet{MillerEtAl2015} for examples).
 
 Finally, one must still judge whether the potential improvement in predictions is sufficient given the extra 
 costs involved with using more detailed covariates. If the extra budget is spent on deriving more detailed 

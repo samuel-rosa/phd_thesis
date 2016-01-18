@@ -188,8 +188,8 @@ parte mais alta \cite{HeldweinEtAl2009}.
 
 A geologia é bastante complexa, sendo constituída por três formações geológicas, além de depósitos coluvionares 
 e de aluvião do Quaternário. A literatura sobre o tema é vasta \cite{Bortoluzzi1974, Brasil1980, 
-GasparettoEtAl1988, MacielFilho1990, PieriniEtAl2002, MarquesEtAl2005, Milani2005, Pinto2005, CPRM2007, 
-Pedron2007, Sartori2009, NascimentoEtAl2010, WerlangEtAl2010, Machado2012, PedronEtAl2012}, e uma revisão da 
+GasparettoEtAl1988, MacielFilho1990, Machado1998, PieriniEtAl2002, MarquesEtAl2005, Milani2005, Pinto2005, 
+CPRM2007, Pedron2007, Sartori2009, NascimentoEtAl2010, WerlangEtAl2010, PedronEtAl2012}, e uma revisão da 
 mesma é apresentada aqui.
 
 % \begin{figure}[h]
