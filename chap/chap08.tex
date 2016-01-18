@@ -247,7 +247,7 @@ stochastic residuals, which is small for BUDE ($\text{SCV} \cong 0.20$) and larg
 
 Sequential unconditional Gaussian simulation was used to create $\mathcal{R} = 1000$ equiprobable realizations 
 of each soil data generating process with linear and non-linear trends (\autoref{fig:chap08-realizations}) as 
-described by \citet{Samuel-RosaEtAl}.
+described in \autoref{subsec:simulation} \cite{Samuel-RosaEtAl}.
  
 \begin{figure}[!ht]
  \centering
@@ -283,6 +283,14 @@ data generating process to be known. The criterion minimized was the mean univer
 $\mathcal{R} = 1000$ simulated realities of CLAY with linear trend. This yielded another 3000~calibration 
 datasets. The true optimum sampling designs was used to quantify how suboptimal our multi-objective sampling 
 design is.
+
+\subsection{Evaluation of Sampling Algorithms}
+
+We evaluated how sampling design and sample size influence spatial prediction accuracy. The goal was to 
+evaluate how the proposed improvements on the CLHS compare with the original algorithm. The mean error (ME) of 
+prediction was used as the measure of prediction accuracy. We started computing the prediction error at each 
+validation location for each realization. Then we calculated the realization-wise ME, which were summarized 
+using box-and-whisker plots. 
 
 \section{FINAL CONSIDERATIONS}
 
