@@ -96,8 +96,8 @@
 
 % IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
 % depois do pacote 'hyperref'
-\usepackage[alf,abnt-and-type=&]{abntex2cite}
-%\renewcommand{\authorcapstyle}{\small}
+\usepackage[alf,abnt-and-type=&,abnt-etal-cite=2]{abntex2cite}
+\renewcommand{\authorcapstyle}{\small}
 
 %%==============================================================================
 %% Pacotes - formatação de verbatim
@@ -246,7 +246,7 @@
 %%=============================================================================
 %% Capa e folha de rosto
 %%=============================================================================
-\maketitle
+% \maketitle
 
 %%=============================================================================
 %% Ficha catalográfica
@@ -423,13 +423,12 @@ about its reliability, which is critical for decision makers.
 % Adiciona cada capitulo
 \include{chap/chap00} % General introduction
 % \include{chap/chap01}
-\selectlanguage{brazilian}\citeoption{abnt-and-type=e}
+\selectlanguage{brazilian}
 \include{chap/chap02} % Modelo conceitual de pedogênese
-\selectlanguage{english}\citeoption{abnt-and-type=&}
+\selectlanguage{english}
 % \include{chap/chap03} % The Santa Maria dataset -- soil data
 % \include{chap/chap04} % The Santa Maria dataset -- covariate data
 \include{chap/chap05} % Do more detailed covariates deliver more accurate soil maps?
-%TODO: 
 \include{chap/chap06} % Spatial point pattern analysis of soil survey sampling locations
 \include{chap/chap07} % Optimization of sample configurations for spatial trend estimation for soil mapping
 \include{chap/chap08} % Sampling for soil mapping in terra incognita
