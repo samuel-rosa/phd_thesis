@@ -8,7 +8,30 @@
 Pedogênese}
 
 \begin{chapterabstract}{brazilian}{\ptkeys}
- Este é o resumo em português.
+O presente documento apresenta o modelo conceitual de pedogênese -- descrição explícita dos fatores e 
+processos de formação do solo que determinam as características do solo e o seu padrão de distribuição 
+espaço-temporal -- da bacia de captação do reservatório do DNOS/CORSAN, localizada no sul do Brasil. O clima é 
+subtropical úmido sem estação seca definida. O relevo é plano a montanhoso (variação de altitude entre 139 e 
+\SI{475}{\m}), com vales encaixados que condicionam o volume precipitado e o fluxo radiativo nas diferentes 
+superfícies. A geologia é constituída pela sequência de três formações geológicas: rochas sedimentares 
+(arenito fluvial), seguidas de rochas ígneas (basaltos-andesitos tholeíticos e vitrófilos, riólitos-riodacitos 
+granofíricos) intercaladas por rochas sedimentares (arenito eólico). Depósitos do Quaternário aparecem nas 
+partes mais baixas. A geomorfologia atual é resultado dos processos erosivos do Terciário e Quaternário. A 
+dissecação atual é fraca devido ao clima que favorece a instalação e permanência de vegetação exuberante. Três 
+unidades morfoestruturais são identificadas: no topo, o Planalto, com relevo suave-ondulado a ondulado, 
+seguido pelo Rebordo do Planalto, com ampla variação altimétrica, declividade acentuada e escarpas abruptas.
+Na base, a Depressão Periférica, com formas agradacionais de planície fluvial. Nas partes altas, a rede de 
+drenagem apresenta padrão bem definido, geralmente retangular, determinada pelas falhas e/ou fraturas. Já nas 
+áreas mais, devido aos processos de deposição sedimentar e erosão fluvial, sua configuração é serpenteada. Ali 
+encontram-se um lençol freático próximo da superfície do solo e cursos de água perenes. O uso da terra para 
+produção agrosilvopastoril foi intenso em tempos pretéritos e resultou em forte degradação do solo. O abandono 
+de muitas áreas degradadas permitiu a regeneração da vegetação natural, resultando na atual ocupação com 
+florestas e vegetação secundária de \SI{\pm60}{\percent}. Em geral, o solo é pouco profundo devido ao 
+predomínio de condições de forte declividade. É comum encontrar solo raso mesmo em áreas de maior estabilidade 
+como fruto da degradação pelo uso agrícola. O solo é mais profundo no Planalto, nos terraços do Rebordo, nas 
+coxilhas de relevo suave-ondulado a ondulado, e nas planícies aluviais. A textura é mais fina e homogênea ao 
+longo do perfil quando desenvolvido a partir de rochas vulcânicas. As características do solo nas planícies 
+aluviais são determinada pela presença constante de lençol freático próximo da superfície.
 \end{chapterabstract}
 
 \def\enkeys{Paraná Geological Province, DNOS Catchment, Plateau Border, Soil formation factors, Pedogenesis}
