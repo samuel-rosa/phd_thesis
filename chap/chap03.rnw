@@ -485,3 +485,21 @@ exchangeable bases and exchangeable acidity, i.e.
 % the normal distribution to the data -- a product of the \Rpackage{pedometrics}.}
 % \label{fig:intro-soil-properties}
 % \end{figure}
+
+\section{FINAL CONSIDERATIONS}
+
+The main goal of documenting the soil data contained in the Santa Maria dataset was to produce the basis for 
+future soil spatial modelling exercises in the catchment of the DNOS reservoir. As a result of an ongoing 
+collaborative effort, the present version of this documentation will be improved in the near future as new 
+studies are developed. We plan to include new figures to exemplify how field soil sampling was carried out. 
+Description of non-standard soil description and analysis methods will likely be extended. This includes, for 
+example, the oxidative treatment with \ce{H2O2} to which soil samples were submitted prior to particle size 
+distribution analysis. For cases such as the ECEC, determined using a non-standard method, we plan to develop 
+a study to calibrate a model to convert our results to the standard method for determining exchangeable bases, 
+which uses barium chloride (\ce{BaCl2}) for saturation. Other already existing soil data will also be include 
+in the Santa Maria dataset and documented as well. These data have not been used in any study so far, and 
+include the potential acidity, sum of exchangeable bases, potential cation exchange capacity, base saturation, 
+aluminium saturation, and five size classes of the sand fraction. Once a comprehensive documentation has been 
+constructed, we will prepare a basic spatial exploratory soil data analysis. We hope that our effort to 
+properly document the soil data that we produced, and make it freely available for use, will serve as an 
+example for future soil spatial modelling studies developed elsewhere.
