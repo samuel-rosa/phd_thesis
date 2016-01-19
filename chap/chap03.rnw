@@ -10,10 +10,24 @@
  
 \end{chapterabstract}
 
-\def\enkeys{}
+\def\enkeys{Spatial soil modelling, Purposive sampling, Legacy data, Soil field description, Soil laboratory 
+analysis}
   
 \begin{chapterabstract}{english}{\enkeys}
- 
+The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between \num{2004} and 
+\num{2013} in the catchment of the DNOS/CORSAN reservoir, located in the southern Brazilian state of Rio 
+Grande do Sul. These soil data was produced during the development of research projects that aimed at 
+producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
+erosion. All observation locations were selected purposively or by convenience. Several environmental features 
+were described at the observation locations, such as land use, geology, soil classification, slope, drainage 
+condition, presence of coarse fragments and rock outcrops, soil coverage with vegetation, among 
+other peculiarities of each observation location that were not recorded in a systematic way. Soil samples were 
+submitted to laboratory analysis to determine the soil organic carbon content, particle size distribution, 
+bulk density, and the content of exchangeable bases (calcium, magnesium, potassium, and sodium) and acidity. 
+The effective cation exchange capacity was calculated as the sum of exchangeable bases and acidity. The soil 
+data is freely available as CSV files in a repository hosted in GitHub. These include the identification of 
+each observation locations, their geographic coordinates, and field and laboratory data. The number of 
+laboratory replicates and the sample standard deviation is provided as well.
 \end{chapterabstract}
 
 \formatchapter
