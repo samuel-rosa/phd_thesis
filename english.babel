@@ -48,7 +48,7 @@
 \def\aprovadaem{approved in}%
 \def\soborienta{\textit{Under~the~supervision~of}}%
 \def\sobcoorienta{\textit{and~co-supervision~of}}%
-\def\and{and}%
+% \def\and{and}%
 \def\of{of}%
 \def\folhas{p}%
 \def\presidente{President}%

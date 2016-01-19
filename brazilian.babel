@@ -49,7 +49,7 @@
 \def\aprovadaem{aprovado(a) em}%
 \def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%
 \def\sobcoorienta{\textit{e co-orienta\c{c}{\~a}o~de}}%
-\def\and{e}%
+% \def\and{e}%
 \def\of{de}%
 \def\folhas{f}%
 \def\presidente{Presidente}%
