@@ -101,8 +101,7 @@ and factor covariates using equal-area strata (quantile sampling) and proportion
 each level, respectively, and reproducing the linear correlation of the numeric covariates 
 \cite{MinasnyEtAl2006b}. The method is very flexible and can be easily extended \cite{MinasnyEtAl2010a, 
 RoudierEtAl2012}. Recently, \citet{Samuel-RosaEtAl2016} proposed conceptual and algorithmic improvements on 
-the 
-CLHS. In short, the proposed improvements concern the definition of the marginal sampling strata, the 
+the CLHS. In short, the proposed improvements concern the definition of the marginal sampling strata, the 
 measurement of the correlation between covariates, and the aggregation of the objective functions. Preliminary 
 results have shown that the improvement resulted in a more numerically stable sampling algorithm 
 \citet{Samuel-RosaEtAl2016}.
@@ -124,10 +123,8 @@ Russo1984, WarrickEtAl1987} proposed a conservative solution: the points should 
 uniform distribution of pairwise distances. Their claim was that the sample would be globally optimal for an 
 infinite set of unknown variograms. This has not been proved mathematically nor corroborated by empirical 
 evidence. The resulting sample usually is redundant (poorly informative), concentrating most of the points in 
-a 
-single large cluster, with a few scattered points -- many of the point-pairs are computed using the same 
-subset 
-of points.
+a single large cluster, with a few scattered points -- many of the point-pairs are computed using the same 
+subset of points.
 
 Another critique to the idea of \citet{BreslerEtAl1982, Russo1984, WarrickEtAl1987} is that it was rooted on 
 the use of the method-of-moments to fit a continuous function to the binned empirical variogram. Nowadays we 
@@ -171,14 +168,12 @@ Our short review suggested that there are efficient and robust methods for desig
 configurations for spatial trend estimation and spatial interpolation in \emph{terra incognita}. The method of 
 \citet{MinasnyEtAl2006b} is the most suited to sample for spatial trend estimation. Because 
 \citet{Samuel-RosaEtAl2016} produced a more numerically stable sampling algorithm, we opt for using the 
-improved 
-version of the CLHS called ACDC. The MSSD is the most suited criterion to optimize sample configurations for 
-spatial interpolation for soil mapping in \emph{terra incognita} \cite{BrusEtAl2006, WalvoortEtAl2010}. An 
-efficient and robust method for variogram estimation in the same circumstances seem to be missing, as well as 
-a 
-method that takes all three objectives jointly. We now propose a series of innovations and modifications on an 
-existing method so that this gap can be potentially filled. Our proposed innovations and modifications have 
-been implemented in the publicly available \Rpackage{spsann}\footspsann.
+improved version of the CLHS called ACDC. The MSSD is the most suited criterion to optimize sample 
+configurations for spatial interpolation for soil mapping in \emph{terra incognita} \cite{BrusEtAl2006, 
+WalvoortEtAl2010}. An efficient and robust method for variogram estimation in the same circumstances seem to 
+be missing, as well as a method that takes all three objectives jointly. We now propose a series of 
+innovations and modifications on an existing method so that this gap can be potentially filled. Our proposed 
+innovations and modifications have been implemented in the publicly available \Rpackage{spsann}\footspsann.
 
 \subsection{Sampling for Variogram Estimation}
 
@@ -243,13 +238,12 @@ southern edge of the plateau of the Paraná Sedimentary Basin, Rio Grande do Sul
 topsoil, and includes several soil properties, but only two were explored in this study: clay content (CLAY, 
 \si{\gram\per\kilo\gram}) and bulk density (BUDE, \si{\mega\gram\per\cubic\metre}). The dataset also includes 
 several covariates derived from area-class soil maps, digital elevation models, geological maps, land use 
-maps, 
-and satellite images. All preprocessing steps and methods used to derive the covariates were described by 
-\citet{Samuel-RosaEtAl2015}.
+maps, and satellite images. All preprocessing steps and methods used to derive the covariates were described 
+by \citet{Samuel-RosaEtAl2015}.
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[draft = true, width = 90mm]{fig/chap02-location}
+ \includegraphics[width = 90mm]{fig/chap02-location}
  \caption{Location of the real-world study area in Santa Maria, southern Brazil.}
  \label{fig:chap08-location}
 \end{figure}
@@ -282,15 +276,17 @@ variance (SCV) of the stochastic residuals, which is small for BUDE ($\text{SCV}
 CLAY ($\text{SCV} \cong 0.85$).
 
 Sequential unconditional Gaussian simulation was used to create $\mathcal{R} = 1000$ equiprobable realizations 
-of an isotropic Gaussian random field of CLAY and BUDE (\autoref{fig:chap08-realizations}) using the same 
-settings described in \autoref{subsec:simulation} \cite{Samuel-RosaEtAl2016}.
+of an isotropic Gaussian random field of CLAY and BUDE 
+% (\autoref{fig:chap08-realizations}) 
+using the same settings described in \autoref{subsec:simulation} \cite{Samuel-RosaEtAl2016}.
  
-\begin{figure}[!ht]
- \centering
- \includegraphics[draft = true, width = \textwidth]{fig/chap02-location}
- \caption{Example realizations of the soil data generating processes with a) linear and b) non-linear trends.}
- \label{fig:chap08-realizations}
-\end{figure}
+% \begin{figure}[!ht]
+%  \centering
+%  \includegraphics[width = \textwidth]{fig/chap02-realizations}
+%  \caption{Example realizations of the soil data generating processes with a) linear and b) non-linear 
+%  trends.}
+%  \label{fig:chap08-realizations}
+% \end{figure}
 
 \subsection{Sampling Scenarios}
 
