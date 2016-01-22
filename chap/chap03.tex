@@ -1,473 +1,568 @@
 \artigotrue
-\chapter{THE SANTA MARIA DATASET -- SOIL DATA}
-\label{chap:chap03}
+\chapter{MODELO CONCEITUAL DE PEDOGÊNESE}
+\label{chap:chap02}
 %\SweaveUTF8
 
 
-\def\ptkeys{}
+\def\ptkeys{Província Geológica do Paraná, Bacia do DNOS, Rebordo do Planalto, Fatores de formação do solo, 
+Pedogênese}
 
 \begin{chapterabstract}{brazilian}{\ptkeys}
- 
+ Este é o resumo em português.
 \end{chapterabstract}
 
-\def\enkeys{}
+\def\enkeys{Paraná Geological Province, DNOS Catchment, Plateau Border, Soil formation factors, Pedogenesis}
   
 \begin{chapterabstract}{english}{\enkeys}
- 
+ This is the English abstract.
 \end{chapterabstract}
 
 \formatchapter
 
-\section{INTRODUCTION}
-\label{sec:chap03-introduction}
+\section{APRESENTAÇÃO}
+\label{sec:chap02-apresentacao}
 
-\titlenote{Collaborated in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno 
-(UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), 
-Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and Ad van 
-Oostrum (ISRIC -- World Soil Information).}
+\titlenote{Colaboraram na preparação deste documento: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), 
+Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de 
+Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
 
-The Santa Maria dataset is a data set comprising soil data from $n = 410$ point soil observations made between 
-\num{2004} and \num{2013} in the catchment of the DNOS/CORSAN reservoir, located in the southern border of the 
-plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, Brazil. These 
-point soil observations cover the northern sector of the catchment -- an area of \SI{\pm2000}{\hectare}, which 
-corresponds to \SI{\pm60}{\percent} of the entire catchment. These soil data was produced during the 
-development of research projects that aimed at producing semi-detailed soil and land use maps (\scale{25000}) 
-\cite{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012}, and predicting topsoil carbon stock and 
-vulnerability to erosion \cite{Samuel-Rosa2009, MouraBueno2012, Miguel2013}.
+A modelagem espacial do solo inicia com a definição de um \emph{modelo conceitual de pedogênese}. Um modelo 
+conceitual de pedogênese constitui uma representação verbal da realidade sob estudo que inclui a descrição 
+explícita dos fatores e processos de formação do solo que determinam as características do solo e o seu padrão 
+de distribuição espaço-temporal. Isso requer a reunião de toda a informação ambiental disponível e aplicação 
+dos conceitos de relação solo paisagem, desenvolvimento do solo em catenas, ou outro modelo teórico de 
+explicação da variação espacial do solo.
 
-This document presents a description of the soil data contained in the Santa Maria dataset, including the 
-procedures for soil sampling and description, as well as the analytical methods employed. The soil data is 
-freely available as CSV files in a repository hosted in \dnosgeneral{}. Files \texttt{fieldData.csv} and 
-\texttt{labData.csv} contain the identification of each observation locations, their geographic coordinates 
-(latlong, WGS1984), and field and laboratory data, respectively. Files \texttt{fieldMetadata.csv} and 
-\texttt{labMetadata.csv} contain the metadata. Every soil property is identified with a code composed of three 
-or four capital letters. For example, soil organic carbon is identified with \texttt{ORCA}. A column contains 
-the number of laboratory replicates is identified with the code of the soil property followed by the letter 
-\q{N}. The column containing the sample standard deviation is identified in the same manner, but using \q{SD}. 
-For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
-
-The reader should be aware that soil science evolved in Brazil following a somewhat different pathway than in 
-the countries of the northern hemisphere due to the specific features of \emph{tropical soils}. Methods have 
-been adapted along the years, possibly leading to nomenclature mismatches. The reader is invited to contribute 
-to solve any problems in this document.
-
-\section{FIELD SAMPLING}
-\label{sec:chap03-sampling}
-
-The Santa Maria dataset is composed of three subsets which are described in the next three sections. Together, 
-these subsets yield a sampling density of \num{\pm0.18}~observations per hectare, with an average separation 
-distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation distances of 
-\num{18} and \SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by more than 
-\SI{49}{\metre}.
-
-\subsection{Subset I}
-
-The first subset ($n = 340$, \autoref{fig:soil-data-subsets-I-III}) was produced as part of projects that aimed 
-at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
-erosion \cite{Samuel-Rosa2009, SamuelRosaEtAl2011a, MiguelEtAl2012, Moura-BuenoEtAl2012, Samuel-RosaEtAl2013}. 
-The researchers faced several difficulties with a budget cut and shortage of workforce. They also had 
-restricted access to several areas due to geographic barriers and prohibition of access by some landowners. 
-These difficulties forced the researchers to reduce the originally aimed number of observations ($n = 500$) 
-during the development of the project.
-
-\def\foottacit{\footnote{comprehensive explanation of what \emph{tacit knowledge} is, opposed to explicit 
-knowledge, can be found in \href{https://en.wikipedia.org/wiki/Tacit_knowledge}{Wikipedia}.}}
-
-All observation locations were selected purposively or by convenience. Tacit knowledge\foottacit{} was the 
-main tool to choose the observation locations, a process that was carried out in the office using Google Earth 
-imagery of the years of \num{2008} and \num{2009}. The main goal of the researchers was to obtain a sample that 
-they understood as being representative of the different landforms, land uses, and soil taxa present in the 
-study area. They also wanted the observations to be spread throughout the entire study area.
-
-At the observation locations, the researchers defined an area of \SI{\pm100}{\metre\squared} within which they 
-opened three soil pits. Soil samples were collected up to a depth of \SI{20}{\centi\metre}, the depth being 
-measured with a ruler. The resulting sampling depth of Subset I varies from \num{2} to \SI{20}{\centi\metre}, 
-with an average of \SI{17}{\centi\metre}. This variation of the vertical sampling support was not a problem for 
-the researchers because their goal was to sample the \emph{topsoil}. The topsoil was defined as the topmost 
-soil layer, with a depth equal or inferior to \SI{20}{\centi\metre}, being the soil layer most susceptible to 
-degradation induced by poor agricultural practices and land use changes.
-
-Soil samples from the three pits opened in each sampling area were used to produce a composite sample which was 
-used for laboratory analyses. Subsurface soil features were observed with an auger in each pit, and the average 
-(continuous variables) or most common (categorical variables) value recorded. Note that soil sampling was done 
-using an areal support -- an area of \SI{\pm100}{\metre\squared}. However, the shape and exact area of the 
-sampling units are unknown, and georeferencing took place at point support. Thus, the use of this subset 
-requires to make the assumption that it was obtained using a point sampling support. The possible negative 
-consequences of this assumption have not been explored so far.
+O presente documento apresenta o modelo conceitual de pedogênese da bacia de captação do reservatório do 
+DNOS/CORSAN (Departamento Nacional de Obras de Saneamento/Companhia Riograndense de Saneamento), localizada na 
+divisa entre os municípios de \itaara{} (ao norte) e \santamaria{} (ao sul), na porção sul da \baciaparana{},
+estado do Rio Grande do Sul, Brasil (\autoref{fig:chap02-location}). A bacia de captação do reservatório do 
+DNOS/CORSAN corresponde à cabeceira da bacia hidrográfica do \riovacacaimirim{}, tributário do \riojacui{} e, 
+consequentemente, do \rioguaiba{} e da \lagoadospatos{}. A bacia de captação do reservatório do DNOS/CORSAN
+cobre uma área de \SI{\pm29}{\square\kilo\metre} e alimenta um reservatório com volume máximo 
+de \SI{\pm3800000}{\cubic\metre} em uma área inundada de \SI{0,74}{\square\kilo\metre}. Este reservatório 
+contribui com até \SI{30}{\percent} do abastecimento de água da cidade de Santa Maria \cite{Dias2003, 
+DillEtAl2004, Miguel2010}.
 
 \begin{figure}[!ht]
- \centering
- <<fig:soil-data-subsets-I-III, fig = TRUE, echo = FALSE>>=
- cal_data <- read.table(
-  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
-  header = TRUE, na.strings = "na")[1:350, c("longitude", "latitude")]
- sp::coordinates(cal_data) <- ~ longitude + latitude
- sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
- cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
- pts <- data.frame(slot(cal_data, "coords"))
- pts[, "id"] <- c(rep("black", 340), rep("red", 10))
- invisible(capture.output(
-  spgrass6::initGRASS(
-    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
-    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(),
-    override = TRUE)
- ))
- invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
- invisible(capture.output(drain <- spgrass6::readVECT6("STREAM_10", ignore.stderr = TRUE)))
- invisible(capture.output(drain <- rgeos::gIntersection(drain, pol, byid = TRUE)))
- p <- sp::spplot(
-  pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
-  scales = list(draw = TRUE),
-  colorkey = FALSE, aspect = "iso",
-  xlim = c(cal_data@bbox[1, 1] * 0.9998, cal_data@bbox[1, 2] * 1.0005),
-  ylim = c(cal_data@bbox[2, 1] * 0.99999, cal_data@bbox[2, 2] * 1.00001),
-  par.settings = list(
-    fontsize = list(text = 12, points = 8),
-    layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)),
-  panel = function(x, y, ...) {
-    sp::panel.polygonsplot(x, y, ...)
-    lattice::panel.points(
-      x = pts[, "longitude"], y = pts[, "latitude"], pch = 20, col = pts[, "id"])
-    lattice::panel.abline(
-      v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
-      col = "gray", lty = "dashed", lwd = 0.5)
-    }) +
-  latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed"))
- print(p)
- @
- \caption{Spatial distribution of the point soil observations contained in \emph{Subset I} ($n = 340$, black) 
- and \emph{Subset III} ($n = 10$, red) of the Santa Maria dataset. The drainage network is shown in the 
- background to give an idea of how the locations of soil observations is related to terrain features.}
- \label{fig:soil-data-subsets-I-III}
+\centering
+\begin{minipage}[b]{95mm}
+\subcaption{}
+\includegraphics{fig/chap02-location}
+\end{minipage}
+\begin{minipage}[b]{95mm}
+\subcaption{}
+\includegraphics{fig/chap02-perspective}
+\end{minipage}
+\caption{Localização da bacia de captação do reservatório do DNOS/CORSAN (a) no Município de Santa Maria, 
+Estado do Rio Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza). A 
+área de estudo (b), em vermelho, corresponde a \SI{\pm60}{\percent} da bacia do DNOS (em azul).}
+\label{fig:chap02-location}
 \end{figure}
 
-Georeferencing was done in the field using a Global Navigation Satellite System (GNSS) receiver with a 
-horizontal positional error of less than \SI{\pm8}{\metre} positioned approximately at the centre of the
-sampling area. Sometimes, the horizontal positional error was larger than \SI{\pm8}{\metre} due the effects
-of vegetation biomass, terrain features, and satellite configuration. In this cases, observation locations 
-were georeferenced in the office using \SI{1}{\metre} spatial resolution Google Earth imagery of the years of 
-\num{2008} and \num{2009}. The positional horizontal error of these images imagery is \SI{\pm6}{\metre}.
+\def\footsolosdors{\footnote{O grupo está registado no Diretório dos Grupos de Pesquisa no Brasil 
+(\href{http://dgp.cnpq.br/dgp/espelhogrupo/9373361709890764}{DGP}) mantido pelo CNPq.}}
 
-Every observation was identified with a number in increasing order, following the order in which the 
-observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out, yielding 
-an observation density of about \num{18}~observations per \si{\kilo\metre\squared}.
+Os estudos em modelagem espacial do solo na bacia do DNOS -- abreviatura de bacia de captação do reservatório 
+do DNOS/CORSAN -- iniciaram no ano de \num{2008} com o grupo de pesquisa \emph{Gênese, composição e 
+comportamento dos solos do RS}\footsolosdors{}, sediado no Departamento de Solos da Universidade Federal 
+de Santa Maria (\ufsm). Devido à limitação de recursos, o grupo de pesquisa optou por restringir seus estudos 
+em modelagem espacial do solo à uma parte da bacia do DNOS. A área escolhida cobre \SI{\pm60}{\percent} de toda 
+a bacia do DNOS, o que corresponde à uma área de \SI{\pm18}{\square\kilo\metre}. A área de estudo foi 
+escolhida por apresentar acesso facilitado, além de englobar as todas as formações geológicas, geoformas, usos 
+da terra, e vegetação presentes na bacia do DNOS.
 
-\subsection{Subset II}
+\section{CLIMA}
+\label{sec:chap02-clima}
 
-The second subset ($n = 60$) was produced in the years of \num{2012} and \num{2013}, and was intended to 
-constitute an independent dataset for validation purposes. Because of the many many access limitations 
-(geographic barriers and prohibition by landowners) and shortage of workforce, budget, infrastructure and 
-time faced in previous field campaigns, researchers chose to employ transect (cluster) sampling 
-\cite{MiguelEtAl2012, Moura-BuenoEtAl2012, Samuel-RosaEtAl2013}. They started defining the population of 
-transects using their knowledge of the study area, taking into account the factors that they thought 
-determined the spatial distribution of soil properties. Each researcher (three) delineated $m = 60$ easily 
-accessible, straight transects of \SI{400}{\metre} following the spatial gradients of environmental features 
-(topography, geology, vegetation, land use, and soils). Accordingly, knowledge of existing roads, human 
-settlements, water bodies, and other access limitations was used as well. The activity was carried out using 
-Google Earth imagery of the years of \num{2008} and \num{2009}.
+\def\footcfa{\footnote{Mais informações sobre o tipo climático Cfa podem ser encontrados na 
+\href{https://pt.wikipedia.org/wiki/Clima_subtropical_\%C3\%BAmido}{Wikipedia}.}}
 
-% TODO: add a figure with all transects highlighting the selected ones.
-% \caption{Three experts drawn 180 linear transects aligned in the direction of maximum expected 
-% spatial variance of environmental features. They avoided locations where it was known that geographic 
-% barriers or landowners would impede the access to collect soil samples. Using probability sampling, 12 
-% transects were selected to collect validation observations (red).}
+O clima local é classificado como Cfa\footcfa{} -- subtropical úmido sem estação seca definida --, com 
+temperatura média anual de \SI{19,1}{\celsius}. As temperaturas podem alcançar \SI{>40}{\celsius}, no verão, e 
+valores negativos no inverno \cite{HeldweinEtAl2009}. A precipitação média anual é de \SI{1708}{\milli\metre} 
+bem distribuídos ao longo do ano \cite{Maluf2000}. Predominam os ventos do quadrante leste (frio, úmido e de 
+intensidade fraca a moderada), oeste (frio, seco e de intensidade fraca a moderada) e norte (quente, seco e de 
+intensidade moderada a forte) \cite{HeldweinEtAl2009}.
 
-Twelve out of the $m = 180$ transects were randomly selected using as many iterations as necessary until 
-there were no intersecting transects, and there was at least one transect in each of the three major 
-geomorphological units of the study area (Planalto, Rebordo do Planalto, and Depressão Periférica). 
-Finally, $n = 5$ observation locations, separated by equidistant intervals of \SI{100}{\metre}, were 
-selected in each transect. Observation locations were named with a number in increasing order, 
-following the order in which the observations were made, starting from \num{341} (\num{341}--\num{400}).
+O padrão predominante das chuvas é o avançado, caracterizado por ter seu pico de maior intensidade no início da 
+precipitação \cite{MehlEtAl2001}. As chuvas de maior intensidade ocorrem nos meses do final da primavera, 
+verão e início do outono \cite{MouraBueno2012}. Como resultado desse padrão, as chuvas de inverno são as 
+menos erosivas, mesmo que o conteúdo de água do solo permaneça elevado durante todo o período. O padrão de 
+precipitação também é condicionado pelo relevo. Observações feitas em três locais durante o ano de \num{2011}, 
+marcado por forte estiagem, mostram variação na lâmina total precipitada entre \num{1317} e \SI{1411}{\mm} 
+\cite{MouraBueno2012}. Assim, o relevo plano a montanhoso, com vales encaixados, parece condicionar a formação 
+de diferentes regiões microclimáticas, refletindo no volume e intensidade das chuvas \cite{MouraBueno2012}.
 
-Observation locations were identified in the field using a GNSS receiver with a horizontal positional error
-of less than \SI{\pm8}{\metre}. A soil pit was opened within a radius of \SI{2}{\metre} from the predefined 
-observation location. Soil sampling and description was carried out using the same procedure used with 
-\emph{Subset I}. Georeferencing was performed using a Differential Global Positioning System (DGPS) with 
-a horizontal positional error of less than \SI{1}{\centi\metre}.
+O relevo também deve condicionar o fluxo radiativo que atinge as diferentes superfícies. Apesar de não haver 
+estudos que demonstrem a efetividade desse fenômeno na área, é reconhecido que grande parte da superfície em 
+terrenos de topografia complexa é influenciada pelo efeito de sombreamento, sobretudo nas primeiras horas da 
+manhã e no final da tarde \cite{OliphantEtAl2003}. Além disso, a declividade do terreno possui forte influência 
+sobre o ângulo de interceptação da radiação solar pelas superfícies \cite{Birkeland1999}. Como consequência, 
+deve ocorrer variações na temperatura e conteúdo de água no solo nas diferentes superfícies. Os meses de 
+inverno são marcados por ainda menor disponibilidade de radiação solar devido à alta frequência de nevoeiros, 
+sobretudo nas partes mais baixas, com valores normais de insolação de \SI{5,1}{\hour\per\day} 
+\cite{HeldweinEtAl2009}. Além disso, devido à variação de altitude entre \num{139} e \SI{475}{\metre}, deve 
+ocorrer diferença na temperatura da ordem de aproximadamente \SI{4}{\celsius} entre a parte mais baixa e a 
+parte mais alta \cite{HeldweinEtAl2009}.
 
-\subsection{Subset III}
+\section{GEOLOGIA}
+\label{sec:chap02-geologia}
 
-The third subset ($n = 10$) contains data compiled from the studies of \citeonline{Pedron2005} and
-\citeonline{Miguel2010}, specifically from the uppermost A horizon of modal soil profiles whose locations 
-were purposively selected using tacit knowledge after a preliminary area-class soil map had been produced 
-and/or the observations included in \emph{Subset I} had been made. The researchers aimed at observation 
-locations that they understood as being most representative of the soil mapping units depicted in their 
-respective area-class soil maps. A single soil sample was taken from each of the described soil horizon and 
-used for laboratory analysis (see below). The resulting depth of the uppermost A horizons varies from \num{12} 
-to \SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried using a GNSS 
-receiver with a horizontal positional error of less than \SI{\pm8}{\metre} positioned at the observation 
-location. Data are identified in the Santa Maria dataset using the same identification that was used in the 
-studies from where they were compiled.
+A geologia é bastante complexa, sendo constituída por três formações geológicas, além de depósitos coluvionares 
+e de aluvião do Quaternário. A literatura sobre o tema é vasta \cite{Bortoluzzi1974, Brasil1980, 
+GasparettoEtAl1988, MacielFilho1990, Machado1998, PieriniEtAl2002, MarquesEtAl2005, Milani2005, Pinto2005, 
+CPRM2007, Pedron2007, Sartori2009, NascimentoEtAl2010, WerlangEtAl2010, PedronEtAl2012}, e uma revisão da 
+mesma é apresentada aqui.
 
-\section{FIELD DESCRIPTION}
-
-Several environmental features were described at the observation locations. The next sections present a 
-description of how this was done.
-
-\subsection{Land Use}
-
-Land use (\texttt{LAND}) was assessed in the years of \num{2008} and \num{2009} using data collected in the 
-field and Google Earth imagery. Five land uses were identified: native forest (primary or secondary), shrubland 
-(abandoned areas with predominance of shrub-sized vegetation, known in Brazil as \emph{capoeira}), animal 
-husbandry (grasslands), forestry (\textit{Eucalyptus} and \textit{Pinus}), and crop agriculture. Other 
-land uses such as human settlements and water bodies were not observed/sampled.
-
-\subsection{Geology}
-
-Soil parent material (\texttt{PARENT}, sedimentary or igneous), geologic formation (\texttt{GEO}), and 
-lithology (\texttt{LITHO}) was inferred from direct observation of soil properties and local environmental 
-features in the field. Existing geologic maps were used only when soil characteristics and environmental 
-features were insufficient to reach an agreement about the most likely soil parent material, geologic 
-formation, and lithology.
-
-\subsection{Soil Classification}
-
-The most likely soil classification (\texttt{TAXON}) was inferred in the field using direct observation of soil 
-properties (\SI{20}{\centi\metre}-deep soil pits and auger holes down to the diagnostic subsurface horizon or 
-bedrock) and local environmental features. Soil taxon was inferred only till the second categorical level of 
-the Brazilian System of Soil Classification \cite{SantosEtAl2013a} because further levels require data that 
-cannot be easily identified in the field.
-
-% TODO: move this description of the soil taxa to the metadata file.
-% RF - Neossolo Flúvico, RL - Neossolo Litólico, RR - Neossolo Regolítico, RQ - Neossolo 
-% Quartzarênico, PV - Argissolo Vermelho, PVA - Argissolo Vermelho-Amarelo, PA - Argissolo 
-% Amarelo, PBAC - Argissolo Bruno-Acinzentado, SX - Planossolo Háplico, CX - Cambissolo Háplico.
-
-\subsection{Slope}
-
-The slope gradient (\texttt{SLOPE}, \si{\percent}) was measured using a clinometer, the observer and target 
-being at a constant height above the ground. The distance between observer and target was between 
-\SI{30}{\metre} (dense forests) and \SI{50}{\metre} (open fields).
-
-\subsection{Drainage}
-
-Soil drainage status (\texttt{DRAIN}) was inferred visually from soil features observed with an auger using the 
-classification scheme proposed by \citeonline{SantosEtAl2013}.
-
-\subsection{Coarse Fragments and Rock Outcrops}
-
-Presence of coarse fragments (\texttt{FRAG}) -- soil material of diameter \SI{>2}{\centi\metre} -- was 
-described as a binary variable, that is, a value of \num{1} (one) was annotated when coarse fragments were 
-present, and \num{0} (zero) otherwise. The approach was adopted to describe the presence of rock outcrops 
-(\texttt{ROCK}). The quantity of gravel (\texttt{GRAVEL}, \si{\percent}) was estimated visually.
-
-The employed to describe the presence of coarse fragments and rock outcrops is not in line with the soil 
-description guidelines currently used by most Brazilian soil scientists. The reason for its use is the limited 
-importance given to these soil properties in the respective research projects.
-
-\subsection{Canopy}
-
-% TODO: add three figures as examples of each class.
-Soil coverage with vegetation (\texttt{CANOPY}) was inferred visually in the field using three classes: low 
-(\SI{<25}{\percent}), medium (\SIrange{25}{75}{\percent}), and high (\SI{>75}{\percent}).
-
-\subsection{Additional Information}
-
-Additional information was recorded at each observation location during the field campaigns. They refer to 
-peculiarities of each observation location and were not recorded in a systematic way.
-
-\section{LABORATORY ANALYSIS}
-\label{sec:chap03-laboratory}
-
-Soil samples were air dried, crushed and passed through a \SI{2}{\milli\metre}-sieve prior to laboratory 
-analyses using the methods described in the next sections. One or more laboratory replicates were used to 
-calculate analytical errors.
-
-\subsection{Soil Organic Fraction}
-\label{sec:chap03-organic}
-
-The soil organic carbon content (\texttt{ORCA}, \si{\gram\per\kilo\gram}) was determined using the method of
-\citeonline{Mebius1960} modified by \citeonline{YeomansEtAl1988} as described by \citeonline{ClaessenEtAl1997}.
-
-\def\footsulfochromic{\footnote{See a detailed description of the sulfochromic solution, or chromic acid, at 
-\href{http://en.wikipedia.org/wiki/Chromic_acid}{Wikipedia}.}}
-
-Sample aliquots of \num{0.050} to \SI{0.500}{\gram} were placed in glass digestion tubes 
-(\SI{80}{\milli\liter}). The amount of sample used varied according to the ORCA estimated by visual 
-interpretation of soil colour. Every digestion tube received an aliquot of \SI{10}{\milli\liter} of 
-sulfochromic solution\footsulfochromic{} [\SI{0.067}{\mole\per\liter} potassium bichromate solution
-(\ce{K2Cr2O7}) in the presence of concentrated sulphuric acid (\ce{H2SO4})] and a small reflux funnel 
-to avoid loss of reagent during digestion. A digestion block with capacity for \num{40}~samples was used:
-\num{36}~tubes with soil sample plus \num{3}~tubes with blank plus \num{1}~tube with \ce{H2SO4} and a
-thermometer for temperature control. Digestion at \SI{150}{\celsius} last \SI{30}{\minute}. Three blanks 
-were prepared and set aside at room temperature to estimate the loss of reagent due to heat in the digestion 
-block. After digestion the tubes were set aside at room temperature to cool down. Next, the solution was 
-transferred to Erlenmeyer flasks (\SI{250}{\milli\liter}) with \SI{60}{\milli\liter} of distilled water and
-\SI{2}{\milli\liter} of concentrated orthophosphoric acid [\ce{H3PO4}] and \num{3}~drops of 
-\SI{1}{\percent}~diphenylamine). The solution was titrated using \SI{0.1}{\mole\per\liter} ammonium ferrous
-sulphate (\ce{FeSO4(NH4)2 * 6H2O}) until persistent green colour. The results were multiplied by \num{1.11}
-to correct to the standard method (dry combustion).
-
-The soil organic matter content of the observations compiled from \citeonline{Pedron2005} was determined 
-using the method described by \citeonline{TedescoEtAl1995}. Sample aliquots of \SI{2.5}{\milli\liter}
-were placed in Erlenmeyer flasks (\SI{50}{\milli\liter}). Every Erlenmeyer flask received an aliquot of 
-\SI{15}{\milli\liter} of \SI{0.067}{\mole\per\liter} sulfochromic solution (\ce{Na2Cr2O7 + H2SO4}). The 
-flasks were heated in a water bath at \num{75} to \SI{80}{\celsius} during \SI{30}{\minute} and shaken 
-for \SI{5}{\minute}. A water aliquot of \SI{15}{\milli\liter} was added to the flask and let overnight 
-(\num{15} to \SI{18}{\hour}). In the next day, an aliquot of \SI{3.0}{\milli\liter} was sampled to a 
-small cup with \SI{3.0}{\milli\liter} of distilled water. The absorbency of the supernatant was measured 
-at \SI{645}{\nano\metre}. The results were transformed to organic carbon content using the Van Bemmelen 
-factor (\num{1.724}), the result assumed to be equivalent to soil organic carbon content measured using the 
-standard method. The results are expressed using a volume-basis and were converted to a mass-basis using a
-1:1 relation because the mass of the sample aliquot used in the analyses is unknown.
-
-\subsection{Particle Size Analysis}
-\label{chap:chap03-granulometry}
-
-\def\footsuzuki{\footnote{As far as I know, a comprehensive description of this method has not been 
-published so far, neither in Portuguese nor in English. You can visit the homepage of the Soil Physics 
-Laboratory of the Universidate Federal de Santa Maria at \url{https://coral.ufsm.br/fisicadosolo/} to get more 
-information about the method or contact their developers.}}
-
-Particle size analysis was performed using the pipette method, with the sand fraction (\texttt{SAND}, 
-\SIrange{0.053}{2}{\milli\metre}, \si{\gram\per\kilo\gram}) determined by wet sieving, and the silt fraction 
-(\texttt{SILT}, \SIrange{0.002}{0.053}{\milli\metre}, \si{\gram\per\kilo\gram}) calculated by difference. 
-The analytical procedure is an adaptation\footsuzuki{} of the method of the Soil Conservation Service of 
-the United States Department of Agriculture \cite{UnitedStates1972} made by the Soil Physics Laboratory of the 
-Universidate Federal de Santa Maria \cite{SuzukiEtAl2004, SuzukiEtAl2004a}.
-
-First, a sample aliquot of \SI{20}{\gram} was placed in a \SI{100}{\milli\liter} glass container (height: 
-\SI{10.5}{\centi\metre}; diameter: \SI{2.75}{\centi\metre}; weight: \SI{85}{\gram}). Two nylon spheres with a 
-diameter of \SI{1.71}{\centi\metre} and weighting \SI{3.04}{\gram} (density: \SI{1.11}{\g\per\cm\cubic}) were 
-added to act as physical disaggregating agents. Then, an aliquot of \SI{10}{\milli\liter} of 
-\SI{1}{\mole\per\liter} sodium hydroxide (\ce{NaOH}) solution was added to act as chemical dispersing agent 
-along with \SI{40}{\milli\liter} of distilled water. The glass container was closed with a plastic cap, 
-manually shaken for \SI{10}{\second}, and placed in a horizontal mechanical shaker with capacity for 
-\num{85}~samples. The suspension was left to stand overnight (\SI{10}{\hour}). In the next day the suspension 
-was submitted to horizontal mechanical agitation during \SI{4}{\hour} at \si{120} cycles per minute 
-\cite{SuzukiEtAl2004, SuzukiEtAl2004a}.
-
-After horizontal agitation, the suspension was poured in a plastic graduated cylinder with capacity for 
-\SI{1000}{\milli\liter} using a glass funnel and a metal sieve to hold the two nylon spheres. The suspension in 
-the graduated cylinder was completed to \SI{1000}{\milli\liter} and homogenized using a hand stirrer 
-(\SI{30}{\second}). The suspension was allowed to stand until sedimentation was complete. The time needed was 
-calculated using the Stokes law with the temperature measured in a graduated cylinder filled with distilled 
-water.
-
-%TODO provide a more detailed description of how CLAY was determined as well as of the oxidative
-%treatment with H2O2.
-
-The clay fraction (\texttt{CLAY}, \SI{<0.002}{\milli\metre}, \si{\gram\per\kilo\gram}) was determined by the 
-pipette method. Soil samples with organic matter content \SI{>5}{\percent} were submitted to oxidative 
-treatment with hydrogen peroxide (\ce{H2O2) prior to the analysis following the recommendations of
-\citeonline{ClaessenEtAl1997}.
-
-%The sand fraction was separated into five size classes:
-%
-%\begin{itemize}
-%\item \SIrange{1.00}{2.00}{\milli\metre}: very coarse sand;
-%\item \SIrange{0.50}{1.00}{\milli\metre}: coarse sand;
-%\item \SIrange{0.25}{0.50}{\milli\metre}: median sand;
-%\item \SIrange{0.106}{0.25}{\milli\metre}:fine sand;
-%\item \SIrange{0.053}{0.106}{\milli\metre}: very fine sand.
-%\end{itemize}
-
-% The clay fraction (\textless0.002~mm) was initially determined by the pipette method without any 
-% pretreatment. A 1~mol~L$^{-1}$ NaOH solution was used as the dispersing agent, with the addition of two 
-% nylon spheres as disaggregating agent plus horizontal mechanical agitation during 4~hours 
-% \cite{SuzukiEtAl2004}.
-
-% A propor{\c{c}}{\~{a}}o da fra{\c{c}}{\~{a}}o argila dispersa em {\'{a}}gua foi determinada conforme 
-% descrito acima para a fra{\c{c}}{\~{a}}o argila total. A diferen{\c{c}}a {\'{e}} que n{\~{a}}o foi usado o 
-% agente dispersante (NaOH) e o agente desagregante (esferas de nylon) \cite{ClaessenEtAl1997}.
-
-\subsection{Soil Density}
-\label{chap:chap03-bude}
-
-% TODO: Provide a more detailed description of how this is done.
-The bulk soil density (\texttt{BUDE}, \si{\mega\gram\per\cubic\metre}) was determined using the core method 
-with a metallic ring (height: \SI{3}{\centi\metre}; diameter: \SI{5}{\centi\metre}) as described by 
-\citeonline{ClaessenEtAl1997}. The bulk soil density was not determined in the locations where the soil was 
-very shallow or stony.
-
-\subsection{Exchangeable Bases and Acidity}
-\label{chap:chap03-ecec}
-
-The exchangeable calcium (\texttt{CALC}, \si{\milli\mole\per\kilo\gram}) and magnesium (\texttt{MAGN}, 
-\si{\milli\mole\per\kilo\gram}) were determined by atomic absorption spectroscopy after extraction with 
-\SI{1.0}{\mole\per\liter} \ce{KCl} solution using the method described by \citeonline{ClaessenEtAl1997}. 
-The exchangeable sodium (\texttt{SODI}, \si{\milli\mole\per\kilo\gram}) and potassium (\texttt{POTA}, 
-\si{\milli\mole\per\kilo\gram}) were extracted with a \SI{0.05}{\mole\per\liter} \ce{HCl} solution plus 
-\SI{0.025}{\mole\per\liter} \ce{H2SO} (Mehlich-\num{1} solution). Both were quantified by means of flame 
-atomic emission spectrometry using the method described by \citeonline{TedescoEtAl1995}.
-
-The exchangeable acidity (\texttt{EXAC}, \si{\milli\mole\per\kilo\gram}), also known in Brazil as exchangeable 
-aluminium, was extracted using the same \SI{1.0}{\mole\per\liter} \ce{KCl} solution used to extract the 
-exchangeable calcium and magnesium. It was determined by titrimetry with \SI{0.025}{\mole\per\liter} 
-\ce{NaOH} solution as described by \citeonline{ClaessenEtAl1997}.
-
-% TODO: Include POAC in the database and improve the description of how it was determined.
-% The potential acidity (POAC, \si{\milli\mole\per\kilo\gram}) was determined with \SI{1.0}{\mole\per\liter} 
-% calcium acetate solution at pH~\num{7.0} and titrated with \SI{0.0606}{\mole\per\liter} \ce{NaOH} solution 
-% as described by \citeonline{ClaessenEtAl1997}.
-
-The effective cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}) was defined as the sum of 
-exchangeable bases and exchangeable acidity, i.e. 
-
-\begin{equation*}
- \texttt{ECEC} = \texttt{CALC} + \texttt{MAGN} + \texttt{POTA} + \texttt{SODI} + \texttt{EXAC}.
-\end{equation*}
-
-
-% TODO: Provide a more detailed description of how these are calculated and include the data in the database.
-% The sum of exchangeable bases (BASES) is given by the sum of the exchangeable calcium, magnesium, sodium and 
-% potassium. The effective cation exchange capacity (ECEC) is the given by the exchangeable acidity plus the 
-% sum of exchangeable bases. The potential cation exchange capacity (CEC) is given by the potential acidity 
-% plus the sum of exchangeable bases. Note that the standard method for determining exchangeable bases relies 
-% on the use of barium chloride [BaCl$_2$]. The base saturation (BASA) is given by the sum of exchangeable 
-% bases divided by the potential cation exchange capacity. The saturation of the ECEC with exchangeable 
-% acidity, or the aluminum saturation (ALSA), is given by the sum of exchangeable bases divided by the 
-% effective cation exchange capacity. The results are multiplied by 100. 
-
-% \begin{figure}[!ht]
-% \centering
-% <<echo = FALSE>>=
-% options(useFancyQuotes = FALSE)
-% tmp <- read.table(
-%  '~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv', sep = ";",
-%  header = TRUE, na.strings = 'na')
-% lattice::trellis.par.set(
-%  fontsize = list(text = 16, points = 15), axis.line = list(lwd = 0.01),
-%  layout.widths = list(left.padding = 0, right.padding = 0),
-%  layout.heights = list(top.padding = 0, bottom.padding = 0))
-% aa <- pedometrics::plotHD(tmp$CLAY, xlab = 'CLAY')
-% bb <- pedometrics::plotHD(tmp$ORCA, xlab = 'ORCA')
-% cc <- pedometrics::plotHD(tmp$ECEC, xlab = 'ECEC')
-% dd <- pedometrics::plotHD(na.exclude(tmp$BUDE), xlab = "BUDE")
-% @
-% \begin{minipage}[b]{63mm}
-% \subcaption{}
-% \centering
-% <<intro-clay, fig = TRUE, echo = FALSE>>=
-% print(aa)
-% @
-% \end{minipage}
-% \begin{minipage}[b]{63mm}
-% \subcaption{}
-% \centering
-% <<intro-orca, fig = TRUE, echo = FALSE>>=
-% print(bb)
-% @
-% \end{minipage}
-% \begin{minipage}[b]{63mm}
-% \subcaption{}
-% \centering
-% <<intro-ecec, fig = TRUE, echo = FALSE>>=
-% print(cc)
-% @
-% \end{minipage}
-% \begin{minipage}[b]{63mm}
-% \subcaption{}
-% \centering
-% <<intro-bude, fig = TRUE, echo = FALSE>>=
-% print(dd)
-% @
-% \end{minipage}
-% \caption{The four soil properties explored in this thesis: (a) clay content, (b) organic carbon
-% content, (c) effective cation exchange capacity, and (d) bulk density. Each panel shows the sample
-% histogram and summary statistics of the soil properties in their original scale ($\lambda = 1$), as
-% well as the theoretical probability density function so that we can assess how good is the fit of
-% the normal distribution to the data -- a product of the \Rpackage{pedometrics}.}
-% \label{fig:intro-soil-properties}
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/geo1988}
+%   \caption{Mapa da geologia da AEPQ-SM publicado na escala 1:50.000 \citep{GasparettoEtAl1988}.\\Legenda: 
+% SG-S - Sequência Superior da Formação Serra Geral, CT - Formação Caturrita, BT - Formação Botucatu, SG-I - 
+% Sequência Inferior da Formação Serra Geral.}
+%   \label{fig:geo1988}
 % \end{figure}
+
+\def\caturrita{\href{https://pt.wikipedia.org/wiki/Forma\%C3\%A7\%C3\%A3o_Caturrita}{Formação Caturrita}}
+
+Na base da sequência estratigráfica, em elevações abaixo de \SI{\pm200}{\metre}, está a \caturrita{}, 
+constituída por material sedimentar depositado em ambiente fluvial no Triássico Superior. Sua composição é 
+diversa, apresentando seixos de siltito argiloso vermelho na base, seguido por arenito avermelhado de 
+granulometria fina à média, composição quartzosa e matriz argilosa, podendo ainda conter considerável teor de 
+feldspato, sobreposto por siltito e folhelho também avermelhados. Em geral, a granulometria do arenito é mais 
+grosseira e menos argilosa na base da deposição. Devido à sua origem fluvial, a Formação Caturrita apresenta 
+marcada estratificação cruzada acanalada e tabular. A origem fluvial também resulta em significativa variação 
+espacial na granulometria do arenito, identificada pelo contraste entre áreas de maior cimentação e coesão, com 
+outras de maior condutividade hidráulica. Imediatamente acima da Formação Caturrita encontra-se, ora a 
+Formação Botucatu, ora a Sequência Inferior da Formação Serra Geral.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/geo1990}
+%   \caption{Mapa da geologia da AEPQ-SM publicado na escala 1:25.000 \citep{MacielFilho1990}.\\Legenda: QD - 
+% Depósitos do Quaternário, SG-S - Sequência Superior da Formação Serra Geral, CT - Formação Caturrita, BT - 
+% Formação Botucatu, SG-I - Sequência Inferior da Formação Serra Geral.}
+%   \label{fig:geo1990}
+% \end{figure}
+
+\def\serrageral{\href{http://pt.wikipedia.org/wiki/Forma\%C3\%A7\%C3\%A3o_Serra_Geral}{Formação Serra Geral}}
+
+Em elevações entre \num{\pm200} e \SI{\pm350}{\metre} está a Sequência Inferior da \serrageral{} 
+(basaltos-andesitos toleíticos). As rochas básicas são de coloração cinza-escura e são constituídas por 
+plagioclásio cálcico clinopiroxênio, magnetita e material intersticial de quartzo e material desvitrificado. 
+Em elevações superiores a \SI{\pm350}{\metre} está a Sequência Superior da Formação Serra Geral (vitrófilos, 
+riólitos-riodacitos granofíricos). As rochas ácidas apresentam cor cinza-clara, estrutura microcristalina e 
+são constituídas por cristais e plagioclásio, clinopiroxênios, hornblenda uralítica e magnetita. A origem 
+desse material remonta o Cretáceo, quando sucessivos derrames de lavas de origem vulcânica fissural ocorreram 
+durante aproximadamente \num{10} milhões de anos em toda a Bacia do Paraná. Esses eventos ocorreram ao mesmo 
+tempo em que iniciava a separação das plataformas continentais que hoje constituem a América do Sul e África, 
+marcando o final da existência do supercontinente Pangea.
+
+\def\botucatu{\href{http://pt.wikipedia.org/wiki/Forma\%C3\%A7\%C3\%A3o_Botucatu}{Formação Botucatu}}
+
+O arenito eólico constituinte da \botucatu{} é encontrado tanto assentado sobre a Formação Caturrita, como no 
+interior da Formação Serra Geral (arenito \emph{intertrap}). Trata-se de um arenito quartzoso de granulometria 
+fina à média, contendo feldspato alterado e cimentado por sílica ou por óxido de ferro, que lhe confere a 
+coloração rosa-avermelhada. Sua deposição teve início no Cretáceo Inferior, período em que a Bacia do Paraná 
+estava sob influência de clima desértico. Essa condição climática continuou durante todo o período em que 
+ocorreram as dezenas de eventos de vulcanismo fissural, fazendo com que os mesmos fossem sucedidos por 
+deposições eólicas de duração variável. Como a duração e a quantidade de material depositado pelos eventos de 
+vulcanismo fissural era variável, assim como o intervalo de tempo entre cada novo evento e a intensidade das 
+deposições de sedimentos eólicos, a espessura das camadas do arenito eólico e das rochas vulcânicas é bastante 
+variável. Além disso, devido ao diversos eventos de subsidência que ocorreram no eixo central da Bacia do 
+Paraná, com consequente soerguimento de suas bordas, as camadas dessas rochas possuem diferentes inclinações 
+ao longo de sua faixa de exposição, sendo caracteristicamente ondulada e com suave tendência de inclinação 
+para sudoeste.
+
+As deposições do Quaternário são constituídas por depósitos coluvionares e de aluvião. Em elevações entre 
+\num{\pm200} e \SI{\pm300}{\metre} encontram-se depósitos coluviais de material proveniente de uma ou ambas as 
+Formações Serra Geral (fragmentos de tamanho variado) e Botucatu. Em elevações abaixo de \SI{\pm200}{\metre} 
+são mais comuns os depósitos coluviais de uma ou ambas as Formações Botucatu e Caturrita. Esses depósitos 
+ocorrem de maneira descontínua nas encostas. Próximo aos cursos de água na porção mais baixa da bacia e no 
+entorno do reservatório, encontram-se depósitos fluviais recentes, geralmente formados por fragmentos 
+arredondados (seixo) de tamanho variável e/ou sedimento arenoso. Em pequenas áreas abaciadas e mal drenadas, 
+os sedimentos apresentam granulometria mais fina.
+
+\section{GEOMORFOLOGIA}
+\label{sec:chap02-geomorfologia}
+
+A área de estudo está situada na porção sul da Bacia Sedimentar do Paraná. Assim, as geoformas atuais são 
+resultado dos processos erosivos que ocorreram durante o Terciário e o Quaternário \cite{Sartori2009}, após as 
+últimas deposições de lavas vulcânicas e de sedimentos eólicos. Durante esse período, a esculturação da 
+paisagem foi determinada pelas alternações entre climas úmidos, semi-áridos e áridos \cite{Sartori2009}. 
+Atualmente, o clima subtropical úmido favorece a instalação e permanência de uma vegetação mais eficiente na 
+redução do processo de dissecação da paisagem \cite{Sartori2009, NascimentoEtAl2010}. Isso permite que as 
+superfícies geomórficas atinjam maior estabilidade e maturidade.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/dem90}
+%   \caption{Modelo digital de elevação da AEPQ-SM com resolução espacial de 90~m (SRTM DEM versão 4) 
+% \citep{JarvisEtAl2008}.}
+%   \label{fig:dem90}
+% \end{figure}
+
+As unidades morfoestruturais que abrangem a área são o Planalto e o Rebordo do Planalto da Bacia do Paraná 
+\cite{NascimentoEtAl2010}. O Planalto é marcado por relevo suave-ondulado a ondulado, com formas denudacionais 
+de superfícies planas com topos convexos (fluxo hídrico divergente). Nesses locais, as vertentes assumem a 
+forma convexa levemente ondulada \cite{NascimentoEtAl2010}, muitas vezes encaixadas em falhas e/ou fraturas. 
+Já o Rebordo do Planalto é caracterizado pela ampla variação altimétrica, declividade acentuada e escarpas 
+abruptas, apresentando formas denudacionais com topos convexos (fluxo hídrico divergente), aguçados e em 
+formas de escarpas. Nesses locais, as vertentes assumem forma retilínea com grande desnível 
+\cite{NascimentoEtAl2010}, muitas vezes interrompidas por degraus ou patamares, na maioria das vezes encaixadas 
+em falhas e/ou fraturas. Esses patamares são resultado da ação diferencial dos processos denudacionais sobre a 
+paisagem, geralmente condicionados pela resistência do material de origem, seja ela química/mineralógica 
+(rochas vulcânicas básicas vs. ácidas), seja ela física/granulométrica (rochas vulcânicas vs. sedimentares), ou 
+estrutural (padrão de diaclasamento vertical vs. horizontal das rochas vulcânicas) \cite{Holtz2003, Pedron2007, 
+StreckEtAl2008}. Entretanto, em algumas situações, os patamares são formados por depósitos coluviais -- mesmo 
+nas partes altas do Rebordo do Planalto -- resultantes de movimentos de massa causados por eventos 
+pluviométricos de elevada intensidade e/ou duração \cite{PinheiroEtAl2004, PaisaniEtAl2010}. Nesses casos, os 
+patamares possuem menor dimensão e maior declividade. Em outras situações, os patamares são inteiramente 
+recobertos por colúvios provenientes de áreas à montante, sobretudo dos arenitos da Formação Botucatu, formando 
+vertentes alongadas e com menor inclinação, que chegam até a margem dos cursos de água. Assim, as encostas que 
+apresentam patamares constituem, de modo geral, vertentes mais curtas e inclinadas, muitas vezes escarpadas.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/dem10}
+%   \caption{Modelo digital de elevação da AEPQ-SM com interpolado de curvas de nível com 10~m de 
+% equidistância 
+% \citep{DSG1980, DSG1992, DSG1992a}.}
+%   \label{fig:dem10}
+% \end{figure}
+
+Apesar da área de estudo ser abrangida pelas unidades morfoestruturais do Planalto e do Rebordo do Planalto
+da Bacia do Paraná, as características geomorfológicas das porções mais baixas da paisagem são similares 
+àquelas encontradas na Depressão Periférica. Essas áreas são marcadas pelo acúmulo de sedimentos provenientes 
+do Planalto e do Rebordo, formando planícies aluviais que se intercalam entre as coxilhas (denominação 
+regional de colinas). Essas áreas são caracterizadas pela presença de formas agradacionais de planície fluvial 
+e formas denudacionais de topos convexos e de superfícies planas. As últimas correspondem às coxilhas de 
+algumas dezenas de metros de altitude, geralmente formadas sobre o substrato da Formação Caturrita 
+\cite{GasparettoEtAl1988}, geralmente assentadas na base do Rebordo do Planalto. Essas coxilhas constituem 
+divisores de água de pequena amplitude que auxiliam na subdivisão da área em pequenas sub-bacias 
+\cite{Marins2004, Sartori2009}. Nesses locais as vertentes costumam ser alongadas e assumem a forma 
+predominantemente côncava devido aos processos de deposição sedimentar e erosão fluvial, apesar dos mesmos 
+serem muito fracos sob a atual condição climática 
+\cite{NascimentoEtAl2010, WerlangEtAl2010}.
+
+A grande heterogeneidade geomorfológica da área de estudo se traduz em uma grande heterogeneidade textural 
+do relevo, ou rugosidade, resultante da ação climática ao longo do tempo geológico \cite{NascimentoEtAl2010}. 
+Entretanto, em menor escala, a ação antrópica também atua sobre a configuração geomorfológica da área. O 
+principal efeito se deu pela erosão da camada superficial do solo, cultivado intensivamente sem o uso de 
+práticas conservacionistas ao longo de inúmeras décadas \cite{Menezes2008, Sturmer2008, Miguel2010, 
+SamuelRosaEtAl2011a}. Além disso, a abertura de caminhos para acesso às áreas de produção nos patamares do 
+Rebordo do Planalto e nos topos de morros proporcionou a formação de canais de concentração e escoamento dos 
+fluxos hídricos, levando à formação inicial de voçorocas. Obras de maior expressividade, como ferrovias, ruas 
+e rodovias pavimentadas, conjuntos habitacionais e construções isoladas, as quais envolvem operações de 
+terraplanagem e aterramento, também resultaram em modificações localizadas na geomorfologia da área. Por fim, 
+a construção do reservatório possibilitou a formação de uma área de agradação da paisagem bastante estável em 
+seu entorno, uma vez que o sedimento removido do Planalto e do Rebordo do Planalto não são mais transportados 
+a jusante.
+
+\section{HIDROGRAFIA}
+\label{sec:chap02-hidrografia}
+
+A hidrografia da área é condicionada pelas condições geomorfológicas, geológicas, pedológicas e climáticas, ao 
+mesmo tempo que exerce forte influência sobre a modelagem da paisagem \cite{NascimentoEtAl2010}. Como a área é 
+abrangida pelas unidades morfoestruturais do Planalto e do Rebordo do Planalto da Bacia do Paraná, a drenagem 
+apresenta um padrão bem definido, geralmente retangular, determinado pelas falhas e/ou fraturas 
+\cite{Bortoluzzi1974, GasparettoEtAl1988, NascimentoEtAl2010}. A própria formação da bacia do DNOS se deve 
+a existência de falhas e/ou fraturas \cite{GasparettoEtAl1988}. A principal e maior delas localiza-se no eixo 
+central da bacia, onde atualmente está localizado o leito do rio Vacacaí-Mirim. Quanto aos tributários do rio 
+Vacacaí-Mirim, a maioria possui o leito assentado sobre outras falhas e/ou fraturas de menor dimensão 
+perpendiculares àquela do eixo central da bacia.
+
+Nas áreas mais baixas, cujas características geomorfológicas se assemelham à Depressão Periférica, a drenagem 
+apresenta configuração serpenteada, resultado dos processos de deposição sedimentar e erosão fluvial 
+\cite{PaivaEtAl2001, SutiliEtAl2009}. Como o relevo é plano a suave-ondulado, e as vertentes longas e 
+predominantemente côncavas, o lençol freático fica próximo da superfície do solo. A variação das condições 
+meteorológicas ao longo do ano fazem com que o lençol freático apresente flutuação significativa, mantendo o 
+conteúdo de água do solo elevado durante os meses mais frios (menor evapotranspiração) \cite{HeldweinEtAl2009}.
+Isso também favorece a ocorrência de inundações, sobretudo nas proximidades dos cursos de água e do 
+reservatório \cite{Goldani2006}.
+
+Muitos cursos de água localizados no Planalto, no Rebordo do Planalto e nas coxilhas assentadas em sua base, 
+são sazonais. Em geral, esses cursos de água estão em atividade apenas nos meses mais frios do ano, quando a 
+disponibilidade de água no ambiente é maior, ou durante os eventos de precipitação de forte intensidade, que 
+ocorrem nos meses de verão \cite{HeldweinEtAl2009, MouraBueno2012}. Os cursos de água do Rebordo do Planalto 
+costumam apresentar leito raso e pedregoso, muitas vezes assentado sobre rochas da Formação Serra Geral 
+\cite{SutiliEtAl2009}. Já os cursos de água localizados nos patamares e coxilhas costumam ser rasos, se 
+assentados sobre as rochas da Formação Caturrita, ou profundos, se assentados sobre as rochas da Formação 
+Botucatu ou depósitos coluvionares, formando voçorocas. Segundo relatos de alguns dos moradores mais antigos, 
+muitas nascentes e pequenos cursos de água já perderam totalmente sua atividade, sobretudo quando localizadas 
+no interior ou à jusante de áreas de uso antrópico.
+
+Dado que a declividade e o desnível entre a parte mais baixa e a parte mais alta da área são acentuados, as 
+cheias costumam apresentar velocidade e vazão bastante grandes \cite{PaivaEtAl2001, SutiliEtAl2009}. Em média, 
+nos \SI{7}{\km} de extensão do rio Vacacaí-Mirim, da nascente até o reservatório, a declividade média é de 
+\SI{0,03}{\m\per\m}. Isso representa um desnível de \SI{\pm210}{\m}, o que resulta em um tempo de concentração 
+da bacia estimado em \SI{3}{\hour} \cite{PaivaEtAl2001}. Essas características causam erosão severa nas 
+margens dos cursos de água nas áreas mais baixas (depósitos aluviais), sobretudo nos raios externos das 
+curvas, onde a velocidade da água é maior \cite{SutiliEtAl2009}. Em alguns trechos, os cursos de água chegam a 
+ter sua largura duplicada em menos de uma década, resultando no aumento da sinuosidade e do nível de fundo 
+\cite{PaivaEtAl2001}. Esses eventos comprometem áreas de produção, bem como a estrutura de residências e vias 
+públicas localizadas nas margens dos cursos de água. Grande parte do material removido das margens dos cursos 
+de água é transportado para dentro do reservatório, que já perdeu mais de \SI{30}{\percent} de sua capacidade 
+inicial de armazenamento de água \cite{DillEtAl2004}.
+
+\section{USO DA TERRA}
+\label{sec:chap02-landuse}
+
+A área de estudo já foi intensamente ocupada em tempos pretéritos. Isso é evidenciado pela grande quantidade, 
+extensão e boa distribuição da rede viária em toda a sua área. Além disso, a área é cortada por uma estrada 
+férrea e avizinha uma rodovia federal, ambas muito movimentadas. Entretanto, nas últimas décadas, muitos 
+caminhos internos das propriedades rurais foram desativados, fruto do abandono de áreas de produção, a maioria 
+delas localizada nos topos dos morros, patamares do Rebordo ou no fundo de vales, onde a manutenção dos 
+caminhos é muito onerosa, ou ainda, distantes da sede das propriedades. No passado, essas estradas internas 
+possibilitaram o trânsito de pessoas e o transporte da produção agrosilvopastoril, a qual era comercializada 
+às margens da estrada férrea e nas áreas urbanas do município. Atualmente, o tráfego está concentrado nas 
+estradas principais e secundárias, enquanto alguns poucos caminhos internos são utilizados apenas na condução 
+de rebanhos ou no acesso a pequenas áreas de produção agrícola. A maioria dos caminhos internos inativos está 
+localizada no interior de áreas de floresta natural regenerada, o que dificulta a sua identificação pelo uso 
+de imagens aéreas ou orbitais. Em alguns casos, esses caminhos são utilizados em atividades de turismo 
+ecológico, especialmente para caminhadas a pé, ou atividades esportivas com motocicletas (trilhas).
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/land1980}
+%   \caption{Mapa do uso da terra da AEPQ-SM publicado na escala 1:25.000 \citep{DSG1980, DSG1992, 
+% DSG1992a}.\\Legenda de acordo com o guia para descrição do solo da FAO \citep{FAO2006}: S - Assentamentos 
+% humanos, PF - Silvicultura, H - Pecuária, FS - Floresta nativa.}
+%   \label{fig:land1980}
+% \end{figure}
+
+O abandono de muitas áreas de produção possibilitou a regeneração da vegetação natural em grande parte da 
+área. Atualmente, a área ocupada por florestas e vegetação secundária (capoeira) representa 
+\SI{\pm60}{\percent} da área total \cite{SamuelRosaEtAl2011a}. Isso mostra que, assim como toda a região do 
+Rebordo do Planalto da Bacia do Paraná, o uso da terra foi desintensificado nas últimas décadas 
+\cite{SEMA/UFSM2001, DillEtAl2004, Poelking2007, Miguel2010, SamuelRosaEtAl2011a, Dullius2012, 
+tenCatenEtAl2012}. As áreas florestadas são encontradas nos mais diversos estádios de desenvolvimento, com os 
+estratos intermediário e superior concentrando a maior parte dos indivíduos. As florestas originais, e 
+secundárias em estágio avançado de desenvolvimento, são encontradas apenas em áreas de difícil acesso. Em 
+geral, as áreas florestadas predominam nas regiões de maior declividade, com solo raso e pedregoso. Tais 
+condições pedológicas são resultado, na maioria dos casos, das condições geológicas e geomorfológicas, mas 
+também podem derivar da degradação causada pelo intenso uso da terra durante inúmeras décadas 
+\cite{SamuelRosaEtAl2011a}. A ocorrência de fragmentos ao longo dos cursos de água, estradas e próximo de 
+edificações é comum. Nas formações mais jovens, é comum encontrar fragmentos de carvão e sinais de uso agrícola 
+no passado. As áreas sob vegetação secundária (capoeira) também ocorrem em toda a bacia de captação, 
+predominantemente em locais de difícil acesso e acentuada declividade, geralmente interligados por caminhos 
+internos, indicando sua utilização agrícola no passado \cite{SamuelRosaEtAl2011a}. Sua composição florística 
+varia entre as áreas, predominando espécies de porte herbáceo e arbustivo. O solo dessas áreas costuma ser 
+menos pedregoso que nas áreas florestadas, mas apresentam profundidade semelhante \cite{SamuelRosaEtAl2011a}, 
+indicando que as atividades agrícolas foram encerradas antes do solo atingir seu nível máximo de degradação. 
+Entretanto, a reserva de nutrientes do solo, assim como a sua fertilidade física, foram esgotadas à tal ponto 
+que a vegetação secundária ainda não foi 
+capaz de produzir melhorias significativas quando comparado com as condições originais \cite{Menezes2008, 
+Zalamena2008}.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/land2009}
+%   \caption{Mapa do uso da terra da AEPQ-SM publicado na escala 1:2.000 \citep{SamuelRosaEtAl2011a}.\\Legenda 
+% de acordo com o guia para descrição do solo da FAO \citep{FAO2006}: O - Outros usos (água), S - 
+% Assentamentos 
+% humanos, PF - Silvicultura, AA - Agricultura anual, H - Pecuária, SS - Vegetação secundária (capoeira), FS - 
+% Floresta nativa.}
+%   \label{fig:land2009}
+% \end{figure}
+
+Apesar do abandono de muitas áreas de produção agrícola nas últimas décadas, sobretudo aquelas com maior 
+dificuldade de acesso, os caminhos internos utilizados para o escoamento da produção, mesmo depois de 
+inativos, continuam associados ao processo de degradação do solo. Isso ocorre porque, na grande maioria dos 
+casos, todo o fluxo da água de escorrimento superficial proveniente dos eventos de precipitação é concentrado 
+nesses caminhos internos, onde, geralmente, quantidade significativa de resíduos vegetais está depositada. 
+Esse resíduo vegetal, mais a fração mineral do solo carregada pela enxurrada, costuma chegar com facilidade 
+aos cursos de água. No caso dos caminhos internos ainda utilizados na condução de rebanhos, a produção de 
+sedimentos minerais tende a ser ainda maior, haja vista o impacto mecânico do pisoteio animal sobre a 
+desagregação do solo. Além disso, muitas áreas florestadas e sob vegetação secundária ainda são utilizadas 
+para o pastoreio de bovinos e equinos \cite{SamuelRosaEtAl2011a}. Isso causa a degradação da camada superficial 
+do solo, sobretudo pela sua compactação, dificultando a infiltração da água dos eventos de precipitação, o que 
+resulta na perda da serapilheira \cite{ScheneiderEtAl1978}. Além disso, a própria regeneração natural é 
+prejudicada, uma vez que plantas em estádio inicial de desenvolvimento e raízes superficiais são destruídas 
+\cite{ScheneiderEtAl1978, HackEtAl2005}. O resultado desse processo é a perda da qualidade do solo e, 
+consequentemente, da produtividade da floresta \cite{KonigEtAl2002}.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/ndvi30}
+%   \caption{Mapa do índice de vegetação por diferença normalizada (Landsat~5~TM) da AEPQ-SM em dezembro de 
+% 2010.}
+%   \label{fig:ndvi30}
+% \end{figure}
+
+Dado que a área de estudo também possui áreas com relevo plano a suave-ondulado e solo profundo, 
+\SI{\pm30}{\percent} de sua superfície ainda é utilizada com atividades agrosilvopastoris ao longo de todo o 
+ano, principalmente a pecuária extensiva \cite{SamuelRosaEtAl2011a}. As áreas de produção animal extensiva 
+predominam nas porções norte, sul e centro-oeste, ao longo dos cursos de água e estradas. O solo é mais 
+profundo e menos pedregoso do que em áreas de floresta natural e vegetação secundária. Além disso, são 
+encontrados fragmentos de carvão e formações de micro relevo devido ao uso de implementos agrícolas para o 
+revolvimento do solo na maior parte dos locais, evidenciando seu uso agrícola no passado. Essas áreas podem 
+ser divididas entre aquelas de campo sujo (pastagens naturais mal manejadas, com predomínio de vegetação de 
+porte herbáceo-arbustivo) e campo limpo (pastagens naturais e perenes bem manejadas) 
+\cite{SamuelRosaEtAl2011a}. Em geral, as áreas de campo sujo estão próximas a áreas de vegetação secundária 
+(capoeira), com relevo mais declivoso e solo mais pedregoso e raso do que aquelas de campo limpo, indicando que 
+podem vir a ser abandonadas dentro de pouco tempo. Assim como as áreas florestadas e sob vegetação secundária, 
+a dinâmica de uso dessas áreas ao longo do tempo é bastante complexa, dificultando o estabelecimento de 
+relações diretas com a maior parte das características do solo. Entretanto, sob o ponto de vista da reserva de 
+nutrientes e matéria orgânica, o solo pode ser considerado pobre, uma vez que a exploração pecuária é 
+totalmente extrativista e extensiva.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/ndvi5}
+%   \caption{Mapa do índice de vegetação por diferença normalizada (RapidEye) da AEPQ-SM em novembro de 2012.}
+%   \label{fig:ndvi5}
+% \end{figure}
+
+As atividades agrosilvopastoris que ocupam menor extensão territorial são a agricultura e a silvicultura. As 
+áreas de lavoura estão dispersas em toda a área, geralmente localizadas em terrenos de pequena declividade e 
+com solo medianamente profundo. Entretanto, algumas áreas de produção ocorrem em declives superiores a 
+\SI{50}{\percent} e com solo raso e pedregoso \cite{SamuelRosaEtAl2011a}. Em qualquer das situações, as 
+condições de degradação do solo costumam ser bastante avançadas, exceto por algumas áreas de produção 
+olerícola profissional. Assim como as áreas de agricultura, as florestas exóticas (\textit{Eucalyptus}) são 
+implantadas em áreas de menor declividade e com solo mais profundo, geralmente onde o acesso com máquinas é 
+melhor, sobretudo pela necessidade de escoamento da produção. A área ocupada por essa atividade possui 
+tendência de crescimento, haja vista os novos plantios existentes e o relato de alguns moradores 
+\cite{SamuelRosaEtAl2011a}. Em geral, os novos plantios são implantados em áreas de produção agropecuária, seja 
+pelo elevado nível de degradação do solo já atingido, seja pela redução da força de trabalho das famílias 
+devido ao êxodo rural, ou pela maior lucratividade dessa atividade.
+
+Por fim, as obras de engenharia e assentamentos urbanos são aquelas que ocupam a menor parte da área de 
+estudo. No que diz respeito à malha viária, a maior concentração ocorre na porção sul, junto ao maior 
+assentamento urbano, localizado no entorno do reservatório. Entretanto, diversas construções são encontradas 
+ao longo das estradas que cortam a área, muitas das quais são pertencentes a moradores do centro da cidade de 
+Santa Maria e são utilizadas apenas como sítios de final de semana. O número de sítios de final de semana 
+aumentou significativamente ao longo da última década \cite{Goldani2006}, muitos dos quais construídos em 
+locais inapropriados, como margens dos corpos de água e áreas de forte declividade. Esse processo de 
+urbanização desordenada, que exigiu a realização de obras de corte e aterramento dos terrenos, é um importante 
+contribuinte da carga de sedimentos recebida pelo reservatório anualmente \cite{PaivaEtAl2001, DillEtAl2004, 
+MiguelEtAl2014}. Soma-se a isso os resíduos domésticos e cloacais despejados nos cursos de água devido à falta 
+de coleta e tratamento \cite{Goldani2006}. Quanto às demais obras de engenharia, destacam-se os reservatórios 
+de água, a maioria deles de pequena extensão, utilizados para a dessedentação animal. Como os cursos de água 
+de maior volume estão localizados na porção sul da área, a maior parte dos reservatórios de água está na 
+porção norte \cite{SamuelRosaEtAl2011a}. Além disso, a menor permeabilidade do solo e do substrato rochoso, bem 
+como da condição topográfica, favorecem essa característica.
+
+\section{PEDOLOGIA}
+
+O solo da área de estudo possui características com forte dependência do material de origem 
+\cite{NascimentoEtAl2010} que, conforme descrito acima, é um importante condicionante da geomorfologia e da 
+hidrologia. Nas superfícies geomórficas mais estáveis, como no topo do Planalto (rochas vulcânicas), nos 
+terraços do Rebordo (rochas vulcânicas e sedimentares) e nas coxilhas de relevo suave-ondulado a ondulado 
+(rochas sedimentares), as condições ambientais proporcionam maior desenvolvimento do solo em profundidade 
+\cite{Moser1990}. Já nas áreas de relevo mais acidentado do Rebordo, onde a taxa de formação do solo deve ser 
+semelhante a taxa de remoção, as condições ambientais são pouco favoráveis ao desenvolvimento do solo 
+\cite{Moser1990, DalmolinEtAl2006a, Sturmer2008, SamuelRosaEtAl2011a}. Entretanto, além da condição 
+geomorfológica que impede ou limita o desenvolvimento do solo nesses locais, a resistência da rocha ao 
+intemperismo também é um importante condicionante \cite{Pedron2007}. Já nas planícies aluviais, as 
+características do solo são fortemente influenciadas pelo hidromorfismo e deposição sedimentar 
+\cite{Moser1990, Miguel2010}.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/solo1989}
+%   \caption{Mapa do solo da AEPQ-SM publicado na escala 1:100.000 \citep{AzolinEtAl1988}.\\Legenda de acordo 
+% com o sistema brasileiro de taxonomia do solo \citep{SoaresEtAl2005}: TBa-Rd - Terra Bruna Estruturada 
+% álica, 
+% Re4 - Solo Litólico Eutrófico/Distrófico relevo montanhoso, Re-C-Co - Solo Litólico Eutrófico relevo forte 
+% ondulado, Rd1 - Solo Litólico Distrófico/Eutrófico, C1 - Cambissolo Eutrófico.}
+%   \label{fig:solo1989}
+% \end{figure}
+
+Como a área de estudo possui a maior parte de sua superfície em condições de forte declividade, o solo é, 
+predominantemente, pouco desenvolvido, com profundidade inferior à \SI{50}{\cm} até o contato lítico e comum 
+ocorrência de pedregosidade e rochosidade \cite{Miguel2010}. Assim, predominam as áreas de solo classificado 
+como Neossolo Litólico Distro-Úmbrico típico, Cambissolo Háplico Ta Eutrófico típico, Neossolo Litólico 
+Eutro-Úmbrico típico e Neossolo Regolítico Distro-Úmbrico típico. Em muitas áreas de maior estabilidade (topos 
+de morros, patamares do Rebordo do Planalto e coxilhas), onde as condições para o desenvolvimento pedogenético 
+são mais favoráveis \cite{Moser1990}, o solo também apresenta características que indicam seu fraco 
+desenvolvimento \cite{MouraBueno2012}. Entretanto, nessas áreas, o solo sofreu severa degradação ao longo das 
+inúmeras décadas de cultivo intensivo sem uso de práticas conservacionistas, fazendo com que parte 
+significativa de sua camada superficial fosse perdida \cite{SamuelRosaEtAl2011a}. Nos patamares constituídos 
+inicialmente por colúvios sedimentares (arenito Botucatu) e vulcânicos (fragmentos de tamanhos variáveis), 
+atualmente, devido à forte erosão à que foi submetido, o solo apresenta superfície recoberta por fragmentos 
+rochosos que limitam seu uso para atividades agrosilvopastoris \cite{MouraBueno2012}. Dado que a ocorrência de 
+ambientes com solo pouco desenvolvido não é função restrita da geomorfologia e do material de origem, mas 
+também do uso antrópico, não é possível estabelecer uma relação direta e unívoca da textura do solo com os 
+níveis taxonômicos mais altos. Essa diferenciação pode ser realizada mais adequadamente a partir da 
+identificação do material parental. Assim, os arenitos conferem textura arenosa ao solo, sobretudo aqueles da 
+Formação Botucatu, enquanto as rochas vulcânicas conferem textura média ao solo, sobretudo os 
+basaltos-andesitos toleíticos.
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[height=7cm]{figures/solo2010}
+%   \caption{Mapa do solo da AEPQ-SM publicado na escala 1:25.000 \citep{MiguelEtAl2012}.\\Legenda de acordo 
+% com o sistema brasileiro de taxonomia do solo \citep{SantosEtAl2006}: PBAC - Argissolo Bruno-Acinzentado, PV 
+% - 
+% Argissolo Vermelho, C-R - Cambissolo-Neossolo, RY - Neossolo Flúvico, RL - Neossolo Litólico, RL-RR - 
+% Neossolo 
+% Litólico-Neossolo Regolítico, RR - Neossolo Regolítico, SX - Planossolo Háplico.}
+%   \label{fig:solo2010}
+% \end{figure}
+
+As áreas com maior desenvolvimento pedogenético em profundidade ocorrem na paisagem menos declivosa do Planalto 
+(rochas vulcânicas), algumas coxilhas (rochas sedimentares) e depósitos aluviais, mas com menor expressão 
+territorial \cite{Miguel2010}. Quando em áreas de material de origem vulcânica, sobretudo basaltos-andesitos 
+toleíticos, encontra-se solo classificado como Argissolo Vermelho Alítico típico. Trata-se de solo com 
+horizonte superficial de textura arenosa a média, sobrejacente a um horizonte subsuperficial de textura média a 
+argilosa \cite{Miguel2010}. Nas áreas do Planalto em que ocorrem riólitos-riodacitos granofíricos, o solo 
+costuma apresentar menor desenvolvimento, predominantemente classificado como Neossolo Litólico e Cambissolo 
+Háplico. Em pequenas manchas, o solo é classificado como Argissolo Vermelho-Amarelo. O menor desenvolvimento do 
+solo originário de riólitos-riodacitos granofíricos deve-se, exatamente, a maior resistência da rocha ao 
+intemperismo, uma vez que possui maior teor de sílica, sobretudo na forma de grandes de cristais de quartzo 
+cristalizados a baixa temperatura (\SI{<600}{\celsius}) \cite{Pedron2007}.
+
+Quando em áreas de material de origem sedimentar (Formação Caturrita), o solo costuma ser classificado como 
+Argissolo Bruno-Acinzentado Alítico abrúptico. Trata-se de solo com horizonte superficial de textura arenosa 
+que transiciona de maneira abrupta para um horizonte subsuperficial de textura argilosa \cite{Miguel2010}. 
+Essa descontinuidade textural pode ser devida a fatores bem distintos. O primeiro deles estaria relacionado às 
+características do próprio material de origem que, por ter sido formado em ambiente fluvial durante um período 
+de mudança climática no Triássico \cite{PieriniEtAl2002}, apresenta camadas deposicionais com granulometria 
+diferenciada. Assim, a presença de camadas de siltitos e folhelhos pode ter contribuído para a formação da 
+descontinuidade textural. Outra hipótese trata da contribuição dos arenitos da Formação Botucatu e 
+\emph{intertrap} na Formação Serra Geral. Dado que esse material está localizado em posições superiores na 
+paisagem e são bastante suscetíveis à erosão, o mesmo pode ter contribuído para a formação do horizonte 
+superficial arenoso do solo. Em ambos os casos, a hipótese formulada refere-se à ocorrência de descontinuidade 
+litológica, com a diferença de que no primeiro caso as litologias pertencem à mesma formação geológica. Por 
+fim, a descontinuidade textural observada pode ser resultado dos processos pedogenéticos, sobretudo a perda 
+(erosão lateral seletiva) e translocação (argiluviação) das partículas mais finas. Até o presente momento, 
+essa é a hipótese mais aceita.
+
+Nas áreas deprimidas da paisagem do Planalto, formando pequenas bacias de acumulação, ou nas áreas planas ao 
+longo dos cursos de água da Depressão Periférica, o solo é classificado como Planossolo Háplico Alítico típico 
+\cite{Miguel2010}. Trata-se de solo com horizonte superficial de textura média sobre horizonte subsuperficial 
+de textura média a argilosa, podendo ou não apresentar horizonte intermediário eluvial. Ainda mais próximo dos 
+cursos de água, o solo é classificado como Neossolo Flúvico Tb Eutrófico fragmentário \cite{Miguel2010}. Como 
+o material de origem é diverso e possui arranjamento espacial discordante, a textura do solo é variável, mas 
+sempre arenosa ou média, nunca argilosa, mesmo quando presente em áreas do Planalto ou do Rebordo. Por fim, 
+com expressão territorial ainda menor, o solo é classificado como Neossolo Quartzarênico Órtico típico em 
+alguns patamares do Rebordo, sejam eles de origem estrutural ou da deposição de colúvios do arenito da Formação 
+Botucatu.
+
+Apesar das características do solo da área apontarem para sua fragilidade, sobretudo sua granulometria, a 
+geomorfologia possui papel preponderante sobre o potencial de perda de solo por erosão laminar 
+\cite{Miguel2010}. Contudo, a maior parte das áreas de maior declividade estão atualmente ocupadas por densa 
+cobertura florestal \cite{SamuelRosaEtAl2011a}, reduzindo a fragilidade do solo. Estimativas indicam que apenas 
+uma pequena fração da área deve apresentar perdas de solo por erosão laminar acima de valores toleráveis 
+\cite{Miguel2010}. Algumas observações até mesmo indicam que essas estimativas estão acima da perda real de 
+solo por erosão laminar na bacia \cite{Branco1998, MouraBueno2012}. Isso permite sugerir que os processos de 
+degradação do solo na área de estudo são de pequena intensidade e bastante pontuais, principalmente nas área 
+de expansão urbana.
+
+\section{CONSIDERAÇÕES FINAIS}
+
+A área de estudos em modelagem espacial do solo da bacia do DNOS apresenta grande diversidade pedológica, 
+fruto da diversidade da geologia e geomorfologia, determinantes dos fluxos hidrológicos na paisagem, bem como 
+pelo intenso uso da terra com atividades agrosilvopastoris num passado próximo. Em geral, o solo apresenta 
+elevada vulnerabilidade à degradação, com impacto direto sobre a população local e regional, cujo 
+abastecimento de água depende do reservatório do DNOS. Atualmente, a área parece adentrar um período de redução 
+da alteração das características da paisagem, o que deverá evitar a degradação do solo, exceto nas áreas de 
+expansão urbana.
+
+Espera-se que a estabilização da paisagem contribua, num futuro próximo, para a construção de um entendimento 
+mais acurado da relação entre o solo e os demais componentes ambientais, principalmente nas áreas florestadas 
+recentemente abandonadas. Nesse sentido, o presente documento constitui apenas a primeira versão do modelo 
+conceitual de pedogênese da bacia do DNOS. A medida que o entendimento sobre a variação espaço-temporal do 
+solo na bacia do DNOS for aprimorado, novas versões do modelo conceitual de pedogênese serão construídas.

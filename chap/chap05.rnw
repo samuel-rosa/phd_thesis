@@ -2,8 +2,37 @@
 \chapter{THE SANTA MARIA DATASET -- COVARIATE DATA}
 \label{chap:chap04}
 %\SweaveUTF8
+\SweaveOpts{prefix.string = fig/chap04}
 
-
+<<R-settings, echo = FALSE>>=
+ 
+ # Start GRASS
+ invisible(capture.output(
+   spgrass6::initGRASS(
+     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
+ 
+ # Load polygon with the boundary of the study area
+ invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
+ 
+ # Load calibration points
+ pts <- read.table(
+  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
+  header = TRUE, na.strings = "na")[, c("longitude", "latitude")]
+ sp::coordinates(pts) <- ~ longitude + latitude
+ sp::proj4string(pts) <- sp::CRS("+init=epsg:4674") # sirgas2000
+ pts <- sp::spTransform(pts, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
+ #pts <- data.frame(slot(pts, "coords"))
+ 
+ # Set bounding box
+ dnos_bbox <- rbind(range(c(pts@bbox[1, ], pol@bbox[1, ])), range(c(pts@bbox[2, ], pol@bbox[2, ])))
+ 
+ # Trellis settings
+ require(lattice)
+ trellis.par.set(fontsize = list(text = 12, points = 8),
+      layout.widths = list(left.padding = 0, right.padding = 0),
+      layout.heights = list(top.padding = 0, bottom.padding = 0))
+@
 
 \def\ptkeys{}
 
@@ -609,6 +638,7 @@ value of \ang{0.1} was added to the rasters to remove these flat surfaces.
   print(map)
   rm(slp, map)
   gc()
+@
  \caption{Slope \tt{SLP}} raster surfaces derived from \demNew{} using windows of sizes (from left to right) 
  $3 \times 3$, $31 times 31$, and $255 \times 255$.}
 \label{fig:covar-data-slope}

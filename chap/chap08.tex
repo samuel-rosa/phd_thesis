@@ -1,344 +1,519 @@
 \artigotrue
-\chapter{SAMPLING FOR SOIL MAPPING IN \emph{TERRA INCOGNITA}}
-\label{chap:chap08}
+\chapter{OPTIMIZATION OF SAMPLE CONFIGURATIONS FOR SPATIAL TREND ESTIMATION FOR SOIL MAPPING}
+\label{chap:chap07}
 
-\def\ptkeys{Recozimento simulato, Otimização multi-objetivo, Estimativa do variogram, Predição espacial}
+\def\ptkeys{Recozimento simulato, Otimização multi-objetivo, Pareto, Amostragem por hypercubo latino 
+condicionado, Covariáveis}
 
 \begin{chapterabstract}{brazilian}{\ptkeys}
 Este é o resumo em português.
 \end{chapterabstract}
 
-\def\enkeys{Simulated annealing, Multi-objective optimization, Variogram estimation, Spatial prediction}
+\def\enkeys{Simulated annealing, Multi-objective optimization, Pareto, Conditioned Latin hypercube sampling, 
+Covariates}
   
 \begin{chapterabstract}{english}{\enkeys}
-This study addresses a problem that many soil spatial modellers face: how to come up with an efficient spatial 
-sample configuration to 1) estimate the spatial trend, 2) estimate the variogram of the residuals, and 3) make 
-spatial predictions in situations where we know very little? Different sample designs that aim at these three
-objectives individually (ACDC, PPL, and MSSD) are compared using synthetic data derived from a real-world 
-study case in Santa Maria, southern Brazil. The second of these sampling algorithms is introduced in this 
-study as as result of the improvement of an existing sampling algorithm for variogram estimation. A 
-general-purpose sampling algorithm that aims at the three objectives jointly is also presented (SPAN). These 
-sampling algorithms are compared with the outcome of simple random sampling (SRS) and systematic grid sampling 
-(SGS). Evaluations include assessing the variation in model parameter estimation and prediction accuracy. The 
-last is assessed using $n = 1000$ validation points probabilistically selected from 500 quasi-equal-area 
-compact geographic strata. Experimental results are not available yet. So far, the main outcome of the study 
-is the creation and maintenance of the \Rpackage{spsann}, devoted to the optimization of sample patterns using 
-spatial simulated annealing.
+The spatial trend is the part of a soil spatial model that deterministically explains the soil spatial 
+variation using covariates. The sampling method most commonly used to identify and estimate the spatial trend 
+is the \emph{conditioned Latin hypercube sampling} (CLHS). In this study we propose conceptual and algorithmic 
+improvements on the CLHS, which are evaluated using synthetic data derived from a real-world study case in 
+Santa Maria, southern Brazil. The improvements include: 1) using the Pearson's $r$ only when all covariates 
+are numeric, and the Cramér's $v$ when some or all covariates are factors, 2) defining marginal sampling 
+strata using only the unique values of the sample quantiles estimated with a discontinuous function, and 3) 
+scaling the objective functions to the same approximate range of values using the upper-lower bound approach 
+with the Pareto maximum and minimum before aggregating them into a single utility function using a weighted 
+sum. Compared to the original CLHS, our proposed improvements resulted in a sampling algorithm with a better 
+numerical behaviour. It remains to be evaluated if the better numerical behaviour results in more accurate 
+spatial predictions.
 \end{chapterabstract}
 
 \formatchapter
 
 \section{INTRODUCTION}
+\label{sec:chap07-intro}
 
 \titlenote{This chapter is based on the study \textit{spsann -- optimization of sample patterns using spatial 
 simulated annealing}, presented at the EGU General Assembly 2015 \cite{Samuel-RosaEtAl2015a}, and 
-\textit{Optimization of sample configurations for variogram estimation}, presented at Pedometrics 2015 
-\cite{Samuel-RosaEtAl2015c}. Also collaborated in the preparation of this document: Gerard B. M. Heuvelink 
-(ISRIC -- World Soil Information), Dick J. Brus (Alterra, Wageningen University and Research Centre, the 
-Netherlands), Gustavo M. Vasques (Embrapa Soils, Brazil), and Lúcia Helena Cunha dos Anjos (Universidade 
+\textit{Optimization of sample configurations for spatial trend estimation}, presented at Pedometrics 2015 
+\cite{Samuel-RosaEtAl2015d}. Also collaborated in the preparation of this document: Dick J. Brus (Alterra, 
+Wageningen University and Research Centre, the Netherlands), Gerard B. M. Heuvelink (ISRIC -- World Soil 
+Information), Gustavo M. Vasques (Embrapa Soils, Brazil), and Lúcia Helena Cunha dos Anjos (Universidade 
 Federal Rural do Rio de Janeiro, Brazil).}
 
-The success of soil mapping largely depends on the sampling data because the last are used to 1) estimate the 
-spatial trend, 2) estimate the variogram of the residuals, and 3) make spatial predictions by calculating 
-conditional distributions. A poor sampling strategy is likely to deliver a poor model and large prediction 
-errors, resulting in a waste of financial resources, staff and time \cite{vanGroenigenEtAl1999,  
-deGruijterEtAl2006, LanEtAl2010}. This is undesirable because sampling already is the largest contributor to 
-the costs of soil mapping \cite{WebsterEtAl1990, vanGroenigenEtAl1999, KempenEtAl2012}.
-
-The focus of this study is on the optimization of spatial sample configurations for soil mapping. We explore a 
-scenario in which a) multiple soil properties have to be mapped, b) we are ignorant about the form of the model 
-of spatial variation, and c) the operational constraints limit sampling to a single phase. The objective is to 
-evaluate the ability of different sampling configuration types and sample sizes to capture the true form of the 
-model of spatial variation and make accurate predictions. We also quantify the gain in prediction accuracy by 
-combining popular sampling methods in a multi-objective optimization problem. This study addresses a problem 
-that many soil spatial modellers face: how to come up with a spatial sample configuration that is effective and 
-robust in situations where we know very little? To start, we present a short review on the methods for spatial 
-sample optimization.
-
-\section{PURPOSIVE SAMPLING}
-
-\emph{Purposive sampling} is the non-probability sampling mode by which the sampling locations are selected 
-intentionally as to satisfy an \textit{a priori} criterion. This criterion is commonly defined based on the 
-model that will be used to infer the structure of spatial variation of a soil property $Y(\boldsymbol{s})$. 
-Compared to probability sampling, purposive sampling generally is more efficient for \emph{model-based 
-inference} \cite{deGruijterEtAl2006}.
-
-The criterion used to select the sampling locations can be defined based on the chosen statistical model 
-\cite{deGruijterEtAl2006, Mueller2007, WebsterEtAl2013}. A set of mathematical and heuristic rules is then 
-formalized in the form of a computer algorithm to find the sampling locations that minimize (or maximize) that 
-criterion. The more we know about the structure of spatial variation of $Y(\boldsymbol{s})$, the more likely we 
-are to obtain the optimum sample configuration given the chosen statistical model.
-
-However, the statistical model is usually unknown before we sample. This is especially common when multiple 
-soil properties have to be mapped and the available information is insufficient to decide on the structure of 
-the spatial variation. Because we usually want to make the least possible number of assumptions about the model 
-structure, the safest solution is to use a space filling design \cite{HenglEtAl2003a, deGruijterEtAl2006, 
-Mueller2007, WalvoortEtAl2010}: the locations are selected as to generate a sample that covers the geographic 
-and/or feature space(s) as evenly as possible. In areas with very little information on the spatial variation 
-of the soil properties of interest, referred to \emph{terra incognita} by \citet{WebsterEtAl2007}, there 
-usually are operational constraints that limit the sampling to a single phase. The spatial sample configuration 
-has to be optimized to identify the correct model structure, estimate model parameters, and make spatial 
-predictions.
-
-\subsection{Sampling for Spatial Trend Estimation}
-
-The spatial trend corresponds to the spatial variation of $Y(\boldsymbol{s})$ that is explained linearly or 
-nonlinearly by the covariates. For a linear spatial trend, the sample should cover the extremes of the 
-distribution of the covariates \cite{Mueller2007}. For models with interactions and/or higher order terms there 
-are the response surface designs \cite{BoxEtAl1951, LeschEtAl1995}. These approaches produce clusters of points 
-and ignore the spatial autocorrelation of the residuals \cite{BrusEtAl2007a, Mueller2007}. Optimal sampling 
-designs for neural nets, random forests, etc., are yet unknown.
-
-A common solution for spatial trend estimation in \emph{terra incognita} is to use a feature space filling 
-sample. \citet{HenglEtAl2003a} sampled along the marginal distribution of the covariates using equal-range 
-strata with weights proportional to the frequency distribution. \citet{MinasnyEtAl2007a} sampled equal-variance 
-geographic strata created using the variance of the covariates retained in their first principal component.
-
-A more elaborated method, formulated as a multi-objective optimization problem, was developed by 
-\citet{MinasnyEtAl2006b} based on the Latin hypercube sampling \cite{McKayEtAl1979}, known as \emph{conditioned 
-Latin hypercube sampling} (CLHS). The CLHS is based on sampling along the marginal distribution of the numeric 
-and factor covariates using equal-area strata (quantile sampling) and proportionally to the area occupied by 
-each level, respectively, and reproducing the linear correlation of the numeric covariates 
-\cite{MinasnyEtAl2006b}. The method is very flexible and can be easily extended \cite{MinasnyEtAl2010a, 
-RoudierEtAl2012}. Recently, \citet{Samuel-RosaEtAl2016} proposed conceptual and algorithmic improvements on 
-the CLHS. In short, the proposed improvements concern the definition of the marginal sampling strata, the 
-measurement of the correlation between covariates, and the aggregation of the objective functions. Preliminary 
-results have shown that the improvement resulted in a more numerically stable sampling algorithm 
-\citet{Samuel-RosaEtAl2016}.
-
-\subsection{Sampling for Variogram Estimation}
-
-A variogram model explains the spatially correlated random part of the spatial variation of 
-$Y(\boldsymbol{s})$. Several sampling methods exist to identify and/or estimate the variogram and its 
-parameters \cite{BrusEtAl1994, deGruijterEtAl2006, Mueller2007, WebsterEtAl2013}. Modern ones focus on maximum 
-likelihood estimators \cite{Lark2002, Zimmerman2006, Mueller2007}, their limitation being that a minimum 
-knowledge about the form of the variogram is required. A Bayesian approach was suggested to account for the 
-uncertainty of the estimated variogram \cite{DiggleEtAl2006, MarchantEtAl2006, ZhuEtAl2006}. But it is hard to 
-implement for multiple variables simultaneously, and the uncertainty is likely to increase with the number of 
-parameters that need to be estimated.
-
-Sampling for variogram estimation should concentrate on relevant pairwise distances \cite{MuellerEtAl1999, 
-Lark2002}. But how to do that when we are ignorant about the shape of the variogram? \citet{BreslerEtAl1982, 
-Russo1984, WarrickEtAl1987} proposed a conservative solution: the points should be located as to match a 
-uniform distribution of pairwise distances. Their claim was that the sample would be globally optimal for an 
-infinite set of unknown variograms. This has not been proved mathematically nor corroborated by empirical 
-evidence. The resulting sample usually is redundant (poorly informative), concentrating most of the points in 
-a single large cluster, with a few scattered points -- many of the point-pairs are computed using the same 
-subset of points.
-
-Another critique to the idea of \citet{BreslerEtAl1982, Russo1984, WarrickEtAl1987} is that it was rooted on 
-the use of the method-of-moments to fit a continuous function to the binned empirical variogram. Nowadays we 
-recognize that the estimates of the method-of-moments are affected by the correlation between the sequence 
-of classes of pair-wise distances and that more robust methods exist \cite{DiggleEtAl2002}. Maximum 
-likelihood methods estimate model parameters using all data points, avoiding the need for an \textit{ad hoc} 
-definition of classes of pair-wise distances that generally smooth out the structure of the spatial process  
-\cite{Lark2000}.
-
-\subsection{Sampling for Spatial Interpolation}
-
-Kriging is the best unbiased linear predictor of soil properties \cite{LarkEtAl2006}. The overall prediction 
-accuracy depends on spreading the sample points as uniformly as possible throughout the study area. This is 
-because for a stationary isotropic random field the kriging variance is a function only of the distance 
-between 
-sample points \cite{Cressie1993}. Regular sampling grids are commonly used to obtain a uniform geographic 
-coverage, although triangular equilateral grids are more efficient \cite{WebsterEtAl2007}. Regular grids 
-usually are inappropriate for irregularly shaped areas \cite{WalvoortEtAl2010}.
-
-The regression-kriging approach for soil mapping \cite{HenglEtAl2007b} lead to the development of sampling 
-methods that account for both feature and geographic spaces. \citet{HenglEtAl2003a} proposed sampling 
-iteratively in the feature space and keeping the sample configuration with the best geographic coverage. 
-\citet{MinasnyEtAl2006b} developed a sampling strategy for spatial trend estimation and claimed that the 
-geographic space could be considered as well. \citet{MinasnyEtAl2007a} suggested that a geographic 
-stratification based on the variance of the covariates would take into consideration the geographic coverage. 
-These methods are suboptimal for spatial interpolation because they essentially operate in the feature space.
-
-Efficient optimization of sample configurations for spatial interpolation depends upon minimizing a 
-distance-based metric \cite{RoyleEtAl1998}. One such metric is the Mean Squared Shortest Distance (MSSD) 
-between sample and prediction points \cite{BrusEtAl2006}. It is equivalent to finding, for each prediction 
-point, the nearest neighbouring sample point. This metric can be minimized using the \textit{k}-means 
-clustering algorithm \cite{WalvoortEtAl2010}, which is computationally fast, but sensitive to local optima 
-solutions.
-
-\section{WHICH SAMPLING ALGORITHMS?}
-
-\def\footspsann{\footnote{The \Rpackage{spsann} is publicly available at 
-\url{https://cran.r-project.org/web/packages/spsann}.}}
-
-Our short review suggested that there are efficient and robust methods for designing optimum spatial sample 
-configurations for spatial trend estimation and spatial interpolation in \emph{terra incognita}. The method of 
-\citet{MinasnyEtAl2006b} is the most suited to sample for spatial trend estimation. Because 
-\citet{Samuel-RosaEtAl2016} produced a more numerically stable sampling algorithm, we opt for using the 
-improved version of the CLHS called ACDC. The MSSD is the most suited criterion to optimize sample 
-configurations for spatial interpolation for soil mapping in \emph{terra incognita} \cite{BrusEtAl2006, 
-WalvoortEtAl2010}. An efficient and robust method for variogram estimation in the same circumstances seem to 
-be missing, as well as a method that takes all three objectives jointly. We now propose a series of 
-innovations and modifications on an existing method so that this gap can be potentially filled. Our proposed 
-innovations and modifications have been implemented in the publicly available \Rpackage{spsann}\footspsann.
-
-\subsection{Sampling for Variogram Estimation}
-
-We propose that sampling to estimate the variogram model for soil mapping in \emph{terra incognita} should be 
-based on placing several small clusters scattered throughout the spatial domain as to maximize the amount of 
-information. The most relevant pairwise distances are those that 1) enable an accurate estimate of the 
-behaviour of the variogram near the origin and 2) produce a low estimate of the nugget variance. Our concern 
-is with the fact that the shape of the variogram and the estimated nugget variance determine the smoothness of 
-the spatial predictions \cite{WebsterEtAl2007}.
-
-The design of our sampling algorithm starts with the method proposed by \citet{WarrickEtAl1987}. The first 
-proposed modification is to aim at a uniform distribution of the number of \emph{unique points} instead of 
-\emph{point-pairs} per lag-distance class. The second modification is based on the idea of 
-\citet{PettittEtAl1993a}, who suggested using linear transect with exponential spacings. Here, we use 
-exponentially spaced lag-distance classes defined up to the circumradius $r$ of the bounding box of the area 
-as proposed by \citet{TruongEtAl2013}. The exponential spacings are created sequentially from the largest to 
-the smallest lag by halving the immediately preceding larger lag, resulting in narrower lags in the left 
-side of the variogram. It works as follows:
-
-\begin{enumerate}
- \item Find $r$. Use the result to define the upper bound (UB) of the first rightmost lag.
- \item Halve $r$. Use the result to define the lower bound (LB) of the first rightmost lag.
- \item Go to the next lag.
- \item Set the LB of the last lag as the UB of the current lag.
- \item Halve the UB. Use the result to define the LB of the current lag.
- \item Proceed as in 3--5 till the UB and LB of leftmost lag have been defined.
-\end{enumerate}
-
-This method usually yields seven lags, depending on the size of the smallest lag. Our objective is to place 
-the 
-points as to have each of them contributing to all lags. The criterion to be minimized is the sum of 
-differences between the vectors of the pre-specified $\boldsymbol{l}^*$ and observed $\boldsymbol{l}$ 
-distributions of unique \textbf{P}oints \textbf{P}er \textbf{L}ag
+Modern soil mapping is based on using a model of spatial variation composed of two terms, 
 
 \begin{equation}
- \text{PPL} = \sum_{i = 1}^{q} w_i (l_i^* - l_i),
-\end{equation}\label{eq:chap08-ppl}
+ Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
+\end{equation}\label{eq:chap07-lmm}
 
-\noindent where $\boldsymbol{w}$ is a vector of weights for the $q$ lag-distance classes, and 
-$\boldsymbol{l}^* = n$ for a uniform distribution, $n$ being the number of sample points.
+\def\footgerard{\footnote{Gerard Heuvelink shared the same opinion during his Richard Webster Medal speech at 
+the conference of the Pedometrics Commission of the IUSS, which took place from 14--18 September 2015, in 
+Córdoba, Spain.}}
 
-\subsection{Sampling in \emph{Terra Incognita}}
+\noindent The first term in the right-hand size in \autoref{eq:chap07-lmm} is the spatial trend, 
+which corresponds to the spatial variation of the soil property $Y(\boldsymbol{s})$ that is explained 
+deterministically using spatially exhaustive covariates; the remaining spatial variation of 
+$Y(\boldsymbol{s})$ is explained stochastically with the second term \cite{Cressie1993}. Soil scientists 
+devoted all their attention to $m(\boldsymbol{s})$ for more than a century \cite{Jenny1961, Florinsky2012}. 
+Post-war technological developments in the fields of mathematics, statistics, and informatics, made many soil 
+scientists turn their focus to $e(\boldsymbol{s})$ \cite{WebsterEtAl1990}. Recent developments in remote 
+sensing and machine-learning algorithms made those soil scientists shift their attention back to 
+$m(\boldsymbol{s})$ \cite{MooreEtAl1993} -- but without forgetting of $e(\boldsymbol{s})$ \cite{OdehEtAl1994} 
+--, which now usually explains a considerably large proportion of the variation of $Y(\boldsymbol{s})$ 
+compared to $e(\boldsymbol{s})$\footgerard. Besides, it is in $m(\boldsymbol{s})$ where we can incorporate most 
+of our pedological knowledge \cite{Lark2012}.
 
-We propose a heuristic, general-purpose method to design sample configurations for soil mapping in \emph{terra 
-incognita}. Like sampling for spatial trend estimation (ACDC), it is based on solving a multi-objective 
-combinatorial optimization problem (MOCOP). An utility function is defined aggregating the three criteria 
-described above so that the sample points cover, extend over, spread over, SPAN the feature, variogram 
-and geographic spaces,
+Recent studies have shown that using more detailed covariates or more complex machine-learning algorithms can 
+deliver more accurate soil maps, but the increase in prediction performance may be modest 
+\cite{Samuel-RosaEtAl2015} and largely depends on the calibration data \cite{HeungEtAl2016}. Limited to the 
+currently available covariates and machine-learning algorithms, and to the existing pedological knowledge, one 
+of the major operational issue that needs to be solved in any soil mapping project is how to design an 
+efficient spatial sample to estimate $m(\boldsymbol{s})$. The sampling method most commonly used to solve this 
+problem is the \emph{conditioned Latin hypercube sampling} (CLHS). The CLHS was developed by Budiman Minasny 
+and Alex McBratney at the University of Sydney in 2005, using an idea borrowed from the Latin hypercube 
+sampling \cite{McKayEtAl1979, MinasnyEtAl2006b}. The popularity of the CLHS is due to its non\-/probabilistic 
+nature, seen as a link with the sampling strategies used in \q{traditional soil survey}, easiness to 
+implement, and the high flexibility which makes the addition of new features simple \cite{MinasnyEtAl2010a, 
+RoudierEtAl2012, MulderEtAl2013, CarvalhoJuniorEtAl2014, CliffordEtAl2014}.
+
+The CLHS is a heuristic strategy of creating spatial samples that aim at three objectives: ($\mathcal{O}_1$) 
+uniform coverage of the marginal distribution of numeric covariates (continuous and discrete data, e.g. 
+elevation, slope, etc.), ($\mathcal{O}_2$) proportional sample sizes for the classes of factor covariates 
+(binary, categorical, and ordinal data, e.g. geology, land use, etc.), and ($\mathcal{O}_3$) reproduction of 
+the linear correlation of numeric covariates. The main idea was that if a spatial sample reproduces the 
+marginal distribution of the numeric and factor covariates, as well as the correlation matrix of the numeric 
+covariates, it will approximately cover the multivariate distribution of the covariates -- this should put us 
+closer to identifying the \q{true} spatial trend if we are (or assume to be) ignorant about its form.
+
+Some critiques of the CLHS appeared in the literature since it was first published. Most of them focused on 
+operational difficulties encountered in the field. For example, \citet{CambuleEtAl2013} argued that the 
+CLHS is impractical in poorly-accessible areas, but \citet{RoudierEtAl2012} and 
+\citet{MulderEtAl2013} showed that this is just a matter of how the algorithm is implemented. And 
+\citet{CliffordEtAl2014} presented an algorithm for selecting an alternative sampling point when a CLHS 
+sample point is inaccessible. Only recently soil scientists started paying more attention to the theoretical 
+and algorithmic aspects of the CLHS. \citet{MinasnyEtAl2010a} demonstrated that, given an assumed known 
+linear spatial trend, the CLHS is suboptimal. \citet{CliffordEtAl2014} questioned the importance of 
+meeting the third objective ($\mathcal{O}_3$), as well as the mathematical approach used to find a solution 
+for all three objectives jointly (see below). Finally, \citet{Brus2015} proposed an alternative method 
+for selecting Latin hypercube samples with known inclusion probabilities so that these samples can also be 
+used for design-based inference.
+
+Our objective is to propose conceptual and algorithmic improvements on the CLHS, all of which we describe in 
+the next section. We then evaluate if the proposed improvements result in a more accurate representation of 
+the feature space and spatial predictions.
+
+\section{PROPOSED IMPROVEMENTS}
+
+\subsection{Defining the Marginal Sampling Strata}
+
+Given a \emph{numeric} covariate, the CLHS uses the sample size $n$ to define the number of marginal 
+sampling strata $c$, i.e. $c = n$, and the interpolated sample quantiles to define the breakpoints of the 
+$c$ marginal sampling strata. The first objective of the CLHS ($\mathcal{O}_1$) is to have exactly one 
+sample point falling in each marginal sampling strata. However, depending on the level of discretization of 
+the covariate values, the CLHS may produce replicated breakpoints in the regions with a relatively high 
+frequency of covariate values. For example, given a sample size of $n = 5$ and a covariate $\boldsymbol{a}$ 
+with (ordered integer) values $\boldsymbol{a} = (1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 8, 9, 9, 9, 9)$, the lower and 
+upper boundaries of the marginal sampling strata are $\boldsymbol{a}_{mss} = (1.0, 1.0, 2.6, 4.4, 9.0, 9.0)$. 
+Because the marginal sampling strata in which a sample point $b_i$ falls is evaluated using the indicator 
+function
+
+\begin{equation*}
+ b_{sol_i} = 
+ \begin{cases}
+  1, & \text{if}\ a_{mss_j} \leq b_i \leq a_{mss_{j + 1}}\ \text{and}\ j = 1 \\ 
+  1, & \text{if}\ a_{mss_j} < b_i \leq a_{mss_{j + 1}}\ \text{and}\ j > 1 \\ 
+  0, & \text{otherwise}
+ \end{cases}
+\end{equation*}
+
+\noindent where $i = 1, 2, \ldots, n$, and $j = 1, 2, \ldots, c$, the first and last marginal sampling strata 
+of $\boldsymbol{a}$ will be empty, and the respective $n‘ = 2$ sample points will be allocated among the other 
+three marginal sampling strata, with the set of allocation solutions $\boldsymbol{b}_{sol} = \{(0, 2, 1, 2, 
+0), (0, 1, 2, 2, 0), (0, 2, 2, 1, 0)\}$. Ergo, the CLHS will be unable to find the globally optimum allocation 
+solution $\boldsymbol{b}_{sol} = (1, 1, 1, 1, 1)$.
+
+We propose defining the marginal sampling strata using only the unique values of the sample quantiles 
+estimated with a discontinuous function \cite{HyndmanEtAl1996}. Accordingly, for our example, 
+$\boldsymbol{a}_{mss} = (1, 2, 4, 9)$. The number of sample points that should fall in each marginal sampling 
+strata is directly proportional to the number of sampling units (grids cells of a raster image) in that 
+stratum of the covariate. For $\boldsymbol{a}$, this is $\boldsymbol{b}_{sol} = (2, 1, 2)$. The direct 
+consequence of this modifications is that, given a set of $p$ covariates, each of them will potentially have a 
+different number of (quasi-equal-size) marginal sampling strata, i.e. $c_i \leq n$, where $i = 1, 2, \ldots, 
+p$. This will ultimately depend on the shape of their empirical frequency distribution, on the level of 
+discretization of the covariate values, and on the sample size $n$.
+
+\subsection{Measuring the Association/Correlation Between Covariates}
+
+Two of the objectives of the CLHS ($\mathcal{O}_1$ and $\mathcal{O}_3$) are concerned with \emph{numeric} 
+covariates, while only one ($\mathcal{O}_2$) focuses on \emph{factor} covariates. $\mathcal{O}_1$ and 
+$\mathcal{O}_2$ are mathematically equivalent -- they aim at the coverage of the marginal distribution of the 
+numeric and factor covariates --, and $\mathcal{O}_3$ measures the similarity between the population and 
+sample correlation matrices of the numeric covariates as estimated with the Pearson`s $r$. The CLHS ignores 
+the association among factor covariates, as well as of those with the numeric covariates. This means that the 
+CLHS gives more importance to numeric covariates. Such a bias cannot be corrected by simply attributing 
+different \emph{weights} to each objective (see below).
+
+We propose to replace the Pearson`s $r$ with the Cramér`s $v$
 
 \begin{equation}
-\text{SPAN} = w_1 \text{CORR} + w_2 \text{DIST} + w_3 \text{PPL} + w_4 \text{MSSD}, 
-\end{equation}\label{eq:chap08-span}
+ v =  \sqrt{\frac{\chi^2 / n}{min(ncol - 1, nrow - 1)}},
+\end{equation}\label{eq:chap07-cramer}
 
-with $w_1 = w_2$ and $w_1 + w_2 = w_3 + w_4$ in the \emph{terra incognita} setting.
+\noindent where $nrow$ and $ncol$ are the number of rows and columns of the bivariate contingency table, 
+$n$ is the sample size, and $\chi^2$ is the chi-squared statistic
+
+\begin{equation}
+ \chi^2 = \sum_{i = 1}^{nrow}\sum_{j=1}^{ncol}\frac{(O_{ij} - E_{ij})^2}{E_{ij}},
+\end{equation}\label{eq:chap07-chi-squared}
+
+\noindent where $O_{ij}$ and $E_{ij}$ are the observed and expected frequency, respectively, the marginal 
+proportions of $O$ being the maximum likelihood estimates of the marginal proportions of $E$ 
+\cite{Cramer1946, Agresti2002}. The Cramér`s $v$ is a measure of association between factor covariates that 
+ranges from $0$ to $+1$: the closer to $+1$, the larger the association between two factor covariates. 
+Accordingly, the only requirement for using the Cramér`s $v$ -- instead of the Pearson`s $r$ -- is that any 
+numeric covariate be transformed into a factor covariate, with the factor levels defined using the marginal 
+sampling strata. One could still use the Pearson`s $r$ when all covariates are numeric because computing the 
+Cramér`s $v$ is more computationally demanding.
+
+\subsection{Aggregating the Objectives}
+
+Sampling for spatial trend estimation is a \emph{multi-objective combinatorial optimization problem} (MOCOP): 
+we have to find a spatial sample that meets a list of objectives among an almost infinite set of possible 
+spatial samples. An important step for solving a MOCOP is to define each objective as a function, i.e. an 
+\emph{objective function} $f_i$ \cite{Arora2011}. An $f_i$ associates a numerical value with each spatial 
+sample as a function only of the values of the $p$ covariates used to describe the spatial domain -- also 
+known as \emph{design variables} \cite{Arora2011} -- at the $n$ sample points. The lower the objective 
+function value, the closer the spatial sample is to meeting the respective objective. Thus, when solving a 
+MOCOP, one aims at minimizing the vector of $k$ objective functions \cite{Arora2011}
+
+\begin{equation}
+ \boldsymbol{f}(\boldsymbol{X}) = (f_1(\boldsymbol{X}), f_2(\boldsymbol{X}), \ldots, f_k(\boldsymbol{X})),
+\end{equation}
+
+\noindent where $\boldsymbol{X}$ is the design matrix, a $n \times p$ matrix subject to the implicit 
+constraints imposed by the finiteness of the spatial domain and discreteness of the $p$ design variables. 
+These implicit constraints define the set of values that can be assigned jointly to the design variables, i.e. 
+the $p$-dimensional \emph{feasible design space} $\mathcal{S}$, which, in turn, defines the set of numerical 
+values that can be returned by the objective functions, i.e. the $k$-dimensional \emph{feasible objective 
+space} $\mathcal{Z}$ \cite{MarlerEtAl2004}.
+
+Ideally, there is a traceable unique \emph{point cloud} $\boldsymbol{X}^*$ (i.e. a spatial sample with the 
+values of the covariates at its sample points) that minimizes all objective functions simultaneously 
+\cite{MarlerEtAl2009}. However, in practice such a unique point cloud seldom exists, and if it exists it is 
+hard to find. In most cases there is a large set of optima point clouds that map onto a set of optima points 
+on $\mathcal{Z}$ because, for example, multiple point clouds can return the very same objective function value 
+\cite{Arora2011}. The set of optima point clouds is commonly defined using the concept of \emph{Pareto 
+optimality} \cite{MarlerEtAl2004}: a point cloud $\boldsymbol{X}^*$ in $\mathcal{S}$ is Pareto optimum if and 
+only if there is no other point cloud $\boldsymbol{X}$ in $\mathcal{S}$ that decreases the value of at least 
+one objective function without increasing the value of another objective function.
+
+A reasonable strategy to find a single optimum solution is to aggregate the objective functions into a single 
+\emph{utility function} $U$ \cite{MarlerEtAl2005}. The most common aggregation method is the \emph{weighted 
+sum} method, which is used in the CLHS. It employs weights to incorporate the \emph{a priori} preferences of 
+the user, their relative values reflecting the importance of each objective function \cite{MarlerEtAl2009}. 
+Thus, the MOCOP boils down to minimizing the convex combination of objective functions
+
+\begin{equation}
+ U = \sum_{i=1}^{k} w_i f_i(\boldsymbol{X}),
+\end{equation}\label{eq:chap07-utility}
+
+\noindent which means that the weights $w_i$ are constrained to $w_i > 0$ and $\sum_{i=1}^{k} w_i = 1$ 
+\cite{MarlerEtAl2005, MarlerEtAl2009}. An important requirement of the weighted sum method is that the 
+objective functions be scaled to the same approximate range of values so that any potential numerical 
+dominance can be eliminated or minimized, and the weights can play the desired role \cite{MarlerEtAl2005, 
+MarlerEtAl2009}. 
+
+There are several methods to scale the objective functions \cite{MarlerEtAl2005}. The Fortran source code of 
+the CLHS shows that, although not mentioned in the original paper, the CLHS scales $\mathcal{O}_1$ and 
+$\mathcal{O}_3$ using the \emph{upper-bound approach}, $f_i'' =f_i(\boldsymbol{X}) / f_i^{max}$, where 
+$f^{max}_{\mathcal{O}_1} = n \times p^{num}$ and $f^{max}_{\mathcal{O}_3} = 0.5p^{num^2} + p^{num}$, 
+$p^{num}$ being the number of numerical covariates. $\boldsymbol{f}^{max}$ is a rough estimate of the 
+single worst solution for $\mathcal{O}_1$ and $\mathcal{O}_3$, called the \emph{nadir point cloud} 
+\cite{MarlerEtAl2004}. Thus, this transformation results in a non-dimensional objective function with an upper 
+limit around 1, and its use relies on the fact that, by definition, the three objective functions yield 
+objective function values of very different orders of magnitude: $\mathcal{O}_1$ > $\mathcal{O}_3$ > 
+$\mathcal{O}_2$. This is because $\mathcal{O}_1$ uses the number of sample points per strata (0--n), while 
+$\mathcal{O}_3$ uses the linear correlation coefficient (-1--1), and $\mathcal{O}_2$ uses the proportion of 
+sample points per strata (0--1).
+
+We believe that the \emph{upper-bound approach} is insufficient for a proper scaling of the objective 
+functions because $\boldsymbol{f}^{max}$ usually is unattainable -- i.e. it does not correspond to any point 
+cloud in $\mathcal{S}$, and/or is far from the Pareto optimum set \cite{MarlerEtAl2004}. Defining 
+$\boldsymbol{f}^{max}$ as the median of the objective functions over multiple spatial samples generated by 
+simple random sampling \cite{CliffordEtAl2014} is a suboptimal strategy because it only ensures that the 
+objective functions will have similar orders of magnitude at the beginning of the optimization, which might 
+have a negligible influence in the definition of $\mathcal{Z}$ \cite{MarlerEtAl2005}. Besides, provided the 
+optimization algorithm is well designed, the starting point should not influence the solution of the MOCOP 
+(see below).
+
+We propose using a more robust approach, i.e. the \emph{upper-lower bound approach},
+
+\begin{equation}
+ f_i'' = \frac{f_i(\boldsymbol{X}) - f_i^{\circ}}{f_i^{max} - f_i^{\circ}}
+\end{equation}
+
+\noindent where $f_i''$ is the $i$th non-dimensional, scaled objective function constrained between zero 
+and one \cite{MarlerEtAl2005}. Because of the above-mentioned problems regarding the definition of 
+$\boldsymbol{f}^{max}$, it is more appropriate to use the \emph{Pareto maximum}, $f_i^{max} = max_{1 \leq j 
+\leq k} f_ i(\boldsymbol{X}_j^*)$, where $\boldsymbol{X}_j^*$ is the point cloud that minimizes the $j$th 
+objective function \cite{MarlerEtAl2005}. In practice, we find the optimum point cloud for each objective 
+function individually, and then calculate the objective function value of every other objective function. The 
+Pareto maximum of a given objective function is the largest absolute maximum value obtained for that objective 
+function. The same applies for $f_i^{\circ}$, the \emph{utopia point} -- the single best solution for the 
+$i$th objective function, which exists in the objective space, but usually is unattainable, i.e. it does not 
+correspond to any point cloud in $\mathcal{S}$ \cite{Arora2011} -- which is replaced with the Pareto 
+minimum. The drawback of this approach is the extra time needed to optimize the $k$ objective functions 
+individually.
+
+\subsection{Resulting Problem Definition}
+
+Given the proposed modifications, the problem of sampling for spatial trend estimation for soil mapping is 
+redefined using two objective functions,
+
+\begin{equation}
+ \text{CORR} = \sum_{i=1}^{p}\sum_{j=1}^{p}|\varphi_{ij} - v_{ij}|,
+\end{equation}\label{eq:chap07-corr}
+
+\noindent where $\varphi_{ij}$ and $v_{ij}$ are the population and sample associations (or correlations in 
+case all covariates are numeric) at the $i$th row and $j$th column of the $p$-dimensional population and 
+sample association (or correlation) matrices, and
+
+\begin{equation}
+ \text{DIST} = \sum_{i=1}^{p}\sum_{j=1}^{c_i} |\pi_{ij} - \gamma_{ij}|,
+\end{equation}\label{eq:chap07-dist}
+
+\noindent where $\pi_{ij}$ and $\gamma_{ij}$ are the proportion of sample and population points that fall 
+in the $j$th class (or marginal sampling strata) of the $i$th covariate, $c_i$ being the number of classes of 
+the $i$th covariate. With these two objective functions, we define an utility function $U$ as in 
+\autoref{eq:chap07-utility} aiming at a spatial sample that reproduces an 
+\textbf{A}ssociation/\textbf{C}orrelation measure and the marginal \textbf{D}istribution of the 
+\textbf{C}ovariates,
+
+\begin{equation}
+ \text{ACDC} = w_1\text{CORR} + w_2 \text{DIST},
+\end{equation}\label{eq:chap07-acdc}
+
+\noindent with $w_1 = w_2 = 0.5$ in the general setting.
 
 \section{CASE STUDY}
 
-The study was developed using synthetic data derived from a real-world study case described by 
-\citet{Samuel-RosaEtAl2015}. The study site is a small catchment of about \SI{2000}{\hectare} located on the 
-southern edge of the plateau of the Paraná Sedimentary Basin, Rio Grande do Sul, Brazil 
-(\autoref{fig:chap08-location}). The real-world dataset contains $n = 350$ point soil observations of the 
-topsoil, and includes several soil properties, but only two were explored in this study: clay content (CLAY, 
-\si{\gram\per\kilo\gram}) and bulk density (BUDE, \si{\mega\gram\per\cubic\metre}). The dataset also includes 
-several covariates derived from area-class soil maps, digital elevation models, geological maps, land use 
-maps, and satellite images. All preprocessing steps and methods used to derive the covariates were described 
-by \citet{Samuel-RosaEtAl2015}.
+We developed a case study to evaluate the proposed improvements and compare them with the original CLHS. It 
+was based on using synthetic data derived from a real-world study case \cite{Samuel-RosaEtAl2015}. The study 
+site is a small catchment of about \SI{2000}{\hectare} located on the southern edge of the plateau of the 
+Paraná Geologic Province, Rio Grande do Sul, Brazil. The real-world dataset contains $n = 350$ point soil 
+observations of the topsoil, and includes several soil properties, but only bulk density data 
+(BUDE,~\si{\mega\gram\per\metre\cubic} was used ($n = 282$). The dataset also includes several covariates 
+derived from area-class soil maps, digital elevation models, geological maps, land use maps, and satellite 
+images. All processing steps used to derive the covariates were described by \citet{Samuel-RosaEtAl2015}.
+
+\subsection{Soil Data Generating Process}
+\label{subsec:simulation}
+
+In an ideal world, we would create $\mathcal{R} \geq 100$ spatial samples of $\mathcal{N} \geq 2$ sizes 
+with each of the $\mathcal{A} \geq 2$ algorithms that we want to compare. Then we would go to the field, 
+sample the soil, and measure a property to construct $\mathcal{D} = \mathcal{R} \times \mathcal{N} \times 
+\mathcal{A}$ calibration datasets. The same property would be measured at a fixed set of probabilistically 
+selected validation sites. Each calibration dataset would be used to calibrate a model, with which we would 
+predict at the validation sites. The $\mathcal{A}$ sampling algorithms would then be compared on how well 
+they performed, for each of the $\mathcal{N}$ sizes, using the confidence interval of a prediction error 
+statistic over all $\mathcal{R}$ spatial samples. Here, the random selection of spatial samples would be the 
+\emph{source of variation} \cite{deGruijterEtAl1990}.
+
+In the real world\dots Because resources are limited, we decided to create only $\mathcal{R} = 1$ spatial 
+sample with $\mathcal{N} = 3$ sizes with each of the $\mathcal{A} = 4$ sampling algorithms that we want to 
+compare (CORR, DIST, ACDC, and CLHS). The variation had to come from another source: we chose it to be the 
+soil property data. We did so using unconditional sequential Gaussian simulation \cite{Goovaerts2001, 
+Pebesma2004}. To start, we defined a theoretical (or super-population) model, our \emph{soil data generating 
+process}. To be as close to reality as possible, the soil data generating process was defined empirically 
+calibrating a (non)linear mixed model to BUDE. The main calibration steps are as follows \cite{Breiman2001, 
+LiawEtAl2002, DiggleEtAl2007, Lark2012}:
+
+\begin{enumerate}
+ \item Random regression forest: grow $n_{\text{trees}} = 500$ regression trees with a maximum terminal node 
+ size of $n_{\text{node size}} = 5$ points, each tree grown using $n = 282$ calibration points randomly 
+ selected with replacement from the set of $n = 282$ point soil observations (about $n_{\text{in-bag}} = 178$ 
+ unique point soil observations), and $p_{\text{in-bag}} = 4$ covariates randomly selected at each split out 
+ of a set of $p = 12$ covariates selected as in \citet{Samuel-RosaEtAl2015}.
+ 
+ \item Out-of-bag predictions: use each of the $n_{\text{trees}} = 500$ regression trees from step (1) to 
+ predict BUDE at the  point soil observations not included (out-of-bag) in the respective calibration dataset 
+ (about $n_{\text{out-of-bag}} = 104$ point soil observations), and compute the average of the predicted BUDE 
+ at each point soil observation (about 184 predicted values for each out-of-bag point).
+ 
+ \item Linear mixed model: assume that the average of the out-of-bag predictions from step (2) are linearly 
+ related to BUDE and present insignificant conditional bias, and use them as a covariate in the fixed effects 
+ of a linear mixed model (LMM), the random effects modelled using the Whittle-Matérn model, all parameters 
+ being estimated by Gaussian restricted maximum likelihood (REML).
+\end{enumerate}
+
+The parameters of the LMM are the coefficients $\beta_0$ and $\beta_1$ of the linear trend, which correct 
+any linear bias in the random regression forest out-of-bag predictions \cite{LiawEtAl2002}, and the nugget 
+($\tau^2$), sill ($\sigma^2$), and range ($\alpha$) of the Whittle-Matérn model. The shape parameter 
+($\nu$) of the Whittle-Matérn model was defined separately, by choosing from a set of discrete values 
+$\nu = (0.5, 1.0, 2.0, 4.0, 8.0)$ based on the resulting profile likelihood for $\nu$ and maximized restricted 
+log-likelihood, and on the computing time \cite{Stein1999, DiggleEtAl2007}. The fitted LMM 
+($\beta_0 = \SI{13.35}{\mega\gram\per\cubic\metre}$, $\beta_1 = 0.91$, 
+$\tau^2 = \SI{349.51}{\mega\gram\per\metre\tothe{6}}$, $\sigma^2 = \SI{97.24}{\mega\gram\per\metre\tothe{6}}$, 
+$\alpha = \SI{210.99}{\metre}$, $\nu = 2.0$) explained \num{38} and \SI{18}{\percent} of the sample variance of 
+BUDE with $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fig:chap07-bude-vario}).
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[width = 90mm]{fig/chap02-location}
- \caption{Location of the real-world study area in Santa Maria, southern Brazil.}
- \label{fig:chap08-location}
+ \begin{minipage}{90mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width = 90mm]{fig/chap07-random-forest-fit}
+ \end{minipage}
+ \begin{minipage}{90mm}
+  \centering
+  \subcaption{}
+  \includegraphics[width = 90mm]{fig/chap07-bude-vario}
+ \end{minipage}
+ \caption[(Non)Linear mixed model fitted to the soil bulk density data.]{(Non)Linear mixed model fitted to the 
+ soil bulk density data (BUDE, \si{\mega\gram\per\cubic\metre}) measured at $n = 282$ calibration locations. 
+ The top panel shows the relation between out-of-bag random regression forest predictions and BUDE, here
+ representing the deterministic component $m(\boldsymbol{s})$. The bottom panel shows the REML fit of the 
+ variogram model (red line) to BUDE, i.e. the stochastic component $e(\boldsymbol{s})$. Exponentially spaced
+ lag-distance classes are used to depict the sample variogram (blue dots) along with the number of point-pairs
+ in each variogram lag-distance class.}
+ \label{fig:chap07-bude-vario}
 \end{figure}
 
-\subsection{Soil Data Generating Process}
+With the random regression forest and the LMM at hand, we produced $\mathcal{R} = 1000$ equiprobable 
+realizations of an isotropic Gaussian random field of BUDE. Each realization is constituted of a collection of 
+BUDE values at a fine grid of \num{\sim800000} regularly spaced (\SI{5}{\metre}) points covering the entire 
+study area. Because we used \emph{unconditional} Gaussian simulation -- a simulation that is only 
+\emph{globally} conditioned to the histogram (and variogram) of the data observed at the calibration locations 
+\cite{Goovaerts1997} -- and a large number of realizations, we expect to find at any point of the simulation 
+grid, over the $\mathcal{R} = 1000$ realizations, the whole set of possible BUDE values (i.e. the global 
+histogram). Thus, the variance -- our uncertainty -- is the same everywhere. This is in contrast with 
+\emph{conditional} Gaussian simulation -- a simulation that is \emph{locally} conditioned to the data observed 
+at the calibration locations --, which serves the purposes of honouring the data at the calibration locations, 
+thus reducing the variance of the output realizations \cite{Goovaerts1997}. In our study, \emph{conditional} 
+Gaussian simulation is inappropriate as a model of uncertainty because the sampling algorithms that we evaluate 
+are designed to situations where we know very little, everywhere, about the spatial structure of the soil data 
+generating process.
 
-We assumed the soil properties ($Y$) to be a function of the interplay of environmental conditions defined by 
-the climate, organisms, relief, parent material, time, and other unknown players \cite{Jenny1941, 
-McBratneyEtAl2003, Florinsky2012}. Because our pedologial knowledge and data available still are too limited 
-to build such a complex \emph{mechanistic model}, we assumed the soil properties to be the outcome of a 
-spatial stochastic process composed of the additive combination of fixed and random effects, i.e. 
-$Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s})$. Here the soil property is a random variable 
-$Y(\boldsymbol{s})$, $m(\boldsymbol{s})$ is a deterministic trend, and $e(\boldsymbol{s})$ is a spatially 
-correlated, Gaussian distributed random variable, that is stationary in the mean and covariance 
-\cite{HeuvelinkEtAl2001}.
+Unconditional simulation algorithms approximate the globally conditioned distribution of a soil variable at a 
+given point using neighbouring simulated values as local conditioning information \cite{Goovaerts1997}: the 
+larger the neighbourhood, the better the approximation. A sensible criteria to select the nearest simulated 
+values is the practical range of the variogram model \cite{Pebesma2004}. However, as the simulation proceeds, 
+the number of simulated values within this neighbourhood becomes computationally prohibitive 
+\cite{WebsterEtAl2007}. Thus, we chose to use a fixed maximum number of simulated values $n_{max} = 100$ 
+within the practical range of the variogram model that are closest to the point being simulated. Last, but not 
+least, sequential simulations algorithms speed up computations by using the same random path in all 
+simulations, allowing it to reuse the \q{expensive results}: neighbourhood selection and solution to the 
+kriging equations \cite{Pebesma2004}. We believe that following the same random path to generate each of the 
+$\mathcal{R} = 1000$ realizations can introduce a structural component in the approximation errors. To avoid 
+that, simulations were carried out using five different seeds for the pseudo-random number generators.
 
-Using the above formulation of the \emph{mixed model of spatial variation}, we defined two \emph{soil 
-data generating processes} assuming a different form in $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$. In 
-practice, we used the real-world soil data to calibrate linear and non-linear mixed models that are taken as 
-the exact mathematical representations of the true (stochastic) processes giving rise to the soil and its 
-properties. The linear mixed model is that constructed by \citet{Samuel-RosaEtAl2015} using CLAY ($n = 350$) 
-in the Box-Cox space due to its strong skewness, and corresponds to what the authors called their \emph{best 
-performing} linear mixed model. The non-linear mixed model was constructed by \citet{Samuel-RosaEtAl2016} 
-using BUDE ($n = 282$) in its original untransformed scale, the non-linear trend being defined using the 
-out-of-bag predictions of a random regression forest model. The spatially dependent stochastic residuals of 
-CLAY and BUDE were modelled using the Whittle-Matérn model, the difference being that the shape parameter was 
-set to $\nu = (0.5, 2)$, respectively. All model parameters were estimated by Gaussian restricted maximum 
-likelihood (REML) \cite{LarkEtAl2004, DiggleEtAl2007}. Both models also differ by the spatially correlated 
-variance (SCV) of the stochastic residuals, which is small for BUDE ($\text{SCV} \cong 0.20$) and large for 
-CLAY ($\text{SCV} \cong 0.85$).
+\subsection{Sampling and Model Calibration}
 
-Sequential unconditional Gaussian simulation was used to create $\mathcal{R} = 1000$ equiprobable realizations 
-of an isotropic Gaussian random field of CLAY and BUDE 
-% (\autoref{fig:chap08-realizations}) 
-using the same settings described in \autoref{subsec:simulation} \cite{Samuel-RosaEtAl2016}.
- 
-% \begin{figure}[!ht]
-%  \centering
-%  \includegraphics[width = \textwidth]{fig/chap02-realizations}
-%  \caption{Example realizations of the soil data generating processes with a) linear and b) non-linear 
-%  trends.}
-%  \label{fig:chap08-realizations}
-% \end{figure}
-
-\subsection{Sampling Scenarios}
-
-We defined $\mathcal{A} = 6$ sampling designs with $\mathcal{N} = 3$ sample sizes $\boldsymbol{n} = (100, 200, 
-400)$. These sample sizes correspond to the moderately high inspection density (1 sample point per 20, 10, and 
-\SI{5}{\hectare}, respectively) recommended for the production of soil maps published at a \scale{25000} 
-\cite{Rossiter2000}. The baseline design was obtained by simple random sampling (SRS), which we understand 
-as the poorest sampling design. The second sampling design was obtained by systematic grid sampling (SGS), one 
-of the most commonly used sampling design for soil mapping.
-
-Another three sampling designs were defined minimizing each of the three criteria pointed above: ACDC, PPL, 
-and MSSD. Our multi-objective sampling design was obtained minimizing the three criteria simultaneously 
-(SPAN). Since we assumed to be ignorant about the structure of the soil data generating processes, all criteria 
-were considered equally important and received the same weights. Note that for ACDC and SPAN, different sample 
-configurations were optimized for CLAY and BUDE because the algorithms use the same set of covariates used to 
-calibrate the soil data generating processes.
-
-The combination of sampling designs and sample sizes resulted in 18~point sample sets. Each of these point 
-sample sets were used to sample from the $\mathcal{R} = 1000$ simulated realities of CLAY and BUDE. This 
-yielded \num{36000}~calibration datasets. The baseline designs were used to quantify the gain in prediction 
-accuracy with the use of our multi-objective sampling design.
-
-We also defined the true optimum sampling design for CLAY. In this case we assumed the structure of the CLAY 
-data generating process to be known. The criterion minimized was the mean universal kriging variance 
-\cite{BrusEtAl2007a}. The optimum design was also explored at three sample sizes and used to sample from the 
-$\mathcal{R} = 1000$ simulated realities of CLAY with linear trend. This yielded another 3000~calibration 
-datasets. The true optimum sampling designs was used to quantify how suboptimal our multi-objective sampling 
-design is.
+We compare $\mathcal{A} = 4$ sampling algorithms (CORR, DIST, ACDC, and CLHS) and $\mathcal{N} = 3$ sample 
+sizes $n = (100, 200, 400)$. These sample sizes correspond to the moderately high inspection density (1 sample 
+point per 20, 10, and \SI{5}{\hectare}, respectively) recommended for the production of soil maps published at 
+a \scale{25000} \cite{Rossiter2000}. Spatial sample configurations were created optimizing each of the 
+objective functions using spatial simulated annealing as implemented in the \Rpackage{spsann}. Spatial 
+simulated annealing is a well known method with widespread use to solve optimization problems in the soil and 
+geo-sciences. This is mainly due to its robustness against local optima and easiness of implementation. We then 
+used each optimized spatial sample configuration to sample from each realization to constitute calibration 
+datasets. Each calibration dataset was used to calibrate a (non)linear mixed model as described above for the 
+soil data generating process.
 
 \subsection{Evaluation of Sampling Algorithms}
 
-We will evaluated how sampling design and sample size influence spatial prediction accuracy. The goal will be 
-to evaluate how our multi-objective sampling design compares with the baseline designs. For the spatial 
-stochastic process with linear trend, we will also compared our multi-objective sampling design with the true 
-optimum design. For these purposes, the same evaluation strategy used by \cite{Samuel-RosaEtAl2016} will be 
-employed.
+The influence of sampling design and sample size on the spatial prediction accuracy will be assessed using 
+$n = 1000$ validation points probabilistically selected from 500 quasi-equal-area compact geographic strata. 
+Geographic stratification was obtained using the \textit{k}-means algorithm as implemented in the 
+\Rpackage{spcosa} \cite{WalvoortEtAl2010}. Each strata has $n = 2$ randomly selected validation points. The 
+algorithm was run using three different seeds for the pseudo-random number generator, the resulting 
+stratification with the minimum objective value being selected.
 
-The variation in model parameter estimation will also be evaluated for both linear mixed model and 
-regression-kriging model plotting together the 1000 variogram models calibrated with each sampling design and 
-sample size superimposed by the true variogram model. The variation of each variogram model parameter will be 
-summarized using box-and-whisker plots. For the regression-kriging model, box-and-whisker plots will be used 
-to summarize the variation of the importance ranking of each predictor variable. For the linear mixed model, 
-we will summarize the coefficients of the linear trend. These statistics will be compared with the true model 
-parameters.
+We plan to use the realization-wise mean error (ME) and mean squared error (MSE) at the probabilistically 
+validation points to evaluate the sampling designs. The ME will show the effect of the sampling design 
+on the accuracy of the predictions, while the MSE will indicate how the sampling design influenced the 
+calibration of the variogram model. As such, we can use the mean ratio of (empirical and theoretical) squared 
+errors (MRSE) to see how good our estimate of the prediction errors are. The median of the ratio of squared 
+errors (MedRSE) will also be computed because this ratio has a strong positive skew resulting that when there 
+are have a few positive outliers of the ratio, the mean will be larger than 1 \cite{Lark2000a}. When the errors 
+have normal distribution, the ratio has a chi-square distribution with 1 degree of freedom. So the median of 
+the ratio then should be 0.455. A fifth measure that we plan to use is the amount of variance explained (AVE) 
+by both the spatial trend and variogram model separately. At the end, we will aggregate these measures over the 
+$\mathcal{R} = 1000$ realizations using box-and-whisker plots so that we can check visually how one sampling 
+design compares to another.
+
+\section{RESULTS AND DISCUSSION}
+
+Due to operational limitations, only the results of the spatial sample optimization are available. 
+\autoref{fig:chap07-energy-all} shows the evolution of the objective function values during the optimization 
+of sample configurations using all four sampling algorithms for all sample sizes. The observed pattern is that 
+expected from a spatial simulated annealing algorithm. High and variable objective function values during the 
+first Markov chains, with low and stable values as the optimization reaches its end. The remarkably larger 
+variation of CLHS at the beginning of the optimization, compared to the other algorithms, is likely due to the 
+fact that it is composed of three objective functions. It is worth pointing that the optimum sample 
+configuration was not found for any of the sampling algorithms after $n_\text{chains} = 500$ of size $n$ as 
+indicated by the descending behaviour of the objective function values at the end of the optimization.
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[width=\textwidth]{fig/chap07-energy-corr-dist-acdc-clhs}
+ \caption[Objective function values during the optimization of three sample configurations using four sampling 
+ algorithms.]{Objective function values during the optimization of sample configurations of size 
+ $n = (100, 200, 400)$ using sampling algorithms CORR, DIST, ACDC, and CLHS against the number of Markov 
+ chains of length $n$.}
+ \label{fig:chap07-energy-all}
+\end{figure}
+
+Our expectation that the first objective of the CLHS has a numerical dominance over the second and third 
+objective functions was confirmed as shown in \autoref{fig:chap07-energy-acdc-clhs}. Comparing $\mathcal{O}_1$ 
+with $\mathcal{O}_2$ and $\mathcal{O}_3$, we see that the sample configuration is rapidly optimized with 
+respect to $\mathcal{O}_2$ and $\mathcal{O}_3$ during the first Markov chains -- see the descendent vertical 
+point cloud on the right side of both top panels. The bottom left panel suggests that $\mathcal{O}_2$ and 
+$\mathcal{O}_3$ are optimized jointly, with a bias towards $\mathcal{O}_3$. Most of the optimization efforts 
+are spent towards $\mathcal{O}_1$, as suggested by the high point density along the horizontal axis in both 
+top panels.Thus, the bias in the CLHS can be ordered as $\mathcal{O}_1$ > $\mathcal{O}_3$ > $\mathcal{O}_2$. 
+On the other hand, ACDC appear to be unbiased as suggested by the bottom right panel. The sample configuration 
+is optimized with respect to CORR and DIST jointly, as expected. This results suggest our proposed 
+improvements on the CLHS produced a sampling algorithm with a better numerical behaviour. It is worth noting 
+that the results presented in \autoref{fig:chap07-energy-acdc-clhs} refer to sample sizes of $n = 100$, but 
+are representative of what was observed with the other two sample sizes.
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[width=\textwidth]{fig/chap07-energy-acdc-clhs}
+ \caption[Region of the feasible objective space explored by pairs of objective functions that compose CLHS 
+ and ACDC.]{Region of the feasible objective space $\mathcal{Z}$ explored by pairs of objective functions (x 
+ vs  y) that compose CLHS ($\mathcal{O}_1$, $\mathcal{O}_2$, and $\mathcal{O}_3$) and ACDC (CORR and DIST)  
+ during the optimization of a sample configuration of size $n = 100$ using $n_{\text{chains}} = 500$ Markov 
+ chains of length $n$.}
+ \label{fig:chap07-energy-acdc-clhs}
+\end{figure}
+
+A snapshot of the optimized sample configurations is presented in \autoref{fig:chap07-points}. We start 
+comparing the spatial samples produced using CORR and DIST regarding their geographic distribution. For all 
+three sample sizes, DIST produces a spatial sample with a better geographic coverage, the difference being 
+smaller as the sample size increases. Although these algorithms do not aim at the coverage of the geographic 
+space, leaving large spaces unsampled can have a negative effect on the prediction accuracy of calibrated 
+models. CORR leaves larger empty spaces because it creates clusters of points, many of which resemble 
+transects. The coverage of the geographic space of DIST samples is degraded when combined with CORR (ACDC). 
+ACDC samples have more clusters of points than DIST, which again resemble transects. Both ACDC and CLHS 
+samples present a similar level of coverage of the geographic space. The difference is that CLHS places 
+clusters of samples in regions others than those targeted by ACDC and vice-versa -- for example, with $n = 
+100$, the central and south-western regions of the study area. This is likely to be due to the numerical 
+dominance of $\mathcal{O}_1$ in CLHS, which results in a bias towards numeric covariates.
+
+\begin{figure}[!ht]
+ \centering
+ \includegraphics[width=\textwidth]{fig/chap07-points-corr-dist-acdc-clhs}
+ \caption[Sample configurations optimized using four sampling algorithms.]{Sample configurations of size 
+ $n = (100, 200, 400)$ optimized using sampling algorithms CORR, DIST,  ACDC, and CLHS superimposing the
+ drainage network.}
+ \label{fig:chap07-points}
+\end{figure}
 
 \section{FINAL CONSIDERATIONS}
 
-Experimental results are not available yet. So far, the main outcome of the study is the creation and 
-maintenance of the \Rpackage{spsann}, devoted to the optimization of sample patterns using spatial simulated 
-annealing. \texttt{spsann} offers many optimizing criteria for sampling for variogram estimation (PPL), 
-spatial trend estimation (CORR, DIST, ACDC, and CLHS), and spatial interpolation (MSSD) in \emph{terra 
-incognita}. It also  includes the mean or maximum universal kriging variance (MUKV) as an optimizing criterion 
-for spatial interpolation when the model of spatial variation is known. ACDC, PPL, and MSSD were combined 
-(SPAN) for sampling for variogram and spatial trend estimation, and spatial interpolation when we are ignorant 
-about the model of spatial variation.
+An important conclusion of our study is that the proposed improvements on the CLHS resulted in a sampling 
+algorithm with a better numerical behaviour. This means that the first objective of our study has been 
+reached, at least for the case study used here. It remains to be evaluated if our results apply to other 
+combinations of covariates, and if the better numerical behaviour results in more accurate spatial predictions.

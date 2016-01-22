@@ -1,623 +1,979 @@
 \artigotrue
-\chapter{SPATIAL POINT PATTERN ANALYSIS OF SOIL SURVEY SAMPLING LOCATIONS}
-\label{chap:chap06}
+\chapter{DO MORE DETAILED COVARIATES DELIVER MORE ACCURATE SOIL MAPS?}
+\label{chap:chap05}
 
-\def\ptkeys{Modelagem espacial do solo, Caminhamento livre, Análise de padrão pontual, Julgamento 
-especialista, Motivação}
+% User defined commands
+\def\elev{\texttt{ELEV}} % elevation
+\def\slp{\texttt{SLP}}   % slope
+\def\asp{\texttt{ASP}}   % aspect
+\def\nor{\texttt{NOR}}   % northernness
+\def\acc{\texttt{ACC}}   % flow accumulation
+\def\twi{\texttt{TWI}}   % topographic wetness index
+\def\spi{\texttt{SPI}}   % stream power index
+\def\tpi{\texttt{TPI}}   % topographic position index
+\def\ndvi{\texttt{NDVI}} %
+\def\savi{\texttt{SAVI}} %
+\def\sibcs{Brazilian System of Soil Classification}
 
-\begin{chapterabstract}{brazilian}{\ptkeys}
-Este é o resumo em português.
+\def\portuguesekeys{Mapeamento Digital do Solo, Modelo Linear Misto, Informação Auxiliar, Seleção de Variáveis,
+Acurácia do Modelo, Custo do Mapeamento do Solo}
+
+\begin{chapterabstract}{brazilian}{\portuguesekeys}
+Neste estudo nós avaliamos se investir em covariáveis espacialmente mais detalhadas aumenta a acurácia dos 
+mapas do solo. Nós usamos um estudo de caso no sul do Brasil para mapear o conteúdo de argila (CLAY), o 
+conteúdo de carbono orgânico (SOC), e capacidade de troca de cátions efetiva (ECEC) da camada superficial do 
+solo de uma área de \SI{\sim2000}{\hectare} localizada na borda do planalto da Bacia Sedimentar do Paraná. 
+Cinco covariáveis, cada uma com dois níveis de detalhe espacial, foram usadas: mapa areal-categórico de solo,
+modelos digitais de elevação (DEM), mapas geológicos, mapas de uso da terra, e imagens de satélite. Trinta e 
+dois modelos de regressão linear múltipla foram calibrados para cada propriedade do solo usando todas as 
+combinações de detalhe espacial das covariáveis. Para cada combinação, \textit{stepwise regression} foi usada 
+para selecionar as variáveis preditoras incorporadas no modelo. A avaliação dos modelos foi feita usando o 
+R-quadrado ajustado da regressão. O modelo de referência, calibrado com a versão menos detalhada de cada 
+covariável, e o modelo com o melhor desempenho, foram usados para calibrar dois modelos lineares mistos para
+cada propriedade do solo. Parâmetros dos modelos foram estimados usando máxima verossimilhança restrita. 
+Predições espaciais foram realizadas usando o melhor preditor linear não-enviesado empírico. Validação-cruzada 
+foi usada para validar os modelos de regressão linear múltipla e dos modelos lineares mistos de referência e 
+com melhor desempenho. Os resultados mostram que para CLAY a acurácia da predição não aumentou 
+consideravelmente por usar covariáveis mais detalhadas. A quantidade de variância explicada aumentou apenas 
+\SI{\sim2}{\pp} (pontos percentuais), menos do que obtido pela inclusão do passo de krigagem, que explicou 
+\SI{4}{\pp}. Por outro lado, a predição de SOC e ECEC aumentou em \SI{\sim13}{\pp} quando o modelo de 
+referência foi substituído pelo modelo com melhor desempenho. Em geral, o aumento no desempenho preditivo foi 
+modesto e pode não sobrepor os custos adicionais do uso de covariáveis mais detalhadas. Pode ser mais eficiente
+investir recursos adicionais na coleta de mais observações do solo, ou no aumento do detalhe apenas da 
+covariável que tem o efeito de aumento mais forte. Em nosso estudo, a última funcionaria apenas para SOC e 
+ECEC pelo investimento em um mapa de uso da terra mais detalhado e, possivelmente, também em um mapa 
+geológico e DEM mais detalhados.
 \end{chapterabstract}
 
-\def\enkeys{Soil spatial modelling, Free survey, Point pattern analysis, Expert judgement, Motivation}
+\def\englishkeys{Digital Soil Mapping, Linear Mixed Model, Auxiliary Information, Variable Selection, Model
+Accuracy, Soil Mapping Cost}
   
-\begin{chapterabstract}{english}{\enkeys}
-Field soil spatial modellers usually select sampling locations based on tacit knowledge about soil-landscape 
-relationships. The aim of this study was to access the potential of point pattern analysis (PPA) to help 
-understanding the purposive sampling strategy traditionally employed by field soil modellers. A dataset 
-consisting of $n = 340$ soil samples obtained in a soil spatial modelling exercise carried out in Southern 
-Brazil between \num{2008} and \num{2011} was used to access this potential. PPA was performed using the 
-\Rpackage{spatstat}. Soil sampling density was estimated using an isotropic Gaussian kernel smoother. The 
-inhomogeneous G function and Monte Carlo simulations were used to evaluate the spatial pattern of the sampling 
-points. A non-stationary Poisson point process model was fitted using covariates (land use and terrain 
-attributes) and the sampling date to evaluate how environmental features and other intervening factors 
-influenced the choice of sampling locations. Comparisons between PPA and judgements elicited from the 
-soil modellers who carried out the soil modelling were used to validate the analysis. PPA showed that soil 
-sampling locations are inhomogeneously distributed in the study area. Two areas were more densely sampled 
-(nearest neighbour distances, $\text{NND} < \SI{125}{\m}$), one in the Southern sector, the other in the 
-Middle-North-eastern sector. Sampling points have an approximately random spatial distribution in these two 
-areas, while in the less densely sampled areas they are spaced at approximately regular distances ($NND 
-> \SI{125}{\m}$). Land use, physiographic strata, and sampling date have a significant influence on the spatial
-distribution of sampling locations. Land use yields the largest deviance reduction (\SI{6}{\percent}), followed
-by sampling date (\SI{4}{\percent}) and physiographic strata (\SI{2}{\percent}). These results are in close 
-agreement with judgements elicited from soil modellers. According to them, more densely sampled areas are those 
-where they had a less consistent knowledge of soil-landscape relationships. These areas were visited in the 
-first and last field campaigns, evidencing a temporal effect. On the other hand, most of the intermediate 
-campaigns were carried out in areas where they had a better knowledge of soil-landscape relationships. Other 
-intermediate campaigns were carried out in areas of poor accessibility, where soil modellers selected sampling 
-locations by convenience. Intermediate field campaigns also coincided with a budget cut. The interplay of these 
-intervening factors reduced the motivation of the soil modellers to conduct more intensive sampling. Soil 
-modellers also reported that they performed a mental stratification of the study area prior to selecting 
-sampling locations. Terrain features composed the first stratification variable, while land use was used as the 
-stage-two stratification variable. The close agreement between PPA and judgements elicited from soil modellers 
-suggests that PPA can help understand the sampling strategy used by soil modellers.
+\begin{chapterabstract}{english}{\englishkeys}
+In this study we evaluated whether investing in more spatially detailed covariates improves the accuracy of 
+soil maps. We used a case study from Southern Brazil to map clay content (CLAY), organic carbon content (SOC), 
+and effective cation exchange capacity (ECEC) of the topsoil for a \SI{\approx2000}{\hectare} area located on 
+the edge of the plateau of the Paraná Sedimentary Basin. Five covariates, each with two levels of spatial 
+detail were used: area-class soil maps, digital elevation models (DEM), geologic maps, land use maps, and 
+satellite images. Thirty-two multiple linear regression models were calibrated for each soil property using all 
+spatial detail combinations of the covariates. For each combination, stepwise regression was used to select 
+predictor variables incorporated in the model. Model evaluation was done using the adjusted R-square of the 
+regression. The baseline model, calibrated with the less detailed version of each covariate, and the best 
+performing model were used to calibrate two linear mixed models for each soil property. Model parameters were 
+estimated using restricted maximum likelihood. Spatial prediction was performed using the empirical best linear 
+unbiased predictor. Validation of baseline and best performing linear multiple regression and linear mixed 
+models was done using cross-validation. Results show that for CLAY the prediction accuracy did not considerably 
+improve by using more detailed covariates. The amount of variance explained increased only \num{\sim2} 
+percentage points (\si{\pp}), less than that obtained by including the kriging step, which explained 
+\SI{4}{\pp}. On the other hand, prediction of SOC and ECEC improved by \SI{\sim13}{\pp} when the baseline model 
+was replaced by the best performing model. Overall, the increase in prediction performance was modest and may 
+not outweigh the extra costs of using more detailed covariates. It may be more efficient to spend extra 
+resources on collecting more soil observations, or increasing the detail of only those covariates that have the 
+strongest improvement effect. In our case study, the latter would only work for SOC and ECEC, by investing in 
+a more detailed land use map and possibly also a more detailed geologic map and DEM.
 \end{chapterabstract}
 
 \formatchapter
 
 \section{INTRODUCTION}
+\label{sec:chap05-intro}
 
-\titlenote{This chapter is based on the studies \textit{An approach to help formalizing the purposive sampling 
-strategy of classical soil surveys}, presented at the 20th World Congress of Soil Science 
-\cite{Samuel-RosaEtAl2014b}, and \textit{Spatial point pattern analysis of soil survey sampling locations}, 
-presented at the 10th European Conference on Geostatistics for Environmental Applications 
-\cite{Samuel-RosaEtAl2014a}.}
+\titlenote{This chapter is based on A.~Samuel-Rosa, G.B.M.~Heuvelink, G.M.~Vasques, L.H.C.~Anjos. Do more 
+detailed covariates deliver more accurate soil maps? \emph{Geoderma}, v.243--244, p.214--227, 2015. Terms and 
+expressions have been modified to match the standard terminology used throughout the thesis without 
+compromising the content of the original text. Footnotes were added where a definition required correction or 
+clarification.}
 
-Free survey has been used for many decades in soil spatial modelling. It is a model-based sampling method that 
-relies on the mental model of soil-landscape relationships of field soil spatial modellers (also known as 
-soil surveyors). This mental model is built with the experience gained in the field and its quality is directly 
-proportional to the years of field work. However, this model is rarely formalized as a verbal representation 
-and is lost when the soil modeller deceases, hindering the transmission of soil knowledge to young soil 
-modellers. The present study assesses the potential of point pattern analysis (PPA) as a tool to help 
-understanding the purposive sampling strategy traditionally employed by field soil modellers.
+Modern soil mapping relies on the use of statistical models to produce digital representations of spatial 
+soil distribution using point soil observations and spatially exhaustive covariates \cite{McBratneyEtAl2003, 
+ScullEtAl2003, Florinsky2012}. Three important weaknesses in the statistical soil distribution modelling 
+approach can be pointed out. First, it requires sufficient and appropriately distributed point soil data within 
+the area being mapped \cite{CarreEtAl2007a}. Second, the model structure explores only the empirical 
+relationship among environmental conditions and soil properties, being less comprehensive than soil-landscape 
+process models \cite{Grunwald2009}. Last, the covariates are only approximations of the true environmental 
+conditions that helped shape the soil. They serve only as proxies (surrogates) of the current environmental 
+conditions, which in many cases are different from the past conditions under which pedogenesis took place 
+\cite{HeuvelinkEtAl2001}. In spite of these weaknesses, modern soil mapping techniques have proven very 
+successful in the past decades in producing soil property maps that capture the main patterns of soil spatial 
+variation \cite{MooreEtAl1993, McBratneyEtAl2000, Grunwald2009}.
 
-\subsection{Point Pattern Analysis}
+More recently, there has been a growing interest in understanding how the characteristics of the covariates 
+influence the success of soil mapping -- this study contributes to this effort. It is commonly accepted that 
+the more resources are spent on the construction of a covariate and the more spatial information it has, the 
+more accurately it describes the environmental conditions \cite{HupyEtAl2004, HenglEtAl2013a}. It is also 
+generally believed that such \emph{more detailed} covariates will be more valuable for soil mapping and lead to 
+more accurate soil property predictions \cite{CavazziEtAl2013, MaynardEtAl2014}. If these more detailed 
+covariates convey more information and represent more adequately the environmental conditions -- the drivers of 
+soil forming processes --, then it is fair to expect that they improve the accuracy of the resulting soil maps. 
+However, some studies have shown the contrary \cite{ThompsonEtAl2001, EldeiryEtAl2008, KimEtAl2014}. For 
+example, the window size at which DEM derivatives are calculated can be more important than the spatial 
+resolution of the DEM \cite{Wood1996, ZhuEtAl2008, BehrensEtAl2010a}. The uncertainty about the added value of 
+using more detailed covariates is of concern for those seeking to use resources efficiently, because using more 
+detailed covariates generally increases soil mapping costs \cite{ShiEtAl2012}.
 
-Point pattern analysis includes a series of statistical techniques devoted to the analysis of sets of points 
-irregularly distributed within a region in the geographic space \cite{Diggle2003}. The main objective of these 
-techniques is to provide substantial empirical evidences to infer about the underlying process (a biological 
-mechanism) that generated the point pattern \cite{BivandEtAl2008}. A basic assumption is that the point pattern
-can be treated as a realization of a spatially homogeneous (stationary) random point process in the plane 
-\cite{Diggle2003}. Assuming that soil observations made using the free survey method come from a stochastic 
-process is unrealistic because soil observations are made following the conceptual model of pedogenesis of soil
-modellers. In other words they are the product of an unspecified deterministic process, alike many other 
-biological mechanisms evaluated using point pattern analysis. Point pattern analysis serves as an efficient 
-exploratory tool in these circumstances and helps choosing non-stationary models to fit spatially inhomogeneous
-processes \cite{Baddeley2010} alike soil observation.
+The objective of this study was to evaluate whether investing in more detailed covariates improves the accuracy 
+of soil maps. The main difference of our study to previous ones is that we use a rigorous statistical approach 
+to assess the added value of using five more detailed covariates simultaneously. We used a case study in Brazil 
+to compare the accuracy of maps of the clay content, organic carbon content and effective cation exchange 
+capacity of the topsoil as obtained from regression kriging on the five covariates, whereby each covariate was 
+evaluated on two levels of spatial detail.
 
-\subsection{Elicitation of Expert Judgements}
+\section{MATERIAL AND METHODS}
+\label{sec:chap05-methods}
 
-Calibrating a point process model requires some knowledge of the underlying process -- the biological 
-mechanism -- that generated the point pattern. Such knowledge can be obtained, for example, eliciting the 
-judgements of experts, a common practice in many fields of research \cite{OHaganEtAl2006}. Usually, experts 
-are consulted when important decisions have to be made during the development of a project or when there is 
-great uncertainty about a phenomenon or event \cite{MeyerEtAl2001}. This means that an expert is every 
-individual who has a deep knowledge about a given theme. When trying to understand a soil observation process,
-an expert is every soil modeller that helped planning and conducting field sampling. The elicitation can be 
-carried out in several ways \cite{Cooke1991, MeyerEtAl2001, OHaganEtAl2006} but due to operational issues, 
-individual interview is the method most commonly employed. It also helps avoiding negative dominance effects 
-due to eventual hierarchical relationships among experts \cite{Cooke1991}. Aggregation of expert judgements can 
-be done using behavioural methods, where each expert evaluates the information provided by other experts until 
-a common point is reached \cite{OrsiEtAl2011}.
+\subsection{Study Area and Soil Data}
+\label{subsec:chap05-soil-data}
 
-\subsection{Neurophysiological Responses}
-
-Eliciting expert judgement is an important steps towards understanding the underlying process that generated 
-the point pattern composed of soil observation. Deeper knowledge can be constructed with this information 
-through its articulation with psychological theories. Psychological theories can help unravelling, for 
-example, possible influences of the surrounding environment on how soil modellers perceive distances, or how 
-their motivation shifts along field sampling campaigns. Many studies have been developed in many fields of 
-research \cite{Hull1932, BonnesEtAl2002, StampsEtAl2004, BonezziEtAl2011, Toure-TilleryEtAl2011a} without 
-coming to a common conclusions about the neurophysiological responses of people under different situations. 
-However, it is well known that the motivation to develop a series of tasks changes with time 
-\cite{BonezziEtAl2011, Toure-TilleryEtAl2011a} and that the architecture of the surrounding environment plays 
-significant effects on the way space and distances are perceived \cite{Coeterier1994, EpsteinEtAl1998}. This 
-suggests that operational and conceptual biases in the soil observation process could be more easily depicted 
-when empirical data produced using point pattern analysis and the interview of experts are analysed under the 
-light of psychological theories.
-
-\subsubsection{Spatial enclosure}
-
-Environmental psychology is the field of science dedicated to the study of the relationships between human 
-behaviour and the surrounding physical environment \cite{BonnesEtAl2002}. One of the recognized effects of the 
-architecture of the surrounding physical environment on neurophysiological responses is the spatial enclosure 
-\cite{EpsteinEtAl1998}. In natural landscapes, spatial enclosure expresses itself in environments surrounded by
-elevated geomorphological features and rugged terrain such as in the valley bottom of mountainous regions. The 
-effect of spatial enclosure on neurophysiological responses is complex \cite{StampsEtAl2004}, but it commonly 
-results in the alteration of how distances are perceived \cite{Coeterier1994}. For instance, it can induce the 
-perception that an enclosed space has a size larger than what it has in reality. A good example on how the 
-perception of distances is altered due to spatial enclosure is the sensation of having waked hundreds of meters 
-through a dense forest when only a few have been covered in reality.
-
-\subsubsection{Motivation shifts}
-
-Research on the psychology of goal pursuit and motivation has been carried out by many decades without coming 
-to a common conclusion \cite{Toure-TilleryEtAl2011a, Hull1932}. Modern theories claim that there are motivation
-shifts when a task involves the pursuit of multiple goals and describe it as the U-shaped pattern of multi-goal
-pursuit \cite{BonezziEtAl2011, Toure-TilleryEtAl2011a}. In the beginning of a multi-goal project, motivation 
-is high, and comes from the desire to accomplish all tasks using means that follow previously established rules 
-or personal characteristics. This is called the \emph{means-focused motivation}. With time occurs a decrease 
-in motivation to pursue the main goal due to one or many factor such as diminished goal accessibility, decline 
-of physiological and psychological resources (depletion) after first tasks are completed, positive 
-goal-related emotions which reduce the efforts toward the main goal and shift the focus to another goal, and 
-choosing to relax initial standards to save time and resources. In this phase prevails the 
-\emph{outcome-focused motivation}, which is the bottom of the U-shaped motivation curve. As the main goal 
-becomes closer, the motivation comes again from the desire to accomplish all tasks using means that follow 
-previously established rules or personal characteristics as in the beginning of the project. Stronger adherence 
-to standards (previously established rules) at the beginning and end of a project is possibly explained by the 
-fact that self-signalling concerns (the image made about the self) usually are greater in these two phases of 
-goal pursuit \cite{Toure-TilleryEtAl2011}.
-
-\section{STUDY CASE}
-
-A study case was conducted to evaluate the potential of point pattern analysis as a tool to help understanding 
-the purposive sampling strategy traditionally employed by field soil modellers. The database is composed of 
-the $n = 340$ soil observations made in a small catchment (\SI{\pm20}{\km}) in Southern Brazil between 
-\num{2008} and \num{2011} \cite{SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013}. The catchment is 
-located in the municipalities of Itaara and Santa Maria (\autoref{fig:chap06-chap06-location}). Climate is 
-classified as Cfa (K{\"o}ppen climate classification -- subtropical humid without a dry season) with mean 
-annual temperature of \SI{19.3}{\celsius}, and mean annual precipitation of \SI{1708}{\mm} well distributed 
-throughout the year \cite{Maluf2000}. Relief varies between plain (slope between \num{0} and \SI{3}{\percent}) 
-and mountainous (slope between \num{45} and \SI{100}{\percent}), and elevations range between \num{139} and 
-\SI{475}{\m}. There are three main geological formations which consist of (a) basic, intermediate and acid 
-igneous rocks (rhyolite-rhyodacite and andesite-basalt) of the Cretaceous period; (b) consolidated sedimentary 
-rocks (aeolian and fluvial sandstones) of the Triassic and Jurassic periods; and (c) non-consolidated (fluvial 
-and colluvial deposits) of the Quaternary period \cite{GasparettoEtAl1988, MacielFilho1990, Sartori2009}. 
-Forest areas occupy more than half of the study area, followed by native grassland, shrubland, farmland, 
-forestry, urban areas and artificial water bodies \cite{SamuelRosaEtAl2011a}.
+The study area constitutes a small catchment (\SI{\sim2000}{\hectare}) located on the southern edge of the 
+plateau of the Paraná Sedimentary Basin, Rio Grande do Sul, Brazil (\autoref{fig:chap05-location}). The climate 
+is classified as Cfa (K\"oppen -- subtropical humid without a dry season) with mean annual temperature of 
+\SI{19.3}{\celsius}, and mean annual precipitation of \SI{1708}{\mm}, well distributed throughout the year 
+\cite{Maluf2000}. Relief varies between plain (slope between \num{0} and \SI{3}{\percent}) and mountainous 
+(slope between \num{45} and \SI{100}{\percent}), and elevations range between \num{140} and \SI{475}{\m}. 
+Geology consists of basic, intermediate and acid igneous rocks (rhyolite-rhyodacite and andesite-basalt) of the 
+Cretaceous period, consolidated sedimentary rocks (aeolian and fluvial sandstones) of the Triassic and Jurassic 
+periods, and non-consolidated (fluvial and colluvial deposits) of the Quaternary period 
+\cite{GasparettoEtAl1988, MacielFilho1990, Sartori2009}. Native semi-deciduous forests occupy more than 
+half of the area, followed by native grassland used for animal husbandry, semi-deciduous shrubland, annual 
+crop agriculture, forestry (Eucalyptus), urban areas, and artificial water bodies \cite{SamuelRosaEtAl2011a}.
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[width=95mm]{fig/chap02-location}
- \includegraphics[width=95mm]{fig/chap06-ppp}
- \caption{Location of the study area (left) in the central region of the Southernmost Brazilian state, Rio 
- Grande do Sul, and the planar point pattern (right) composed of $n = 340$ soil observations made between 
- the years of \num{2008} and \num{2011} during soil and land use mapping projects.}
- \label{fig:chap06-chap06-location}
+ \begin{minipage}[b]{95mm}
+  \subcaption{}
+  \label{fig:chap05-brazil}
+  \centering
+  \includegraphics[width=90mm]{fig/chap05FIG1a}
+ \end{minipage}
+ \begin{minipage}[b]{95mm}
+  \subcaption{}
+  \label{fig:chap05-points}
+  \centering
+  \includegraphics[width=90mm]{fig/chap05FIG1b}
+ \end{minipage}
+ \caption{Location of the study area in Santa Maria (a) and spatial distribution of the point soil observations
+ and drainage network (b).}
+ \label{fig:chap05-location}
 \end{figure}
 
-\subsection{Elicitation of Expert Judgements}
+A dataset containing $n = 350$ point soil observations collected between \num{2004} and \num{2011} 
+\cite{PedronEtAl2006b, SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013} was used in this study 
+(available at \url{https://github.com/samuel-rosa/dnos-sm-rs-general}). Sampling locations were selected 
+purposively and by convenience \cite{Samuel-RosaEtAl2014b}. Three soil pits were opened within an area of 
+\SI{\pm100}{\m\square} at most sampling locations to obtain composite samples of the topsoil for laboratory 
+analysis. Soil was collected to a depth of \SI{20}{\cm} or less when soil depth was smaller than \SI{20}{\cm}. 
+A few observations ($n = 10$) correspond to individual samples collected up to \SI{30}{\cm}. Sampling depth 
+ranges from \num{2} to \SI{30}{\cm}, with a mean of \SI{17.3}{\cm}. We assumed that the vertical, horizontal 
+and temporal support differences between soil samples is negligible for the purpose of this study.
 
-The soil observation process was described by the two soil modellers who planned and conducted the field 
-campaigns in the study area. Their knowledge about the soil observation process was elicited using individual 
-interviews and written narratives. Written narratives were obtained making a bibliographic review of published 
-material and asking the soil modellers to make written descriptions of the soil observation process.
+Three soil properties (fine earth fraction, \SI{<2}{\mm}) were explored: clay content (CLAY, 
+\si{\gram\per\kilo\gram}), organic carbon content (SOC, \si{\gram\per\kilo\gram}), and effective cation 
+exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}). CLAY was determined by the pipette method. SOC was 
+determined using wet digestion. ECEC was calculated as the sum of exchangeable bases plus exchangeable 
+acidity. The soil properties selected were expected to present different patterns of spatial variation and 
+correlation with the most dominant factors of soil formation \cite{Jenny1941} in the area: organisms 
+(\textit{O}), relief (\textit{R}), and parent material (\textit{P}). CLAY was presumed to have a stronger 
+relation with \textit{P}, while SOC was expected to be more correlated with \textit{O}. Because the soils of 
+the study area were strongly eroded due to intense agriculture in the \num{20}th century, both CLAY and SOC 
+were also expected to be closely related with \textit{R}. Finally, ECEC was expected to be strongly correlated 
+with \textit{P} and \textit{O}, which is supported by its natural relationship with both CLAY and SOC.
 
-\subsection{Point Pattern Analysis}
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG2a}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG2d}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG2b}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG2e}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG2c}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG2f}
+ \end{minipage}
+ \caption{Histogram, empirical density function, and summary statistics of CLAY (a, b), SOC (c, d), and ECEC 
+ (e, f) in the original (left) and Box-Cox feature spaces (right).}
+ \label{fig:chap05-soil-properties}
+\end{figure}
 
-Analysis of the point pattern was carried out using tools available in the \texttt{R} environment 
-\cite{R2013}, mainly the \texttt{spatstat} \cite{Baddeley2010} package. Point pattern analysis included 
-estimating the \emph{G} function of the spatial distribution of the point pattern. Monte Carlo simulations ($n 
-= 19$) were used to build the envelope of the \emph{G} function. The envelope was used to test the point 
-pattern for complete spatial randomness along the entire distance interval at a level of confidence of 
-\SI{95}{\percent}. Analysis of the observation intensity in the geographic space was accomplished estimating 
-an isotropic Gaussian kernel with edge effect correction by the method of Diggle \cite{Diggle1985}. The 
-bandwidth of the Gaussian kernel was adjusted to minimize the square-mean-error criterion defined by Diggle 
-\cite{Diggle1985}. The observation intensity was also analysed estimating empty space distances and the 
-Stienen diagram, which depicts point observations using circles of diameter proportional to the nearest 
-neighbour distance. Analysis of the Stienen diagram was done in \googleearth{} using the \texttt{plotKML} 
-package \cite{Hengl2013}. A non-stationary Poisson point process model was fitted to the point pattern using 
-covariates suggested by the judgements elicited from the experts. A generalized linear model with a log link 
-was fitted by maximizing the pseudolikelihood using the Berman-Turner computational approximation 
-\cite{Baddeley2010}. This point process model was then used as estimate of the observation intensity to 
-estimate the envelope of the detrended \emph{G} function.
+Point soil data, here denoted by $Y(s)$, showed a positive skew (\autoref{fig:chap05-soil-properties}) and was 
+normalized, $Y'(s)$, using the Box-Cox family of power transformations, where $Y'(s) = (Y(s)^{\lambda} - 1) / 
+\lambda$, if $\lambda > 0$, and $Y'(s) = log(Y(s))$, if $\lambda = 0$ \cite{DiggleEtAl2007}. Lambda 
+($\lambda$) values were selected empirically \cite{FoxEtAl2011}. Because the resulting distribution of the 
+back-transform (see \autoref{subsec:chap05-validation}) has no expectation when $\lambda < 0$ 
+\cite{RibeiroEtAl2001}, a logarithm transformation ($\lambda = 0$) was used when a negative $\lambda$ was 
+estimated (SOC and ECEC).
+
+\subsection{Covariates}
+\label{subsec:chap05-sources}
+
+Five freely available covariates were evaluated in this study, each with two levels of spatial detail: 
+area-class soil maps (\texttt{soil}), geologic maps (\texttt{geo}), land use maps (\texttt{land}), digital 
+elevation models (\texttt{dem}), and satellite images (\texttt{sat}). Each pair was composed of covariates 
+that were produced separately from scratch using different data sources and/or production methods, thus 
+demanding different amounts of resources (time, workforce, budget, technology, etc.). In this study, the level 
+of spatial detail of a covariate is a function of the components of its production process such as the 
+cartographic ratio (\texttt{soil}, \texttt{geo} and \texttt{land}), spatial sampling support (\texttt{sat}), 
+number and diversity of data sources explored (\texttt{dem}), and quantity of spatial data used (all five). 
+Thus, the reader should bear in mind that our definition of spatial detail is broader than spatial resolution 
+or spatial scale. It should also not be confounded with spatial support \cite{WebsterEtAl2007} or thematic 
+detail \cite{Rossiter2000}.
+
+\def\footcovars{\footnote{In statistical terms, the terms \emph{covariate} and \emph{predictor variable} are 
+synonymous, and the reason for the use given in this study is purely operational.}}
+
+The covariates were transformed to predictor variables\footcovars{} that were used in the geostatistical 
+modelling. Since the transformation is different for categorical and continuous covariates, the procedures are 
+explained below for each type separately.
+
+\subsubsection{Categorical predictor variables}
+\label{subsubsec:chap05-categorical-covars}
+
+Area-class soil maps, geologic maps and land use maps are categorical covariates (factors). Mapping units are 
+the $k$ factor levels that are transformed to as many dummy (indicator, binary) variables as there are factor 
+levels, before model calibration. Each dummy variable receives a value equal to one (\num{1}) when a given 
+class is present, and zero (\num{0}) otherwise \cite{Everitt2006}. If the number of point soil observations 
+falling inside the spatial domain of a mapping unit is too small to accurately estimate a regression 
+coefficient (we used a threshold of $n = 15$ observations), the mapping unit is merged with a similar mapping 
+unit prior to calculating dummy variables. The resulting generalized categorical covariate maps are shown in 
+\autoref{fig:chap05-cat-covars}. The binary maps are the categorical predictor variables.
+
+\noindent\textit{Soil maps}. The less detailed soil map (\soilOld) was published with a \scale{100000} and 
+has five mapping units \cite{AzolinEtAl1988} (\autoref{fig:chap05-soil-old}). It was produced using existing 
+soil maps and technical reports (\scale{750000}) \cite{Brasil1973}, aerial photographs (\scale{60000}), 
+topographic maps (\scale{50000}), and sparse point soil observations along the road network. The more detailed 
+soil map (\soilNew) was prepared with a \scale{25000} and has eight mapping units \cite{MiguelEtAl2012} 
+(\autoref{fig:chap05-soil-new}). It was produced using high spatial resolution satellite images 
+(\SI{65}{\cm}), existing soil maps and technical reports published with a \scale{50000} \cite{Poelking2007} 
+and \num{1}:\num{25000} \cite{PedronEtAl2006b}, topographic maps (\scale{25000}), and descriptions from 
+\num{\sim350} point soil observations. Five dummy predictor variables were derived from \soilOld{} and seven 
+from \soilNew{} (\autoref{tab:chap05-soil-covars}).
+
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{Cartographic scale: \num{1}:\num{100000}}
+  \label{fig:chap05-soil-old}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG3a}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{Cartographic scale: \num{1}:\num{25000}}
+  \label{fig:chap05-soil-new}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG3d}
+ \end{minipage}    
+ \begin{minipage}[b]{63mm}
+  \subcaption{Cartographic scale: \num{1}:\num{50000}}
+  \label{fig:chap05-geo-old}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG3b}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{Cartographic scale: \num{1}:\num{25000}}
+  \label{fig:chap05-geo-new}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG3e}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{Cartographic scale: \num{1}:\num{500000}}
+  \label{fig:chap05-land-old}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG3c}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{Cartographic scale: \num{1}:\num{2000}}
+  \label{fig:chap05-land-new}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG3f}
+ \end{minipage}
+ \caption{Area-class soil maps (a, b), geologic maps (c, d), and land use maps (e, f) compared in our study. 
+ The less detailed version is displayed at the left, while the more detailed version is shown on the right. 
+ Legend abbreviations and derived dummy variables are described in Tables
+ \ref{tab:chap05-soil-covars}--\ref{tab:chap05-land-covars}.}
+ \label{fig:chap05-cat-covars}
+\end{figure}
+
+\noindent\textit{Geologic maps}. The less detailed geologic map (\geoOld) was produced using topographic maps 
+with \scale{50000} \cite{GasparettoEtAl1988} (\autoref{fig:chap05-geo-old}). The more detailed geologic map 
+(\geoNew) was produced using topographic maps with \scale{25000}, and includes the location of overlaying 
+Quaternary sedimentary deposits \cite{MacielFilho1990} (\autoref{fig:chap05-geo-new}). \geoNew{} did not cover 
+a small part in the North of the study area, where \geoOld{} was used instead (this strategy was approved by 
+experts on the local geology). The mapping unit of both geologic maps depicting the Caturrita Formation was 
+used indirectly by deriving dummy predictor variables from all other individual mapping units. Three dummy 
+predictor variables were derived from \geoOld{} and four from \geoNew{} (\autoref{tab:chap05-geology-covars}).
+
+\noindent\textit{Land use maps}. The less detailed land use map (\landOld) was produced by manually digitizing 
+land use data included in topographic maps with a \scale{25000} \cite{DSG1980, DSG1992, DSG1992a} 
+(\autoref{fig:chap05-land-old}). The more detailed land use map (\landNew) was prepared (\scale{2000}) by 
+manual digitization using \SI{65}{\cm} spatial resolution satellite images covering the years \num{2008} and 
+\num{2009} \cite{SamuelRosaEtAl2011a} (\autoref{fig:chap05-land-new}). Mapping units depicting human 
+settlements and water bodies ($n = 0$) were not masked out from the prediction grid and were merged with other 
+mapping units to derive dummy predictor variables. Five dummy predictor variables were derived from \landNew{} 
+and two from \landOld{} (\autoref{tab:chap05-land-covars}).
+
+\subsubsection{Continuous predictor variables}
+\label{subsubsec:chap05-continuous-covars}
+
+\def\arcgis{\href{http://resources.arcgis.com/en/help/main/10.1/index.html}{ArcGIS}}
+
+The less detailed DEM (\demOld) is the hole-filled SRTM DEM version~\num{4} \cite{JarvisEtAl2008} 
+(\autoref{fig:chap05-dem-old}). The spatial sampling support of the SRTM DEM is \SI{1}{\arcsecond} 
+(\SI{\sim30}{\m}), but elevation data were aggregated to \SI{3}{\arcsecond} (\SI{\sim90}{\m}) for public 
+release in regions outside the United States \cite{ReuterEtAl2007}. The more detailed DEM (\demNew) was 
+produced by interpolating contour lines with vertical spacing of \SI{10}{\m} along with data about the 
+drainage network, lakes and peaks digitized from topographic maps with \scale{25000} 
+(\autoref{fig:chap05-dem-new}). Interpolation to \SI{5}{\m} pixel size was performed using a hydrologically 
+correct algorithm implemented in \arcgis{} software by ESRI \cite{Hutchinson1989}. Contour line artefacts were 
+minimized using a seven by seven low-pass filter (\grass{r.neighbors}). The window size was chosen such that 
+the smoothed DEM best matched the original contour map while also respecting the original drainage network 
+pattern.
+
+\input{chap/tab/chap01TAB1.tex}
+
+\input{chap/tab/chap01TAB2.tex}
+
+\input{chap/tab/chap01TAB3.tex}
+
+\begin{figure}[!ht]
+ \centering
+ \begin{minipage}[b]{63mm}
+  \subcaption{Spatial resolution: \SI{90}{\m}}
+  \label{fig:chap05-dem-old}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG4a}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{Spatial resolution: \SI{30}{\m}}
+  \label{fig:chap05-sat-old}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG4b}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{Vertical spacing of contours: \SI{10}{\m}}
+  \label{fig:chap05-dem-new}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG4c}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{Spatial resolution: \SI{5}{\m}}
+  \label{fig:chap05-sat-new}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG4d}
+ \end{minipage}
+ \caption{Digital elevation models (a, c) and satellite images, depicted using the normalized difference
+ vegetation index (b, d), compared in our study. The less detailed version is displayed at the top, while the 
+ more detailed version is shown on the bottom.}
+ \label{fig:chap05-con-covars}
+\end{figure}
+
+Eight DEM derivatives were calculated: elevation (\elev), slope (\slp), aspect (\asp), northernness (\nor), 
+flow accumulation (\acc), topographic wetness index (\twi), stream power index (\spi), and topographic 
+position index (\tpi). \slp{} and \asp{} were calculated using \grass{r.param.scale} with seven window sizes 
+(sampling support, analysis scale): \num{3}, \num{7}, \num{15}, \num{31}, \num{63}, \num{127}, and \num{255}. 
+\asp{} was scaled to the standard \num{0}--\ang{360} range and orientation, and was transformed to \nor{} 
+using $\texttt{NOR} = abs(\ang{180} - \texttt{ASP})$. \twi{} and \spi{} were calculated using \slp{} 
+calculated with different window sizes, and \acc{} calculated using \grass{r.watershed}. \tpi{} was calculated 
+using \saga{ta\_morphometry} with the same seven window sizes. The combination of DEM derivatives (\elev, 
+\slp, \nor, \twi, \spi, and \tpi) and window sizes yielded $p = 36$ continuous predictor variables from each 
+DEM.
+
+The less detailed satellite image was acquired by the Landsat-\num{5} Thematic Mapper on December \num{26}, 
+\num{2010} (available at Instituto Nacional de Pesquisas Espaciais - Divisão de Geração de Imagens -- 
+\inpedgi) (\autoref{fig:chap05-sat-old}). It has \SI{8}{\bit} radiometric resolution and \SI{\sim30}{\m} 
+spatial resolution. Spectral bands were orthorectified (Geomatica OrthoEngine) and radiometrically corrected 
+(\grass{i.landsat.toar}). The more detailed satellite image comes from the RapidEye constellation (available 
+at Ministério do Meio Ambiente -- \mma) (\autoref{fig:chap05-sat-new}). It was acquired on November \num{16}, 
+\num{2012}, has \SI{16}{\bit} radiometric resolution, \SI{6.5}{\m} spatial resolution, and was orthorectified 
+to \SI{5}{\m} spatial resolution. Both images were atmospherically (6S atmospheric model 
+\cite{VermoteEtAl1997}, \grass{i.atcorr}) and topographically corrected (\grass{i.topo.corr}). Derived 
+predictor variables are the spectral bands (except the thermal band) and vegetation indices (normalized 
+difference vegetation index - NDVI, and soil-adjusted vegetation index - SAVI). Eight continuous predictor 
+variables were derived from the Landsat-5~TM image and nine from the RapidEye image.
+
+\subsubsection{Additional processing}
+\label{subsubsec:chap05-sources-processing}
+
+Soil maps, geologic maps, land use maps, and satellite images were registered with the prediction grid 
+(\SI{5}{\m} pixel size) using nearest neighbour resampling. \demOld{} was registered using cubic resampling 
+\cite{Samuel-RosaEtAl2013c}. Systematic positional errors were corrected using affine transformation 
+\cite{Samuel-RosaEtAl2014}.
+
+\subsection{Linear Mixed Model of Spatial Variation}
+\label{subsec:chap05-lmm}
+
+We model each of the soil properties of interest as the outcome of a spatial stochastic process. The model is 
+composed of fixed and random effects \cite{HeuvelinkEtAl2001, LarkEtAl2006}. We use the point soil 
+observations and spatially exhaustive predictor variables to calibrate the model and predict the outcome of 
+the 
+spatial stochastic process at unobserved locations. This fixed effect (deterministic trend), $m(\textbf{s})$, 
+describes that part of the spatial variation of the soil property that is explained by the covariates. We 
+assume here that is a linear function of the predictor variables. The random effect (stochastic residuals, 
+latent variables), $e(\textbf{s})$, describes that part of the spatial variation that cannot be 
+explained by the covariates \cite{Cressie1993}. It is represented by a spatially correlated, Gaussian 
+distributed random variable, that is assumed stationary in the mean and covariance. Thus, the linear mixed 
+model of spatial variation that we employed is given by
+
+\begin{equation}\label{eq:chap05-lmm}
+ Y'(\textbf{s}) = m(\textbf{s}) + e(\textbf{s}) 
+                = \sum_{j=0}^{p} \beta_{j}\cdot X_{j}(\textbf{s}) + e(\textbf{s}),
+\end{equation}
+
+\noindent{where $Y'(\textbf{s})$ is the soil property after Box-Cox transformation, $m(\textbf{s})$ and 
+$e(\textbf{s})$ are defined as above, $\beta_{j}$ are the regression model coefficients, and 
+$X_{j}(\textbf{s})$ is the regression model matrix, with $j = 0, 1, 2, \ldots, p$, $p$ being the number of 
+predictor variables. Variable $X_{0}(\textbf{s})$ is taken as unity so that $\beta_{0}$ is the intercept.}
+
+\subsubsection{Model selection}
+
+We calibrated $m = 2^5 = 32$ multiple linear regression models for each soil property (fitted using ordinary 
+least squares, OLS) to model the deterministic trend for each combination of the five covariates (recall from 
+\autoref{sec:chap05-intro} that each covariate is available at two levels of spatial detail, hence $2^5$ 
+combinations). The number of predictor variables used to calibrate each model varied among combinations 
+between 
+$p = 52$ and $p = 62$, because more detailed covariates enabled the derivation of a larger number of predictor 
+variables (except the DEM). Backward VIF (variance inflation factor) selection followed by stepwise AIC 
+(Akaike's Information Criterion) selection were used to select predictor variables to enter the models 
+\cite{Samuel-RosaEtAl2014c, VenablesEtAl2002}.
+
+The $m = 32$ multiple linear regression models calibrated for each soil property were ranked using the ratio 
+between the regression sum of squares and the total sum of squares. Because stepwise regression results in 
+biased models \cite{Harrell2001a}, the ratio of sum of squares was adjusted (${R}^{2}_{adj}$) using the number 
+of predictor variables initially offered to enter the model instead of the reduced number of predictor 
+variables that entered the model. Next, the five covariates were ranked based on how their level of spatial 
+detail related with the calibration of models with improved predictive performance. The relation between the 
+level of spatial detail of the covariates and model performance was evaluated using a graphical output called 
+\emph{model series plot} (\Rpackage{pedometrics}, \citet{Samuel-RosaEtAl2014c}). Pedological evaluation 
+of predictor variables included in the models was omitted because this was beyond our objectives.
+
+The multiple linear regression model calibrated using only the less detailed covariates, which we call the 
+\emph{baseline} model, and the multiple linear regression model with the highest ${R}^{2}_{adj}$, which we 
+call the \emph{best performing} model, were extended to linear mixed models of spatial variation 
+(\autoref{eq:chap05-lmm}) for each soil property. Estimation of the parameters of the linear mixed models was 
+performed using residual (restricted, marginal) maximum likelihood (REML) \cite{RibeiroEtAl2001, 
+LarkEtAl2004}. The spatial correlation function adopted was the exponential function (this is equivalent to 
+the Matérn correlation function with smoothness parameter $\nu = 0.5$ \cite{Stein1999}).
+
+\subsubsection{Model validation}
+\label{subsec:chap05-validation}
+
+Only the \emph{baseline} and \emph{best performing} multiple linear regression and linear mixed models 
+calibrated for each soil property were validated. Model validation was performed using leave-one-out 
+cross-validation (LOO\-/CV) \cite{BrusEtAl2011}. All model parameters were re-estimated at each LOO\-/CV run 
+to reduce bias \cite{LaslettEtAl1987}. LOO\-/CV predicted values were back-transformed from the Box-Cox space 
+to the original space of soil properties using stochastic simulation \cite{ChristensenEtAl2001}:
+
+\begin{enumerate}
+ \item each predicted value and associated prediction error variance were used to simulate $n = \num{20000}$ 
+ values from a Gaussian distribution;
+ 
+ \item simulated values were back-transformed using $Y(s) = (Y'(s) \times \lambda + 1)^{1 / \lambda}$, if 
+ $\lambda > 0$, and $Y(s) = exp(Y'(s))$, if $\lambda = 0$;
+ 
+ \item the mean and variance of back-transformed simulated values were used as the predicted value and 
+ prediction error variance in the original space of soil properties.
+\end{enumerate}
+
+Five error statistics were computed from the LOO\-/CV results \cite{JanssenEtAl1995, KempenEtAl2010, 
+BrusEtAl2011}. The mean error (\textit{ME}), which measures the prediction bias, the mean absolute error 
+(\textit{MAE}) and the root mean squared error (\textit{RMSE}), which measure the prediction accuracy, the 
+scaled root mean squared error (\textit{SRMSE}, also known as mean squared deviation ratio), which measures 
+how 
+well the prediction error variance matches the squared differences between predicted and observed soil 
+property, where $\textit{SRMSE} > 1$ indicates under-estimation, while $\textit{SRMSE} < 1$ indicates 
+over-estimation, and the amount of variance explained (\textit{AVE}, also known as coefficient of 
+determination 
+or ratio of scatter), which measures the fraction of the overall spread of observed values that is explained 
+by 
+the model. The AVE ranges from \num{0} to \num{100}, where $\textit{AVE} = 100$ is the optimal value.
+
+\subsubsection{Spatial prediction}
+\label{subsec:chap05-prediction}
+
+Only the \emph{baseline} and \emph{best performing} linear mixed models calibrated for each soil property were 
+used for spatial prediction. Spatial predictions at a fine grid of \num{\sim800000} point locations were made 
+in the Box-Cox space using the best linear unbiased predictor (BLUP) with the empirical estimates of the 
+random 
+effects (EBLUP) \cite{LarkEtAl2006}. EBLUP with a fixed effect model is conceptually equivalent to kriging 
+with 
+external drift and regression kriging, and mathematically equivalent to kriging with external drift and 
+universal kriging. Point predicted values and prediction error variances were back-transformed to the original 
+soil property space using stochastic simulation as described above (\autoref{subsec:chap05-validation}).
 
 \section{RESULTS}
+\label{sec:chap05-results}
 
-\subsection{Elicited Expert Knowledge}
+\subsection{Model Series Plots}
 
-According to the information gathered, the soil modellers had only a small experience with soil spatial 
-modelling and this was the first time they were responsible for planning and making soil observations. Their 
-expectation was to perform approximately $n = 500$ observations, given the available infrastructure, human 
-resources and financial resources. The goal was to obtain a \q{satisfactory} coverage of both attribute and 
-geographic spaces, with emphasis on the former. A mental stratification of the area was made to help achieve 
-this goal. First, the area was divided into three strata according to geomorphological features: low elevation 
-areas with flat and gently sloping terrain, steep slopes, and high elevation areas with gently sloping 
-terrain. These strata represent three common physiographic regions of Southern Brazil called, respectively, 
-Central Depression, Plateau Border and Plateau.
-
-With their goal in mind, soil modellers started field campaigns in the Southern sector of the study area in 
-\num{2008}. This area represents the Central Depression, were soil modellers had less knowledge of 
-soil\-/landscape relationships. Access to most sampling sites was granted by the absence of geographic 
-barriers and presence of a dense road network. After a few field campaigns, the soil modellers noticed that 
-available resources and infrastructure would not allow visiting $n = 500$ sites. Access restrictions were 
-imposed by some land owners and mean access time to observation locations was lager than expected. Besides, a 
-budget shortage imposed important restrictions to the continuity of the study. As a consequence, the goal and 
-planning of field campaigns had to be changed. The most sensible change was the decrease of observation 
-intensity, requiring the approximate location of observation sites to be predefined beforehand at 
-approximately equally spaced distances to obtain a satisfactory spatial coverage. A final outcome of at least 
-$n = 300$ soil observations became the new focal goal of the soil modellers.
-
-Next field campaigns took place in the most sloppy areas of the study area. These areas represent the Plateau 
-Border and possess severe access restrictions due to strong slopes and dense forest cover. Access restrictions 
-were again imposed by some land owners. Following, field campaigns were carried out in the Northern and 
-North-eastern sectors of the study area. These areas represent the Plateau, were the soil modellers had a 
-larger knowledge of soil-landscape relationships. Overall, there were only minor access issues due to 
-geographic barriers and very few restrictions were imposed by land owners. More field campaigns were carried 
-out in the areas of the Plateau Border but avoiding difficult to access areas (steep slopes and dense forests).
-In the last field campaigns, with a small amount of resources still available, the soil modellers performed a 
-few more observations in some areas of the Plateau Border and Central Depression were they knowledge about the 
-soil-landscape relationships was poorer. This yielded the final outcome of $n = 340$ soil observations.
-
-\subsection{Point Pattern Analysis}
-
-\subsubsection{Observation intensity}
-
-The spatial distribution of the relative soil observation intensity estimated using an isotropic Gaussian 
-kernel is shown in \autoref{fig:chap06-intensity} (left plot). There are two regions were soil observation was 
-more intense. The first and largest of them is located in the South-western sector, while the second is 
-located in the Middle-North-eastern sector. The largest values are also found in the South-western sector. 
-Differences in observation intensity resulted in the occurrence of patches with deficient or poorly 
-representative observation coverage (Figure \ref{fig:chap06-intensity}, right plot). The largest patches are 
-located in the Middle and Middle-Eastern sectors.
+The model series plot is a graphical description of the relation between the prediction accuracy of multiple 
+linear regression models and the covariates used to calibrate them (\autoref{fig:chap05-model-series}). The 
+magnitude of improvement in prediction accuracy is depicted in the bottom panel with the ${R}^{2}_{adj}$. The 
+top panel is interpreted both horizontally and vertically. In the vertical direction we identify which version 
+of each covariate was used to calibrate a given model. The less and the more detailed versions are identified 
+by the yellow (bright) and green (dark) colours, respectively. The \emph{baseline} model is identified by the 
+column containing only yellow cells, while the column with only green cells represents the model calibrated 
+using only the more detailed version of each covariate, which we call the \emph{most detailed} model. The 
+first important results that we obtain from the model series plots is that a) the \emph{baseline} model is not 
+the model with the lowest ${R}^{2}_{adj}$, which we call the \emph{poorest performing} model, and b) the 
+\emph{most detailed} model is not the \emph{best performing} model.
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[width=5cm]{fig/chap06-empty-space}
- \caption{Estimated empty space distances. Values range from \num{1} to \SI{709}{\m}.}
-\label{fig:chap06-intensity}
+ \begin{minipage}[b]{\textwidth}
+  \subcaption{}
+  \includegraphics[width=\textwidth]{fig/chap05FIG5a}
+ \end{minipage}
+ \begin{minipage}[b]{\textwidth}
+  \subcaption{}
+  \includegraphics[width=\textwidth]{fig/chap05FIG5b}
+ \end{minipage}
+ \begin{minipage}[b]{\textwidth}
+  \subcaption{}
+  \includegraphics[width=\textwidth]{fig/chap05FIG5c}
+ \end{minipage}
+ \caption{Model series plots for CLAY (a), SOC (b), and ECEC (c). The less and more detailed version of each 
+ covariate are identified with the yellow (bright) and green (dark) colours, respectively. Multiple linear 
+ regression models were ranked using their ${R}^{2}_{adj}$. Triangles show the mean ranking of the more 
+ detailed covariates (i.e. centre of green cells).}
+ \label{fig:chap05-model-series}
 \end{figure}
 
-The Stienen diagram (\href{https://drive.google.com/file/d/0B7xsLbrOA23oeG9zSWVLcnZYdEk/edit?usp=sharing}{click
-here to download} and open in \googleearth) helped identifying areas where the observation pattern is 
-approximately regular, such as the Northern sector where the circles are approximately aligned and have about 
-the same size. In the Southern sector, where the size of the circles is variable, the observation process seem 
-to be approximately random. The relation between observation intensity and environmental features is also very 
-clear. There is a strong relation between nearest neighbour distance and topography. Overall, the smallest 
-nearest neighbour distance values seem to occur in the Central Depression and increase towards the Plateau 
-Border (which has a dense forest cover) and the Plateau.
+The row-wise analysis of the model series plots shows if a model calibrated with the more detailed version of 
+a given covariate has a higher prediction accuracy. This information is retrieved by looking at the row-wise 
+distribution of green cells -- these cells represent the $m = 16$ models calibrated using the more detailed 
+version of a given covariate, irrespective of the version of the other covariates. The more concentrated the 
+green cells are in the right half of the plot, the larger the relative benefit of using the more detailed 
+version of that covariate. For example, the top row of the second model series plot shows the SOC models 
+calibrated using the two versions of the land use map (\texttt{land}). All green cells are on the right half 
+of the plot between rankings \num{1} and \num{16} (see the x axis). The four lower rows show that the green 
+cells of the other four covariates are distributed along the entire ranking range (from \num{1} to \num{32}). 
+This means that the relative benefit of calibrating a SOC model with a more detailed land use map is larger 
+compared to that of using a more detailed version of the other covariates.
 
-Observation intensity is also related to the temporal order in which observations were made 
-(\autoref{fig:chap06-nndistG}). First observations were made at short distances, resulting in a higher 
-observation intensity. With time, nearest neighbour distance started to increase. This increase occurred until 
-about the \num{150}th soil observation, when the nearest neighbour distance reached about \SI{250}{\m} and 
-remained approximately constant until the \num{300}th observation. After the \num{300}th observation, the 
-nearest neighbour distance started to decrease and reached values around \SI{50}{\m}.
+The centre of the row-wise distribution of the green cells for each covariate, calculated as the mean ranking, 
+is represented by the triangles. The mean ranking quantifies the relative benefit of using a more detailed 
+version of each covariate. For example, the mean ranking of the SOC models calibrated using the more detailed 
+land use map is about \num{8} (top row), while the mean ranking of the models calibrated using the more 
+detailed satellite image (\texttt{sat}) is close to \num{20} (bottom row). Using the more detailed DEM 
+(\texttt{dem}) is almost as beneficial as using the more detailed geologic map (\texttt{geo}) -- the mean 
+ranking of the SOC models calibrated using the more detailed version of these two covariates is about 
+\num{15}--\num{16} (second and third rows). Using the more detailed version of the soil map (\texttt{soil}, 
+fourth row) is not as beneficial as using \texttt{land}, \texttt{geo} or \texttt{dem}, but more beneficial 
+than using \texttt{sat}. Because the covariates were ranked based on the mean rankings, the covariate 
+displayed 
+in the top row of each model series plot is the one which resulted in the largest improvement of the 
+prediction accuracy when the more detailed version was used to calibrate the model -- for SOC this is the land 
+use map.
+
+For CLAY, calibrating the models with the more detailed soil map resulted in the largest improvement of the 
+prediction accuracy relative to the other covariates. The DEM was the second most beneficial covariate (mean 
+ranking of \num{15}), but the benefit of using its more detailed version was similar to that of using the more 
+detailed version of any other covariate (mean rankings between \num{17} and \num{18}). Nine models had a 
+poorer prediction performance than the baseline model, ranked \num{27}th, the poorest performing model being 
+that calibrated with the more detailed land use map and satellite image. Despite these patterns, calibrating 
+CLAY models with the more detailed version of any covariate resulted in a small improvement of the prediction 
+accuracy, as evidenced by the small increases of the ${R}^{2}_{adj}$. The difference between the poorest and 
+best performing models is less than \SI{3}{\pp} (percentage points). In comparison, for SOC, by simply 
+using the more detailed land use map we already obtained a model ranked \num{9}th, an increase of \SI{8}{\pp} 
+in ${R}^{2}_{adj}$ compared to the baseline model, ranked \num{24}th.
+
+The same general pattern observed for SOC models was observed for ECEC models -- the more detailed land use 
+map results in the largest improvement of the prediction accuracy. The main difference is that calibrating the 
+models with the more detailed geologic map was slightly more beneficial for ECEC (mean ranking of \num{12}) 
+than for SOC (mean ranking of \num{14}). The poorest performing ECEC model was that calibrated with the more 
+detailed satellite image. Using only the more detailed land use map resulted in an improvement of \SI{6}{\pp} 
+in ${R}^{2}_{adj}$ (model ranked \num{7}th), differing from the best performing model by only \SI{2}{\pp}. 
+Using the more detailed version of all covariates except the soil map or satellite image resulted in increases 
+of about \num{6} and \SI{7}{\pp} in ${R}^{2}_{adj}$, respectively. The baseline model was ranked as 
+\num{28}th, which is a higher ranking than the models calibrated with all possible combinations of the more 
+detailed satellite image and the more detailed soil map and/or DEM.
+
+The patterns observed in the model series plots resulted from the change (increase or decrease) of the 
+importance of each covariate on explaining the variance when the more detailed version was used 
+(\autoref{tab:chap05-drop}). We used the \emph{baseline} and \emph{most detailed} models to quantify this 
+change. Each model was refitted dropping one covariate at a time. The difference $\Delta$ between the 
+${R}^{2}_{adj}$ of the model calibrated with all five $q$ covariates (${R}^{2}_{adj}{}_{q = 5}$) and the model 
+calibrated without the $q$-th covariate ($R^{2}_{adj}{}_{q = 5 - 1}$) was calculated. The more positive 
+$\Delta{R}^{2}_{adj}$ becomes, the more beneficial the more detailed version of the $q$-th covariate is for 
+improving prediction accuracy. For CLAY, \texttt{dem} and \texttt{land} were the most important covariates in 
+the \emph{baseline} model, while \texttt{geo} was the least important. The importance of \texttt{soil} and 
+\texttt{geo} increased when their more detailed version was used (change of \SI{+0.013}{\pp} for both), while 
+\texttt{sat}, \texttt{land} and \texttt{dem} became less important. For SOC and ECEC, \texttt{land} was not 
+the most important covariate in the \emph{baseline} model. But it was the covariate whose importance had the 
+largest positive shift when the more detailed version was used (\SI{+0.085}{\pp} for SOC and \SI{+0.045}{\pp}
+for ECEC). \texttt{sat} became less important when the more detailed version was used -- see its low ranking 
+in all model series plots. The increase of the importance of \texttt{geo} was larger for ECEC 
+(\SI{+0.026}{\pp}) than for SOC (\SI{+0.013}{\pp}) -- see the difference in the mean ranking of \texttt{geo} 
+in 
+the SOC (\num{14}) and ECEC (\num{12}) model series plots.
+
+\input{chap/tab/chap01TAB4.tex}
+
+\subsection{REML Fit of the Variogram Model}
+
+\def\footnugget{\footnote{To be more precise, the small number of point observations separated by short 
+distances reduces the ability of modelling the behaviour of the variogram near the origin as a whole.}}
+
+The small improvement in the prediction accuracy of the CLAY linear mixed model calibrated with the more 
+detailed covariates is evidenced by \autoref{fig:chap05-lmm}. The shape of the experimental variogram is very 
+similar for both \emph{baseline} and \emph{best performing} linear mixed models, which is also true for SOC 
+and ECEC. However, the sill variance had a very small reduction for CLAY compared to SOC and ECEC. The last 
+two showed a more considerable improvement in prediction accuracy. It can also be seen that the number of 
+point observations separated by short distances is very small, reducing the accuracy of the estimate of the 
+nugget variance\footnugget{}. The result is that the estimated nugget variance changes rather erratically 
+from the \emph{baseline} to the \emph{best performing} models, decreasing for CLAY and SOC, and increasing 
+for ECEC.
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[trim=0mm 0mm 0mm 12mm,clip=true,width=7.5cm]{fig/chap06-nndistG.pdf}
- \caption{Estimated nearest neighbour distances as related to the temporal order in which soil observations 
- were done. Twenty two field campaigns were carried out to make the $n = 340$ soil observations available.
- Deeper information about field campaigns is given in \autoref{fig:chap06-covars}. Function \texttt{rollmean} 
- from \Rpackage{zoo} was used to estimate the rolling mean \cite{ZeileisEtAl2005}.}
- \label{fig:chap06-nndistG}
+ \begin{minipage}[b]{90mm}
+  \subcaption{}
+  \includegraphics[width=90mm]{fig/chap05FIG6a} 
+ \end{minipage}
+ \begin{minipage}[b]{90mm}
+  \subcaption{}
+  \includegraphics[width=90mm]{fig/chap05FIG6b}
+ \end{minipage}
+ \begin{minipage}[b]{90mm}
+  \subcaption{}
+  \includegraphics[width=90mm]{fig/chap05FIG6c}
+ \end{minipage}
+ \caption{Experimental variogram (dots) and REML fit of the linear mixed models (line) for CLAY (a), SOC (b), 
+ and ECEC (c). Left -- baseline model. Right -- best performing model.}
+ \label{fig:chap05-lmm}
 \end{figure}
 
-\subsubsection{Spatial distribution}
+\subsection{Validation}
 
-The estimated inhomogeneous \emph{G} function of the spatial distribution of the point process is shown in the 
-left plot of \autoref{fig:chap06-gest}. The curve of the empirical point process (continuous black line) 
-follows a different pattern than the theoretical curve (dashed red line) of a completely random spatial point 
-process. This result supports the initial understanding that the point pattern under analysis can be the 
-realization of a deterministic process. \autoref{fig:chap06-gest} (right plot) also shows the envelope of the 
-estimated inhomogeneous \emph{G} function built with $n = 19$ Monte Carlo simulations. The global statistical 
-test evidences that observations with a nearest neighbour distance smaller than about \SI{125}{\m} have a 
-random pattern of spatial distribution. At nearest neighbour distance above \SI{125}{\m} the empirical curve 
-shows a strong deviation from the envelope, indicating that the spatial distribution of the soil observations 
-is approximately regular. Because there is a significant difference between the empirical and theoretical 
-curves, the point process under analysis can be regarded as not being a realization of complete spatial 
-randomness, but of an yet unspecified point process \cite{Baddeley2010}.
+The LOO\-/CV results indicate that the linear mixed models for CLAY are slightly positively biased, while 
+those for SOC and ECEC are slightly negatively biased (\autoref{tab:chap05-cv-stats}). For both CLAY and ECEC, 
+the \textit{MAE} shows that these models are more accurate than the multiple linear regression models, 
+suggesting that the kriging step improves the prediction accuracy.
+
+\input{chap/tab/chap01TAB5.tex}
+
+Overall, all models had a moderate to poor prediction performance. The errors are, in absolute values, 
+somewhat large, mainly for ECEC. The best \textit{AVE} are about \SI{60}{\percent} for CLAY, \SI{50}{\percent} 
+for SOC, and \SI{40}{\percent} for ECEC. In general, the prediction error variance was under-estimated by the 
+linear mixed models and over-estimated by the multiple regression models. The best estimates of the prediction 
+error variance were obtained by both CLAY linear mixed models, and the ECEC baseline linear regression model.
+
+For CLAY, the increase in the \textit{AVE} was larger when including a kriging step ($\Delta\textit{AVE} = 
+\SI{3.9}{\pp}$) than when using more detailed covariates ($\Delta\textit{AVE} = \SI{1.6}{\pp}$). In the case 
+of SOC, including a kriging step reduced the \textit{AVE} by \SI{3.2}{\pp}, and for ECEC, both strategies 
+increased the \textit{AVE} (\autoref{tab:chap05-cv-stats}).
+
+\subsection{Spatial Prediction}
+
+Both \emph{baseline} and \emph{best performing} linear mixed models captured the same overall pattern of 
+spatial variation of the soil properties (\autoref{fig:chap05-kriging}). The main difference is that the 
+spatial patterns of the different covariates used to calibrate each model produced different features in the 
+prediction maps. For example, the CLAY map produced by the best performing model 
+(\autoref{fig:chap05-clay-best-pred}) displays abrupt changes in the predicted values in the north-north-east 
+due to the use of the more detailed soil map. Strongly-marked features following the stream network obtained 
+through the use of the more detailed DEM are also observed (\autoref{fig:chap05-clay-best-pred} and 
+\autoref{fig:chap05-clay-best-var}).
+
+SOC maps (\autoref{fig:chap05-soc-best-pred} and \autoref{fig:chap05-soc-best-var}) show peculiar features in 
+the central part of the study area, where predictions reached values as high as \SI{507}{\gram\per\kilo\gram}, 
+while the maximum value in the calibration data is \SI{163}{\gram\per\kilo\gram}. The extremely high predicted 
+values resulted from the inclusion of the topographic position index derived from the more detailed DEM, using 
+a window size of $15 \times 15$~pixels (\texttt{TPI\_10\_15}) to model the deterministic trend. 
+\texttt{TPI\_10\_15} values in the point calibration data range from \num{-7} to \SI{6}{\m}, while in the 
+central part of the study area they range from \num{12} to \SI{31}{\m}. Thus, feature-space extrapolation 
+explains the extremely high predicted values for SOC. Abrupt changes in predicted SOC are also observed at 
+locations with low to moderate SOC (\SIrange{40}{80}{\gram\per\kilo\gram}). This is caused by using the more 
+detailed land use map.
+
+Predicted ECEC (\autoref{fig:chap05-ecec-base-pred} and \autoref{fig:chap05-ecec-best-pred}) had a large 
+dependency on land use and geologic maps. Several features observed in the prediction maps derive from these 
+two covariates. The influence of land use is seen in the northern part, while in the western, central, and 
+eastern parts the influence of both covariates create an irregular pattern in the spatial distribution of 
+ECEC. It is also in these parts that the largest prediction error standard deviations occur, following the 
+spatial pattern of the covariates.
 
 \begin{figure}[!ht]
  \centering
- \includegraphics[trim=0mm 0mm 0mm 12mm,clip=true,width=7.5cm]{fig/chap06-gest-sim.pdf}
- \caption{Spatial distribution of the planar point pattern estimated with the inhomogeneous \emph{G} function 
- and its global envelope. Note that at nearest neighbour distances smaller than about \SI{125}{\m} the point 
- pattern can be regarded as having a random pattern of spatial distribution. These observations were made in 
- first and last field campaigns as shown in \autoref{fig:chap06-nndistG}.}
-\label{fig:chap06-gest}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-clay-base-pred}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG7a}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-clay-best-pred}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG7d}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-soc-base-pred}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG7b}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-soc-best-pred}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG7e}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-ecec-base-pred}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG7c}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-ecec-best-pred}
+  \centering
+  \includegraphics[width=63mm]{fig/chap05FIG7f}
+ \end{minipage}
+ \caption{Predicted values for CLAY (\si{\gram\per\kilo\gram}) (a, b), SOC (\si{\gram\per\kilo\gram}) (c, d), 
+ and ECEC (\si{\milli\mole\per\kilo\gram}) (e, f) using the \emph{baseline} (left) and \emph{best performing}
+ (right) linear mixed models.}
+ \label{fig:chap05-kriging}
 \end{figure}
 
-\subsubsection{Point process model}
-
-Three covariates were suggested by the judgements elicited from the experts: a land use map 
-\cite{SamuelRosaEtAl2011a}, terrain attributes derived from the hole-filled SRTM version \num{4} 
-\cite{ReuterEtAl2007}, and data about field campaigns. Terrain attributes elevation, morphometric protection 
-index and topographic position index were used to stratify the area into three strata following the approach 
-of the soil modellers. A Dirichlet tessellation of the point pattern was computed to represent field campaigns 
-in the space domain.
-
-Among all covariates available, land use, physiographic strata and field campaigns 
-(\autoref{fig:chap06-covars}) are those which better explain the spatial distribution of the point process 
-(\autoref{tab:chap06-deviance}). This corroborates the interpretation of the Stienen diagram (plotted in 
-\googleearth) and \autoref{fig:chap06-nndistG} made above. Land use data produces the largest deviance 
-reduction, followed by field campaigns and physiographic strata. The interactions between predictors also 
-reduce the deviance and were not included in the model to avoid increasing its complexity.
-
-\begin{figure}[!h]
+\begin{figure}[!ht]
  \centering
- \includegraphics[width=0.32\textwidth]{fig/chap06-covarsA}
- \includegraphics[width=0.305\textwidth]{fig/chap06-covarsB}
- \includegraphics[width=0.3\textwidth]{fig/chap06-covarsC}
- \caption{Covariates used to fit the non-stationary Poisson point process model superimposed with the planar 
- point pattern. Physiographic strata has three levels (South-North aligned): Central Depression, Plateau 
- Border, and Plateau. Land use has seven levels: native forest (more than \SI{50}{\percent} of the area), 
- shrubland, animal husbandry, crop agriculture, forestry, urban, and water. Field campaigns has
- \num{22}~levels represented with increasing colour heat (white to red) from the first to the last.}
- \label{fig:chap06-covars}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-clay-base-var}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG8a}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-clay-best-var}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG8d}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-soc-base-var}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG8b}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-soc-best-var}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG8e}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-ecec-base-var}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG8c}
+ \end{minipage}
+ \begin{minipage}[b]{63mm}
+  \subcaption{}
+  \label{fig:chap05-ecec-best-var}
+  \centering
+  \includegraphics[width=60mm]{fig/chap05FIG8f}
+ \end{minipage}
+ \caption{Prediction error standard deviations for CLAY (\si{\gram\per\kilo\gram}) (a, b), SOC 
+ (\si{\gram\per\kilo\gram}) (c, d), and ECEC (\si{\milli\mole\per\kilo\gram}) (e, f) using the \emph{baseline}
+ (left) and \emph{best performing} (right) linear mixed models.}
+ \label{fig:chap05-kriging-variance}
 \end{figure}
 
-\begin{table}[!ht]
- \caption{Analysis of deviance for the fitted non-stationary Poisson point process model with two-tailed 
- p-values for the chi-squared tests comparing the reduction in deviance due to the inclusion of each predictor 
- variable. Terms were added sequentially to the model (first to last).}
- \label{tab:chap06-deviance}
- \centering\footnotesize
- \begin{tabular}{lrrrrr}
-  \hline
-  Predictor		& Df	& Deviance	& Resid. Df	& Resid. Dev	& Pr($>$Chi)	\\ 
-  \hline
-  Intercept only	&  	&  		& 3240 		& 1943.05 	&  		\\ 
-  Physiographic strata	& 2 	& 38.03 	& 3238 		& 1905.03 	& 5.524e-09 	\\ 
-  Land use		& 6 	& 120.91 	& 3232 		& 1784.12 	& < 2.2e-16 	\\ 
-  Field campaigns	& 21 	& 63.28 	& 3211 		& 1720.84 	& 4.027e-06 	\\ 
-  \hline
- \end{tabular}
-\end{table}
-
-Estimated coefficients for predictor variables show that observation intensity has a decreasing tendency in the
-Plateau Border and Plateau (\autoref{tab:chap06-coef}). The lowest observation intensity occurs in areas of 
-native forests, urban land use and water bodies. All field observation campaigns were less intense than the 
-first. Observation intensity reduction factor was similar between the second and seventh field campaigns 
-(about \num{-0.75} times). The largest reduction occurred in the \num{13}th field campaign (\num{-2.18} times), 
-when observation intensity started to increase again until the last field campaign.
-
-\begin{table}[!ht]
- \caption{Estimated coefficients for the fitted non-stationary Poisson point process model and their lower and 
- upper limits of the \SI{95}{\percent} confidence interval. Physiographic strata has three levels: Central 
- Depression, Plateau Border and Plateau. Land use has seven levels: native forest, shrubland, animal 
- husbandry, crop agriculture, forestry, urban and water. Field campaigns has \num{22} levels represented with 
- increasing number from the first to the last. Significance levels of the two-tailed Z test against the null 
- hypothesis that each regression coefficient is equal to zero are given for p-values of \num{0} (***), 
- \num{0.001} (**), \num{0.01} (*), \num{0.05} ( ) and \num{1} (na).}
- \label{tab:chap06-coef}
- \centering\footnotesize
- \begin{tabular}{lrrlrr}
-  \hline
-  Predictor		& Estimate 	& Standard error	& Z test & Lower limit 	& Upper limit	\\ 
-  \hline
-  (Intercept)		& -10.37 	& 0.24 			& na 	& -10.85	& -9.90         \\ 
-  Plateau border	& -0.03 	& 0.20 			&    	& -0.42 	& 0.37	\\ 
-  Plateau		& -0.07 	& 0.31 			&    	& -0.67 	& 0.53 	\\ 
-  Shrubland		& 1.17 		& 0.18 			& *** 	& 0.82 	        & 1.52 	\\ 
-  Animal husbandry	& 0.95 		& 0.14 			& *** 	& 0.67 		& 1.23 	\\ 
-  Crop agriculture	& 1.59 		& 0.19 			& *** 	& 1.22 		& 1.96 	\\ 
-  Forestry		& 1.10 		& 0.28 			& *** 	& 0.56 		& 1.64 	\\ 
-  Urban			& -1.12 	& 0.52 			& * 	& -2.13 	& -0.11 \\ 
-  Water			& 0.74 		& 0.72 			&    	& -0.68 	& 2.16 	\\ 
-  Field campaign 2	& -0.70 	& 0.32 			& * 	& -1.32 	& -0.08\\ 
-  Field campaign 3	& -0.68 	& 0.31 			& * 	& -1.29 	& -0.07\\ 
-  Field campaign 4	& -0.75 	& 0.32 			& * 	& -1.37 	& -0.13\\ 
-  Field campaign 5	& -0.85 	& 0.39 			& * 	& -1.60 	& -0.09 \\ 
-  Field campaign 6	& -1.04 	& 0.37 			& **	& -1.77 	& -0.31 \\ 
-  Field campaign 7	& -0.74 	& 0.43 			&    	& -1.58 	& 0.09 	\\ 
-  Field campaign 8	& -1.36 	& 0.34 			& *** 	& -2.03 	& -0.69 \\ 
-  Field campaign 9	& -1.56 	& 0.43 			& *** 	& -2.40 	& -0.73 \\ 
-  Field campaign 10	& -1.49 	& 0.38 			& *** 	& -2.24 	& -0.75 \\ 
-  Field campaign 11	& -1.44 	& 0.41 			& *** 	& -2.24 	& -0.63 \\ 
-  Field campaign 12	& -1.39 	& 0.36 			& *** 	& -2.10 	& -0.68 \\ 
-  Field campaign 13	& -2.18 	& 0.44 			& *** 	& -3.04 	& -1.32 \\ 
-  Field campaign 14	& -1.64 	& 0.45 			& *** 	& -2.53 	& -0.75 \\ 
-  Field campaign 15	& -1.90 	& 0.36 			& *** 	& -2.61 	& -1.19 \\ 
-  Field campaign 16	& -1.93 	& 0.44 			& *** 	& -2.79 	& -1.07 \\ 
-  Field campaign 17	& -1.20 	& 0.38 			& ** 	& -1.94 	& -0.46 \\ 
-  Field campaign 18	& -1.25 	& 0.41			& ** 	& -2.06 	& -0.45 \\ 
-  Field campaign 19	& -1.14 	& 0.51 			& * 	& -2.15 	& -0.13 \\ 
-  Field campaign 20	& -1.33 	& 0.41 			& ** 	& -2.13 	& -0.53 \\ 
-  Field campaign 21	& -1.35 	& 0.38 			& *** 	& -2.10 	& -0.60 \\ 
-  Field campaign 22	& -0.28 	& 0.42 			&    	& -1.10 	& 0.54 	\\ 
-  \hline
- \end{tabular}
-\end{table}
-
-The fitted non-stationary Poisson point process model gives a fine representation of the observation intensity 
-(\autoref{fig:chap06-trend}, left plot) estimated with the isotropic Gaussian kernel 
-(\autoref{fig:chap06-intensity}). Both sectors of high observation intensity are correctly predicted. However, 
-relative intensity values are strongly over-predicted in the South-western sector, while in border areas they 
-are strongly under-predicted. These under-predicted areas seem to be correlated to estimated empty space 
-distances (\autoref{fig:chap06-intensity}).
-
-\begin{figure}[!h]
- \centering
- \includegraphics[width=\textwidth]{fig/chap06-kernel-trend-res}
- \caption{Relative empirical kernel density estimate (left), and relative trend (centre) and residuals (right) 
- of the fitted non-stationary Poisson point process model. Data shown is relative to the largest absolute
- estimated value of intensity. Relative kernel density values range from \num{0.02} to \num{1.00}, relative
- trend values range from \num{0.01} to \num{1.00}, and relative residual values range from \num{-1} to
- \num{0.81}.}
- \label{fig:chap06-trend}
-\end{figure}
-
-The envelope of the detrended estimated inhomogeneous \emph{G} function (\autoref{fig:chap06-gest}) suggests 
-that the fitted non-stationary Poisson point process model has efficiently captured the trend of the point 
-pattern. A slight difference between the curve of the empirical point process (continuous black line) and the 
-theoretical curve (dashed red line) still exists in the middle range of the nearest neighbour distances. 
-Inclusion of interaction terms between predictors in the fitted model could help explaining this still 
-remaining trend feature.
-
-\begin{figure}[!h]
- \centering
- \includegraphics[trim=0mm 0mm 0mm 12mm,clip=true,width=7.5cm]{fig/chap06-fit-gest-sim}
- \caption{Global envelope of the detrended estimated inhomogeneous \emph{G} function. Now the curve of the 
- empirical point process (continuous black line) follows a pattern similar to that of the theoretical curve 
- (dashed red line) of a completely random spatial point process.}
- \label{fig:chap06-trend}
-\end{figure}
+The smallest prediction error standard deviations occur at lower elevations, along the three main streams, and 
+close to the water outlet in the southern part of the study area. These areas have the highest density of 
+point soil observations used to calibrate the models, and the smallest values for all three soil properties. 
+While the first determines the accuracy of the EBLUP, the second influences the final accuracy through the 
+back-transformation of predicted values.
 
 \section{DISCUSSION}
 
-The spatial distribution of the point process has features resulting from the influence of three key factors. 
-The first of them is \textit{conceptual} and regards the knowledge of the soil modellers about soil-landscape 
-relationships. The second factor is \textit{operational} and relates to the available infrastructure, human 
-resources and budget to make soil observations, as well to access restrictions imposed by land owners and 
-geographic barriers. The last factor is \textit{psychological}, which is also affected by the first two and is 
-related to how the soil modellers perceive their surrounding environment and how the course of their 
-motivation shifted during the soil observation process. The next three sections are devoted to better 
-understand these factors.
+Our main goal was to evaluate whether investing in more spatially detailed covariates improves the accuracy of 
+soil maps. We saw that calibrating the models with more detailed covariates generally has a small to moderate, 
+but positive, impact on the predictions. The magnitude of this benefit depends on the magnitude of the 
+increase 
+of the spatial detail of the covariate, on the other covariates included in the model, and on the soil 
+property. However, there seems to be a limit above which the increase of spatial detail has a negative impact 
+on the predictions. In the next two subsections we interpret the results from a pedological perspective and 
+assess whether the investment in more detailed covariates is worthwhile or if alternatives to improve 
+prediction accuracy should be favoured.
 
-\subsection{Concentrating on Problem Areas}
-\label{subsec:chap06-conceptual}
+\subsection{Spatio-Temporal Controls of Soil Properties}
 
-Soil observations were made during studies organized by two young soil modellers. Both soil modellers were 
-starting their carriers and had a larger experience with well drained, deep and high iron oxide content soils 
-derived from igneous rocks and occurring on gently sloping to sloping relief. This is the same type of soil and
-relief that prevails in the Northern and North-eastern sectors of the study area. Because the soil 
-modellers started the study using the free survey method, locating soil observations to test hypotheses 
-posited according to their mental model of soil-landscape relationships, more observations were made on the so 
-called \q{problem areas} \cite{Rossiter2000}. Problem areas are those areas for which the mental model of 
-soil-landscape relationships is incomplete or possesses significant weaknesses, i.e. spatial soil variation is 
-poorly predicted. Thus, it could be expected beforehand that the soil modellers would concentrate their 
-efforts in Central Depression and Plateau Border areas. This is clearly evidenced by the higher observation 
-intensity in the Central Depression and some areas of the Plateau Border, while the Plateau has a lower 
-observation intensity.
+CLAY was moderately well predicted using less detailed covariates, with small improvement when using the more 
+detailed covariates. CLAY was expected to have a strong correlation with topography and parent material. This 
+correlation was already considerable when the less detailed DEM and geologic map were used, and improved only 
+marginally with the more detailed version. One sensible explanation is that the effective (actual rather than 
+theoretical) spatial detail of the two geologic maps was similar, although they had a four-fold difference in 
+the size of the minimum legible delineation (see \citet{HenglEtAl2006a} for a discussion on effective 
+scale). For the DEM, many studies have already suggested that its resolution may be of secondary importance 
+when calculating DEM derivatives for soil mapping \cite{ZhuEtAl2008, BehrensEtAl2010a, MillerEtAl2015}. The 
+influence of land use on CLAY is currently small due to reduction of soil erosion in the first decade of the 
+\num{21}st century \cite{MiguelEtAl2012, TenCatenEtAl2012b}. A moderate within-field spatial variation may 
+exist due to past erosional processes \cite{MouraBueno2012}, but we lack evidence of how well this source of 
+variation was captured in the present-time point soil data.
 
-\subsection{Managing Available Resources}
+It is worthwhile to consider the influence of the more detailed soil map on predicting CLAY. Due to its 
+production process, the more detailed soil map derives a large amount of spatial detail from the geologic map, 
+land use map and DEM -- note that the second-best performing model for CLAY included the more detailed 
+geologic map instead of the more detailed soil map (\autoref{fig:chap05-model-series}). However, most of the 
+additional spatial detail included in the more detailed soil map was probably based on the spatial variation 
+of 
+soil texture, because this is a strongly marked soil feature in the area \cite{MiguelEtAl2012}. Soil texture 
+is 
+one of the most important soil properties used by soil surveyors in the field to identify mapping units 
+\cite{Legros2006}. These findings help explain why in the end the more detailed soil map was the most 
+beneficial for CLAY instead of the geologic map.
 
-Field work is the main component of any soil mapping effort \cite{KempenEtAl2012}. Therefore, it demands an 
-efficient planning of field campaigns to guarantee that the available infrastructure, human resources and 
-budget are enough to accomplish the desired observation intensity. When the free survey method is used, 
-planning of field campaigns strongly relies on the experience of the field soil modellers. Because the two 
-field soil modellers working in the study area had a small field experience, it soon became clear to them
-that field campaigns were inefficiently planned. Overall, the field soil modellers underestimated the costs of
-variable components of field campaigns. One of these variable components is the access time to observation 
-locations, which usually has a large impact on sampling costs \cite{DomburgEtAl1997}, specially in areas with 
-many accessibility constraints.
+SOC and ECEC were considerably better predicted when more detailed covariates were used. Our expectation that 
+SOC and ECEC would have a strong correlation with land use was confirmed by the fact that this covariate 
+explained a large amount of the variance and was highly beneficial for improving the predictions. Although the 
+available point soil data are limited to the \num{2004}--\num{2011} period, we believe that land use changes 
+in the last \num{30}~years \cite{MiguelEtAl2012, TenCatenEtAl2012b} strongly affected SOC and ECEC. Thus, the 
+more detailed land use map is likely to have considerably improved model performance because it is up-to-date 
+and, possibly, because it has \num{40}~times more spatial detail than its less detailed version. Despite the 
+fact that the two land use maps used in this study were from different time periods, which confounds the 
+analysis, the results obtained indicate that a more detailed land use map improves the prediction of SOC. For 
+example, the areas used for crop agriculture, which are well known for having lower SOC and ECEC 
+\cite{Menezes2008, MouraBueno2012}, are not depicted in the less detailed land use map.
 
-Inefficient planning of field campaigns plus budget cuts and operational issues related to available 
-infrastructure and human resources lead to the need for redefining the initially aimed total number of soil 
-observations. Because the study started on problem areas, there is an \emph{operational} bias towards employing
-larger observation efforts in these areas, multiplying the \emph{conceptual} effect described above (See 
-\autoref{subsec:chap06-conceptual}). However, operational issues also lead to the reduction of the 
-observation intensity on poorly accessible areas, such as those with steep slopes and dense forest cover of the 
-Plateau Border. In classic sampling theory an observation process strongly influenced by accessibility issues 
-is called \emph{convenience sampling} \cite{deGruijterEtAl2006}. The most extreme case occurs when soil 
-observations are made only along the road network \cite{CambuleEtAl2013}. This is not the case of the 
-observations made in Plateau Border, but there are enough evidences to regard them as being the outcome of 
-convenience sampling. Datasets obtained through convenience sampling usually present significant biases that 
-affect the construction of robust digital soil mapping models \cite{BrusEtAl2011}. Therefore, it can be 
-expected beforehand that most digital soil mapping models build for the study area will have a poor performance 
-in the Plateau Border areas.
+We expected SOC to have a stronger correlation with the DEM than with the geologic map due to its strong 
+dependence on erosion, but we observed the contrary. This result may be partially explained by the fact that 
+there is a strong relation between geology and topography in the study area \cite{Sartori2009}. Due to its 
+production process \cite{MacielFilho1990}, the geologic maps can be interpreted as an aggregated version of a 
+DEM. A second sensible explanation is that the effect of erosion on SOC is not that large because erosion was 
+considerably reduced in the last decade \cite{MiguelEtAl2012, TenCatenEtAl2012b}. A last possible explanation, 
+which integrates the previous two, is the existence of a spatial relation between SOC and CLAY, the last being 
+strongly correlated with parent material. These relations help explain why the more detailed DEM was almost as 
+beneficial as the more detailed geologic map for SOC predictions. In the case of ECEC, our expectation of a 
+strong dependency on a more detailed geologic map for producing more accurate predictions was confirmed.
 
-\subsection{Neurophysiological Responses}
+The observed benefit of the more detailed geologic map and DEM for making more accurate CLAY, SOC, and ECEC 
+predictions suggests that these soil properties are spatially related in the study area. We also hypothesize 
+that the complexity of current land use makes it difficult to achieve SOC and ECEC models with performances 
+comparable to CLAY. One important source of variation in forested areas is its use for animal grazing 
+\cite{SamuelRosaEtAl2011a}. This influences nutrient cycling and soil nutrient availability 
+\cite{SchramaEtAl2013}. Current remote sensing technology is unable to capture the data needed to proxy the 
+environmental conditions created by these processes.
 
-\subsubsection{Spatial enclosure}
+\subsection{Using More Detailed Covariates}
 
-When making soil observations, enclosed places can be biasedly oversampled due to the effect of the spatial 
-enclosure on the way that field soil modellers perceive the distances in their surrounding environment. If 
-this hypothesis is correct, then it can be expected that the two soil modellers would have located soil 
-observations at shorter distances in the Central Depression than in the Plateau, resulting in a denser soil 
-observation in the former. The same explanation is valid for the denser soil observation made in the last field
-campaigns carried out in a densely forested rugged terrain. Unfortunately the most expressive effect of the 
-spatial enclosure occurs in the same places were the soil modellers had a poorer knowledge of soil-landscape 
-relationships (Southern and Middle-Eastern sectors) and were not aware yet of the incompatibility between the 
-available resources and their goals (Southern sector).
+More detailed covariates are usually expected to improve predictions in soil mapping \cite{CavazziEtAl2013, 
+MaynardEtAl2014}. However, deciding whether to invest or not in more detailed covariates requires careful 
+thinking and depends on case-specific elements. We generally saw improvement in the predictions in our study, 
+but the improvement was not large and may not outweigh the costs. Also, the models calibrated with the more 
+detailed versions of all covariates were not the best performing models. Using more detailed satellite images 
+and land use maps degraded CLAY predictions. Although the more detailed soil map had the largest benefit for 
+CLAY, it may be too costly and impractical since its production usually requires having available more 
+detailed 
+versions of all other covariates. For SOC and ECEC, simply using a more detailed land use map resulted in 
+considerably more accurate predictions. However, the superior performance may not outweigh the extra costs 
+because producing a more detailed land use map usually requires up-to-date field observations and satellite 
+images. Thus, the decision to adopt a more detailed covariate for soil mapping will ultimately depend on a 
+trade-off between the increased accuracy and the extra budget required. It may also depend on other potential 
+applications of the covariates, but this is not our concern here.
 
-\subsubsection{Motivation shifts}
+One interesting observation is that if a less detailed covariate yields poor predictions, its more detailed 
+version has the potential to produce larger improvement in model performance. However, this is only a 
+potential, not a guarantee. For instance, \citet{EldeiryEtAl2008} were not able to increase the $R^2 = 
+0.31$ of linear regression models of soil salinity by more than \num{0.07}~points using \num{7.5}~times more 
+detailed satellite images. On the other hand, model performance is likely to be hardly improved using more 
+detailed covariates if their less detailed version has already produced accurate predictions. This agrees with 
+findings by \citet{ThompsonEtAl2001} and \citet{KimEtAl2014}.
 
-The U-shaped pattern of multi-goal pursuit shows a well fit to the soil observation process carried out by the 
-two field soil modellers in the study area. A strong motivation to follow well-known guidelines for soil 
-observation existed in the first field campaigns. The soil modellers had the goal of obtaining a coverage of 
-both attribute and geographic spaces to refine their knowledge of soil-landscape relationships and obtain a 
-dataset that provides the means to make accurate predictions of the spatial variation of soil properties. 
-Besides, this was one of the first studies under their complete responsibility, powering their initial 
-motivational status. Follows that the possibility of understanding new soil-landscape relationships represented
-a pleasant challenge for the young soil modellers. With time the soil modellers faced accessibility 
-constraints that started depleting their physiological and psychological resources. The situation became worst 
-when the soil modellers realized that the available resources and the initial goal were incompatible because 
-the costs were underestimated and due to budget cuts. They were forced to shift their focus to the outcome, 
-i.e. obtaining a \q{satisfactory} coverage of the geographic space while keeping the costs of the study 
-bellow the available amount of resources available. In other words, they had to relax their initial standards 
-to save resources (physiological, psychological and economical). The result was the reduction of the 
-observation intensity. A new motivation shift occurred when the end of the project became closer and the soil 
-modellers perceived that their resources were not completely depleted. Problem areas were visited again and the 
-free survey method used to make new soil observations in a very similar way of the first field campaigns.
+We also observed that the predictions can be degraded when using the more detailed version of covariates. In 
+our study, this happened with the satellite image (all three soil properties), land use map (CLAY) and soil 
+map (SOC and ECEC). A (small) benefit was observed only when these covariates were used along with the more 
+detailed version of other covariates. As pointed out above, such a small benefit may not outweigh the increase 
+in mapping costs. The trade-off between reducing model performance and being beneficial seems to depend on how 
+much more spatial detail a covariate will have and on its correlation with the soil property. For example, the 
+land use map was strongly correlated with SOC and ECEC, but not with CLAY, and its more detailed version had 
+\num{40}~times more spatial detail. It helped improve SOC and ECEC predictions, but degraded CLAY predictions, 
+resulting in only a small improvement when used along with the more detailed satellite image and geologic map.
 
-\subsection{Observation Model}
+If the influence of a more detailed covariate depends on the increase of spatial detail, then the priority 
+should be to improve the spatial detail of the most beneficial covariate. This requires solid subject area 
+knowledge because empirical evidence from the \emph{baseline} model may be insufficient. The most beneficial 
+covariate is not necessarily that which explained the largest part of the variance in the \emph{baseline} 
+model (see \autoref{tab:chap05-drop}). This occurs because increasing the spatial detail reduces the 
+correlation between the covariate and the soil property. And also because there is little room to improve a 
+correlation that is already high in the \emph{baseline} model. \citet{CavazziEtAl2013} suggest that the 
+more detailed covariate has an excess of detail, a \q{noise} that degrades the predictions. This could explain 
+the results for \texttt{sat}: higher resolution images can resolve smaller objects (e.g. individual plants) 
+whose spectral behaviours are highly variable, adding noise to the \texttt{sat}-soil property correlation; on 
+the other hand, lower resolution images capture collections of objects, and thus their variation is smoothed 
+out in the pixel, reducing noise.
 
-The approach presented here helped formalizing a verbal representation of the mental model of the two soil 
-scientists who produced the set of $n = 340$ soil observations in the study area. \autoref{fig:chap06-model} 
-shows one of the possible ways of depicting this model. Nearest neighbour distance is 
-used as a quantitative indicator of the progress of the observation process.
+According to information theory one should optimize (maximize) the correlation between the point soil data and 
+the covariates. This was described elsewhere as matching the \q{phenomenon scale} (the spatial pattern of the 
+soil property) with the \q{analysis scale} (the spatial pattern of the covariates) \cite{DunganEtAl2002, 
+MillerEtAl2014}. Finding the \q{optimum} requires evaluating the strength of the correlation using covariates 
+with different levels of spatial detail \cite{DragutEtAl2009, CavazziEtAl2013, MillerEtAl2015}. Our results 
+show that this approach may be too costly and impractical. Since modern soil mapping techniques explore only 
+the empirical relation among environmental conditions and soil properties \cite{Grunwald2009}, the \q{optimum}
+is a \q{conditional optimum} -- conditional on the point soil data available. It does not necessarily mean 
+that the most accurate predictions will be made, but only that there is a level of spatial detail at which the 
+correlation between the covariate and the point soil data is at a maximum. We suggest that instead more 
+comprehensive approaches should be used to explore the full potential of the available covariates (see 
+\citet{BehrensEtAl2010a} and \citet{MillerEtAl2015} for examples).
 
-\begin{figure}[!h]
- \centering
- \includegraphics[width=7cm,angle=-90]{fig/chap06-observation-model}
- \caption{Theoretical model of soil observation depicted using the proposed approach that includes elicitation 
- of expert knowledge, point pattern analysis and articulation of psychological theories of perception and 
- motivation. Phases I, II and III are guided by, respectively, means-, outcome- and means-focused motivation.}
- \label{fig:chap06-model}
-\end{figure}
+Finally, one must still judge whether the potential improvement in predictions is sufficient given the extra 
+costs involved with using more detailed covariates. If the extra budget is spent on deriving more detailed 
+covariates, we suggest that it may be better to substantially improve the detail of a less influential
+covariate than marginally increase the detail of the most influential covariate. However, other means to spend 
+the extra budget should be considered. For instance, it may be more efficient to concentrate on obtaining more 
+soil observations. These may focus on better capturing the short range spatial variation \cite{BrusEtAl2007a} 
+or improving the representation of the feature space to avoid undesirable extrapolations 
+\cite{MinasnyEtAl2006b}.
 
-In the first phase the soil modellers employed the free survey method in its strict sense. The area was 
-stratified into three primary observation units (physiographic strata) and many secondary observation units 
-(land use type). The soil modellers were strongly motivated (means-focused motivation) and started observing 
-the soil in problem areas. But they were unaware of the effects of spatial enclosure, access issues and of 
-their inexperience which resulted in an inadequate planning of field campaigns. When the soil modellers became
-aware of these effects (after a few field campaigns have already been carried out), the main goal of the 
-project had to be reviewed and planning of field campaigns reformulated. This marks the end of the first phase 
-of the observation model, which had as outcome a point pattern covering the geographic space in a fashion 
-similar to that of a spatially random sample.
+\section{CONCLUSIONS}
 
-The second phase of the observation model starts when the soil modellers are consistently less motivated than 
-when they started the observation process. This decreased motivation comes along with a new focal goal: making 
-a minimum number of observations to obtain a ``satisfactory'' geographic coverage of the area. This is achieved
-reformulating the planning of field campaigns. The free survey still is the observation method used but with 
-the location of soil observations made beforehand at approximately equally spaced intervals. In the field the 
-soil modellers are free to change this location according to their mental model of soil-landscape 
-relationships but respecting the previously established spacing between observations. They also move from 
-problem areas to those were the spatial soil pattern can be predicted more easily. When strong access issues 
-are faced, convenience sampling is employed. The objective is to save physiological, psychological and 
-economical resources. When the soil modellers realized that they had reached the new focal goal and that their
-resources were not completely depleted yet, a new effort was employed to better understand problem areas. This 
-marks the end of the second phase of the observation model, where the soil observation process was guided by an
-outcome-focused motivation. The outcome of this phase is a point pattern covering the geographic space in a 
-similar way to that of a spatially regular sample.
+This study has shown that:
 
-The last phase of the observation model starts when the soil modellers have a renewed motivation to make soil 
-observations in problem areas using the free survey method in its strict sense. Soil observations are made 
-until there are resources available. Field campaigns are better planned now because the soil modellers have 
-gained a lot of field experience. But the effects of spatial enclosure can still be present. The outcome of 
-this phase is a point pattern which has similar features to that produced in the first phase, i.e. covers the 
-geographic space in a fashion similar to that of a spatially random sample. The main difference is that the 
-number observations made is smaller as was the amount of resources available.
+\begin{enumerate}
+ \item Using more detailed covariates results in only a modest increase in the prediction accuracy of linear 
+ prediction models;
+ 
+ \item A more detailed covariate has a greater potential to improve prediction accuracy when the soil property
+ is poorly predicted by its less detailed version;
+ 
+ \item The impact on prediction accuracy when using the more detailed version of a less important covariate 
+ may depend on which other covariates are included in the model;
+ 
+ \item Choosing whether or not to invest in more detailed covariates depends on the strength of the 
+ relationship between the covariates and the soil property being modelled, and on the relative difference 
+ between the less detailed and the more detailed versions of the covariates.
+\end{enumerate}
 
-% \subsection{Next step}
-% 
-% Every modelling exercise starts with the development of a conceptual model (a verbal representation) of the 
-% reality under study. This step has been covered in the present paper. The next step constitutes developing a 
-% mathematical representation of this conceptual model, i.e. translate the verbal representation of the reality 
-% into a set of possible mathematical representations. One alternative is to use \textit{Species Distribution 
-% Models} (SDM). The basic assumption of SDM is that the spatial distribution of a phenomenon can be predicted 
-% relating sites of known occurrence with environmental co-variates available for the entire study area 
-% \cite{HenglEtAl2009e, WartonEtAl2010, HijmansEtAl2013}. Its use to model the soil observation process is 
-% possible because soil observation by means of the free survey method can be regarded as a biologic mechanism 
-% that takes place at specific sites as a function of environmental features. This biologic mechanism has the 
-% simple objective of obtaining a better knowledge of the environment (given the mental model of soil-landscape 
-% relationships of soil scientist) to make a better use of it and thus make possible the maintenance of the 
-% species through time.
-% 
-% Similar to standard ecological studies, soil observation reports are composed by presence-only data, that is, 
-% they hardly include information about the sites were soil observations were not made. In general, the total 
-% number of observed sites (including soil pits, road cuts, gullies, river banks, rock outcrops, bore holes, and 
-% many others) is larger than the recorded number of soil observations. But only soil data at modal sites usually
-% is reported by soil modellers. Besides, the observation window is hardly known because soil modellers make 
-% observations outside the reality under study and also bring their experience from soil observations in other 
-% areas. A common approach in SDM modelling to deal with presence-only data is to fit a model to predict the 
-% areas where soil observations are not likely to be made. This model is then used to produce the so-called 
-% \textit{pseudo-absence} data.
-% 
-% Once the mathematical representation of the observation model is available it can be used for scenario 
-% simulation exercises. For example, subsets of soil observations of varying sizes could be generated to simulate
-% the observation process in different budget scenarios and evaluate the effect of calibration sample size on the
-% performance of digital soil mapping models. The structure of the SDM approach applied to such exercise can be 
-% as described bellow (items from \num{1} to \num{4} follow \citeonline{HenglEtAl2009e}, while item 5 follows 
-% \citeonline{BrusEtAl2007a}):
-% 
-% \begin{enumerate}
-%  \item Estimate observation density in the geographic space using a kernel smoother;
-%  
-%  \item Estimate observation density in the feature space using factor analysis;
-%  
-%  \item Generate pseudo-absence locations of soil observations;
-%  
-%  \item Fit an universal kriging model to density values in the geographic space using environmental co-variates
-%  selected fitting a non-stationary Poisson point process model to the presence-only data;
-% 
-%  \item Select subsets of observations of varying sizes using spatial simulated annealing with the minimization 
-%  of the spatially averaged universal kriging variance as optimization criteria.
-% \end{enumerate}
-% 
-% Using an universal kriging model as the mathematical representation of the soil observation process is an 
-% attractive alternative because it allows making geostatistical simulations and spatially depicting 
-% uncertainties.
+\section*{ACKNOWLEDGEMENTS}
+
+We are grateful to Dr.~Bradley A.~Miller, from the Leibniz Centre for Agricultural Landscape Research, 
+M\"uncheberg, Germany, for his comments during the revision of the manuscript. The following colleagues 
+collaborated in different phases of data collection and/or processing: Dr.~Ricardo Simão Diniz Dalmolin, 
+Dr.~Edgardo Ramos Medeiros and Jean Michel Moura Bueno (UFSM), Dr.~Pablo Miguel (UFPel), Dr.~Mauro Antonio 
+Homem Antunes, Fábio Paes Leme Ferreira, and Anastácia Perci Campos de Almeida (UFRRJ), and Luis Fernando 
+Chimelo Ruiz (UFRGS). We are grateful to Dr.~Bas Kempen, Dr.~Tom Hengl, and Marcos Angelini (ISRIC) for their 
+helpful comments during the conception of the study and data analysis. We also thank the development teams and 
+module/package authors of the many free and open source software (FOSS) and operational system (OS) that were 
+used to develop our study. The first author was supported by the CAPES Foundation, Ministry of Education of 
+Brazil (Process BEX 11677/13-9). The last author was supported by the CNPq foundation, Ministry of Science and 
+Technology of Brazil. The use of the RapidEye images is endorsed by the Corporate Commitment Agreement signed 
+between the Federal Rural University of Rio de Janeiro and the Brazilian Ministry of the Environment.
