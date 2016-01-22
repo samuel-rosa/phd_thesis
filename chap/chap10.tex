@@ -2,7 +2,17 @@
 \chapter{GENERAL CONCLUSION}
 \label{chap:conclusion}
 
-\autoref{chap:chap05} has demonstrated that the existing, freely available covariates are suitable for 
+This thesis has made a local pedological contribution with the development of a comprehensive description of 
+the soil-forming factors and processes that determine the spatio-temporal distribution of soil properties of 
+the study site where the study cases were conducted. The conceptual model of pedogenesis, presented in 
+\autoref{chap:chap03}, showed that the spatial distribution of soil properties is highly variable, even when 
+under the same land use. At large spatial scales, this spatial variation is determined by the geological and 
+geomorphological diversity of the area, while at small spatial scales, past and current (poor) agricultural 
+practices seem to play a major role. Along with the conceptual model of pedogenesis, \autoref{chap:chap04} and 
+\autoref{chap:chap05} constitute a technical contribution of this thesis. These chapters provide the bases for 
+future soil spatial modelling exercises in the study site.
+
+\autoref{chap:chap06} has demonstrated that the existing, freely available covariates are suitable for 
 calibrating soil spatial models. It was shown that using more detailed covariates results in only a modest 
 increase in the prediction accuracy of linear soil spatial models. The observed increase is comparable to the 
 effect of incorporating spatial dependence in the soil spatial model, and may not outweigh the extra costs of 
@@ -16,7 +26,7 @@ less influential covariate than marginally increase the detail of the most influ
 should always consider if more efficient means of increasing prediction accuracy exist (e.g. obtaining more 
 soil observations).
 
-\autoref{chap:chap06} showed that several factors influence how field soil spatial modellers decide upon where 
+\autoref{chap:chap07} showed that several factors influence how field soil spatial modellers decide upon where 
 to place soil observation locations. These are of three types: conceptual, operational, and psychological. The 
 first concerns the knowledge of the soil spatial modellers about soil-landscape relationships, and seems to be 
 connected with the years of field experience. The second relates with the available resources (infrastructure, 
@@ -29,5 +39,16 @@ Depending on the focal goal, the resulting point pattern resembles a random (tes
 soil-landscape relationships -- means-focused motivation) or a regular (maximizing the number of observations 
 -- outcome-focused motivation) spatial sample.
 
-   
+\autoref{chap:chap08} showed that the conditioned Latin hypercube sampling, a popular method used for 
+optimizing spatial sample configurations for spatial trend estimation, can be conceptually and algorithmically 
+improved. Compared to the original implementation, the proposed improvements resulted in a sampling algorithm 
+with a better numerical behaviour.
 
+\autoref{chap:chap09} 
+
+Finally, this thesis has contributed with two R-packages. The first (\texttt{pedometrics}) contains 
+miscellaneous functions designed during the development of the chapters that compose this thesis. The second, 
+contains functions to optimize sample configurations to identify and estimate the variogram and spatial trend, 
+and make spatial predictions. The later was developed as part of \autoref{chap:chap08} and 
+\autoref{chap:chap09}. Both are freely available and can be obtained from the The Comprehensive R Archive 
+Network (\cran).
