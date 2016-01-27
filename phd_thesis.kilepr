@@ -323,12 +323,12 @@ order=3
 
 [item:chap/chap10.tex]
 archive=true
-column=22
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=46
+line=0
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:chap/preface.tex]
@@ -423,12 +423,12 @@ order=-1
 
 [item:phd_thesis.tex]
 archive=true
-column=91
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=175
+line=0
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [view-settings,view=0,item:UFRuralRJ.cls]
