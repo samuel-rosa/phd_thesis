@@ -1,6 +1,6 @@
 \artigotrue
 \chapter{DO MORE DETAILED COVARIATES DELIVER MORE ACCURATE SOIL MAPS?}
-\label{chap:chap05}
+\label{chap:chap06}
 
 % User defined commands
 \def\elev{\texttt{ELEV}} % elevation
@@ -54,20 +54,25 @@ soil maps. We used a case study from Southern Brazil to map clay content (CLAY),
 and effective cation exchange capacity (ECEC) of the topsoil for a \SI{\approx2000}{\hectare} area located on 
 the edge of the plateau of the Paraná Sedimentary Basin. Five covariates, each with two levels of spatial 
 detail were used: area-class soil maps, digital elevation models (DEM), geologic maps, land use maps, and 
-satellite images. Thirty-two multiple linear regression models were calibrated for each soil property using all 
+satellite images. Thirty-two multiple linear regression models were calibrated for each soil property using 
+all 
 spatial detail combinations of the covariates. For each combination, stepwise regression was used to select 
 predictor variables incorporated in the model. Model evaluation was done using the adjusted R-square of the 
 regression. The baseline model, calibrated with the less detailed version of each covariate, and the best 
 performing model were used to calibrate two linear mixed models for each soil property. Model parameters were 
-estimated using restricted maximum likelihood. Spatial prediction was performed using the empirical best linear 
+estimated using restricted maximum likelihood. Spatial prediction was performed using the empirical best 
+linear 
 unbiased predictor. Validation of baseline and best performing linear multiple regression and linear mixed 
-models was done using cross-validation. Results show that for CLAY the prediction accuracy did not considerably 
+models was done using cross-validation. Results show that for CLAY the prediction accuracy did not 
+considerably 
 improve by using more detailed covariates. The amount of variance explained increased only \num{\sim2} 
 percentage points (\si{\pp}), less than that obtained by including the kriging step, which explained 
-\SI{4}{\pp}. On the other hand, prediction of SOC and ECEC improved by \SI{\sim13}{\pp} when the baseline model 
+\SI{4}{\pp}. On the other hand, prediction of SOC and ECEC improved by \SI{\sim13}{\pp} when the baseline 
+model 
 was replaced by the best performing model. Overall, the increase in prediction performance was modest and may 
 not outweigh the extra costs of using more detailed covariates. It may be more efficient to spend extra 
-resources on collecting more soil observations, or increasing the detail of only those covariates that have the 
+resources on collecting more soil observations, or increasing the detail of only those covariates that have 
+the 
 strongest improvement effect. In our case study, the latter would only work for SOC and ECEC, by investing in 
 a more detailed land use map and possibly also a more detailed geologic map and DEM.
 \end{chapterabstract}
@@ -75,7 +80,7 @@ a more detailed land use map and possibly also a more detailed geologic map and 
 \formatchapter
 
 \section{INTRODUCTION}
-\label{sec:chap05-intro}
+\label{sec:chap06-intro}
 
 \titlenote{This chapter is based on A.~Samuel-Rosa, G.B.M.~Heuvelink, G.M.~Vasques, L.H.C.~Anjos. Do more 
 detailed covariates deliver more accurate soil maps? \emph{Geoderma}, v.243--244, p.214--227, 2015. Terms and 
@@ -86,7 +91,8 @@ clarification.}
 Modern soil mapping relies on the use of statistical models to produce digital representations of spatial 
 soil distribution using point soil observations and spatially exhaustive covariates \cite{McBratneyEtAl2003, 
 ScullEtAl2003, Florinsky2012}. Three important weaknesses in the statistical soil distribution modelling 
-approach can be pointed out. First, it requires sufficient and appropriately distributed point soil data within 
+approach can be pointed out. First, it requires sufficient and appropriately distributed point soil data 
+within 
 the area being mapped \cite{CarreEtAl2007a}. Second, the model structure explores only the empirical 
 relationship among environmental conditions and soil properties, being less comprehensive than soil-landscape 
 process models \cite{Grunwald2009}. Last, the covariates are only approximations of the true environmental 
@@ -100,37 +106,46 @@ More recently, there has been a growing interest in understanding how the charac
 influence the success of soil mapping -- this study contributes to this effort. It is commonly accepted that 
 the more resources are spent on the construction of a covariate and the more spatial information it has, the 
 more accurately it describes the environmental conditions \cite{HupyEtAl2004, HenglEtAl2013a}. It is also 
-generally believed that such \emph{more detailed} covariates will be more valuable for soil mapping and lead to 
+generally believed that such \emph{more detailed} covariates will be more valuable for soil mapping and lead 
+to 
 more accurate soil property predictions \cite{CavazziEtAl2013, MaynardEtAl2014}. If these more detailed 
-covariates convey more information and represent more adequately the environmental conditions -- the drivers of 
-soil forming processes --, then it is fair to expect that they improve the accuracy of the resulting soil maps. 
+covariates convey more information and represent more adequately the environmental conditions -- the drivers 
+of 
+soil forming processes --, then it is fair to expect that they improve the accuracy of the resulting soil 
+maps. 
 However, some studies have shown the contrary \cite{ThompsonEtAl2001, EldeiryEtAl2008, KimEtAl2014}. For 
 example, the window size at which DEM derivatives are calculated can be more important than the spatial 
 resolution of the DEM \cite{Wood1996, ZhuEtAl2008, BehrensEtAl2010a}. The uncertainty about the added value of 
-using more detailed covariates is of concern for those seeking to use resources efficiently, because using more 
+using more detailed covariates is of concern for those seeking to use resources efficiently, because using 
+more 
 detailed covariates generally increases soil mapping costs \cite{ShiEtAl2012}.
 
-The objective of this study was to evaluate whether investing in more detailed covariates improves the accuracy 
+The objective of this study was to evaluate whether investing in more detailed covariates improves the 
+accuracy 
 of soil maps. The main difference of our study to previous ones is that we use a rigorous statistical approach 
-to assess the added value of using five more detailed covariates simultaneously. We used a case study in Brazil 
+to assess the added value of using five more detailed covariates simultaneously. We used a case study in 
+Brazil 
 to compare the accuracy of maps of the clay content, organic carbon content and effective cation exchange 
 capacity of the topsoil as obtained from regression kriging on the five covariates, whereby each covariate was 
 evaluated on two levels of spatial detail.
 
 \section{MATERIAL AND METHODS}
-\label{sec:chap05-methods}
+\label{sec:chap06-methods}
 
 \subsection{Study Area and Soil Data}
-\label{subsec:chap05-soil-data}
+\label{subsec:chap06-soil-data}
 
 The study area constitutes a small catchment (\SI{\sim2000}{\hectare}) located on the southern edge of the 
-plateau of the Paraná Sedimentary Basin, Rio Grande do Sul, Brazil (\autoref{fig:chap05-location}). The climate 
+plateau of the Paraná Sedimentary Basin, Rio Grande do Sul, Brazil (\autoref{fig:chap06-location}). The 
+climate 
 is classified as Cfa (K\"oppen -- subtropical humid without a dry season) with mean annual temperature of 
 \SI{19.3}{\celsius}, and mean annual precipitation of \SI{1708}{\mm}, well distributed throughout the year 
 \cite{Maluf2000}. Relief varies between plain (slope between \num{0} and \SI{3}{\percent}) and mountainous 
 (slope between \num{45} and \SI{100}{\percent}), and elevations range between \num{140} and \SI{475}{\m}. 
-Geology consists of basic, intermediate and acid igneous rocks (rhyolite-rhyodacite and andesite-basalt) of the 
-Cretaceous period, consolidated sedimentary rocks (aeolian and fluvial sandstones) of the Triassic and Jurassic 
+Geology consists of basic, intermediate and acid igneous rocks (rhyolite-rhyodacite and andesite-basalt) of 
+the 
+Cretaceous period, consolidated sedimentary rocks (aeolian and fluvial sandstones) of the Triassic and 
+Jurassic 
 periods, and non-consolidated (fluvial and colluvial deposits) of the Quaternary period 
 \cite{GasparettoEtAl1988, MacielFilho1990, Sartori2009}. Native semi-deciduous forests occupy more than 
 half of the area, followed by native grassland used for animal husbandry, semi-deciduous shrubland, annual 
@@ -140,19 +155,19 @@ crop agriculture, forestry (Eucalyptus), urban areas, and artificial water bodie
  \centering
  \begin{minipage}[b]{95mm}
   \subcaption{}
-  \label{fig:chap05-brazil}
+  \label{fig:chap06-brazil}
   \centering
   \includegraphics[width=90mm]{fig/chap05FIG1a}
  \end{minipage}
  \begin{minipage}[b]{95mm}
   \subcaption{}
-  \label{fig:chap05-points}
+  \label{fig:chap06-points}
   \centering
   \includegraphics[width=90mm]{fig/chap05FIG1b}
  \end{minipage}
  \caption{Location of the study area in Santa Maria (a) and spatial distribution of the point soil observations
  and drainage network (b).}
- \label{fig:chap05-location}
+ \label{fig:chap06-location}
 \end{figure}
 
 A dataset containing $n = 350$ point soil observations collected between \num{2004} and \num{2011} 
@@ -211,19 +226,19 @@ with \textit{P} and \textit{O}, which is supported by its natural relationship w
  \end{minipage}
  \caption{Histogram, empirical density function, and summary statistics of CLAY (a, b), SOC (c, d), and ECEC 
  (e, f) in the original (left) and Box-Cox feature spaces (right).}
- \label{fig:chap05-soil-properties}
+ \label{fig:chap06-soil-properties}
 \end{figure}
 
-Point soil data, here denoted by $Y(s)$, showed a positive skew (\autoref{fig:chap05-soil-properties}) and was 
+Point soil data, here denoted by $Y(s)$, showed a positive skew (\autoref{fig:chap06-soil-properties}) and was 
 normalized, $Y'(s)$, using the Box-Cox family of power transformations, where $Y'(s) = (Y(s)^{\lambda} - 1) / 
 \lambda$, if $\lambda > 0$, and $Y'(s) = log(Y(s))$, if $\lambda = 0$ \cite{DiggleEtAl2007}. Lambda 
 ($\lambda$) values were selected empirically \cite{FoxEtAl2011}. Because the resulting distribution of the 
-back-transform (see \autoref{subsec:chap05-validation}) has no expectation when $\lambda < 0$ 
+back-transform (see \autoref{subsec:chap06-validation}) has no expectation when $\lambda < 0$ 
 \cite{RibeiroEtAl2001}, a logarithm transformation ($\lambda = 0$) was used when a negative $\lambda$ was 
 estimated (SOC and ECEC).
 
 \subsection{Covariates}
-\label{subsec:chap05-sources}
+\label{subsec:chap06-sources}
 
 Five freely available covariates were evaluated in this study, each with two levels of spatial detail: 
 area-class soil maps (\texttt{soil}), geologic maps (\texttt{geo}), land use maps (\texttt{land}), digital 
@@ -245,7 +260,7 @@ modelling. Since the transformation is different for categorical and continuous 
 explained below for each type separately.
 
 \subsubsection{Categorical predictor variables}
-\label{subsubsec:chap05-categorical-covars}
+\label{subsubsec:chap06-categorical-covars}
 
 Area-class soil maps, geologic maps and land use maps are categorical covariates (factors). Mapping units are 
 the $k$ factor levels that are transformed to as many dummy (indicator, binary) variables as there are factor 
@@ -254,94 +269,94 @@ class is present, and zero (\num{0}) otherwise \cite{Everitt2006}. If the number
 falling inside the spatial domain of a mapping unit is too small to accurately estimate a regression 
 coefficient (we used a threshold of $n = 15$ observations), the mapping unit is merged with a similar mapping 
 unit prior to calculating dummy variables. The resulting generalized categorical covariate maps are shown in 
-\autoref{fig:chap05-cat-covars}. The binary maps are the categorical predictor variables.
+\autoref{fig:chap06-cat-covars}. The binary maps are the categorical predictor variables.
 
 \noindent\textit{Soil maps}. The less detailed soil map (\soilOld) was published with a \scale{100000} and 
-has five mapping units \cite{AzolinEtAl1988} (\autoref{fig:chap05-soil-old}). It was produced using existing 
+has five mapping units \cite{AzolinEtAl1988} (\autoref{fig:chap06-soil-old}). It was produced using existing 
 soil maps and technical reports (\scale{750000}) \cite{Brasil1973}, aerial photographs (\scale{60000}), 
 topographic maps (\scale{50000}), and sparse point soil observations along the road network. The more detailed 
 soil map (\soilNew) was prepared with a \scale{25000} and has eight mapping units \cite{MiguelEtAl2012} 
-(\autoref{fig:chap05-soil-new}). It was produced using high spatial resolution satellite images 
+(\autoref{fig:chap06-soil-new}). It was produced using high spatial resolution satellite images 
 (\SI{65}{\cm}), existing soil maps and technical reports published with a \scale{50000} \cite{Poelking2007} 
 and \num{1}:\num{25000} \cite{PedronEtAl2006b}, topographic maps (\scale{25000}), and descriptions from 
 \num{\sim350} point soil observations. Five dummy predictor variables were derived from \soilOld{} and seven 
-from \soilNew{} (\autoref{tab:chap05-soil-covars}).
+from \soilNew{} (\autoref{tab:chap06-soil-covars}).
 
 \begin{figure}[!ht]
  \centering
  \begin{minipage}[b]{63mm}
   \subcaption{Cartographic scale: \num{1}:\num{100000}}
-  \label{fig:chap05-soil-old}
+  \label{fig:chap06-soil-old}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG3a}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{Cartographic scale: \num{1}:\num{25000}}
-  \label{fig:chap05-soil-new}
+  \label{fig:chap06-soil-new}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG3d}
  \end{minipage}    
  \begin{minipage}[b]{63mm}
   \subcaption{Cartographic scale: \num{1}:\num{50000}}
-  \label{fig:chap05-geo-old}
+  \label{fig:chap06-geo-old}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG3b}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{Cartographic scale: \num{1}:\num{25000}}
-  \label{fig:chap05-geo-new}
+  \label{fig:chap06-geo-new}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG3e}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{Cartographic scale: \num{1}:\num{500000}}
-  \label{fig:chap05-land-old}
+  \label{fig:chap06-land-old}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG3c}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{Cartographic scale: \num{1}:\num{2000}}
-  \label{fig:chap05-land-new}
+  \label{fig:chap06-land-new}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG3f}
  \end{minipage}
  \caption{Area-class soil maps (a, b), geologic maps (c, d), and land use maps (e, f) compared in our study. 
  The less detailed version is displayed at the left, while the more detailed version is shown on the right. 
  Legend abbreviations and derived dummy variables are described in Tables
- \ref{tab:chap05-soil-covars}--\ref{tab:chap05-land-covars}.}
- \label{fig:chap05-cat-covars}
+ \ref{tab:chap06-soil-covars}--\ref{tab:chap06-land-covars}.}
+ \label{fig:chap06-cat-covars}
 \end{figure}
 
 \noindent\textit{Geologic maps}. The less detailed geologic map (\geoOld) was produced using topographic maps 
-with \scale{50000} \cite{GasparettoEtAl1988} (\autoref{fig:chap05-geo-old}). The more detailed geologic map 
+with \scale{50000} \cite{GasparettoEtAl1988} (\autoref{fig:chap06-geo-old}). The more detailed geologic map 
 (\geoNew) was produced using topographic maps with \scale{25000}, and includes the location of overlaying 
-Quaternary sedimentary deposits \cite{MacielFilho1990} (\autoref{fig:chap05-geo-new}). \geoNew{} did not cover 
+Quaternary sedimentary deposits \cite{MacielFilho1990} (\autoref{fig:chap06-geo-new}). \geoNew{} did not cover 
 a small part in the North of the study area, where \geoOld{} was used instead (this strategy was approved by 
 experts on the local geology). The mapping unit of both geologic maps depicting the Caturrita Formation was 
 used indirectly by deriving dummy predictor variables from all other individual mapping units. Three dummy 
-predictor variables were derived from \geoOld{} and four from \geoNew{} (\autoref{tab:chap05-geology-covars}).
+predictor variables were derived from \geoOld{} and four from \geoNew{} (\autoref{tab:chap06-geology-covars}).
 
 \noindent\textit{Land use maps}. The less detailed land use map (\landOld) was produced by manually digitizing 
 land use data included in topographic maps with a \scale{25000} \cite{DSG1980, DSG1992, DSG1992a} 
-(\autoref{fig:chap05-land-old}). The more detailed land use map (\landNew) was prepared (\scale{2000}) by 
+(\autoref{fig:chap06-land-old}). The more detailed land use map (\landNew) was prepared (\scale{2000}) by 
 manual digitization using \SI{65}{\cm} spatial resolution satellite images covering the years \num{2008} and 
-\num{2009} \cite{SamuelRosaEtAl2011a} (\autoref{fig:chap05-land-new}). Mapping units depicting human 
+\num{2009} \cite{SamuelRosaEtAl2011a} (\autoref{fig:chap06-land-new}). Mapping units depicting human 
 settlements and water bodies ($n = 0$) were not masked out from the prediction grid and were merged with other 
 mapping units to derive dummy predictor variables. Five dummy predictor variables were derived from \landNew{} 
-and two from \landOld{} (\autoref{tab:chap05-land-covars}).
+and two from \landOld{} (\autoref{tab:chap06-land-covars}).
 
 \subsubsection{Continuous predictor variables}
-\label{subsubsec:chap05-continuous-covars}
+\label{subsubsec:chap06-continuous-covars}
 
 \def\arcgis{\href{http://resources.arcgis.com/en/help/main/10.1/index.html}{ArcGIS}}
 
 The less detailed DEM (\demOld) is the hole-filled SRTM DEM version~\num{4} \cite{JarvisEtAl2008} 
-(\autoref{fig:chap05-dem-old}). The spatial sampling support of the SRTM DEM is \SI{1}{\arcsecond} 
+(\autoref{fig:chap06-dem-old}). The spatial sampling support of the SRTM DEM is \SI{1}{\arcsecond} 
 (\SI{\sim30}{\m}), but elevation data were aggregated to \SI{3}{\arcsecond} (\SI{\sim90}{\m}) for public 
 release in regions outside the United States \cite{ReuterEtAl2007}. The more detailed DEM (\demNew) was 
 produced by interpolating contour lines with vertical spacing of \SI{10}{\m} along with data about the 
 drainage network, lakes and peaks digitized from topographic maps with \scale{25000} 
-(\autoref{fig:chap05-dem-new}). Interpolation to \SI{5}{\m} pixel size was performed using a hydrologically 
+(\autoref{fig:chap06-dem-new}). Interpolation to \SI{5}{\m} pixel size was performed using a hydrologically 
 correct algorithm implemented in \arcgis{} software by ESRI \cite{Hutchinson1989}. Contour line artefacts were 
 minimized using a seven by seven low-pass filter (\grass{r.neighbors}). The window size was chosen such that 
 the smoothed DEM best matched the original contour map while also respecting the original drainage network 
@@ -357,32 +372,32 @@ pattern.
  \centering
  \begin{minipage}[b]{63mm}
   \subcaption{Spatial resolution: \SI{90}{\m}}
-  \label{fig:chap05-dem-old}
+  \label{fig:chap06-dem-old}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG4a}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{Spatial resolution: \SI{30}{\m}}
-  \label{fig:chap05-sat-old}
+  \label{fig:chap06-sat-old}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG4b}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{Vertical spacing of contours: \SI{10}{\m}}
-  \label{fig:chap05-dem-new}
+  \label{fig:chap06-dem-new}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG4c}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{Spatial resolution: \SI{5}{\m}}
-  \label{fig:chap05-sat-new}
+  \label{fig:chap06-sat-new}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG4d}
  \end{minipage}
  \caption{Digital elevation models (a, c) and satellite images, depicted using the normalized difference
  vegetation index (b, d), compared in our study. The less detailed version is displayed at the top, while the 
  more detailed version is shown on the bottom.}
- \label{fig:chap05-con-covars}
+ \label{fig:chap06-con-covars}
 \end{figure}
 
 Eight DEM derivatives were calculated: elevation (\elev), slope (\slp), aspect (\asp), northernness (\nor), 
@@ -398,10 +413,10 @@ DEM.
 
 The less detailed satellite image was acquired by the Landsat-\num{5} Thematic Mapper on December \num{26}, 
 \num{2010} (available at Instituto Nacional de Pesquisas Espaciais - Divisão de Geração de Imagens -- 
-\inpedgi) (\autoref{fig:chap05-sat-old}). It has \SI{8}{\bit} radiometric resolution and \SI{\sim30}{\m} 
+\inpedgi) (\autoref{fig:chap06-sat-old}). It has \SI{8}{\bit} radiometric resolution and \SI{\sim30}{\m} 
 spatial resolution. Spectral bands were orthorectified (Geomatica OrthoEngine) and radiometrically corrected 
 (\grass{i.landsat.toar}). The more detailed satellite image comes from the RapidEye constellation (available 
-at Ministério do Meio Ambiente -- \mma) (\autoref{fig:chap05-sat-new}). It was acquired on November \num{16}, 
+at Ministério do Meio Ambiente -- \mma) (\autoref{fig:chap06-sat-new}). It was acquired on November \num{16}, 
 \num{2012}, has \SI{16}{\bit} radiometric resolution, \SI{6.5}{\m} spatial resolution, and was orthorectified 
 to \SI{5}{\m} spatial resolution. Both images were atmospherically (6S atmospheric model 
 \cite{VermoteEtAl1997}, \grass{i.atcorr}) and topographically corrected (\grass{i.topo.corr}). Derived 
@@ -410,7 +425,7 @@ difference vegetation index - NDVI, and soil-adjusted vegetation index - SAVI). 
 variables were derived from the Landsat-5~TM image and nine from the RapidEye image.
 
 \subsubsection{Additional processing}
-\label{subsubsec:chap05-sources-processing}
+\label{subsubsec:chap06-sources-processing}
 
 Soil maps, geologic maps, land use maps, and satellite images were registered with the prediction grid 
 (\SI{5}{\m} pixel size) using nearest neighbour resampling. \demOld{} was registered using cubic resampling 
@@ -418,7 +433,7 @@ Soil maps, geologic maps, land use maps, and satellite images were registered wi
 \cite{Samuel-RosaEtAl2014}.
 
 \subsection{Linear Mixed Model of Spatial Variation}
-\label{subsec:chap05-lmm}
+\label{subsec:chap06-lmm}
 
 We model each of the soil properties of interest as the outcome of a spatial stochastic process. The model is 
 composed of fixed and random effects \cite{HeuvelinkEtAl2001, LarkEtAl2006}. We use the point soil 
@@ -432,7 +447,7 @@ explained by the covariates \cite{Cressie1993}. It is represented by a spatially
 distributed random variable, that is assumed stationary in the mean and covariance. Thus, the linear mixed 
 model of spatial variation that we employed is given by
 
-\begin{equation}\label{eq:chap05-lmm}
+\begin{equation}\label{eq:chap06-lmm}
  Y'(\textbf{s}) = m(\textbf{s}) + e(\textbf{s}) 
                 = \sum_{j=0}^{p} \beta_{j}\cdot X_{j}(\textbf{s}) + e(\textbf{s}),
 \end{equation}
@@ -446,7 +461,7 @@ predictor variables. Variable $X_{0}(\textbf{s})$ is taken as unity so that $\be
 
 We calibrated $m = 2^5 = 32$ multiple linear regression models for each soil property (fitted using ordinary 
 least squares, OLS) to model the deterministic trend for each combination of the five covariates (recall from 
-\autoref{sec:chap05-intro} that each covariate is available at two levels of spatial detail, hence $2^5$ 
+\autoref{sec:chap06-intro} that each covariate is available at two levels of spatial detail, hence $2^5$ 
 combinations). The number of predictor variables used to calibrate each model varied among combinations 
 between 
 $p = 52$ and $p = 62$, because more detailed covariates enabled the derivation of a larger number of predictor 
@@ -467,13 +482,13 @@ of predictor variables included in the models was omitted because this was beyon
 The multiple linear regression model calibrated using only the less detailed covariates, which we call the 
 \emph{baseline} model, and the multiple linear regression model with the highest ${R}^{2}_{adj}$, which we 
 call the \emph{best performing} model, were extended to linear mixed models of spatial variation 
-(\autoref{eq:chap05-lmm}) for each soil property. Estimation of the parameters of the linear mixed models was 
+(\autoref{eq:chap06-lmm}) for each soil property. Estimation of the parameters of the linear mixed models was 
 performed using residual (restricted, marginal) maximum likelihood (REML) \cite{RibeiroEtAl2001, 
 LarkEtAl2004}. The spatial correlation function adopted was the exponential function (this is equivalent to 
 the Matérn correlation function with smoothness parameter $\nu = 0.5$ \cite{Stein1999}).
 
 \subsubsection{Model validation}
-\label{subsec:chap05-validation}
+\label{subsec:chap06-validation}
 
 Only the \emph{baseline} and \emph{best performing} multiple linear regression and linear mixed models 
 calibrated for each soil property were validated. Model validation was performed using leave-one-out 
@@ -506,7 +521,7 @@ by
 the model. The AVE ranges from \num{0} to \num{100}, where $\textit{AVE} = 100$ is the optimal value.
 
 \subsubsection{Spatial prediction}
-\label{subsec:chap05-prediction}
+\label{subsec:chap06-prediction}
 
 Only the \emph{baseline} and \emph{best performing} linear mixed models calibrated for each soil property were 
 used for spatial prediction. Spatial predictions at a fine grid of \num{\sim800000} point locations were made 
@@ -516,15 +531,15 @@ effects (EBLUP) \cite{LarkEtAl2006}. EBLUP with a fixed effect model is conceptu
 with 
 external drift and regression kriging, and mathematically equivalent to kriging with external drift and 
 universal kriging. Point predicted values and prediction error variances were back-transformed to the original 
-soil property space using stochastic simulation as described above (\autoref{subsec:chap05-validation}).
+soil property space using stochastic simulation as described above (\autoref{subsec:chap06-validation}).
 
 \section{RESULTS}
-\label{sec:chap05-results}
+\label{sec:chap06-results}
 
 \subsection{Model Series Plots}
 
 The model series plot is a graphical description of the relation between the prediction accuracy of multiple 
-linear regression models and the covariates used to calibrate them (\autoref{fig:chap05-model-series}). The 
+linear regression models and the covariates used to calibrate them (\autoref{fig:chap06-model-series}). The 
 magnitude of improvement in prediction accuracy is depicted in the bottom panel with the ${R}^{2}_{adj}$. The 
 top panel is interpreted both horizontally and vertically. In the vertical direction we identify which version 
 of each covariate was used to calibrate a given model. The less and the more detailed versions are identified 
@@ -553,7 +568,7 @@ the model with the lowest ${R}^{2}_{adj}$, which we call the \emph{poorest perfo
  covariate are identified with the yellow (bright) and green (dark) colours, respectively. Multiple linear 
  regression models were ranked using their ${R}^{2}_{adj}$. Triangles show the mean ranking of the more 
  detailed covariates (i.e. centre of green cells).}
- \label{fig:chap05-model-series}
+ \label{fig:chap06-model-series}
 \end{figure}
 
 The row-wise analysis of the model series plots shows if a model calibrated with the more detailed version of 
@@ -608,7 +623,7 @@ detailed satellite image and the more detailed soil map and/or DEM.
 
 The patterns observed in the model series plots resulted from the change (increase or decrease) of the 
 importance of each covariate on explaining the variance when the more detailed version was used 
-(\autoref{tab:chap05-drop}). We used the \emph{baseline} and \emph{most detailed} models to quantify this 
+(\autoref{tab:chap06-drop}). We used the \emph{baseline} and \emph{most detailed} models to quantify this 
 change. Each model was refitted dropping one covariate at a time. The difference $\Delta$ between the 
 ${R}^{2}_{adj}$ of the model calibrated with all five $q$ covariates (${R}^{2}_{adj}{}_{q = 5}$) and the model 
 calibrated without the $q$-th covariate ($R^{2}_{adj}{}_{q = 5 - 1}$) was calculated. The more positive 
@@ -633,7 +648,7 @@ the SOC (\num{14}) and ECEC (\num{12}) model series plots.
 distances reduces the ability of modelling the behaviour of the variogram near the origin as a whole.}}
 
 The small improvement in the prediction accuracy of the CLAY linear mixed model calibrated with the more 
-detailed covariates is evidenced by \autoref{fig:chap05-lmm}. The shape of the experimental variogram is very 
+detailed covariates is evidenced by \autoref{fig:chap06-lmm}. The shape of the experimental variogram is very 
 similar for both \emph{baseline} and \emph{best performing} linear mixed models, which is also true for SOC 
 and ECEC. However, the sill variance had a very small reduction for CLAY compared to SOC and ECEC. The last 
 two showed a more considerable improvement in prediction accuracy. It can also be seen that the number of 
@@ -658,13 +673,13 @@ for ECEC.
  \end{minipage}
  \caption{Experimental variogram (dots) and REML fit of the linear mixed models (line) for CLAY (a), SOC (b), 
  and ECEC (c). Left -- baseline model. Right -- best performing model.}
- \label{fig:chap05-lmm}
+ \label{fig:chap06-lmm}
 \end{figure}
 
 \subsection{Validation}
 
 The LOO\-/CV results indicate that the linear mixed models for CLAY are slightly positively biased, while 
-those for SOC and ECEC are slightly negatively biased (\autoref{tab:chap05-cv-stats}). For both CLAY and ECEC, 
+those for SOC and ECEC are slightly negatively biased (\autoref{tab:chap06-cv-stats}). For both CLAY and ECEC, 
 the \textit{MAE} shows that these models are more accurate than the multiple linear regression models, 
 suggesting that the kriging step improves the prediction accuracy.
 
@@ -679,20 +694,20 @@ error variance were obtained by both CLAY linear mixed models, and the ECEC base
 For CLAY, the increase in the \textit{AVE} was larger when including a kriging step ($\Delta\textit{AVE} = 
 \SI{3.9}{\pp}$) than when using more detailed covariates ($\Delta\textit{AVE} = \SI{1.6}{\pp}$). In the case 
 of SOC, including a kriging step reduced the \textit{AVE} by \SI{3.2}{\pp}, and for ECEC, both strategies 
-increased the \textit{AVE} (\autoref{tab:chap05-cv-stats}).
+increased the \textit{AVE} (\autoref{tab:chap06-cv-stats}).
 
 \subsection{Spatial Prediction}
 
 Both \emph{baseline} and \emph{best performing} linear mixed models captured the same overall pattern of 
-spatial variation of the soil properties (\autoref{fig:chap05-kriging}). The main difference is that the 
+spatial variation of the soil properties (\autoref{fig:chap06-kriging}). The main difference is that the 
 spatial patterns of the different covariates used to calibrate each model produced different features in the 
 prediction maps. For example, the CLAY map produced by the best performing model 
-(\autoref{fig:chap05-clay-best-pred}) displays abrupt changes in the predicted values in the north-north-east 
+(\autoref{fig:chap06-clay-best-pred}) displays abrupt changes in the predicted values in the north-north-east 
 due to the use of the more detailed soil map. Strongly-marked features following the stream network obtained 
-through the use of the more detailed DEM are also observed (\autoref{fig:chap05-clay-best-pred} and 
-\autoref{fig:chap05-clay-best-var}).
+through the use of the more detailed DEM are also observed (\autoref{fig:chap06-clay-best-pred} and 
+\autoref{fig:chap06-clay-best-var}).
 
-SOC maps (\autoref{fig:chap05-soc-best-pred} and \autoref{fig:chap05-soc-best-var}) show peculiar features in 
+SOC maps (\autoref{fig:chap06-soc-best-pred} and \autoref{fig:chap06-soc-best-var}) show peculiar features in 
 the central part of the study area, where predictions reached values as high as \SI{507}{\gram\per\kilo\gram}, 
 while the maximum value in the calibration data is \SI{163}{\gram\per\kilo\gram}. The extremely high predicted 
 values resulted from the inclusion of the topographic position index derived from the more detailed DEM, using 
@@ -703,7 +718,7 @@ explains the extremely high predicted values for SOC. Abrupt changes in predicte
 locations with low to moderate SOC (\SIrange{40}{80}{\gram\per\kilo\gram}). This is caused by using the more 
 detailed land use map.
 
-Predicted ECEC (\autoref{fig:chap05-ecec-base-pred} and \autoref{fig:chap05-ecec-best-pred}) had a large 
+Predicted ECEC (\autoref{fig:chap06-ecec-base-pred} and \autoref{fig:chap06-ecec-best-pred}) had a large 
 dependency on land use and geologic maps. Several features observed in the prediction maps derive from these 
 two covariates. The influence of land use is seen in the northern part, while in the western, central, and 
 eastern parts the influence of both covariates create an irregular pattern in the spatial distribution of 
@@ -714,88 +729,88 @@ spatial pattern of the covariates.
  \centering
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-clay-base-pred}
+  \label{fig:chap06-clay-base-pred}
   \centering
   \includegraphics[width=63mm]{fig/chap05FIG7a}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-clay-best-pred}
+  \label{fig:chap06-clay-best-pred}
   \centering
   \includegraphics[width=63mm]{fig/chap05FIG7d}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-soc-base-pred}
+  \label{fig:chap06-soc-base-pred}
   \centering
   \includegraphics[width=63mm]{fig/chap05FIG7b}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-soc-best-pred}
+  \label{fig:chap06-soc-best-pred}
   \centering
   \includegraphics[width=63mm]{fig/chap05FIG7e}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-ecec-base-pred}
+  \label{fig:chap06-ecec-base-pred}
   \centering
   \includegraphics[width=63mm]{fig/chap05FIG7c}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-ecec-best-pred}
+  \label{fig:chap06-ecec-best-pred}
   \centering
   \includegraphics[width=63mm]{fig/chap05FIG7f}
  \end{minipage}
  \caption{Predicted values for CLAY (\si{\gram\per\kilo\gram}) (a, b), SOC (\si{\gram\per\kilo\gram}) (c, d), 
  and ECEC (\si{\milli\mole\per\kilo\gram}) (e, f) using the \emph{baseline} (left) and \emph{best performing}
  (right) linear mixed models.}
- \label{fig:chap05-kriging}
+ \label{fig:chap06-kriging}
 \end{figure}
 
 \begin{figure}[!ht]
  \centering
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-clay-base-var}
+  \label{fig:chap06-clay-base-var}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG8a}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-clay-best-var}
+  \label{fig:chap06-clay-best-var}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG8d}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-soc-base-var}
+  \label{fig:chap06-soc-base-var}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG8b}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-soc-best-var}
+  \label{fig:chap06-soc-best-var}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG8e}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-ecec-base-var}
+  \label{fig:chap06-ecec-base-var}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG8c}
  \end{minipage}
  \begin{minipage}[b]{63mm}
   \subcaption{}
-  \label{fig:chap05-ecec-best-var}
+  \label{fig:chap06-ecec-best-var}
   \centering
   \includegraphics[width=60mm]{fig/chap05FIG8f}
  \end{minipage}
  \caption{Prediction error standard deviations for CLAY (\si{\gram\per\kilo\gram}) (a, b), SOC 
  (\si{\gram\per\kilo\gram}) (c, d), and ECEC (\si{\milli\mole\per\kilo\gram}) (e, f) using the \emph{baseline}
  (left) and \emph{best performing} (right) linear mixed models.}
- \label{fig:chap05-kriging-variance}
+ \label{fig:chap06-kriging-variance}
 \end{figure}
 
 The smallest prediction error standard deviations occur at lower elevations, along the three main streams, and 
@@ -834,7 +849,7 @@ variation was captured in the present-time point soil data.
 It is worthwhile to consider the influence of the more detailed soil map on predicting CLAY. Due to its 
 production process, the more detailed soil map derives a large amount of spatial detail from the geologic map, 
 land use map and DEM -- note that the second-best performing model for CLAY included the more detailed 
-geologic map instead of the more detailed soil map (\autoref{fig:chap05-model-series}). However, most of the 
+geologic map instead of the more detailed soil map (\autoref{fig:chap06-model-series}). However, most of the 
 additional spatial detail included in the more detailed soil map was probably based on the spatial variation 
 of 
 soil texture, because this is a strongly marked soil feature in the area \cite{MiguelEtAl2012}. Soil texture 
@@ -913,7 +928,7 @@ If the influence of a more detailed covariate depends on the increase of spatial
 should be to improve the spatial detail of the most beneficial covariate. This requires solid subject area 
 knowledge because empirical evidence from the \emph{baseline} model may be insufficient. The most beneficial 
 covariate is not necessarily that which explained the largest part of the variance in the \emph{baseline} 
-model (see \autoref{tab:chap05-drop}). This occurs because increasing the spatial detail reduces the 
+model (see \autoref{tab:chap06-drop}). This occurs because increasing the spatial detail reduces the 
 correlation between the covariate and the soil property. And also because there is little room to improve a 
 correlation that is already high in the \emph{baseline} model. \citet{CavazziEtAl2013} suggest that the 
 more detailed covariate has an excess of detail, a \q{noise} that degrades the predictions. This could explain 

@@ -1,7 +1,7 @@
 \setcounter{page}{1}
 \artigofalse
 \chapter{GENERAL INTRODUCTION}
-\label{chap:introduction}
+\label{chap:chap01}
 
 Modern soil spatial modelling is based on using statistical models to explore the empirical relationship among 
 environmental conditions and soil properties. These soil spatial models, like any other model, are nothing 
@@ -10,51 +10,50 @@ soil and render the observations useless --, no matter how large the volume of d
 our background knowledge, it will never be possible to construct a model that explains the entire complexity 
 of the soil. Thus, the outcome of a soil spatial model, i.e. a soil map, will always deviate from the 
 \q{truth} -- this deviation from the \q{truth} is what we call \emph{error}. What a soil map conveys is what 
-we expect the soil to be, not our \emph{certainty} about it.
+we expect the soil to be, acknowledging that there is \emph{uncertainty} about it.
 
 Because soil spatial modellers aim at using the available resources to produce the most accurate 
 representation of the soil, a sensible research programme is to investigate the main causes for soil maps 
 being more or less \emph{uncertain}. There are many sources of uncertainty in soil spatial modelling, such as 
-the errors that result from using a poor statistical model and from making interpolations and extrapolations 
+the errors that result from using a poor statistical model or from making interpolations and extrapolations 
 to predict soil properties at unvisited locations. Another important source of uncertainty is the data used to 
 assess the empirical relationship among environmental conditions and soil properties: covariate and soil data.
 
-The general objective of this thesis is to evaluate the soil and covariate data as source of uncertainty in 
-soil spatial modelling. This general objective can be divided into specific objectives and their respective 
-research questions:
+The general objective of this thesis is to evaluate some sources of uncertainty in soil spatial modelling with 
+emphasis on the soil and covariate data. This general objective can be divided into specific objectives and 
+their respective research questions:
 
 \begin{enumerate}
  \item Determine the suitability of freely available covariates to calibrate soil spatial models.
   \begin{enumerate}[label=(\alph*)]
    \item Does the use of more detailed covariates result in considerably more accurate soil maps?
    \item How does incorporation of spatial dependence in a soil spatial model compare to the gain in 
-   prediction accuracy obtained with using more detailed covariates?
+   prediction accuracy obtained from using more detailed covariates?
    \item Are the answers to these research questions consistent across soil properties?
   \end{enumerate}
  
  \item Identify the factors that determine how field soil spatial modellers select soil observation locations.
   \begin{enumerate}[label=(\alph*)]
+   \item Which factors are considered for deciding upon the location of soil observations, and do they have a 
+   pedological origin?
    \item Do the factors play the same role along the course of the soil observation process?
-   \item Do the main criteria employed for deciding upon the location of soil observations have a pedological 
-   origin?
    \item Can point pattern analysis help understanding the purposive sampling strategy traditionally employed
    by field soil spatial modellers?
   \end{enumerate}
- 
- \item Identify appropriate calibration sample sizes and designs for soil spatial modelling.
+
+  \item Identify appropriate calibration sample sizes and designs for soil spatial modelling.
   \begin{enumerate}[label=(\alph*)]
-   \item Can theoretical and algorithmic improvements on existing spatial sample optimization algorithms 
-   improve the performance of soil models?
-   \item How suboptimal is it to use a sample configuration that was optimized to a different purpose than it 
-   is going to be used for?
-   \item Is the predictive performance of a soil-mapping model estimated using a sample configuration 
-   optimized using heuristics poorer than that of another soil-mapping model whose parameters were estimated 
-   using a sample configuration optimized using an \textit{a priori} knowledge of the model?
-   \item Is it possible to obtain a sample configuration that is efficient in identifying and estimating i) 
-   the spatial trend and ii) the variogram model, and iii) making spatial predictions?
-   \item How does the sample configuration affect the estimated model parameters and thus the conclusions that 
-   can be drawn under the light of the existing conceptual model of pedogenesis?
-   \item Are the answers to the research questions above consistent across sample sizes and soil properties?
+   \item Can the conditioned Latin hypercube sampling algorithm be improved, and does this
+   improvement deliver more accurate soil spatial predictions?
+%   \item How suboptimal is it to use a sample configuration that was optimized for a different purpose?
+%   \item Is the predictive performance of a soil-mapping model estimated using a sample configuration 
+%   optimized using heuristics poorer than that of another soil-mapping model whose parameters were estimated 
+%   using a sample configuration optimized using an \textit{a priori} knowledge of the model?
+%   \item Is it possible to obtain a sample configuration that is efficient in identifying and estimating i) 
+%   the spatial trend and ii) the variogram model, and iii) making spatial predictions?
+%   \item How does the sample configuration affect the estimated model parameters and thus the conclusions 
+%   that can be drawn under the light of the existing conceptual model of pedogenesis?
+%   \item Are the answers to the research questions above consistent across sample sizes and soil properties?
   \end{enumerate}
 \end{enumerate}
 
@@ -79,36 +78,43 @@ was used to develop the case studies presented in this thesis. The Santa Maria d
 $n = 410$ soil observations compiled from studies carried out between \num{2004} and \num{2013}. These studies 
 aimed at producing semi-detailed soil and land use maps, and modelling topsoil carbon stock and vulnerability 
 to erosion. A comprehensive description of the covariate data included in the Santa Maria dataset, and their 
-processing, is given in \autoref{chap:chap05}. The goal of these three chapters is to provide the bases for 
-future soil spatial modelling exercises in the study area and to serve as examples for new soil spatial 
-modelling studies developed elsewhere.
+processing, is given in \autoref{chap:chap05}. Beyond describing the data used in the thesis, the goal of these 
+two 
+chapters, along with the conceptual model of pedogenesis, is to provide the bases for future soil spatial 
+modelling 
+exercises in the study area, and to serve as examples for new soil spatial modelling studies developed 
+elsewhere.
 
 Based on an article published in the peer reviewed journal \geoderma, \autoref{chap:chap06} serves the purpose 
-of meeting the first objective of the thesis and answering its respective research questions. There, the 
+of meeting the first objective of the thesis and answering its respective research questions. The 
 prediction performance of linear soil spatial models calibrated using covariates (area-class soil maps, land 
-use maps, geological maps, digital elevation models, and orbital images) available in two levels of detail is 
+use maps, geological maps, digital elevation models, and satellite images) available in two levels of detail 
+is 
 evaluated. The influence of taking the spatial dependence of the residuals into account is assessed as well. 
 
 \autoref{chap:chap07} presents an approach that aims at helping to understand the purposive sampling strategy 
-traditionally employed by field soil modellers, i.e. free survey. This is important because most soil 
-spatial modelling projects rely on legacy data, i.e. soil data produced many years ago, whose observation 
-locations were purposively selected by soil spatial modellers using poorly formalized tacit rules. The 
-chapter, designed to answer the research questions of the second objective of the thesis, shows that the 
-location of soil observations were strongly determined by subjective elements unrelated to the local 
-soil-landscape relationship. Understanding the reasons behind the location of free survey soil observations 
-can help soil spatial modellers designing more efficient data-driven sampling strategies.
+traditionally employed by field soil modellers, i.e. free survey. This is important because many soil 
+spatial modelling projects rely on legacy data, i.e. soil data produced previously and made available (publicly 
+or 
+not), whose observation locations were purposively selected by soil spatial modellers using poorly documented 
+tacit rules. The chapter is designed to answer the research questions of the second objective of the thesis. 
+Point 
+pattern analysis is used to characterize and compare the spatial sample configurations, whereas theories 
+borrowed 
+from Psychology are used to elaborate on the subjective factors involved in selecting soil observation 
+locations.
 
-The results of the experiment devised to evaluate if improving a popular sampling algorithm results in more 
-accurate spatial predictions is presented in \autoref{chap:chap08}. The comparison of five sampling algorithms 
-on how they affect estimated model parameters and prediction accuracy is presented in \autoref{chap:chap09}. 
-The chapter also introduces a new general purpose sampling algorithm. Both chapters contain only partial 
-results, and will be the basis of manuscripts to be submitted to peer reviewed journals, both dealing with the 
-second objective of this thesis and its respective research questions.
+Objective 3 and its research questions are addressed in \autoref{chap:chap08}. Three improved sampling 
+algorithms are compared to the original conditioned Latin hypercube sampling algorithm on how they affect 
+geographic coverage, estimated model parameters and prediction accuracy. The influence of sample size is also 
+discussed.
 
-The sequence of eight chapters is closed with a \emph{General Conclusion} where I highlight the main results 
-of the research, contributions and merits of the study. Next, there are two appendices, both devoted to the 
-description of the two packages for \texttt{R} developed to support the case studies: \texttt{pedometrics} 
-(\autoref{apen:pedometrics}) and \texttt{spsann} (\autoref{apen:spsann}). The first includes miscellaneous 
-functions that were put together for ease of use. The second was designed for the optimization of sample 
-configurations using spatial simulated annealing. All literature references are presented under a unique 
-\emph{Bibliographic References} chapter (\autoref{chap:references}) at the end of the thesis.
+The sequence of eight chapters is closed with a \emph{General Conclusion} where I highlight the main research 
+results and contributions of the study. Next, there are two appendices, both devoted to the description of the 
+two 
+packages for \texttt{R} developed to support the thesis: \texttt{pedometrics} (\autoref{apen:pedometrics}) 
+and \texttt{spsann} (\autoref{apen:spsann}). The first includes miscellaneous functions that were put together 
+for ease of use. The second was designed for the optimization of sample configurations using spatial simulated 
+annealing. All literature references are presented under a unique \emph{Bibliographic References} chapter 
+(\autoref{chap:references}) at the end of the thesis.
+

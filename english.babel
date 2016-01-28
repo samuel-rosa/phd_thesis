@@ -11,7 +11,7 @@
 \def\listtablename{List of Tables}%
 \def\listdefname{List of Definitions}%
 \def\listtheoremsname{List of Theorems}%
-\def\listappendixname{List of Appendices}%
+\def\listappendixname{List de Appendices}%
 \def\listannexname{List of Annexes}%
 \def\corollaryname{Corollary}%
 \def\propositionname{Proposition}%
@@ -26,11 +26,6 @@
 \def\proofname{Proof}%
 \def\figurename{Figure}%
 \def\chaptername{Chapter}%
-
-\def\sectionname{Section}%
-\def\subsectionname{Section}%
-\def\subsubsectionname{Section}%
-
 \def\tablename{Table}%
 \def\authorname{Author}%
 \def\authornamef{Author}%
@@ -44,26 +39,48 @@
 \def\annexsname{Annex}%
 \def\keywordsname{Keywords}%
 \def\cipcaption{CIP -- CATALOGING-IN-PUBLICATION}%
-\def\byname{by}%
-\def\aprovadaem{approved in}%
-\def\soborienta{\textit{Under~the~supervision~of}}%
-\def\sobcoorienta{\textit{and~co-supervision~of}}%
-% \def\and{and}%
-\def\of{of}%
 \def\folhas{p}%
-\def\presidente{President}%
+
 \def\dissname{Dissertation}%
 \def\tesename{Thesis}%
-\def\tesespecificinfo{%
-Thesis presented in partial fulfilment of the requirements for the degree of
-\textbf{\@grau}, \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+
+%% ============================================================================================================
+%% Segundo as normas atuais, parece que os seguinte textos devem sempre aparecer em português, mesmo que o 
+%% documento tenha sido escrito em outra língua. Anteriormente, estes textos eram definidos no arquivo da 
+%% classe. Contudo, parece mais eficiente fazê-lo usando o pacote babel. Sua versão em inglês aparece na 
+%% sequência para possível uso futuro.
+%% ============================================================================================================
+\def\tesespecificinfo{% 
+Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de \textbf{\@grau}, \@curso, {\'A}rea de 
+Concentra\c{c}{\~a}o em \@area.
 }%
 \def\dissspecificinfo{%
-Dissertation presented in partial fulfilment of the requirements for the degree
-of \textbf{\@grau}, \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de \textbf{\@grau}, 
+\@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
+\def\aprovadoem{Documento aprovado em}%
+\def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%
+\def\sobcoorienta{\textit{e co-orienta\c{c}{\~a}o~de}}%
+\def\andname{e}%
+\def\ofname{de}%
+\def\presidente{Presidente}%
 
-
+% \def\tesespecificinfo{%
+% Thesis presented in partial fulfilment of the requirements for the degree of \textbf{\@grau}, \@curso, 
+% {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+% }%
+% \def\dissspecificinfo{%
+% Dissertation presented in partial fulfilment of the requirements for the degree
+% of \textbf{\@grau}, \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+% }%
+% \def\byname{by}%
+% \def\aprovadoem{Document approved in}%
+% \def\soborienta{\textit{Under~the~supervision~of}}%
+% \def\sobcoorienta{\textit{and~co-supervision~of}}%
+% \def\andname{and}%
+% \def\ofname{of}%
+% \def\presidente{President}%
+%% ============================================================================================================
 
 \def\planodoutoradospecificinfo{PhD Work Plan}%
 \def\proptesename{Ph.D. Thesis Proposal}%

@@ -1,966 +1,605 @@
 \artigotrue
-\chapter{Do more detailed environmental covariates deliver more accurate soil maps?}
-\label{chap:chap05}
+\chapter{MODERN SOIL SPATIAL MODELLING AND ITS SOURCES OF UNCERTAINTY}
+\label{chap:chap02}
 
-% User defined commands
-\def\elev{\texttt{ELEV}} % elevation
-\def\slp{\texttt{SLP}}   % slope
-\def\asp{\texttt{ASP}}   % aspect
-\def\nor{\texttt{NOR}}   % northernness
-\def\acc{\texttt{ACC}}   % flow accumulation
-\def\twi{\texttt{TWI}}   % topographic wetness index
-\def\spi{\texttt{SPI}}   % stream power index
-\def\tpi{\texttt{TPI}}   % topographic position index
-\def\ndvi{\texttt{NDVI}} %
-\def\savi{\texttt{SAVI}} %
-\def\sibcs{Brazilian System of Soil Classification}
+\section{DEMAND FOR SOIL SPATIAL INFORMATION}
 
-\def\englishkeys{Digital Soil Mapping, Linear Mixed Model, Auxiliary 
-  Information, Variable Selection, Model Accuracy, Soil Mapping Cost}
-  
-\begin{chapterabstract}{english}{\englishkeys}
-In this study we evaluated whether investing in more spatially detailed 
-environmental covariates improves the accuracy of digital soil maps. We used a 
-case study from Southern Brazil to map clay content (CLAY), organic carbon 
-content (SOC), and effective cation exchange capacity (ECEC) of the topsoil for
-a $\sim$~2,000~ha area located on the edge of the plateau of the Paraná 
-Sedimentary Basin. Five covariates, each with two levels of spatial detail were
-used: area-class soil maps, digital elevation models (DEM), geologic maps, land
-use maps, and satellite images. Thirty-two multiple linear regression models 
-were calibrated for each soil property using all spatial detail combinations of
-the covariates. For each combination, stepwise regression was used to select 
-predictor variables incorporated in the model. Model evaluation was done using 
-the adjusted R-square of the regression. The baseline model, calibrated with the
-less detailed version of each covariate, and the best performing model were used
-to calibrate two linear mixed models for each soil property. Model parameters 
-were estimated using restricted maximum likelihood. Spatial prediction was 
-performed using the empirical best linear unbiased predictor. Validation of 
-baseline and best performing linear multiple regression and linear mixed models
-was done using cross-validation. Results show that for CLAY the prediction 
-accuracy did not considerably improve by using more detailed covariates. The 
-amount of variance explained increased only $\sim$~2 percentage points (pp), 
-less than that obtained by including the kriging step, which explained 4~pp. On
-the other hand, prediction of SOC and ECEC improved by $\sim$~13~pp when the 
-baseline model was replaced by the best performing model. Overall, the increase
-in prediction performance was modest and may not outweigh the extra costs of 
-using more detailed covariates. It may be more efficient to spend extra 
-resources on collecting more soil observations, or increasing the detail of only
-those covariates that have the strongest improvement effect. In our case study,
-the latter would only work for SOC and ECEC, by investing in a more detailed 
-land use map and possibly also a more detailed geologic map and DEM.
-\end{chapterabstract}
+\def\footmodeller{\footnote{The use that I give to the expression \emph{soil spatial modeller} throughout this 
+thesis is approximately equivalent to expressions traditionally used in the academic world such as soil 
+scientist, soil surveyor, soil taxonomist, geostatistician, pedometrician, soil investigator, soil mapper, and 
+so on. In this thesis, a soil spatial modeller is any person that \emph{constructs} an explanation -- a model 
+-- of the observed spatial soil variation using the tools and techniques available at his/her time and place. 
+The goal of a soil spatial modeller is to construct a model that is simple yet able to produce an accurate 
+representation of the spatial soil variation given the available resources and its intended application. I call 
+this activity \emph{soil spatial modelling}. Accordingly, I understand that those that are excluded from the 
+academic world such as peasants, farmers, indigenous populations, and so on, are soil spatial modellers as 
+well, although their modelling of the soil is not the focus of this thesis.}}
 
-\def\portuguesekeys{Mapeamento Digital do Solo, Modelo Linear Misto, Informação 
-Auxiliar, Seleção de Variáveis, Acurácia do Modelo, Custo do Mapeamento do Solo}
-\begin{chapterabstract}{brazilian}{\portuguesekeys}
-Neste estudo nós avaliamos se investir em covariáveis ambientais espacialmente
-mais detalhadas aumenta a acurácia dos mapas digitais do solo. Nós usamos um 
-estudo de caso no sul do Brasil para mapear o conteúdo de argila (CLAY), o
-conteúdo de carbono orgânico (SOC), e capacidade de troca de cátions efetiva 
-(ECEC) da camada superficial do solo de uma área de $\sim$~2000~ha localizada
-na borda do planalto da Bacia Sedimentar do Paraná. Cinco covariáveis, cada uma
-com dois níveis de detalhe espacial, foram usadas: mapa areal-categórico de solo,
-modelos digitais de elevação (DEM), mapas geológicos, mapas de uso da terra, e 
-imagens de satélite. Trinta e dois modelos de regressão linear múltipla foram
-calibrados para cada propriedade do solo usando todas as combinações de detalhe
-espacial das covariáveis. Para cada combinação, stepwise regression foi usada 
-para selecionar as variáveis preditoras incorporadas no modelo. A avaliação dos
-modelos foi feita usando o R-quadrado ajustado da regressão. O modelo baseline, 
-calibrado com a versão menos detalhada de cada covariável, e o modelo com o 
-melhor desempenho, foram usados para calibrar dois modelos lineares mistos para
-cada propriedade do solo. Parâmetros dos modelos foram estimados usando 
-restricted maximum likelihood. Predições espaciais foram realizadas usando o 
-empirical best linear unbiased predictor. Validação-cruzada foi usada para 
-validar os modelos de regressão linear múltipla e dos modelos lineares mistos 
-de linha de base e com melhor desempenho. Os resultados mostram que para CLAY a 
-acurácia da predição não aumentou consideravelmente por usar covariáveis mais
-detalhadas. A quantidade de variância explicada aumentos apenas $\sim$~2 pontos
-percentuais (pp), menos do que obtido pela inclusão do passo de krigagem, que
-explicou 4-pp. Por outro lado, a predição de SOC e ECEC aumentos em $\sim$~13~pp
-quando o modelo de base foi substituído pelo modelo com melhor desempenho. Em 
-geral, o aumento no desempenho preditivo foi modesto e pode não sobrepor os 
-custos adicionais do uso de covariáveis mais detalhadas. Pode ser mais eficiente
-investir recursos adicionais na coleta de mais observações do solo, ou no 
-aumento do detalhe apenas da covariável que tem o efeito de aumento mais forte.
-Em nosso estudo, a última funcionaria apenas para SOC e ECEC pelo investimento
-em um mapa de uso da terra mais detalhado e, possivelmente, também em um mapa 
-geológico e DEM mais detalhados.
-\end{chapterabstract}
+Many soil spatial modellers\footmodeller{} have complained for many years about the decreasing interest in 
+producing and updating soil information, not only in Brazil \cite{Dalmolin1999, Ker1999, KerEtAl2003, 
+Mendonca-SantosEtAl2003, Ramos2003, Espindola2008}, but in many countries around the world \cite{Basher1997, 
+HarteminkEtAl2008, Grunwald2009, SanchezEtAl2009, Finke2012, SamuelRosa2012}. Several reasons were presented to 
+explain the general lack of interest in producing and updating soil information after the 1980s: the use of 
+specialized taxonomic terminology by soil spatial modellers was abusive; information conveyed by soil maps was 
+too limited due to its qualitative nature; policy and decision makers were unaware of the usefulness of soil 
+information and dynamicity of soil; applied scientific research came to be preferred over basic scientific 
+research; soil spatial modelling largely ignored environmental applications other than agriculture; lack of 
+communication between soil spatial modellers and the general public; among others. But everyone seem to agree 
+on one point: governments understood that producing and updating soil information was too costly. Cutting down 
+the budget for soil spatial modelling fundamentally was an economic decision.
 
-\formatchapter
+Since the last decade, soil scientists in general have launched many initiatives to make soil become a hot 
+topic \cite{HarteminkEtAl2008}. For example, the United Nations (\WorldSoilDay) declared 5 December the World 
+Soil Day and 2015 the International Year of Soils \cited{in an effort to raise awareness and promote more 
+sustainable use of this critical resource}. Soil spatial modellers created a global consortium, the \gsm, with 
+the goal of producing \cited{a new digital soil map of the world using state-of-the-art and emerging 
+technologies}. The Food and Agriculture Organization (\fao) launched a Global Soil Partnership (\gsp) for 
+\cited{leading to the adoption of sustainable development goals for soils}. The International Union of Soil 
+Sciences (\iussusc) created a working group, funded by the United States Department of Agriculture (\usdausc) 
+to develop a Universal Soil Classification System, \cited{a common language to describe soils that can be used 
+internationally}. An Intergovernmental Technical Panel on Soils (\itps) was formed with soil experts from all 
+regions of the world \cited{to provide
+scientific and technical advice and guidance on global soil issues to the Global Soil Partnership}. The 
+\gates{} foundation handed out an 18~\$~million grant \cited{to map most parts in Sub-Saharan Africa, and 
+make all Sub-Saharan Africa soil data available}. Soil spatial modellers at the International Soil Reference 
+and Information Centre (ISRIC) launched its Global Soil Information Facilities (\gsif), a \cited{framework for 
+production of open soil data}, which has already output \SI{250}{\m}-resolution soil maps with global coverage. 
+In Brazil, soil spatial modellers created the Brazilian Network for Research in Digital Soil Mapping (\redemds) 
+with the objective of \cited{generating synergy among Brazilian soil scientists to advance research in digital 
+soil mapping}.
 
-\section{Introduction}
-\label{sec:intro}
+\def\footpronassolos{\footnote{The initiative to restart the national soil survey program coincides with the 
+currently increased, government funded, economically driven, historical pressure to occupy the Cerrado and 
+Amazon biomes, considered \q{the last agricultural frontier} \cite{Correia2005, Macarini2005, Silva2005, 
+CarvalhoEtAl2009, Batlle-BayerEtAl2010, MartinelliEtAl2010, SchneiderEtAl2015}. It is traditionally argumented 
+that transforming parts of the Cerrado and Amazon biomes into agricultural land is needed to eradicate poverty 
+in Brazil and feed a growing world population. This is the argument used by the Brazilian politicians who are 
+in favour of changing the Brazilian legislation to easy the acquisition of up to \SI{100000}{\hectare} of 
+agricultural land in these regions by multinational corporations to produce cellulose and paper 
+\cite{SECOM2015}. Unfortunately, the Brazilian states that compose \q{the last agricultural frontier}, which 
+are among the poorest Brazilian states, have a long history of land conflicts due to the conservative 
+development model adopted in Brazil, where the benefits of economic growth are not shared by all people 
+\cite{ComissaoPastoraldaTerra2015}. In regions such as this, the problem of food insecurity is more due to the 
+lack of political will than to the lack of food \cite{FAO2005, FAO2009, FAO2015}. As such, one might wonder 
+whether restarting the national soil survey program without promoting a deep agrarian reform and strengthening 
+of the public agricultural extension service is beneficial for the general Brazilian population.}}
 
-Digital soil mapping relies on the use of statistical models to produce digital representations of spatial soil 
-distribution using point soil observations and spatially exhaustive environmental covariates 
-\cite{McBratneyEtAl2003, ScullEtAl2003, Florinsky2012}. Three important weaknesses in the statistical 
-soil distribution modelling approach can be pointed out. First, it requires sufficient and appropriately 
-distributed point soil data within the area being mapped \cite{CarreEtAl2007a}. Second, the model structure 
-explores only the empirical relationship among environmental conditions and soil properties, being
-less comprehensive than soil-landscape process models \cite{Grunwald2009}. Last, the covariates are only 
-approximations of the true environmental conditions that helped shape the soil. They serve only as proxies 
-(surrogates) of the current environmental conditions, which in many cases are different from the past 
-conditions under which pedogenesis took place \cite{HeuvelinkEtAl2001}. In spite of these weaknesses, digital 
-soil mapping has proven very successful in the past decades in producing soil property maps that capture the 
-main patterns of soil spatial variation \cite{MooreEtAl1993, McBratneyEtAl2000, Grunwald2009}.
+The efforts of the soil science community have motivated the scientific community to recognize the importance 
+of soils for humanity and the environment at the local, regional, and global levels \cite{SanchezEtAl2009, 
+Kempen2011, OmutoEtAl2013}. Soil scientists, whose presence in public administration through scientific and 
+technical advisory boards appears to grow, seem to have been able to convince policy and decision makers about 
+the importance of producing and updating soil information. For example, in Brazil, the Federal Court of 
+Accounts (\tcu), in collaboration with Embrapa Soils and other soil science related institutions, held a Soil 
+Governance Conference, where a new National Program for Soil Survey and Interpretation of Brazil (\pronassolos) 
+was announced, with an expected budget of 8~R\$~billion\footpronassolos. In the sequence, Embrapa Soils 
+created a working group, with soil spatial modellers from other government institutions and universities, and 
+the first PRONASOLOS report with proposal and goals was completed on December 2015. Unfortunately, it is not 
+clear whether the national soil survey program will truly be restarted because, like happened in the end of the 
+1980s, it essentially is an economic decision. Apparently, other areas of soil science have not been receiving 
+much more attention and/or funding than soil spatial modelling. It is also not clear whether the soil science 
+community efforts have brought about a renewed recognition of the importance of soils for humanity and the 
+environment among the general public.
 
-More recently, there has been a growing interest in understanding how the characteristics of the environmental 
-covariates influence the success of digital soil mapping -- this study contributes to this effort. It is 
-commonly accepted that the more resources are spent on the construction of a covariate and the more spatial 
-information it has, the more accurately it describes the environmental conditions \cite{HupyEtAl2004, 
-HenglEtAl2013a}. It is also generally believed that such \textit{more detailed} covariates will be more 
-valuable for digital soil mapping and lead to more accurate soil property predictions \cite{CavazziEtAl2013, 
-MaynardEtAl2014}. If these more detailed covariates convey more information and represent more adequately the 
-environmental conditions -- the drivers of soil forming processes --, then it is fair to expect that they 
-improve the accuracy of the resulting soil maps. However, some studies have shown the contrary 
-\cite{ThompsonEtAl2001, EldeiryEtAl2008, KimEtAl2014}. For example, the window size at which DEM derivatives 
-are calculated can be more important than the spatial resolution of the DEM \cite{Wood1996, ZhuEtAl2008, 
-BehrensEtAl2010a}. The uncertainty about the added value of using more detailed covariates is of concern for 
-those seeking to use resources efficiently, because using more detailed covariates generally increases soil 
-mapping costs \cite{ShiEtAl2012}.
+\section{MODERN SOIL SPATIAL MODELLING}
 
-The objective of this study was to evaluate whether investing in more detailed environmental covariates 
-improves the accuracy of digital soil maps. The main difference of our study to previous ones is that we use a 
-rigorous statistical approach to assess the added value of using five more detailed covariates simultaneously. 
-We used a case study in Brazil to compare the accuracy of digital maps of the clay content, organic carbon 
-content and effective cation exchange capacity of the topsoil as obtained from regression kriging on the five 
-covariates, whereby each covariate was evaluated on two levels of spatial detail.
+Technology plays a determinant role on how we perceive the world around us -- see, for example, 
+\citeonline{Hartemink2009}. When early farmers, during the Neolithic Revolution, ca.~\num{10000}~years ago, 
+first observed that soil properties varied in space, they probably soon figured out that such variation was 
+related to other environmental features and influenced crop yields. That early, rough, approximate 
+understanding -- a \emph{model} -- of soil spatial variation certainly was fundamental for choosing -- 
+\emph{predicting} -- the most appropriate locations to start and maintain human settlements, some of which 
+became great, long-standing empires \cite{MazoyerEtAl2008, BrevikEtAl2010, Churchman2010}. Archaeological 
+research provides evidence that several of these empires had more formal \emph{soil classification systems} and 
+\emph{soil survey programs}, in most cases for taxation purposes \cite{Barrera-BassolsEtAl2003} -- a practice 
+that lasts till today.
 
-\section{Material and Methods}
-\label{sec:methods}
+\def\footKubrick{\href{https://www.youtube.com/watch?v=qtbOmpTnyOc}{\textit{2001: A Space Odyssey}}}
 
-\subsection{Study area and soil data}
-\label{subsec:soil-data}
+A lot happened since the Neolithic Revolution \cite{BrevikEtAl2010} -- from bone to spacecraft, as in Kubrick's 
+-- \footKubrick,
+and the knowledge constructed with multiple soil spatial studies was fundamental for the development of 
+agriculture and increase of food production -- although many farmers still live in Neolithic conditions 
+\cite{MazoyerEtAl2008}. If we adopt an integrative view, soil maps produced during this long period of human 
+history seem to fit into what we call today the \emph{discrete model of
+spatial variation}. The discrete model of spatial variation explains the variation of soil properties in space 
+using mutually exclusive mapping units that are separated by sharply defined, crisp boundaries (i.e. polygons) 
+\cite{Heuvelink1996, Legros2006}. The soil in each mapping unit is more or less homogeneous with regard to its 
+properties at the time of mapping. These properties, which are generally used to name the mapping unit along 
+with other environmental features, can be characterised using one or more direct observations made within the 
+domain of the mapping unit \cite{WebsterEtAl1990, Legros2006}.
 
-The study area constitutes a small catchment ($\sim$~2,000~ha) located on the southern edge of the plateau of 
-the Paraná Sedimentary Basin, Rio Grande do Sul, Brazil (\autoref{fig:location}). The climate is classified as 
-Cfa (K\"oppen -- subtropical humid without a dry season) with mean annual temperature of 19.3$^{\circ}$C, and 
-mean annual precipitation of 1,708~mm, well distributed throughout the year \cite{Maluf2000}. Relief varies 
-between plain (slope between 0 and 3\%) and mountainous (slope between 45 and 100\%), and elevations range 
-between 140 and 475~m. Geology consists of basic, intermediate and acid igneous rocks (rhyolite-rhyodacite and 
-andesite-basalt) of the Cretaceous period, consolidated sedimentary rocks (aeolian and fluvial sandstones) of 
-the Triassic and Jurassic periods, and non-consolidated (fluvial and colluvial deposits) of the Quaternary 
-period \cite{GasparettoEtAl1988, MacielFilho1990, Sartori2009}. Native semi-deciduous forests occupy more than 
-half of the area, followed by native grassland used for animal husbandry, semi-deciduous shrubland, annual 
-crop agriculture, forestry (Eucalyptus), urban areas, and artificial water bodies \cite{SamuelRosaEtAl2011a}.
+A key step was given in 1886 in Russia with the formalization of the approximate understanding of the soil 
+spatial variation using scientific parlance, i.e. the postulation of the \q{the basic law of soil science} by 
+Vasily Dokuchaev \cite{Florinsky2012}: \q{Any... soil is always and everywhere a mere function of the following 
+factors of soil formation: 1) the nature (content and structure) of the parent rock, 2) the climate of the 
+given terrain, 3) the mass and character of vegetation, 4) the age of the terrain, and finally, 5) the terrain 
+topography.}. The basic law of soil science was presented 40-years later by Sergey Zakharov in the form of a 
+general soil formation equation, which is known in the western soil science literature as \cite{Jenny1941, 
+Florinsky2012}
 
- \begin{figure}[!ht]
-    \centering
-    \begin{minipage}[b]{95mm}
-      \subcaption{}
-      \label{fig:brazil}
-      \centering
-      \includegraphics[width=90mm]{chap01FIG1a}
-    \end{minipage}
-    \begin{minipage}[b]{95mm}
-      \subcaption{}
-      \label{fig:points}
-      \centering
-      \includegraphics[width=90mm]{chap01FIG1b}
-    \end{minipage}
-  \caption{Location of the study area in Santa Maria (a) and spatial 
-  distribution of the point soil observations and drainage network (b).}
-  \label{fig:location}
- \end{figure}
+\begin{equation}
+\mathfrak{s} = f(\mathfrak{cl}, \mathfrak{o}, \mathfrak{r}, \mathfrak{p}, \mathfrak{t}, \mathfrak{\ldots}),
+\end{equation}\label{eqn:chap02-clorpt}
 
-A dataset containing $n=350$ point soil observations collected between 2004 and 2011 \cite{PedronEtAl2006b, 
-SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013} was used in this study (available at 
-\url{https://github.com/samuel-rosa/dnos-sm-rs}). Sampling locations were selected purposively and by 
-convenience \cite{Samuel-RosaEtAl2014b}. Three soil pits were opened within an area of about 100~m$^2$ at most 
-sampling locations to obtain composite samples of the topsoil for laboratory analysis. Soil was collected to a 
-depth of 20~cm or less when soil depth was smaller than 20~cm. A few observations ($n = 10$) correspond to 
-individual samples collected up to 30~cm. Sampling depth ranges from 2 to 30~cm, with a mean of 17.3~cm. We 
-assumed that the vertical, horizontal and temporal support differences between soil samples is negligible for 
-the purpose of this study.
+\noindent where $\mathfrak{s}$ is the soil and its properties, $\mathfrak{cl}$ if the climate, $\mathfrak{o}$ 
+are the organisms, including humans, $\mathfrak{r}$ stands for relief or topography, $\mathfrak{p}$ is the 
+parent material, $\mathfrak{t}$ is time or age of the terrain, and $\mathfrak{\ldots}$ stand for other unknown 
+players. Dokuchaev was aware that producing empirical evidence to corroborate his basic law of soil science was 
+difficult because data on soil formation factors was scarce. Besides, it was difficult to numerically express 
+the relation between soil and formation factors. Despite of these difficulties, the basic law of soil science 
+was readily adopted by soil spatial modellers because it provided a solid basis for explaining the soil spatial 
+variation \cite{Smith1986}.
 
-Three soil properties (fine earth fraction, $<2$~mm) were explored: clay content 
-(CLAY,~\si{\gram\per\kilo\gram}), organic carbon content (SOC,~\si{\gram\per\kilo\gram}), and effective cation 
-exchange capacity (ECEC,~mmol~kg$^{-1}$). CLAY was determined by the pipette method. SOC was determined using 
-wet digestion. ECEC was calculated as the sum of exchangeable bases plus exchangeable acidity. The soil 
-properties selected were expected to present different patterns of spatial variation and correlation with the 
-most dominant factors of soil formation \cite{Jenny1941} in the area: organisms (\textit{O}), relief 
-(\textit{R}), and parent material (\textit{P}). CLAY was presumed to have a stronger relation with \textit{P}, 
-while SOC was expected to be more correlated with \textit{O}. Because the soils of the study area were strongly 
-eroded due to intense agriculture in the 20th century, both CLAY and SOC were also expected to be closely 
-related with \textit{R}. Finally, ECEC was expected to be strongly correlated with \textit{P} and \textit{O}, 
-which is supported by its natural relationship with both CLAY and SOC.
+An important enthusiast and supporter of the use of \autoref{eqn:chap02-clorpt} was Hans Jenny 
+(\citeyear{Jenny1941}). He believed that the large volume of already existing soil data/knowledge, which had 
+been constructed mostly based on the basic law of soil science, needed to be organized by means of numerical 
+laws and quantitative theories -- instead of soil maps, taxonomic classifications, and soil-forming processes 
+-- to enable treating it mathematically (i.e. using empirical correlation). For that end, solving 
+\autoref{eqn:chap02-clorpt} depended on the soil scientist' skills to select suitable study areas and locations 
+for making observations. But the problem continued to be that obtaining data on soil-forming factors was still 
+difficult compared to obtaining soil data. It follows that direct application of \autoref{eqn:chap02-clorpt} 
+for producing soil maps was impossible because it required soil-forming factors to be exhaustively known 
+everywhere \cite{Jenny1941}. Despite the operational difficulties encountered since the postulation of the 
+basic law of soil science and definition of \autoref{eqn:chap02-clorpt}, the concept of soil-forming factors 
+were employed in most of the subsequent soil spatial studies around the world, resulting in the enhancement of 
+taxonomic classifications, theories about soil-forming processes, and production of soil maps using the 
+discrete model of spatial variation \cite{Schelling1970, Hudson1992, BockheimEtAl2000, Legros2006, 
+KrasilnikovEtAl2009b, HarteminkEtAl2013}.
 
- \begin{figure}[!ht]
-   \centering
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2a}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2d}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2b}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2e}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2c}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG2f}
-    \end{minipage}
-  \caption{Histogram, empirical density function, and summary statistics of CLAY (a, b), SOC (c, d), and ECEC 
-(e, f) in the original (left) and Box-Cox feature spaces (right).}
-  \label{fig:soil-properties}
- \end{figure}
+Soil spatial modelling using the discrete model of spatial variation and the idea that soil properties were 
+determined by soil-forming factors had its weaknesses as any other model of spatial variation. Three main 
+weaknesses can be pointed out, all of which only were recognized and understood using post-war 
+scientific/technological developments \cite{HeuvelinkEtAl2001, McBratneyEtAl2003, ScullEtAl2003}. First, 
+\q{soil bodies} were described as discrete, homogeneous entities -- although it was recognized that soil is a 
+continuous media whose properties vary from place to place in such a way that nearby locations have more 
+similar soil property values than distant locations (spatial autocorrelation) --, implying that the fluxes of 
+energy and matter across the landscape had to be understood as being partially homogeneous (within a mapping 
+unit), partially discontinuous (between mapping units) processes. Second, the uncertainty (errors) about mapped 
+soil properties was disregarded, meaning that a single, absolute value for each soil property would be 
+attributed to each mapping unit ignoring that soil properties vary from place to place and that estimates can 
+be affected by all sorts of errors. Last, but not least, some important soil spatial modelling decisions could 
+not be efficiently shared with others by means of formal, explicit knowledge because they were largely based on 
+the intuitive, tacit knowledge of soil modellers, i.e. the knowledge that a soil modeller has about the 
+soil-landscape relationships and the soil modelling process but that cannot be adequately communicated, 
+articulated by verbal (written or spoken) means. This was evidenced, for example, by the fact that different 
+soil modellers would produce considerably different soil maps without being able to explain why 
+\cite{Legros2006, BazagliaFilhoEtAl2013}.
 
-Point soil data, here denoted by $Z(s)$, showed a positive skew (\autoref{fig:soil-properties}) and was 
-normalized, $Z'(s)$, using the Box-Cox family of power transformations, where $Z'(s) = (Z(s)^{\lambda} - 1) / 
-\lambda$, if $\lambda > 0$, and $Z'(s) = log(Z(s))$, if $\lambda = 0$ \cite{DiggleEtAl2007}. Lambda ($\lambda$) 
-values were selected empirically \cite{FoxEtAl2011}. Because the resulting distribution of the back-transform 
-(see \autoref{subsec:validation}) has no expectation when $\lambda<0$ \cite{RibeiroEtAl2001}, a logarithm 
-transformation ($\lambda=0$) was used when a negative $\lambda$ was estimated (SOC and ECEC).
+Different solutions were explored during the post-war to overcome one or another weaknesses of the discrete 
+model of spatial variation. Most of these solutions came from the new developments in the fields of 
+mathematics, statistics and informatics, many of them already successfully employed by the mining industry 
+\cite{Matheron1969}. For example, those important soil spatial modelling decisions, generally taken with basis 
+on the tacit knowledge of the soil modeller, could now be more efficiently communicated with others through the 
+use of computers -- provided they had a computer. This is because using a computer to produce soil maps 
+requires modelling rules to be formalized in the form of a computer script, which is the mean used to establish 
+the communication between the soil modeller (a human being) and the data processing environment (a computer).
 
-\subsection{Environmental covariates}
-\label{subsec:sources}
+Soil modellers also understood that the error about the mapped soil property could be acknowledged using 
+classical statistics. First, the definition of mapping units, which was based on the knowledge of the 
+soil-forming factors, needed to be viewed as a modelling exercise that aims at minimizing the within-unit 
+variance (and maximizing the between-unit variance) of a soil property \cite{VoltzEtAl1990}. Then, the most 
+likely value of a soil property at any one point in a given mapping unit would be its mean over the multiple 
+observations made in that mapping unit \cite{VoltzEtAl1990, Cressie1993}. The only requirement -- so that the 
+estimated mean would be fair (unbiased) -- was that the location of soil observations be selected using some 
+form of randomization (probability sampling) such as it is done in controlled agronomic experiments, e.g. 
+simple random sampling within mapping units \cite{deGruijterEtAl1990}. It follows that the uncertainty about 
+the value of the mapped soil property is the same everywhere within a mapping unit, irrespective of the 
+location of existing soil observations \cite{Heuvelink1996}. This is because the expected error of predicting 
+the value of a soil property at any location with its mean is also the same everywhere.
 
-Five freely available environmental covariates were evaluated in this study, each with two levels of spatial 
-detail: area-class soil maps (\texttt{soil}), geologic maps (\texttt{geo}), land use maps (\texttt{land}), 
-digital elevation models (\texttt{dem}), and satellite images (\texttt{sat}). Each pair was composed by 
-covariates that were produced separately from scratch using different data sources and/or production methods, 
-thus demanding different amounts of resources (time, workforce, budget, technology, etc.). In this study,
-the level of spatial detail of an environmental covariate is a function of the components of its production 
-process such as the cartographic ratio (\texttt{soil}, \texttt{geo} and \texttt{land}), spatial sampling 
-support (\texttt{sat}), number and diversity of data sources explored (\texttt{dem}), and quantity of spatial 
-data used (all five). Thus, the reader should bear in mind that our definition of spatial detail is broader 
-than spatial resolution or spatial scale. It should also not be confounded with spatial support 
-\cite{WebsterEtAl2007} or thematic detail \cite{Rossiter2000}.
+Those solutions still required describing \q{soil bodies} as discrete, homogeneous entities, and continued 
+neglecting the spatial variation and autocorrelation of soil properties. For that end, one solution was to 
+ignore the knowledge on soil-forming factors and use the \emph{continuous model of spatial variation}. 
+Accordingly, the main requirement was that a soil property be treated as the outcome of a random (stochastic) 
+spatial process \cite{Cressie1993, Webster2000}. At first, the proposition of \emph{imagining} the soil as 
+being the result of randomness is awkward (\autoref{eqn:chap02-clorpt}). However, pondering on the multitude of 
+soil-forming factors and processes, and on the complexity of their interactions \cite{BockheimEtAl2010, 
+GrunwaldEtAl2011}, as well as on the limitations of the existing knowledge on soil spatial variation, one can 
+easily conclude that soil is a chaotic media \cite{Webster2000} -- so why not treat it as such? One only had to 
+\emph{imagine} that the value of a soil property observed at a given location simply was one that happened to 
+be recorded by chance among an infinitely large number of values that could have been recorded instead 
+\cite{Webster2000}. In other words, one had to \emph{imagine} that, if a soil property is recorded multiple 
+times at the same location, the recorded values would not necessarily be the same. As such, a soil property at 
+a given location would not be described using a single absolute value, but a probability distribution function 
+(PDF), generally the normal (Gaussian), characterised by the mean and variance of those \q{recorded} values. 
+Accordingly, to describe the fact that soil property values at nearby locations are more similar than at 
+locations further apart -- they covary, vary together or jointly -- would require a joint probability 
+distribution function, characterised by the covariance \cite{WebsterEtAl1990, Cressie1993}.
 
-The environmental covariates were transformed to predictor variables that were used in the geostatistical 
-modelling. Since the transformation is different for categorical and continuous covariates, the procedures are 
-explained below for each type separately.
 
-\subsubsection*{Categorical predictor variables}
-\label{subsubsec:categorical-covars}
 
-Area-class soil maps, geologic maps and land use maps are categorical environmental covariates (factors). 
-Mapping units are the $k$ factor levels that are transformed to as many dummy (indicator, binary) variables as 
-there are factor levels, before model calibration. Each dummy variable receives a value equal to one (1) when a 
-given class is present, and zero (0) otherwise \cite{Everitt2006}. If the number of point soil observations 
-falling inside the spatial domain of a mapping unit is too small to accurately estimate a regression 
-coefficient (we used a threshold of $n=15$ observations), the mapping unit is merged with a similar mapping 
-unit prior to calculating dummy variables. The resulting generalized categorical covariate maps are shown in 
-\autoref{fig:cat-covars}. The binary maps are the categorical predictor variables.
+Different from its discrete counterpart, the continuous model of spatial variation takes into account the 
+relative location of existing observations when predicting a soil property at a given unobserved location. In 
+the simplest case, the most likely value of a soil property in a given location is defined by a constant mean 
+computed over all observations made in the mapping region, plus a random variable with mean zero and (spatial) 
+covariance that depends only on the separation distance between locations \cite{WebsterEtAl1990, Cressie1993}. 
+The main idea underlying the continuous model of spatial variation is that soil property values at nearby 
+locations are more similar than at locations further apart \cite{WebsterEtAl1990}. Thus, we err less if we 
+predict the value of a soil property at a given location with a value observed at a nearby location than with a 
+value observed at a distant location. Optimally, because the soil is a continuous media and its properties vary 
+in space in an autocorrelated fashion, we make the most accurate prediction taking a weighted average of the 
+values recorded at all observation locations, nearby locations receiving larger weights than distant locations. 
+In both cases, it follows that the uncertainty about the mapped soil property is larger the farther from 
+existing soil observations, i.e. it is spatially varying \cite{Cressie1993}.
 
-\noindent\textit{Soil maps}. The less detailed soil map (\soilOld) was published with a \scale{100,000} and has 
-five mapping units \cite{AzolinEtAl1988} (\autoref{fig:soil-old}). It was produced using existing soil maps and 
-technical reports (\scale{750,000}) \cite{Brasil1973}, aerial photographs (\scale{60000}), topographic maps 
-(\scale{50,000}), and sparse point soil observations along the road network. The more detailed soil map 
-(\soilNew) was prepared with a \scale{25000} and has eight mapping units \cite{MiguelEtAl2012}
-(\autoref{fig:soil-new}). It was produced using high spatial resolution satellite images (65~cm), existing soil 
-maps and technical reports published with a \scale{50,000} \cite{Poelking2007} and 1:25,000 
-\cite{PedronEtAl2006b}, topographic maps (\scale{25,000}), and descriptions from $\sim$~350 point soil 
-observations. Five dummy predictor variables were derived from \soilOld{} and seven from \soilNew{} 
-(\autoref{tab:soil-covars}).
 
- \begin{figure}[!ht]
-    \centering
-    \begin{minipage}[b]{63mm}
-       \subcaption{Cartographic scale: 1:100,000}
-       \label{fig:soil-old}
-       \centering
-       \includegraphics[width=60mm]{chap01FIG3a}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-       \subcaption{Cartographic scale: 1:25,000}
-       \label{fig:soil-new}
-       \centering
-       \includegraphics[width=60mm]{chap01FIG3d}
-    \end{minipage}    
-    \begin{minipage}[b]{63mm}
-       \subcaption{Cartographic scale: 1:50,000}
-       \label{fig:geo-old}
-       \centering
-       \includegraphics[width=60mm]{chap01FIG3b}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-       \subcaption{Cartographic scale: 1:25,000}
-       \label{fig:geo-new}
-       \centering
-       \includegraphics[width=60mm]{chap01FIG3e}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-       \subcaption{Cartographic scale: 1:500,000}
-       \label{fig:land-old}
-       \centering
-       \includegraphics[width=60mm]{chap01FIG3c}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-       \subcaption{Cartographic scale: 1:2,000}
-       \label{fig:land-new}
-       \centering
-       \includegraphics[width=60mm]{chap01FIG3f}
-    \end{minipage}
-   \caption{Area-class soil maps (a, b), geologic maps (c, d), and land use 
-   maps (e, f) compared in our study. The less detailed version is displayed 
-   at the left, while the more detailed version is shown on the right. Legend 
-   abbreviations and derived dummy variables are described in Tables 
-   \ref{tab:soil-covars}--\ref{tab:land-covars}.}
-  \label{fig:cat-covars}
-\end{figure}
 
-\noindent\textit{Geologic maps}. The less detailed geologic map (\geoOld) was produced using topographic maps 
-with \scale{50,000} \cite{GasparettoEtAl1988} (\autoref{fig:geo-old}). The more detailed geologic map (\geoNew) 
-was produced using topographic maps with \scale{25,000}, and includes the location of overlaying Quaternary 
-sedimentary deposits \cite{MacielFilho1990} (\autoref{fig:geo-new}). \geoNew{} did not cover a small part in 
-the North of the study area, where \geoOld{} was used instead (this strategy was approved by experts on the 
-local geology). The mapping unit of both geologic maps depicting the Caturrita Formation was used indirectly 
-by deriving dummy predictor variables from all other individual mapping units. Three dummy predictor variables 
-were derived from \geoOld{} and four from \geoNew{} (\autoref{tab:geology-covars}).
 
-\noindent\textit{Land use maps}. The less detailed land use map (\landOld) was produced by manually digitizing 
-land use data included in topographic maps with a \scale{25000} \cite{DSG1980, DSG1992, DSG1992a} 
-(\autoref{fig:land-old}). The more detailed land use map (\landNew) was prepared (\scale{2,000}) by manual 
-digitization using 65~cm spatial resolution satellite images covering the years 2008 and 2009 
-\cite{SamuelRosaEtAl2011a} (\autoref{fig:land-new}). Mapping units depicting human settlements and water bodies 
-($n=0$) were not masked out from the prediction grid and were merged with other mapping units to derive dummy 
-predictor variables. Five dummy predictor variables were derived from \landNew{} and two from \landOld{} 
-(\autoref{tab:land-covars}).
+The obvious difficulty in this approach is that the PDF cannot be defined because we usually have one single 
+value recorded at each observation location.
 
-\subsubsection*{Continuous predictor variables}
-\label{subsubsec:continuous-covars}
 
-The less detailed DEM (\demOld) is the hole-filled SRTM DEM version~4 \cite{JarvisEtAl2008} 
-(\autoref{fig:dem-old}). The spatial sampling support of the SRTM DEM is 1~arc-second ($\sim$~30~m), but 
-elevation data were aggregated to 3~arc-seconds ($\sim$~90~m) for public release in regions outside the United 
-States \cite{ReuterEtAl2007}. The more detailed DEM (\demNew) was produced by interpolating contour lines with 
-vertical spacing of 10~m along with data about the drainage network, lakes and peaks digitized from topographic 
-maps with \scale{25,000} (\autoref{fig:dem-new}). Interpolation to 5-m pixel size was performed using a 
-hydrologically correct algorithm implemented in 
-\href{http://resources.arcgis.com/en/help/main/10.1/index.html#/How_Topo_to_Raster_works/009z0000007m000000/}{ 
-ArcGIS\textregistered{}} software by ESRI \cite{Hutchinson1989}. Contour line artefacts were minimized using a 
-seven by seven low-pass filter (\grass{r.neighbors}). The window size was chosen such that the smoothed DEM 
-best matched the original contour map while also respecting the original drainage network pattern.
+Availability of general-purpose computers fuelled the use and development of the continuous model of
+spatial variation, especially in European, North American, and Oceanian countries
+\cite{HeuvelinkEtAl2001,McBratneyEtAl2003,ScullEtAl2003}. But limitations in its prediction
+performance and developments in remote sensing and machine-learning algorithms helped many soil
+scientists to understand that the continuous model of spatial variation had limitations too. For
+instance, it is unable to capture abrupt changes in the values of soil properties that occur, for
+example, between agricultural fields, parent materials, land uses, and so on
+\cite{SteinEtAl1988,VoltzEtAl1990}. Because, contrary to the discrete model of spatial variation, the
+continuous model of spatial variation largely ignores the existing pedological knowledge
+\cite{Grunwald2009,Lark2012}. Soil scientists also understood that the discrete model of spatial
+variation was more efficient than previously thought \cite{BregtEtAl1987}. First, because it was now
+possible to employ Jenny's equation of soil-forming factors for soil mapping using remote sensing
+products as surrogates of the factors of soil formation \cite{MooreEtAl1993}. Second, machine-learning
+algorithms enabled identifying complex spatial patterns that before could only be identified by an
+experienced soil scientist \cite{McKenzieEtAl1999}. The most logical step was to combine the
+strengths of both discrete and continuous models of spatial variation into a single model -- the
+\emph{mixed model of spatial variation} --, that is, inclusion of the existing pedological
+knowledge and consideration of the spatial continuity of soil property values.
 
-\input{chap/tab/chap01TAB1.tex}
+The mixed model of spatial variation\footnote{The use that I give to the expression \emph{mixed model of 
+spatial variation}
+in this thesis is approximately equivalent to expressions such as regression-kriging, kriging with external 
+drift, universal
+kriging, hybrid approach for soil mapping, pedometric mapping, digital soil mapping, predictive soil mapping, 
+environmental
+correlation, geostatistical mapping, soil-landscape modelling, and so on. As far as I know, soil modellers have 
+not yet reached an agreement on how these \q{traditional} expressions should be used, nor what their 
+\q{correct} meaning is. See, for example, \citeonline{Hengl2003, McBratneyEtAl2003, ScullEtAl2003}. Because the 
+expression \emph{mixed model of spatial variation} has a theoretical basis (other expressions are defined based 
+on operational aspects), I understand that its adoption and use is a more appropriate choice.} can be viewed as 
+a generalization of previously existing models of spatial variation, by which a soil property 
+$Y(\boldsymbol{s})$ at a given location $\boldsymbol{s}$ is modelled as the outcome of a spatial stochastic 
+process \cite{Cressie1993, HeuvelinkEtAl2001, LarkEtAl2006}. Accordingly, the model is composed of \emph{fixed} 
+and \emph{random effects}. The fixed effects, a deterministic large-scale spatial trend, $m(\boldsymbol{s})$, 
+describes the portion of the spatial variation of the soil property that is explained with the factors of soil 
+formation as suggested by the empirical correlation calculated using point soil observations and spatially 
+exhaustive covariates\footnote{In the statistical literature, the term \emph{covariate} is synonymous to 
+\emph{explanatory variable}, \emph{predictor variable}, and \emph{independent variable}, and refers to the 
+variable that, although not being of primary interest, is used in a model because it determines the behaviour 
+of the \emph{response variable} or \emph{dependent variable} \cite{Everitt2006}. In soil science, a covariate 
+has the same statistical meaning, the difference being that they assume a pedological meaning as well, i.e. 
+they are viewed as proxies, indicators, substitutes, surrogates, approximations of the soil-forming factors due 
+to the simple fact that the soil-forming factors -- the true environmental conditions that helped shape the 
+soil -- are unknown. Covariates are defined \emph{spatially exhaustive} when they cover the entire area being 
+modelled, i.e. they are exhaustively known in the entire geographic space.}. The random effects, also known as 
+stochastic residuals or latent variables, $e(\boldsymbol{s})$, describe the portion of the spatial variation of 
+the soil property that cannot be explained with the covariates but is potentially spatially correlated, the 
+form and degree of this spatial correlation possibly being interpreted pedologically \cite{Lark2012}. Thus
 
-\input{chap/tab/chap01TAB2.tex}
-
-\input{chap/tab/chap01TAB3.tex}
-
-\begin{figure}[!ht]
-  \centering
-    \begin{minipage}[b]{63mm}
-      \subcaption{Spatial resolution: 90~m}
-      \label{fig:dem-old}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG4a}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{Spatial resolution: 30~m}
-      \label{fig:sat-old}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG4b}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{Vertical spacing of contours: 10~m}
-      \label{fig:dem-new}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG4c}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{Spatial resolution: 5~m}
-      \label{fig:sat-new}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG4d}
-    \end{minipage}
-  \caption{Digital elevation models (a, c) and satellite images, depicted using   the normalized difference 
-vegetation index (b, d), compared in our study. The less detailed version is displayed at the top, while the 
-more detailed version is shown on the bottom.}
-  \label{fig:con-covars}
-\end{figure}
-
-Eight DEM derivatives were calculated: elevation (\elev), slope (\slp), aspect (\asp), northernness (\nor), 
-flow accumulation (\acc), topographic wetness index (\twi), stream power index (\spi), and topographic 
-position index (\tpi). \slp{} and \asp{} were calculated using \grass{r.param.scale} with seven window sizes 
-(sampling support, analysis scale): 3, 7, 15, 31, 63, 127, and 255. \asp{} was scaled to the standard 
-0-360$^\circ$ range and orientation, and was transformed to \nor{} using $\texttt{NOR} = abs(180^\circ - 
-\texttt{ASP})$. \twi{} and \spi{} were calculated using \slp{} calculated with different window sizes, and 
-\acc{} calculated using \grass{r.watershed}. \tpi{} was calculated using \saga{ta\_morphometry} with the same 
-seven window sizes. The combination of DEM derivatives (\elev, \slp, \nor, \twi, \spi, and \tpi) and window 
-sizes yielded $p=36$ continuous predictor variables from each DEM.
-
-The less detailed satellite image was acquired by the Landsat-5 Thematic Mapper on December 26, 2010 
-(available at Instituto Nacional de Pesquisas Espaciais - Divisão de Geração de Imagens -- 
-\href{http://www.dgi.inpe.br/CDSR/}{INPE-DGI}) (\autoref{fig:sat-old}). It has 8~bits radiometric resolution 
-and $\sim$~30~m spatial resolution. Spectral bands were orthorectified (Geomatica\textregistered{}
-OrthoEngine\textregistered{}) and radiometrically corrected (\grass{i.landsat.toar}). The more detailed 
-satellite image comes from the RapidEye constellation (available at Ministério do Meio Ambiente -- 
-\href{http://geocatalogo.ibama.gov.br/}{MMA}) (\autoref{fig:sat-new}). It was acquired on November 16, 2012, 
-has 16~bits radiometric resolution, 6.5~m spatial resolution, and was orthorectified to 5~m spatial resolution. 
-Both images were atmospherically (6S atmospheric model \cite{VermoteEtAl1997}, \grass{i.atcorr}) and 
-topographically corrected (\grass{i.topo.corr}). Derived predictor variables are the spectral bands (except 
-the thermal band) and vegetation indices (normalized difference vegetation index - NDVI, and soil-adjusted 
-vegetation index - SAVI). Eight continuous predictor variables were derived from the Landsat-5~TM image and 
-nine from the RapidEye image.
-
-\subsubsection*{Additional processing}
-\label{subsubsec:sources-processing}
-
-Soil maps, geologic maps, land use maps, and satellite images were registered with the prediction grid (5-m 
-pixel size) using nearest neighbour resampling. \demOld{} was registered using cubic resampling 
-\cite{Samuel-RosaEtAl2013c}. Systematic positional errors were corrected using affine transformation 
-\cite{Samuel-RosaEtAl2014}.
-
-\subsection{Linear mixed model of spatial variation}
-\label{subsec:lmm}
-
-We model each of the soil properties of interest as the outcome of a spatial stochastic process. The model is 
-composed of fixed and random effects \cite{HeuvelinkEtAl2001, LarkEtAl2006}. We use the point soil observations 
-and spatially exhaustive predictor variables to calibrate the model and predict the outcome of the spatial 
-stochastic process at unobserved locations. This fixed effect (deterministic trend), $\mu(\textbf{s})$, 
-describes that part of the spatial variation of the soil property that is explained by the covariates. We 
-assume here that is a linear function of the predictor variables. The random effect (stochastic residuals, 
-latent variables), $\varepsilon(\textbf{s})$, describes that part of the spatial variation that cannot be 
-explained by the covariates \cite{Cressie1993}. It is represented by a spatially correlated, Gaussian 
-distributed random variable, that is assumed stationary in the mean and covariance. Thus, the linear mixed 
-model of spatial variation that we employed is given by
-
-\begin{equation}\label{eq:lmm}
- Z'(\textbf{s}) = \mu(\textbf{s}) + \varepsilon(\textbf{s}) = \sum_{j=0}^{p} 
- \beta_{j}\cdot X_{j}(\textbf{s}) + \varepsilon(\textbf{s}),
+\begin{equation}\label{eq:intro-mixed-model}
+Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
 \end{equation}
 
-\noindent{where $Z'(\textbf{s})$ is the soil property after Box-Cox transformation, $\mu(\textbf{s})$ and 
-$\varepsilon(\textbf{s})$ are defined as above, $\beta_{j}$ are the regression model coefficients, and 
-$X_{j}(\textbf{s})$ is the regression model matrix, with $j=0, 1, 2, \ldots, p$, $p$ being the number
-of predictor variables. Variable $X_{0}(\textbf{s})$ is taken as unity so that $\beta_{0}$ is the intercept.}
+\autoref{eq:intro-mixed-model} possesses a great flexibility that makes easy to explore newly developed 
+statistical and 
+data-mining methods, generally resulting in better performance than the constituent models alone, as well as 
+integrating the 
+existing pedological knowledge provided it is translated into a mathematical form \cite{OdehEtAl1994, 
+OdehEtAl1995, 
+Heuvelink1996, McBratneyEtAl2000, HenglEtAl2004, Lopez-GranadosEtAl2005, WebsterEtAl2007, Grunwald2009, 
+Lark2012}. These features, and the development of the Internet, promoted the rapid popularization of the mixed 
+model of 
+spatial variation, and many recent large scale soil-mapping projects already successfully employed the mixed 
+model of spatial
+variation \cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
 
-\subsubsection*{Model selection}
+Unfortunately, along with the success of the mixed model of spatial variation, came a rupture between soil 
+modellers pertaining to different \q{schools}, building a negative atmosphere in many
+countries (see examples from Brazil [\url{https://groups.google.com/forum/#!forum/soil-mapping}] and
+Spain [\url{http://www.madrimasd.org/blogs/universo/2009/10/07/126094}]). On one side, this was
+caused by the (presumptuous) assumption that the mixed model of spatial variation possibly
+represented a \q{paradigm shift} in soil science \cite{McBratneyEtAl2003} and that it is the
+ultimate soil mapping method, superior to all others \cite{MinasnyEtAl2016}. This assumption is
+certainly untrue, specially in many poorer regions where the mixed model of spatial variation seems
+useless because farmers already obtain satisfactory yields and properly manage their soils using
+indigenous/local knowledge
+\cite{Barrera-BassolsEtAl2003, Barrera-BassolsEtAl2006, HillyerEtAl2006, CorreiaEtAl2007, ValeJuniorEtAl2007}.
+Perhaps the strong criticism made against soil scientists that
+refused to adopt the mixed model of spatial variation, using somewhat pejorative arguments
+\cite{HeuvelinkEtAl2001,Mendonca-SantosEtAl2003}, helped building this unfruitful scenario. On
+the other side, soil scientists disliked losing importance in the research field in which they worked for
+decades, perhaps very afraid of the new technological developments due to their poor knowledge of
+mathematics, statistics, and informatics \cite{Webster2001,SamuelRosa2012}.
 
-We calibrated $m=2^5=32$ multiple linear regression models for each soil property (fitted using ordinary least 
-squares, OLS) to model the deterministic trend for each combination of the five covariates (recall from 
-\autoref{sec:intro} that each covariate is available at two levels of spatial detail, hence $2^5$ 
-combinations). The number of predictor variables used to calibrate each model varied among combinations between 
-$p=52$ and $p=62$, because more detailed covariates enabled the derivation of a larger number of predictor 
-variables (except the DEM). Backward VIF (variance inflation factor) selection followed by stepwise AIC 
-(Akaike's Information Criterion) selection were used to select predictor variables to enter the models 
-\cite{Samuel-RosaEtAl2014c, VenablesEtAl2002}.
+Although all that is very common when a new theory or method appears
+\cite{Russell1932, Feyerabend1977, Kuhn2011}, I think we have reached a point in which nothing else
+can be gained by
+playing one soil scientist against the other. Such a (noble) understanding was already shared by
+\citeonline{Jenny1941} when comparing \cited{soil geographers} and \cited{soil functionalists}.
+The view that I
+try to maintain from beginning to end of this thesis is that, despite the technological developments,
+the activity of modelling the soil remained essentially the same throughout human history. Soil
+maps still serve the same old purpose of representing our limited understanding about the spatial
+organization of the soil in the natural environment in a simplified manner, as well as giving
+insights about how the soil came to be and how they should be managed
+\cite{Jenny1941, Hudson1992, Legros2006, Blanco-CanquiEtAl2010, Grunwald2010}. This is the reason why,
+irrespective of the method/model 
+used to produce soil maps, I use the (integrative) expression \emph{soil mapping}. In support to
+this view, based on the existing body of knowledge on soil mapping and the currently available
+technologies, and believing in the importance of aiming at a more reproducible research, I have
+defined a general (didactic) sequence of seven steps that I believe should be
+followed in a soil-mapping project.
 
-The $m=32$ multiple linear regression models calibrated for each soil property were ranked using the ratio 
-between the regression sum of squares and the total sum of squares. Because stepwise regression results in 
-biased models \cite{Harrell2001a}, the ratio of sum of squares was adjusted (${R}^{2}_{adj}$) using the number 
-of predictor variables initially offered to enter the model instead of the reduced number of predictor 
-variables that entered the model. Next, the five environmental covariates were ranked based on how their level 
-of spatial detail related with the calibration of models with improved predictive performance. The relation 
-between the level of spatial detail of the covariates and model performance was evaluated using a graphical 
-output called model series plot (\Rpackage{pedometrics}, \citeonline{Samuel-RosaEtAl2014c}). Pedological 
-evaluation of predictor variables included in the models was omitted because this was beyond our objectives.
+\noindent\textit{Step 0}. Identify a reality or problem entity, the geographic region for which
+there is a demand of spatial soil information. Target soil properties are appointed as well as the
+required accompanying output information (e.g. metadata). Key modelling decisions are taken in this step
+such as the support (punctual or areal), spatial resolution (and possibly the cartographic scale),
+coordinate reference system, etc. Depending on how well defined the demand is, the model of spatial
+variation can also be specified, i.e. discrete, continuous, or mixed. Data policy is discussed (What data
+should be public? How to make data public? How to implement the data policy?) and agreed upon. Finally,
+the available infrastructure, budget, time, and workforce are specified so that next steps can be
+appropriately planned as to fulfil the demand.
 
-The multiple linear regression model calibrated using only the less detailed environmental covariates, which we 
-call the \textit{baseline} model, and the multiple linear regression model with the highest ${R}^{2}_{adj}$, 
-which we call the \textit{best performing} model, were extended to linear mixed models of 
-spatial variation (\autoref{eq:lmm}) for each soil property. Estimation of the parameters of the linear mixed 
-models was performed using residual (restricted, marginal) maximum likelihood (REML) \cite{RibeiroEtAl2001, 
-LarkEtAl2004}. The spatial correlation function adopted was the exponential function (this is equivalent to the 
-Matérn correlation function with smoothness parameter $\nu=0.5$ \cite{Stein1999}).
+\noindent\textit{Step 1}. Develop a conceptual model of pedogenesis, a verbal representation of the
+reality or problem entity including the explicit description of soil-forming factors and processes
+that determine the spatio-temporal distribution of soil properties. This requires gathering the most
+of the existing environmental information contained in scientific articles, technical reports,
+books, websites, local knowledge, as well as existing maps of the soil, land use, geology, digital
+elevation models, satellite images, aerial photographs, among others. Environmental information is used
+to articulate pedogenetic concepts. Provided that any of the existing soil data are available, an
+exploratory data analysis can help unravelling soil-landscape relationships. The poorer the volume of
+existing environmental information, and the less experienced the soil modeller is, the more
+important an exploratory field campaign is to help understanding the existing soil-landscape relationships.
 
-\subsubsection*{Model validation}
-\label{subsec:validation}
+\noindent\textit{Step 2}. Define the model of spatial variation, a translation of the conceptual
+model of pedogenesis into a set of possible mathematical representations. Depending on
+how well defined the demand was, the model of spatial variation was already specified in
+\textit{Step 0}. Provided the volume of existing environmental information and legacy soil data is
+moderate to large and/or the soil modeller is very experienced and/or the available budget
+allows carrying out exploratory field campaigns, a single model of spatial variation is
+defined, i.e. discrete, continuous, or mixed. Assuming that the mixed model of spatial variation is
+chosen, the statistical and/or data-mining models that will be used to represent the discrete
+and continuous components are specified, taking into account the feasibility of meeting their
+requirements given the available soil data, infrastructure, budget, time, and workforce. If multiple
+models or statistical and/or data-mining models are chosen, the pedological and
+statistical criteria for identifying the best performing model are defined.
 
-Only the \textit{baseline} and \textit{best performing} multiple linear regression and linear mixed models 
-calibrated for each soil property were validated. Model validation was performed using leave-one-out 
-cross-validation (LOO\-/CV) \cite{BrusEtAl2011}. All model parameters were re-estimated at each LOO\-/CV run 
-to reduce bias \cite{LaslettEtAl1987}. LOO\-/CV predicted values were back-transformed from the Box-Cox space 
-to the original space of soil properties using stochastic simulation \cite{ChristensenEtAl2001}:
+\noindent\textit{Step 3}. Prepare the modelling database, a collection of soil and covariate data
+needed to estimate the parameters and testvalidate the chosen statistical and/or data-mining
+models. If required, this includes preparing a sampling plan with formally defined selection rules,
+making properly documented field soil observations, and running replicated laboratory analyses.
+Soil data from different sources are harmonized. Covariates are selected using the conceptual model
+of pedogenesis and empirical evidence. Both soil and covariate data are assessed regarding the need
+for nonlinear transformations to meet the requirements of the chosen statistical and/or
+data-mining models, and to improve their empirical correlation. Several of these tasks can be (and
+usually are) carried out with the aid of a data processing environment (a computer).
 
-\begin{enumerate}
- \item each predicted value and associated prediction error variance were used to simulate $n = 20,000$ values 
-from a Gaussian distribution;
-\item simulated values were back-transformed using $Z(s) = (Z'(s) \times \lambda + 1)^{1 / \lambda}$, if 
-$\lambda > 0$, and $Z(s) = exp(Z'(s))$, if $\lambda = 0$;
- \item the mean and variance of back-transformed simulated values were used as the predicted value and 
-prediction error variance in the original space of soil properties.
-\end{enumerate}
+\noindent\textit{Step 4}. Estimate the parameters of the statistical and/or data-mining
+models, a task that essentially depends on translating the set of possible mathematical
+representations of the conceptual model of pedogenesis into a computer representation, that is, a
+computer code or script. Developing a well documented computer code that describes all processing
+steps ease re-design, future consistency checks, correction of mistakes, and
+dissemination/reproducibility. Calibrated models are evaluated using statistical criteria defined in
+\textit{Step 2} such as goodness-of-fit measures. Best performing models are evaluated regarding their
+tenability (pedological evaluation), which includes visually assessing draft soil maps, and how well
+they represent the range of possible mathematical models. Failure in this last assessment suggests
+that the model requires adjustments, possibly more calibration data, or that it can be discarded.
 
-Five error statistics were computed from the LOO\-/CV results \cite{JanssenEtAl1995, KempenEtAl2010, 
-BrusEtAl2011}. The mean error (\textit{ME}), which measures the prediction bias, the mean absolute error 
-(\textit{MAE}) and the root mean squared error (\textit{RMSE}), which measure the prediction accuracy, the 
-scaled root mean squared error (\textit{SRMSE}, also known as mean squared deviation ratio), which measures how 
-well the prediction error variance matches the squared differences between predicted and observed soil 
-property, where $\textit{SRMSE}>1$ indicates under-estimation, while $\textit{SRMSE}<1$ indicates 
-over-estimation, and the amount of variance explained (\textit{AVE}, also known as coefficient of determination 
-or ratio of scatter), which measures the fraction of the overall spread of observed values that is explained by 
-the model. The AVE ranges from 0 to 100, where $\textit{AVE}=100$ is the optimal value.
+\noindent\textit{Step 5}. Validate the statistical and/or data-mining models, preferentially
+predicting the values of the modelled soil properties at a set of independent, probabilistically
+selected observation locations for which the true values are known. If an independent set of
+observation locations is unavailable, validation is performed using leave-one-out cross-validation.
+The best performing model, selected using the statistical criteria defined in \textit{Step 2}, is
+assumed to be the best mathematical representation of the reality under study. If two or more
+models present similar prediction performance and have a considerably different structure, then it
+is assumed that the best mathematical representation of the reality under study is given by the
+aggregated version of these models, or parsimony is considered to elect the simpler model with fewer variables, 
+steps, rules, etc. If previous steps have already allowed selecting a single best
+performing model, statistical validation is used only to assess model accuracy.
 
-\subsubsection*{Spatial prediction}
-\label{subsec:prediction}
+\noindent\textit{Step 6}. Make spatial predictions, the application of the best performing
+model(s) to predict soil properties values at unvisited locations. If demanded, the uncertainty
+about the predicted soil properties values (i.e. the prediction interval) is estimated too.
+Maps of the target soil properties as well as the required accompanying output information
+(e.g. point soil observations, covariate maps, uncertainty maps, metadata, computer scripts)
+are delivered to the users of the soil information, and possibly used to populate a spatial soil
+information system, where they are made available for inspection using different visualization
+techniques. Provided there is infrastructure, budget, time, and workforce available, modelling
+steps can be re-designed and the outputs updated at the user request.
 
-Only the \textit{baseline} and \textit{best performing} linear mixed models calibrated for each soil property 
-were used for spatial prediction. Spatial predictions at a fine grid of $\sim$~800,000 point locations were 
-made in the Box-Cox space using the best linear unbiased predictor (BLUP) with the empirical estimates of the 
-random effects (EBLUP) \cite{LarkEtAl2006}. EBLUP with a fixed effect model is conceptually equivalent to 
-kriging with external drift and regression kriging, and mathematically equivalent to kriging with external 
-drift and universal kriging. Point predicted values and prediction error variances were back-transformed to the 
-original soil property space using stochastic simulation as described above (\autoref{subsec:validation}).
+\noindent\textit{Step 7}. Reformulate the conceptual model of pedogenesis, the use
+of the knowledge gained during the previous steps until the production of the soil property
+maps, which give insights about the reality or problem entity under study, to correct
+and/or improve the description of soil-forming factors and processes that determine the
+spatio-temporal distribution of soil properties. If demanded, the reformulated conceptual model
+of pedogenesis is delivered to the users of the soil information as well to help in scenario analysis
+and decision making.
 
-\section{Results}
-\label{sec:results}
+\subsection{Sources of uncertainty}
+\label{sec:intro-uncertainty}
 
-\subsection{Model series plots}
+Soil spatial models, like any other model, are nothing more than a gross simplification of reality.
+This means that soil models are unable to explain the spatio-temporal soil variation in
+its entirety, but only a small part of it \cite{Heuvelink1998a, Legros2006}. When we use a
+soil-mapping model to produce continuous representations of soil properties across space and/or time,
+i.e. soil maps, these continuous representations will inexorably deviate from the \q{truth}. What
+the soil map presents is our most likely expectation about the soil properties -- not our
+\emph{certainty} about them. The deviation from the \q{truth} is what we call \emph{error}. Many
+examples from the soil-mapping literature show that, irrespective of the soil property, soil-mapping
+models have a quite variable predictive performance, usually explaining between \SI{15}{\percent}
+(or less) and (rarely more than) \SI{75}{\percent} of the spatio-temporal soil variation
+\cite{MooreEtAl1993, OdehEtAl1994, GesslerEtAl1995, McKenzieEtAl1999, GobinEtAl2001, SumflethEtAl2008, 
+SunEtAl2012, ViscarraRosselEtAl2013, NussbaumEtAl2014, HenglEtAl2015, GaschEtAl2015, HeungEtAl2016}.
+The main reason for a soil map to be in error is that the background knowledge and data used to
+construct the soil-mapping model is very limited -- we have to try our best with the available
+resources. Unless we observe the soil everywhere, which would destroy the soil and render the
+observations useless, no matter how large the volume of data is, or how comprehensive our background
+knowledge, it will never be possible to construct a model that explains the entire complexity of
+the soil \cite{Tukey1997}. This means that our knowledge about the soil, and the world as a whole,
+will always be only partial \cite{Box1993}. Because we cannot eliminate the uncertainty of a soil
+map, they can always be considered as wrong, and there can be many alternative versions for the same map, the 
+difference being that some might be useful
+\cite{Box1976}.
 
-The model series plot is a graphical description of the relation between the prediction accuracy of multiple 
-linear regression models and the environmental covariates used to calibrate them (\autoref{fig:model-series}). 
-The magnitude of improvement in prediction accuracy is depicted in the bottom panel by the ${R}^{2}_{adj}$. The 
-top panel is interpreted both horizontally and vertically. In the vertical direction we identify which version 
-of each covariate was used to calibrate a given model. The less and the more detailed versions are identified 
-by the yellow (bright) and green (dark) colours, respectively. The \textit{baseline} model is identified by the 
-column containing only yellow cells, while the column with only green cells represents the model calibrated 
-using only the more detailed version of each covariate, which we call the \textit{most detailed} model. The 
-first important results that we obtain from the model series plots is that a) the \textit{baseline} model is 
-not the model with the lowest ${R}^{2}_{adj}$, which we call the \textit{poorest performing} model, and b) the 
-\textit{most detailed} model is not the \textit{best performing} model.
+Soil modellers aim at producing the most accurate representations of the soil given the
+available resources. Thus, a reasonable research program is the identification of the causes for
+soil maps being more or less uncertain. For instance, the error that results from making
+extrapolations and interpolations to predict soil properties at unvisited locations is an
+important source of uncertainty \cite{HeuvelinkEtAl1999, RefsgaardEtAl2006}. In the case of
+data-centred soil models, such as the mixed model of spatial variation, these errors are
+larger the farther we are from the existing observations. Thus, the most efficient way of reducing
+these errors is to increase the number of observations and improve the spatial coverage of the mapping
+region \cite{BrusEtAl2007a}. However, most soil-mapping projects must rely on using only soil
+data produced many years ago \cite{KempenEtAl2009, HenglEtAl2014, PoggioEtAl2014, NussbaumEtAl2014, 
+MulderEtAl2016}, when most sampling locations were chosen by soil modellers using non-explicit
+location rules, usually placing more samples in complex and less known areas \cite{Rossiter2000}.
 
-\begin{figure}[!ht]
-  \centering
-    \begin{minipage}[b]{\textwidth}
-      \subcaption{}
-      \includegraphics[width=\textwidth]{chap01FIG5a}
-    \end{minipage}
-    \begin{minipage}[b]{\textwidth}
-      \subcaption{}
-      \includegraphics[width=\textwidth]{chap01FIG5b}
-    \end{minipage}
-    \begin{minipage}[b]{\textwidth}
-      \subcaption{}
-      \includegraphics[width=\textwidth]{chap01FIG5c}
-    \end{minipage}
-  \caption{Model series plots for CLAY (a), SOC (b), and ECEC (c). The less and 
-  more detailed version of each environmental covariate are identified by the 
-  yellow (bright) and green (dark) colours, respectively. Multiple linear 
-  regression models were ranked by their ${R}^{2}_{adj}$. Triangles show the 
-  mean ranking of the more detailed covariates (i.e. centre of green cells).}
-  \label{fig:model-series}
-\end{figure}
+On the contrary, if the budget of the soil-mapping project includes (additional) sampling, soil
+modellers have to decide upon the number and spatial configuration of the sample
+\cite{deGruijterEtAl2006, WebsterEtAl2013}. Unfortunately this is not an easy task, except if the
+goal is on modelling very few soil properties that can be rapidly measured using field
+sensors, and for which a model of spatial (co)variation can be assumed known \cite{MarchantEtAl2006}.
+In most cases, several difficult-to-measure soil properties have to be modelled/mapped, many of
+which have a poorly known structure of spatial (co)variation. If using the mixed model of spatial
+variation, the chosen spatial sample configuration has to be appropriate for estimating the spatial
+trend \cite{HenglEtAl2003a, MinasnyEtAl2006b} and the variogram model
+\cite{WarrickEtAl1987, WebsterEtAl1992, Lark2002}, making spatial predictions
+\cite{YfantisEtAl1987, WalvoortEtAl2010} and, (cross)validating the model/map \cite{BrusEtAl2011}, four
+often conflicting objectives. Besides, one
+must be careful not to decide upon collecting an insufficient or an exaggerated number of soil samples.
+Under-sampling can result in soil models with little utility, while over-sampling can produce
+modelling benefits that do not outweigh the sampling costs \cite{vanGroenigenEtAl1999}.
 
-The row-wise analysis of the model series plots shows if a model calibrated with the more detailed version of 
-a given environmental covariate has a higher prediction accuracy. This information is retrieved by looking at 
-the row-wise distribution of green cells -- these cells represent the $m=16$ models calibrated using the more 
-detailed version of a given covariate, irrespective of the version of the other covariates. The more 
-concentrated the green cells are in the right half of the plot, the larger the relative benefit of using the
-more detailed version of that environmental covariate. For example, the top row of the second model series 
-plot shows the SOC models calibrated using the two versions of the land use map (\texttt{land}). All green 
-cells are on the right half of the plot between rankings 1 and 16 (see the x axis). The four lower rows
-show that the green cells of the other four covariates are distributed along the entire ranking range (from 1 
-to 32). This means that the relative benefit of calibrating a SOC model with a more detailed land use map is 
-larger compared to that of using a more detailed version of the other covariates.
+Soil data may not only poorly cover the geographic and/or feature spaces \cite{HenglEtAl2003a}, but
+also have significant laboratory and positional errors \cite{NelsonEtAl2011}. Besides, some soil
+properties may naturally contain more errors due to their conceptual definition and analytical
+procedures employed. Take particle-size distribution as an example. First, the errors are propagated
+to the fraction obtained by difference (silt). Second, pre-treatments, such as organic matter
+oxidation, can change mineral structure \cite{MikuttaEtAl2005a}. And third, ignoring that the
+particle-size distribution is a compositional datum can introduce bias in the predictions
+\cite{LarkEtAl2007}.
 
-The centre of the row-wise distribution of the green cells for each environmental covariate, calculated as the 
-mean ranking, is represented by the triangles. The mean ranking quantifies the relative benefit of using a 
-more detailed version of each covariate. For example, the mean ranking of the SOC models calibrated using the 
-more detailed land use map is about 8 (top row), while the mean ranking of the models calibrated using the more 
-detailed satellite image (\texttt{sat}) is close to 20 (bottom row). Using the more detailed DEM (\texttt{dem}) 
-is almost as beneficial as using the more detailed geologic map (\texttt{geo}) -- the mean ranking of the SOC 
-models calibrated using the more detailed version of these two covariates is about 15-16 (second and third 
-rows). Using the more detailed version of the soil map (\texttt{soil}, fourth row) is not as beneficial as 
-using \texttt{land}, \texttt{geo} or \texttt{dem}, but more beneficial than using \texttt{sat}. Because the 
-covariates were ranked based on the mean rankings, the covariate displayed in the top row of each model series 
-plot is the one which resulted in the largest improvement of the prediction accuracy when the more detailed 
-version was used to calibrate the model -- for SOC this is the land use map.
+Another important source of uncertainty is the covariates used to calibrate the soil models.
+First, because they contain varying levels of error \cite{HeuvelinkEtAl1989}. These errors derive
+from the various methods of data generation, analytical procedures and, inherent characteristics of
+each site. For example, digital elevation models usually present larger errors in areas with steep
+slopes, rough terrains, and high altitude, and with dense forest cover or urbanized
+\cite{Florinsky1998,Toutin2000,FisherEtAl2006}. Interpolation of elevation data using kriging
+can produce spurious artefacts \cite{HenglEtAl2009} compared to hydrologically consistent
+algorithms \cite{Hutchinson1989}. And stereoscopic correlation techniques produce digital elevation
+models with poorer quality than interferometric synthetic aperture radar \cite{HirtEtAl2010}.
 
-For CLAY, calibrating the models with the more detailed soil map resulted in the largest improvement of the 
-prediction accuracy relative to the other environmental covariates. The DEM was the second most beneficial 
-covariate (mean ranking of 15), but the benefit of using its more detailed version was similar to that of using 
-the more detailed version of any other covariate (mean rankings between 17 and 18). Nine models had a poorer 
-prediction performance than the baseline model, ranked 27th, the poorest performing model being that 
-calibrated with the more detailed land use map and satellite image. Despite these patterns, calibrating CLAY 
-models with the more detailed version of any covariate resulted in a small improvement of the prediction 
-accuracy, as evidenced by the small increases of the ${R}^{2}_{adj}$. The difference between the poorest and 
-best performing models is less than 3~percentage points (pp). In comparison, for SOC, by simply using the more 
-detailed land use map we already obtained a model ranked 9th, an increase of 8~pp in ${R}^{2}_{adj}$ compared 
-to the baseline model, ranked 24th.
+Deciding upon which covariates to include in the soil-mapping model is another important source of
+uncertainty. This is especially important nowadays, when the number of available (uncertain)
+covariates increases every week, many of which possibly being statistically redundant. A more
+pedologically sound approach for selecting the covariates consists in eliciting the knowledge of a
+few experts \cite{LarkEtAl2007a}, optimally more than five \cite{MeyerEtAl2001}. An expert is
+every soil modeller with long-term practical experience in soil mapping \cite{MeyerEtAl2001}.
+If the mapping region is unknown to the experts, then a sound conceptual model of pedogenesis must be
+provided. However, the understanding about the mapping region may be limited to a point that enables
+building only a very uncertain conceptual model of pedogenesis. For example, an unstable landscape that
+consistently suffers from natural and/or anthropogenic alterations is geomorphologically more complex than
+a stable one \cite{Schumm1979}. As the landscape is rejuvenated, thus increasing complexity, establishing
+soil-landscape relationships becomes very difficult \cite{StreckEtAl2008}. Similar uncertainty
+in the conceptual model of pedogenesis can arise in very old, stable surfaces that have gone
+through many environmental modifications, but were not affected by Pleistocene glaciations
+\cite{MckenzieEtAl2006}. These landscapes commonly have polygenetic soils that present properties
+reflecting today and ancient vegetation and climate \cite{PainEtAl1995, Ker1998}.
 
-The same general pattern observed for SOC models was observed for ECEC models -- the more detailed land use map 
-results in the largest improvement of the prediction accuracy. The main difference is that calibrating the 
-models with the more detailed geologic map was slightly more beneficial for ECEC (mean ranking of 12) than for 
-SOC (mean ranking of 14). The poorest performing ECEC model was that calibrated with the more detailed 
-satellite image. Using only the more detailed land use map resulted in an improvement of 6~pp in 
-${R}^{2}_{adj}$ (model ranked 7th), differing from the best performing model by only 2~pp. Using the more 
-detailed version of all environmental covariates except the soil map or satellite image resulted in increases 
-of about 6 and 7~pp in ${R}^{2}_{adj}$, respectively. The baseline model was ranked as 28th, which is a higher 
-ranking than the models calibrated with all possible combinations of the more detailed satellite image and the 
-more detailed soil map and/or DEM.
+A commonly used approach to select the covariates to enter a soil-mapping model is automated selection.
+Because automated selection algorithms are available in most software packages \cite{Harrell2001a},
+they are relatively easy to use \cite{DraperEtAl1971}, deliver satisfactory results,
+\cite{HenglEtAl2004}, and are needed to automate soil-mapping routines \cite{HenglEtAl2014}. The
+main uncertainty here is on which method to use. Some methods analyse all possible combinations of
+covariates. Others simulate the process of natural selection \cite{AndersenEtAl2010}.
+Cross-validation selects covariates that produce the best predictions on test sets
+\cite{GuyonEtAl2003}. Other methods take into account the order in which the covariates are added
+to (forward selection) or removed from (backward elimination) the model \cite{LarkEtAl2007a}. The stepwise 
+method adds and removes covariates until no further addition or removal results in
+significant changes in the model \cite{DraperEtAl1998}. Many other methods exist and have been
+used in soil-mapping projects \cite{PoggioEtAl2013,NussbaumEtAl2014}. Some prefer to use
+dimensionality reduction techniques to reduce the number of covariates \cite{Massy1965} before
+running the covariate selection algorithm \cite{tenCatenEtAl2011a, HenglEtAl2014}. However, there
+are evidences that the number of problems associated with using automated covariate selection
+methods, and dimensionality reduction techniques, can be greater than the number of advantages 
+\cite{FarrarEtAl1967, Jackson1993, Chatfield1995, Edirisooriya1995, Harrell2001a, Jolliffe2002, 
+Peres-NetoEtAl2005, LarkEtAl2007a}. The most evident being the fact that each method produces a different set 
+of covariates which may have a weaker physical or biological relation with the soil property being 
+modelled/mapped.
+Soil modellers also have to chose the form of the model that will be used to model the
+empirical relation between covariates and soil properties. Early soil-mapping projects were based
+solely on mental models \cite{Hudson1992}. Later, many soil-mapping projects used statistical
+models that assume a linear relation \cite{MooreEtAl1993,OdehEtAl1994}. Developments in
+informatics introduced new forms of modelling this relation. Nowadays many soil-mapping projects
+employ machine-learning methods such as regression trees, artificial neural networks, random forests,
+support vector machines, among many others \cite{HeungEtAl2016}. The main reason being that these
+nonlinear models have a greater ability to capture more complex site-specific soil-landscape relations
+\cite{Grunwald2009}. In fact, the relation between soil properties and covariates seldom is
+completely linear \cite{McKenzieEtAl1999}. Once again, the problem is that each model produces a
+different soil map, although the validation statistics may suggest that the differences in their
+performance are insignificant \cite{HeungEtAl2016}. A solution is to aggregate the predictions of
+the many models, but this will not necessarily reduce our uncertainty. Besides, machine-learning
+methods are more difficult to implement and interpret, possibly being more prone to error, and can
+be devoid of any pedological information \cite{Grunwald2009}.
 
-The patterns observed in the model series plots resulted from the change (increase or decrease) of the 
-importance of each environmental covariate on explaining the variance when the more detailed version was used 
-(\autoref{tab:drop}). We used the \textit{baseline} and \textit{most detailed} models to quantify this change. 
-Each model was refitted dropping one covariate at a time. The difference $\Delta$ between the ${R}^{2}_{adj}$ 
-of the model calibrated with all five $q$ covariates (${R}^{2}_{adj}{}_{q=5}$) and the model calibrated without 
-the $q$-th covariate ($R^{2}_{adj}{}_{q=5-1}$) was calculated. The more positive $\Delta{R}^{2}_{adj}$ 
-becomes, the more beneficial the more detailed version of the $q$-th covariate is for improving prediction 
-accuracy. For CLAY, \texttt{dem} and \texttt{land} were the most important covariates in the baseline model, 
-while \texttt{geo} was the least important. The importance of \texttt{soil} and \texttt{geo} increased when 
-their more detailed version was used (change of $+0.013$~pp for both), while \texttt{sat}, \texttt{land} 
-and \texttt{dem} became less important. For SOC and ECEC, \texttt{land} was not the most important covariate in 
-the baseline model. But it was the covariate whose importance had the largest positive shift when the more 
-detailed version was used ($+0.085$~pp for SOC and $+0.045$~pp for ECEC). \texttt{sat} became less important 
-when the more detailed version was used -- see its low ranking in all model series plots. The increase of the 
-importance of \texttt{geo} was larger for ECEC ($+0.026$) than for SOC ($+0.013$) -- see the difference in the 
-mean ranking of \texttt{geo} in the SOC (14) and ECEC (12) model series plots.
+As we have seen, the sources of uncertainty in soil-mapping projects are multiple and the list that I
+present is far from being comprehensive -- others will do a better job. The main message is that we
+cannot eliminate the uncertainty of a soil map and, as such, our knowledge about the soil will always
+be limited. Despite of this, soil models/maps -- and the entire body of human knowledge -- are still
+needed to guide our every-day actions. So, instead of eliminating uncertainty, the real quest is for
+understanding it and its sources. Because while studying the multiple sources of uncertainty -- the
+\emph{known unknowns} --, instead of bringing them all into light, turning them into sources of error
+which we have a good understanding of -- the \emph{known knowns} --, we end up uncovering other sources
+of error that we were not aware of -- the \emph{unknown unknowns} \cite{Wikipedia2015}. If a known
+(or unknown) unknown happens to become a known known, then action can be taken to reduce our
+uncertainty. For example, if we gain knowledge that a source of error has a systematic nature, then a
+corrective measure can be taken right away.
 
-\input{chap/tab/chap01TAB4.tex}
+A most comprehensive way of dealing with the known unknowns is \emph{error propagation analysis},
+also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989,Taylor1997}. This is done taking
+our uncertainty into account through the soil-modelling steps, seeing how it propagates, and
+evaluating its impact on the uncertainty of the output soil map. This would allow us identifying the
+main source of uncertainty, so that we could try to take corrective measures to improve its quality.
+But such an exercise is cumbersome \cite{NelsonEtAl2011}, and the efforts required may not
+outweigh the benefits, this being one of the reasons why it is rarely carried out. Another important
+reason for error propagation analysis being unpopular is the common ignorance and lack of
+understanding -- perhaps prejudice -- about error and uncertainty \cite{Wechsler2003,Heuvelink2005}.
+But the most important reason seems to be that statistical packages and data analysis environments do
+not include -- if they ever will or should include -- a simple routine, a button, to run a complete
+uncertainty analysis \cite{HeuvelinkEtAl2006b}.
 
-\subsection{REML fit of the variogram model}
+Since soil maps still are useful, despite being in error, most soil-mapping projects adopt a very
+pragmatic approach, and the uncertainty is almost completely ignored \cite{McBratneyEtAl2003,ScullEtAl2003}.
+In other words, we assume that all sources of uncertainty are insignificant.
+Positional and analytical errors are disregarded, covariates are taken as certain, and so on. These
+data are used to calibrate a few models, whose parameters are assumed to be estimated without error
+\cite{DiggleEtAl1998}. The soil-mapping model with the best validation statistics, generally
+chosen using (the optimistic) cross-validation, is selected to make spatial predictions at unvisited
+locations \cite{BrusEtAl2011}. Errors in the resulting map are regarded as being due to interpolation
+error. Most soil models will output an estimate of this uncertainty, i.e. a measure of what
+we do not know about the modelled/mapped soil property such as the kriging prediction error variance
+\cite{HeuvelinkEtAl1989}. But even such a measure is nothing more than a model of our uncertainty
+whose quality needs proper assessment \cite{Goovaerts2001}. Because soil models that ignore
+the spatial autocorrelation of the prediction errors generally are optimistic about our uncertainty,
+i.e. they estimate that we know more than we actually do. And geostatistical models can either
+under- or overestimate the uncertainty depending on the available data and modelling decisions
+\cite{Lark2000a}.
 
-The small improvement in the prediction accuracy of the CLAY linear mixed model calibrated with the more 
-detailed environmental covariates is evidenced by \autoref{fig:lmm}. The shape of the experimental variogram is 
-very similar for both baseline and best performing linear mixed models, which is also true for SOC and ECEC. 
-However, the sill variance had a very small reduction for CLAY compared to SOC and ECEC. The last two showed a 
-more considerable improvement in prediction accuracy. It can also be seen that the number of point observations 
-separated by short distances is very small, reducing the accuracy of the estimate of the nugget variance. The 
-result is that the estimated nugget variance changes rather erratically from the baseline to the best 
-performing models, decreasing for CLAY and SOC, and increasing for ECEC.
+Continually ignoring the uncertainty in soil-mapping projects is quite a dangerous choice
+\cite{HeuvelinkEtAl1999}. It can induce the layman -- and even other scientists -- to think that
+soil modellers produce perfect, complete answers to soil-related issues. The most likely
+consequence is what already happened in the end of the 1980's in most countries when funds for
+soil-modelling research were almost completely extinguished
+\cite{Basher1997, Dalmolin1999, Ker1999, Ramos2003, HarteminkEtAl2008, Finke2012}: if the soil map is a perfect
+representation of reality, then once it is done, soil modellers become useless. Nowadays, many
+software packages and data analysis environments include a basic routine to take into account, at
+least, one source of uncertainty \cite{ChristensenEtAl2002, Papritz2015, RibeiroJrEtAl2015}. If a
+more elaborated, problem-specific software is required, then there is the free and open source
+software community. Free access to the scientific literature is guaranteed by many governments,
+universities, and libraries that spend a significant amount of resources every year on subscriptions
+and maintenance of digital repositories. Anyone with a true interest in contributing to the body of
+human knowledge must recognize the urgent need to stop neglecting, perhaps consciously denying, what
+we already known -- the \emph{unknown knowns} \cite{Zizek2006}.
 
-\begin{figure}[!ht]
-  \begin{center}
-    \begin{minipage}[b]{90mm}
-      \subcaption{}
-      \includegraphics[width=90mm]{chap01FIG6a} 
-    \end{minipage}
-    \begin{minipage}[b]{90mm}
-      \subcaption{}
-      \includegraphics[width=90mm]{chap01FIG6b}
-    \end{minipage}
-    \begin{minipage}[b]{90mm}
-      \subcaption{}
-      \includegraphics[width=90mm]{chap01FIG6c}
-    \end{minipage}
-    \caption{Experimental variogram (dots) and REML fit of the linear mixed 
-    models (line) for CLAY (a), SOC (b), and ECEC (c). Left -- baseline model.
-    Right -- best performing model.}
-    \label{fig:lmm}
-  \end{center}
-\end{figure}
-
-\subsection{Validation}
-
-The LOO\-/CV results indicate that the linear mixed models for CLAY are slightly positively biased, while 
-those for SOC and ECEC are slightly negatively biased (\autoref{tab:cv-stats}). For both CLAY and ECEC, the 
-\textit{MAE} shows that these models are more accurate than the multiple linear regression models, suggesting 
-that the kriging step improves the prediction accuracy.
-
-\input{chap/tab/chap01TAB5.tex}
-
-Overall, all models had a moderate to poor prediction performance. The errors are, in absolute values, somewhat 
-large, mainly for ECEC. The best \textit{AVE} are about 60\% for CLAY, 50\% for SOC and 40\% for ECEC. In 
-general, the prediction error variance was under-estimated by the linear mixed models and over-estimated by the 
-multiple regression models. The best estimates of the prediction error variance were obtained by both CLAY 
-linear mixed models, and the ECEC baseline linear regression model.
-
-For CLAY, the increase in the \textit{AVE} was larger when including a kriging step 
-($\Delta\textit{AVE}=3.9$~pp) than when using more detailed environmental covariates 
-($\Delta\textit{AVE}=1.6$~pp). In the case of SOC, including a kriging step reduced the \textit{AVE} by 3.2~pp, 
-and for ECEC, both strategies increased the \textit{AVE} (\autoref{tab:cv-stats}).
-
-\subsection{Spatial prediction}
-
-Both baseline and best performing linear mixed models captured the same overall pattern of spatial variation of 
-the soil properties (\autoref{fig:kriging}). The main difference is that the spatial patterns of the different 
-environmental covariates used to calibrate each model produced different features in the prediction maps. For 
-example, the CLAY map produced by the best performing model (\autoref{fig:clay-best-pred}) displays abrupt 
-changes in the predicted values in the north-northeast due to the use of the more detailed soil map. 
-Strongly-marked features following the stream network obtained through the use of the more detailed DEM are 
-also observed (Figures \ref{fig:clay-best-pred} and \ref{fig:clay-best-var}).
-
-SOC maps (Figures \ref{fig:soc-best-pred} and \ref{fig:soc-best-var}) show peculiar features in the central 
-part of the study area, where predictions reached values as high as \SI{507}{\gram\per\kilo\gram}, while 
-the maximum value in the calibration data is \SI{163}{\gram\per\kilo\gram}. The extremely high predicted 
-values resulted from the inclusion of the topographic position index derived from the more detailed DEM, using 
-a window size of 15~x~15~pixels (\texttt{TPI\_10\_15}) to model the deterministic trend. \texttt{TPI\_10\_15} 
-values in the point calibration data range from -7 to 6~m, while in the central part of the study area they 
-range from 12 to 31~m. Thus, feature-space extrapolation explains the extremely high predicted values for SOC. 
-Abrupt changes in predicted SOC are also observed at locations with low to moderate SOC 
-(\SIrange{40}{80}{\gram\per\kilo\gram}). This is caused by using the more detailed land use map.
-
-Predicted ECEC (Figures \ref{fig:ecec-base-pred} and \ref{fig:ecec-best-pred}) had a large dependency on land 
-use and geologic maps. Several features observed in the prediction maps derive from these two covariates. The 
-influence of land use is seen in the northern part, while in the western, central, and eastern parts the 
-influence of both covariates create an irregular pattern in the spatial distribution of ECEC. It is also in 
-these parts that the largest prediction error standard deviations occur, following the spatial pattern of the 
-covariates.
-
- \begin{figure}[!ht]
-    \centering
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:clay-base-pred}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG7a}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:clay-best-pred}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG7d}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:soc-base-pred}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG7b}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:soc-best-pred}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG7e}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:ecec-base-pred}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG7c}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:ecec-best-pred}
-      \centering
-      \includegraphics[width=63mm]{chap01FIG7f}
-    \end{minipage}
-  \caption{Predicted values for CLAY (\si{\gram\per\kilo\gram}) (a, b), SOC (\si{\gram\per\kilo\gram}) (c, d), 
-and ECEC (mmol~kg$^{-1}$) (e, f) using the baseline (left) and best performing (right) linear mixed models.}
-  \label{fig:kriging}
-\end{figure}
-
-\begin{figure}[!ht]
-\centering
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:clay-base-var}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG8a}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:clay-best-var}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG8d}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:soc-base-var}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG8b}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:soc-best-var}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG8e}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:ecec-base-var}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG8c}
-    \end{minipage}
-    \begin{minipage}[b]{63mm}
-      \subcaption{}
-      \label{fig:ecec-best-var}
-      \centering
-      \includegraphics[width=60mm]{chap01FIG8f}
-    \end{minipage}
-  \caption{Prediction error standard deviations for CLAY (\si{\gram\per\kilo\gram}) (a, b), SOC 
-(\si{\gram\per\kilo\gram}) (c, d), and ECEC (mmol~kg$^{-1}$) (e, f) using the baseline (left) and best 
-performing (right) linear mixed models.}
-  \label{fig:kriging-variance}
-\end{figure}
-
-The smallest prediction error standard deviations occur at lower elevations, along the three main streams, and 
-close to the water outlet in the southern part of the study area. These areas have the highest density of point 
-soil observations used to calibrate the models, and the smallest values for all three soil properties. While 
-the first determines the accuracy of the EBLUP, the second influences the final accuracy through the 
-back-transformation of predicted values.
-
-\section{Discussion}
-
-Our main goal was to evaluate whether investing in more spatially detailed environmental covariates improves 
-the accuracy of soil maps. We saw that calibrating the models with more detailed covariates generally has a 
-small to moderate, but positive, impact on the predictions. The magnitude of this benefit depends on the 
-magnitude of the increase of the spatial detail of the covariate, on the other covariates included in the 
-model, and on the soil property. However, there seems to be a limit above which the increase of spatial
-detail has a negative impact on the predictions. In the next two subsections we interpret the results from a 
-pedological perspective and assess whether the investment in more detailed covariates is worthwhile or if 
-alternatives to improve prediction accuracy should be favoured.
-
-\subsection{Spatio-temporal controls of soil properties}
-
-CLAY was moderately well predicted using less detailed environmental covariates, with small improvement when 
-using the more detailed covariates. CLAY was expected to have a strong correlation with topography and parent 
-material. This correlation was already considerable when the less detailed DEM and geologic map were used, and 
-improved only marginally with the more detailed version. One sensible explanation is that the effective (actual 
-rather than theoretical) spatial detail of the two geologic maps was similar, although they had a four-fold 
-difference in the size of the minimum legible delineation (see \citeonline{HenglEtAl2006a} for a discussion on 
-effective scale). For the DEM, many studies have already suggested that its resolution may be of secondary 
-importance when calculating DEM derivatives for digital soil mapping \cite{ZhuEtAl2008, BehrensEtAl2010a, 
-MillerEtAl2015}. The influence of land use on CLAY is currently small due to reduction of soil erosion in the 
-first decade of the 21st century \cite{MiguelEtAl2012, TenCatenEtAl2012b}. A moderate within-field spatial 
-variation may exist due to past erosional processes \cite{MouraBueno2012}, but we lack evidence of how well 
-this source of variation was captured in the present-time point soil data.
-
-It is worthwhile to consider the influence of the more detailed soil map on predicting CLAY. Due to its 
-production process, the more detailed soil map derives a large amount of spatial detail from the geologic map, 
-land use map and DEM -- note that the second-best performing model for CLAY included the more detailed geologic 
-map instead of the more detailed soil map (\autoref{fig:model-series}). However, most of the additional spatial 
-detail included in the more detailed soil map was probably based on the spatial variation of soil texture, 
-because this is a strongly marked soil feature in the area \cite{MiguelEtAl2012}. Soil texture is one of the 
-most important soil properties used by soil surveyors in the field to identify mapping units \cite{Legros2006}. 
-These findings help explain why in the end the more detailed soil map was the most beneficial for CLAY instead 
-of the geologic map.
-
-SOC and ECEC were considerably better predicted when more detailed environmental covariates were used. Our 
-expectation that SOC and ECEC would have a strong correlation with land use was confirmed by the fact that this 
-covariate explained a large amount of the variance and was highly beneficial for improving the predictions. 
-Although the available point soil data are limited to the 2004-2011 period, we believe that land use changes in 
-the last 30~years \cite{MiguelEtAl2012, TenCatenEtAl2012b} strongly affected SOC and ECEC. Thus, 
-the more detailed land use map is likely to have considerably improved model performance because it is 
-up-to-date and, possibly, because it has 40 times more spatial detail than its less detailed version. Despite 
-the fact that the two land use maps used in this study were from different time periods, which confounds the 
-analysis, the results obtained indicate that a more detailed land use map improves the prediction of SOC. For 
-example, the areas used for crop agriculture, which are well know for having lower SOC and ECEC 
-\cite{Menezes2008, MouraBueno2012}, are not depicted in the less detailed land use map.
-
-We expected SOC to have a stronger correlation with the DEM than with the geologic map due to its strong 
-dependence on erosion, but we observed the contrary. This result my be partially explained by the fact that 
-there is a strong relation between geology and topography in the study area \cite{Sartori2009}. Due to its 
-production process \cite{MacielFilho1990}, the geologic maps can be interpreted as an aggregated version of a 
-DEM. A second sensible explanation is that the effect of erosion on SOC is not that large because erosion was 
-considerably reduced in the last decade \cite{MiguelEtAl2012, TenCatenEtAl2012b}. A last possible explanation, 
-which integrates the previous two, is the existence of a spatial relation between SOC and CLAY, the last being 
-strongly correlated with parent material. These relations help explain why the more detailed DEM was almost as 
-beneficial as the more detailed geologic map for SOC predictions. In the case of ECEC, our expectation of a 
-strong dependency on a more detailed geologic map for producing more accurate predictions was confirmed.
-
-The observed benefit of the more detailed geologic map and DEM for making more accurate CLAY, SOC and ECEC 
-predictions suggests that these soil properties are spatially related in the study area. We also hypothesize 
-that the complexity of current land use makes it difficult to achieve SOC and ECEC models with 
-performances comparable to CLAY. One important source of variation in forested areas is its use for animal 
-grazing \cite{SamuelRosaEtAl2011a}. This influences nutrient cycling and soil nutrient availability 
-\cite{SchramaEtAl2013}. Current remote sensing technology is unable to capture the data needed to proxy the 
-environmental conditions created by these processes.
-
-\subsection{Using more detailed environmental covariates}
-
-More detailed covariates are usually expected to improve predictions in digital soil mapping 
-\cite{CavazziEtAl2013, MaynardEtAl2014}. However, deciding whether to invest or not in more detailed 
-covariates requires careful thinking and depends on case-specific elements. We generally saw improvement in 
-the predictions in our study, but the improvement was not large and may not outweigh the costs. Also, the 
-models calibrated with the more detailed versions of all covariates were not the best performing models. Using 
-more detailed satellite images and land use maps degraded CLAY predictions. Although the more detailed
-soil map had the largest benefit for CLAY, it may be too costly and impractical since its production usually 
-requires having available more detailed versions of all other covariates. For SOC and ECEC, simply using a more 
-detailed land use map resulted in considerably more accurate predictions. However, the superior performance may 
-not outweigh the extra costs because producing a more detailed land use map usually requires up-to-date field 
-observations and satellite images. Thus, the decision to adopt a more detailed covariate for digital soil 
-mapping will ultimately depend on a trade-off between the increased accuracy and the extra budget required. It 
-may also depend on other potential applications of the covariates, but this is not our concern here.
-
-One interesting observation is that if a less detailed covariate yields poor predictions, its more detailed 
-version has the potential to produce larger improvement in model performance. However, this is only a 
-potential, not a guarantee. For instance, \citeonline{EldeiryEtAl2008} were not able to increase the $R^2 = 
-0.31$ of linear regression models of soil salinity by more than 0.07 points using 7.5 times more detailed 
-satellite images. On the other hand, model performance is likely to be hardly improved using more detailed 
-covariates if their less detailed version has already produced accurate predictions. This agrees with findings 
-by \citeonline{ThompsonEtAl2001} and \citeonline{KimEtAl2014}.
-
-We also observed that the predictions can be degraded when using the more detailed version of covariates. In 
-our study, this happened with the satellite image (all three soil properties), land use map (CLAY) and soil map 
-(SOC and ECEC). A (small) benefit was observed only when these covariates were used along with the more 
-detailed version of other covariates. As pointed out above, such a small benefit may not outweigh the increase 
-in mapping costs. The trade-off between reducing model performance and being beneficial seems to depend on how 
-much more spatial detail a covariate will have and on its correlation with the soil property. For example, the 
-land use map was strongly correlated with SOC and ECEC, but not with CLAY, and its more detailed version 
-had 40~times more spatial detail. It helped improve SOC and ECEC predictions, but degraded CLAY predictions, 
-resulting in only a small improvement when used along with the more detailed satellite image and geologic map.
-
-If the influence of a more detailed covariate depends on the increase of spatial detail, then the priority 
-should be to improve the spatial detail of the most beneficial covariate. This requires solid subject area 
-knowledge because empirical evidence from the baseline model may be insufficient. The most beneficial covariate 
-is not necessarily that which explained the largest part of the variance in the baseline model (see 
-\autoref{tab:drop}). This occurs because increasing the spatial detail reduces the correlation between the 
-covariate and the soil property. And also because there is little room to improve a correlation that is already 
-high in the baseline model. \citeonline{CavazziEtAl2013} suggest that the more detailed covariate has an 
-excess of detail, a ``noise'' that degrades the predictions. This could explain the results for \texttt{sat}: 
-higher resolution images can resolve smaller objects (e.g. individual plants) whose spectral behaviours are 
-highly variable, adding noise to the \texttt{sat}-soil property correlation; on the other hand, lower 
-resolution images capture collections of objects, and thus their variation is smoothed out in the pixel, 
-reducing noise.
-
-According to information theory one should optimize (maximize) the correlation between the point soil data and 
-the covariates. This was described elsewhere as matching the ``phenomenon scale'' (the spatial pattern of the 
-soil property) with the ``analysis scale'' (the spatial pattern of the covariates) \cite{DunganEtAl2002, 
-MillerEtAl2014}. Finding the ``optimum'' requires evaluating the strength of the correlation using covariates 
-with different levels of spatial detail \cite{DragutEtAl2009, CavazziEtAl2013, MillerEtAl2015}. Our results 
-show that this approach may be too costly and impractical. Since digital soil mapping explores only the 
-empirical relationship among environmental conditions and soil properties \cite{Grunwald2009}, the ``optimum'' 
-is a ``conditional optimum'' -- conditional on the point soil data available. It does not necessarily mean that 
-the most accurate predictions will be made, but only that there is a level of spatial detail at which the 
-correlation between the covariate and the point soil data is at a maximum. We suggest that instead more 
-comprehensive approaches should be used to explore the full potential of the available covariates (see 
-\citeonline{BehrensEtAl2010a} and \citeonline{MillerEtAl2015} for examples).
-
-Finally, one must still judge whether the potential improvement in predictions is sufficient given the extra 
-costs involved with using more detailed covariates. If the extra budget is spent on deriving more detailed 
-covariates, we suggest that it may be better to substantially improve the detail of a less influential
-covariate than marginally increase the detail of the most influential covariate. However, other means to spend 
-the extra budget should be considered. For instance, it may be more efficient to concentrate on obtaining more 
-soil observations. These may focus on better capturing the short range spatial variation \cite{BrusEtAl2007a} 
-or improving the representation of the feature space to avoid undesirable extrapolations 
-\cite{MinasnyEtAl2006b}.
-
-\section{Conclusions}
-
-This study has shown that:
-
-\begin{enumerate}
- \item Using more detailed environmental covariates results in only a modest increase in the prediction 
-accuracy of linear prediction models;
- 
- \item A more detailed covariate has a greater potential to improve prediction accuracy when the soil property 
-is poorly predicted by its less detailed version;
- 
- \item The impact on prediction accuracy when using the more detailed version of a less important covariate 
-may depend on which other covariates are included in the model;
- 
- \item Choosing whether or not to invest in more detailed covariates depends on the strength of the 
-relationship between the covariates and the soil property being modelled, and on the relative difference 
-between the less detailed and the more detailed versions of the covariates.
-\end{enumerate}
-
-\section*{Acknowledgements}
-
-We are grateful to Dr.~Bradley A.~Miller, from the Leibniz Centre for Agricultural Landscape Research, 
-M\"uncheberg, Germany, for his comments during the revision of the manuscript. The following colleagues 
-collaborated in different phases of data collection and/or processing: Dr.~Ricardo Simão Diniz Dalmolin, 
-Dr.~Edgardo Ramos Medeiros and Jean Michel Moura Bueno (UFSM), Dr.~Pablo Miguel (UFPel), Dr.~Mauro Antonio 
-Homem Antunes, Fábio Paes Leme Ferreira, and Anastácia Perci Campos de Almeida (UFRRJ), and Luis Fernando 
-Chimelo Ruiz (UFRGS). We are grateful to Dr.~Bas Kempen, Dr.~Tom Hengl, and Marcos Angelini (ISRIC) for their 
-helpful comments during the conception of the study and data analysis. We also thank the development teams and 
-module/package authors of the many free and open source software (FOSS) and operational system (OS) that were 
-used to develop our study. The first author was supported by the CAPES Foundation, Ministry of Education of 
-Brazil (Process BEX 11677/13-9). The last author was supported by the CNPq foundation, Ministry of Science and 
-Technology of Brazil. The use of the RapidEye images is endorsed by the Corporate Commitment Agreement signed 
-between the Federal Rural University of Rio de Janeiro and the Brazilian Ministry of the Environment.
-
-\section*{Note}
-This chapter is based on A.~Samuel-Rosa, G.B.M.~Heuvelink, G.M.~Vasques, L.H.C.~Anjos. Do more detailed 
-environmental covariates deliver more accurate soil maps? \textit{Geoderma}, v.243--244, p.214--227, 2015.

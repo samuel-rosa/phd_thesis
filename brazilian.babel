@@ -27,11 +27,6 @@
 \def\proofname{Prova}%
 \def\figurename{Figura}%
 \def\chaptername{Cap\'{\i}tulo}%
-
-\def\sectionname{Se\c{c}\~{a}o}%
-\def\subsectionname{Se\c{c}\~{a}o}%
-\def\subsubsectionname{Se\c{c}\~{a}o}%
-
 \def\tablename{Tabela}%
 \def\authorname{Autor}%
 \def\authornamef{Autora}%
@@ -45,29 +40,32 @@
 \def\annexsname{Anexos}%
 \def\keywordsname{Palavras-chave}%
 \def\cipcaption{CIP -- CATALOGA{\c{C}}{\~A}O NA PUBLICA{\c{C}}{\~A}O}%
-\def\byname{por}%
-\def\aprovadaem{aprovado(a) em}%
-\def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%
-\def\sobcoorienta{\textit{e co-orienta\c{c}{\~a}o~de}}%
-% \def\and{e}%
-\def\of{de}%
+
 \def\folhas{f}%
-\def\presidente{Presidente}%
 \def\dissname{Disserta{\c{c}}{\~a}o}%
 \def\tesename{Tese}%
+
+%% ============================================================================================================
+%% Segundo as normas atuais, parece que os seguinte textos devem sempre aparecer em português, mesmo que o 
+%% documento tenha sido escrito em outra língua. Anteriormente, estes textos eram definidos no arquivo da 
+%% classe. Contudo, parece mais eficiente fazê-lo usando o pacote babel.
+%% ============================================================================================================
 \def\tesespecificinfo{%
-Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de 
-\textbf{\@grau}, \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de \textbf{\@grau}, \@curso, {\'A}rea de 
+Concentra\c{c}{\~a}o em \@area.
 }%
 \def\dissspecificinfo{%
-Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o 
-do grau de \textbf{\@grau}, \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em 
-\@area.
+Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de \textbf{\@grau}, 
+\@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
-
-
-
-
+\def\byname{por}%
+\def\aprovadoem{Documento aprovado em}%
+\def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%
+\def\sobcoorienta{\textit{e co-orienta\c{c}{\~a}o~de}}%
+\def\andname{e}%
+\def\ofname{de}%
+\def\presidente{Presidente}%
+%% ============================================================================================================
 
 \def\planodoutoradospecificinfo{Plano de Curso para Doutorado}%
 \def\proptesespecificinfo{Proposta de Tese de Doutorado}%

@@ -9,9 +9,9 @@ of a doctorate course}\footnote{\citeonline{UFRRJ2006}}, which is quite the same
 International Organization for Standardization (\iso): a \q{document which presents the author's research and 
 findings and submitted by him in support of his candidature for a degree or professional 
 qualification}\footnote{\citeonline{ISO1986}}. I tried reading other theses to see if I could get an 
-inspiration. I also discussed this matter with my patient supervisors Lúcia Helena Cunha dos Anjos 
-(Universidade Federal Rural do Rio de Janeiro, Brazil), Gustavo de Mattos Vasques (Embrapa Solos, Brazil), and 
-Gerard B. M. Heuvelink (ISRIC -- World Soil Information, the Netherlands). Unfortunately, for one reason or 
+inspiration. I also discussed this matter with my patient supervisors Lúcia Anjos 
+(Universidade Federal Rural do Rio de Janeiro, Brazil), Gustavo Vasques (Embrapa Solos, Brazil), and 
+Gerard Heuvelink (ISRIC -- World Soil Information, the Netherlands). Unfortunately, for one reason or 
 another, I was never satisfied with the outcome.
 
 At first, I was a bit desperate. Have I failed? Has everyone failed? I hoped not! Perhaps the lack of an 
@@ -22,16 +22,16 @@ completely honest with the reader, as Richard Webster\footnote{\citeonline{Webst
 As such, I started thinking about all steps given since the start of the doctorate course, something like 
 \q{Once upon a time in Seropédica...}.
 
-As the title says, this thesis is about a research on some of the sources of uncertainty in soil spatial 
-models, i.e. some of the factors determining a soil map to be more or less accurate. Many of these sources are 
-known, others are still unknown, and some are disregarded due to our ignorance -- or by convenience. When I 
-wrote my doctorate research project, it seemed appropriate to aim at evaluating what I understood as being the 
-main sources of uncertainty in soil spatial modelling. The reason was simple: soil spatial modelling was a 
-growing activity in Brazilian universities and research centres, and I felt that many soil spatial modellers 
-were inclined towards using the most expensive data sources as the only way of producing higher accuracy soil 
-maps of the Brazilian territory. I was preoccupied about these ideas -- which appeared to be sort of an 
-euphoria about new remote sensors -- because I believed that high quality soil maps could be produced if we 
-simply started using the data at hand.
+As the title says, this thesis is about a research on the factors determining a soil map to be more or less 
+accurate, what I call \emph{sources of uncertainty}. Many of these sources are known, others are still unknown, 
+and some are disregarded due to our ignorance -- or by convenience. When I wrote my doctorate research project, 
+it seemed appropriate to aim at evaluating what I understood as being the main sources of uncertainty in the 
+process of building a model to produce soil maps, a process that I call \emph{soil spatial modelling}. The 
+reason was simple: soil spatial modelling was a growing activity in Brazilian universities and research 
+centres, and I felt that many \emph{soil spatial modellers} were inclined towards using the most expensive data 
+sources as the only way of producing higher accuracy soil maps of the Brazilian territory. I was preoccupied 
+about these ideas -- which appeared to be sort of an euphoria about new remote sensors -- because I believed 
+that high quality soil maps could be produced if we simply started using the data at hand.
 
 Defining the main sources of uncertainty in soil spatial modelling required an operational definition, which 
 was given based on the observation that, in general, the main decisions made by soil spatial modellers concern 
@@ -41,23 +41,23 @@ these three mains sources of uncertainty was then divided into five specific obj
 \begin{enumerate}
 \item Identify appropriate calibration sample sizes and designs for soil spatial modelling;
 
-\item Determine the accuracy of freely available covariates and their suitability to calibrate soil spatial
+\item Determine the accuracy of freely available covariates and their suitability to calibrate soil spatial 
 models;
 
 \item Identify appropriate covariate selection methods to build linear soil spatial models;
 
-\item Assess the effect of multicollinearity among covariates on the performance of linear soil spatial 
-models;
+\item Assess the effect of multicollinearity among covariates on the performance of linear soil spatial models;
 
 \item Identify database scenarios in which non-linear soil spatial models are more efficient than linear soil 
 spatial models.
 \end{enumerate}
 
 The idea was to deal with each of the objectives separately and present the results in individual chapters of 
-the thesis which would be submitted for publication in peer reviewed journals. The main expected result was the 
+the thesis which would be submitted for publication in peer reviewed journals. The main expected result was 
+the 
 definition of a sound \emph{working protocol} that would allow the construction of efficient soil spatial 
 models. My goal was to contribute to national (Brazilian Research Network on Digital Soil Mapping -- \redemds) 
-and international (\globalsoilmap{} and Global Soil Information Facilities -- \gsif) initiatives, while 
+and international (\gsm{} and Global Soil Information Facilities -- \gsif) initiatives, while 
 generating a significant amount of bibliographic material to support the teaching of modern soil spatial 
 modelling techniques in soil classes at Brazilian universities.
 
@@ -67,12 +67,13 @@ class that I have adapted to compile this thesis is available in
 
 With time it became clear that the five objectives and the expected results were too ambitious. I certainly 
 was overwhelmed by the knowledge of the multiple sources of uncertainty, and felt compelled to develop a very 
-through study. But I forgot that a doctorate course includes more activities than those planed in the 
+thorough study. But I forgot that a doctorate course includes more activities than those planned in the 
 research project: you take classes, prepare grant proposals, write reports, help colleagues, get involved in 
 other projects -- such as adapting the \LaTeX{}\footnote{\footlatex} class used to compile this thesis --, 
 publish the papers of your master thesis, train undergraduate students, create and maintain the newsletter of 
 a scientific group, read many articles and books, learn a couple of computer languages, start a relationship, 
-get sick, and so on. When you see, two years are already gone by, and you still are preparing the database with 
+get sick, and so on. When you realize, two years are already gone by, and you still are preparing the database 
+with 
 which you will develop your case studies.
 
 \def\footr{See more about \texttt{R} in 
@@ -80,19 +81,19 @@ which you will develop your case studies.
 
 I know that I was particularly lucky for most of the soil and covariate data already being available for my 
 use -- I have decided very early to continue using the data that I collected during my master course. However, 
-I spent a lot of time to organize it and make a through description of all processing steps before I could 
+I spent a lot of time to organize it and make a thorough description of all processing steps before I could 
 actually use it. This effort was in line with my original intent of defining a working protocol for 
 constructing soil spatial models. Meeting this goal required making my research the most reproducible as 
 possible. I then learned that many well known methods of data analysis/processing are not used simply because 
 they are not implemented in a (single) software package. Developing and maintaining a software package in the 
 most popular environment for data processing and analysis, i.e. \texttt{R}\footnote{\footr}, was a natural 
-decision: programming took a lot of my time.
+decision: programming took a lot of my time!
 
 A significant amount of time was also spent preparing a description of the soil-forming factors and processes
 that determine the soil spatio-temporal distribution in the study area where the case studies were to be 
-developed. Such a description is called in this thesis a \emph{conceptual model of pedogenesis}. This was 
+developed. Such a description is what I call \emph{conceptual model of pedogenesis}. This was 
 another effort in line with the definition of a working protocol. But it was also expected to serve the 
-development of a experiment devoted to meeting the third objective of the research project. My intent was to 
+development of an experiment devoted to meeting the third objective of the research project. My intent was to 
 compare automated covariate selection methods with the use of expert knowledge. Preliminary tests were 
 conducted with a few experts to help planning the experiment, which was believed to be a complex one. But 
 since I needed to give more attention to the first and second objectives, I had to stop working on the third 
@@ -100,10 +101,14 @@ objective.
 
 There also was my poor knowledge on some known topics, which sometimes took me to the wrong direction. For 
 example, I wanted to evaluate how much more accurate a soil map is when more accurate covariates are used 
-(second objective), the reason being that I was concern with the fact that the covariates too are in error. As 
-such, I collected field data to validate the covariates and correct them for any systematic errors. Only later, 
-discussing with Gerard, I understood that 1) the validation data was poor, and 2) in soil spatial modelling the 
-covariates generally are assumed to be measured without error -- otherwise a technique called error propagation 
+(second objective), the reason being that I was concerned with the fact that the covariates too are in error. 
+As 
+such, I collected field data to validate the covariates and correct them for any systematic errors. Only 
+later, 
+discussing with Gerard, I understood that 1) the validation data was poor, and 2) in soil spatial modelling 
+the 
+covariates generally are assumed to be measured without error -- otherwise a technique called error 
+propagation 
 analysis (or uncertainty analysis) is employed to take that error into account. In the end, we had to 
 reformulate the second objective of the research project.
 
@@ -112,8 +117,8 @@ was a challenge. Most soil data used for soil spatial modelling was produced in 
 with observation locations purposively selected by soil spatial modellers using tacit rules. As such, I wanted 
 to build an algorithm composed of a set of objective decision rules that would produce spatial samples similar 
 to those produced by a soil spatial modeller. I would then simulate budget scenarios for sampling and see how 
-different spatial sample would perform regarding soil map accuracy. But how to devise such an algorithm? I 
-interviewed the soil spatial modellers that produced the soil data used in the doctorate research project, 
+different spatial samples would perform regarding soil map accuracy. But how to devise such an algorithm? I 
+interviewed the soil spatial modellers that produced the soil data to be used to conduct the case studies,
 carried out a point pattern analysis of the resulting spatial sample configuration, and explored psychological 
 concepts to understand the whys of the locations of the sampling points. A lengthy study was carried out 
 without finding a practical solution. Perhaps it was more appropriate to explore the existing, less complex 
@@ -136,10 +141,12 @@ After some time working on the sampling experiment, we came to learn that the sa
 chosen had weaknesses -- apparently like any algorithm. So, we thought that, perhaps, we could improve on 
 those algorithms! A literature review suggested that we were correct and there was room for algorithmic 
 improvements. But now we needed to know if the algorithmic improvements had any practical added value before 
-evaluating the influence of sample size and design. Another change in the schedule was needed: I pointed that 
-two experiments should be carried out, the first to evaluate the algorithmic improvements, the second to 
+evaluating the influence of sample size and design of prediction accuracy. Another change in the schedule was 
+needed: I pointed
+that two experiments should be carried out, the first to evaluate the algorithmic improvements, the second to 
 compare the algorithms. At this point it became clear that carrying out the experiment to evaluate covariate 
-selection methods was impossible given the time available till the end of the doctorate course. This was a pity 
+selection methods was impossible given the time available till the end of the doctorate course. This was a 
+pity 
 because I had already visited Murray Lark at the the British Geological Survey (\bgs) headquarters in 
 Nottingham, UK, to discuss about the experiment.
 
@@ -150,20 +157,24 @@ been very happy if I could discuss the topic at least partially, but perhaps par
 useful. As for the fifth objective, I believe that developing a sound globally relevant work on the topic 
 requires using several datasets, not a single dataset as I explored in my research project.
 
-As a consequence of all these events, at the end on the doctorate course, I must confess that I was able 
-to meet only the first and scratch the surface of the second scientific objectives of my doctorate research 
-project. I did make \emph{technical} contributions that were part of the original goal of defining a working 
-protocol for soil spatial modelling. This includes documenting the soil and covariate data, as well as their 
-processing steps, and describing the soil-forming factors that determine the soil spatio-temporal distribution 
+As a consequence of all these events, at the end of the doctorate course, I was able to meet only the first and 
+scratch the surface of the second \emph{scientific} objective -- \emph{scientific} in the sense of answering 
+research questions -- of my doctorate research project. I did make \emph{technical} contributions -- 
+\emph{technical} in the sense of practical application -- that were part of the original goal of defining a 
+working protocol for soil spatial modelling. This includes documenting the soil and covariate data, as well as 
+their processing steps, and describing the soil-forming factors that determine the soil spatio-temporal 
+distribution 
 in the study area. However, these technical contributions do not help meeting any of the original scientific 
-objectives. The same applies to the two \texttt{R}-packages that I developed and maintained, and the experiment 
+objectives. The same applies to the two \texttt{R}-packages that I developed and maintained, and the 
+experiment 
 conducted to understand how soil spatial modellers decide upon where to observe the soil, which were not 
 originally planned in the research project.
 
-So... This is, more or less, the \emph{story} of the research that I have carried out in collaboration with my 
+So... this is, more or less, the \emph{story} of the research that I have carried out in collaboration with my 
 supervisors and co-authors during my doctorate course. Perhaps I should be happy for this story having more 
-errors than hits -- because I learned more with the former than with the last. I guess this is it: there is 
-nothing to write in this thesis other than what I have done during the doctorate course that is directly and/or 
+errors than hits -- because I learned more with the former than with the latter. I guess this is it: there is 
+nothing to write in this thesis other than what I have done during the doctorate course that is directly 
+and/or 
 indirectly related to the original research project, have it been planned or not, be it a technical or 
 scientific contribution, completed or not. This is what I present as the final requirement for the completion 
 of the doctorate course.
@@ -198,13 +209,15 @@ because I would never be writing this preface without their support. These are:
 \end{itemize}
 
 It is needed to note that six individuals gave important technical contributions during the preparation of 
-the soil and covariate data that were used to develop the case studies. Three of them are from the Universidade 
-Federal Rural do Rio de Janeiro: Fabio Paes Leme Ferreira, Anastácia Perci Campos de Almeida, and Mauro Antônio 
+the soil and covariate data that were used to develop the case studies. Three of them are from the 
+Universidade 
+Federal Rural do Rio de Janeiro: Fabio Paes Leme Ferreira, Anastácia Perci Campos de Almeida, and Mauro 
+Antônio 
 Homem Antunes. The other three are from the Universidade Federal de Santa Maria: Ricardo Simão Diniz Dalmolin, 
 Jean Michel Moura Bueno, and Luis Fernando Chimelo Ruiz.
 
 Many other individuals have also given some form of scientific and/or technical contribution, be it through 
-the exchange of e-mail massages, chatting during a coffee break, a short visit to their home institutions, or 
+the exchange of email messages, chatting during a coffee break, a short visit to their home institutions, or 
 any other informal occasion. Their contributions were invaluable for usually raising unforeseen questions, 
 pointing to extremely helpful references, and helping me seeing the research problems from another perspective.
 Special thanks are due to Ad van Oostrum, Andreas Jürg Papritz, Bas Kempen, Bradley A. Miller, Chantal 
@@ -214,12 +227,14 @@ Thomas Caspari, Tomislav Hengl, Vera Laetitia Mulder, and many others that I mig
 
 Having the story of a doctorate course to tell depends not only on scientific and/or technical contributions,
 but also on the unconditional support of family, friends, and colleagues. My family, which gained several new 
-members in the last four years, was strong enough to understand my rare and short visits, and the importance of 
+members in the last four years, was strong enough to understand my rare and short visits, and the importance 
+of 
 a long stay on the other side of the Atlantic. Although my mother (Elaine), father (Adir), and brother 
 (Eduardo) have only a vague idea of what I have been working on, their support was incommensurable. 
 South-American and European friends were invaluable: Marcos, Indira, Eloi, Thomas, Nina, Jorge, André, Thiago, 
 and Andriéli. There was the amazing, coolest of them all, ISRIC family, which I miss very much, lead by 
-our dearest Yolanda. There also were my post-graduate colleagues. But one friend deserves a special thank: 
+our dearest Yolanda. There also were my postgraduate colleagues and teachers. But one friend deserves a special 
+thanks: 
 Manoeli! Thank you Manoeli -- by destiny or a strange coincidence --, born and raised in the same small town, 
 after completing the bachelor and master together in Brazil, we ended up sharing the same house in The 
 Netherlands during the doctorate. There, we continued our philosophical chats about all aspects of life, the 
@@ -227,11 +242,14 @@ universe, and everything which we started years ago. It was a pleasure to share 
 wonderful friend!
 
 Finally, three little Bacchanalian creatures, one having only a vague idea of my work, the other two not 
-speaking any human language, deserve my most sincere thank: Monique, Tupã, and Dindi! Your love is fire through 
+speaking any human language, deserve my most sincere thanks: Monique, Tupã, and Dindi! Your love was fire 
+through 
 my veins!
 
 \begin{flushright}
  Alessandro Samuel Rosa
  
- Seropédica, January 2016.
+ Seropédica, February 2016.
 \end{flushright}
+
+

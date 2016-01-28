@@ -1,7 +1,7 @@
 %\listfiles
 
 %% Tipo de documento e a classe a ser usada para sua formatação.
-\documentclass[tese,english]{UFRuralRJ}
+\documentclass[tese]{UFRuralRJ}
 
 %% Um tipo específico de monografia pode ser informado como parâmetro opcional:
 %\documentclass[tese]{UFRuralRJ}
@@ -192,6 +192,7 @@
 \def\gsm{\href{http://www.globalsoilmap.net/}{GlobalSoilMap}}
 \def\gsp{\href{http://www.fao.org/globalsoilpartnership/}{GSP}}
 \def\geoderma{\href{http://www.journals.elsevier.com/geoderma/}{Geoderma}} % Geoderma
+\def\googlearth{Google Earth\textregistered}
 
 % Intergovernmental Technical Panel on Soils
 \def\itps{\href{http://www.fao.org/globalsoilpartnership/intergovernmental-technical-panel-on-soils/}{ITPS}}
@@ -222,7 +223,7 @@
 \def\tcu{\href{https://www.governancadosolo.gov.br/}{TCU}}
 \def\topodata{\href{http://www.dsr.inpe.br/topodata/}{TOPODATA}}
 \def\ufsm{\href{http://site.ufsm.br/}{UFSM}}
-\def\WorldSoilDay{\href{http://www.un.org/apps/news/story.asp?NewsID=49520#.VnremV6alz0}{UN}}
+\def\WorldSoilDay{\href{http://www.un.org/apps/news/story.asp?NewsID=49520}{UN}}
 
 % Variables
 \def\geoNew{\texttt{GEO\_25}}
@@ -238,7 +239,7 @@
 %%==============================================================================
 %% Identificação do trabalho
 %%==============================================================================
-\titulo{Analysis of Sources of Uncertainty in Soil Spatial Modelling}
+\titulo{Análise de Fontes de Incerteza na Modelagem Espacial do Solo}
 \author{Samuel-Rosa}{Alessandro}
 \instituto{Instituto de Agronomia}
 \curso{Curso de Pós-Graduação em Agronomia -- Ciência do Solo}
@@ -248,23 +249,23 @@
 \local{Serop\'edica}{RJ}{Brasil}
 
 %%==============================================================================
-%% Identificação dos orientadores
+%% Identification of supervisors
 %%==============================================================================
-\advisor[Professora]{Drª.}{Anjos}{Lúcia Helena Cunha dos}{UFRRJ}
+\advisor[Professora]{Dra.}{Anjos}{Lúcia Helena Cunha dos}{UFRRJ}
 \orientadoratrue
-\coadvisor[Professor]{Dr.}{Vasques}{Gustavo de Mattos}
-\coadvisor[Professor]{Dr.}{Heuvelink}{Gerard B M}
+\coadvisor[Pesquisador]{Dr.}{Vasques}{Gustavo de Mattos}
+\coadvisor[Professor]{Dr.}{Heuvelink}{Gerardus Bernardus Maria}
 \coorientadorestrue
 
 %%==============================================================================
-%% Informações sobre a defesa
+%% Information about the defence
 %%==============================================================================
-\committee[Dr.]{Vasques}{Gustavo de Mattos}{UFRRJ} %% Presidente
-\committee[Dra.]{Banca}{Melhor Integrante da}{UFRRJ} %% Examinador
-\committee[Dr.]{Banca}{Melhor Integrante da}{UFRRJ} %% Examinador
-\committee[Dra.]{Banca}{Outra Melhor Integrante da}{MEFR} %% Examinador
-\committee[Dr.]{Banca}{Outro Melhor Integrante da}{MEFR} %% Examinador
-\date{14}{September}{2015} %% Data da defesa
+\committee[Dr.]{Vasques}{Gustavo de Mattos}{EMBRAPA} %% President
+\committee[Dr.]{Ceddia}{Marcos Bacis}{UFRRJ} %% Examinator
+\committee[Dr.]{Teixeira}{Wenceslau Geraldes}{EMBRAPA} %% Examinator
+\committee[Dra.]{Lopes Assad}{Maria Leonor Ribeiro Casimiro}{UFSCar} %% Examinator
+\committee[Dr.]{Oliveira}{Ronaldo Pereira de}{EMBRAPA} %% Examinator
+\date{23}{February}{2016} %% Date of defence
 
 %%==============================================================================
 %% Outros itens
@@ -335,73 +336,56 @@
 %%=============================================================================
 %% Resumo geral em português
 %%=============================================================================
-\def\tituloportugues{Análise das Fontes de Incerteza no Mapeamento do Solo}
+\def\tituloportugues{Análise de Fontes de Incerteza na Modelagem Espacial do Solo}
 \def\chavesportugues{Pedometria, Modelos Preditivos, Incerteza}
 \generalabstracttrue
 \begin{generalabstract}{brazilian}{\tituloportugues}{\chavesportugues}
-A tradução da representação verbal de modelos conceituais que descrevem a 
-realidade para a forma de representação matemática destes modelos é um passo 
-chave no mapeamento digital do solo (MDS). O desenvolvimento de tais 
-representações matemáticas é afetado por diversas fontes de incerteza. Estas 
-fontes podem ser classificadas, didaticamente, em três categoriais: a) 
-observações de calibração, b) co-variáveis ambientais, e c) estrutura do 
-modelo. O objetivo geral desta proposta de pesquisa de doutorado é avaliar 
-estas três principais fontes de incerteza no MDS sob diferentes cenários de 
-banco de dados relativos ao número de observações de calibração e à qualidade 
-das co-variáveis ambientais usadas para ajustas os modelos de MDS. Um banco de
-dados de uma área piloto em estudos de MDS no sul do Brasil será usada para 
-desenvolver uma série de testes empíricos para alcançar estes objetivos. 
-Primeiro será avaliada a qualidade das co-variáveis ambientais disponíveis 
-gratuitamente e a sua adequabilidade para o MDS. Em seguida, sete conjuntos 
-de observações de calibração com tamanhos variados serão avaliados em relação 
-ao seu efeito sobre o desempenho dos modelos de MDS. Métodos de seleção de 
-co-variáveis também serão avaliados quanto à sua aderência ao modelo conceitual
-de pedogênese. Os efeitos da multicolinearidade sobre os modelos lineares de 
-tendência e a solução de ortogonalização serão profundamente avaliados. Por 
-fim, mas não menos importante, modelos não-lineares serão avaliados em relação 
-a sua capacidade de apresentar melhor desempenho do que modelo lineares em 
-cenários de banco de dados pobres. Os resultados permitirão entender como os 
-fatores incertos influenciam os modelos de MDS e a definição de um protocolo 
-de trabalho apropriado. Isso será uma contribuição direta à Rede Brasileira de 
-Pesquisa em Mapeamento Digital do Solo, ao consórcio GlobalSoilMap.net, ao 
-Global Soil Information Facilities, e ao projeto da FAO Aliança Global pelo 
-Solo. Além disso, permitirá o uso da informação do solo com maior segurança 
-sobre a sua confiabilidade, o que é crítico para tomadores de decisão.
+
 \end{generalabstract}
 
 %%=============================================================================
-%% Resumo geral em inglês
+%% English General Abstract
 %%=============================================================================
-\def\tituloingles{Analysis of Sources of Uncertainty in Soil Mapping}
-\def\chavesingles{Pedometrics, Predictive Models, Uncertainty}
+\def\titleEn{Analysis of Sources of Uncertainty in Soil Spatial Modelling}
+\def\keyEn{Pedometrics, Digital Soil Mapping, Soil and Covariate Data}
+
 \generalabstracttrue
-\begin{generalabstract}{english}{\tituloingles}{\chavesingles}
-Translating verbal representations of conceptual models that describe reality 
-into mathematical representations of these models is a key step in digital soil 
-mapping (DSM). The development of such mathematical representations is affected 
-by several sources of uncertainty. These sources can be classified into three 
-categories for didactic purposes: a) calibration observations, b) environmental
-co-variates and c) model structure. The general objective of this PhD research 
-proposal is to evaluate these three main sources of uncertainty in DSM under 
-different database scenarios regarding the number of calibration observations 
-and the quality of environmental co-variates used to fit DSM models. A database 
-from a pilot area in DSM studies in southern Brazil will be used to develop a 
-series of empirical tests to meet these objective. First, the quality of freely 
-available environmental co-variates and their suitability for DSM will be 
-assessed. Next, seven sets of calibration observations of varying sizes will be 
-evaluated as to how they affect the performance of DSM models. Co-variate 
-selection methods will also be evaluated on how they comply with the conceptual 
-model of pedogenesis. Multicollinearity effects on linear trend models and the 
-orthogonalization solution will be deeply evaluated. Last, but not least, 
-non-linear models will be evaluated if they present better performance than 
-linear models in poor database scenarios. The results will enable to understand 
-how uncertain factors influence DSM models and the definition of a proper 
-working protocol. This will be a direct contribution to the Brazilian Research 
-Network on Digital Soil Mapping, the GlobalSoilMap.net consortium, the Global 
-Soil Information Facilities, and of FAO's project Global Soil Partnership. 
-Besides, it will ensure the use of the soil information with greater confidence 
-about its reliability, which is critical for decision makers.
+\begin{generalabstract}{english}{\titleEn}{\keyEn}
+Modern soil spatial modelling is based on statistical models that explore the empirical relationship among 
+environmental conditions and soil properties. These soil spatial models, like any other model, are a gross 
+simplification of reality, and their outcome, i.e. a soil map, will always be in \emph{error}. There are many 
+causes for soil maps being more or less \emph{uncertain}. The general objective of this thesis is to evaluate 
+some sources of uncertainty in soil spatial modelling, with emphasis on the soil and covariate data. Case 
+studies were developed using data from a small catchment (\SI{\approx2000}{\hectare}) located on the edge
+of the Plateau of the Paraná Geological Province in Southern Brazil. Soil spatial distribution is highly 
+variable, being determined by the geology and geomorphology -- at large spatial scales -- and by past and 
+current agricultural practices -- at small spatial scales. Four topsoil (0--\SI{20}{\cm}) properties contained 
+in the Santa Maria dataset were explored: clay content, organic carbon content, effective cation exchange 
+capacity, and bulk density. Five covariates from the Santa Maria dataset, each with two levels of spatial 
+detail, were used: area-class soil maps, digital elevation models, geologic maps, land use maps, and satellite 
+images. Two packages for \texttt{R} were created in support of the case studies, the first 
+(\texttt{pedometrics}) 
+containing miscellaneous functions, the second (\texttt{spsann}) designed for the optimization of sample 
+configurations using spatial simulated annealing. The case studies demonstrate that existing covariates are 
+suitable 
+for calibrating soil spatial models, and using more detailed covariates results in only a modest increase in 
+the 
+prediction accuracy that may not outweigh the extra costs. More efficient means of increasing prediction 
+accuracy should be explored, such as obtaining more soil observations. For this end, one should use more 
+objective means for selecting observation locations such as those implemented in the \Rpackage{spsann} 
+to minimize the influence of conceptual, operational, and psychological factors on the sampling design. These 
+factors determine how the motivation of field soil modellers shifts between learning/verifying soil-landscape 
+relationships, and maximizing the number of observations and geographic coverage during soil observation 
+campaigns, resulting in considerably different sample configurations. For spatial trend identification and 
+estimation, it should suffice to optimize spatial samples aiming only at reproducing the marginal distribution 
+of the covariates. Apparently, taking the correlation between covariates into account, as implemented in 
+the conditioned Latin hypercube sampling algorithm, can degrade prediction accuracy. It remains to be 
+evaluated 
+if sampling algorithms designed to jointly optimize spatial samples for variogram and spatial trend 
+estimation, 
+and spatial interpolation produce more accurate spatial predictions than their single versions.
 \end{generalabstract}
+
 
 %% Lista de Ilustrações (opc)
 %% Lista de Símbolos (opc)
@@ -458,12 +442,12 @@ about its reliability, which is critical for decision makers.
 
 % Adiciona cada capitulo
 \include{chap/chap01} % 1. General introduction
-% \include{chap/chap02} % 2. 
+\include{chap/chap02} % 2. 
 \selectlanguage{brazilian}
 \include{chap/chap03} % 3. Modelo conceitual de pedogênese
 \selectlanguage{english}
-% \include{chap/chap04} % 4. The Santa Maria dataset -- soil data
-% \include{chap/chap05} % 5. The Santa Maria dataset -- covariate data
+\include{chap/chap04} % 4. The Santa Maria dataset -- soil data
+\include{chap/chap05} % 5. The Santa Maria dataset -- covariate data
 \include{chap/chap06} % 6. Do more detailed covariates deliver more accurate soil maps?
 \include{chap/chap07} % 7. Spatial point pattern analysis of soil survey sampling locations
 \include{chap/chap08} % 8. Optimization of sample configurations for spatial trend estimation for soil mapping

@@ -423,10 +423,10 @@ order=-1
 
 [item:phd_thesis.tex]
 archive=true
-column=0
+column=8
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=211
 mode=LaTeX
 open=false
 order=0
@@ -570,7 +570,7 @@ JumpList=
 ViMarks=.,31,4,[,31,4,],31,21
 
 [view-settings,view=0,item:phd_thesis.tex]
-CursorColumn=91
-CursorLine=175
+CursorColumn=8
+CursorLine=211
 JumpList=
 ViMarks=.,175,56,[,175,54,],175,90
