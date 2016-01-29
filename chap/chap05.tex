@@ -11,7 +11,7 @@
 % Este é o resumo em português.
 %\end{chapterabstract}
 
-\def\enkeys{Auxiliary information, Raster data}
+\def\enkeys{Area-class soil maps, Digital elevation models, Geological maps, Land use maps, Satellite images}
   
 \begin{chapterabstract}{english}{\enkeys}
 The Santa Maria dataset comprises a list of more than 100 covariates covering the catchment of the DNOS/CORSAN 
@@ -73,8 +73,8 @@ fence corners, and property entrances.
 \begin{Schunk}
 \begin{Soutput}
          used (Mb) gc trigger (Mb) max used (Mb)
-Ncells 584791 31.3     940480 50.3   892587 47.7
-Vcells 759471  5.8    1650153 12.6  1307480 10.0
+Ncells 584802 31.3     940480 50.3   892586 47.7
+Vcells 759573  5.8    1650153 12.6  1307513 10.0
 \end{Soutput}
 \end{Schunk}
 \includegraphics{fig/chap05-field-gcps}
@@ -102,7 +102,7 @@ The field location of the GCPs is as follows (in Portuguese):
  desce da rodovia federal BR158.
  
  \item [GCP 02] Na entrada da Estrada do Perau, Rua Gralha Azul, em Itaara, no centro do canteiro, entre o 
- outdoor e a árvore (\it{Cedrella fissilis}), junto à rodovia federal BR158.
+ outdoor e a árvore (\textit{Cedrella fissilis}), junto à rodovia federal BR158.
  
  \item [GCP 03] Na entrada de Itaara, próximo ao equipamento estático de fiscalização eletrônica de 
  velocidade, na rodovia federal BR158, a \SI{520}{\m} do Museu de Ufologia, em frente à Fruteira da 
@@ -110,7 +110,7 @@ The field location of the GCPs is as follows (in Portuguese):
  extração de brita DallaPasqua, localizada a \SI{4}{\km} do local.
  
  \item [GCP 04] Em Santa Maria, na entrada da estrada de acesso ao cemitério do Bairro Campestre do Menino 
- Deus, do lado direito da Estrada do Perau (subindo), alinhado (\SI{\pm{50}{\cm}) com a frente das casas, a
+ Deus, do lado direito da Estrada do Perau (subindo), alinhado (\SI{50}{\cm}) com a frente das casas, a
  \SI{2,2}{\m} do muro, a \SI{6,5}{\m} do meio-fio da Estrada do Perau, a \SI{50}{\m} da ponte sobre o Rio
  Vacacaí-Mirim.
  
@@ -118,7 +118,7 @@ The field location of the GCPs is as follows (in Portuguese):
  \SI{1}{\m} de uma palmeira e \SI{1}{\m} do muro de pedras.
  
  \item [GCP 06] Em Itaara, na Avenida Etelvina, na beira da estrada, a \SI{2,5}{\m} do centro da estrada,
- alinhado (\SI{20}{\cm}) com a cerca que separa a floresta nativa do pomar de \it{Citrus}~sp.~localizado 
+ alinhado (\SI{20}{\cm}) com a cerca que separa a floresta nativa do pomar de \textit{Citrus}~sp.~localizado 
  do outro lado da estrada.
  
  \item [GCP 07] Em Itaara, no lado esquerdo da entrada da estrada que dá acesso à mina de extração de brita
@@ -147,7 +147,8 @@ The field location of the GCPs is as follows (in Portuguese):
  
  \item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (a \SI{30}{\cm}) que divide duas 
 propriedades, uma à 
- esquerda coberta com floresta nativa/exótica e outra à direita ocupada com lavoura de culturas anuais. O ponto 
+ esquerda coberta com floresta nativa/exótica e outra à direita ocupada com lavoura de culturas anuais. O 
+ponto 
 está 
  locado no lado oposto. Plantação de videiras logo acima, no divisor de águas.
  
@@ -157,11 +158,13 @@ está
  lado esquerdo subindo, no interior da estrada.
 \end{description}
 
-Attribute validation of soil, geologic, and land use maps, and digital elevation models was done using a set of 
+Attribute validation of soil, geologic, and land use maps, and digital elevation models was done using a set 
+of 
 $n = 60$ 
 validation points located along $m = 12$ linear transects. The procedures for obtaining soil, geologic, land 
 use, and elevation data at these validation points is described in \autoref{apen:soil-data}, 
-\autoref{sec:chap04-subset-ii}. Such a validation exercise was carried out because these maps originally had no 
+\autoref{sec:chap04-subset-ii}. Such a validation exercise was carried out because these maps originally had 
+no 
 accompanying validation information.
 
 % TODO: figure with GCPs used to orthorectify satellite images. Show the bounding box of the image and the 
@@ -199,28 +202,15 @@ the approximate taxonomic composition (\si{\percent}).
 \begin{minipage}[b]{63mm}
 \subcaption{}
 \centering
-\begin{Schunk}
-\begin{Soutput}
-           used (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  1428142 76.3    2487386 132.9  3675969 196.4
-Vcells 11921187 91.0   31666781 241.6 31631870 241.4
-\end{Soutput}
-\end{Schunk}
 \includegraphics{fig/chap05-soil-old}
 \end{minipage}
 \begin{minipage}[b]{63mm}
 \subcaption{}
 \centering
-\begin{Schunk}
-\begin{Soutput}
-           used (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  1428365 76.3    4298049 229.6  5372562 287.0
-Vcells 12970803 99.0   36656129 279.7 36621015 279.4
-\end{Soutput}
-\end{Schunk}
 \includegraphics{fig/chap05-soil-new}
 \end{minipage} 
-\caption[Area-class soil maps included in the Santa Maria dataset.]{Area-class soil maps (a) \soilOld{} and (b) 
+\caption[Area-class soil maps included in the Santa Maria dataset.]{Area-class soil maps (a) \soilOld{} and 
+(b) 
 \soilNew{} used to derive indicator covariates included in the Santa Maria dataset.}
 \label{fig:chap05-soil-maps}
 \end{figure}
@@ -233,7 +223,8 @@ used to help defining the preliminary soil map legend. Point field observations 
 made in 
 more than \num{350} locations using a purposive sampling approach (see \autoref{chap:chap04} and 
 \autoref{chap:chap07}). These observations helped to identify six modal (representative) soil profiles. Soil 
-sampling and description of modal soil profiles, and laboratory analyses of soil samples, followed the standard 
+sampling and description of modal soil profiles, and laboratory analyses of soil samples, followed the 
+standard 
 protocols adopted in Brazil \cite{ClaessenEtAl1997, 
 SantosEtAl2005}. Soil classification was done following the criteria of the Brazilian System of Soil 
 Classification (SiBCS) \cite{SantosEtAl2006}. The final version of the map was prepared using satellite images 
@@ -252,7 +243,7 @@ statistics suggest that there are large positional errors in all directions, wit
 a mean azimuth of \SI{128}{\degree} (\autoref{tab:chap05-soil-geo-val}).
 
 \begin{table}[ht]
- \caption{Error statistics of the horizontal validation of \soilOld{} using $n = 4$ GCPs.}
+ \caption{Error statistics of the horizontal positional validation of \soilOld{} using $n = 4$ GCPs.}
  \label{tab:chap05-soil-geo-val}
  \centering
  {\small
@@ -301,7 +292,8 @@ named with the code of the respective mapping unit in the original map. Prior to
 space, class codes of \soilOld{} were changed to match soil 
 taxa codes of the current Brazilian System of Soil Classification using a standard correlation table 
 \cite{SantosEtAl2006}. The overall purities of both soil maps are not considerably different 
-(\autoref{tab:chap05-soil-attr-val}). A reason for this could be that validation was performed considering only 
+(\autoref{tab:chap05-soil-attr-val}). A reason for this could be that validation was performed considering 
+only 
 the second level of the SiBCS -- it is likely that \soilNew{} would outperform \soilOld{} if validation data 
 included soil taxa up to the fourth level of the SiBCS. The low overall purity of \soilOld{} and 
 \soilNew{} (\num{31.67} and \SI{30.00}{\percent}, respectively) is likely due to several sources of error. 
@@ -312,65 +304,73 @@ because the survey report does not include analytical soil data. Last, soil clas
 sites were inferred in the field using only morphological soil properties and the general concepts of the 
 SiBCS.
 
-Five ($p = 5$) covariates were derived from \soilOld{} as described below (including the soil classes according 
+Five ($p = 5$) covariates were derived from \soilOld{} as described below (including the soil classes 
+according 
 to the original and updated classification \cite{AzolinEtAl1988, SantosEtAl2013a}, and the international 
 classification \cite{IUSSWorkingGroupWRB2007}):
 
 \begin{description}
- \item[\texttt{SOIL\_100b}] Shallow soil (\it{Re4}) with low to high base saturation covering mountainous 
+ \item[\texttt{SOIL\_100b}] Shallow soil (\textit{Re4}) with low to high base saturation covering mountainous 
  terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico Distrófico/Eutrófico;
  Distric/Eutric Leptosol).
   
- \item[\texttt{SOIL\_100c}] Association (\it{Re-C-Co}) of shallow soil with high base saturation located in
+ \item[\texttt{SOIL\_100c}] Association (\textit{Re-C-Co}) of shallow soil with high base saturation located in
 steep terrain (Solo Litólico Eutrófico relevo forte ondulado; Neossolo Litólico Eutrófico; Eutric
  Leptosol), low weathered soil (Cambissolo Eutrófico; Cambissolo Háplico Eutrófico; Eutric Cambisol), and
  colluvial deposits.
   
- \item[\texttt{SOIL\_100d}] Association (\it{TBa-Rd}) of deep, well-structured, low base saturation soil (Terra
+ \item[\texttt{SOIL\_100d}] Association (\textit{TBa-Rd}) of deep, well-structured, low base saturation soil 
+(Terra
  Bruna Estruturada álica; Nitossolo; Nitisol), and shallow soil (Solo Litólico; Neossolo Litólico; Leptosol).
   
- \item[\texttt{SOIL\_100e}] Shallow soil (\it{Rd1} and \textit{Re4}) with low to high base
+ \item[\texttt{SOIL\_100e}] Shallow soil (\textit{Rd1} and \textit{Re4}) with low to high base
  saturation (Solo Litólico Distrófico/Eutrófico; Neossolo Litólico Distrófico/Eutrófico; Distric/Eutric
  Leptosol) located in undulating to mountainous terrain.
   
  \item[\texttt{SOIL\_100f}] This covariate includes the best soil mapping units for row crop agriculture among 
 those 
- identified in the soil survey, that is \it{TBa-Rd}, described above, and \it{C1}, which is composed
+ identified in the soil survey, that is \textit{TBa-Rd}, described above, and \textit{C1}, which is composed
  of low weathered soils developed in lower landscape positions, close to drainage channels (Cambissolo
  Eutrófico; Cambissolo Eutrófico; Eutric Cambisol).
 \end{description}
 
-Covariates derived from \soilNew{} are presented below. Mapping unit \it{RY}, composed mainly of soils 
+Covariates derived from \soilNew{} are presented below. Mapping unit \textit{RY}, composed mainly of soils 
 developed 
 from fluvial deposits (Neossolo Flúvico; Fluvisol) does not appear due to the small area that it occupies.
 
 \begin{description}
-  \item[\texttt{SOIL\_25a}] Moderately deep soil (\it{PBAC}) derived from sedimentary rocks, with abrupt 
+  \item[\texttt{SOIL\_25a}] Moderately deep soil (\textit{PBAC}) derived from sedimentary rocks, with abrupt 
 textural
   change and low base saturation (Argissolo Bruno-Acinzentado; Alisol).
   
-  \item[\texttt{SOIL\_25b}] Deep soil (\it{PV}) derived from igneous rocks, with moderate textural gradient,
+  \item[\texttt{SOIL\_25b}] Deep soil (\textit{PV}) derived from igneous rocks, with moderate textural 
+gradient,
   and low base saturation (Argissolo Vermelho; Acrisol).
  
-  \item[\texttt{SOIL\_25c}] Low weathered soil (Cambissolo Háplico; Cambisol) and shallow soil with low to high 
+  \item[\texttt{SOIL\_25c}] Low weathered soil (Cambissolo Háplico; Cambisol) and shallow soil with low to 
+high 
 base
-  saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric Leptosol/Regosol) (\it{C-R}).
+  saturation (Neossolo Litólico/Regolítico Eutrófico/Distrófico; Eutric/Distric Leptosol/Regosol) 
+(\textit{C-R}).
  
-  \item[\texttt{SOIL\_25d}] Shallow soil (\it{RL}) with low to high base saturation (Neossolo Litólico 
+  \item[\texttt{SOIL\_25d}] Shallow soil (\textit{RL}) with low to high base saturation (Neossolo Litólico 
   Eutrófico/Distrófico; Eutric/Distric Leptosol).
  
   \item[\texttt{SOIL\_25h}] This covariate includes the mapping units with the best soils for row crop 
 agriculture
-  among those identified in the soil survey (\it{PBAC}, \it{PV}, and \it{SX}). \it{PBAC} and \it{PV} are as
+  among those identified in the soil survey (\textit{PBAC}, \textit{PV}, and \textit{SX}). \textit{PBAC} and 
+\textit{PV} are as
   described above. \textit{SX} is composed of moderately deep soil derived from sedimentary rocks, with abrupt 
   textural change, low base saturation, and which are saturated with water for long periods of the year 
   (Planossolo Háplico; Planosol).
   
-  \item[\texttt{SOIL\_25i}] This covariate includes all three mapping units (\it{RL}, \it{RL-RR}, and \it{RR})
+  \item[\texttt{SOIL\_25i}] This covariate includes all three mapping units (\textit{RL}, \textit{RL-RR}, and 
+\textit{RR})
   composed mainly of shallow soils (Neossolo Litólico and Neossolo Regolítico; Leptosol and Regosol).
   
-  \item[\texttt{SOIL\_25j}] This covariate includes all four mapping units (\it{PV}, \it{RL}, \it{RL-RR}, and 
-  \it{C-R}) composed mainly of soil derived from igneous rocks.
+  \item[\texttt{SOIL\_25j}] This covariate includes all four mapping units (\textit{PV}, \textit{RL}, 
+\textit{RL-RR}, and 
+  \textit{C-R}) composed mainly of soil derived from igneous rocks.
 \end{description}
 
 \section{DIGITAL ELEVATION MODELS}
@@ -392,7 +392,8 @@ UTM zone 22S (EPSG:32722) using the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
 The horizontal positional validation of topographic maps was performed using the $n = 14$ GCPs. According to 
 Brazilian 
-legislation, high-quality map standards require that at least 90% of the GCPs have horizontal positional errors 
+legislation, high-quality map standards require that at least 90% of the GCPs have horizontal positional 
+errors 
 smaller than \SI{13}{\metre}, and an overall horizontal error (i.e. RMSE) smaller than \SI{8}{\metre} at the 
 \scale{25000}
 \cite{Brasil1984}. Estimated validation statistics show that the overall observed horizontal error 
@@ -400,8 +401,10 @@ smaller than \SI{13}{\metre}, and an overall horizontal error (i.e. RMSE) smalle
 is larger than those established by current regulations (\autoref{tab:chap05-topomap-geo-val}). The mean error 
 vector is larger than \SI{60}{\metre} with an azimuth of \SI{63}{\degree}. Both x- and y-coordinates are 
 positively biased, but the largest error occurs in the x-coordinate (\SI{50}{\metre}). Similar ME and MAE 
-values suggests that there is a strong systematic positional error. An affine transformation was employed using 
-the \Rpackage{vec2dtransf} \cite{Carrillo2012} to correct this systematic error. Model parameters were adjusted 
+values suggests that there is a strong systematic positional error. An affine transformation was employed 
+using 
+the \Rpackage{vec2dtransf} \cite{Carrillo2012} to correct this systematic error. Model parameters were 
+adjusted 
 using the same set of GCPs used for the validation in the geographic space.
 
 \begin{table}[ht]
@@ -452,7 +455,7 @@ Shuttle Radar Topography Mission (SRTM) products. The following equation was use
 
 \begin{equation}
  h = H + N,
-\end{equation}\label{eq:geoidal}
+\end{equation}\label{eqn:geoidal}
 
 \noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that approximates the 
 surface of the planet), $H$ is the orthometric height (height above the imaginary surface called geoid and 
@@ -473,7 +476,8 @@ interpolated from contour lines, yielding the first DEM included in the Santa Ma
 
 The second DEM (\demOld{}) is the well known SRTM DEM ($\SI{3}{\arcsecond} \approx \SI{90}{\m}$ spatial 
 resolution) produced by the National Aeronautics and Space Administration’s Jet Propulsion Laboratory in 
-collaboration with the National Geospatial\-/Intelligence Agency \cite{RodriguezEtAl2006}. The SRTM DEM version 
+collaboration with the National Geospatial\-/Intelligence Agency \cite{RodriguezEtAl2006}. The SRTM DEM 
+version 
 used here is the \emph{sink\-/filled SRTM version \num{4}}, prepared by the Consultative Group for 
 International Agricultural Research (\cgiar) using the same hydrologically correct interpolation method that 
 was used above to produce \demNew{} \cite{ReuterEtAl2007, JarvisEtAl2008}. However, the only data source used 
@@ -491,26 +495,12 @@ because elevation values of the SRTM DEM already are referenced to the global ge
 \begin{minipage}[b]{63mm}
 \subcaption{}
 \centering
-\begin{Schunk}
-\begin{Soutput}
-           used (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  1427640 76.3    4158126 222.1  5372562 287.0
-Vcells 12579518 96.0   42403859 323.6 42370441 323.3
-\end{Soutput}
-\end{Schunk}
 \includegraphics{fig/chap05-dem-old}
 \end{minipage}
 \begin{minipage}[b]{63mm}
 \subcaption{}
 \centering
-\begin{Schunk}
-\begin{Soutput}
-           used (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  1428790 76.4    4023800 214.9  5372562 287.0
-Vcells 12581604 96.0   39255394 299.5 42370441 323.3
-\end{Soutput}
-\end{Schunk}
-\includegraphics{fig/chap05-006}
+\includegraphics{fig/chap05-dem-new}
 \end{minipage} 
 \caption[Digital elevation models included in the Santa Maria dataset.]{Digital elevation models (a) \demOld{} 
 and (b) \demNew{} used to derive terrain covariates included in the Santa Maria dataset.}
@@ -518,7 +508,8 @@ and (b) \demNew{} used to derive terrain covariates included in the Santa Maria 
 \end{figure}
 
 A third DEM was included with the sole purpose of supporting the orthorectification -- removal of the effects 
-of the perspective of the sensor on the relative position of objects in the image -- and topographic correction 
+of the perspective of the sensor on the relative position of objects in the image -- and topographic 
+correction 
 -- removal of the effects of the topography on the reflectance values, i.e. on the illumination of the 
 geomorphic surfaces -- of satellite images (\autoref{sec:chap05-sat-image}) \cite{Mather2004, 
 Schowengerdt2007}. The third DEM (\topodata) was produced by the Brazilian National Institute for Space 
@@ -532,9 +523,11 @@ with the gravitational model EGM1996. This conversion was done because orbital s
 ellipsoid as vertical datum. For the orthorectification of satellite images, the DEM was then processed using 
 \grass{r.resamp.interp} with the bicubic resampling method to match the reference grid.
 
-The three DEMs present similar vertical accuracy (\autoref{tab:chap05-dem-attr-val}). In the case of \demNew{}, 
+The three DEMs present similar vertical accuracy (\autoref{tab:chap05-dem-attr-val}). In the case of 
+\demNew{}, 
 which was derived from contour lines published at a \scale{25000}, the vertical positional accuracy does not 
-meet the high-quality standards of current Brazilian legislation, which states that 90% of the GCPs should have 
+meet the high-quality standards of current Brazilian legislation, which states that 90% of the GCPs should 
+have 
 vertical errors smaller than \SI{5}{\metre}, which is half of the distance between contour lines 
 \cite{Brasil1984}. The corresponding RMSE should be less than \SI{3}{\metre}.
 
@@ -577,7 +570,8 @@ vertical errors smaller than \SI{5}{\metre}, which is half of the distance betwe
 % \end{figure}
 
 Despite all DEMs present a similar vertical accuracy, \demNew{} is considered the highest quality DEM in the 
-Santa Maria dataset. Because it was produced using information about the drainage network and location of lakes 
+Santa Maria dataset. Because it was produced using information about the drainage network and location of 
+lakes 
 and natural depressions, it is likely to provide a better hydrological representation of the study area. As 
 such, \demNew{} was used to estimate the geographical limits (boundary) of the catchment that constitute the 
 study area (\autoref{fig:chap05-elev-maps}), for which GRASS modules \texttt{r.watershed} and 
@@ -605,21 +599,10 @@ value of \ang{0.1} was added to the rasters to remove these flat surfaces.
 
 \begin{figure}[!ht]
 \centering
-\begin{Schunk}
-\begin{Soutput}
-           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  1901034 101.6    4023800 214.9  5372562 287.0
-Vcells 13295417 101.5   56246024 429.2 69753012 532.2
-\end{Soutput}
-\begin{Soutput}
-           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  1908943 102.0    4023800 214.9  5372562 287.0
-Vcells 28530435 217.7   67575228 515.6 69753012 532.2
-\end{Soutput}
-\end{Schunk}
-\includegraphics{fig/chap05-covar-data-slope}
-\caption[Slope derived using windows of different sizes.]{Slope \texttt{SLP}} raster surfaces derived from 
-\demNew{} using windows of sizes (from left to right) $3 \times 3$, $31 times 31$, and $255 \times 255$.}
+\includegraphics{fig/chap05-slope}
+\caption[Slope derived using windows of different sizes.]{Slope \texttt{SLP} raster surfaces derived from 
+\demNew{} using windows of sizes (from left to right) $3 \times 3$, $31 \times 31$, $127 \times 127$, and $255 
+\times 255$.}
 \label{fig:chap05-slope}
 \end{figure}
 
@@ -711,7 +694,8 @@ model. Resampling was performed using the cubic resampling method. The original 
 \centering
 \includegraphics{fig/chap05-geo-new}
 \end{minipage} 
-\caption[Geologic maps included in the Santa Maria dataset.]{Geologic maps (a) \geoOld{} and (b) \geoNew{} used 
+\caption[Geologic maps included in the Santa Maria dataset.]{Geologic maps (a) \geoOld{} and (b) \geoNew{} 
+used 
 to derive indicator covariates included in the Santa Maria dataset.}
 \label{fig:chap05-geo-maps}
 \end{figure}
@@ -827,10 +811,12 @@ use change between the years of 1980 and 2009.}
 
 The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution (\SI{2.4}{\m}) 
 Quickbird satellite images of \num{2008} and \num{2009}, made publicly available in \googleearth{} 
-\cite{SamuelRosaEtAl2011a}. Identification of land uses and delineation of mapping units were done manually, on 
+\cite{SamuelRosaEtAl2011a}. Identification of land uses and delineation of mapping units were done manually, 
+on 
 the computer screen, without using any automated classification routine. Positional validation of 
 \googleearth{} imagery revealed that they have only minor systematic positional errors 
-(\autoref{tab:chap05-google-geo-val}). Despite this, the attribute validation of both land use maps, using $n = 
+(\autoref{tab:chap05-google-geo-val}). Despite this, the attribute validation of both land use maps, using $n 
+= 
 60$ validation points placed along $m = 12 linear transects$, showed that they have similar overall accuracy 
 close to \SI{70.00}{\percent}.
 
@@ -851,32 +837,37 @@ close to \SI{70.00}{\percent}.
 \end{table}
 
 \landOld{} was used to derive $p = 2$ covariates defined as indicator variables, with plantation forests 
-(\it{PF}) and human settlements (\it{S}) being grouped together due to their small importance in terms of 
-covered area (\it{PF}) and for not containing any soil observation (\it{S}). These covariates are:
+(\textit{PF}) and human settlements (\textit{S}) being grouped together due to their small importance in terms 
+of 
+covered area (\textit{PF}) and for not containing any soil observation (\textit{S}). These covariates are:
 
 \begin{description}
- \item[\texttt{LU1980a}] Native forest (\it{FS}), which is likely to have soils with higher fertility.
+ \item[\texttt{LU1980a}] Native forest (\textit{FS}), which is likely to have soils with higher fertility.
   
- \item[\texttt{LU1980b}] Animal husbandry (\it{H}), the second most important land use in the study area, which 
+ \item[\texttt{LU1980b}] Animal husbandry (\textit{H}), the second most important land use in the study area, 
+which 
 is
  likely to have a soil fertility status lower than native forests.
 \end{description}
 
-Four ($p = 4$) indicator covariates were derived from \landNew{}, with plantation forests (\it{PF}), human 
-settlements (\it{S}), and other land uses (\it{O}), which comprise natural and artificial water bodies, being 
-grouped together due to their small importance in terms of covered area (\it{PF}) and for not containing any 
-soil observation (\it{S} and \it{O}). These covariates are:
+Four ($p = 4$) indicator covariates were derived from \landNew{}, with plantation forests (\textit{PF}), human 
+settlements (\textit{S}), and other land uses (\textit{O}), which comprise natural and artificial water bodies, 
+being 
+grouped together due to their small importance in terms of covered area (\textit{PF}) and for not containing 
+any 
+soil observation (\textit{S} and \textit{O}). These covariates are:
 
 \begin{description}
- \item[\texttt{LU2009a}] Native forest (\it{FS}), as described above.
+ \item[\texttt{LU2009a}] Native forest (\textit{FS}), as described above.
  
- \item[\texttt{LU2009b}] Shrubland (\it{SS}), which is likely to have a soil fertility level above those found 
+ \item[\texttt{LU2009b}] Shrubland (\textit{SS}), which is likely to have a soil fertility level above those 
+found 
 in
  areas used with annual crop agriculture and animal husbandry, but lower than in native forests.
  
- \item[\ttt{LU2009c}] Animal husbandry (\it{H}), as described above.
+ \item[\texttt{LU2009c}] Animal husbandry (\textit{H}), as described above.
   
- \item[\texttt{LU2009d}] Annual crop agriculture (\it{AA}), which is likely to present the lowest soil 
+ \item[\texttt{LU2009d}] Annual crop agriculture (\textit{AA}), which is likely to present the lowest soil 
 fertility 
  levels due to the usually poor management practices employed.
 \end{description}
@@ -938,9 +929,9 @@ version \num{4} DEM \cite{RapidEye2013}.
 \subcaption{}
 \centering
 \includegraphics{fig/chap05-sat-new}
-\end{minipage} 
+\end{minipage}
 \caption[Satellite images included in the Santa Maria dataset.]{Satellite images used to derive covariates such 
-as (a) \texttt{NDVI_30} and (b) \texttt{NDVI_5b} included in the Santa Maria dataset.}
+as (a) \texttt{NDVI\_30} and (b) \texttt{NDVI\_5b} included in the Santa Maria dataset.}
 \label{fig:chap05-sat-image}
 \end{figure}
 

@@ -10,6 +10,7 @@ invisible(capture.output(
   spgrass6::initGRASS(
     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE)))
+invisible(system("r.mask -o buffer_BASIN_10", ignore.stderr = TRUE))
 
 # Load polygon with the boundary of the study area
 invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
@@ -22,7 +23,7 @@ invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.st
 % Este é o resumo em português.
 %\end{chapterabstract}
 
-\def\enkeys{Auxiliary information, Raster data}
+\def\enkeys{Area-class soil maps, Digital elevation models, Geological maps, Land use maps, Satellite images}
   
 \begin{chapterabstract}{english}{\enkeys}
 The Santa Maria dataset comprises a list of more than 100 covariates covering the catchment of the DNOS/CORSAN 
@@ -242,9 +243,10 @@ the approximate taxonomic composition (\si{\percent}).
 
 # Load less detailed soil map and auxiliary data
 invisible(capture.output(map <- spgrass6::readRAST6("SOIL_100", ignore.stderr = TRUE)))
-load("/home/alessandro/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
+load("~/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
 
 # Process data
+map@bbox <- pol@bbox
 map@data[, 1] <- as.factor(map@data[, 1])
 map@data[, 1] <- plyr::revalue(
   map@data[, 1], c("1" = "C1", "9" = "Rd1", "11" = "Re-C-Co", "13" = "Re4", "14" = "TBa-Rd"))
@@ -252,7 +254,7 @@ color <- c(sibcs$colors[2], sibcs$colors[41], sibcs$colors[21], sibcs$colors[39]
 
 # Prepare plot
 p1 <- sp::spplot(
-  map, main = "", col.regions = color, asp = 1,
+  map, main = "", col.regions = color, 
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
@@ -264,8 +266,6 @@ p1$legend$inside$args$key$space <- "left"
 
 # Plot and clean workspace
 plot(p1)
-rm(map, p1, color)
-gc()
 
 @
 \end{minipage}
@@ -279,9 +279,10 @@ gc()
 
 # Load more detailed soil map and auxiliary data
 invisible(capture.output(map <- spgrass6::readRAST6("SOIL_25", ignore.stderr = TRUE)))
-load("/home/alessandro/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
+load("~/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
 
 # Process data
+map@bbox <- pol@bbox
 map@data[, 1] <- as.factor(map@data[, 1])
 map@data[, 1] <- plyr::revalue(
   map@data[, 1], c(
@@ -292,7 +293,7 @@ color <- c(
 
 # Prepare plot
 p1 <- sp::spplot(
-  map, main = "", col.regions = color, asp = 1,
+  map, main = "", col.regions = color, 
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
@@ -307,8 +308,6 @@ p1$legend$inside$args$key$labels$labels <- rev(p1$legend$inside$args$key$labels$
 
 # Plot and clean workspace
 plot(p1)
-rm(map, p1, color)
-gc()
  
 @
 \end{minipage} 
@@ -344,7 +343,7 @@ statistics suggest that there are large positional errors in all directions, wit
 a mean azimuth of \SI{128}{\degree} (\autoref{tab:chap05-soil-geo-val}).
 
 \begin{table}[ht]
- \caption{Error statistics of the horizontal validation of \soilOld{} using $n = 4$ GCPs.}
+ \caption{Error statistics of the horizontal positional validation of \soilOld{} using $n = 4$ GCPs.}
  \label{tab:chap05-soil-geo-val}
  \centering
  {\small
@@ -544,7 +543,7 @@ Shuttle Radar Topography Mission (SRTM) products. The following equation was use
 
 \begin{equation}
  h = H + N,
-\end{equation}\label{eq:geoidal}
+\end{equation}\label{eqn:geoidal}
 
 \noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that approximates the 
 surface of the planet), $H$ is the orthometric height (height above the imaginary surface called geoid and 
@@ -601,15 +600,13 @@ map@data[, 1] <- as.integer(map@data[, 1])
 
 # Prepare plot
 p1 <- sp::spplot(
-  map, main = "", col.regions = colors, asp = 1, at = breaks, 
+  map, main = "", col.regions = colors, at = breaks, 
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
 
 # Plot and clean workspace
 plot(p1)
-rm(map, p1, colors)
-gc()
    
 @
 \end{minipage}
@@ -634,15 +631,13 @@ map@data[, 1] <- as.integer(map@data[, 1])
 
 # Prepare plot
 p1 <- sp::spplot(
-  map, main = "", col.regions = colors, asp = 1, at = breaks, 
+  map, main = "", col.regions = colors, at = breaks, 
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
 
 # Plot and clean workspace
 plot(p1)
-rm(map, p1, colors)
-gc()
  
 @
 \end{minipage} 
@@ -757,7 +752,7 @@ slp <- as(slp, "SpatialPixelsDataFrame")
 
 # Prepare plots
 map <- sp::spplot(
-  slp, scales = list(draw = FALSE), aspect = "iso", col.regions = terrain.colors(64), 
+  slp, scales = list(draw = FALSE), col.regions = terrain.colors(64), 
   colorkey = list(space = "bottom"),
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
@@ -873,7 +868,7 @@ map@data[, 1] <- plyr::revalue(
 
 # Prepare plot
 map <- sp::spplot(
-  map, main = "", col.regions = sp::bpy.colors(4), asp = 1,
+  map, main = "", col.regions = sp::bpy.colors(4), 
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
@@ -896,6 +891,7 @@ plot(map)
 
 # Load R settings
 <<r-settings>>
+
 # Load more detailed geologic map and auxiliary data
 invisible(capture.output(map <- spgrass6::readRAST6("predGEO_25", ignore.stderr = TRUE)))
 
@@ -913,7 +909,7 @@ invisible(system("r.to.vect --o in=GEO_25d out=poly feature=area", ignore.stderr
 invisible(capture.output(poly <- spgrass6::readVECT6("poly", ignore.stderr = TRUE)))
 poly@bbox <- pol@bbox
 map <- sp::spplot(
-  map, main = "", col.regions = sp::bpy.colors(4), asp = 1, 
+  map, main = "", col.regions = sp::bpy.colors(4), 
   sp.layout = list("sp.polygons", poly, first = FALSE, 
                    col = ifelse(poly$value == 0, "transparent", " black"), 
                    fill = ifelse(poly$value == 0, "transparent", "lightgray"), alpha = 0.5))
@@ -1033,6 +1029,7 @@ the use of the nearest neighbour resampling method to match \landOld{} to the re
  
 # Load R settings
 <<r-settings>>
+
 # Load less detailed land use map
 invisible(capture.output(map <- spgrass6::readRAST6("LU1980", ignore.stderr = TRUE)))
 
@@ -1048,7 +1045,7 @@ map@data[, 1] <- plyr::revalue(
 
 # Prepare plot
 map <- sp::spplot(
-  map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 13, 4, 18)], asp = 1,
+  map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 13, 4, 18)], 
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
@@ -1089,7 +1086,7 @@ map@data[, 1] <- plyr::revalue(
 
 # Prepare plot
 map <- sp::spplot(
-  map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 12, 13, 16, 4, 18, 20)], asp = 1,
+  map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 12, 13, 16, 4, 18, 20)],
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
@@ -1121,7 +1118,7 @@ map@data[, 1] <- as.factor(map@data[, 1])
 
 # Prepare plot
 map <- sp::spplot(
-  map, main = "", aspect = 1, col.regions = c("lightgreen", "lightyellow"),
+  map, main = "", col.regions = c("lightgreen", "lightyellow"),
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
@@ -1260,11 +1257,11 @@ invisible(capture.output(map <- spgrass6::readRAST6("NDVI_30", ignore.stderr = T
 
 # Prepare data
 map@bbox <- pol@bbox
-load("/home/alessandro/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
+load("~/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
 
 # Prepare map
 map <- sp::spplot(
-  map, aspect = "iso", main = "", col.regions = ndvi$colors, at = ndvi$breaks,
+  map, main = "", col.regions = ndvi$colors, at = ndvi$breaks,
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
@@ -1287,11 +1284,11 @@ invisible(capture.output(map <- spgrass6::readRAST6("NDVI_5b", ignore.stderr = T
 
 # Prepare data
 map@bbox <- pol@bbox
-load("/home/alessandro/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
+load("~/projects/dnos-sm-rs/dnos-sm-rs-data/R/color_ramps.RData")
 
 # Prepare map
 map <- sp::spplot(
-  map, aspect = "iso", main = "", col.regions = ndvi$colors, at = ndvi$breaks,
+  map, main = "", col.regions = ndvi$colors, at = ndvi$breaks,
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
