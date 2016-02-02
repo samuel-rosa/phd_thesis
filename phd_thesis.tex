@@ -79,6 +79,7 @@
   \def\subsubsectionautorefname{Section}%
   \def\subsectionautorefname{Section}%
   \def\sectionautorefname{Section}%
+  \def\chapterautorefname{Chapter}%
 } 
 
 %%TODO: Margens conforme MDT UFSM 7ª edição. Corrigir no arquivo UFRuralRJ.cls 
@@ -211,10 +212,8 @@
 \def\pronassolos{\href{https://goo.gl/zbMK24}{PRONASOLOS}}
 \def\redemds{%
  \href{%
-  https://www.embrapa.br/busca-de-noticias/-/noticia/2062813/solo-brasileiro-agora-tem-mapeamento-digital
- }{%
-  RedeMDS
- }
+  https://www.embrapa.br/busca-de-noticias/-/noticia/2062813/solo-brasileiro-agora-tem-mapeamento-digital%
+}{RedeMDS}%
 }
 \def\riovacacaimirim{\href{http://pt.wikipedia.org/wiki/Rio_Vacaca\%C3\%AD-Mirim}{Rio Vacacaí-Mirim}}
 \def\riojacui{\href{http://pt.wikipedia.org/wiki/Rio_Jacu\%C3\%AD}{Rio Jacuí}}
@@ -242,10 +241,10 @@
 \titulo{Análise de Fontes de Incerteza na Modelagem Espacial do Solo}
 \author{Samuel-Rosa}{Alessandro}
 \instituto{Instituto de Agronomia}
-\curso{Curso de Pós-Graduação em Agronomia -- Ciência do Solo}
+\curso{Curso de Pós-Graduação em Agronomia--Ciência do Solo}
 \area{Ciência do Solo}
-\grau{Doutor em Agronomia -- Ciência do Solo}
-\nivel{Doutorado em Agronomia -- Ciência do Solo}
+% \grau{Doutor}
+% \nivel{Doutorado em Agronomia -- Ciência do Solo}
 \local{Serop\'edica}{RJ}{Brasil}
 
 %%==============================================================================
@@ -265,7 +264,7 @@
 \committee[Dr.]{Teixeira}{Wenceslau Geraldes}{EMBRAPA} %% Examinator
 \committee[Dra.]{Lopes Assad}{Maria Leonor Ribeiro Casimiro}{UFSCar} %% Examinator
 \committee[Dr.]{Oliveira}{Ronaldo Pereira de}{EMBRAPA} %% Examinator
-\date{23}{February}{2016} %% Date of defence
+\date{24}{Fevereiro}{2016} %% Date of defence
 
 %%==============================================================================
 %% Outros itens
@@ -290,9 +289,9 @@
 %%=============================================================================
 % Como a CIP vai ser impressa atrás da página de rosto, as margens inner e outer	
 % devem ser invertidas.
-%\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}
-%\makeCIP{alessandrosamuel@yahoo.com.br}% email do autor		
-%\restoregeometry
+% \newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}
+% \makeCIP{alessandrosamuel@yahoo.com.br}% email do autor		
+% \restoregeometry
 
 %Se for usar a catalogação gerada pelo gerador do site da biblioteca comentar as linhas
 %acima e utilizar o comando abaixo
@@ -301,7 +300,7 @@
 %%=============================================================================
 % Folha de aprovação
 %%=============================================================================
-% \makeapprove
+\makeapprove
 
 %%=============================================================================
 %% Dedicatória (opcional)
@@ -336,8 +335,8 @@
 %%=============================================================================
 %% Resumo geral em português
 %%=============================================================================
-% \def\tituloportugues{Análise de Fontes de Incerteza na Modelagem Espacial do Solo}
-% \def\chavesportugues{Pedometria, Modelos Preditivos, Incerteza}
+% \def\tituloportugues{Análise de fontes de incerteza na modelagem espacial do solo}
+% \def\chavesportugues{Pedometria. Mapeamento Digital do Solo. Dados de Solo e Covariáveis}
 % \generalabstracttrue
 % \begin{generalabstract}{brazilian}{\tituloportugues}{\chavesportugues}
 % 
@@ -346,11 +345,12 @@
 %%=============================================================================
 %% English General Abstract
 %%=============================================================================
-\def\titleEn{Analysis of Sources of Uncertainty in Soil Spatial Modelling}
-\def\keyEn{Pedometrics, Digital Soil Mapping, Soil and Covariate Data}
+\def\titleEn{Analysis of sources of uncertainty in soil spatial modelling}
+\def\nivelEn{Doctor of Science in Agronomy, Soil Science}
+\def\keyEn{Pedometrics. Digital Soil Mapping. Soil and Covariate Data}
 
 \generalabstracttrue
-\begin{generalabstract}{english}{\titleEn}{\keyEn}
+\begin{generalabstract}{english}{\titleEn}{\keyEn}{\nivelEn}
 Modern soil spatial modelling is based on statistical models that explore the empirical relationship among 
 environmental conditions and soil properties. These soil spatial models, like any other model, are a gross 
 simplification of reality, and their outcome, i.e. a soil map, will always be in \emph{error}. There are many 
@@ -364,13 +364,11 @@ in the Santa Maria dataset were explored: clay content, organic carbon content, 
 capacity, and bulk density. Five covariates from the Santa Maria dataset, each with two levels of spatial 
 detail, were used: area-class soil maps, digital elevation models, geologic maps, land use maps, and satellite 
 images. Two packages for \texttt{R} were created in support of the case studies, the first 
-(\texttt{pedometrics}) 
-containing miscellaneous functions, the second (\texttt{spsann}) designed for the optimization of sample 
-configurations using spatial simulated annealing. The case studies demonstrate that existing covariates are 
-suitable 
-for calibrating soil spatial models, and using more detailed covariates results in only a modest increase in 
-the 
-prediction accuracy that may not outweigh the extra costs. More efficient means of increasing prediction 
+(\texttt{pedometrics}) containing miscellaneous functions, the second (\texttt{spsann}) designed for the 
+optimization of sample configurations using spatial simulated annealing. The case studies demonstrate that 
+existing covariates are suitable for calibrating soil spatial models, and using more detailed covariates 
+results in only a modest increase in 
+the prediction accuracy that may not outweigh the extra costs. More efficient means of increasing prediction 
 accuracy should be explored, such as obtaining more soil observations. For this end, one should use more 
 objective means for selecting observation locations such as those implemented in the \Rpackage{spsann} 
 to minimize the influence of conceptual, operational, and psychological factors on the sampling design. These 
@@ -394,22 +392,22 @@ and spatial interpolation produce more accurate spatial predictions than their s
 %%=============================================================================
 %% Lista de figuras
 %%=============================================================================
-\listoffigures
+% \listoffigures
 
 %%=============================================================================
 %% Lista de tabelas (comentar se não houver)
 %%=============================================================================
-\listoftables
+% \listoftables
 
 %%=============================================================================
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
-\listofappendix
+% \listofappendix
 
 %%=============================================================================
 %% Lista de Anexos (comentar se não houver)
 %%=============================================================================
-%\listofannex
+% \listofannex
 
 %%=============================================================================
 %% Lista de abreviaturas e siglas
@@ -441,31 +439,30 @@ and spatial interpolation produce more accurate spatial predictions than their s
 \setlength{\baselineskip}{1.5\baselineskip}
 
 % Adiciona cada capitulo
+\selectlanguage{english}
 \include{chap/chap01} % 1. General introduction
 \include{chap/chap02} % 2. 
 \selectlanguage{brazilian}
 \include{chap/chap03} % 3. Modelo conceitual de pedogênese
 \selectlanguage{english}
-\include{chap/chap04} % 4. The Santa Maria dataset -- soil data
-\include{chap/chap05} % 5. The Santa Maria dataset -- covariate data
+% \include{chap/chap04} % 4. The Santa Maria dataset -- soil data
+% \include{chap/chap05} % 5. The Santa Maria dataset -- covariate data
 \include{chap/chap06} % 6. Do more detailed covariates deliver more accurate soil maps?
-\include{chap/chap07} % 7. Spatial point pattern analysis of soil survey sampling locations
-\include{chap/chap08} % 8. Optimization of sample configurations for spatial trend estimation for soil mapping
-\include{chap/chap09} % 9. Sampling for soil mapping in terra incognita
-\include{chap/chap10} % 10. General conclusion
+% \include{chap/chap07} % 7. Spatial point pattern analysis of soil survey sampling locations
+% \include{chap/chap08} % 8. Optimization of sample configurations for spatial trend estimation for soil mapping
+% \include{chap/chap09} % 9. Sampling for soil mapping in terra incognita
+% \include{chap/chap10} % 10. General conclusion
 \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-\appendix
+% \appendix
 % \include{chap/} % Introdução Geral
 % \include{chap/} % Conclusão Geral
 % \include{chap/apenb} % conceptual model of pedogenesis
 % \include{chap/apena} % The Santa Maria dataset -- soil data
 % \include{chap/apene} % The Santa Maria dataset -- covariate data
-% \include{chap/appenc} % R-package spsann
-% \include{chap/append} % R-package pedometrics
 
 %%=============================================================================
 %% Referências
@@ -475,7 +472,8 @@ and spatial interpolation produce more accurate spatial predictions than their s
 %%=============================================================================
 %% Anexos
 %%=============================================================================
-%\annex
-%\include{capitulos/anexoa}
+% \annex
+% \include{chap/appenc} % R-package spsann
+% \include{chap/append} % R-package pedometrics
 
 \end{document}

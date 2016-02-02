@@ -39,8 +39,7 @@
 %% Identificação
 %%==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[21/10/2015 v.0.4 Formatação de documentos acadêmicos 
-                          da UFRuralRJ]
+\ProvidesClass{UFRuralRJ}[21/10/2015 v.0.4 Formatação de documentos acadêmicos da UFRuralRJ]
 
 %%==============================================================================
 %% Declaração de opções da classe
@@ -50,6 +49,7 @@
 \DeclareOption{tese}{
   \AtEndOfClass{
     \newcommand{\titlepagespecificinfo}{\tesespecificinfo}
+    \def\grau{\tesegrau}
     \def\doctypename{\tesename}
     \def\doctypearticle{a}
     \def\doctypenameCIP{Tese (Doutorado)}
@@ -63,6 +63,7 @@
       Monografia submetida como requisito parcial para obten{\c{c}}{\~a}o do 
       %grau de \textbf{\@grau}, \@altCurso, {\'A}rea de Concentra\c{c}{\~a}o em
       grau de \textbf{\@grau}, \@curso, {\'A}rea de Concentra\c{c}{\~a}o em
+      
       \@area.
     }
     \def\doctypename{Monografia de Especializa{\c{c}}{\~a}o}
@@ -127,7 +128,7 @@
 % \newcommand{\altCurso}[1]{\gdef\@altCurso{#1}} %% Obsoleto
 \newcommand{\area}[1]{\gdef\@area{#1}}
 \newcommand{\instituto}[1]{\gdef\@instituto{#1}}
-\newcommand{\grau}[1]{\gdef\@grau{#1}}
+% \newcommand{\grau}[1]{\gdef\@grau{#1}}
 \newcommand{\nivel}[1]{\gdef\@nivel{#1}}
 \newcommand{\trabalhoNumero}[1] {\gdef\@trabalhoNumero{#1}}
 \newcommand{\local}[3]{\gdef\@city{#1}\gdef\@state{#2}\gdef\@country{#3}}
@@ -531,15 +532,16 @@
     {\LargeE\textbf{\MakeUppercase{\@titulo}}}\par    % Título
     \vspace{25mm}
     {\LargeE\textbf{\MakeUppercase{\@authora}}}\\[15mm] % Autor do documento
-    \soborienta\par
+    
+    {\LargeE\soborienta\par}
     \@ifundefined{@advisor}{}{
       \vfill{\LargeE\textbf{\@advisor}}}\\ %% Orientador(a)
     \@ifundefined{@coadvisora}{}{
       \vspace{2ex}
-      \sobcoorienta\par{\LargeE\textbf{\@coadvisora}}} %% Co-orientador 1
+      {\LargeE\sobcoorienta\par{\textbf{\@coadvisora}}}} %% Co-orientador 1
 
     \@ifundefined{@coadvisorb}{}{
-      \par\textit{\and}\par\textbf{\LargeE\@coadvisorb}} %% Co-orientador 2
+      {\LargeE\par\textit{\andname}\par\textbf{\@coadvisorb}}} %% Co-orientador 2
     \vspace{15mm}
     \begin{flushright}
       \hspace{80mm}
@@ -549,7 +551,7 @@
     \end{flushright}
     \vspace{15mm}
     \centerline{\LargeE\@city,~\@state,~\@country} %% Cidade, estado e país
-    \centerline{\LargeE\@publmonth~\of~\@publyear} %% Mês e ano
+    \centerline{\LargeE\@publmonth~\ofname~\@publyear} %% Mês e ano
   }
 }
 
@@ -658,7 +660,8 @@
 	  \@ifundefined{@authord}{}{\textbf{\@authord}\\}%
 	  \vspace{1.5cm}
 		 {como requisito parcial para obten{\c{c}}{\~a}o do grau de} \\
-		 \textbf{\@grau}
+		 % \textbf{\@grau}
+		 \textbf{\grau}
   }
 }
 
@@ -832,15 +835,17 @@
 \newcommand{\generalabstractbheaderbox}[1]{%
   \parbox[t]{\textwidth}{
     \MakeUppercase{\@authoralast}, \@authorafirst. \textbf{\@generalabstracttitulo}.
-    \@publyear. \pageref{LastPage}\folhas. \doctypename~(\@nivel).
+    % \@publyear. \pageref{LastPage}\folhas. \doctypename~(\@nivel).
+    \@publyear. \pageref{LastPage}\folhas. \doctypename~(\@generalabstractnivel).
     \@instituto, \ufrrjlongo, \@city, RJ, \@publyear.
     \vfill\vspace{13mm}
   }
 }
-\newenvironment{generalabstract}[3]{
+\newenvironment{generalabstract}[4]{
   \if@openright\cleardoublepage\else\clearpage\fi%
     \gdef\@generalabstractbkeywords{#3}
     \gdef\@generalabstracttitulo{#2}
+    \gdef\@generalabstractnivel{#4}
   \begin{otherlanguage}{#1}
     \ifgeneralabstract
       \chapter*{\LargeF\generalabstractname} %% general abstract
@@ -873,11 +878,20 @@
     \setlength{\baselineskip}{0.67\baselineskip} %% Espaçamento simples
     \vspace*{-14mm} %% Alinhamento superior
     \vspace*{10mm}  %% Coloca o resumo a 10 mm da margem superior
-    \section*{\centering\MakeUppercase{\abstractname}} %% Título centralizado
-    %% Adiciona o resumo ao sumário sem numerar seção
-    % NOTA: Há incompatibilidade entre \MakeUppercase e \addcontentsline
-    %\addcontentsline{toc}{section}{\MakeUppercase{\abstractname}}
-    \addcontentsline{toc}{section}{\uppercase{\abstractname}}
+    
+    %\section*{\centering\MakeUppercase{\abstractname}} %% Título centralizado
+    \addtocounter{section}{1} %% adicionar numeração ao 'resumo' no corpo do texto
+    \section*{\centering{\thesection~\abstractname}}
+    
+    %% Adicionar 'resumo' ao sumário numerado com qualquer outra seção dentro do texto
+    %% ASR: Há incompatibilidade entre \MakeUppercase e \addcontentsline
+    %% ASR: Na verdade, não é necessário usar \MakeUppercase ou \uppercase. Basta definir \abstractname
+    %%      usando os arquivos de idioma do pacote babel, dado que \abstractname aparece sempre em maiúsculas.
+    % \addcontentsline{toc}{section}{\MakeUppercase{\abstractname}}
+    % \addcontentsline{toc}{section}{\uppercase{\abstractname}}
+    % \addcontentsline{toc}{section}{\uppercase{\protect\numberline{\thesection}\abstractname}}
+    \addcontentsline{toc}{section}{\protect\numberline{\thesection}\abstractname}
+    
     \vspace{2mm} %% Espaço do título até o corpo do texto
     \parindent0em
 }{\par\vspace{6mm} %% Espaço do corpo do texto até as palavras-chave
@@ -921,8 +935,7 @@
         \fi
       \fi
       \refstepcounter{chapter}%
-      \ifchap\addcontentsline{toc}{chapter}{
-        \protect\numberline{\@chapapp\thechapter}#1}\fi%
+      \ifchap\addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp\thechapter}#1}\fi%
       \addtocontents{lof}{\protect\addvspace{0\p@}}%original = 10\p@ 
       \addtocontents{lot}{\protect\addvspace{0\p@}}%
       %\pagestyle{UFRuralRJ}\let\ps@plain\ps@UFRuralRJ%

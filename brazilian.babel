@@ -3,8 +3,8 @@
 %
 \@namedef{captionsbrazilian}{%
 \def\bibname{Refer{\^e}ncias bibliogr{\'a}ficas}%
-\def\abstractname{Resumo}%
-\def\generalabstractname{Resumo geral}%
+\def\abstractname{RESUMO}%
+\def\generalabstractname{RESUMO GERAL}%
 \def\appendixname{Ap{\^e}ndice}%
 % \def\appendixsname{Ap{\^e}ndices}%
 \def\contentsname{Sum{\'a}rio}%
@@ -44,6 +44,7 @@
 \def\folhas{f}%
 \def\dissname{Disserta{\c{c}}{\~a}o}%
 \def\tesename{Tese}%
+\def\tesegrau{Doutor}%
 
 %% ============================================================================================================
 %% Segundo as normas atuais, parece que os seguinte textos devem sempre aparecer em português, mesmo que o 
@@ -51,12 +52,14 @@
 %% classe. Contudo, parece mais eficiente fazê-lo usando o pacote babel.
 %% ============================================================================================================
 \def\tesespecificinfo{%
-Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de \textbf{\@grau}, \@curso, {\'A}rea de 
-Concentra\c{c}{\~a}o em \@area.
+Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de 
+%\textbf{\@grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+\textbf{\grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
 }%
 \def\dissspecificinfo{%
-Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de \textbf{\@grau}, 
-\@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
+Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de 
+%\textbf{\@grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
+\textbf{\grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
 \def\byname{por}%
 \def\aprovadoem{Documento aprovado em}%

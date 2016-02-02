@@ -3,8 +3,8 @@
 %
 \@namedef{captionsenglish}{%
 \def\bibname{Bibliographic References}%
-\def\abstractname{Abstract}%
-\def\generalabstractname{General abstract}%
+\def\abstractname{ABSTRACT}%
+\def\generalabstractname{GENERAL ABSTRACT}%
 \def\appendixname{Appendix}%
 \def\contentsname{Contents}%
 \def\listfigurename{List of Figures}%
@@ -43,6 +43,7 @@
 
 \def\dissname{Dissertation}%
 \def\tesename{Thesis}%
+\def\tesegrau{Doctor}%
 
 %% ============================================================================================================
 %% Segundo as normas atuais, parece que os seguinte textos devem sempre aparecer em português, mesmo que o 
@@ -51,12 +52,14 @@
 %% sequência para possível uso futuro.
 %% ============================================================================================================
 \def\tesespecificinfo{% 
-Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de \textbf{\@grau}, \@curso, {\'A}rea de 
-Concentra\c{c}{\~a}o em \@area.
+Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de 
+%\textbf{\@grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+\textbf{\grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
 }%
 \def\dissspecificinfo{%
-Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de \textbf{\@grau}, 
-\@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
+Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de 
+%\textbf{\@grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
+\textbf{\grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
 \def\aprovadoem{Documento aprovado em}%
 \def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%
