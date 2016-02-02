@@ -213,10 +213,10 @@ order=-1
 
 [item:chap/appenc.tex]
 archive=true
-column=32
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=150
+line=250
 mode=LaTeX
 open=false
 order=5
@@ -983,12 +983,12 @@ order=-1
 
 [item:phd_thesis.tex]
 archive=true
-column=10
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=285
+line=0
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [view-settings,view=0,item:UFRuralRJ.cls]
@@ -1004,10 +1004,10 @@ JumpList=
 ViMarks=.,32,23,[,32,23,],32,35
 
 [view-settings,view=0,item:chap/appenc.tex]
-CursorColumn=32
-CursorLine=150
+CursorColumn=0
+CursorLine=250
 JumpList=
-ViMarks=
+ViMarks=.,250,0,[,250,0,],250,0
 
 [view-settings,view=0,item:chap/append.tex]
 CursorColumn=0
