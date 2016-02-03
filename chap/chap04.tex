@@ -1,16 +1,15 @@
 \artigotrue
-\chapter{THE SANTA MARIA DATASET -- SOIL DATA}
+\chapter{THE SANTA MARIA DATASET. PART I -- SOIL DATA}
 \label{chap:chap04}
 %\SweaveUTF8
 
 
 %\def\ptkeys{}
-
 %\begin{chapterabstract}{brazilian}{\ptkeys}
 % Este é o resumo em português.
 %\end{chapterabstract}
 
-\def\enkeys{Spatial soil modelling, Purposive sampling, Legacy data, Soil field description, Soil laboratory 
+\def\enkeys{Spatial soil modelling. Purposive sampling. Legacy data. Soil field description. Soil laboratory 
 analysis}
   
 \begin{chapterabstract}{english}{\enkeys}
@@ -81,8 +80,7 @@ distance between two neighbouring points of \SI{180}{\metre}, minimum and maximu
 
 \subsection{Subset I}
 
-The first subset ($n = 340$, \autoref{fig:soil-data-subsets-I-III}) was produced as part of projects that 
-aimed 
+The first subset ($n = 340$, \autoref{fig:chap04-subsets-I-III}) was produced as part of projects that aimed 
 at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
 erosion \cite{Samuel-Rosa2009, SamuelRosaEtAl2011a, MiguelEtAl2012, Moura-BuenoEtAl2012, Samuel-RosaEtAl2013}. 
 The researchers faced several difficulties with a budget cut and shortage of workforce. They also had 
@@ -117,55 +115,16 @@ used for laboratory analyses. Subsurface soil features were observed with an aug
 average 
 (continuous variables) or most common (categorical variables) value recorded. Note that soil sampling was done 
 using an areal support -- an area of \SI{\pm100}{\metre\squared}. However, the shape and exact area of the 
-sampling units are unknown, and georeferencing took place at point support. Thus, the use of this subset 
-requires to make the assumption that it was obtained using a point sampling support. The possible negative 
-consequences of this assumption have not been explored so far.
+sampling units are unknown, and georeferencing took place at point support.
 
 \begin{figure}[!ht]
- \centering
-%  <<fig:soil-data-subsets-I-III, fig = TRUE, echo = FALSE>>=
-%  cal_data <- read.table(
-%   "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
-%   header = TRUE, na.strings = "na")[1:350, c("longitude", "latitude")]
-%  sp::coordinates(cal_data) <- ~ longitude + latitude
-%  sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
-%  cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
-%  pts <- data.frame(slot(cal_data, "coords"))
-%  pts[, "id"] <- c(rep("black", 340), rep("red", 10))
-%  invisible(capture.output(
-%   spgrass6::initGRASS(
-%     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
-%     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(),
-%     override = TRUE)
-%  ))
-%  invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
-%  invisible(capture.output(drain <- spgrass6::readVECT6("STREAM_10", ignore.stderr = TRUE)))
-%  invisible(capture.output(drain <- rgeos::gIntersection(drain, pol, byid = TRUE)))
-%  p <- sp::spplot(
-%   pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
-%   scales = list(draw = TRUE),
-%   colorkey = FALSE, aspect = "iso",
-%   xlim = c(cal_data@bbox[1, 1] * 0.9998, cal_data@bbox[1, 2] * 1.0005),
-%   ylim = c(cal_data@bbox[2, 1] * 0.99999, cal_data@bbox[2, 2] * 1.00001),
-%   par.settings = list(
-%     fontsize = list(text = 12, points = 8),
-%     layout.widths = list(left.padding = 0, right.padding = 0),
-%     layout.heights = list(top.padding = 0, bottom.padding = 0)),
-%   panel = function(x, y, ...) {
-%     sp::panel.polygonsplot(x, y, ...)
-%     lattice::panel.points(
-%       x = pts[, "longitude"], y = pts[, "latitude"], pch = 20, col = pts[, "id"])
-%     lattice::panel.abline(
-%       v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
-%       col = "gray", lty = "dashed", lwd = 0.5)
-%     }) +
-%   latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed"))
-%  print(p)
-%  @
- \caption{Spatial distribution of the point soil observations contained in \emph{Subset I} ($n = 340$, black) 
- and \emph{Subset III} ($n = 10$, red) of the Santa Maria dataset. The drainage network is shown in the 
- background to give an idea of how the locations of soil observations is related to terrain features.}
- \label{fig:soil-data-subsets-I-III}
+\centering
+\includegraphics[width=0.90\textwidth]{fig/chap04-subsets-I-III}
+\caption[Spatial distribution of \emph{Subset I} and \emph{Subset III}.]{Spatial distribution of the point soil 
+observations contained in \emph{Subset I} ($n = 340$, black) and \emph{Subset III} ($n = 10$, red) of the Santa 
+Maria dataset. The drainage network is shown in the background to give an idea of how the locations of soil 
+observations is related to terrain features.}
+\label{fig:chap04-subsets-I-III}
 \end{figure}
 
 Georeferencing was done in the field using a Global Navigation Satellite System (GNSS) receiver with a 
@@ -174,15 +133,16 @@ sampling area. Sometimes, the horizontal positional error was larger than \SI{\p
 of vegetation, terrain, and satellite configuration. In these cases, observation locations 
 were georeferenced in the office using \SI{1}{\metre} spatial resolution \googleearth{} imagery with 
 positional 
-horizontal error of \SI{\pm6}{\metre}(\autoref{tab:chap05-covar-data-google-geo-val}).
+horizontal error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
 
 Every observation was identified with a number in increasing order, following the order in which the 
 observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out, yielding 
 an observation density of about \num{18}~observations per \si{\kilo\metre\squared}.
 
 \subsection{Subset II}
+\label{sec:chap04-subset-ii}
 
-The second subset ($n = 60$) was produced in the years of \num{2012} and \num{2013}, and was intended to 
+The second subset ($n = 60$) was produced in the years \num{2012} and \num{2013}, and was intended to 
 constitute an independent dataset for validation purposes. Because of the many access limitations 
 (geographic barriers and prohibition by landowners) and shortage of workforce, budget, infrastructure and 
 time faced in previous field campaigns, researchers chose to employ transect (cluster) sampling 
@@ -243,8 +203,8 @@ Land use (\texttt{LAND}) was assessed in the years of \num{2008} and \num{2009} 
 field and Google Earth imagery. Five land uses were identified: native forest (primary or secondary), 
 shrubland 
 (abandoned areas with predominance of shrub-sized vegetation, known in Brazil as \emph{capoeira}), animal 
-husbandry (grasslands), forestry (\textit{Eucalyptus spp.} and \textit{Pinus spp.}), and row crop agriculture. 
-Other 
+husbandry (grasslands), forestry (\textit{Eucalyptus spp.} and \textit{Pinus spp.}), and annual crop 
+agriculture. Other 
 land uses such as human settlements and water bodies were not observed/sampled.
 
 \subsection{Geology}
@@ -286,8 +246,8 @@ classification scheme proposed by \citeonline{SantosEtAl2013}.
 Presence of coarse fragments (\texttt{FRAG}) -- soil material of diameter \SI{>2}{\milli\metre} -- was 
 described as a binary variable, that is, a value of \num{1} (one) was annotated when coarse fragments were 
 present, and \num{0} (zero) otherwise. The same approach was adopted to describe the presence of rock outcrops 
-(\texttt{ROCK} -- SIZE???). The quantity of coarse fragments (\texttt{GRAVEL}, \si{\percent}) was estimated 
-visually in some observation points.
+(\texttt{ROCK}). The quantity of coarse fragments (\texttt{GRAVEL}, \si{\percent}) was estimated visually in 
+some observation points.
 
 It is worth noting that the approach employed to describe the presence of coarse fragments and rock outcrops is 
 not in line with the standard soil description guidelines currently used in Brazil. The reason for this is that 

@@ -9,7 +9,7 @@
 %Este é o resumo em português.
 %\end{chapterabstract}
 
-\def\enkeys{Soil spatial modelling, Free survey, Point pattern analysis, Expert judgement, Motivation}
+\def\enkeys{Soil spatial modelling. Free survey. Point pattern analysis. Expert judgement. Motivation}
   
 \begin{chapterabstract}{english}{\enkeys}
 Field soil spatial modellers usually select sampling locations based on tacit knowledge about soil-landscape 
@@ -73,7 +73,7 @@ mechanism) that generated the point pattern \cite{BivandEtAl2008}. A basic assum
 can be treated as a realization of a spatially homogeneous (stationary) random point process in the plane 
 \cite{Diggle2003}. Assuming that soil observations made using the free survey method come from a stochastic 
 process is unrealistic because soil observations are made following the conceptual model of pedogenesis of soil
-modellers. In other words they are the product of an unspecified deterministic process, alike many other 
+modellers. In other words, they are the product of an unspecified deterministic process, alike many other 
 biological mechanisms evaluated using point pattern analysis. Point pattern analysis serves as an efficient 
 exploratory tool in these circumstances and helps choosing non-stationary models to fit spatially inhomogeneous
 processes \cite{Baddeley2010} alike soil observation.
@@ -124,20 +124,17 @@ shifts when a task involves the pursuit of multiple goals and describe it as the
 multi-goal
 pursuit \cite{BonezziEtAl2011, Toure-TilleryEtAl2011a}. In the beginning of a multi-goal project, motivation 
 is high, and comes from the desire to accomplish all tasks using means that follow previously established 
-rules 
-or personal characteristics. This is called the \emph{means-focused motivation}. With time the motivation to 
-pursue the main goal decreases due to one or more factors such as diminished sense of goal achievability, 
-decline 
-of physiological and psychological resources (depletion) after first tasks are completed, positive 
-goal-related emotions that reduce the efforts toward the main goal and shift the focus to another goal, and 
-choosing to relax initial standards to save time and resources. The \emph{outcome-focused motivation} prevails 
-in this phase, which is the bottom of the U-shaped motivation curve. As the main goal 
-becomes closer, the motivation increases again from the desire to accomplish all tasks using means that follow 
-previously established rules or personal characteristics as in the beginning of the project. Stronger 
-adherence 
-to standards (previously established rules) at the beginning and end of a project is possibly explained by the 
-fact that self-signalling concerns (the image made about the self) usually are greater in these two phases of 
-goal pursuit \cite{Toure-TilleryEtAl2011}.
+rules. This is called the \emph{means-focused motivation}. With time the motivation to pursue the main goal 
+decreases due to one or more factors such as diminished sense of goal achievability, decline 
+of physiological and psychological resources (depletion) after first tasks are completed, positive goal-related 
+emotions that reduce the efforts toward the main goal and shift the focus to another goal, and choosing to 
+relax initial standards to save time and resources. The \emph{outcome-focused motivation} prevails in this 
+phase, which is the bottom of the U-shaped motivation curve. As the main goal becomes closer, the motivation 
+increases again from the desire to accomplish all tasks using means that follow 
+previously established rules as in the beginning of the project. Stronger adherence to standards (previously 
+established rules) at the beginning and end of a project is possibly explained by the fact that self-signalling 
+concerns (the image made about the self) usually are greater in these two phases of goal pursuit 
+\cite{Toure-TilleryEtAl2011}.
 
 \section{STUDY CASE}
 
@@ -159,14 +156,19 @@ Forest areas occupy more than half of the study area, followed by native grassla
 forestry, urban areas and artificial water bodies \cite{SamuelRosaEtAl2011a}.
 
 \begin{figure}[!ht]
- \centering
- \includegraphics[width=95mm]{fig/chap07-location}
- \includegraphics[width=95mm]{fig/chap07-ppp}
-
- \caption{Location of the study area (left) in the central region of the Southernmost Brazilian state, Rio 
- Grande do Sul, and the planar point pattern (right) composed of $n = 340$ soil observations made between 
- the years of \num{2008} and \num{2011}.}
- \label{fig:chap07-chap07-location}
+\centering
+\begin{minipage}{0.6\textwidth}
+\subcaption{}
+\includegraphics[width=\textwidth]{fig/chap07-location}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+\subcaption{}
+\includegraphics[width=\textwidth]{fig/chap07-ppp}
+\end{minipage}
+\caption[Location of the study area and the planar point pattern.]{Location of the study area (a) in the 
+central region of the Southernmost Brazilian state, Rio Grande do Sul, and the planar point pattern (b) 
+composed of $n = 340$ soil observations made between the years of \num{2008} and \num{2011}.}
+\label{fig:chap07-chap07-location}
 \end{figure}
 
 \subsection{Elicitation of Expert Judgements}
@@ -191,7 +193,7 @@ bandwidth of the Gaussian kernel was adjusted to minimize the square-mean-error 
 \cite{Diggle1985}. The observation intensity was also analysed by estimating empty space distances and the 
 Stienen diagram, which depicts point observations using circles of diameter proportional to the nearest 
 neighbour distance. Analysis of the Stienen diagram was done in \googleearth{} using the \texttt{plotKML} 
-package \cite{Hengl2013}. A non-stationary Poisson point process model was fitted to the point pattern using 
+package \cite{Hengl2014}. A non-stationary Poisson point process model was fitted to the point pattern using 
 covariates suggested by the judgements elicited from the experts. A generalized linear model with a log link 
 was fitted by maximizing the pseudolikelihood using the Berman-Turner computational approximation 
 \cite{Baddeley2010}. This point process model was then used as estimate of the observation intensity to 
@@ -201,7 +203,7 @@ estimate the envelope of the detrended \emph{G} function.
 
 \subsection{Elicited Expert Knowledge}
 
-According to the information gathered, the soil modellers had littlel experience with soil spatial 
+According to the information gathered, the soil modellers had little experience with soil spatial 
 modelling and this was the first time they were responsible for planning and making soil observations. Their 
 expectation was to perform approximately $n = 500$ observations, given the available infrastructure, human 
 resources and financial resources. The goal was to obtain a \q{satisfactory} coverage of both attribute and 
@@ -249,10 +251,10 @@ geographic coverage (Figure \ref{fig:chap07-intensity}, right plot). The largest
 located in the Middle and Middle-Eastern sectors.
 
 \begin{figure}[!ht]
- \centering
- \includegraphics[width=5cm]{fig/chap07-empty-space}
-
- \caption{Estimated empty space distances. Values range from \num{1} to \SI{709}{\m}.}
+\centering
+\includegraphics[width=0.6\textwidth]{fig/chap07-empty-space}
+\caption[Estimated empty space distances.]{Estimated empty space distances. Values range from \num{1} to 
+\SI{709}{\m}.}
 \label{fig:chap07-intensity}
 \end{figure}
 
@@ -273,15 +275,14 @@ remained approximately constant until the \num{300}th sample. After the \num{300
 nearest neighbour distance started to decrease and reached values around \SI{50}{\m}.
 
 \begin{figure}[!ht]
- \centering
- \includegraphics[trim=0mm 0mm 0mm 12mm,clip=true,width=7.5cm]{fig/chap07-nndistG}
-
- \caption{Estimated nearest neighbour distances (NND) as related to the temporal order in which soil 
-observations 
- were done. Twenty two field campaigns were carried out to make the $n = 340$ soil observations available.
- Deeper information about field campaigns is given in \autoref{fig:chap07-covars}. Function \texttt{rollmean} 
- from \Rpackage{zoo} was used to estimate the rolling mean \cite{ZeileisEtAl2005}.}
- \label{fig:chap07-nndistG}
+\centering
+\includegraphics[trim=0mm 0mm 0mm 12mm, clip=true, width = 0.6\textwidth]{fig/chap07-nndistG}
+\caption[Nearest neighbour distances and the order of soil observation.]{Estimated nearest neighbour distances 
+(NND) as related to the temporal order in which soil observations were done. Twenty two field campaigns were 
+carried out to make the $n = 340$ soil observations available. Deeper information about field campaigns is 
+given in \autoref{fig:chap07-covars}. Function \texttt{rollmean} from \Rpackage{zoo} was used to estimate the 
+rolling mean \cite{ZeileisEtAl2005}.}
+\label{fig:chap07-nndistG}
 \end{figure}
 
 \subsubsection{Spatial distribution}
@@ -300,13 +301,13 @@ curves, the point process under analysis can be regarded as not being a realizat
 randomness, but of an yet unspecified point process \cite{Baddeley2010}.
 
 \begin{figure}[!ht]
- \centering
- \includegraphics[trim=0mm 0mm 0mm 12mm,clip=true,width=7.5cm]{fig/chap07-gest-sim}
-
- \caption{Spatial distribution of the planar point pattern estimated with the inhomogeneous \emph{G} function 
- and its global envelope. Note that at NND smaller than about \SI{125}{\m} the point 
- pattern can be regarded as having a random pattern of spatial distribution. These observations were made in 
- first and last field campaigns as shown in \autoref{fig:chap07-nndistG}.}
+\centering
+\includegraphics[trim=0mm 0mm 0mm 38mm, clip=true, width=0.6\textwidth]{fig/chap07-gest-sim}
+\caption[Estimated inhomogeneous \emph{G} function and its global envelope.]{Spatial distribution of the planar 
+point pattern estimated with the inhomogeneous \emph{G} function and its global envelope. Note that at NND 
+smaller than about \SI{125}{\m} the point pattern can be regarded as having a random pattern of spatial 
+distribution. These observations were made in first and last field campaigns as shown in 
+\autoref{fig:chap07-nndistG}.}
 \label{fig:chap07-gest}
 \end{figure}
 
@@ -330,23 +331,24 @@ reduction, followed by field campaigns and physiographic strata. The interaction
 reduce the deviance and were not included in the model to avoid increasing its complexity.
 
 \begin{figure}[!h]
- \centering
- \includegraphics[width=0.32\textwidth]{fig/chap07-covarsA}
- \includegraphics[width=0.305\textwidth]{fig/chap07-covarsB}
- \includegraphics[width=0.3\textwidth]{fig/chap07-covarsC}
-
- \caption{Covariates used to fit the non-stationary Poisson point process model superimposed with the planar 
- point pattern. Physiographic strata include (South-North aligned): Central Depression, Plateau 
- Border, and Plateau. Land use includes: native forest (more than \SI{50}{\percent} of the area), 
- shrubland, animal husbandry, crop agriculture, forestry, urban, and water. Field campaigns has
- \num{22}~levels represented with increasing colour heat (white to red) from the first to the last campaign.}
- \label{fig:chap07-covars}
+\centering
+\includegraphics[width=0.32\textwidth]{fig/chap07-covarsA}
+\includegraphics[width=0.305\textwidth]{fig/chap07-covarsB}
+\includegraphics[width=0.3\textwidth]{fig/chap07-covarsC}
+\caption[Covariates used to fit the non-stationary Poisson point process model.]{Covariates used to fit the 
+non-stationary Poisson point process model superimposed with the planar point pattern. Physiographic strata 
+include (South-North aligned): Central Depression, Plateau Border, and Plateau. Land use includes: native 
+forest (more than \SI{50}{\percent} of the area), shrubland, animal husbandry, crop agriculture, forestry, 
+urban, and water. Field campaigns has \num{22}~levels represented with increasing colour heat (white to red) 
+from the first to the last campaign.}
+\label{fig:chap07-covars}
 \end{figure}
 
 \begin{table}[!ht]
- \caption{Analysis of deviance for the fitted non-stationary Poisson point process model with two-tailed 
- p-values for the chi-squared tests comparing the reduction in deviance due to the inclusion of each predictor 
- variable. Terms were added sequentially to the model (first to last).}
+\caption[Analysis of deviance for the fitted non-stationary Poisson point process model.]{Analysis of deviance 
+for the fitted non-stationary Poisson point process model with two-tailed p-values for the chi-squared tests 
+comparing the reduction in deviance due to the inclusion of each predictor variable. Terms were added 
+sequentially to the model (first to last).}
  \label{tab:chap07-deviance}
  \centering\footnotesize
  \begin{tabular}{lrrrrr}
@@ -370,10 +372,11 @@ times),
 when observation intensity started to increase again until the last field campaign.
 
 \begin{table}[!ht]
- \caption{Estimated coefficients for the fitted non-stationary Poisson point process model and their lower and 
- upper limits at the \SI{95}{\percent} confidence interval. Physiographic strata has three levels: Central 
- Depression, Plateau Border and Plateau. Land use has seven levels: native forest, shrubland, animal 
- husbandry, crop agriculture, forestry, urban and water. Field campaigns has \num{22} levels represented with 
+ \caption[Estimated coefficients for the fitted non-stationary Poisson point process model.]{Estimated 
+coefficients for the fitted non-stationary Poisson point process model and their lower and upper limits at the 
+\SI{95}{\percent} confidence interval. Physiographic strata has three levels: Central Depression, Plateau 
+Border and Plateau. Land use has seven levels: native forest, shrubland, animal husbandry, crop agriculture, 
+forestry, urban and water. Field campaigns has \num{22} levels represented with 
  increasing number from the first to the last campaign. Significance levels of the two-tailed Z test against 
 the null 
  hypothesis that each regression coefficient is equal to zero are given for p-values of \num{0} (***), 
@@ -428,13 +431,13 @@ distances (\autoref{fig:chap07-intensity}).
 \begin{figure}[!h]
  \centering
  \includegraphics[width=\textwidth]{fig/chap07-kernel-trend-res}
-
- \caption{Relative empirical kernel density estimate (left), and relative trend (centre) and residuals (right) 
- of the fitted non-stationary Poisson point process model. Data shown is relative to the largest absolute
- estimated value of intensity. Relative kernel density values range from \num{0.02} to \num{1.00}, relative
- trend values range from \num{0.01} to \num{1.00}, and relative residual values range from \num{-1} to
- \num{0.81}.}
- \label{fig:chap07-trend}
+ \caption[Relative empirical kernel density estimate, and relative trend and residuals of the fitted 
+non-stationary Poisson point process model.]{Relative empirical kernel density estimate (left), and relative 
+trend (centre) and residuals (right) of the fitted non-stationary Poisson point process model. Data shown is 
+relative to the largest absolute estimated value of intensity. Relative kernel density values range from 
+\num{0.02} to \num{1.00}, relative trend values range from \num{0.01} to \num{1.00}, and relative residual 
+values range from \num{-1} to \num{0.81}.}
+\label{fig:chap07-trend}
 \end{figure}
 
 The envelope of the detrended estimated inhomogeneous \emph{G} function (\autoref{fig:chap07-gest}) suggests 
@@ -446,19 +449,18 @@ remaining trend feature.
 
 \begin{figure}[!h]
  \centering
- \includegraphics[trim=0mm 0mm 0mm 12mm,clip=true,width=7.5cm]{fig/chap07-fit-gest-sim}
-
- \caption{Global envelope of the detrended estimated inhomogeneous \emph{G} function. After detrending the 
-curve of the 
- empirical point process (continuous black line) follows a pattern similar to that of the theoretical curve 
- (dashed red line) of a completely random spatial point process.}
- \label{fig:chap07-trend}
+ \includegraphics[trim=0mm 0mm 0mm 35mm, clip=true, width=0.6\textwidth]{fig/chap07-fit-gest-sim}
+ \caption[Global envelope of the detrended estimated inhomogeneous \emph{G} function.]{Global envelope of the 
+detrended estimated inhomogeneous \emph{G} function. After detrending the curve of the empirical point process 
+(continuous black line) follows a pattern similar to that of the theoretical curve (dashed red line) of a 
+completely random spatial point process.}
+\label{fig:chap07-trend}
 \end{figure}
 
 \section{DISCUSSION}
 
 The spatial distribution of the point process has features resulting from the influence of three key factors. 
-The first of them is \textit{conceptual} and regards the knowledge of the soil modellers about soil-landscape 
+The first is \textit{conceptual} and regards the knowledge of the soil modellers about soil-landscape 
 relationships. The second factor is \textit{operational} and relates to the available infrastructure, human 
 resources and budget to make soil observations, as well to access restrictions imposed by landowners and 
 geographic barriers. The last factor is \textit{psychological}, which is also affected by the first two and is 
@@ -469,8 +471,8 @@ understand these factors.
 \subsection{Concentrating on Problem Areas}
 \label{subsec:chap07-conceptual}
 
-Soil observations were made during studies organized by two young soil modellers. Both soil modellers were 
-starting their careers and had more experience with well drained, deep and high iron oxide content soils 
+Soil observations were made during studies organized by two young soil modellers. Both soil modellers had just 
+started their careers and had more experience with well drained, deep and high iron oxide content soils 
 derived from igneous rocks and occurring on gently sloping to sloping relief. This is the same type of soil and
 relief that prevails in the Northern and North-eastern sectors of the study area. Because the soil 
 modellers started the study using the free survey method, locating soil observations to test hypotheses 
@@ -555,11 +557,11 @@ shows one of the possible ways of depicting this model. Nearest neighbour distan
 used as a quantitative indicator of the progress of the observation process.
 
 \begin{figure}[!h]
- \centering
- \includegraphics[width=7cm,angle=-90]{fig/chap07-observation-model}
-
- \caption{Theoretical model of soil observation depicted using the proposed approach that includes elicitation 
- of expert knowledge, point pattern analysis and articulation of psychological theories of perception and 
+\centering
+\includegraphics[width=70mm, angle=-90]{fig/chap07-observation-model}
+ \caption[Theoretical model of soil observation.]{Theoretical model of soil observation depicted using the 
+proposed approach that includes elicitation of expert knowledge, point pattern analysis and articulation of 
+psychological theories of perception and 
  motivation. Phases I, II and III are guided by, respectively, means-, outcome- and means-focused motivation.}
  \label{fig:chap07-model}
 \end{figure}
@@ -617,8 +619,9 @@ between conceptual and operational factors, which determines how the motivation 
 towards one or another focal goal. Depending on the focal goal, the resulting point pattern resembles a random 
 (testing hypotheses of soil-landscape relationships -- means-focused motivation) or a regular (maximizing the 
 number of observations -- outcome-focused motivation) spatial sample. Understanding the reasons behind the 
-location of soil observations in free survey can help soil spatial modellers designing more efficient 
-data-driven sampling strategies.
+location 
+of soil observations in free survey can help soil spatial modellers designing more efficient data-driven 
+sampling strategies.
 
 % the following will not be included in the text
 % \subsection{Next step}

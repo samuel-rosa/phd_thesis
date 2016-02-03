@@ -45,7 +45,7 @@
 %% Diretório onde estão as figuras dos capítulos
 \graphicspath{{chap/}}
 
-% Im�proved in�ter�face for float�ing ob�jects
+% Im­proved in­ter­face for float­ing ob­jects
 \usepackage{float}
 \usepackage{wrapfig}
 
@@ -97,7 +97,7 @@
 
 % IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
 % depois do pacote 'hyperref'
-\usepackage[alf,abnt-and-type=&,abnt-etal-cite=2,abnt-etal-list=0]{abntex2cite}
+\usepackage[alf,abnt-and-type=&,abnt-etal-cite=2, abnt-etal-list = 0]{abntex2cite}
 \renewcommand{\authorcapstyle}{\small}
 
 %%==============================================================================
@@ -127,9 +127,10 @@
 
 % Flexible typesetting of table and figure floats using key/value directives
 \usepackage{ctable}
+\usepackage{multirow}
 
 % Customising captions in floating environments
-\usepackage[font=footnotesize,labelfont=bf,compatibility=false]{caption}
+\usepackage[font=small, labelfont=bf, compatibility=false]{caption}
 
 % Support for sub-captions
 \usepackage[skip=0pt,position=top,singlelinecheck=off,justification=raggedright, 
@@ -141,7 +142,7 @@
 % Crossing out sentences (\sout{})
 \usepackage[normalem]{ulem}
 
-% Con�trol lay�out of item�ize, enu�mer�ate, de�scrip�tion
+% Con­trol lay­out of item­ize, enu­mer­ate, de­scrip­tion
 \usepackage{enumitem}
 
 % Fonte gótica (fraktur)
@@ -181,10 +182,12 @@
 \def\dnosgeneral{\href{https://github.com/samuel-rosa/dnos-sm-rs-general/tree/master/data}{GitHub}}
 \def\fao{\href{http://www.fao.org/index_en.htm}{FAO}}
 
-% Bill & Melinda Gates foundation
 \def\gates{%
-\href{http://www.gatesfoundation.org/what-we-do/global-development/agricultural-development%
-}{Bill \& Melinda Gates}%
+\href{%
+http://www.gatesfoundation.org/what-we-do/global-development/agricultural-development%
+}{%
+Bill \& Melinda Gates%
+}%
 }%
 
 \def\gsif{\href{http://www.isric.org/projects/global-soil-information-facilities-gsif}{GSIF}}
@@ -211,8 +214,10 @@
 \def\redemds{%
 \href{%
 https://www.embrapa.br/busca-de-noticias/-/noticia/2062813/solo-brasileiro-agora-tem-mapeamento-digital%
-}{RedeMDS}%
-}
+}{%
+RedeMDS%
+}%
+}%
 \def\riovacacaimirim{\href{http://pt.wikipedia.org/wiki/Rio_Vacaca\%C3\%AD-Mirim}{Rio Vacacaí-Mirim}}
 \def\riojacui{\href{http://pt.wikipedia.org/wiki/Rio_Jacu\%C3\%AD}{Rio Jacuí}}
 \def\rioguaiba{\href{http://pt.wikipedia.org/wiki/Lago_Gua\%C3\%ADba}{Rio Guaíba}}
@@ -241,9 +246,9 @@ https://www.embrapa.br/busca-de-noticias/-/noticia/2062813/solo-brasileiro-agora
 \instituto{Instituto de Agronomia}
 \curso{Curso de Pós-Graduação em Agronomia--Ciência do Solo}
 \area{Ciência do Solo}
-% \grau{Doutor}
-% \nivel{Doutorado em Agronomia -- Ciência do Solo}
-\local{Serop\'edica}{RJ}{Brasil}
+%\grau{Doutor em Agronomia -- Ciência do Solo}
+%\nivel{Doutorado em Agronomia -- Ciência do Solo}
+\local{Seropédica}{RJ}{Brasil}
 
 %%==============================================================================
 %% Identification of supervisors
@@ -262,7 +267,7 @@ https://www.embrapa.br/busca-de-noticias/-/noticia/2062813/solo-brasileiro-agora
 \committee[Dr.]{Teixeira}{Wenceslau Geraldes}{EMBRAPA} %% Examinator
 \committee[Dra.]{Lopes Assad}{Maria Leonor Ribeiro Casimiro}{UFSCar} %% Examinator
 \committee[Dr.]{Oliveira}{Ronaldo Pereira de}{EMBRAPA} %% Examinator
-\date{24}{Fevereiro}{2016} %% Date of defence
+\date{23}{February}{2016} %% Date of defence
 
 %%==============================================================================
 %% Outros itens
@@ -287,9 +292,9 @@ https://www.embrapa.br/busca-de-noticias/-/noticia/2062813/solo-brasileiro-agora
 %%=============================================================================
 % Como a CIP vai ser impressa atrás da página de rosto, as margens inner e outer	
 % devem ser invertidas.
-% \newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}
-% \makeCIP{alessandrosamuel@yahoo.com.br}% email do autor		
-% \restoregeometry
+%\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}
+%\makeCIP{alessandrosamuel@yahoo.com.br}% email do autor		
+%\restoregeometry
 
 %Se for usar a catalogação gerada pelo gerador do site da biblioteca comentar as linhas
 %acima e utilizar o comando abaixo
@@ -349,37 +354,35 @@ https://www.embrapa.br/busca-de-noticias/-/noticia/2062813/solo-brasileiro-agora
 
 \generalabstracttrue
 \begin{generalabstract}{english}{\titleEn}{\keyEn}{\nivelEn}
-Modern soil spatial modelling is based on statistical models that explore the empirical relationship among 
-environmental conditions and soil properties. These soil spatial models, like any other model, are a gross 
-simplification of reality, and their outcome, i.e. a soil map, will always be in \emph{error}. There are many 
-causes for soil maps being more or less \emph{uncertain}. The general objective of this thesis is to evaluate 
-some sources of uncertainty in soil spatial modelling, with emphasis on the soil and covariate data. Case 
-studies were developed using data from a small catchment (\SI{\approx2000}{\hectare}) located on the edge
-of the Plateau of the Paraná Geological Province in Southern Brazil. Soil spatial distribution is highly 
-variable, being determined by the geology and geomorphology -- at large spatial scales -- and by past and 
-current agricultural practices -- at small spatial scales. Four topsoil (0--\SI{20}{\cm}) properties contained 
-in the Santa Maria dataset were explored: clay content, organic carbon content, effective cation exchange 
-capacity, and bulk density. Five covariates from the Santa Maria dataset, each with two levels of spatial 
-detail, were used: area-class soil maps, digital elevation models, geologic maps, land use maps, and satellite 
-images. Two packages for \texttt{R} were created in support of the case studies, the first 
-(\texttt{pedometrics}) containing miscellaneous functions, the second (\texttt{spsann}) designed for the 
-optimization of sample configurations using spatial simulated annealing. The case studies demonstrate that 
-existing covariates are suitable for calibrating soil spatial models, and using more detailed covariates 
-results in only a modest increase in 
-the prediction accuracy that may not outweigh the extra costs. More efficient means of increasing prediction 
-accuracy should be explored, such as obtaining more soil observations. For this end, one should use more 
-objective means for selecting observation locations such as those implemented in the \Rpackage{spsann} 
-to minimize the influence of conceptual, operational, and psychological factors on the sampling design. These 
-factors determine how the motivation of field soil modellers shifts between learning/verifying soil-landscape 
-relationships, and maximizing the number of observations and geographic coverage during soil observation 
-campaigns, resulting in considerably different sample configurations. For spatial trend identification and 
-estimation, it should suffice to optimize spatial samples aiming only at reproducing the marginal distribution 
-of the covariates. Apparently, taking the correlation between covariates into account, as implemented in 
-the conditioned Latin hypercube sampling algorithm, can degrade prediction accuracy. It remains to be 
-evaluated 
-if sampling algorithms designed to jointly optimize spatial samples for variogram and spatial trend 
-estimation, 
-and spatial interpolation produce more accurate spatial predictions than their single versions.
+Modern soil spatial modelling is based on statistical models to explore the empirical relationship among 
+environmental conditions and soil properties. These models are a simplification of reality, and their outcome 
+(soil map) will always be in \emph{error}. What a soil map conveys is what we expect the soil to be, 
+acknowledging that we are \emph{uncertain} about it. The objective of this thesis is to evaluate important 
+sources of uncertainty in spatial soil modelling, with emphasis on soil and covariate data. Case studies 
+were developed using data from a catchment located in Southern Brazil. The soil spatial distribution in 
+the study area is highly variable, being determined by the geology and geomorphology (coarse spatial 
+scales), and by agricultural practices (fine spatial scales). Four topsoil properties were explored: clay 
+content, organic carbon content, effective cation exchange capacity and bulk density. Five covariates, each 
+with two levels of spatial detail, were used: area-class soil maps, digital elevation models, geologic maps, 
+land use maps, and satellite images. These soil and covariate data constitute the \emph{Santa Maria dataset}. 
+Two packages for \texttt{R} were created in support of the case studies, the first (\texttt{pedometrics}) 
+containing various functions for spatial exploratory data analysis and model calibration, the second 
+(\texttt{spsann}) designed for the optimization of spatial samples using simulated annealing. The case studies 
+demonstrated that existing covariates are suitable for calibrating soil spatial models, and using more 
+detailed covariates results in only a modest increase in the prediction accuracy that may not outweigh the 
+extra costs. More efficient means of increasing prediction accuracy should be explored, such as obtaining more 
+soil observations. For this end, one should use objective means for selecting observation locations to 
+minimize the effects of psychological responses of soil modellers to conceptual and operational factors on the 
+sampling design. This because conceptual and operational difficulties encountered in the field determine how 
+the motivation of soil modellers shifts between learning/verifying soil-landscape relationships and maximizing 
+the number of observations and geographic coverage. For the sole purpose of spatial trend estimation, it 
+should suffice to optimize spatial samples aiming only at reproducing the marginal distribution of the 
+covariates. For the joint purpose of optimizing sample configurations for spatial trend and variogram 
+estimation, and spatial interpolation, one can formulate a sound multi-objective optimization problem using 
+robust versions of existing sampling algorithms. Overall, we have learned that a single, universal recipe for 
+reducing our uncertainty in soil spatial modelling cannot be formulated. Deciding upon efficient ways of 
+reducing our uncertainty requires, first, that we explore the full potential of existing soil and covariate 
+data using sound spatial modelling techniques.
 \end{generalabstract}
 
 
@@ -390,22 +393,22 @@ and spatial interpolation produce more accurate spatial predictions than their s
 %%=============================================================================
 %% Lista de figuras
 %%=============================================================================
-% \listoffigures
+\listoffigures
 
 %%=============================================================================
 %% Lista de tabelas (comentar se não houver)
 %%=============================================================================
-% \listoftables
+\listoftables
 
 %%=============================================================================
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
-% \listofappendix
+%\listofappendix
 
 %%=============================================================================
 %% Lista de Anexos (comentar se não houver)
 %%=============================================================================
-% \listofannex
+%\listofannex
 
 %%=============================================================================
 %% Lista de abreviaturas e siglas
@@ -437,30 +440,31 @@ and spatial interpolation produce more accurate spatial predictions than their s
 \setlength{\baselineskip}{1.5\baselineskip}
 
 % Adiciona cada capitulo
-\selectlanguage{english}
 \include{chap/chap01} % 1. General introduction
-\include{chap/chap02} % 2. 
+%\include{chap/chap02} % 2. 
 \selectlanguage{brazilian}
 \include{chap/chap03} % 3. Modelo conceitual de pedogênese
 \selectlanguage{english}
-% \include{chap/chap04} % 4. The Santa Maria dataset -- soil data
-% \include{chap/chap05} % 5. The Santa Maria dataset -- covariate data
+\include{chap/chap04} % 4. The Santa Maria dataset -- soil data
+\include{chap/chap05} % 5. The Santa Maria dataset -- covariate data
 \include{chap/chap06} % 6. Do more detailed covariates deliver more accurate soil maps?
-% \include{chap/chap07} % 7. Spatial point pattern analysis of soil survey sampling locations
-% \include{chap/chap08} % 8. Optimization of sample configurations for spatial trend estimation for soil mapping
-% \include{chap/chap09} % 9. Sampling for soil mapping in terra incognita
-% \include{chap/chap10} % 10. General conclusion
+\include{chap/chap07} % 7. Spatial point pattern analysis of soil survey sampling locations
+\include{chap/chap08} % 8. Optimization of sample configurations for spatial trend estimation for soil mapping
+%\include{chap/chap09} % 9. Sampling for soil mapping in terra incognita
+%\include{chap/chap10} % 10. General conclusion
 \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-% \appendix
+\appendix
 % \include{chap/} % Introdução Geral
 % \include{chap/} % Conclusão Geral
 % \include{chap/apenb} % conceptual model of pedogenesis
 % \include{chap/apena} % The Santa Maria dataset -- soil data
 % \include{chap/apene} % The Santa Maria dataset -- covariate data
+% \include{chap/appenc} % R-package spsann
+% \include{chap/append} % R-package pedometrics
 
 %%=============================================================================
 %% Referências
@@ -470,8 +474,7 @@ and spatial interpolation produce more accurate spatial predictions than their s
 %%=============================================================================
 %% Anexos
 %%=============================================================================
-% \annex
-% \include{chap/appenc} % R-package spsann
-% \include{chap/append} % R-package pedometrics
+%\annex
+%\include{capitulos/anexoa}
 
 \end{document}

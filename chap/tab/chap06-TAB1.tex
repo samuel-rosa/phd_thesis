@@ -1,20 +1,25 @@
 \ctable[
-  caption  = [Dummy predictor variables derived from soil maps.]{Description of the $p = 12$ dummy predictor 
-variables derived from the two soil maps.},
-  label    = tab:chap05-soil-covars,
+  caption  = {Description of the $p = 12$ dummy predictor variables derived from the two soil maps.},
+  cap      = {Predictor variables derived from soil maps.},
+  label    = tab:chap06-soil-covars,
   notespar,
   pos      = !ht,
+  maxwidth = \textwidth,
   % doinside = \scriptsize\setstretch{1.1},
   doinside = \small
   ]{l p{0.85\textwidth} l}{
   \tnote[a]{Soil classification according to the old Brazilian classification (only for 
-  \citeonline{AzolinEtAl1988}), the current Brazilian classification \cite{SantosEtAl2013a}, and the 
-  international classification \cite{IUSSWorkingGroupWRB2007}.}
-  \tnote[b]{Minimum Legible Delineation calculated following \citeonline{Rossiter2000}.}
+  \citet{AzolinEtAl1988}), the current Brazilian classification, according to \citet{SantosEtAl2013a}, and the 
+  international classification, following \citet{IUSSWorkingGroupWRB2007}.}
+  
+  \tnote[b]{Minimum Legible Delineation calculated following \citet{Rossiter2000}.}
+  
   }{ \FL
   Code & Mapping unit(s) included and Description\tmark[a,b] \ML
-  \multicolumn{2}{l}{Source: \citeonline{AzolinEtAl1988}. Cartographic scale: \num{1}:\num{100000}. Minimum 
-  Legible Delineation: \SI{40}{\hectare}.} \NN
+  
+  \multicolumn{2}{p{0.98\linewidth}}{Source: \citet{AzolinEtAl1988}. Cartographic scale: 
+  \num{1}:\num{100000}. Minimum Legible Delineation: \SI{40}{\hectare}.} \NN
+  
   \texttt{SOIL\_100b} & \textit{Re4}. Shallow soil with low to high base saturation covering mountainous 
   terrain (Solo Litólico Eutrófico/Distrófico relevo montanhoso; Neossolo Litólico Distrófico/Eutrófico; 
   Distric/Eutric Leptosol). \NN 
@@ -31,10 +36,32 @@ variables derived from the two soil maps.},
   \texttt{SOIL\_100f} & \textit{TBa-Rd} and \textit{C1}. \textit{C1} is composed of low weathered soil 
   developed in lower landscape positions, close to drainage channels (Cambissolo Eutrófico; Cambissolo 
   Eutrófico; Eutric Cambisol). This dummy predictor variable includes the best soil mapping units for crop 
-  agriculture among those identified in the soil survey. \NN
-  & \NN
-  \multicolumn{2}{l}{Source: \citeonline{MiguelEtAl2012}. Cartographic scale: \num{1}:\num{25000}. Minimum 
-  Legible Delineation: \SI{2.5}{\hectare}.} \NN
+  agriculture among those identified in the soil survey. \LL
+  }
+
+  \ctable[
+  caption  = {Description of the $p = 12$ dummy predictor variables derived from the two soil maps.},
+  cap      = {Predictor variables derived from soil maps.},
+  label    = tab:chap06-soil-covars,
+  notespar,
+  continued,
+  pos      = !ht,
+  maxwidth = \textwidth,
+  % doinside = \scriptsize\setstretch{1.1},
+  doinside = \small
+  ]{l p{0.85\textwidth} l}{
+  \tnote[a]{Soil classification according to the old Brazilian classification (only for 
+  \citet{AzolinEtAl1988}), the current Brazilian classification, according to \citet{SantosEtAl2013a}, and the 
+  international classification, following \citet{IUSSWorkingGroupWRB2007}.}
+  
+  \tnote[b]{Minimum Legible Delineation calculated following \citet{Rossiter2000}.}
+  
+  }{ \FL
+  Code & Mapping unit(s) included and Description\tmark[a,b] \ML
+ 
+  \multicolumn{2}{p{0.98\linewidth}}{Source: \citet{MiguelEtAl2012}. Cartographic scale: 
+  \num{1}:\num{25000}. Minimum Legible Delineation: \SI{2.5}{\hectare}.} \NN
+  
   \texttt{SOIL\_25a}  & \textit{PBAC}. Moderately deep soil derived from sedimentary rocks, with abrupt 
   textural change and low base saturation (Argissolo Bruno-Acinzentado; Alisol). \NN
   \texttt{SOIL\_25b}  & \textit{PV}. Deep soil derived from igneous rocks, with moderate textural gradient, 

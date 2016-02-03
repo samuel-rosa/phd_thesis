@@ -1,17 +1,20 @@
 \ctable[
- caption  = [Dummy predictor variables derived from geologic maps.]{Description of the $p = 7$ dummy 
-predictor variables derived from the two geologic maps.},
- label    = tab:chap05-geology-covars,
+ caption  = {Description of the $p = 7$ dummy predictor variables derived from the two geologic maps.},
+ cap      = {Predictor variables derived from geologic maps.},
+ label    = tab:chap06-geology-covars,
  notespar,
  pos      = !ht,
+ maxwidth = \textwidth,
  % doinside = \scriptsize\setstretch{1.1}
  doinside = \small
  ]{l p{0.85\textwidth} l}{
- \tnote[a]{Minimum Legible Delineation calculated following \citeonline{Rossiter2000}.}
+ \tnote[a]{Minimum Legible Delineation calculated following \citet{Rossiter2000}.}
  }{ \FL
  Code & Mapping unit(s) included and Description\tmark[a] \ML
- \multicolumn{2}{l}{Source: \citeonline{GasparettoEtAl1988}. Cartographic scale: \num{1}:\num{50000}. Minimum 
- Legible Delineation: \SI{10}{\hectare}.} \NN
+ 
+ \multicolumn{2}{p{0.98\linewidth}}{Source: \citet{GasparettoEtAl1988}. Cartographic scale: 
+ \num{1}:\num{50000}. Minimum Legible Delineation: \SI{10}{\hectare}.} \NN
+ 
  \texttt{GEO\_50a} & \textit{SG-I}. Inferior Sequence of the Serra Geral Formation. Composed mainly of basic 
  igneous rocks (tholeiitic basalt and andesite). It is likely to be related with high CLAY and ECEC. \NN
  \texttt{GEO\_50b} & \textit{SG-S}. Superior Sequence of the Serra Geral Formation. Composed mainly of acid 
@@ -21,8 +24,10 @@ predictor variables derived from the two geologic maps.},
  be related with low CLAY and ECEC. \NN
  Other & \textit{CT} depicts the Caturrita Formation, which is composed mainly of fluvial sandstones. \NN
  & \NN
- \multicolumn{2}{l}{Source: \citeonline{MacielFilho1990}. Cartographic scale: \num{1}:\num{25000}. Minimum 
- Legible Delineation: \SI{2.5}{\hectare}.} \NN
+ 
+ \multicolumn{2}{p{0.98\linewidth}}{Source: \citet{MacielFilho1990}. Cartographic scale: 
+ \num{1}:\num{25000}. Minimum Legible Delineation: \SI{2.5}{\hectare}.} \NN
+ 
  \texttt{GEO\_25a} & \textit{SG-I}. Inferior Sequence of the Serra Geral Formation. \NN
  \texttt{GEO\_25b} & \textit{SG-S}. Superior Sequence of the Serra Geral Formation. \NN
  \texttt{GEO\_25c} & \textit{BT}. Botucatu Formation. \NN

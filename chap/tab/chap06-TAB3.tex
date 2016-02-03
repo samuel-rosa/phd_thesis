@@ -1,24 +1,29 @@
 \ctable[
- caption  = [Dummy predictor variables derived from land use maps.]{Description of the $p = 7$ dummy 
-predictor variables derived from the two land use maps.},
- label    = tab:chap05-land-covars,
+ caption  = {Description of the $p = 7$ dummy predictor variables derived from the two land use maps.},
+ cap      = {Predictor variables derived from land use maps.},
+ label    = tab:chap06-land-covars,
  notespar,
  pos      = !ht,
+ maxwidth = \textwidth,
  % doinside = \scriptsize\setstretch{1.1}
  doinside = \small
  ]{l p{0.85\textwidth} l}{
- \tnote[a]{Minimum Legible Delineation calculated following \citeonline{Rossiter2000}.}
+ \tnote[a]{Minimum Legible Delineation calculated following \citet{Rossiter2000}.}
  }{ \FL
  Code & Mapping unit(s) included and Description\tmark[a] \ML
- \multicolumn{2}{l}{Source: \citeonline{DSG1980, DSG1992, DSG1992a}. Cartographic scale: \num{1}:\num{25000}.
- Minimum Legible Delineation: \SI{2.5}{\hectare}.} \NN
+ 
+ \multicolumn{2}{p{0.98\linewidth}}{Source: \citet{DSG1980, DSG1992, DSG1992a}. Cartographic scale: 
+ \num{1}:\num{25000}.Minimum Legible Delineation: \SI{2.5}{\hectare}.} \NN
+ 
  \texttt{LU1980a} & \textit{FS}. Native forest, which is likely to have soil with higher fertility. \NN
  \texttt{LU1980b} & \textit{H}. Animal husbandry, which is likely to have soil fertility status lower than 
  native forests and is the second most important land use in the area. \NN
  Other & Plantation forests (\textit{PF}) and human settlements (\textit{S}). \NN
  & \NN
- \multicolumn{2}{l}{Source: \citeonline{SamuelRosaEtAl2011a}. Cartographic scale: \num{1}:\num{2000}. Minimum 
- Legible Delineation: \SI{100}{\square\m}.} \NN
+ 
+ \multicolumn{2}{p{0.98\linewidth}}{Source: \citet{SamuelRosaEtAl2011a}. Cartographic scale: 
+ \num{1}:\num{2000}. Minimum Legible Delineation: \SI{100}{\square\m}.} \NN
+ 
  \texttt{LU2009a} & \textit{FS}. Native forest. \NN
  \texttt{LU2009b} & \textit{SS}. Shrubland, which is likely to have SOC and ECEC level above those found in 
  areas used with annual crop agriculture and animal husbandry, but lower than in native forests. \NN

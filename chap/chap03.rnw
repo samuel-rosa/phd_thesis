@@ -1,3 +1,5 @@
+% PLEASE DO NOT EDIT DID FILE ANYMORE!
+
 \artigotrue
 \chapter{MODELO CONCEITUAL DE PEDOGÊNESE}
 \label{chap:chap03}
@@ -87,21 +89,19 @@ dos conceitos de relação solo-paisagem, desenvolvimento do solo em catenas, ou
 explicação da variação espacial do solo.
 
 O presente documento apresenta o modelo conceitual de pedogênese da bacia de captação do reservatório do 
-DNOS/CORSAN (Departamento Nacional de Obras de Saneamento/Companhia Riograndense de Saneamento), localizada na 
-divisa entre os municípios de \itaara{} (ao norte) e \santamaria{} (ao sul), na porção sul da \baciaparana{},
+DNOS-CORSAN (Departamento Nacional de Obras de Saneamento-Companhia Riograndense de Saneamento), localizada na 
+divisa entre os municípios de \itaara{} (ao norte) e \santamaria{} (ao sul), na porção sul da \baciaparana{}, 
 estado do Rio Grande do Sul, Brasil (\autoref{fig:chap03-location}). A bacia de captação do reservatório do 
-DNOS/CORSAN corresponde à cabeceira da bacia hidrográfica do \riovacacaimirim{}, tributário do \riojacui{} e, 
-consequentemente, do \rioguaiba{} e da \lagoadospatos{}. A bacia de captação do reservatório do DNOS/CORSAN
-cobre uma área de \SI{\pm29}{\square\kilo\metre} e alimenta um reservatório com volume máximo 
-de \SI{\pm3800000}{\cubic\metre} em uma área inundada de \SI{0,74}{\square\kilo\metre}. Este reservatório 
+DNOS-CORSAN corresponde à cabeceira da bacia hidrográfica do \riovacacaimirim{}, tributário do \riojacui{} e, 
+consequentemente, do \rioguaiba{} e da \lagoadospatos{}. A bacia de captação do reservatório do DNOS-CORSAN 
+cobre uma área de \SI{\pm29}{\square\kilo\metre} e alimenta um reservatório com volume máximo de 
+\SI{\pm3800000}{\cubic\metre} em uma área inundada de \SI{0,74}{\square\kilo\metre}. Este reservatório 
 contribui com até \SI{30}{\percent} do abastecimento de água da cidade de Santa Maria \cite{Dias2003, 
 DillEtAl2004, Miguel2010}.
 
 \begin{figure}[!ht]
 \centering
-\begin{minipage}[b]{95mm}
-\subcaption{}
-<<location, fig=TRUE, echo=FALSE, include=FALSE>>=
+<<location, fig = TRUE, echo = FALSE, include = FALSE>>=
 # Start GRASS
 invisible(capture.output(
   spgrass6::initGRASS(
@@ -156,11 +156,28 @@ brazil <- sp::spplot(
 # Print map
 plot(brazil)
 @
-\includegraphics[width=90mm]{fig/chap03-location}
-\end{minipage}
-\begin{minipage}[b]{95mm}
-\subcaption{}
-<<perspective, echo=FALSE, fig=TRUE, include=FALSE>>=
+\includegraphics[width=0.90\textwidth]{fig/chap03-location}
+\caption[Localização da bacia de captação do reservatório do DNOS-CORSAN, em Santa Maria, RS, 
+Brasil]{Localização da bacia de captação do reservatório do DNOS-CORSAN no Município de Santa Maria, Estado do 
+Rio Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza).}
+\label{fig:chap03-location}
+\end{figure}
+
+\def\footsolosdors{\footnote{O grupo está registado no Diretório dos Grupos de Pesquisa no Brasil 
+(\href{http://dgp.cnpq.br/dgp/espelhogrupo/9373361709890764}{DGP}) mantido pelo CNPq.}}
+
+Os estudos em modelagem espacial do solo na bacia do DNOS -- abreviatura de bacia de captação do reservatório 
+do DNOS-CORSAN -- iniciaram no ano de \num{2008} com o grupo de pesquisa \emph{Gênese, composição e 
+comportamento dos solos do RS}\footsolosdors{}, sediado no Departamento de Solos da Universidade Federal de 
+Santa Maria (\ufsm). Devido à limitação de recursos, o grupo de pesquisa optou por restringir seus estudos em 
+modelagem espacial do solo à uma parte da bacia do DNOS. A área escolhida cobre \SI{\pm60}{\percent} de toda a 
+bacia do DNOS, o que corresponde à uma área de \SI{\pm18}{\square\kilo\metre}. A área de estudo foi escolhida 
+por apresentar acesso facilitado, além de englobar as todas as formações geológicas, geoformas, usos da terra, 
+e vegetação presentes na bacia do DNOS (\autoref{fig:chap03-perspective}).
+
+\begin{figure}[!ht]
+\centering
+<<perspective, echo = FALSE, fig = TRUE, include = FALSE>>=
 # Start GRASS
 invisible(capture.output(
   spgrass6::initGRASS(
@@ -168,6 +185,7 @@ invisible(capture.output(
     location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(), override = TRUE))) 
     
 # Prepare figure with study area in perspective
+system("g.remove MASK", ignore.stdout = TRUE, ignore.stderr = TRUE)
 system("g.region rast=ELEV_10", ignore.stdout = TRUE, ignore.stderr = TRUE)
 output <- path.expand("~/projects/phd_thesis/chap/fig/chap03-perspective")
 cmd <- paste(
@@ -184,27 +202,12 @@ cmd <- paste("convert ~/projects/phd_thesis/chap/fig/chap03-perspective.tif ",
 system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
 system("rm ~/projects/phd_thesis/chap/fig/chap03-perspective.tif")
 @
-\includegraphics[width=90mm]{fig/chap03-perspective}
-\end{minipage}
-\caption[Localização da bacia de captação do reservatório do DNOS/CORSAN, em Santa Maria, RS, 
-Brasil]{Localização da bacia de captação do reservatório do DNOS/CORSAN (a) no Município de Santa Maria, Estado 
-do Rio Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza). A área de 
-estudo (b), em vermelho, corresponde a \SI{\pm60}{\percent} da bacia do DNOS (em azul).}
-\label{fig:chap03-location}
+\includegraphics[width = 0.90\textwidth]{fig/chap03-perspective}
+\caption[Localização da área de estudo na bacia do DNOS.]{Localização da área de estudo, em vermelho, na bacia 
+de captação do reservatório do DNOS-CORSAN (em azul). A área de estudo, cujo relevo é bastante acidentado e o 
+uso da terra predominante é floresta natural, corresponde a \SI{\pm60}{\percent} da bacia do DNOS.}
+\label{fig:chap03-perspective}
 \end{figure}
-
-\def\footsolosdors{\footnote{O grupo está registado no Diretório dos Grupos de Pesquisa no Brasil 
-(\href{http://dgp.cnpq.br/dgp/espelhogrupo/9373361709890764}{DGP}) mantido pelo CNPq.}}
-
-Os estudos em modelagem espacial do solo na bacia do DNOS -- abreviatura de bacia de captação do reservatório 
-do DNOS/CORSAN -- iniciaram no ano de \num{2008} com o grupo de pesquisa \emph{Gênese, composição e 
-comportamento dos solos do RS}\footsolosdors{}, sediado no Departamento de Solos da Universidade Federal 
-de Santa Maria (\ufsm). Devido à limitação de recursos, o grupo de pesquisa optou por restringir seus estudos 
-em modelagem espacial do solo à uma parte da bacia do DNOS. A área escolhida cobre \SI{\pm60}{\percent} de 
-toda 
-a bacia do DNOS, o que corresponde à uma área de \SI{\pm18}{\square\kilo\metre}. A área de estudo foi 
-escolhida por apresentar acesso facilitado, além de englobar as todas as formações geológicas, geoformas, usos 
-da terra, e vegetação presentes na bacia do DNOS.
 
 \section{CLIMA}
 \label{sec:chap03-clima}
@@ -480,7 +483,7 @@ O abandono de muitas áreas de produção possibilitou a regeneração da vegeta
 \SI{\pm60}{\percent} da área total \cite{SamuelRosaEtAl2011a}. Isso mostra que, assim como toda a região do 
 Rebordo do Planalto da Bacia do Paraná, o uso da terra foi desintensificado nas últimas décadas 
 \cite{SEMA/UFSM2001, DillEtAl2004, Poelking2007, Miguel2010, SamuelRosaEtAl2011a, Dullius2012, 
-tenCatenEtAl2012}. As áreas florestadas são encontradas nos mais diversos estádios de desenvolvimento, com os 
+TenCatenEtAl2012}. As áreas florestadas são encontradas nos mais diversos estádios de desenvolvimento, com os 
 estratos intermediário e superior concentrando a maior parte dos indivíduos. As florestas originais, e 
 secundárias em estágio avançado de desenvolvimento, são encontradas apenas em áreas de difícil acesso. Em 
 geral, as áreas florestadas predominam nas regiões de maior declividade, com solo raso e pedregoso. Tais 
