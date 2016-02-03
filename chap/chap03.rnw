@@ -4,7 +4,7 @@
 %\SweaveUTF8
 \SweaveOpts{prefix.string = fig/chap03}
 
-\def\ptkeys{Província Geológica do Paraná, Bacia do DNOS, Rebordo do Planalto, Fatores de formação do solo, 
+\def\ptkeys{Província Geológica do Paraná. Bacia do DNOS. Rebordo do Planalto. Fatores de formação do solo. 
 Pedogênese}
 
 \begin{chapterabstract}{brazilian}{\ptkeys}
@@ -39,39 +39,36 @@ longo do perfil quando desenvolvido a partir de rochas vulcânicas. As caracter�
 aluviais são determinadas pela presença constante de lençol freático próximo da superfície.
 \end{chapterabstract}
 
-\def\enkeys{Paraná Geological Province, DNOS Catchment, Plateau Border, Soil formation factors, Pedogenesis}
-  
-\begin{chapterabstract}{english}{\enkeys}
-This document presents the conceptual model of pedogenesis -- an explicit description of soil-forming factors 
-and 
-processes that determine the spatio-temporal distribution of soil properties  -- of the 
-catchment of the DNOS/CORSAN reservoir, located in southern Brazil. Climate is subtropical humid without a dry 
-season. Relief varies between plain and mountainous, with enclosed valleys (elevation ranging between 
-\num{139} and \SI{475}{\metre} above sea level) that determine rainfall volume and radiative flux on different 
-surfaces. The geology is composed of a sequence of three geological formations: consolidated sedimentary rocks 
-(fluvial sandstone), followed by basic and acid igneous rocks (andesite-basalt and rhyolite-rhyodacite), 
-interlayered with consolidated sedimentary rocks (aeolian sandstone). Unconsolidated colluvial deposits of the 
-Quaternary period occur in the lower portions of the landscape. Current geomorphology is a result of erosive 
-processes of the Tertiary and Quaternary. Landscape dissection is weak due to the current climate that favours 
-the installation and maintenance of an exuberant vegetation. There are three morphostructural units: at the 
-top, the \textit{Planalto} (Plateau), with gently-rolling to sloping relief, followed by the \textit{Rebordo do 
-Planalto} (Plateau Border), with wide altimetric variation, steep slopes and abrupt cliffs; at the bottom, the 
-\textit{Depressão Periférica} (Peripheral Depression), composed of 
-aggradational fluvial plains. In higher altitudes, the drainage network has a well defined pattern, generally 
-rectangular, determined by the faults and/or fractures. In the lower areas, its configuration is sinuous due 
-to 
-sediment deposition and fluvial erosion, with the presence of water table close to the surface and perennial 
-water 
-streams. Land use for agrosilvopastoral production was intense in past times, resulting in severe soil 
-degradation. Recent abandonment of many degraded areas allowed the regeneration of natural vegetation, 
-resulting in \SI{\pm60}{\percent} of the area being now occupied with forest and secondary vegetation. The 
-soil is predominantly shallow due to the dominance of steep slopes. Even in gently-sloping terrain it is 
-common to find shallow soils as a result of soil degradation, Deeper soil can be found in the Planalto, in the 
-terraces of the Rebordo, and in the small hills with gently-rolling slopes and alluvial plains. Soil texture 
-is finer and more homogeneous throughout the soil profile in soil developed from igneous rocks. Soil 
-features in the alluvial plains are determined by the constant presence of the water table close to the 
-surface.
-\end{chapterabstract}
+% \def\enkeys{Paraná Geological Province, DNOS Catchment, Plateau Border, Soil formation factors, Pedogenesis}
+%   
+% \begin{chapterabstract}{english}{\enkeys}
+% This document presents the conceptual model of pedogenesis -- an explicit description of soil-forming 
+% factors and processes that determine the spatio-temporal distribution of soil properties  -- of the 
+% catchment of the DNOS/CORSAN reservoir, located in southern Brazil. Climate is subtropical humid without a 
+% dry season. Relief varies between plain and mountainous, with enclosed valleys (elevation ranging between 
+% \num{139} and \SI{475}{\metre} above sea level) that determine rainfall volume and radiative flux on 
+% different surfaces. The geology is composed of a sequence of three geological formations: consolidated 
+% sedimentary rocks (fluvial sandstone), followed by basic and acid igneous rocks (andesite-basalt and 
+% rhyolite-rhyodacite), interlayered with consolidated sedimentary rocks (aeolian sandstone). Unconsolidated 
+% colluvial deposits of the Quaternary period occur in the lower portions of the landscape. Current 
+% geomorphology is a result of erosive processes of the Tertiary and Quaternary. Landscape dissection is weak 
+% due to the current climate that favours the installation and maintenance of an exuberant vegetation. There 
+% are three morphostructural units: at the top, the \textit{Planalto} (Plateau), with gently-rolling to 
+% sloping relief, followed by the \textit{Rebordo do Planalto} (Plateau Border), with wide altimetric 
+% variation, steep slopes and abrupt cliffs; at the bottom, the \textit{Depressão Periférica} (Peripheral 
+% Depression), composed of aggradational fluvial plains. In higher altitudes, the drainage network has a well 
+% defined pattern, generally rectangular, determined by the faults and/or fractures. In the lower areas, its 
+% configuration is sinuous due to sediment deposition and fluvial erosion, with the presence of water table 
+% close to the surface and perennial water streams. Land use for agrosilvopastoral production was intense in 
+% past times, resulting in severe soil degradation. Recent abandonment of many degraded areas allowed the 
+% regeneration of natural vegetation, resulting in \SI{\pm60}{\percent} of the area being now occupied with 
+% forest and secondary vegetation. The soil is predominantly shallow due to the dominance of steep slopes. 
+% Even in gently-sloping terrain it is common to find shallow soils as a result of soil degradation, Deeper 
+% soil can be found in the Planalto, in the terraces of the Rebordo, and in the small hills with 
+% gently-rolling slopes and alluvial plains. Soil texture is finer and more homogeneous throughout the soil 
+% profile in soil developed from igneous rocks. Soil features in the alluvial plains are determined by the 
+% constant presence of the water table close to the surface.
+% \end{chapterabstract}
 
 \formatchapter
 
@@ -104,7 +101,7 @@ DillEtAl2004, Miguel2010}.
 \centering
 \begin{minipage}[b]{95mm}
 \subcaption{}
-<<location,fig=TRUE,echo=FALSE>>=
+<<location, fig=TRUE, echo=FALSE, include=FALSE>>=
 # Start GRASS
 invisible(capture.output(
   spgrass6::initGRASS(
@@ -159,10 +156,11 @@ brazil <- sp::spplot(
 # Print map
 plot(brazil)
 @
+\includegraphics[width=90mm]{fig/chap03-location}
 \end{minipage}
 \begin{minipage}[b]{95mm}
 \subcaption{}
-<<perspective,echo=FALSE,fig=TRUE>>=
+<<perspective, echo=FALSE, fig=TRUE, include=FALSE>>=
 # Start GRASS
 invisible(capture.output(
   spgrass6::initGRASS(
@@ -186,10 +184,12 @@ cmd <- paste("convert ~/projects/phd_thesis/chap/fig/chap03-perspective.tif ",
 system(cmd, ignore.stdout = TRUE, ignore.stderr = TRUE)
 system("rm ~/projects/phd_thesis/chap/fig/chap03-perspective.tif")
 @
+\includegraphics[width=90mm]{fig/chap03-perspective}
 \end{minipage}
-\caption{Localização da bacia de captação do reservatório do DNOS/CORSAN (a) no Município de Santa Maria, 
-Estado do Rio Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza). A 
-área de estudo (b), em vermelho, corresponde a \SI{\pm60}{\percent} da bacia do DNOS (em azul).}
+\caption[Localização da bacia de captação do reservatório do DNOS/CORSAN, em Santa Maria, RS, 
+Brasil]{Localização da bacia de captação do reservatório do DNOS/CORSAN (a) no Município de Santa Maria, Estado 
+do Rio Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza). A área de 
+estudo (b), em vermelho, corresponde a \SI{\pm60}{\percent} da bacia do DNOS (em azul).}
 \label{fig:chap03-location}
 \end{figure}
 
