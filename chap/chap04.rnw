@@ -1,5 +1,6 @@
 \artigotrue
 \chapter{THE SANTA MARIA DATASET. PART I -- SOIL DATA}
+\shorttitle{Soil Data}
 \label{chap:chap04}
 %\SweaveUTF8
 \SweaveOpts{prefix.string = fig/chap04, pdf = FALSE, png = TRUE}

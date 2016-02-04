@@ -1,5 +1,6 @@
 \artigotrue
 \chapter{THE SANTA MARIA DATASET. PART II -- COVARIATE DATA}
+\shorttitle{Covariate Data}
 \label{chap:chap05}
 %\SweaveUTF8
 \SweaveOpts{prefix.string = fig/chap05, pdf = FALSE, png = TRUE}
@@ -535,7 +536,7 @@ horizontal validation of topographic maps (\scale{25000}) using $n = 14$  GCPs.}
 Interpolation of the raster surface with \SI{5}{\metre} grid size was performed using the function 
 \texttt{Topo 
 to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation method based on the 
-ANUDEM program developed by \citeonline{Hutchinson1989}. Vector files of contour lines (\texttt{multiline}), 
+ANUDEM program \cite{Hutchinson1989}. Vector files of contour lines (\texttt{multiline}), 
 drainage network (\texttt{multiline}), lakes (\texttt{polygons}) and peaks (\texttt{points}) were used to 
 generate a 
 hydrologically sound DEM, that is, a DEM without spurious depressions and giving a precise representation 
