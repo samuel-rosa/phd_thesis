@@ -2,6 +2,31 @@
 \chapter{MODERN SOIL SPATIAL MODELLING AND ITS SOURCES OF UNCERTAINTY}
 \label{chap:chap02}
 
+\def\enkeys{Demand for Soil Information. Mixed Model of Spatial Variation. Soil and Covariate Data. Model 
+Structure.}
+  
+\begin{chapterabstract}{english}{\enkeys}
+The efforts of the soil science community have motivated the scientific community to recognize the importance 
+of soils for humanity and the environment at the local, regional, and global levels. Soil spatial modellers 
+seem to have been able to convince policy and decision makers about the importance of producing and updating 
+soil information. For that end, soil spatial modellers have been using the mixed model of spatial variation 
+(MMSV). The MMSV integrates aspects of \q{traditional} methods of soil spatial modelling, based on the discrete 
+model of spatial variation (DMSV), as well of geostatistical techniques, more formally the continuous model of 
+spatial variation (CMSV). As such, the MMSV explores the knowledge of soil-forming factors as well as the fact 
+that the soil is a continuous media. It also acknowledges that soil maps always deviate from the \q{truth}, 
+which means that a soil map conveys what we expect the soil to be, not our certainty about it. There are many 
+sources for our uncertainty about the soil. For instance, the soil and covariate data used to calibrate soil 
+spatial models is an important source of uncertainty. Soil data can have errors and poorly represent the 
+population from which it has been sampled. The influence of the covariate data on our uncertainty about the 
+soil expresses itself through the poor correlation with soil properties. Finally, the structure of the model 
+used to measure the empirical correlation between covariates and soil properties can greatly determined our 
+uncertainty about the soil. Because we cannot eliminate the uncertainty of a soil map, our knowledge about the 
+soil will always be limited. Despite of this, soil spatial models are still needed to guide our every-day 
+actions.
+\end{chapterabstract}
+
+\formatchapter
+
 \section{DEMAND FOR SOIL SPATIAL INFORMATION}
 
 \def\footmodeller{\footnote{The use that I give to the expression \emph{soil spatial modeller} throughout this 
@@ -40,7 +65,7 @@ to develop a Universal Soil Classification System, \cited{a common language to d
 internationally}. An Intergovernmental Technical Panel on Soils (\itps) was formed with soil experts from all 
 regions of the world \cited{to provide
 scientific and technical advice and guidance on global soil issues to the Global Soil Partnership}. The 
-\gates{} foundation handed out an 18~\$~million grant \cited{to map most parts in Sub-Saharan Africa, and 
+\gates{} foundation handed out an \SI{18}[\$]~million grant \cited{to map most parts in Sub-Saharan Africa, and 
 make all Sub-Saharan Africa soil data available}. Soil spatial modellers at the International Soil Reference 
 and Information Centre (ISRIC) launched its Global Soil Information Facilities (\gsif), a \cited{framework for 
 production of open soil data}, which has already output \SI{250}{\m}-resolution soil maps with global coverage. 
@@ -71,7 +96,7 @@ technical advisory boards appears to grow, seem to have been able to convince po
 the importance of producing and updating soil information. For example, in Brazil, the Federal Court of 
 Accounts (\tcu), in collaboration with Embrapa Soils and other soil science related institutions, held a Soil 
 Governance Conference, where a new National Program for Soil Survey and Interpretation of Brazil (\pronassolos) 
-was announced, with an expected budget of 8~R\$~billion\footpronassolos. In the sequence, Embrapa Soils 
+was announced, with an expected budget of \SI{8}[R\$]~billion\footpronassolos. In the sequence, Embrapa Soils 
 created a working group, with soil spatial modellers from other government institutions and universities, and 
 the first PRONASOLOS report with proposal and goals was completed on December 2015. Unfortunately, it is not 
 clear whether the national soil survey program will truly be restarted because, like happened in the end of the 
@@ -107,6 +132,8 @@ using mutually exclusive mapping units that are separated by sharply defined, cr
 properties at the time of mapping. These properties, which are generally used to name the mapping unit along 
 with other environmental features, can be characterised using one or more direct observations made within the 
 domain of the mapping unit \cite{WebsterEtAl1990, Legros2006}.
+
+\subsection{Discrete Model of Spatial Variation}
 
 A key step was given in 1886 in Russia with the formalization of the approximate understanding of the soil 
 spatial variation using scientific parlance, i.e. the postulation of the \q{the basic law of soil science} by 
@@ -165,6 +192,8 @@ articulated by verbal (written or spoken) means. This was evidenced, for example
 soil modellers would produce considerably different soil maps without being able to explain why 
 \cite{Legros2006, BazagliaFilhoEtAl2013}.
 
+\subsection{Continuous Model of Spatial Variation}
+
 Different solutions were explored during the post-war to overcome one or another weaknesses of the discrete 
 model of spatial variation. Most of these solutions came from the new developments in the fields of 
 mathematics, statistics and informatics, many of them already successfully employed by the mining industry 
@@ -184,8 +213,9 @@ estimated mean would be fair (unbiased) -- was that the location of soil observa
 form of randomization (probability sampling) such as it is done in controlled agronomic experiments, e.g. 
 simple random sampling within mapping units \cite{deGruijterEtAl1990}. It follows that the uncertainty about 
 the value of the mapped soil property is the same everywhere within a mapping unit, irrespective of the 
-location of existing soil observations \cite{Heuvelink1996}. This is because the expected error of predicting 
-the value of a soil property at any location with its mean is also the same everywhere.
+location of existing soil observations \cite{Heuvelink1996}. This is because due to statistical independence 
+and constant variance within mapping units, the expected error of predicting the value of a soil property at 
+any location with its mean is also the same everywhere.
 
 Those solutions still required describing \q{soil bodies} as discrete, homogeneous entities, and continued 
 neglecting the spatial variation and autocorrelation of soil properties. For that end, one solution was to 
@@ -206,8 +236,6 @@ Accordingly, to describe the fact that soil property values at nearby locations 
 locations further apart -- they covary, vary together or jointly -- would require a joint probability 
 distribution function, characterised by the covariance \cite{WebsterEtAl1990, Cressie1993}.
 
-
-
 Different from its discrete counterpart, the continuous model of spatial variation takes into account the 
 relative location of existing observations when predicting a soil property at a given unobserved location. In 
 the simplest case, the most likely value of a soil property in a given location is defined by a constant mean 
@@ -222,23 +250,21 @@ values recorded at all observation locations, nearby locations receiving larger 
 In both cases, it follows that the uncertainty about the mapped soil property is larger the farther from 
 existing soil observations, i.e. it is spatially varying \cite{Cressie1993}.
 
+% The obvious difficulty in this approach is that the PDF cannot be defined because we usually 
+% have one single value recorded at each observation location.
 
-
-
-The obvious difficulty in this approach is that the PDF cannot be defined because we usually have one single 
-value recorded at each observation location.
-
+\subsection{Mixed Model of Spatial Variation}
 
 Availability of general-purpose computers fuelled the use and development of the continuous model of
 spatial variation, especially in European, North American, and Oceanian countries
-\cite{HeuvelinkEtAl2001,McBratneyEtAl2003,ScullEtAl2003}. But limitations in its prediction
+\cite{HeuvelinkEtAl2001, McBratneyEtAl2003, ScullEtAl2003}. But limitations in its prediction
 performance and developments in remote sensing and machine-learning algorithms helped many soil
 scientists to understand that the continuous model of spatial variation had limitations too. For
 instance, it is unable to capture abrupt changes in the values of soil properties that occur, for
 example, between agricultural fields, parent materials, land uses, and so on
-\cite{SteinEtAl1988,VoltzEtAl1990}. Because, contrary to the discrete model of spatial variation, the
+\cite{SteinEtAl1988, VoltzEtAl1990}. Because, contrary to the discrete model of spatial variation, the
 continuous model of spatial variation largely ignores the existing pedological knowledge
-\cite{Grunwald2009,Lark2012}. Soil scientists also understood that the discrete model of spatial
+\cite{Grunwald2009, Lark2012}. Soil scientists also understood that the discrete model of spatial
 variation was more efficient than previously thought \cite{BregtEtAl1987}. First, because it was now
 possible to employ Jenny's equation of soil-forming factors for soil mapping using remote sensing
 products as surrogates of the factors of soil formation \cite{MooreEtAl1993}. Second, machine-learning
@@ -289,50 +315,54 @@ integrating the
 existing pedological knowledge provided it is translated into a mathematical form \cite{OdehEtAl1994, 
 OdehEtAl1995, 
 Heuvelink1996, McBratneyEtAl2000, HenglEtAl2004, Lopez-GranadosEtAl2005, WebsterEtAl2007, Grunwald2009, 
-Lark2012}. These features, and the development of the Internet, promoted the rapid popularization of the mixed 
-model of 
-spatial variation, and many recent large scale soil-mapping projects already successfully employed the mixed 
-model of spatial
-variation \cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
+Lark2012}. These features promoted the rapid popularization of the mixed model of spatial variation, and many 
+recent large scale soil-mapping projects already successfully employed the mixed model of spatial variation 
+\cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
+% and the development of the Internet, 
 
-Unfortunately, along with the success of the mixed model of spatial variation, came a rupture between soil 
-modellers pertaining to different \q{schools}, building a negative atmosphere in many
-countries (see examples from Brazil [\url{https://groups.google.com/forum/#!forum/soil-mapping}] and
-Spain [\url{http://www.madrimasd.org/blogs/universo/2009/10/07/126094}]). On one side, this was
-caused by the (presumptuous) assumption that the mixed model of spatial variation possibly
-represented a \q{paradigm shift} in soil science \cite{McBratneyEtAl2003} and that it is the
-ultimate soil mapping method, superior to all others \cite{MinasnyEtAl2016}. This assumption is
-certainly untrue, specially in many poorer regions where the mixed model of spatial variation seems
-useless because farmers already obtain satisfactory yields and properly manage their soils using
-indigenous/local knowledge
-\cite{Barrera-BassolsEtAl2003, Barrera-BassolsEtAl2006, HillyerEtAl2006, CorreiaEtAl2007, ValeJuniorEtAl2007}.
-Perhaps the strong criticism made against soil scientists that
-refused to adopt the mixed model of spatial variation, using somewhat pejorative arguments
-\cite{HeuvelinkEtAl2001,Mendonca-SantosEtAl2003}, helped building this unfruitful scenario. On
-the other side, soil scientists disliked losing importance in the research field in which they worked for
-decades, perhaps very afraid of the new technological developments due to their poor knowledge of
-mathematics, statistics, and informatics \cite{Webster2001,SamuelRosa2012}.
+% Unfortunately, along with the success of the mixed model of spatial variation, came a rupture between soil 
+% modellers pertaining to different \q{schools}, building a negative atmosphere in many
+% countries (see examples from Brazil [\url{https://groups.google.com/forum/#!forum/soil-mapping}] and
+% Spain [\url{http://www.madrimasd.org/blogs/universo/2009/10/07/126094}]). On one side, this was
+% caused by the (presumptuous) assumption that the mixed model of spatial variation possibly
+% represented a \q{paradigm shift} in soil science \cite{McBratneyEtAl2003} and that it is the
+% ultimate soil mapping method, superior to all others \cite{MinasnyEtAl2016}. This assumption is
+% certainly untrue, specially in many poorer regions where the mixed model of spatial variation seems
+% useless because farmers already obtain satisfactory yields and properly manage their soils using
+% indigenous/local knowledge
+% \cite{Barrera-BassolsEtAl2003, Barrera-BassolsEtAl2006, HillyerEtAl2006, CorreiaEtAl2007, 
+% ValeJuniorEtAl2007}.
+% Perhaps the strong criticism made against soil scientists that
+% refused to adopt the mixed model of spatial variation, using somewhat pejorative arguments
+% \cite{HeuvelinkEtAl2001,Mendonca-SantosEtAl2003}, helped building this unfruitful scenario. On
+% the other side, soil scientists disliked losing importance in the research field in which they worked for
+% decades, perhaps very afraid of the new technological developments due to their poor knowledge of
+% mathematics, statistics, and informatics \cite{Webster2001,SamuelRosa2012}.
 
-Although all that is very common when a new theory or method appears
-\cite{Russell1932, Feyerabend1977, Kuhn2011}, I think we have reached a point in which nothing else
-can be gained by
-playing one soil scientist against the other. Such a (noble) understanding was already shared by
-\citeonline{Jenny1941} when comparing \cited{soil geographers} and \cited{soil functionalists}.
-The view that I
-try to maintain from beginning to end of this thesis is that, despite the technological developments,
-the activity of modelling the soil remained essentially the same throughout human history. Soil
-maps still serve the same old purpose of representing our limited understanding about the spatial
-organization of the soil in the natural environment in a simplified manner, as well as giving
-insights about how the soil came to be and how they should be managed
-\cite{Jenny1941, Hudson1992, Legros2006, Blanco-CanquiEtAl2010, Grunwald2010}. This is the reason why,
-irrespective of the method/model 
-used to produce soil maps, I use the (integrative) expression \emph{soil mapping}. In support to
-this view, based on the existing body of knowledge on soil mapping and the currently available
-technologies, and believing in the importance of aiming at a more reproducible research, I have
-defined a general (didactic) sequence of seven steps that I believe should be
-followed in a soil-mapping project.
+% Although all that is very common when a new theory or method appears
+% \cite{Russell1932, Feyerabend1977, Kuhn2011}, I think we have reached a point in which nothing else
+% can be gained by
+% playing one soil scientist against the other. Such a (noble) understanding was already shared by
+% \citeonline{Jenny1941} when comparing \cited{soil geographers} and \cited{soil functionalists}.
 
-\noindent\textit{Step 0}. Identify a reality or problem entity, the geographic region for which
+\subsection{Spatial Soil Modelling Steps}
+
+Despite the rapid technological developments observed recently, the activity of modelling the soil remained 
+essentially the same throughout human history. Soil maps still serve the same old purpose of representing our 
+limited understanding about the spatial
+organization of the soil in the natural environment in a simplified manner, as well as giving insights about 
+how the soil came to be and how they should be managed \cite{Jenny1941, Hudson1992, Legros2006, 
+Blanco-CanquiEtAl2010, Grunwald2010}. For this reason, irrespective of the method/model used to produce soil 
+maps, perhaps we should use an (integrative) expression such as \emph{soil spatial modelling} instead of 
+picking one of the many currently used.
+
+It follows that, based on the existing body of knowledge on soil spatial modelling and the currently available 
+technologies, we should try to define what it constitutes, in practice, the soil spatial modelling activity. A 
+suggested general (didactic) sequence of steps that we believe represent what is or should be done in soil 
+spatial modelling is presented below.
+
+\begin{description}
+\item[Step 1] Identify a reality or problem entity, the geographic region for which
 there is a demand of spatial soil information. Target soil properties are appointed as well as the
 required accompanying output information (e.g. metadata). Key modelling decisions are taken in this step
 such as the support (punctual or areal), spatial resolution (and possibly the cartographic scale),
@@ -342,7 +372,7 @@ should be public? How to make data public? How to implement the data policy?) an
 the available infrastructure, budget, time, and workforce are specified so that next steps can be
 appropriately planned as to fulfil the demand.
 
-\noindent\textit{Step 1}. Develop a conceptual model of pedogenesis, a verbal representation of the
+\item[Step 2] Develop a conceptual model of pedogenesis, a verbal representation of the
 reality or problem entity including the explicit description of soil-forming factors and processes
 that determine the spatio-temporal distribution of soil properties. This requires gathering the most
 of the existing environmental information contained in scientific articles, technical reports,
@@ -353,10 +383,10 @@ exploratory data analysis can help unravelling soil-landscape relationships. The
 existing environmental information, and the less experienced the soil modeller is, the more
 important an exploratory field campaign is to help understanding the existing soil-landscape relationships.
 
-\noindent\textit{Step 2}. Define the model of spatial variation, a translation of the conceptual
+\item[Step 3] Define the model of spatial variation, a translation of the conceptual
 model of pedogenesis into a set of possible mathematical representations. Depending on
 how well defined the demand was, the model of spatial variation was already specified in
-\textit{Step 0}. Provided the volume of existing environmental information and legacy soil data is
+\textbf{Step 1}. Provided the volume of existing environmental information and legacy soil data is
 moderate to large and/or the soil modeller is very experienced and/or the available budget
 allows carrying out exploratory field campaigns, a single model of spatial variation is
 defined, i.e. discrete, continuous, or mixed. Assuming that the mixed model of spatial variation is
@@ -366,8 +396,8 @@ requirements given the available soil data, infrastructure, budget, time, and wo
 models or statistical and/or data-mining models are chosen, the pedological and
 statistical criteria for identifying the best performing model are defined.
 
-\noindent\textit{Step 3}. Prepare the modelling database, a collection of soil and covariate data
-needed to estimate the parameters and testvalidate the chosen statistical and/or data-mining
+\item[Step 4] Prepare the modelling database, a collection of soil and covariate data
+needed to estimate the parameters and test the chosen statistical and/or data-mining
 models. If required, this includes preparing a sampling plan with formally defined selection rules,
 making properly documented field soil observations, and running replicated laboratory analyses.
 Soil data from different sources are harmonized. Covariates are selected using the conceptual model
@@ -376,30 +406,30 @@ for nonlinear transformations to meet the requirements of the chosen statistical
 data-mining models, and to improve their empirical correlation. Several of these tasks can be (and
 usually are) carried out with the aid of a data processing environment (a computer).
 
-\noindent\textit{Step 4}. Estimate the parameters of the statistical and/or data-mining
+\item[Step 5] Estimate the parameters of the statistical and/or data-mining
 models, a task that essentially depends on translating the set of possible mathematical
 representations of the conceptual model of pedogenesis into a computer representation, that is, a
 computer code or script. Developing a well documented computer code that describes all processing
 steps ease re-design, future consistency checks, correction of mistakes, and
 dissemination/reproducibility. Calibrated models are evaluated using statistical criteria defined in
-\textit{Step 2} such as goodness-of-fit measures. Best performing models are evaluated regarding their
+\textbf{Step 3} such as goodness-of-fit measures. Best performing models are evaluated regarding their
 tenability (pedological evaluation), which includes visually assessing draft soil maps, and how well
 they represent the range of possible mathematical models. Failure in this last assessment suggests
 that the model requires adjustments, possibly more calibration data, or that it can be discarded.
 
-\noindent\textit{Step 5}. Validate the statistical and/or data-mining models, preferentially
+\item[Step 6] Validate the statistical and/or data-mining models, preferentially
 predicting the values of the modelled soil properties at a set of independent, probabilistically
 selected observation locations for which the true values are known. If an independent set of
 observation locations is unavailable, validation is performed using leave-one-out cross-validation.
-The best performing model, selected using the statistical criteria defined in \textit{Step 2}, is
+The best performing model, selected using the statistical criteria defined in \textbf{Step 3}, is
 assumed to be the best mathematical representation of the reality under study. If two or more
 models present similar prediction performance and have a considerably different structure, then it
-is assumed that the best mathematical representation of the reality under study is given by the
-aggregated version of these models, or parsimony is considered to elect the simpler model with fewer variables, 
-steps, rules, etc. If previous steps have already allowed selecting a single best
+can be assumed that the best mathematical representation of the reality under study is given by the
+aggregated version of these models, or parsimony is considered to elect the simpler model with 
+fewer variables, steps, rules, etc. If previous steps have already allowed selecting a single best
 performing model, statistical validation is used only to assess model accuracy.
 
-\noindent\textit{Step 6}. Make spatial predictions, the application of the best performing
+\item[Step 7] Make spatial predictions, the application of the best performing
 model(s) to predict soil properties values at unvisited locations. If demanded, the uncertainty
 about the predicted soil properties values (i.e. the prediction interval) is estimated too.
 Maps of the target soil properties as well as the required accompanying output information
@@ -409,16 +439,16 @@ information system, where they are made available for inspection using different
 techniques. Provided there is infrastructure, budget, time, and workforce available, modelling
 steps can be re-designed and the outputs updated at the user request.
 
-\noindent\textit{Step 7}. Reformulate the conceptual model of pedogenesis, the use
+\item[Step 8] Reformulate the conceptual model of pedogenesis, the use
 of the knowledge gained during the previous steps until the production of the soil property
 maps, which give insights about the reality or problem entity under study, to correct
 and/or improve the description of soil-forming factors and processes that determine the
 spatio-temporal distribution of soil properties. If demanded, the reformulated conceptual model
 of pedogenesis is delivered to the users of the soil information as well to help in scenario analysis
 and decision making.
+\end{description}
 
-\subsection{Sources of uncertainty}
-\label{sec:intro-uncertainty}
+\section{SOURCES OF UNCERTAINTY IN SOIL SPATIAL MODELLING}
 
 Soil spatial models, like any other model, are nothing more than a gross simplification of reality.
 This means that soil models are unable to explain the spatio-temporal soil variation in
@@ -429,19 +459,21 @@ the soil map presents is our most likely expectation about the soil properties -
 \emph{certainty} about them. The deviation from the \q{truth} is what we call \emph{error}. Many
 examples from the soil-mapping literature show that, irrespective of the soil property, soil-mapping
 models have a quite variable predictive performance, usually explaining between \SI{15}{\percent}
-(or less) and (rarely more than) \SI{75}{\percent} of the spatio-temporal soil variation
-\cite{MooreEtAl1993, OdehEtAl1994, GesslerEtAl1995, McKenzieEtAl1999, GobinEtAl2001, SumflethEtAl2008, 
-SunEtAl2012, ViscarraRosselEtAl2013, NussbaumEtAl2014, HenglEtAl2015, GaschEtAl2015, HeungEtAl2016}.
+(or less) and (rarely more than) \SI{75}{\percent} of the soil spatial variation
+\cite{MooreEtAl1993, OdehEtAl1994, GesslerEtAl1995, McKenzieEtAl1999, GobinEtAl2001, 
+SumflethEtAl2008, SunEtAl2012, ViscarraRosselEtAl2013, NussbaumEtAl2014, HenglEtAl2015,
+ GaschEtAl2015, HeungEtAl2016}.
+
 The main reason for a soil map to be in error is that the background knowledge and data used to
 construct the soil-mapping model is very limited -- we have to try our best with the available
-resources. Unless we observe the soil everywhere, which would destroy the soil and render the
-observations useless, no matter how large the volume of data is, or how comprehensive our background
-knowledge, it will never be possible to construct a model that explains the entire complexity of
-the soil \cite{Tukey1997}. This means that our knowledge about the soil, and the world as a whole,
+resources. This means that it will never be possible to construct a model that explains the entire complexity 
+of
+the soil \cite{Tukey1997}, and our knowledge about the soil, and the world as a whole,
 will always be only partial \cite{Box1993}. Because we cannot eliminate the uncertainty of a soil
-map, they can always be considered as wrong, and there can be many alternative versions for the same map, the 
-difference being that some might be useful
+map, they can always be considered as wrong, the difference being that some might be useful
 \cite{Box1976}.
+
+\subsection{Soil Data}
 
 Soil modellers aim at producing the most accurate representations of the soil given the
 available resources. Thus, a reasonable research program is the identification of the causes for
@@ -452,9 +484,10 @@ data-centred soil models, such as the mixed model of spatial variation, these er
 larger the farther we are from the existing observations. Thus, the most efficient way of reducing
 these errors is to increase the number of observations and improve the spatial coverage of the mapping
 region \cite{BrusEtAl2007a}. However, most soil-mapping projects must rely on using only soil
-data produced many years ago \cite{KempenEtAl2009, HenglEtAl2014, PoggioEtAl2014, NussbaumEtAl2014, 
-MulderEtAl2016}, when most sampling locations were chosen by soil modellers using non-explicit
-location rules, usually placing more samples in complex and less known areas \cite{Rossiter2000}.
+data produced many years ago \cite{KempenEtAl2009, HenglEtAl2014, PoggioEtAl2014, 
+NussbaumEtAl2014, MulderEtAl2016}, when most sampling locations were chosen by soil 
+modellers using non-explicit location rules, usually placing more samples in complex and
+less known areas \cite{Rossiter2000}.
 
 On the contrary, if the budget of the soil-mapping project includes (additional) sampling, soil
 modellers have to decide upon the number and spatial configuration of the sample
@@ -467,10 +500,10 @@ variation, the chosen spatial sample configuration has to be appropriate for est
 trend \cite{HenglEtAl2003a, MinasnyEtAl2006b} and the variogram model
 \cite{WarrickEtAl1987, WebsterEtAl1992, Lark2002}, making spatial predictions
 \cite{YfantisEtAl1987, WalvoortEtAl2010} and, (cross)validating the model/map \cite{BrusEtAl2011}, four
-often conflicting objectives. Besides, one
-must be careful not to decide upon collecting an insufficient or an exaggerated number of soil samples.
-Under-sampling can result in soil models with little utility, while over-sampling can produce
-modelling benefits that do not outweigh the sampling costs \cite{vanGroenigenEtAl1999}.
+often conflicting objectives. Besides, one must be careful not to decide upon collecting an insufficient
+ or an exaggerated number of soil samples. Under-sampling can result in soil models with large 
+uncertainty, while over-sampling can produce modelling benefits that do not outweigh the sampling costs 
+\cite{vanGroenigenEtAl1999}.
 
 Soil data may not only poorly cover the geographic and/or feature spaces \cite{HenglEtAl2003a}, but
 also have significant laboratory and positional errors \cite{NelsonEtAl2011}. Besides, some soil
@@ -481,32 +514,43 @@ oxidation, can change mineral structure \cite{MikuttaEtAl2005a}. And third, igno
 particle-size distribution is a compositional datum can introduce bias in the predictions
 \cite{LarkEtAl2007}.
 
-Another important source of uncertainty is the covariates used to calibrate the soil models.
-First, because they contain varying levels of error \cite{HeuvelinkEtAl1989}. These errors derive
-from the various methods of data generation, analytical procedures and, inherent characteristics of
+\subsection{Covariate Data}
+
+Another important source of uncertainty is the covariate data used to calibrate the soil models. Their 
+effect appears as a poor correlation with soil properties being modelled, resulting in poor predictions.
+One of the reasons why the covariate data can be poorly correlated with the soil property is the fact
+that they also contain varying levels of error \cite{HeuvelinkEtAl1989} which could make them 
+poor proxies of the soil forming factors. These errors derive from the various 
+methods of data generation, analytical procedures and, inherent characteristics of
 each site. For example, digital elevation models usually present larger errors in areas with steep
 slopes, rough terrains, and high altitude, and with dense forest cover or urbanized
-\cite{Florinsky1998,Toutin2000,FisherEtAl2006}. Interpolation of elevation data using kriging
+\cite{Florinsky1998, Toutin2000, FisherEtAl2006}. Interpolation of elevation data using kriging
 can produce spurious artefacts \cite{HenglEtAl2009} compared to hydrologically consistent
 algorithms \cite{Hutchinson1989}. And stereoscopic correlation techniques produce digital elevation
 models with poorer quality than interferometric synthetic aperture radar \cite{HirtEtAl2010}.
 
-Deciding upon which covariates to include in the soil-mapping model is another important source of
-uncertainty. This is especially important nowadays, when the number of available (uncertain)
-covariates increases every week, many of which possibly being statistically redundant. A more
-pedologically sound approach for selecting the covariates consists in eliciting the knowledge of a
-few experts \cite{LarkEtAl2007a}, optimally more than five \cite{MeyerEtAl2001}. An expert is
-every soil modeller with long-term practical experience in soil mapping \cite{MeyerEtAl2001}.
-If the mapping region is unknown to the experts, then a sound conceptual model of pedogenesis must be
-provided. However, the understanding about the mapping region may be limited to a point that enables
-building only a very uncertain conceptual model of pedogenesis. For example, an unstable landscape that
-consistently suffers from natural and/or anthropogenic alterations is geomorphologically more complex than
-a stable one \cite{Schumm1979}. As the landscape is rejuvenated, thus increasing complexity, establishing
-soil-landscape relationships becomes very difficult \cite{StreckEtAl2008}. Similar uncertainty
-in the conceptual model of pedogenesis can arise in very old, stable surfaces that have gone
+The method used to select which covariates to include in the soil spatial model can also be a reason for
+soil maps being in more or less error. This is because every method can select considerably different 
+sets of covariates, perhaps including a few that are poorly correlated with soil properties. The selection
+of covariates is especially important because the number of available (uncertain) covariates is large, 
+many of which possibly being statistically redundant. 
+
+A pedologically sound approach for the selection of covariates is the elicitation of the knowledge of a 
+few experts \cite{LarkEtAl2007a, MeyerEtAl2001}. An expert is every soil modeller with long-term 
+practical experience in soil mapping \cite{MeyerEtAl2001} and deep knowledge of the mapping 
+region, as expressed in the conceptual model of pedogenesis, as well as of the soil and covariate data. 
+However, it may be that the understanding about the mapping region may be limited to a point that enables
+building only a very uncertain conceptual model of pedogenesis. Take for example a geomorphologically 
+complex, unstable landscape that consistently suffers from natural and/or anthropogenic alterations. 
+Establishing soil-landscape relationships is very difficult in such circumstances, especially if the 
+geomorphological complexity is increased as it is rejuvenated \cite{StreckEtAl2008}. Similar uncertainty
+regarding the soil-landscape relationships can arise in very old, stable surfaces of the tropics that have gone
 through many environmental modifications, but were not affected by Pleistocene glaciations
 \cite{MckenzieEtAl2006}. These landscapes commonly have polygenetic soils that present properties
-reflecting today and ancient vegetation and climate \cite{PainEtAl1995, Ker1998}.
+reflecting today and ancient vegetation and climate \cite{PainEtAl1995, Ker1998}. One could wonder 
+whether expert soil modellers would be more efficient at identifying the covariates with the highest 
+predictive 
+power than sound statistical inference in such circumstances.
 
 A commonly used approach to select the covariates to enter a soil-mapping model is automated selection.
 Because automated selection algorithms are available in most software packages \cite{Harrell2001a},
@@ -516,8 +560,8 @@ main uncertainty here is on which method to use. Some methods analyse all possib
 covariates. Others simulate the process of natural selection \cite{AndersenEtAl2010}.
 Cross-validation selects covariates that produce the best predictions on test sets
 \cite{GuyonEtAl2003}. Other methods take into account the order in which the covariates are added
-to (forward selection) or removed from (backward elimination) the model \cite{LarkEtAl2007a}. The stepwise 
-method adds and removes covariates until no further addition or removal results in
+to (forward selection) or removed from (backward elimination) the model \cite{LarkEtAl2007a}. 
+The stepwise method adds and removes covariates until no further addition or removal results in
 significant changes in the model \cite{DraperEtAl1998}. Many other methods exist and have been
 used in soil-mapping projects \cite{PoggioEtAl2013,NussbaumEtAl2014}. Some prefer to use
 dimensionality reduction techniques to reduce the number of covariates \cite{Massy1965} before
@@ -525,81 +569,94 @@ running the covariate selection algorithm \cite{tenCatenEtAl2011a, HenglEtAl2014
 are evidences that the number of problems associated with using automated covariate selection
 methods, and dimensionality reduction techniques, can be greater than the number of advantages 
 \cite{FarrarEtAl1967, Jackson1993, Chatfield1995, Edirisooriya1995, Harrell2001a, Jolliffe2002, 
-Peres-NetoEtAl2005, LarkEtAl2007a}. The most evident being the fact that each method produces a different set 
-of covariates which may have a weaker physical or biological relation with the soil property being 
-modelled/mapped.
+Peres-NetoEtAl2005, LarkEtAl2007a}. The most evident being the fact that each method produces a
+ different set of covariates which may have a weaker physical or biological relation with the soil 
+property being modelled.
+
+\subsection{Model Structure}
+
 Soil modellers also have to chose the form of the model that will be used to model the
 empirical relation between covariates and soil properties. Early soil-mapping projects were based
 solely on mental models \cite{Hudson1992}. Later, many soil-mapping projects used statistical
-models that assume a linear relation \cite{MooreEtAl1993,OdehEtAl1994}. Developments in
-informatics introduced new forms of modelling this relation. Nowadays many soil-mapping projects
+models that assume a linear relation \cite{MooreEtAl1993, OdehEtAl1994}. Developments in
+statistics introduced new forms of modelling this relation. Nowadays many soil-mapping projects
 employ machine-learning methods such as regression trees, artificial neural networks, random forests,
 support vector machines, among many others \cite{HeungEtAl2016}. The main reason being that these
 nonlinear models have a greater ability to capture more complex site-specific soil-landscape relations
-\cite{Grunwald2009}. In fact, the relation between soil properties and covariates seldom is
-completely linear \cite{McKenzieEtAl1999}. Once again, the problem is that each model produces a
-different soil map, although the validation statistics may suggest that the differences in their
-performance are insignificant \cite{HeungEtAl2016}. A solution is to aggregate the predictions of
-the many models, but this will not necessarily reduce our uncertainty. Besides, machine-learning
-methods are more difficult to implement and interpret, possibly being more prone to error, and can
-be devoid of any pedological information \cite{Grunwald2009}.
+\cite{Grunwald2009}.
 
-As we have seen, the sources of uncertainty in soil-mapping projects are multiple and the list that I
-present is far from being comprehensive -- others will do a better job. The main message is that we
-cannot eliminate the uncertainty of a soil map and, as such, our knowledge about the soil will always
-be limited. Despite of this, soil models/maps -- and the entire body of human knowledge -- are still
+In fact, the relation between soil properties and covariates seldom is completely linear 
+\cite{McKenzieEtAl1999}. For some the fact that each model produces a
+different soil map may be seen as a problem, although the validation statistics may suggest that the 
+differences in their performance are insignificant \cite{HeungEtAl2016}. A solution is to aggregate 
+the predictions of the many models, but this will not necessarily reduce our uncertainty. Besides, 
+machine-learning methods are more difficult to implement and interpret \cite{Grunwald2009}, possibly 
+being more prone to error.
+
+\section{FINAL CONSIDERATIONS}
+
+The sources of uncertainty in soil spatial modelling are multiple and the list that has been presented here
+is far from being comprehensive -- others will do a better job. The main message is that we cannot 
+eliminate the uncertainty of a soil map and, as such, our knowledge about the soil will always
+be limited. Despite of this, soil spatial models -- and the entire body of human knowledge -- are still
 needed to guide our every-day actions. So, instead of eliminating uncertainty, the real quest is for
-understanding it and its sources. Because while studying the multiple sources of uncertainty -- the
-\emph{known unknowns} --, instead of bringing them all into light, turning them into sources of error
-which we have a good understanding of -- the \emph{known knowns} --, we end up uncovering other sources
-of error that we were not aware of -- the \emph{unknown unknowns} \cite{Wikipedia2015}. If a known
-(or unknown) unknown happens to become a known known, then action can be taken to reduce our
-uncertainty. For example, if we gain knowledge that a source of error has a systematic nature, then a
-corrective measure can be taken right away.
+understanding it and its sources. If for instance it happens to us to gain knowledge that a source of 
+error has a systematic nature, then a corrective measure can be taken right away.
 
-A most comprehensive way of dealing with the known unknowns is \emph{error propagation analysis},
-also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989,Taylor1997}. This is done taking
-our uncertainty into account through the soil-modelling steps, seeing how it propagates, and
-evaluating its impact on the uncertainty of the output soil map. This would allow us identifying the
+% Because while studying the multiple sources of uncertainty -- the
+% \emph{known unknowns} --, instead of bringing them all into light, turning them into sources of 
+% error which we have a good understanding of -- the \emph{known knowns} --, we end up uncovering 
+% other sources of error that we were not aware of -- the \emph{unknown unknowns} \cite{Wikipedia2015}. 
+% If a known (or unknown) unknown happens to become a known known, then action can be taken to 
+% reduce our uncertainty. For example, if we gain knowledge that a source of error has a systematic nature, 
+% then a corrective measure can be taken right away.
+
+A most comprehensive way of dealing with the multiple sources of uncertainty is \emph{error propagation 
+analysis},
+also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989, Taylor1997}. This is done taking
+our uncertainty into account through the modelling steps, seeing how it propagates, and
+evaluating its impact on the uncertainty about the output soil map. This would allow us identifying the
 main source of uncertainty, so that we could try to take corrective measures to improve its quality.
 But such an exercise is cumbersome \cite{NelsonEtAl2011}, and the efforts required may not
 outweigh the benefits, this being one of the reasons why it is rarely carried out. Another important
 reason for error propagation analysis being unpopular is the common ignorance and lack of
-understanding -- perhaps prejudice -- about error and uncertainty \cite{Wechsler2003,Heuvelink2005}.
+understanding -- perhaps prejudice -- about error and uncertainty \cite{Wechsler2003, Heuvelink2005}.
 But the most important reason seems to be that statistical packages and data analysis environments do
 not include -- if they ever will or should include -- a simple routine, a button, to run a complete
 uncertainty analysis \cite{HeuvelinkEtAl2006b}.
 
-Since soil maps still are useful, despite being in error, most soil-mapping projects adopt a very
-pragmatic approach, and the uncertainty is almost completely ignored \cite{McBratneyEtAl2003,ScullEtAl2003}.
-In other words, we assume that all sources of uncertainty are insignificant.
-Positional and analytical errors are disregarded, covariates are taken as certain, and so on. These
-data are used to calibrate a few models, whose parameters are assumed to be estimated without error
-\cite{DiggleEtAl1998}. The soil-mapping model with the best validation statistics, generally
-chosen using (the optimistic) cross-validation, is selected to make spatial predictions at unvisited
-locations \cite{BrusEtAl2011}. Errors in the resulting map are regarded as being due to interpolation
-error. Most soil models will output an estimate of this uncertainty, i.e. a measure of what
-we do not know about the modelled/mapped soil property such as the kriging prediction error variance
-\cite{HeuvelinkEtAl1989}. But even such a measure is nothing more than a model of our uncertainty
-whose quality needs proper assessment \cite{Goovaerts2001}. Because soil models that ignore
-the spatial autocorrelation of the prediction errors generally are optimistic about our uncertainty,
-i.e. they estimate that we know more than we actually do. And geostatistical models can either
-under- or overestimate the uncertainty depending on the available data and modelling decisions
-\cite{Lark2000a}.
+%Since soil maps still are useful, despite being in error, most soil-mapping projects adopt a very
+%pragmatic approach, and the uncertainty is almost completely ignored \cite{McBratneyEtAl2003, 
+%ScullEtAl2003}.
+%In other words, we assume that all sources of uncertainty are insignificant.
+%Positional and analytical errors are disregarded, covariates are taken as certain, and so on. These
+%data are used to calibrate a few models, whose parameters are assumed to be estimated without error
+%\cite{DiggleEtAl1998}. The soil-mapping model with the best validation statistics, generally
+%chosen using (the optimistic) cross-validation, is selected to make spatial predictions at unvisited
+%locations \cite{BrusEtAl2011}. Errors in the resulting map are regarded as being due to interpolation
+%error. Most soil models will output an estimate of this uncertainty, i.e. a measure of what
+%we do not know about the modelled/mapped soil property such as the kriging prediction error variance
+%\cite{HeuvelinkEtAl1989}. But even such a measure is nothing more than a model of our uncertainty
+%whose quality needs proper assessment \cite{Goovaerts2001}. Because soil models that ignore
+%the spatial autocorrelation of the prediction errors generally are optimistic about our uncertainty,
+%i.e. they estimate that we know more than we actually do. And geostatistical models can either
+%under- or overestimate the uncertainty depending on the available data and modelling decisions
+%\cite{Lark2000a}.
 
-Continually ignoring the uncertainty in soil-mapping projects is quite a dangerous choice
-\cite{HeuvelinkEtAl1999}. It can induce the layman -- and even other scientists -- to think that
-soil modellers produce perfect, complete answers to soil-related issues. The most likely
-consequence is what already happened in the end of the 1980's in most countries when funds for
-soil-modelling research were almost completely extinguished
-\cite{Basher1997, Dalmolin1999, Ker1999, Ramos2003, HarteminkEtAl2008, Finke2012}: if the soil map is a perfect
-representation of reality, then once it is done, soil modellers become useless. Nowadays, many
-software packages and data analysis environments include a basic routine to take into account, at
-least, one source of uncertainty \cite{ChristensenEtAl2002, Papritz2015, RibeiroJrEtAl2015}. If a
-more elaborated, problem-specific software is required, then there is the free and open source
-software community. Free access to the scientific literature is guaranteed by many governments,
-universities, and libraries that spend a significant amount of resources every year on subscriptions
-and maintenance of digital repositories. Anyone with a true interest in contributing to the body of
-human knowledge must recognize the urgent need to stop neglecting, perhaps consciously denying, what
-we already known -- the \emph{unknown knowns} \cite{Zizek2006}.
+%Continually ignoring the uncertainty in soil-mapping projects is quite a dangerous choice
+%\cite{HeuvelinkEtAl1999}. It can induce the layman -- and even other scientists -- to think that
+%soil modellers produce perfect, complete answers to soil-related issues. The most likely
+%consequence is what already happened in the end of the 1980's in most countries when funds for
+%soil-modelling research were almost completely extinguished
+%\cite{Basher1997, Dalmolin1999, Ker1999, Ramos2003, HarteminkEtAl2008, Finke2012}: if the
+% soil map is a perfect
+%representation of reality, then once it is done, soil modellers become useless. Nowadays, many
+%software packages and data analysis environments include a basic routine to take into account, at
+%least, one source of uncertainty \cite{ChristensenEtAl2002, Papritz2015, RibeiroJrEtAl2015}. If a
+%more elaborated, problem-specific software is required, then there is the free and open source
+%software community. Free access to the scientific literature is guaranteed by many governments,
+%universities, and libraries that spend a significant amount of resources every year on subscriptions
+%and maintenance of digital repositories. Anyone with a true interest in contributing to the body of
+%human knowledge must recognize the urgent need to stop neglecting, perhaps consciously denying, 
+%what we already known -- the \emph{unknown knowns} \cite{Zizek2006}.
 

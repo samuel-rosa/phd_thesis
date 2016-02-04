@@ -2,29 +2,29 @@
 \chapter{GENERAL CONCLUSION}
 \label{chap:chap10}
 
-This thesis has made a local pedological contribution with the development of a comprehensive description of 
-the soil-forming factors and processes that determine the spatio-temporal distribution of soil properties of 
-the study site where the study cases were conducted. The conceptual model of pedogenesis, presented in 
-\autoref{chap:chap03}, showed that the spatial distribution of soil properties is highly variable, even when 
-under the same land use. At large spatial scales, this spatial variation is determined by the geological and 
-geomorphological diversity of the area, while at small spatial scales, past and current (poor) agricultural 
-practices seem to play a major role. Along with the conceptual model of pedogenesis, \autoref{chap:chap04} and 
-\autoref{chap:chap05} constitute a technical contribution of this thesis. These chapters provide the bases for 
-future soil spatial modelling exercises in the study site.
+This thesis has made a pedological contribution with the development of a comprehensive description of the 
+soil-forming factors and processes that determine the spatio-temporal distribution of soil properties in the 
+Santa Maria case study area. The conceptual model of pedogenesis, presented in \autoref{chap:chap03}, showed 
+that the spatial distribution of soil properties is highly variable, even when under the same land use. At 
+coarse spatial scales, this spatial variation is determined by the geological and geomorphological diversity of 
+the area, while at fine spatial scales, past and current (poor) agricultural practices seem to play a major 
+role. Along with the conceptual model of pedogenesis, \autoref{chap:chap04} and \autoref{chap:chap05} 
+constitute a technical contribution of this thesis. These chapters provide the basis for soil spatial modelling 
+exercises in the study area.
 
-\autoref{chap:chap06} has demonstrated that the existing, freely available covariates are suitable for 
-calibrating soil spatial models. It was shown that using more detailed covariates results in only a modest 
-increase in the prediction accuracy of linear soil spatial models. The observed increase is comparable to the 
-effect of incorporating spatial dependence in the soil spatial model, and may not outweigh the extra costs of 
-using more detailed covariates. In general, a more detailed covariate has a greater potential to improve 
+\autoref{chap:chap06} demonstrated that existing, freely available covariates are suitable for calibrating soil 
+spatial models. It was shown that using more detailed covariates results in only a modest increase in the 
+prediction accuracy of linear soil spatial models. The observed increase is comparable to the effect of 
+incorporating spatial dependence in the soil spatial model, and may not outweigh the extra costs of using more 
+detailed covariates. In general, a more detailed covariate has a greater potential to improve 
 prediction accuracy when a soil property is poorly predicted by its less detailed version. However, the 
 magnitude of the improvement may depend on which other covariates are included in the model. Choosing whether 
-or not to invest in more detailed covariates depends on the strength of the relationship between the 
-covariates and the soil property being modelled, and on the relative difference between the less, and 
-more detailed versions of the covariates. It is likely better to substantially improve the detail of a 
-less influential covariate than marginally increase the detail of the most influential covariate. However, one 
-should always consider if more efficient means of increasing prediction accuracy exist (e.g. obtaining more 
-soil observations).
+or not to invest in more detailed covariates depends on the strength of the relationship between the covariates 
+and the soil property being modelled, and on the relative difference between the less, and more detailed 
+versions of the covariates. It is likely better to substantially improve the detail of a less influential 
+covariate than marginally increase the detail of the most influential covariate. However, one should always 
+consider if more efficient means of increasing prediction accuracy exist (e.g. obtaining more soil 
+observations).
 
 \autoref{chap:chap07} showed that several factors influence how field soil spatial modellers decide upon where 
 to place soil observation locations. These are of three types: conceptual, operational, and psychological. The 
@@ -34,30 +34,46 @@ workforce, and budget) to make soil observations, as well as to access restricti
 geographic barriers, for example. The third relates with how the soil modellers perceive their surrounding 
 physical environment and how the course of their motivation shifts during the soil observation process. Point 
 pattern analysis helped understanding that there is a trade-off between conceptual and operational factors, 
-which determines how the motivation of field soil modellers shifts focus towards one or another immediate 
-goal. 
+which determines how the motivation of field soil modellers shifts focus towards one or another immediate goal. 
 Depending on the focal goal, the resulting sample configuration resembles a random (learning/verifying 
 soil-landscape relationships -- means-focused motivation) or a regular (maximizing the number of observations 
 and geographic coverage -- outcome-focused motivation) point pattern.
 
-\autoref{chap:chap08} showed that the conditioned Latin hypercube sampling algorithm, a popular algorithm
-used to optimize spatial sample configurations for spatial trend estimation, can be considerably improved. 
-Compared to the original implementation, the proposed improvements resulted in a sampling algorithm 
-with a better numerical behaviour. Preliminary results showed that the improvements on the algorithm 
-resulted in more accurate and precise spatial predictions. Apparently, only taking the association/correlation 
-between 
-covariates into account degrades prediction accuracy because the coverage of the geographic space is poorer. 
-As such, when optimizing a sample configuration for spatial trend estimation, it should suffice to aim only at 
-reproducing the marginal distribution of the covariates. This should be done using only the non-empty 
-marginal sampling strata.
+\autoref{chap:chap08} showed that the conditioned Latin hypercube sampling algorithm, a popular algorithm used 
+to optimize spatial sample configurations for spatial trend estimation, can be considerably improved. Compared 
+to the original CLHS, our proposed modifications resulted in a sampling algorithm with an improved numerical 
+behaviour, but this does not necessarily translates into improved prediction accuracy. For instance, sample 
+size has a larger influence on prediction accuracy than the sampling algorithm. However, aiming only at the 
+association/correlation between covariates degrades prediction accuracy possibly because the coverage of the 
+geographic space is poorer. As such, when optimizing a sample configuration for spatial trend estimation, it 
+should suffice to aim only at reproducing the marginal distribution of the covariates. This should be done 
+using only the non-empty marginal sampling strata.
 
-\autoref{chap:chap09} 
+\autoref{chap:chap09} showed how to optimize sample configurations for spatial trend and variogram estimation, 
+and spatial interpolation in situations where we know very little about the soil spatial distribution. The only 
+requirement is that one formulates a sound multi-objective optimization problem using robust versions of 
+existing sampling algorithms. The resulting spatial sample should reproduce the marginal distribution of the 
+covariates such that the spatial trend can be accurately estimated. It should also contain several small 
+clusters scattered throughout the spatial domain to enable making an accurate estimate of the behaviour of the 
+variogram, specially near the origin. Finally, it should cover the sampling region in the most uniform way such 
+that the average prediction error variance is the least possible.
 
-Finally, this thesis has contributed with two packages for the software environment for statistical computing 
-and graphics \texttt{R}. The first package, called \texttt{pedometrics}, contains miscellaneous functions 
-designed for the development of this thesis. The second package, called \texttt{spsann}, contains functions to 
-optimize sample configurations to identify and estimate the variogram and spatial trend, and make spatial 
-predictions. The latter was developed as part of \autoref{chap:chap08} and \autoref{chap:chap09}. Both are 
-freely available and can be obtained from The Comprehensive R Archive Network (\cran).
+This thesis has also contributed with two packages for the software environment for statistical computing and 
+graphics \texttt{R}. The first package, called \texttt{pedometrics}, contains various functions for spatial 
+exploratory data analysis and model calibration designed for the development of this thesis. The second 
+package, called \texttt{spsann}, contains functions to optimize sample configurations to identify and estimate 
+the variogram and spatial trend, and make spatial predictions. The latter was developed as part of 
+\autoref{chap:chap08} and \autoref{chap:chap09}. Both are freely available and can be obtained from The 
+Comprehensive R Archive Network (\cran).
 
-
+Overall, this thesis showed that the complex interplay between soil and covariate data can have a large 
+influence on the accuracy of soil maps. A single, universal, cost-effective recipe for reducing our uncertainty 
+in soil spatial modelling seems out of range. The case studies suggested that solutions are case specific and 
+primarily depend on the existing soil and covariate data. Obtaining more soil samples showed to be an efficient 
+strategy provided the available resources allow extra sampling. Otherwise, deciding upon cost-effective ways of 
+reducing our uncertainty requires, first, that we explore the full potential of existing soil and covariate 
+data using robust spatial modelling techniques. Such an exercise requires a comprehensive knowledge of the 
+soil-landscape relationships, as well as a thorough documentation of the soil and covariate data so that their 
+weaknesses and strengths can be easily identified. Then, the decision whether to invest on improving the 
+quality of soil or covariate or both data will depend upon the trade-off between the increased data quality and 
+the amount of resources required.
