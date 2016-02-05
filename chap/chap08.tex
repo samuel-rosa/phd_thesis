@@ -1,5 +1,6 @@
 \artigotrue
 \chapter{OPTIMIZATION OF SAMPLE CONFIGURATIONS FOR SPATIAL TREND ESTIMATION FOR SOIL MAPPING}
+\shorttitle{Sampling for the Spatial Trend}
 \label{chap:chap08}
 
 % \def\ptkeys{Recozimento simulado, Otimização multi-objetivo, Pareto, Amostragem por hipercubo latino 
@@ -17,7 +18,7 @@ variation using covariates. The sampling method most commonly used to identify a
 is \emph{conditioned Latin hypercube sampling} (CLHS). In this study we propose conceptual and algorithmic 
 improvements on CLHS, which are evaluated using synthetic data derived from a real-world study case in Santa 
 Maria, southern Brazil. The improvements include: 1) using the Pearson's $r$ only when all covariates are 
-numeric, and the Cramér's $v$ when some or all covariates are factors, 2) defining marginal sampling 
+numeric, and the Cramér's $V$ when some or all covariates are factors, 2) defining marginal sampling 
 strata using only the unique values of the sample quantiles estimated with a discontinuous function, and 3) 
 scaling the objective functions to the same approximate range of values using the upper-lower bound approach 
 with the Pareto maximum and minimum before aggregating them into a single utility function using a weighted 
@@ -115,7 +116,8 @@ sample point falling in each marginal sampling strata. However, depending on the
 the covariate values, CLHS may produce replicated breakpoints in the regions with a relatively high 
 frequency of covariate values. For example, given a sample size of $n = 5$ and a covariate $\boldsymbol{a}$ 
 with (ordered integer) values $\boldsymbol{a} = (1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 8, 9, 9, 9, 9)$, the lower and 
-upper boundaries of the $c = 5$ marginal sampling strata are $\boldsymbol{a}_{mss} = (1.0, 1.0, 2.6, 4.4, 9.0, 
+upper boundaries of the $c = 5$ marginal sampling strata (mss) are $\boldsymbol{a}_{mss} = (1.0, 1.0, 2.6, 
+4.4, 9.0, 
 9.0)$. 
 Because the marginal sampling strata in which a sample point $b_i$ falls is evaluated using the indicator 
 function
@@ -129,7 +131,8 @@ function
  \end{cases}
 \end{equation*}
 
-\noindent where $i = 1, 2, \ldots, n$, and $j = 1, 2, \ldots, c$, the first and last marginal sampling strata 
+\noindent where $i = 1, 2, \ldots, n$ refers to sample point candidates, and $j = 1, 2, \ldots, c$ to 
+marginal sampling strata, the first and last marginal sampling strata 
 of $\boldsymbol{a}$ will be empty, and the respective $n‘ = 2$ sample points will be allocated among the other 
 three marginal sampling strata, with the set of allocation solutions $\boldsymbol{b}_{sol} = \{(0, 2, 1, 2, 
 0), (0, 1, 2, 2, 0), (0, 2, 2, 1, 0)\}$. Ergo, CLHS will be unable to find the globally optimum allocation 
@@ -153,21 +156,20 @@ covariates, while only one ($\mathcal{O}_2$) focuses on \emph{factor} covariates
 $\mathcal{O}_2$ are mathematically equivalent -- they aim at the coverage of the marginal distribution of the 
 numeric and factor covariates, respectively --, and $\mathcal{O}_3$ measures the similarity between the 
 population and 
-sample correlation matrices of the numeric covariates as estimated with the Pearson`s correlation coefficient 
+sample correlation matrices of the numeric covariates as estimated with the Pearson's correlation coefficient 
 $r$. The CLHS ignores the association among factor covariates, as well as among factor and numeric covariates. 
 This means that 
 CLHS gives more importance to numeric covariates. Such a bias cannot be corrected by simply attributing 
 different \emph{weights} to each objective (see below).
 
-To address the problem above we propose to replace Pearson`s $r$ with Cramér`s $v$
+To address the problem above we propose to replace Pearson's $r$ with Cramér's $V$
 
 \begin{equation} % SEE IMAGE BELOW
- v =  \sqrt{\frac{\chi^2 / n}{min(n_\text{col} - 1, n_\text{row} - 1)}},
+ V =  \sqrt{\frac{\chi^2 / n}{min(n_\text{col} - 1, n_\text{row} - 1)}},
 \end{equation}\label{eqn:chap08-cramer}
 
 \noindent where $n_\text{row}$ and $n_\text{col}$ are the number of rows and columns of the bivariate 
-contingency table, 
-$n$ is the sample size, and $\chi^2$ is the chi-squared statistic
+contingency table, $n$ is the sample size, and $\chi^2$ is the chi-squared statistic
 
 \begin{equation} % SEE IMAGE BELOW
  \chi^2 = \sum_{i = 1}^{n_\text{row}}\sum_{j=1}^{n_\text{col}}\frac{(O_{ij} - E_{ij})^2}{E_{ij}},
@@ -175,28 +177,27 @@ $n$ is the sample size, and $\chi^2$ is the chi-squared statistic
 
 \noindent where $O_{ij}$ and $E_{ij}$ are the observed and expected frequencies, respectively, the marginal 
 proportions of $O$ being the maximum likelihood estimates of the marginal proportions of $E$ 
-\cite{Cramer1946, Agresti2002}. The Cramér`s $v$ is a measure of association between factor covariates that 
+\cite{Cramer1946, Agresti2002}. The Cramér's $V$ is a measure of association between factor covariates that 
 ranges from $0$ to $+1$: the closer to $+1$, the larger the association between two factor covariates. 
-Accordingly, the only requirement for using the Cramér`s $v$ -- instead of the Pearson`s $r$ -- is that any 
+Accordingly, the only requirement for using the Cramér's $V$ -- instead of the Pearson's $r$ -- is that any 
 numeric covariate be transformed into a factor covariate, with the factor levels defined using the marginal 
-sampling strata. One could still use the Pearson`s $r$ when all covariates are numeric because computing the 
-Cramér`s $v$ is more computationally demanding.
+sampling strata. One could still use the Pearson's $r$ when all covariates are numeric because computing the 
+Cramér's $V$ is more computationally demanding.
 
 \subsection{Aggregating the Objectives}
 
 Sampling for spatial trend estimation is a \emph{multi-objective combinatorial optimization problem} (MOCOP): 
-the spatial sample must meet a list of objectives among an almost infinite set of possible 
-spatial samples. An important step for solving a MOCOP is to define each objective as a function, i.e. an 
-\emph{objective function} $f_i$ \cite{Arora2011}. An $f_i$ associates a numerical value with each candidate 
-spatial 
-sample as a function only of the values of the $p$ covariates used to describe the spatial domain -- also 
-known as \emph{design variables} \cite{Arora2011} -- at the $n$ sample points. The lower the objective 
-function value, the closer the spatial sample is to meeting the respective objective. Thus, when solving a 
-MOCOP, one aims at minimizing the vector of $k$ objective functions \cite{Arora2011}
+the spatial sample must meet a list of objectives among an almost infinite set of possible spatial samples. An 
+important step for solving a MOCOP is to define each objective as a function, i.e. an \emph{objective function} 
+$f_i$ \cite{Arora2011}. An $f_i$ associates a numerical value with each candidate spatial sample as a function 
+only of the values of the $p$ covariates used to describe the spatial domain -- also known as \emph{design 
+variables} \cite{Arora2011} -- at the $n$ sample points. The lower the objective function value, the closer the 
+spatial sample is to meeting the respective objective. Thus, when solving a MOCOP, one aims at minimizing the 
+vector of $k$ objective functions \cite{Arora2011}
 
 \begin{equation} % SEE IMAGE BELOW
  \boldsymbol{f}(\boldsymbol{X}) = (f_1(\boldsymbol{X}), f_2(\boldsymbol{X}), \ldots, f_k(\boldsymbol{X})),
-\end{equation}
+\end{equation}\label{eqn:chap08-mocop}
 
 \noindent where $\boldsymbol{X}$ is the design matrix, a $n \times p$ matrix subject to the implicit 
 constraints imposed by the finiteness of the spatial domain and discreteness of the $p$ design variables. 
@@ -226,8 +227,7 @@ Thus, the MOCOP boils down to minimizing the \emph{convex} combination of object
 \end{equation}\label{eqn:chap08-utility}
 
 \noindent where \emph{convex} means that the weights $w_i$ are constrained to $w_i > 0$ and $\sum_{i=1}^{k} w_i 
-= 1$ 
-\cite{MarlerEtAl2005, MarlerEtAl2009}. An important requirement of the weighted sum method is that the 
+= 1$ \cite{MarlerEtAl2005, MarlerEtAl2009}. An important requirement of the weighted sum method is that the 
 objective functions be scaled to the same approximate range of values so that any potential numerical dominance 
 can be eliminated or minimized, and the weights can play the desired role \cite{MarlerEtAl2005, 
 MarlerEtAl2009}. 
@@ -258,7 +258,7 @@ We propose using a more robust approach, i.e. the \emph{upper-lower bound approa
 
 \begin{equation} % SEE IMAGE BELOW
  f_i'' = \frac{f_i(\boldsymbol{X}) - f_i^{\circ}}{f_i^{max} - f_i^{\circ}},
-\end{equation}
+\end{equation}\label{eqn:chap08-pareto-min-max}
 
 \noindent where $f_i^{\circ}$ is the \emph{utopia point}, the single best solution for the $i$th objective 
 function, and $f_i''$ is the $i$th non-dimensional, scaled objective function constrained between zero and one 
