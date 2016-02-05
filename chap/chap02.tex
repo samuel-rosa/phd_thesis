@@ -145,13 +145,13 @@ topography.}. The basic law of soil science was presented 40-years later by Serg
 general soil formation equation, which is known in the western soil science literature as \cite{Jenny1941, 
 Florinsky2012}
 
-\begin{equation}
-\mathfrak{s} = f(\mathfrak{cl}, \mathfrak{o}, \mathfrak{r}, \mathfrak{p}, \mathfrak{t}, \mathfrak{\ldots}),
-\end{equation}\label{eqn:chap02-clorpt}
+\begin{equation}\label{eqn:chap02-clorpt}
+ soil = f(cl, o, r, p, t, \ldots),
+\end{equation}
 
-\noindent where $\mathfrak{s}$ is the soil and its properties, $\mathfrak{cl}$ if the climate, $\mathfrak{o}$ 
-are the organisms, including humans, $\mathfrak{r}$ stands for relief or topography, $\mathfrak{p}$ is the 
-parent material, $\mathfrak{t}$ is time or age of the terrain, and $\mathfrak{\ldots}$ stand for other unknown 
+\noindent where $soil$ is the soil and its properties, $cl$ if the climate, $o$ 
+are the organisms, including humans, $r$ stands for relief or topography, $p$ is the 
+parent material, $t$ is time or age of the terrain, and $\ldots$ stand for other unknown 
 players. Dokuchaev was aware that producing empirical evidence to corroborate his basic law of soil science was 
 difficult because data on soil formation factors was scarce. Besides, it was difficult to numerically express 
 the relation between soil and formation factors. Despite of these difficulties, the basic law of soil science 
@@ -305,20 +305,17 @@ stochastic residuals or latent variables, $e(\boldsymbol{s})$, describe the port
 the soil property that cannot be explained with the covariates but is potentially spatially correlated, the 
 form and degree of this spatial correlation possibly being interpreted pedologically \cite{Lark2012}. Thus
 
-\begin{equation}\label{eq:intro-mixed-model}
+\begin{equation}\label{eqn:intro-mixed-model}
 Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
 \end{equation}
 
 \autoref{eq:intro-mixed-model} possesses a great flexibility that facilitates to explore newly developed 
-statistical and 
-data-mining methods, generally resulting in better performance than the constituent models alone, as well as 
-integrating the 
-existing pedological knowledge provided it is translated into a mathematical form \cite{OdehEtAl1994, 
-OdehEtAl1995, 
-Heuvelink1996, McBratneyEtAl2000, HenglEtAl2004, Lopez-GranadosEtAl2005, WebsterEtAl2007, Grunwald2009, 
-Lark2012}. These features promoted the rapid popularization of the mixed model of spatial variation, and many 
-recent large scale soil-mapping projects already successfully employed the mixed model of spatial variation 
-\cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
+statistical and data-mining methods, generally resulting in better performance than the constituent models 
+alone, as well as integrating the existing pedological knowledge provided it is translated into a mathematical 
+form \cite{OdehEtAl1994, OdehEtAl1995, Heuvelink1996, McBratneyEtAl2000, HenglEtAl2004, Lopez-GranadosEtAl2005, 
+WebsterEtAl2007, Grunwald2009, Lark2012}. These features promoted the rapid popularization of the mixed model 
+of spatial variation, and many recent large scale soil-mapping projects already successfully employed the mixed 
+model of spatial variation \cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
 % and the development of the Internet, 
 
 % Unfortunately, along with the success of the mixed model of spatial variation, came a rupture between soil 
@@ -594,7 +591,7 @@ the predictions of the many models, but this will not necessarily reduce our unc
 machine-learning methods are more difficult to implement and interpret \cite{Grunwald2009}, possibly 
 being more prone to error.
 
-\section{FINAL CONSIDERATIONS}
+\section{CONCLUSIONS}
 
 The sources of uncertainty in soil spatial modelling are multiple and the list that has been presented here
 is far from being comprehensive -- others will do a better job. The main message is that we cannot 

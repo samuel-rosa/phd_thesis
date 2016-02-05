@@ -27,24 +27,21 @@ soil modellers who carried out the soil modelling were used to validate the anal
 sampling locations are inhomogeneously distributed in the study area. Two areas were more densely sampled 
 (nearest neighbour distances, $\text{NND} < \SI{125}{\m}$), one in the Southern sector, the other in the 
 Middle-North-eastern sector. Sampling points have an approximately random spatial distribution in these two 
-areas, while in the less densely sampled areas they are spaced at approximately regular distances ($NND 
+areas, while in the less densely sampled areas they are spaced at approximately regular distances ($\text{NND} 
 > \SI{125}{\m}$). Land use, physiographic strata, and sampling date have a significant influence on the spatial
 distribution of sampling locations. Land use yields the largest deviance reduction (\SI{6}{\percent}), followed
 by sampling date (\SI{4}{\percent}) and physiographic strata (\SI{2}{\percent}). These results are in close 
 agreement with judgements elicited from soil modellers. According to them, more densely sampled areas are 
-those 
-where they had a less consistent knowledge of soil-landscape relationships. These areas were visited in the 
-first and last field campaigns, evidencing a temporal effect. On the other hand, most of the intermediate 
+those where they had a less consistent knowledge of soil-landscape relationships. These areas were visited in 
+the first and last field campaigns, evidencing a temporal effect. On the other hand, most of the intermediate 
 campaigns were carried out in areas where they had a better knowledge of soil-landscape relationships. Other 
 intermediate campaigns were carried out in areas of poor accessibility, where soil modellers selected sampling 
 locations by convenience. Intermediate field campaigns also coincided with a budget cut. The interplay of 
-these 
-intervening factors reduced the motivation of the soil modellers to conduct more intensive sampling. Soil 
-modellers also reported that they performed a mental stratification of the study area prior to selecting 
+these intervening factors reduced the motivation of the soil modellers to conduct more intensive sampling. 
+Soil modellers also reported that they performed a mental stratification of the study area prior to selecting 
 sampling locations. Terrain features composed the first stratification variable, while land use was used as 
-the 
-stage-two stratification variable. The close agreement between PPA and judgements elicited from soil modellers 
-suggests that PPA can help understand the sampling strategy used by soil modellers.
+the stage-two stratification variable. The close agreement between PPA and judgements elicited from soil 
+modellers suggests that PPA can help understand the sampling strategy used by soil modellers.
 \end{chapterabstract}
 
 \formatchapter
@@ -137,9 +134,10 @@ established rules) at the beginning and end of a project is possibly explained b
 concerns (the image made about the self) usually are greater in these two phases of goal pursuit 
 \cite{Toure-TilleryEtAl2011}.
 
-\section{STUDY CASE}
+\section{CASE STUDY}
 
-A study case was conducted to evaluate the potential of point pattern analysis as a tool to help understanding 
+A  case study was conducted to evaluate the potential of point pattern analysis as a tool to help 
+understanding 
 the purposive sampling strategy traditionally employed by field soil modellers. The database is composed of 
 the $n = 340$ soil observations made in a small catchment (\SI{20}{\km\squared}) in Southern Brazil between 
 \num{2008} and \num{2011} for the purpose of mapping soils, land use, carbon stocks, and vulnerability to 
@@ -259,7 +257,7 @@ located in the Middle and Middle-Eastern sectors.
 \label{fig:chap07-intensity}
 \end{figure}
 
-The Stienen diagram (\href{https://drive.google.com/file/d/0B7xsLbrOA23oeG9zSWVLcnZYdEk/edit?usp=sharing}{click
+The Stienen diagram (\href{https://www.dropbox.com/s/m00seobmpl5qtui/stienen.kml?dl=0}{click
 here to download} and open in \googleearth) helped identifying areas where the observation pattern is 
 approximately regular, such as the Northern sector where the circles are approximately aligned and have about 
 the same size. In the Southern sector, where the size of the circles is variable, the observation process seem 
@@ -282,7 +280,7 @@ nearest neighbour distance started to decrease and reached values around \SI{50}
 (NND) as related to the temporal order in which soil observations were done. Twenty two field campaigns were 
 carried out to make the $n = 340$ soil observations available. Deeper information about field campaigns is 
 given in \autoref{fig:chap07-covars}. Function \texttt{rollmean} from \Rpackage{zoo} was used to estimate the 
-rolling mean \cite{ZeileisEtAl2005}.}
+rolling mean using a window of $n = 34$ points \cite{ZeileisEtAl2005}.}
 \label{fig:chap07-nndistG}
 \end{figure}
 
@@ -604,25 +602,18 @@ number observations made is smaller as was the amount of resources available.
 \section{CONCLUSIONS}
 
 Several factors influence how field soil spatial modellers decide upon where to place soil observation 
-locations. 
-These are of three types: conceptual, operational, and psychological. The first concerns the knowledge of the 
-soil 
-spatial modellers about soil-landscape relationships, and seems to be connected with the years of field 
-experience. 
-The second relates with the available resources (infrastructure, workforce, and budget) to make soil 
-observations, 
-as well with access restrictions imposed, for example, by landowners and geographic barriers. The third relates 
-with 
-how the soil modellers perceive their surrounding physical environment and how the course of their motivation 
-shifts during the soil observation process. Point pattern analysis helped understanding that there is a 
-trade-off 
-between conceptual and operational factors, which determines how the motivation of field soil modellers shifts 
-towards one or another focal goal. Depending on the focal goal, the resulting point pattern resembles a random 
-(testing hypotheses of soil-landscape relationships -- means-focused motivation) or a regular (maximizing the 
-number of observations -- outcome-focused motivation) spatial sample. Understanding the reasons behind the 
-location 
-of soil observations in free survey can help soil spatial modellers designing more efficient data-driven 
-sampling strategies.
+locations. These are of three types: conceptual, operational, and psychological. The first concerns the 
+knowledge of the soil spatial modellers about soil-landscape relationships, and seems to be connected with the 
+years of field experience. The second relates to the available resources (infrastructure, workforce, and 
+budget) to make soil observations, as well with access restrictions imposed, for example, by landowners and 
+geographic barriers. The third relates to how the soil modellers perceive their surrounding physical 
+environment and how the course of their motivation shifts during the soil observation process. Point pattern 
+analysis helped understanding that there is a trade-off between conceptual and operational factors, which 
+determines how the motivation of field soil modellers shifts towards one or another focal goal. Depending on 
+the focal goal, the resulting point pattern resembles a random (testing hypotheses of soil-landscape 
+relationships -- means-focused motivation) or a regular (maximizing the number of observations -- 
+outcome-focused motivation) spatial sample. Understanding the reasons behind the location of soil observations 
+in free survey can help soil spatial modellers designing more efficient data-driven sampling strategies.
 
 % the following will not be included in the text
 % \subsection{Next step}
