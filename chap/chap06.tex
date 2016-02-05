@@ -51,7 +51,8 @@ Accuracy. Soil Mapping Cost}
   
 \begin{chapterabstract}{english}{\englishkeys}
 In this study we evaluated whether investing in more spatially detailed covariates improves the accuracy of 
-soil maps. We used a study case from Southern Brazil to map clay content (CLAY), organic carbon content (SOC), 
+soil maps. We used a case study from Southern Brazil to map clay content (CLAY), organic carbon content 
+(SOC), 
 and effective cation exchange capacity (ECEC) of the topsoil for a \SI{\approx2000}{\hectare} area located on 
 the edge of the plateau of the Paraná Sedimentary Basin. Five covariates, each with two levels of spatial 
 detail were used: area-class soil maps, digital elevation models (DEM), geologic maps, land use maps, and 
@@ -74,7 +75,7 @@ was replaced by the best performing model. Overall, the increase in prediction p
 not outweigh the extra costs of using more detailed covariates. It may be more efficient to spend extra 
 resources on collecting more soil observations, or increasing the detail of only those covariates that have 
 the 
-strongest improvement effect. In our study case, the latter would only work for SOC and ECEC, by investing in 
+strongest improvement effect. In our  case study, the latter would only work for SOC and ECEC, by investing in 
 a more detailed land use map and possibly also a more detailed geologic map and DEM.
 \end{chapterabstract}
 
@@ -124,7 +125,7 @@ detailed covariates generally increases soil mapping costs \cite{ShiEtAl2012}.
 The objective of this study was to evaluate whether investing in more detailed covariates improves the 
 accuracy 
 of soil maps. The main difference of our study to previous ones is that we use a rigorous statistical approach 
-to assess the added value of using five more detailed covariates simultaneously. We used a study case in 
+to assess the added value of using five more detailed covariates simultaneously. We used a  case study in 
 Brazil 
 to compare the accuracy of maps of the clay content, organic carbon content and effective cation exchange 
 capacity of the topsoil as obtained from regression kriging on the five covariates, whereby each covariate was 
@@ -449,7 +450,7 @@ explained by the covariates \cite{Cressie1993}. It is represented by a spatially
 distributed random variable, that is assumed stationary in the mean and covariance. Thus, the linear mixed 
 model of spatial variation that we employed is given by
 
-\begin{equation}\label{eq:chap06-lmm}
+\begin{equation}\label{eqn:chap06-lmm}
  Y'(\textbf{s}) = m(\textbf{s}) + e(\textbf{s}) 
                 = \sum_{j=0}^{p} \beta_{j}\cdot X_{j}(\textbf{s}) + e(\textbf{s}),
 \end{equation}
@@ -484,7 +485,7 @@ of predictor variables included in the models was omitted because this was beyon
 The multiple linear regression model calibrated using only the less detailed covariates, which we call the 
 \emph{baseline} model, and the multiple linear regression model with the highest ${R}^{2}_{adj}$, which we 
 call the \emph{best performing} model, were extended to linear mixed models of spatial variation 
-(\autoref{eq:chap06-lmm}) for each soil property. Estimation of the parameters of the linear mixed models was 
+(\autoref{eqn:chap06-lmm}) for each soil property. Estimation of the parameters of the linear mixed models was 
 performed using residual (restricted, marginal) maximum likelihood (REML) \cite{RibeiroEtAl2001, 
 LarkEtAl2004}. The spatial correlation function adopted was the exponential function (this is equivalent to 
 the Matérn correlation function with smoothness parameter $\nu = 0.5$ \cite{Stein1999}).

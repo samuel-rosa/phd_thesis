@@ -1288,3 +1288,13 @@
 %Sem indentação o texto da nota de rodapé  
 \renewcommand\@makefntext[1]{%
   \noindent\makebox[0.5em][r]{\@makefnmark}~~#1}
+
+%%=============================================================================================================
+%% FORMATAÇÃO DAS EQUAÇÕES
+%%=============================================================================================================
+
+%% ASR: O contador de equações está sendo redefinido para incluir apenas o número das seções (e não das 
+%%      subseções). As informações para redefinição estão no endereço
+%%      http://www.math.uh.edu/~torok/math_6298/latex/numbering.html
+\setcounter{equation}{0}
+% \numberwithin{equation}{section}

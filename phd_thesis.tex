@@ -26,6 +26,18 @@
 %%==============================================================================
 
 \usepackage{amsmath,latexsym,amssymb}
+
+%% Definição do espaço antes e depois das equações
+%% http://tex.stackexchange.com/a/69665/62889
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{20pt}
+  \setlength\belowdisplayskip{25pt}
+  \setlength\abovedisplayshortskip{15pt}
+  \setlength\belowdisplayshortskip{20pt}
+}
+\makeatother
+
 \usepackage[range-phrase = --, binary-units = true]{siunitx} %% Sistema Internacional de Unidades
 \DeclareSIUnit\pp{pp} % pencentual point
 
@@ -293,7 +305,7 @@ RedeMDS%
 % Como a CIP vai ser impressa atrás da página de rosto, as margens inner e outer	
 % devem ser invertidas.
 %\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}
-%\makeCIP{alessandrosamuel@yahoo.com.br}% email do autor		
+%\makeCIP{alessandrosamuel@yahoo.com.br}% email do autor
 %\restoregeometry
 
 %Se for usar a catalogação gerada pelo gerador do site da biblioteca comentar as linhas
@@ -374,11 +386,10 @@ extra costs. More efficient means of increasing prediction accuracy should be ex
 soil observations. For this end, one should use objective means for selecting observation locations to 
 minimize the effects of psychological responses of soil modellers to conceptual and operational factors on the 
 sampling design. This is because conceptual and operational difficulties encountered in the field determine 
-how 
-the motivation of soil modellers shifts between learning/verifying soil-landscape relationships and maximizing 
-the number of observations and geographic coverage. For the sole purpose of spatial trend estimation, it 
-should suffice to optimize spatial samples aiming only at reproducing the marginal distribution of the 
-covariates. For the joint purpose of optimizing sample configurations for spatial trend and variogram 
+how the motivation of soil modellers shifts between learning/verifying soil-landscape relationships and 
+maximizing the number of observations and geographic coverage. For the sole purpose of spatial trend 
+estimation, it should suffice to optimize spatial samples aiming only at reproducing the marginal distribution 
+of the covariates. For the joint purpose of optimizing sample configurations for spatial trend and variogram 
 estimation, and spatial interpolation, one can formulate a sound multi-objective optimization problem using 
 robust versions of existing sampling algorithms. Overall, we have learned that a single, universal recipe for 
 reducing our uncertainty in soil spatial modelling cannot be formulated. Deciding upon efficient ways of 
@@ -404,7 +415,7 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
-%\listofappendix
+\listofappendix
 
 %%=============================================================================
 %% Lista de Anexos (comentar se não houver)
@@ -459,14 +470,14 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-% \appendix
+\appendix
 % \include{chap/} % Introdução Geral
 % \include{chap/} % Conclusão Geral
 % \include{chap/apenb} % conceptual model of pedogenesis
 % \include{chap/apena} % The Santa Maria dataset -- soil data
 % \include{chap/apene} % The Santa Maria dataset -- covariate data
-% \include{chap/appenc} % R-package spsann
-% \include{chap/append} % R-package pedometrics
+\include{chap/appenc} % R-package spsann
+\include{chap/append} % R-package pedometrics
 
 %%=============================================================================
 %% Referências

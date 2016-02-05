@@ -438,9 +438,9 @@ for the local and global datums, respectively. MAPGEO2010 is optimized to estima
 Brazilian territory, while EGM1996 is a gravitational model of the Earth and is used as the vertical datum for 
 Shuttle Radar Topography Mission (SRTM) products. The following equation was used:
 
-\begin{equation}
+\begin{equation}\label{eqn:geoidal}
  h = H + N,
-\end{equation}\label{eqn:geoidal}
+\end{equation}
 
 \noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that approximates the 
 surface of the planet), $H$ is the orthometric height (height above the imaginary surface called geoid and 
@@ -615,28 +615,28 @@ is a circular variable, that is, the beginning (\ang{0}) and end (\ang{360}) of 
 same physical meaning. Aspect values were transformed to northernness (\texttt{NOR}), a measure of the degree 
 of exposition of a given surface to the North, a linear variable, using the equation
 
-\begin{equation}
+\begin{equation}\label{eqn:NOR}
  \texttt{NOR} = abs(\ang{180} - \texttt{ASP}).
-\end{equation}\label{eq:NOR}  
+\end{equation}  
 
 Flow accumulation (ACC), also known as catchment area or contributing area, was calculated using 
 \grass{r.watershed}, the resulting raster surface being multiplied by the square of the cell size (i.e. by the 
 cell area \SI{\approx25}{\metre\square}) to convert to areal units. This raster surface was used to calculate 
 the topographic wetness index (\texttt{TWI}) and the stream power index (\texttt{SPI}) using
 
-\begin{equation}
+\begin{equation}\label{eqn:sACC}
  \text{sACC} = \dfrac{\text{ACC}}{5},
-\end{equation}\label{eq:sACC}
+\end{equation}
 
-\begin{equation}
+\begin{equation}\label{eqn:TWI}
  \texttt{TWI} = log \dfrac{\text{sACC}}{tan(\texttt{SLP})},
-\end{equation}\label{eq:TWI}
+\end{equation}
 
 \noindent and
 
-\begin{equation}
+\begin{equation}\label{eqn:SPI}
  \texttt{SPI} = log(\text{sACC} \times tan(\texttt{SLP})),
-\end{equation}\label{eq:SPI}
+\end{equation}
 
 \noindent where sACC is the specific catchment area, \SI{5}{\m} is the cell size, and \texttt{SLP} is the 
 slope 
@@ -675,7 +675,8 @@ model. Resampling was performed using the cubic resampling method. The original 
 \centering
 \includegraphics[width = \textwidth]{fig/chap05-geo-new}
 \end{minipage} 
-\caption[Geologic maps included in the Santa Maria dataset.]{Geologic maps (a) \geoOld{} and (b) \geoNew{} used 
+\caption[Geologic maps included in the Santa Maria dataset.]{Geologic maps (a) \geoOld{} and (b) \geoNew{} 
+used 
 to derive indicator covariates included in the Santa Maria dataset. Legend abbreviations and derived dummy 
 variables are described in the text.}
 \label{fig:chap05-geo-maps}
@@ -793,10 +794,12 @@ in the text.}
 
 The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution (\SI{2.4}{\m}) 
 Quickbird satellite images of \num{2008} and \num{2009}, made publicly available in \googleearth{} 
-\cite{SamuelRosaEtAl2011a}. Identification of land uses and delineation of mapping units were done manually, on 
+\cite{SamuelRosaEtAl2011a}. Identification of land uses and delineation of mapping units were done manually, 
+on 
 the computer screen, without using any automated classification routine. Positional validation of 
 \googleearth{} imagery revealed that they have only minor systematic positional errors 
-(\autoref{tab:chap05-google-geo-val}). Despite this, the attribute validation of both land use maps, using $n = 
+(\autoref{tab:chap05-google-geo-val}). Despite this, the attribute validation of both land use maps, using $n 
+= 
 60$ validation points placed along $m = 12$ linear transects, showed that they have similar overall accuracy 
 close to \SI{70.00}{\percent}.
 
@@ -831,7 +834,8 @@ which is
 \end{description}
 
 Four ($p = 4$) indicator covariates were derived from \landNew{}, with plantation forests (\textit{PF}), human 
-settlements (\textit{S}), and other land uses (\textit{O}), which comprise natural and artificial water bodies, 
+settlements (\textit{S}), and other land uses (\textit{O}), which comprise natural and artificial water 
+bodies, 
 being 
 grouped together due to their small importance in terms of covered area (\textit{PF}) and for not containing 
 any 
@@ -856,14 +860,16 @@ the
 land use change between \num{1980} and \num{2009}, computed by checking if the land use has changed (1) or 
 remained the same (0) in every grid cell after the 29-year period. \texttt{LUdiff} can be useful, for example, 
 to 
-explain the low soil organic carbon content in forest soils due to previous use with crop agriculture or animal 
+explain the low soil organic carbon content in forest soils due to previous use with crop agriculture or 
+animal 
 husbandry.
 
 \section{SATELLITE IMAGES}
 \label{sec:chap05-sat-image}
 
 Two sources of satellite images were used to produce covariate data included in the Santa Maria dataset. The 
-first is the Thematic Mapper (TM) sensor aboard the longest-operating Earth observation satellite -- Landsat 5. 
+first is the Thematic Mapper (TM) sensor aboard the longest-operating Earth observation satellite -- Landsat 
+5. 
 The satellite image used was acquired on \num{26} December \num{2010} and is freely available in the database 
 of the Division of Image Generation of the Brazilian National Institute for Space Research (\inpedgi). The 
 image contains seven spectral bands (\autoref{tab:chap05-satellites}) (including a thermal band that is not 
@@ -910,7 +916,8 @@ version \num{4} DEM \cite{RapidEye2013}.
 \centering
 \includegraphics[width = \textwidth]{fig/chap05-sat-new}
 \end{minipage} 
-\caption[Satellite images included in the Santa Maria dataset.]{Satellite images used to derive covariates such 
+\caption[Satellite images included in the Santa Maria dataset.]{Satellite images used to derive covariates 
+such 
 as (a) \texttt{NDVI\_30} and (b) \texttt{NDVI\_5b} included in the Santa Maria dataset.}
 \label{fig:chap05-sat-image}
 \end{figure}
@@ -932,20 +939,24 @@ produced by Landsat 5 TM and RapidEye and the derived covariates.}
 &\texttt{GREEN\_5} \\
   3 Visible       &\numrange{630}{690}   &\texttt{RED\_30}   &Red           &\numrange{630}{685} 
 &\texttt{RED\_5}   \\
-  -               &-                     & -             &Red-edge      &\numrange{690}{730} &\texttt{EDGE\_5}  
+  -               &-                     & -             &Red-edge      &\numrange{690}{730} &\texttt{EDGE\_5} 
+ 
 \\
   4 Near-infrared &\numrange{760}{900}   &\texttt{NIR\_30a}  &Near-infrared &\numrange{760}{850} 
 &\texttt{NIR\_5}   \\
-  5 Near-infrared &\numrange{1550}{1750} &\texttt{NIR\_30b}  & -            & -                  & -            
+  5 Near-infrared &\numrange{1550}{1750} &\texttt{NIR\_30b}  & -            & -                  & -           
+ 
 \\
-  7 Mid-infrared  &\numrange{2080}{2350} &\texttt{MIR\_30}   & -            & -                  & -            
+  7 Mid-infrared  &\numrange{2080}{2350} &\texttt{MIR\_30}   & -            & -                  & -           
+ 
 \\
   \hline
  \end{tabular}}
 \end{table}
 
 The RapidEye image was atmospherically corrected using the 6S atmospheric model \cite{VermoteEtAl1997} 
-employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- \grass{i.atcorr} was not used because a 
+employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- \grass{i.atcorr} was not used because 
+a 
 \atcorrbug{} was found when trying to correct the RapidEye image -- assuming a tropical atmospheric model, the 
 continental aerosols model, an image-based 
 visibility estimate of \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
@@ -985,15 +996,15 @@ $p = 5$ from RapidEye (Table \ref{tab:chap05-satellites}). Another $p = 6$ covar
 TM and $p = 4$ from RapidEye) were defined using two vegetation indices: the normalized difference vegetation 
 index (NDVI) and the soil-adjusted vegetation index (SAVI), calculated as
 
-\begin{equation}
+\begin{equation}\label{eqn:ndvi}
  \text{NDVI} = \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED}}
-\end{equation}\label{eq:ndvi}
+\end{equation}
 
 \noindent and 
 
-\begin{equation}
+\begin{equation}\label{eqn:savi}
   \text{SAVI} = (1.0 + 0.5) \times \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED} + 0.5},
-\end{equation}\label{eq:savi}
+\end{equation}
 
 \noindent where $\text{NIR} = \texttt{NIR\_30a}$ and $\text{RED} = \texttt{RED\_30}$ for the Landsat 5 TM 
 image, and 

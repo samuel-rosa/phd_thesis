@@ -16,7 +16,7 @@ Covariates}
 The spatial trend is the part of a soil spatial model that deterministically explains the soil spatial 
 variation using covariates. The sampling method most commonly used to identify and estimate the spatial trend 
 is \emph{conditioned Latin hypercube sampling} (CLHS). In this study we propose conceptual and algorithmic 
-improvements on CLHS, which are evaluated using synthetic data derived from a real-world study case in Santa 
+improvements on CLHS, which are evaluated using synthetic data derived from a real-world  case study in Santa 
 Maria, southern Brazil. The improvements include: 1) using the Pearson's $r$ only when all covariates are 
 numeric, and the Cramér's $V$ when some or all covariates are factors, 2) defining marginal sampling 
 strata using only the unique values of the sample quantiles estimated with a discontinuous function, and 3) 
@@ -44,9 +44,9 @@ Federal Rural do Rio de Janeiro, Brazil).}
 
 Modern soil mapping is based on using a model of spatial variation composed of two terms, 
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-lmm} % SEE IMAGE BELOW
  Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
-\end{equation}\label{eqn:chap08-lmm}
+\end{equation}
 
 \def\footgerard{\footnote{Gerard Heuvelink shared the same opinion during his Richard Webster Medal speech at 
 the conference of the Pedometrics Commission of the IUSS, which took place from 14--18 September 2015, in 
@@ -63,8 +63,7 @@ sensing and machine-learning algorithms made those soil scientists shift their a
 $m(\boldsymbol{s})$ \cite{MooreEtAl1993} -- but without forgetting $e(\boldsymbol{s})$ \cite{OdehEtAl1994} 
 --, which now usually explains a considerably large proportion of the variation of $Y(\boldsymbol{s})$ 
 compared to $e(\boldsymbol{s})$\footgerard. Besides, it is in $m(\boldsymbol{s})$ where we can incorporate 
-most 
-of our pedological knowledge \cite{Lark2012}.
+most of our pedological knowledge \cite{Lark2012}.
 
 Recent studies have shown that using more detailed covariates or more complex machine-learning algorithms can 
 deliver more accurate soil maps, but the increase in prediction performance may be modest 
@@ -154,25 +153,23 @@ Two of the objectives of CLHS ($\mathcal{O}_1$ and $\mathcal{O}_3$) are concerne
 covariates, while only one ($\mathcal{O}_2$) focuses on \emph{factor} covariates. $\mathcal{O}_1$ and 
 $\mathcal{O}_2$ are mathematically equivalent -- they aim at the coverage of the marginal distribution of the 
 numeric and factor covariates, respectively --, and $\mathcal{O}_3$ measures the similarity between the 
-population and 
-sample correlation matrices of the numeric covariates as estimated with the Pearson's correlation coefficient 
-$r$. The CLHS ignores the association among factor covariates, as well as among factor and numeric covariates. 
-This means that 
-CLHS gives more importance to numeric covariates. Such a bias cannot be corrected by simply attributing 
-different \emph{weights} to each objective (see below).
+population and sample correlation matrices of the numeric covariates as estimated with the Pearson's 
+correlation coefficient $r$. The CLHS ignores the association among factor covariates, as well as among factor 
+and numeric covariates. This means that CLHS gives more importance to numeric covariates. Such a bias cannot be 
+corrected by simply attributing different \emph{weights} to each objective (see below).
 
 To address the problem above we propose to replace Pearson's $r$ with Cramér's $V$
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-cramer} % SEE IMAGE BELOW
  V =  \sqrt{\frac{\chi^2 / n}{min(n_\text{col} - 1, n_\text{row} - 1)}},
-\end{equation}\label{eqn:chap08-cramer}
+\end{equation}
 
 \noindent where $n_\text{row}$ and $n_\text{col}$ are the number of rows and columns of the bivariate 
 contingency table, $n$ is the sample size, and $\chi^2$ is the chi-squared statistic
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-chi-squared} % SEE IMAGE BELOW
  \chi^2 = \sum_{i = 1}^{n_\text{row}}\sum_{j=1}^{n_\text{col}}\frac{(O_{ij} - E_{ij})^2}{E_{ij}},
-\end{equation}\label{eqn:chap08-chi-squared}
+\end{equation}
 
 \noindent where $O_{ij}$ and $E_{ij}$ are the observed and expected frequencies, respectively, the marginal 
 proportions of $O$ being the maximum likelihood estimates of the marginal proportions of $E$ 
@@ -194,9 +191,9 @@ variables} \cite{Arora2011} -- at the $n$ sample points. The lower the objective
 spatial sample is to meeting the respective objective. Thus, when solving a MOCOP, one aims at minimizing the 
 vector of $k$ objective functions \cite{Arora2011}
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-mocop} % SEE IMAGE BELOW
  \boldsymbol{f}(\boldsymbol{X}) = (f_1(\boldsymbol{X}), f_2(\boldsymbol{X}), \ldots, f_k(\boldsymbol{X})),
-\end{equation}\label{eqn:chap08-mocop}
+\end{equation}
 
 \noindent where $\boldsymbol{X}$ is the design matrix, a $n \times p$ matrix subject to the implicit 
 constraints imposed by the finiteness of the spatial domain and discreteness of the $p$ design variables. 
@@ -221,9 +218,9 @@ sum} method, which is used in the CLHS. It employs weights to incorporate the \e
 the user, their relative values reflecting the importance of each objective function \cite{MarlerEtAl2009}. 
 Thus, the MOCOP boils down to minimizing the \emph{convex} combination of objective functions
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-utility} % SEE IMAGE BELOW
  U = \sum_{i=1}^{k} w_i f_i(\boldsymbol{X}),
-\end{equation}\label{eqn:chap08-utility}
+\end{equation}
 
 \noindent where \emph{convex} means that the weights $w_i$ are constrained to $w_i > 0$ and $\sum_{i=1}^{k} w_i 
 = 1$ \cite{MarlerEtAl2005, MarlerEtAl2009}. An important requirement of the weighted sum method is that the 
@@ -255,9 +252,9 @@ below).
 
 We propose using a more robust approach, i.e. the \emph{upper-lower bound approach},
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-pareto-min-max} % SEE IMAGE BELOW
  f_i'' = \frac{f_i(\boldsymbol{X}) - f_i^{\circ}}{f_i^{max} - f_i^{\circ}},
-\end{equation}\label{eqn:chap08-pareto-min-max}
+\end{equation}
 
 \noindent where $f_i^{\circ}$ is the \emph{utopia point}, the single best solution for the $i$th objective 
 function, and $f_i''$ is the $i$th non-dimensional, scaled objective function constrained between zero and one 
@@ -284,17 +281,17 @@ the extra time needed to optimize each of the $k$ objective functions individual
 Given the proposed modifications, the problem of sampling for spatial trend estimation for soil mapping is 
 redefined using two objective functions,
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-corr} % SEE IMAGE BELOW
  \text{CORR} = \sum_{i=1}^{p}\sum_{j=1}^{p}|\varphi_{ij} - v_{ij}|,
-\end{equation}\label{eqn:chap08-corr}
+\end{equation}
 
 \noindent where $\varphi_{ij}$ and $v_{ij}$ are the population and sample associations (or correlations in case 
 all covariates are numeric) at the $i$th row and $j$th column of the $p$-dimensional population and sample 
 association (or correlation) matrices, and
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-dist} % SEE IMAGE BELOW
  \text{DIST} = \sum_{i=1}^{p}\sum_{j=1}^{c_i} |\pi_{ij} - \gamma_{ij}|,
-\end{equation}\label{eqn:chap08-dist}
+\end{equation}
 
 \noindent where $\pi_{ij}$ and $\gamma_{ij}$ are the proportion of sample and population points that fall in 
 the $j$th class (or marginal sampling strata) of the $i$th covariate, $c_i$ being the number of classes of the 
@@ -303,17 +300,17 @@ $i$th covariate. With these two objective functions, we define a utility functio
 \textbf{A}ssociation/\textbf{C}orrelation measure and the marginal \textbf{D}istribution of the 
 \textbf{C}ovariates,
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-acdc} % SEE IMAGE BELOW
  \text{ACDC} = w_1\text{CORR} + w_2 \text{DIST},
-\end{equation}\label{eqn:chap08-acdc}
+\end{equation}
 
 \noindent with $w_1 = w_2 = 0.5$ when we do not have \emph{a priori} preferences towards the objective 
 functions.
 
-\section{STUDY CASE}
+\section{CASE STUDY}
 
-We developed a study case to evaluate the proposed improvements and compare them with the original CLHS. It 
-was based on using synthetic data derived from a real-world study case \cite{Samuel-RosaEtAl2015}. The study 
+We developed a  case study to evaluate the proposed improvements and compare them with the original CLHS. It 
+was based on using synthetic data derived from a real-world  case study \cite{Samuel-RosaEtAl2015}. The study 
 site is a small catchment of about \SI{2000}{\hectare} located on the southern edge of the Plateau of the 
 Paraná Geologic Province, Rio Grande do Sul, Brazil. The real-world dataset contains $n = 350$ point soil 
 observations of the topsoil, and includes several soil properties, but only bulk density data 
@@ -494,14 +491,14 @@ sometimes during the search can lead to better results. The decision whether to 
 configuration is described by the Metropolis criterion \cite{MetropolisEtAl1953}, used to compute the 
 \emph{acceptance probability} $P(\boldsymbol{X}_i \rightarrow \boldsymbol{X}_{i + 1})$ as
 
-\begin{equation} % SEE IMAGE BELOW.
+\begin{equation}\label{eqn:chap08-metropolis} % SEE IMAGE BELOW.
  P(\boldsymbol{X}_i \rightarrow \boldsymbol{X}_{i + 1}) = 
  \begin{cases}
   1, & \text{if}\  \boldsymbol{f}(\boldsymbol{X}_{i + 1}) \leq  \boldsymbol{f}(\boldsymbol{X}_i), \\ 
   exp\left(\frac{\boldsymbol{f}(\boldsymbol{X}_i) -  \boldsymbol{f}(\boldsymbol{X}_{i + 1})}{T}\right),  
       & \text{if}\  \boldsymbol{f}(\boldsymbol{X}_{i + 1}) >  \boldsymbol{f}(\boldsymbol{X}_i ),
  \end{cases}
-\end{equation}\label{eqn:chap08-metropolis}
+\end{equation}
 
 \noindent where $T$ is a positive control parameter that dictates how likely it is that an inferior sample 
 configuration will be accepted.

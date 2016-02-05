@@ -552,9 +552,9 @@ for the local and global datums, respectively. MAPGEO2010 is optimized to estima
 Brazilian territory, while EGM1996 is a gravitational model of the Earth and is used as the vertical datum for 
 Shuttle Radar Topography Mission (SRTM) products. The following equation was used:
 
-\begin{equation}
+\begin{equation}\label{eqn:geoidal}
  h = H + N,
-\end{equation}\label{eqn:geoidal}
+\end{equation}
 
 \noindent where $h$ is the ellipsoidal height (height above the reference ellipsoid that approximates the 
 surface of the planet), $H$ is the orthometric height (height above the imaginary surface called geoid and 
@@ -811,28 +811,28 @@ is a circular variable, that is, the beginning (\ang{0}) and end (\ang{360}) of 
 same physical meaning. Aspect values were transformed to northernness (\texttt{NOR}), a measure of the degree 
 of exposition of a given surface to the North, a linear variable, using the equation
 
-\begin{equation}
+\begin{equation}\label{eqn:NOR}
  \texttt{NOR} = abs(\ang{180} - \texttt{ASP}).
-\end{equation}\label{eq:NOR}  
+\end{equation}  
 
 Flow accumulation (ACC), also known as catchment area or contributing area, was calculated using 
 \grass{r.watershed}, the resulting raster surface being multiplied by the square of the cell size (i.e. by the 
 cell area \SI{\approx25}{\metre\square}) to convert to areal units. This raster surface was used to calculate 
 the topographic wetness index (\texttt{TWI}) and the stream power index (\texttt{SPI}) using
 
-\begin{equation}
+\begin{equation}\label{eqn:sACC}
  \text{sACC} = \dfrac{\text{ACC}}{5},
-\end{equation}\label{eq:sACC}
+\end{equation}
 
-\begin{equation}
+\begin{equation}\label{eqn:TWI}
  \texttt{TWI} = log \dfrac{\text{sACC}}{tan(\texttt{SLP})},
-\end{equation}\label{eq:TWI}
+\end{equation}
 
 \noindent and
 
-\begin{equation}
+\begin{equation}\label{eqn:SPI}
  \texttt{SPI} = log(\text{sACC} \times tan(\texttt{SLP})),
-\end{equation}\label{eq:SPI}
+\end{equation}
 
 \noindent where sACC is the specific catchment area, \SI{5}{\m} is the cell size, and \texttt{SLP} is the 
 slope 
@@ -1402,15 +1402,15 @@ $p = 5$ from RapidEye (Table \ref{tab:chap05-satellites}). Another $p = 6$ covar
 TM and $p = 4$ from RapidEye) were defined using two vegetation indices: the normalized difference vegetation 
 index (NDVI) and the soil-adjusted vegetation index (SAVI), calculated as
 
-\begin{equation}
+\begin{equation}\label{eqn:ndvi}
  \text{NDVI} = \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED}}
-\end{equation}\label{eq:ndvi}
+\end{equation}
 
 \noindent and 
 
-\begin{equation}
+\begin{equation}\label{eqn:savi}
   \text{SAVI} = (1.0 + 0.5) \times \frac{\text{NIR} - \text{RED}}{\text{NIR} + \text{RED} + 0.5},
-\end{equation}\label{eq:savi}
+\end{equation}
 
 \noindent where $\text{NIR} = \texttt{NIR\_30a}$ and $\text{RED} = \texttt{RED\_30}$ for the Landsat 5 TM 
 image, and 
