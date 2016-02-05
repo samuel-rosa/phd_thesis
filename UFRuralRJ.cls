@@ -39,7 +39,7 @@
 %% Identificação
 %%==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[21/10/2015 v.0.4 Formatação de documentos acadêmicos da UFRuralRJ]
+\ProvidesClass{UFRuralRJ}[05/02/2016 v.0.5 Formatação de documentos acadêmicos da UFRuralRJ]
 
 %%==============================================================================
 %% Declaração de opções da classe
@@ -128,8 +128,8 @@
 % \newcommand{\altCurso}[1]{\gdef\@altCurso{#1}} %% Obsoleto
 \newcommand{\area}[1]{\gdef\@area{#1}}
 \newcommand{\instituto}[1]{\gdef\@instituto{#1}}
-% \newcommand{\grau}[1]{\gdef\@grau{#1}}
-% \newcommand{\nivel}[1]{\gdef\@nivel{#1}}
+% \newcommand{\grau}[1]{\gdef\@grau{#1}} %% Obsoleto
+% \newcommand{\nivel}[1]{\gdef\@nivel{#1}} %% Obsoleto
 \newcommand{\trabalhoNumero}[1] {\gdef\@trabalhoNumero{#1}}
 \newcommand{\local}[3]{\gdef\@city{#1}\gdef\@state{#2}\gdef\@country{#3}}
 
@@ -699,7 +699,7 @@
       \normalsize\centerline{\parbox[t]{\textwidth}{\assina\@committeec}}}
     \vspace{18mm}
     \@ifundefined{@committeed}{}{
-      \normalsize\centerline{\parbox[t]{\textwidth}{\assina\@committeed}}}		
+      \normalsize\centerline{\parbox[t]{\textwidth}{\assina\@committeed}}}
     \vspace{18mm}
     \@ifundefined{@committeee}{}{
       \normalsize\centerline{\parbox[t]{\textwidth}{\assina\@committeee}}}
@@ -880,7 +880,15 @@
   \if@openright\cleardoublepage\else\clearpage\fi
     \gdef\@mykeywords{#2}
   \begin{otherlanguage}{#1}
-    \setlength{\baselineskip}{0.67\baselineskip} %% Espaçamento simples
+    
+    %% ASR: A definição do espaçamento entre linhas no resumo igual à '0.67\baselineskip' é baseada no uso
+    %%      de espaçamento '1.5\baselineskip' no resto do texto, que é equivalente ao espaçamento de um ponto
+    %%      e meio entre linhas. Tal opção pode ser usada na preparação da versão do documento que é enviada
+    %%      ao comitê examinador. Contudo, ela faz com que a formatação do resumo fique péssima quando da 
+    %%      preparação da versão final do documento. A melhor opção, no momento, parece ser eliminar a 
+    %%      definição do espaçamento entre linhas no ambiente 'chapterabstract'.
+    % \setlength{\baselineskip}{0.67\baselineskip} %% Espaçamento simples
+    
     \vspace*{-14mm} %% Alinhamento superior
     \vspace*{10mm}  %% Coloca o resumo a 10 mm da margem superior
     
@@ -920,6 +928,9 @@
 %% Os comandos \@makechapterhead e \@makeschapterhead fazem a
 %% formatação dos títulos propriamente ditos.
 %%=============================================================================
+
+%% Para capítulos baseados em artigos, ou seja, documento na forma de capítulos
+\newif\ifartigo
 
 %% Título curto para cabeçalho (header)
 \newcommand{\shorttitle}[1]{\gdef\@shorttitle{#1}}
@@ -972,8 +983,6 @@
 
 %% Colocar título de capítulos no formato de artigo 
 %% Posição: 20 mm abaixo da margem superior
-\newif\ifartigo
-
 \def\@makechapterhead#1{%
   %% Colocar título dos itens principais do documento a 10 mm da margem superior
   \vspace*{5.5mm} 
@@ -1141,9 +1150,13 @@
 % \let\cite\citep
 % {}
 
-%%=============================================================================
-%% Formatação dos Apêndices 
-%%=============================================================================
+%% Numeração (como capítulo) da lista de 'Referências Bibliográficas'
+%% http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/tocbibind/tocbibind.pdf
+\usepackage[nottoc, notlot, notlof, numbib]{tocbibind}
+
+%%=============================================================================================================
+%% FORMATAÇÃO DOS APÊNDICES
+%%=============================================================================================================
 
 \newcommand{\appendixpage}{%
   \if@openright\cleardoublepage\else\clearpage\fi
@@ -1155,10 +1168,22 @@
   {\centering
    \interlinepenalty \@M
    \normalfont
-   \LargeE\bfseries\MakeUppercase\appendixname\par}%
-  %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo 
-  %%      mundo alinhado na toc
-  \addcontentsline{toc}{chapter}{\hspace*{0.35em}\appendixname}	
+   
+   %% ASR: O comando '\thechapter' é usado para adicionar numeração ao apêndice, seguindo a sequência
+   %%      dos capítulos anteriores. Mas para que o comando '\thechapter' funcione, é necessário aumentar
+   %%      em um a contagem do contador de capítulos.
+   % \LargeE\bfseries\MakeUppercase\appendixname\par}%
+   %% ASR: Há um problema na numeração se houver apêndice e anexo: a segunda entrada aparece em estilo
+   %%      alfabético.
+   \addtocounter{chapter}{+1}
+   \LargeE\bfseries\thechapter~\MakeUppercase\appendixname\par}%
+   %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo mundo alinhado na toc
+   % \addcontentsline{toc}{chapter}{\hspace*{0.35em}\appendixname}
+   % \addcontentsline{toc}{chapter}{\thechapter~\appendixname}
+   \addtocontents{toc}{\protect\addvspace{10\p@}}
+   \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}~\appendixname}
+   \addtocontents{toc}{\protect\addvspace{10\p@}}
+  
   \vfil\newpage
   \if@twoside
     \if@openright
@@ -1201,9 +1226,9 @@
   \if@restonecol\twocolumn\fi
 }
 
-%%==============================================================================
-%% Formatação dos Anexos
-%%==============================================================================
+%%=============================================================================================================
+%% FORMATAÇÃO DOS ANEXOS
+%%=============================================================================================================
 
 \newcommand{\annexpage}{%
   \if@openright\cleardoublepage\else\clearpage\fi
@@ -1217,10 +1242,20 @@
   {\centering
    \interlinepenalty \@M
    \normalfont
-   \LargeF \bfseries \MakeUppercase\annexname\par}%
+   
+   % \LargeF \bfseries \MakeUppercase\annexname\par}%
    %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo 
    %%      mundo alinhado na toc
-   \addcontentsline{toc}{chapter}{\hspace*{0.35em}\annexname}
+   % \addcontentsline{toc}{chapter}{\hspace*{0.35em}\annexname}
+   %% ASR: Há um problema na numeração se houver apêndice e anexo: a segunda entrada aparece em estilo
+   %%      alfabético.
+   \addtocounter{chapter}{+1}
+   \LargeE\bfseries\thechapter~\MakeUppercase\annexname\par}%
+   \addtocontents{toc}{\protect\addvspace{10\p@}}
+   \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}~\annexname}
+   \addtocontents{toc}{\protect\addvspace{10\p@}}
+   
+   
   \vfil\newpage
   \if@twoside
     \if@openright
@@ -1297,4 +1332,3 @@
 %%      subseções). As informações para redefinição estão no endereço
 %%      http://www.math.uh.edu/~torok/math_6298/latex/numbering.html
 \setcounter{equation}{0}
-% \numberwithin{equation}{section}
