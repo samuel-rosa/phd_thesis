@@ -1,5 +1,6 @@
 \artigotrue
 \chapter{THE SANTA MARIA DATASET. PART II -- COVARIATE DATA}
+\shorttitle{Covariate Data}
 \label{chap:chap05}
 %\SweaveUTF8
 
@@ -200,7 +201,8 @@ the approximate taxonomic composition (\si{\percent}).
 \includegraphics[width = \textwidth]{fig/chap05-soil-new}
 \end{minipage} 
 \caption[Area-class soil maps included in the Santa Maria dataset.]{Area-class soil maps (a) \soilOld{} and (b) 
-\soilNew{} used to derive indicator covariates included in the Santa Maria dataset.}
+\soilNew{} used to derive indicator covariates included in the Santa Maria dataset. Legend abbreviations and 
+derived dummy variables are described in the text.}
 \label{fig:chap05-soil-maps}
 \end{figure}
 
@@ -421,7 +423,7 @@ horizontal validation of topographic maps (\scale{25000}) using $n = 14$  GCPs.}
 Interpolation of the raster surface with \SI{5}{\metre} grid size was performed using the function 
 \texttt{Topo 
 to Raster} in ArcGIS\textregistered{} software by ESRI, which includes an interpolation method based on the 
-ANUDEM program developed by \citeonline{Hutchinson1989}. Vector files of contour lines (\texttt{multiline}), 
+ANUDEM program \cite{Hutchinson1989}. Vector files of contour lines (\texttt{multiline}), 
 drainage network (\texttt{multiline}), lakes (\texttt{polygons}) and peaks (\texttt{points}) were used to 
 generate a 
 hydrologically sound DEM, that is, a DEM without spurious depressions and giving a precise representation 
@@ -674,7 +676,8 @@ model. Resampling was performed using the cubic resampling method. The original 
 \includegraphics[width = \textwidth]{fig/chap05-geo-new}
 \end{minipage} 
 \caption[Geologic maps included in the Santa Maria dataset.]{Geologic maps (a) \geoOld{} and (b) \geoNew{} used 
-to derive indicator covariates included in the Santa Maria dataset.}
+to derive indicator covariates included in the Santa Maria dataset. Legend abbreviations and derived dummy 
+variables are described in the text.}
 \label{fig:chap05-geo-maps}
 \end{figure}
 
@@ -783,7 +786,8 @@ the use of the nearest neighbour resampling method to match \landOld{} to the re
 \end{minipage}
 \caption[Land use maps included in the Santa Maria dataset.]{Land use maps (a) \landOld{} and (b) \landNew{} 
 used to derive indicator covariates included in the Santa Maria dataset such as (c) \texttt{LUdiff}, the land 
-use change between the years of 1980 and 2009.}
+use change between the years of 1980 and 2009. Legend abbreviations and derived dummy variables are described 
+in the text.}
 \label{fig:chap05-land-use}
 \end{figure}
 
@@ -997,7 +1001,7 @@ $\text{NIR} = \texttt{NIR\_5}$ and $\text{RED} = \texttt{RED\_5}$ or $\text{RED}
 RapidEye 
 image.
 
-\section{FINAL CONSIDERATIONS}
+\section{CONCLUSIONS}
 
 This document presented a thorough description of the covariate data (area-class soil maps, digital elevation 
 models, geological maps, land use maps, and satellite images) contained in the Santa Maria dataset. This 

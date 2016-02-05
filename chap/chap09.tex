@@ -1,5 +1,6 @@
 \artigotrue
 \chapter{SAMPLING FOR SOIL MAPPING IN \emph{TERRA INCOGNITA}}
+\shorttitle{Sampling in \emph{Terra Incognita}}
 \label{chap:chap09}
 
 %\def\ptkeys{Recozimento simulado, Otimização multi-objetivo, Estimativa do variogram, Predição espacial}
@@ -41,16 +42,17 @@ errors, resulting in a waste of financial resources, staff and time \cite{vanGro
 deGruijterEtAl2006, LanEtAl2010}. This is undesirable because sampling already is the largest contributor to 
 the costs of soil mapping \cite{WebsterEtAl1990, vanGroenigenEtAl1999, KempenEtAl2012}.
 
-This study addresses a problem that many soil spatial modellers face: how to come up with a spatial sample 
-configuration that is effective and robust in situations where we know very little. We explore a scenario in 
-which a) multiple soil properties have to be mapped, b) we are ignorant (or know very little) about the form of 
-the model of spatial variation, and c) the operational constraints limit sampling to a single phase. The study 
-starts with a review of the sampling strategies employed by soil spatial modellers to meet one or more of the 
-three objectives for which sampling data are used under the proposed scenario, i.e. to estimate the spatial 
-trend and the variogram, and make spatial predictions. Based on theoretical and operational features, we 
-indicate the sampling strategies that we believe to be the most appropriate for each purpose and try to 
-formulate a sampling strategy that addresses all three objectives jointly. The chapter ends with a suggestion 
-on how to test the performance of the proposed sampling algorithms.
+This study addresses a problem that many soil spatial modellers face: how to come up with a purposive spatial 
+sample configuration that is effective and robust in situations where we know very little. We explore a 
+scenario in which a) multiple soil properties have to be mapped, b) we are ignorant (or know very little) about 
+the form of the model of spatial variation, and c) the operational constraints limit sampling to a single 
+phase. The study starts with a review of the purposive sampling strategies employed by soil spatial modellers 
+to meet one or more of the three objectives for which sampling data are used under the proposed scenario, i.e. 
+to estimate the spatial trend and the variogram, and make spatial predictions. Based on theoretical and 
+operational features, we indicate the purposive sampling strategies that we believe to be the most appropriate 
+for each purpose and try to formulate a purposive sampling strategy that addresses all three objectives 
+jointly. The chapter ends with a suggestion on how to test the performance of the proposed purposive sampling 
+algorithms.
 
 % The objective is to evaluate the ability of different sampling configuration types and sample sizes to 
 % capture the true form of the model of spatial variation and make accurate predictions. We also quantify the 
@@ -87,7 +89,7 @@ and make spatial predictions.
 \subsection{Sampling for Spatial Trend Estimation}
 
 The spatial trend corresponds to the spatial variation of $Y(\boldsymbol{s})$ that is explained linearly or 
-nonlinearly by the covariates. For a linear spatial trend, the sample should cover the extremes of the 
+non-linearly by the covariates. For a linear spatial trend, the sample should cover the extremes of the 
 distribution of the covariates \cite{Mueller2007}. For models with interactions and/or higher order terms there 
 are the response surface designs \cite{BoxEtAl1951, LeschEtAl1995}. These approaches produce clusters of points 
 and ignore the spatial autocorrelation of the residuals \cite{BrusEtAl2007a, Mueller2007}. Optimal sampling 
@@ -280,24 +282,32 @@ y-coordinates, and $min_j$ refers to taking the minimum over all $j$’s for eac
 
 We propose a heuristic, general-purpose method to design sample configurations for soil mapping in \emph{terra 
 incognita}. Like sampling for spatial trend estimation (ACDC), it is based on solving a multi-objective 
-combinatorial optimization problem (MOCOP). A utility function is defined aggregating the three criteria 
-described above so that the sample points cover, extend over, spread over, SPAN the feature, variogram 
-and geographic spaces,
+combinatorial optimization problem (MOCOP) (\autoref{eqn:chap08-mocop}). A utility function is defined 
+aggregating the three criteria described above using the weighted sum method (\autoref{eqn:chap08-utility})
+so that the sample points cover, extend over, spread over, SPAN the feature, variogram and geographic spaces,
 
 \begin{equation} % SEE IMAGE BELOW
 \text{SPAN} = w_1 \text{CORR} + w_2 \text{DIST} + w_3 \text{PPL} + w_4 \text{MSSD}, 
 \end{equation}\label{eqn:chap08-span}
 
-with $w_1 = w_2$ and $w_1 + w_2 = w_3 + w_4$ in the \emph{terra incognita} setting.
+\noindent with $w_1 = w_2$ and $w_1 + w_2 = w_3 + w_4$ in the \emph{terra incognita} setting. Before 
+aggregation, each objective function is scaled to the same approximate range of values using the upper-lower 
+bound approach with the Pareto minimum and maximum values (\autoref{eqn:chap08-pareto-min-max}) so that any 
+potential numerical dominance can be eliminated or minimized, and the weights can play the desired role 
+\cite{MarlerEtAl2005, MarlerEtAl2009}. Solving the multi-objective optimization problem of sampling in 
+\emph{terra incognita} (SPAN) can be solved using spatial simulated annealing as implemented in the 
+\Rpackage{spsann}. Simulated annealing is a popular method with widespread use to solve combinatorial 
+optimization problems due to its robustness against local optima and easiness of implementation 
+\cite{MetropolisEtAl1953, KirkpatrickEtAl1983, Cerny1985, AartsEtAl1989, Groenigen1999a}.
 
-\section{FINAL CONSIDERATIONS}
+\section{CONCLUSIONS}
 
 This chapter presented sound strategies for optimizing spatial samples to estimate the spatial trend and the 
 variogram, and make spatial predictions when we know very little about the soil spatial distribution. Overall, 
-the main requirement is the formulation of a sound multi-objective optimization problem using robust versions 
-of existing sampling algorithms. The aimed spatial sample should reproduce the marginal distribution of the 
-covariates such that the spatial trend can be accurately estimated. This can be achieved using the recently 
-improved version of the conditioned Latin hypercube sampling algorithm (ACDC).
+the main requirement is the formulation of a sound multi-objective combinatorial optimization problem (MOCOP) 
+using robust versions of existing sampling algorithms. The aimed spatial sample should reproduce the marginal 
+distribution of the covariates such that the spatial trend can be accurately estimated. This can be achieved 
+using the recently improved version of the conditioned Latin hypercube sampling algorithm (ACDC).
 
 The spatial sample should also contain several small clusters scattered throughout the sampling region, the 
 reason being the need for an accurate estimate of the behaviour of the variogram near the origin. An efficient 
@@ -307,8 +317,21 @@ point-pairs in each lag class. Finally, the sampling region should be covered th
 that the average prediction error variance is the least possible. For that end, one can minimize the distance 
 between every prediction point and its nearest neighbouring sampling point (MSSD).
 
-Solving the multi-objective optimization problem of sampling in \emph{terra incognita} (SPAN) can be solved 
-using spatial simulated annealing as implemented in the \Rpackage{spsann}.
+We believe that the proposed general purpose sampling strategy need to be evaluated compared to (i) the single 
+version of each objective function, (ii) popular sampling designs such as regular grids, and (iii) sampling 
+algorithms that assume the model of soil spatial variation as known. The effect of sample size need to be 
+addressed as well. Unfortunately, resource restrictions hinder the execution of such an evaluation using field 
+data because sampling costs are high. A reasonable solution is to use synthetic data derived from a real-world 
+study case. The first step would consist of defining soil data generating processes using existing point soil 
+observations and spatially exhaustive covariates. At least two generating processes should be defined, possibly 
+using different soil properties, such that the deterministic and random components of soil spatial variation 
+have different forms. For example, linear and non-linear trends coupled with exponential and Gaussian 
+variograms. Next, the generating processes would be used to produce multiple realizations of the soil data, 
+from which we would sample using the spatial samples under comparison. Evaluation of sampling strategies would 
+consist of measuring how well the spatial samples (i) capture the true form of the soil data generating 
+process and (ii) make spatial predictions. The outcome of such an exercise should help us understanding on how 
+to decide upon sampling strategies when we want to learn about the soil-landscape relationships and make 
+accurate predictions.
 
 % \section{CASE STUDY}
 % 

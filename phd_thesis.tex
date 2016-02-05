@@ -1,7 +1,7 @@
 %\listfiles
 
 %% Tipo de documento e a classe a ser usada para sua formatação.
-\documentclass[tese]{UFRuralRJ}
+\documentclass[tese,header]{UFRuralRJ}
 
 %% Um tipo específico de monografia pode ser informado como parâmetro opcional:
 %\documentclass[tese]{UFRuralRJ}
@@ -368,12 +368,13 @@ land use maps, and satellite images. These soil and covariate data constitute th
 Two packages for \texttt{R} were created in support of the case studies, the first (\texttt{pedometrics}) 
 containing various functions for spatial exploratory data analysis and model calibration, the second 
 (\texttt{spsann}) designed for the optimization of spatial samples using simulated annealing. The case studies 
-demonstrated that existing covariates are suitable for calibrating soil spatial models, and using more 
+illustrated that existing covariates are suitable for calibrating soil spatial models, and using more 
 detailed covariates results in only a modest increase in the prediction accuracy that may not outweigh the 
 extra costs. More efficient means of increasing prediction accuracy should be explored, such as obtaining more 
 soil observations. For this end, one should use objective means for selecting observation locations to 
 minimize the effects of psychological responses of soil modellers to conceptual and operational factors on the 
-sampling design. This because conceptual and operational difficulties encountered in the field determine how 
+sampling design. This is because conceptual and operational difficulties encountered in the field determine 
+how 
 the motivation of soil modellers shifts between learning/verifying soil-landscape relationships and maximizing 
 the number of observations and geographic coverage. For the sole purpose of spatial trend estimation, it 
 should suffice to optimize spatial samples aiming only at reproducing the marginal distribution of the 
@@ -437,7 +438,7 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Início da tese
 %%=============================================================================
-\setlength{\baselineskip}{1.5\baselineskip}
+% \setlength{\baselineskip}{1.5\baselineskip}
 
 % Adiciona cada capitulo
 \selectlanguage{english}
@@ -453,7 +454,7 @@ data using sound spatial modelling techniques.
 \include{chap/chap08} % 8. Optimization of sample configurations for spatial trend estimation for soil mapping
 \include{chap/chap09} % 9. Sampling for soil mapping in terra incognita
 \include{chap/chap10} % 10. General conclusion
-\setlength{\baselineskip}{\baselineskip}
+% \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
 %% Apêndices

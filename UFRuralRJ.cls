@@ -129,7 +129,7 @@
 \newcommand{\area}[1]{\gdef\@area{#1}}
 \newcommand{\instituto}[1]{\gdef\@instituto{#1}}
 % \newcommand{\grau}[1]{\gdef\@grau{#1}}
-\newcommand{\nivel}[1]{\gdef\@nivel{#1}}
+% \newcommand{\nivel}[1]{\gdef\@nivel{#1}}
 \newcommand{\trabalhoNumero}[1] {\gdef\@trabalhoNumero{#1}}
 \newcommand{\local}[3]{\gdef\@city{#1}\gdef\@state{#2}\gdef\@country{#3}}
 
@@ -734,10 +734,15 @@
   \endgroup
 }
 
-\renewcommand*{\l@section}[2]{\@dottedtocline{1}{0em}{1.7em}{\textbf{#1}}{\hss #2}}
-\renewcommand*{\l@subsection}{\@dottedtocline{2}{0em}{2.4em}}
-\renewcommand*{\l@subsubsection}{\@dottedtocline{3}{0em}{3em}}
-\renewcommand*{\l@paragraph}{\@dottedtocline{4}{0em}{3.8em}}
+%% ASR: O comando \@dottedtocline espera os seguintes parâmetros:
+%%      \@dottedtocline{<level>}{<indentation>}{<numwidth>}
+%%      Não existe definição oficial do nível de indentação das seções. Os valores usados aqui são baseados
+%%      na dimensão da letra 'M' maiúscula na fonte atual, conforme expresso pelo comando 'em'.
+\renewcommand*{\l@section}[2]{\@dottedtocline{1}{1em}{1.7em}{\textbf{#1}}{\hss #2}}
+\renewcommand*{\l@subsection}{\@dottedtocline{2}{2em}{2.4em}}
+\renewcommand*{\l@subsubsection}{\@dottedtocline{3}{3em}{3em}}
+\renewcommand*{\l@paragraph}{\@dottedtocline{4}{4em}{3.8em}}
+
 \newif\if@aftertoc
 \@aftertocfalse
 \renewcommand{\tableofcontents}{%
@@ -935,9 +940,31 @@
         \fi
       \fi
       \refstepcounter{chapter}%
-      \ifchap\addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp\thechapter}#1}\fi%
-      \addtocontents{lof}{\protect\addvspace{0\p@}}%original = 10\p@ 
-      \addtocontents{lot}{\protect\addvspace{0\p@}}%
+      
+      %% FORMATAÇÃO DO TÍTULOS DOS CAPÍTULOS NO SUMÁRIO
+      %% ASR: É preciso adicionar um espaço em '~#1' para evitar que o título fique sobre o número
+      %%      quando o número do capítulo possui dois ou mais dígitos. Contudo, isso aumenta em demasia
+      %%      o espaçamento quando o número do capítulo possui apenas um dígito. Deve haver maneira mais
+      %%      eficiente de fazer isso.
+      %% ASR: São adicionados 10 pontos de espaço vertical antes e após o titulo de cada capitulo no sumario.
+      %%      COmo não existe definição oficial, a decisão de adicionar 10 pontos é completamente arbitrária.
+      %% ASR: É preciso verificar como adicionar a numeração correta do capítulo/artigo usando \Roman. A
+      %%      versão atual usa a mesma numeração sequencial atribuída ao capítulo.
+      \ifchap%
+       \addtocontents{toc}{\protect\addvspace{10\p@}}%
+        \ifartigo
+         \addcontentsline{toc}{chapter}{%
+         \protect\numberline{\@chapapp\thechapter}~\chaptername~\Roman{chapter}.~#1}%
+        \else
+         % \ifchap\addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp\thechapter}#1}\fi%
+         \addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp\thechapter}~#1}%
+        \fi
+       \addtocontents{toc}{\protect\addvspace{10\p@}}%
+      \fi
+      
+      \addtocontents{lof}{\protect\addvspace{0\p@}}% list of figures
+      \addtocontents{lot}{\protect\addvspace{0\p@}}% list of tables
+      
       %\pagestyle{UFRuralRJ}\let\ps@plain\ps@UFRuralRJ%
       \pagestyle{UFRuralRJ}\let\ps@empty\ps@UFRuralRJ% Omitir número de página
       \@makechapterhead{#2}\@afterheading
@@ -945,7 +972,7 @@
 
 %% Colocar título de capítulos no formato de artigo 
 %% Posição: 20 mm abaixo da margem superior
-\newif\ifartigo 
+\newif\ifartigo
 
 \def\@makechapterhead#1{%
   %% Colocar título dos itens principais do documento a 10 mm da margem superior
@@ -1009,35 +1036,38 @@
 %% Formatação das seções
 %%==============================================================================
 
+%% ASR: Os títulos das seções e subseções são precedidos por espaçamento de 20 pontos, e sucedidos por 
+%%      espaçamento de 10 pontos.
+
 %\renewcommand{\section}{%name, level, indent, beforeskip, afterskip,style
 %        \@startsection{section}{1}{0pt}{18pt}{18pt}{\reset@font\bfseries\@setfontsize\Large{12}{20}}
 %}
 
 \renewcommand\section{\@startsection{section}{1}{0pt}%
-                                   {18pt}%
-                                   {18pt}%
+                                   {20pt}%
+                                   {10pt}%
                                    {\centering\reset@font\bfseries\@setfontsize
-                                      \Large{12}{20}}}
+                                     \Large{12}{20}}}
 \renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
-                                   {12pt}%
-                                   {18pt}%
+                                   {20pt}%
+                                   {10pt}%
                                    {\reset@font\bfseries\@setfontsize
-                                      \Large{12}{20}}}
+                                     \Large{12}{20}}}
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{0pt}%
-                                   {12pt}%
-                                   {18pt}%
+                                   {20pt}%
+                                   {10pt}%
                                    {\reset@font\bfseries\@setfontsize
-                                      \Large{12}{20}}}
+                                     \Large{12}{20}}}
 \renewcommand\paragraph{\@startsection{paragraph}{4}{0pt}%
-                                   {12pt}%
-                                   {18pt}%
+                                   {20pt}%
+                                   {10pt}%
                                    {\reset@font\bfseries\@setfontsize
-                                      \Large{12}{20}}}	
+                                     \Large{12}{20}}}	
 \renewcommand\subparagraph{\@startsection{subparagraph}{5}{0pt}%
                                    {1ex}%
                                    {-1em}%
                                    {\reset@font\bfseries\@setfontsize
-                                      \Large{12}{20}}}
+                                     \Large{12}{20}}}
 
 %%=============================================================================
 %% TODO: Lista de quadros
