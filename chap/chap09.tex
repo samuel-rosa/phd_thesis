@@ -42,16 +42,17 @@ errors, resulting in a waste of financial resources, staff and time \cite{vanGro
 deGruijterEtAl2006, LanEtAl2010}. This is undesirable because sampling already is the largest contributor to 
 the costs of soil mapping \cite{WebsterEtAl1990, vanGroenigenEtAl1999, KempenEtAl2012}.
 
-This study addresses a problem that many soil spatial modellers face: how to come up with a spatial sample 
-configuration that is effective and robust in situations where we know very little. We explore a scenario in 
-which a) multiple soil properties have to be mapped, b) we are ignorant (or know very little) about the form of 
-the model of spatial variation, and c) the operational constraints limit sampling to a single phase. The study 
-starts with a review of the sampling strategies employed by soil spatial modellers to meet one or more of the 
-three objectives for which sampling data are used under the proposed scenario, i.e. to estimate the spatial 
-trend and the variogram, and make spatial predictions. Based on theoretical and operational features, we 
-indicate the sampling strategies that we believe to be the most appropriate for each purpose and try to 
-formulate a sampling strategy that addresses all three objectives jointly. The chapter ends with a suggestion 
-on how to test the performance of the proposed sampling algorithms.
+This study addresses a problem that many soil spatial modellers face: how to come up with a purposive spatial 
+sample configuration that is effective and robust in situations where we know very little. We explore a 
+scenario in which a) multiple soil properties have to be mapped, b) we are ignorant (or know very little) about 
+the form of the model of spatial variation, and c) the operational constraints limit sampling to a single 
+phase. The study starts with a review of the purposive sampling strategies employed by soil spatial modellers 
+to meet one or more of the three objectives for which sampling data are used under the proposed scenario, i.e. 
+to estimate the spatial trend and the variogram, and make spatial predictions. Based on theoretical and 
+operational features, we indicate the purposive sampling strategies that we believe to be the most appropriate 
+for each purpose and try to formulate a purposive sampling strategy that addresses all three objectives 
+jointly. The chapter ends with a suggestion on how to test the performance of the proposed purposive sampling 
+algorithms.
 
 % The objective is to evaluate the ability of different sampling configuration types and sample sizes to 
 % capture the true form of the model of spatial variation and make accurate predictions. We also quantify the 
@@ -190,25 +191,25 @@ stable sampling algorithm, we suggest that the improved version of the CLHS call
 
 Different from CLHS, ACDC is a multi-objective optimization problem composed of only two objective functions,
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap09-corr} % SEE IMAGE BELOW
  \text{CORR} = \sum_{i=1}^{p}\sum_{j=1}^{p}|\varphi_{ij} - v_{ij}|,
-\end{equation}\label{eqn:chap09-corr}
+\end{equation}
 
 \noindent where $\varphi_{ij}$ and $v_{ij}$ are the population and sample associations (or correlations in case 
 all covariates are numeric) at the $i$th row and $j$th column of the $p$-dimensional population and sample 
 association (or correlation) matrices, and
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap09-dist} % SEE IMAGE BELOW
  \text{DIST} = \sum_{i=1}^{p}\sum_{j=1}^{c_i} |\pi_{ij} - \gamma_{ij}|,
-\end{equation}\label{eqn:chap09-dist}
+\end{equation}
 
 \noindent where $\pi_{ij}$ and $\gamma_{ij}$ are the proportion of sample and population points that fall in 
 the $j$th class (or marginal sampling strata) of the $i$th covariate, $c_i$ being the number of classes of the 
 $i$th covariate. As such, ACDC is defined as follows:
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-acdc} % SEE IMAGE BELOW
  \text{ACDC} = w_1\text{CORR} + w_2 \text{DIST},
-\end{equation}\label{eqn:chap08-acdc}
+\end{equation}
 
 \noindent with weights $w_1 = w_2 = 0.5$ when we do not have \emph{a priori} preferences towards the objective 
 functions.
@@ -251,9 +252,9 @@ sample configuration, the criterion to be minimized is the sum of differences be
 $\boldsymbol{l}^*$ and observed $\boldsymbol{l}$ distributions of unique \textbf{P}oints \textbf{P}er 
 \textbf{L}ag
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-ppl} % SEE IMAGE BELOW
  \text{PPL} = \sum_{i = 1}^{q} l_i^* - l_i,
-\end{equation}\label{eqn:chap08-ppl}
+\end{equation}
 
 \noindent where $\boldsymbol{l}^* = n$ for a uniform distribution, $n$ being the number of sample points. This 
 proposed modification differs from the original implementation of \citet{WarrickEtAl1987} by the fact that the 
@@ -285,9 +286,9 @@ combinatorial optimization problem (MOCOP) (\autoref{eqn:chap08-mocop}). A utili
 aggregating the three criteria described above using the weighted sum method (\autoref{eqn:chap08-utility})
 so that the sample points cover, extend over, spread over, SPAN the feature, variogram and geographic spaces,
 
-\begin{equation} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-span} % SEE IMAGE BELOW
 \text{SPAN} = w_1 \text{CORR} + w_2 \text{DIST} + w_3 \text{PPL} + w_4 \text{MSSD}, 
-\end{equation}\label{eqn:chap08-span}
+\end{equation}
 
 \noindent with $w_1 = w_2$ and $w_1 + w_2 = w_3 + w_4$ in the \emph{terra incognita} setting. Before 
 aggregation, each objective function is scaled to the same approximate range of values using the upper-lower 
@@ -299,7 +300,7 @@ potential numerical dominance can be eliminated or minimized, and the weights ca
 optimization problems due to its robustness against local optima and easiness of implementation 
 \cite{MetropolisEtAl1953, KirkpatrickEtAl1983, Cerny1985, AartsEtAl1989, Groenigen1999a}.
 
-\section{FINAL CONSIDERATIONS}
+\section{CONCLUSIONS}
 
 This chapter presented sound strategies for optimizing spatial samples to estimate the spatial trend and the 
 variogram, and make spatial predictions when we know very little about the soil spatial distribution. Overall, 
@@ -321,8 +322,9 @@ version of each objective function, (ii) popular sampling designs such as regula
 algorithms that assume the model of soil spatial variation as known. The effect of sample size need to be 
 addressed as well. Unfortunately, resource restrictions hinder the execution of such an evaluation using field 
 data because sampling costs are high. A reasonable solution is to use synthetic data derived from a real-world 
-study case. The first step would consist of defining soil data generating processes using existing point soil 
-observations and spatially exhaustive covariates. At least two generating processes should be defined, possibly 
+case study. The first step would consist of defining soil data generating processes using existing point soil 
+observations and spatially exhaustive covariates. At least two generating processes should be defined, 
+possibly 
 using different soil properties, such that the deterministic and random components of soil spatial variation 
 have different forms. For example, linear and non-linear trends coupled with exponential and Gaussian 
 variograms. Next, the generating processes would be used to produce multiple realizations of the soil data, 

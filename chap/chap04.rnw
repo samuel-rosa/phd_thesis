@@ -511,7 +511,7 @@ exchangeable bases and exchangeable acidity, i.e.
 % \label{fig:intro-soil-properties}
 % \end{figure}
 
-\section{FINAL CONSIDERATIONS}
+\section{CONCLUSIONS}
 
 The main goal of documenting the soil data contained in the Santa Maria dataset was to provide the reader the 
 basis to understand the soil data used in the thesis, and also to support future soil spatial modelling 
