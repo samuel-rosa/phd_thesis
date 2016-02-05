@@ -103,14 +103,18 @@
 %% pacote 'hyperref' não foi carregado.
 \input{macros/bugcaption}
 
-%%==============================================================================
-%% Pacotes - formatação da bibliografia de acordo com as normas da ABNT
-%%==============================================================================
+%%=============================================================================================================
+%% Pacotes - formatação da bibliografia de acordo com as normas da ABNT e da UFRRJ
+%%=============================================================================================================
 
 % IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
 % depois do pacote 'hyperref'
-\usepackage[alf,abnt-and-type=&,abnt-etal-cite=2, abnt-etal-list = 0]{abntex2cite}
+\usepackage[alf, abnt-and-type=&, abnt-etal-cite=2, abnt-etal-list = 0]{abntex2cite}
 \renewcommand{\authorcapstyle}{\small}
+
+%% Numeração (como capítulo) de "Referências Bibliográficas"
+%% http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/tocbibind/tocbibind.pdf
+\usepackage[nottoc, notlot, notlof, numbib]{tocbibind}
 
 %%==============================================================================
 %% Pacotes - formatação de verbatim
@@ -470,7 +474,6 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Referências
 %%=============================================================================
-\addtocounter{chapter}{+1}
 \shorttitle{Bibliographic References}
 \bibliography{ref/biblio}\label{chap:references}
 
