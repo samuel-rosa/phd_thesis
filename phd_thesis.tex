@@ -26,18 +26,6 @@
 %%==============================================================================
 
 \usepackage{amsmath,latexsym,amssymb}
-
-%% Definição do espaço antes e depois das equações
-%% http://tex.stackexchange.com/a/69665/62889
-\makeatletter
-\g@addto@macro\normalsize{%
-  \setlength\abovedisplayskip{20pt}
-  \setlength\belowdisplayskip{25pt}
-  \setlength\abovedisplayshortskip{15pt}
-  \setlength\belowdisplayshortskip{20pt}
-}
-\makeatother
-
 \usepackage[range-phrase = --, binary-units = true]{siunitx} %% Sistema Internacional de Unidades
 \DeclareSIUnit\pp{pp} % pencentual point
 
@@ -65,7 +53,6 @@
 
 %\bibliographystyle{abbrvnat}
 %\setcitestyle{authoryear,round}
-
 
 %%==============================================================================
 %% Pacotes - formatação de hyperlinks
@@ -111,10 +98,6 @@
 % depois do pacote 'hyperref'
 \usepackage[alf, abnt-and-type=&, abnt-etal-cite=2, abnt-etal-list = 0]{abntex2cite}
 \renewcommand{\authorcapstyle}{\small}
-
-%% Numeração (como capítulo) de "Referências Bibliográficas"
-%% http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/tocbibind/tocbibind.pdf
-\usepackage[nottoc, notlot, notlof, numbib]{tocbibind}
 
 %%==============================================================================
 %% Pacotes - formatação de verbatim
@@ -453,7 +436,6 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Início da tese
 %%=============================================================================
-% \setlength{\baselineskip}{1.5\baselineskip}
 
 % Adiciona cada capitulo
 \selectlanguage{english}
@@ -469,7 +451,6 @@ data using sound spatial modelling techniques.
 \include{chap/chap08} % 8. Optimization of sample configurations for spatial trend estimation for soil mapping
 \include{chap/chap09} % 9. Sampling for soil mapping in terra incognita
 \include{chap/chap10} % 10. General conclusion
-% \setlength{\baselineskip}{\baselineskip}
 
 %%=============================================================================
 %% Referências
@@ -489,12 +470,10 @@ data using sound spatial modelling techniques.
 \include{chap/appenc} % R-package spsann
 \include{chap/append} % R-package pedometrics
 
-
-
 %%=============================================================================
 %% Anexos
 %%=============================================================================
-%\annex
+% \annex
 %\include{capitulos/anexoa}
 
 \end{document}
