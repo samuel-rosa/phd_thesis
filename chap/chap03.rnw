@@ -1,5 +1,8 @@
 \artigotrue
 \chapter{MODELO CONCEITUAL DE PEDOGÊNESE}
+\chapternote{Colaboraram na preparação deste documento: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), 
+Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de 
+Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
 \shorttitle{Modelo Conceitual de Pedogênese}
 \label{chap:chap03}
 %\SweaveUTF8
@@ -75,10 +78,6 @@ aluviais são determinadas pela presença constante de lençol freático próxim
 
 \section{APRESENTAÇÃO}
 \label{sec:chap03-apresentacao}
-
-\titlenote{Colaboraram na preparação deste documento: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), 
-Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de 
-Mattos Vasques (Embrapa Soils), e Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
 
 A modelagem espacial do solo inicia com a definição de um \emph{modelo conceitual de pedogênese}. Um modelo 
 conceitual de pedogênese constitui uma representação verbal da realidade sob estudo que inclui a descrição 

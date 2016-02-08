@@ -39,7 +39,7 @@
 %% Identificação
 %%==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[05/02/2016 v.0.5 Formatação de documentos acadêmicos da UFRuralRJ]
+\ProvidesClass{UFRuralRJ}[08/02/2016 v.0.6 Formatação de documentos acadêmicos da UFRuralRJ]
 
 %%==============================================================================
 %% Declaração de opções da classe
@@ -932,6 +932,11 @@
 %% Para capítulos baseados em artigos, ou seja, documento na forma de capítulos
 \newif\ifartigo
 
+%% Novo contador para artigos, ou seja, para os capítulos dos documentos na forma de capítulos
+%% Este contador facilita a inserção de numeração romana para os capítulos.
+\newcounter{artigo}
+\renewcommand{\theartigo}{\Roman{artigo}}%
+
 %% Título curto para cabeçalho (header)
 \newcommand{\shorttitle}[1]{\gdef\@shorttitle{#1}}
 
@@ -940,16 +945,28 @@
 \newcommand{\ii@chapterfont}{\@setfontsize\Large{14}{20}}
 \def\@chapapp{}
 \def\@chapter[#1]#2{%
-      %% Formatação do cabeçalho (header)
+      
+      %% Formatação do cabeçalho dos apêndices, anexos, e capítulos (nesta ordem).
+      %% O cabeçalho é inserido quando a opção 'header' é usada junto da definição do tipo de documento.
+      %% Isso requer que seja definido, em cada apêndice, anexo e capítulo, um título curto, para o qual
+      %% utiliza-se do comando '\shorttitle{}'.
+      %% Note que o cabeçalho de capítulos baseados em artigos (formato em capítulo) leva a palavra 'capítulo'
+      %% também no cabeçalho.
       \ifappendix
-        \gdef\@chaptertitle{\@chapapp\thechapter.~\@shorttitle}
+        \gdef\@chaptertitle{\@chapapp\theappendix.~\@shorttitle}%
       \else
         \ifannex
-          \gdef\@chaptertitle{\@chapapp\thechapter.~\@shorttitle}
+          \gdef\@chaptertitle{\@chapapp\theannex.~\@shorttitle}%
         \else
-          \gdef\@chaptertitle{\chaptername~\@chapapp\thechapter.~\@shorttitle}
+          \ifartigo
+            % \gdef\@chaptertitle{\@chapapp\thechapter~\chaptername~.~\@shorttitle}%
+            \gdef\@chaptertitle{\@chapapp\thechapter~\chaptername~\theartigo.~\@shorttitle}%
+          \else
+            \gdef\@chaptertitle{\@chapapp\thechapter.~\@shorttitle}%
+          \fi
         \fi
       \fi
+      
       \refstepcounter{chapter}%
       
       %% FORMATAÇÃO DO TÍTULOS DOS CAPÍTULOS NO SUMÁRIO
@@ -959,13 +976,15 @@
       %%      eficiente de fazer isso.
       %% ASR: São adicionados 10 pontos de espaço vertical antes e após o titulo de cada capitulo no sumario.
       %%      COmo não existe definição oficial, a decisão de adicionar 10 pontos é completamente arbitrária.
-      %% ASR: É preciso verificar como adicionar a numeração correta do capítulo/artigo usando \Roman. A
-      %%      versão atual usa a mesma numeração sequencial atribuída ao capítulo.
       \ifchap%
        \addtocontents{toc}{\protect\addvspace{10\p@}}%
+        
         \ifartigo
+         \addtocounter{artigo}{+1}
          \addcontentsline{toc}{chapter}{%
-         \protect\numberline{\@chapapp\thechapter}~\chaptername~\Roman{chapter}.~#1}%
+         % \protect\numberline{\@chapapp\thechapter}~\chaptername~\Roman{chapter}.~#1}%
+         \protect\numberline{\@chapapp\thechapter}~\chaptername~\theartigo.~#1}%
+        
         \else
          % \ifchap\addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp\thechapter}#1}\fi%
          \addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp\thechapter}~#1}%
@@ -989,40 +1008,78 @@
   \ifchap
     %% Colocar o termo 'CAPÍTULO' 20 mm abaixo da margem superior
     \ifartigo\vspace*{8mm}\else\vspace*{0mm}\fi
+    
     \reset@font\noindent{
+    
     \ifartigo
       %% Esta é uma solução rápida e suja para ajustar a numeração dos capítulos 
       %% conforme o Manual da UFRuralRJ. Segundo o Manual, os capítulos ou artigos 
       %% devem receber a numeração sequencial do sumário, mas também a palavra
       %% 'CAPÍTULO' seguida do número do capítulo ou artigo usando algarismos 
       %% romanos.
+      % \addtocounter{artigo}{+1}
       \ii@chapterfont
-      \centering\textbf{\@chapapp\thechapter~\MakeUppercase{\chaptername}~
-      \addtocounter{chapter}{-1}\Roman{chapter}\\
-      \addtocounter{chapter}{+1}
+      % \centering\textbf{\@chapapp\thechapter~\MakeUppercase{\chaptername}~
+      % \addtocounter{chapter}{-1}\Roman{chapter}\\
+      % \addtocounter{chapter}{+1}
+      \centering\textbf{\@chapapp\thechapter~\MakeUppercase{\chaptername}~\theartigo\\
       \vspace*{20mm}
       \hspace{0.5em}\MakeUppercase{#1}}
+    
+    %% ASR: Eu não tenho certeza da serventia dos seguintes comandos.
     \else
-      \LargeF\centering\textbf{\@chapapp\thechapter\hspace{0.5em}\MakeUppercase{#1}}
+      \ifappendix
+        \LargeF\centering\textbf{\@chapapp\theappendix\hspace{0.5em}\MakeUppercase{#1}}
+      \else
+        \ifannex
+          \LargeF\centering\textbf{\@chapapp\theannex\hspace{0.5em}\MakeUppercase{#1}}
+        \else
+          \LargeF\centering\textbf{\@chapapp\thechapter\hspace{0.5em}\MakeUppercase{#1}}
+        \fi
+      \fi
     \fi
     \par}
+  
   \else
+    
+    %% Definição do conteúdo do título de cada apêndice, anexo e capítulo (nesta ordem).
+    %% Incrementa-se o contador de apêndices, enquanto o valor do contador de capítulos é reduzido a fim de 
+    %% continuar a numeração correta dos capítulos subsequentes.
     %\@setfontsize\Large{12}{20} se for o padrão da seção
-    \reset@font\noindent{\ii@chapterfont\centering\textbf{
-      \LargeF\MakeUppercase{\@chapapp}
-        \thechapter\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}\par}
+    \ifappendix
+      \addtocounter{appendix}{+1}%
+      \addtocounter{chapter}{-1}%
+      \reset@font\noindent{\ii@chapterfont\centering\textbf{
+        \LargeF\MakeUppercase{\@chapapp}\theappendix\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
+        \par}
+      
+      %% Formatação do título do anexo na lista de apêndices
+      \addtocontents{loap}{\protect\addvspace{10\p@}}
+      \addcontentsline{loap}{section}{
+      \MakeUppercase{\@chapapp}\theappendix\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
+      \addtocontents{loap}{\protect\addvspace{10\p@}}
+      
+    \else
+      \ifannex
+        \addtocounter{annex}{+1}%
+        \addtocounter{chapter}{-1}%
+        \reset@font\noindent{\ii@chapterfont\centering\textbf{
+          \LargeF\MakeUppercase{\@chapapp}\theannex\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
+          \par}
+        
+        %% Formatação do título do anexo na lista de anexos
+        \addtocontents{loan}{\protect\addvspace{10\p@}}%
+        \addcontentsline{loan}{section}{%
+        \MakeUppercase{\@chapapp}\theannex\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}%
+        \addtocontents{loan}{\protect\addvspace{10\p@}}%
+        
+      \else
+        \reset@font\noindent{\ii@chapterfont\centering\textbf{
+          \LargeF\MakeUppercase{\@chapapp}\thechapter\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
+          \par}
+      \fi
+    \fi
   \fi
-  \ifappendix
-    \addcontentsline{loap}{section}{
-      \MakeUppercase{\@chapapp}
-        \thechapter\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
-  \fi
-  \ifannex
-    \addcontentsline{loan}{section}{
-      \MakeUppercase{\@chapapp}
-        \thechapter\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
-  \fi
-  \addvspace{25pt}
 }
 
 %% Formatação da versão estrelada (*) dos capítulos
@@ -1158,6 +1215,11 @@
 %% FORMATAÇÃO DOS APÊNDICES
 %%=============================================================================================================
 
+%% Novo contador para apêndices
+\newcounter{appendix}
+
+%% Formatação da página inicial dos apêndices.
+%% Nesta página a palavra 'apêndice' aparece sozinha e centralizada.
 \newcommand{\appendixpage}{%
   \if@openright\cleardoublepage\else\clearpage\fi
   \thispagestyle{plain}%
@@ -1173,8 +1235,6 @@
    %%      dos capítulos anteriores. Mas para que o comando '\thechapter' funcione, é necessário aumentar
    %%      em um a contagem do contador de capítulos.
    % \LargeE\bfseries\MakeUppercase\appendixname\par}%
-   %% ASR: Há um problema na numeração se houver apêndice e anexo: a segunda entrada aparece em estilo
-   %%      alfabético.
    \addtocounter{chapter}{+1}
    \LargeE\bfseries\thechapter~\MakeUppercase\appendixname\par}%
    %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo mundo alinhado na toc
@@ -1202,13 +1262,16 @@
   \appendixtrue
   \annexfalse
   \appendixpage
-  \setcounter{chapter}{0}%
+  
+  % \setcounter{chapter}{0}%
   \setcounter{section}{0}%
-%   \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
-  \renewcommand{\thechapter}{\Alph{chapter}}%
+  % \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
+  % \renewcommand{\thechapter}{\Alph{chapter}}%
+  \renewcommand{\theappendix}{\Alph{appendix}}%
+  
   \setcounter{tocdepth}{0}%
   \@captionlistingfalse%
-%   \gdef\@chapapp{\LargeF#1\space}% Tamanho agora definido em @chapter
+  % \gdef\@chapapp{\LargeF#1\space}% Tamanho agora definido em @chapter
   \gdef\@chapapp{#1\space}%
 }
 
@@ -1229,6 +1292,9 @@
 %%=============================================================================================================
 %% FORMATAÇÃO DOS ANEXOS
 %%=============================================================================================================
+
+%% Novo contador para anexos
+\newcounter{annex}
 
 \newcommand{\annexpage}{%
   \if@openright\cleardoublepage\else\clearpage\fi
@@ -1274,10 +1340,13 @@
   \appendixfalse
   \annextrue
   \annexpage
-  \setcounter{chapter}{0}%
+  
+  % \setcounter{chapter}{0}%
   \setcounter{section}{0}%
-%   \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
-  \renewcommand{\thechapter}{\Alph{chapter}}%
+  % \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
+  % \renewcommand{\thechapter}{\Alph{chapter}}%
+  \renewcommand{\theannex}{\Alph{annex}}%
+  
   \setcounter{tocdepth}{0}%
   \@captionlistingfalse%
   \gdef\@chapapp{#1\space}%
@@ -1295,13 +1364,13 @@
          {\MakeUppercase\listannexname}%
     \@starttoc{loan}%
     \if@restonecol\twocolumn\fi
-}	
+}%
 
 %%=============================================================================
 %% Notas de rodapé
 %%=============================================================================
 
-% Numeração sequencial ao longo do texto
+%% Numeração sequencial ao longo de todo o texto
 \def\@removefromreset#1#2{{%
   \expandafter\let\csname c@#1\endcsname\@removefromreset
   \def\@elt##1{%
@@ -1314,15 +1383,24 @@
 	
 \@removefromreset{footnote}{chapter}	
 
-% Filete de 3cm a partir da margem esquerda
+%% Filete de 3 cm acima da nota de rodapé a partir da margem esquerda
 \renewcommand\footnoterule{%
   \kern-3\p@
   \hrule\@width.19\columnwidth
   \kern2.6\p@}
 
-%Sem indentação o texto da nota de rodapé  
+%% Sem indentação o texto da nota de rodapé  
 \renewcommand\@makefntext[1]{%
   \noindent\makebox[0.5em][r]{\@makefnmark}~~#1}
+
+%% Informações sobre o capítulo, geralmente usado no caso de documento no formato de capítulos.
+%% A nota é adicionada na mesma página onde aparece o título do capítulo, sem interferir na numeração.
+\newcommand\chapternote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{\hspace{-1em}*~#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
 
 %%=============================================================================================================
 %% FORMATAÇÃO DAS EQUAÇÕES

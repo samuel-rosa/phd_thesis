@@ -1,5 +1,12 @@
 \artigotrue
 \chapter{THE SANTA MARIA DATASET. PART II -- COVARIATE DATA}
+\chapternote{This chapter is based on the studies \textit{Identifying and correcting oblique striping in the 
+Topodata digital elevation model}, presented at the XXXIV Brazilian Congress of Soil Science 
+\cite{Samuel-RosaEtAl2013c}, and \textit{Evaluation of freely available ancillary data used for detailed soil 
+mapping in Brazil}, presented at the EGU General Assembly 2014 \cite{Samuel-RosaEtAl2014}. Also collaborated 
+in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz 
+Dalmolin (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), and Gerard 
+B. M. Heuvelink (ISRIC -- World Soil Information).}
 \shorttitle{Covariate Data}
 \label{chap:chap05}
 %\SweaveUTF8
@@ -44,15 +51,6 @@ land use) mapping initiatives.
 
 \section{INTRODUCTION}
 \label{sec:chap05-intro}
-
-\titlenote{This chapter is based on the studies \textit{Identifying and correcting oblique striping in the 
-Topodata digital elevation model}, presented at the XXXIV Brazilian Congress of Soil Science 
-\cite{Samuel-RosaEtAl2013c}, and \textit{Evaluation of freely available ancillary data used for detailed soil 
-mapping in Brazil}, presented at the EGU General Assembly 2014 \cite{Samuel-RosaEtAl2014}. Also collaborated 
-in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz 
-Dalmolin (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), and Gerard 
-B. 
-M. Heuvelink (ISRIC -- World Soil Information).}
 
 The Santa Maria dataset is a data set comprising spatially exhaustive covariate data produced in the 1980s, 
 1990s, and 2000s covering the catchment of the DNOS-CORSAN reservoir, located in the southern border of the 
