@@ -1,45 +1,42 @@
-%%==============================================================================
+%%=============================================================================================================
 %% UFRuralRJ.cls
-%% Classe LaTeX2e para formatação de documentos acadêmicos da
-%% Universidade Federal Rural do Rio de Janeiro (UFRuralRJ)
+%% Classe LaTeX2e para formatação de documentos acadêmicos da Universidade Federal Rural do Rio de Janeiro 
+%% (UFRuralRJ)
 %%
-%% Este programa é software livre. Você pode redistribuí-lo e/ou modificá-lo 
-%% sob os termos da GNU General Public License versão 2 conforme publicada pela
-%% Free Software Foundation.
+%% Este programa é software livre. Você pode redistribuí-lo e/ou modificá-lo sob os termos da GNU General 
+%% Public License versão 2 conforme publicada pela Free Software Foundation.
 %%
-%% Este programa é distribuído na esperança que será útil, mas SEM QUALQUER 
-%% GARANTIA, sem mesmo a garantia implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO 
-%% PARA UM PROPÓSITO PARTICULAR. Veja a GNU General Public License para mais 
-%% detalhes (http://www.gnu.org/licenses/gpl.html).
+%% Este programa é distribuído na esperança que será útil, mas SEM QUALQUER GARANTIA, sem mesmo a garantia
+%% implícita de COMERCIALIZAÇÃO ou ADEQUAÇÃO PARA UM PROPÓSITO PARTICULAR. Veja a GNU General Public License
+%% para mais detalhes (http://www.gnu.org/licenses/gpl.html).
 %%
-%% Você deve ter recebido uma cópia da Licença Pública Geral GNU, sob o título 
-%% 'LICENCE.md', junto com este programa. Caso contrário, escreva para a Free 
-%% Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
-%% MA 02111-1307 USA.
+%% Você deve ter recebido uma cópia da Licença Pública Geral GNU, sob o título 'LICENCE', junto com este
+%% programa. Caso contrário, escreva para a Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+%% Boston, MA 02111-1307 USA.
 %%
 %% Créditos:
 %%
-%% Esta classe é uma adaptação livre de mdtufsm.cls, contida no pacore 
-%% mdtufsm-ppgi v.1.4 (https://code.google.com/p/mdtufsm-ppgi/), desenvolvido 
-%% pela Informática da Universidade Federal de Santa Maria 
-%% (http://www.inf.ufsm.br), que é uma adaptação livre de iiufrgs.cls,
-%% contida pacote iiufrgs-4.3.1, desenvolvido pelo UFRGS TeX Users Group
-%% (http://www.inf.ufrgs.br/utug).
+%% Esta classe é uma adaptação livre da class mdtufsm.cls, contida no pacote 'mdtufsm-ppgi', em sua versão 
+%% 1.4 (https://code.google.com/p/mdtufsm-ppgi/), desenvolvido pela Informática da Universidade Federal de
+%% Santa Maria (http://www.inf.ufsm.br). O último é uma adaptação livre da class 'iiufrgs.cls', contida 
+%% pacote 'iiufrgs-4.3.1', desenvolvido pelo UFRGS TeX Users Group (http://www.inf.ufrgs.br/utug).
+%% As adaptações para atender às normas da UFRuralRJ foram realizadas por:
+%% - Alessandro Samuel-Rosa (Curso de Pós-Graduação em Agronomia -- Ciência do Solo): 2012-Atual
+%% - Alessandro Bandeira Duarte (Departamento de Filosofia): 2015-Atual
 %%
 %% Informação:
 %%
-%% A formatação de documentos acadêmicos segue as recomendações contidas na
-%% terceira edição do Manual de instruções para organização e apresentação de 
-%% dissertações e teses na UFRRJ, Seropédica: UFRRJ, 25p, 2006, disponível em
-%% http://www.ufrrj.br/portal/modulo/dppg/Formularios_normas/manual_teses.pdf
+%% A formatação de documentos acadêmicos segue as recomendações contidas na terceira edição do Manual de
+%% instruções para organização e apresentação de dissertações e teses na UFRRJ, Seropédica: UFRRJ, 25p, 2006,
+%% disponível em http://www.ufrrj.br/portal/modulo/dppg/Formularios_normas/manual_teses.pdf
 %% 
-%%==============================================================================
+%%=============================================================================================================
 
 %%==============================================================================
 %% Identificação
 %%==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[08/02/2016 v.0.6 Formatação de documentos acadêmicos da UFRuralRJ]
+\ProvidesClass{UFRuralRJ}[09/02/2016 v.0.7 Formatação de documentos acadêmicos da UFRuralRJ]
 
 %%==============================================================================
 %% Declaração de opções da classe
@@ -52,7 +49,18 @@
     \def\grau{\tesegrau}
     \def\doctypename{\tesename}
     \def\doctypearticle{a}
-    \def\doctypenameCIP{Tese (Doutorado)}
+    % \def\doctypenameCIP{Tese (Doutorado)}
+  }
+}
+
+%% Dissertação de mestrado
+\DeclareOption{diss}{
+  \AtEndOfClass{
+    \newcommand{\titlepagespecificinfo}{\dissspecificinfo}
+    \def\grau{\dissgrau}
+    \def\doctypename{\dissname}
+    \def\doctypearticle{a}
+    % \def\doctypenameCIP{Disserta{\c{c}}{\~a}o (Mestrado)}
   }
 }
 
@@ -88,17 +96,6 @@
 	  \def\doctypenameCIP{Monografia (Gradua{\c{c}}{\~a}o)}
   }
 
-}
-
-%% Dissertação de mestrado
-\DeclareOption{diss}{
-  \AtEndOfClass{
-    \newcommand{\titlepagespecificinfo}{\dissspecificinfo}
-    \def\doctypename{\dissname}
-    \def\doctypearticle{a}
-    \def\doctypenameIngles{Master's Dissertation}
-    \def\doctypenameCIP{Disserta{\c{c}}{\~a}o (Mestrado)}
-  }
 }
 
 \DeclareOption{english}{
@@ -155,7 +152,7 @@
 
 %% Definições de gênero
 \newif\ifautora %% 'autora' em vez de 'autor'
-\newif\iforientadora %% 'orientadora' em vez de 'orientador'
+% \newif\iforientadora %% 'orientadora' em vez de 'orientador'
 % \newif\ifcoorientadora %% 'co-orientadora' em vez de 'co-orientador'. Obsoleto
 
 %% Definições de capítulo
@@ -498,7 +495,7 @@
 %%==============================================================================
 
 %% Para saber se há mais de um(a) co-orientador(a)
-\newif\ifcoorientadores
+% \newif\ifcoorientadores
 
 %% Definição do texto de apresentação do(a) orientador(a) e do(s) 
 %% co-orientador(es)
@@ -727,9 +724,11 @@
   \hskip -\leftskip
   % esta é a definicao original da classe report:
   %#1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-  %% ASR: -0.35em é uma solução rápida e suja para deixar todo 
-  %%      mundo alinhado na toc
-  \@dottedtocline{0}{-0.35em}{\ii@chapnumindent}{\MakeUppercase{#1}}{#2}
+  
+  %% ASR: em uma versao anterior, -0.35em foi a solução encontrada para deixar todo mundo alinhado na toc.
+  % \@dottedtocline{0}{-0.35em}{\ii@chapnumindent}{\MakeUppercase{#1}}{#2}
+  \@dottedtocline{0}{0em}{\ii@chapnumindent}{\MakeUppercase{#1}}{#2}
+  
   \penalty\@highpenalty
   \endgroup
 }
@@ -980,7 +979,7 @@
        \addtocontents{toc}{\protect\addvspace{10\p@}}%
         
         \ifartigo
-         \addtocounter{artigo}{+1}
+         \refstepcounter{artigo}
          \addcontentsline{toc}{chapter}{%
          % \protect\numberline{\@chapapp\thechapter}~\chaptername~\Roman{chapter}.~#1}%
          \protect\numberline{\@chapapp\thechapter}~\chaptername~\theartigo.~#1}%
@@ -1039,7 +1038,12 @@
       \fi
     \fi
     \par}
-  
+    
+    %% Espaço vertical adicionado apos o título de cada item do documento. No formato de capitulos individuais,
+    %% aplica-se aos itens Introduçao Geral e Conclusao Geral. Trata-se do mesmo espaçamento vertical 
+    %% adicionado apos cada seçao e subseçao do texto ('afterskip') conforme definido abaixo.
+    \addvspace{10pt}
+    
   \else
     
     %% Definição do conteúdo do título de cada apêndice, anexo e capítulo (nesta ordem).
@@ -1047,36 +1051,47 @@
     %% continuar a numeração correta dos capítulos subsequentes.
     %\@setfontsize\Large{12}{20} se for o padrão da seção
     \ifappendix
-      \addtocounter{appendix}{+1}%
+      \refstepcounter{appendix}
       \addtocounter{chapter}{-1}%
       \reset@font\noindent{\ii@chapterfont\centering\textbf{
         \LargeF\MakeUppercase{\@chapapp}\theappendix\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
         \par}
+      \addvspace{25pt}
       
-      %% Formatação do título do anexo na lista de apêndices
+      %% Formatação do título do apêndice na lista de apêndices
       \addtocontents{loap}{\protect\addvspace{10\p@}}
-      \addcontentsline{loap}{section}{
-      \MakeUppercase{\@chapapp}\theappendix\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
+      %% ASR: Por alguma razão, os apêndices eram adicionados à lista de apêndices usando a formatação 
+      %%      definida para 'section'. Isso resultava no alinhamento incorreto de cada item na lista. Agora 
+      %%      usa-se a formatação definida para 'chapter'.
+      % \addcontentsline{loap}{section}{%
+      \addcontentsline{loap}{chapter}{%
+        \MakeUppercase{\@chapapp}\theappendix\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
       \addtocontents{loap}{\protect\addvspace{10\p@}}
       
     \else
       \ifannex
-        \addtocounter{annex}{+1}%
+        \refstepcounter{annex}%
         \addtocounter{chapter}{-1}%
         \reset@font\noindent{\ii@chapterfont\centering\textbf{
           \LargeF\MakeUppercase{\@chapapp}\theannex\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
           \par}
+        \addvspace{25pt}
         
         %% Formatação do título do anexo na lista de anexos
         \addtocontents{loan}{\protect\addvspace{10\p@}}%
-        \addcontentsline{loan}{section}{%
-        \MakeUppercase{\@chapapp}\theannex\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}%
+        %% ASR: Por alguma razão, os apêndices eram adicionados à lista de apêndices usando a formatação 
+        %%      definida para 'section'. Isso resultava no alinhamento incorreto de cada item na lista. Agora 
+        %%      usa-se a formatação definida para 'chapter'.
+        % \addcontentsline{loan}{section}{%
+        \addcontentsline{loan}{chapter}{%
+          \MakeUppercase{\@chapapp}\theannex\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}%
         \addtocontents{loan}{\protect\addvspace{10\p@}}%
         
       \else
         \reset@font\noindent{\ii@chapterfont\centering\textbf{
           \LargeF\MakeUppercase{\@chapapp}\thechapter\hspace{0.5em}--\hspace{0.5em}\MakeUppercase{#1}}
           \par}
+        \addvspace{10pt}
       \fi
     \fi
   \fi
@@ -1105,7 +1120,7 @@
 %% ASR: Os títulos das seções e subseções são precedidos por espaçamento de 20 pontos, e sucedidos por 
 %%      espaçamento de 10 pontos.
 
-%\renewcommand{\section}{%name, level, indent, beforeskip, afterskip,style
+%\renewcommand{\section}{%name, level, indent, beforeskip, afterskip, style
 %        \@startsection{section}{1}{0pt}{18pt}{18pt}{\reset@font\bfseries\@setfontsize\Large{12}{20}}
 %}
 
@@ -1265,6 +1280,7 @@
   
   % \setcounter{chapter}{0}%
   \setcounter{section}{0}%
+  \numberwithin{section}{appendix}
   % \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
   % \renewcommand{\thechapter}{\Alph{chapter}}%
   \renewcommand{\theappendix}{\Alph{appendix}}%
@@ -1343,6 +1359,7 @@
   
   % \setcounter{chapter}{0}%
   \setcounter{section}{0}%
+  \numberwithin{section}{annex}
   % \renewcommand{\thechapter}{\LargeF\Alph{chapter}}% Tamanho agora definido em @chapter
   % \renewcommand{\thechapter}{\Alph{chapter}}%
   \renewcommand{\theannex}{\Alph{annex}}%

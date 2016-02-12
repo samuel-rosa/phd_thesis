@@ -18,7 +18,6 @@
 
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc} %% Conjunto de caracteres correto
-%\usepackage{times} %% Usar fonte Adobe Times Roman, equivalente à Times New Roman
 \usepackage[utf8]{inputenc} %% Para acentuação correta
 
 %%==============================================================================
@@ -62,8 +61,9 @@
 %% com links.
 
 \usepackage[%hidelinks%, 
-            bookmarksopen=true,linktoc=none,colorlinks=true,
-            linkcolor=blue,citecolor=blue,filecolor=magenta,urlcolor=blue,
+            bookmarksopen=true,linktoc=page,colorlinks=true,
+            linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
+            % linkcolor=black, citecolor=black, filecolor=black, urlcolor=black,
             pdftitle={Analysis of Sources of Uncertainty in Soil Spatial Modelling},
             pdfauthor={Alessandro Samuel-Rosa},
             pdfsubject={Tese de Doutorado},
@@ -97,7 +97,6 @@
 % IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
 % depois do pacote 'hyperref'
 \usepackage[alf, abnt-and-type=&, abnt-etal-cite=2, abnt-etal-list = 0]{abntex2cite}
-\renewcommand{\authorcapstyle}{\small}
 
 %%==============================================================================
 %% Pacotes - formatação de verbatim
@@ -143,9 +142,6 @@
 
 % Con­trol lay­out of item­ize, enu­mer­ate, de­scrip­tion
 \usepackage{enumitem}
-
-% Fonte gótica (fraktur)
-\usepackage{eufrak}
 
 %%==============================================================================
 %% User-defined macros
@@ -247,10 +243,8 @@ RedeMDS%
 %% Identification of supervisors
 %%==============================================================================
 \advisor[Professora]{Dra.}{Anjos}{Lúcia Helena Cunha dos}{UFRRJ}
-\orientadoratrue
 \coadvisor[Pesquisador]{Dr.}{Vasques}{Gustavo de Mattos}
 \coadvisor[Professor]{Dr.}{Heuvelink}{Gerardus Bernardus Maria}
-\coorientadorestrue
 
 %%==============================================================================
 %% Information about the defence
@@ -456,11 +450,8 @@ data using sound spatial modelling techniques.
 %% Apêndices
 %%=============================================================================
 \appendix
-% \include{chap/} % Introdução Geral
-% \include{chap/} % Conclusão Geral
-% \include{chap/apenb} % conceptual model of pedogenesis
-% \include{chap/apena} % The Santa Maria dataset -- soil data
-% \include{chap/apene} % The Santa Maria dataset -- covariate data
+% \include{chap/appena} % Introdução Geral
+% \include{chap/appenb} % Conclusão Geral
 \include{chap/appenc} % R-package spsann
 \include{chap/append} % R-package pedometrics
 

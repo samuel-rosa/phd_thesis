@@ -88,16 +88,15 @@ closer to identifying the \q{true} spatial trend if we are (or assume to be) ign
 
 Some critiques of the CLHS appeared in the literature since it was first published. Most of them focused on 
 operational difficulties encountered in the field. For example, \citet{CambuleEtAl2013} argued that the 
-CLHS is impractical in poorly-accessible areas, but \citet{RoudierEtAl2012} and 
-\citet{MulderEtAl2013} showed that this is just a matter of how the algorithm is implemented.
-\citet{CliffordEtAl2014} presented an algorithm for selecting an alternative sampling point when a CLHS 
-sample point is inaccessible. Only recently soil scientists started paying more attention to the theoretical 
-and algorithmic aspects of the CLHS. \citet{MinasnyEtAl2010a} demonstrated that, given an assumed known 
-linear spatial trend, the CLHS is suboptimal. \citet{CliffordEtAl2014} questioned the importance of 
-meeting the third objective ($\mathcal{O}_3$), as well as the mathematical approach used to find a solution 
-for all three objectives jointly (see below). Finally, \citet{Brus2015} proposed an alternative method 
-for selecting Latin hypercube samples with known inclusion probabilities so that these samples can also be 
-used for design-based inference.
+CLHS is impractical in poorly-accessible areas, but \citet{RoudierEtAl2012} and \citet{MulderEtAl2013} showed 
+that this is just a matter of how the algorithm is implemented. \citet{CliffordEtAl2014} presented an 
+algorithm for selecting an alternative sampling point when a CLHS sample point is inaccessible. Only recently 
+soil scientists started paying more attention to the theoretical and algorithmic aspects of the CLHS. 
+\citet{MinasnyEtAl2010a} demonstrated that, given an assumed known linear spatial trend, the CLHS is 
+suboptimal. \citet{CliffordEtAl2014} questioned the importance of meeting the third objective 
+($\mathcal{O}_3$), as well as the mathematical approach used to find a solution for all three objectives 
+jointly (see below). Finally, \citet{Brus2015} proposed an alternative method for selecting Latin hypercube 
+samples with known inclusion probabilities so that these samples can also be used for design-based inference.
 
 Our objective is to propose conceptual and algorithmic improvements on the CLHS, all of which we describe in 
 the next section. We then evaluate if the proposed improvements result in a more accurate representation of 
@@ -544,30 +543,40 @@ to reduce the size of the neighbourhood as the search for the optimum sample con
 for this is that, as the search evolves and approaches its end, it is likely that moving a sample point over a 
 short distance contributes more to finding the global optimum than moving it over larger distances 
 \cite{GroenigenEtAl1998}. The decrement function determines that the size of the neighbourhood is reduced 
-linearly at the end of the $j$th chain,
+linearly at the end of the $j$th chain. For the x-axis of the neighbourhood,
 
 \begin{equation} % SEE IMAGE BELOW
 x_{\text{max}_{j + 1}} = x_{\text{max}_{j = 0}} - \frac{j}{n_\text{chains}} \times x_{\text{max}_{j = 0}} - 
-                                           x_\text{min} + x_\text{dim}
+                                           x_\text{min} + x_\text{dim},
 \end{equation}
 
-\noindent and 
+\noindent where $x_{\text{max}_{j + 1}}$ is the dimension of the x-axis of the neighbourhood in the next chain,
+i.e. the maximum allowed shift in the x-coordinate, $x_{\text{max}_{j = 0}}$ is the dimensions of the x-axis
+of the neighbourhood in the first chain, $x_\text{min}$ is the minimum required shift in the x-coordinate, 
+$x_\text{dim}$ is the grid spacing in the x-coordinates, and $n_\text{chains}$ is the maximum affordable total 
+number of Markov chains (the very same applies to the y-axis of the neighbourhood). The maximum affordable 
+total number of Markov chains $n_\text{chains}$ has to be large enough such that the globally optimum sample 
+configuration can be found. Finally, one or more criteria for stopping the search can be defined, such as the 
+maximum affordable number of Markov chains completed without returning an improved sample configuration 
+$n_\text{chain stop}$ \cite{Groenigen1999a}.
 
-\begin{equation} % SEE IMAGE BELOW
-y_{\text{max}_{j + 1}} = y_{\text{max}_{j = 0}} - \frac{j}{n_\text{chains}} \times y_{\text{max}_{j = 0}} - 
-                                           y_\text{min} + y_\text{dim},
-\end{equation}
+% \noindent and 
 
-\noindent where $x_{\text{max}_{j + 1}}$ and $y_{\text{max}_{j + 1}}$ are the dimensions of the neighbourhood 
-in the next chain, i.e. the maximum allowed shifts in the x- and y-coordinates, $x_{\text{max}_{j = 0}}$ and 
-$y_{\text{max}_{j = 0}}$ are the dimensions of the neighbourhood in the first chain, $x_\text{min}$ and 
-$y_\text{min}$ are the minimum required shifts in the x- and y-coordinates, $x_\text{dim}$ and $y_\text{dim}$ 
-are the grid spacings in the x- and y-coordinates, i.e. the grid cell size, and $n_\text{chains}$ is the 
-maximum affordable total number of Markov chains. The maximum affordable total number of Markov chains 
-$n_\text{chains}$ has to be large enough such that the globally optimum sample configuration can be found. 
-Finally, one or more criteria for stopping the search can be defined, such as the maximum affordable number of 
-Markov chains completed without returning an improved sample configuration $n_\text{chain stop}$ 
-\cite{Groenigen1999a}.
+% \begin{equation} % SEE IMAGE BELOW
+% y_{\text{max}_{j + 1}} = y_{\text{max}_{j = 0}} - \frac{j}{n_\text{chains}} \times y_{\text{max}_{j = 0}} - 
+%                                            y_\text{min} + y_\text{dim},
+% \end{equation}
+
+% \noindent where $x_{\text{max}_{j + 1}}$ and $y_{\text{max}_{j + 1}}$ are the dimensions of the neighbourhood 
+% in the next chain, i.e. the maximum allowed shifts in the x- and y-coordinates, $x_{\text{max}_{j = 0}}$ and 
+% $y_{\text{max}_{j = 0}}$ are the dimensions of the neighbourhood in the first chain, $x_\text{min}$ and 
+% $y_\text{min}$ are the minimum required shifts in the x- and y-coordinates, $x_\text{dim}$ and $y_\text{dim}$ 
+% are the grid spacings in the x- and y-coordinates, i.e. the grid cell size, and $n_\text{chains}$ is the 
+% maximum affordable total number of Markov chains. The maximum affordable total number of Markov chains 
+% $n_\text{chains}$ has to be large enough such that the globally optimum sample configuration can be found. 
+% Finally, one or more criteria for stopping the search can be defined, such as the maximum affordable number of 
+% Markov chains completed without returning an improved sample configuration $n_\text{chain stop}$ 
+% \cite{Groenigen1999a}.
 
 All parameters of the generation mechanism ($x_\text{min}$, $y_\text{min}$, $x_\text{max}$ and $y_\text{max}$) 
 and annealing schedule ($chain_\text{length}$, $n_\text{chains}$, and $n_\text{chain stop}$) have to be defined 
@@ -602,11 +611,18 @@ the $5 \times 5$ area surrounding every grid point.
 
 \subsection{Model Calibration}
 
-Each of the $\mathcal{D} = \num{12000}$ calibration dataset was used to calibrate a (non)linear mixed model as 
-described in \autoref{sec:chap08-simulation} for the soil data generating process. The main difference is that 
-the shape parameter, $\nu$, of the Whittle-Matérn model was chosen from a set of only three values $\nu = (0.5, 
-1.0, 2.0)$ instead of five. Initial covariance parameters for the model fit were estimated empirically using 
-the \texttt{vgmICP} function implemented in the \texttt{pedometrics} package for R.
+Each of the $\mathcal{D} = \num{12000}$ calibration dataset was used to calibrate a (non)linear mixed model 
+using the same steps employed for calibrating the soil data generating process as described in 
+\autoref{sec:chap08-simulation}. Two important differences exist, though. First, the shape parameter, $\nu$, 
+of the Whittle-Matérn model was chosen from a set of only three values instead of five ($\nu = (0.5, 1.0, 
+2.0)$) following recommendations of \citet{MoyeedEtAl2002}. This modification considerably reduced the 
+computation time. Last, initial covariance parameters needed to solve the system of nonlinear equations for 
+the REML fit of the (non)linear mixed model \cite{KuenschEtAl2011} were chosen using a set of heuristics 
+(\texttt{pedometrics::vgmICP}, \autoref{appen:pedometrics}). These heuristics involve estimating the sample
+variogram at a sequence of seven exponentially spaced lag-distance classes up to half the diagonal of the 
+rectangle that spans the data using Genton's robust Qn-estimator \cite{Genton1998}. A minimum number of 
+$n_\text{pairs} = 30$ point-pairs was required in a lag-distance class so that it be used for guessing the 
+initial covariance parameters.
 
 \subsection{Evaluation of Sampling Algorithms}
 

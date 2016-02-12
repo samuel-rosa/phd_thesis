@@ -6,6 +6,7 @@
 \def\abstractname{ABSTRACT}%
 \def\generalabstractname{GENERAL ABSTRACT}%
 \def\appendixname{Appendix}%
+\def\artigoname{Chapter}% Uso de \autoref em documentos organizados na forma de capítulos individuais
 \def\contentsname{Contents}%
 \def\listfigurename{List of Figures}%
 \def\listtablename{List of Tables}%
@@ -42,24 +43,24 @@
 \def\folhas{p}%
 
 \def\dissname{Dissertation}%
+\def\dissgrau{Master}%
 \def\tesename{Thesis}%
 \def\tesegrau{Doctor}%
 
 %% ============================================================================================================
 %% Segundo as normas atuais, parece que os seguinte textos devem sempre aparecer em português, mesmo que o 
 %% documento tenha sido escrito em outra língua. Anteriormente, estes textos eram definidos no arquivo da 
-%% classe. Contudo, parece mais eficiente fazê-lo usando o pacote babel. Sua versão em inglês aparece na 
-%% sequência para possível uso futuro.
+%% classe. Contudo, parece mais eficiente fazê-lo usando o pacote babel.
+%% Note que UFRuralRJ lida com a questao do genero do autor usando a macro '\ifautora'.
+%% A versão em inglês aparece na sequência para possível uso futuro.
 %% ============================================================================================================
-\def\tesespecificinfo{% 
-Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de 
-%\textbf{\@grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
-\textbf{\grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+\def\tesespecificinfo{%
+Tese submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de 
+\ifautora\textbf{\grau{a}}\else\textbf{\grau}\fi~no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
 }%
 \def\dissspecificinfo{%
 Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de 
-%\textbf{\@grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
-\textbf{\grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
+\ifautora\textbf{\grau{a}}\else\textbf{\grau{e}}\fi~no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
 \def\aprovadoem{Documento aprovado em}%
 \def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%

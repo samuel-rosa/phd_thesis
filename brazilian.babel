@@ -6,6 +6,7 @@
 \def\abstractname{RESUMO}%
 \def\generalabstractname{RESUMO GERAL}%
 \def\appendixname{Ap{\^e}ndice}%
+\def\artigoname{Cap\'itulo}% Uso de \autoref em documentos organizados na forma de capítulos individuais
 % \def\appendixsname{Ap{\^e}ndices}%
 \def\contentsname{Sum{\'a}rio}%
 \def\listfigurename{Lista de Figuras}%
@@ -43,6 +44,7 @@
 
 \def\folhas{f}%
 \def\dissname{Disserta{\c{c}}{\~a}o}%
+\def\dissgrau{Mestr}% NÂO adicione a letra 'e'... Veja abaixo em \dissspecificinfo como isso é resolvido!!!
 \def\tesename{Tese}%
 \def\tesegrau{Doutor}%
 
@@ -50,16 +52,15 @@
 %% Segundo as normas atuais, parece que os seguinte textos devem sempre aparecer em português, mesmo que o 
 %% documento tenha sido escrito em outra língua. Anteriormente, estes textos eram definidos no arquivo da 
 %% classe. Contudo, parece mais eficiente fazê-lo usando o pacote babel.
+%% Note que UFRuralRJ lida com a questao do genero do autor usando a macro '\ifautora'.
 %% ============================================================================================================
 \def\tesespecificinfo{%
-Tese submetida como requisito parcial para obten\c{c}{\~a}o do grau de 
-%\textbf{\@grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
-\textbf{\grau} no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
+Tese submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de 
+\ifautora\textbf{\grau{a}}\else\textbf{\grau}\fi~no \@curso, {\'A}rea de Concentra\c{c}{\~a}o em \@area.
 }%
 \def\dissspecificinfo{%
 Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de 
-%\textbf{\@grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
-\textbf{\grau} no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
+\ifautora\textbf{\grau{a}}\else\textbf{\grau{e}}\fi~no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
 \def\byname{por}%
 \def\aprovadoem{Documento aprovado em}%

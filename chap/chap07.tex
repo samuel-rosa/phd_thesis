@@ -342,82 +342,85 @@ from the first to the last campaign.}
 \label{fig:chap07-covars}
 \end{figure}
 
-\begin{table}[!ht]
-\caption[Analysis of deviance for the fitted non-stationary Poisson point process model.]{Analysis of deviance 
-for the fitted non-stationary Poisson point process model with two-tailed p-values for the chi-squared tests 
-comparing the reduction in deviance due to the inclusion of each predictor variable. Terms were added 
-sequentially to the model (first to last).}
- \label{tab:chap07-deviance}
- \centering\footnotesize
- \begin{tabular}{lrrrrr}
-  \hline
-  Predictor		& Df	& Deviance	& Resid. Df	& Resid. Dev	& Pr($>$Chi)	\\ 
-  \hline
-  Intercept only	&  	&  		& 3240 		& 1943.05 	&  		\\ 
-  Physiographic strata	& 2 	& 38.03 	& 3238 		& 1905.03 	& 5.524e-09 	\\ 
-  Land use		& 6 	& 120.91 	& 3232 		& 1784.12 	& < 2.2e-16 	\\ 
-  Field campaigns	& 21 	& 63.28 	& 3211 		& 1720.84 	& 4.027e-06 	\\ 
-  \hline
- \end{tabular}
-\end{table}
+\ctable[
+  caption  = {Analysis of deviance for the fitted non-stationary Poisson point process model with two-tailed 
+  p-values for the chi-squared tests comparing the reduction in deviance due to the inclusion of each 
+  predictor variable. Terms were added sequentially to the model (first to last).},
+  cap      = {Analysis of deviance for the fitted non-stationary Poisson point process model.},
+  label    = tab:chap07-deviance,
+  notespar,
+  pos      = !ht,
+  maxwidth = \textwidth,
+  % doinside = \scriptsize\setstretch{1.1},
+  doinside = \small
+  ]{lrrrrr}{
+  }{ \FL
+  Predictor		& Df	& Deviance	& Resid. Df	& Resid. Dev	& Pr($>$Chi)	\ML
+  Intercept only	&  	&  		& 3240 		& 1943.05 	&  		\NN
+  Physiographic strata	& 2 	& 38.03 	& 3238 		& 1905.03 	& 5.524e-09 	\NN
+  Land use		& 6 	& 120.91 	& 3232 		& 1784.12 	& < 2.2e-16 	\NN
+  Field campaigns	& 21 	& 63.28 	& 3211 		& 1720.84 	& 4.027e-06 	\LL
+  }
 
 Estimated coefficients for predictor variables show that observation intensity has a decreasing tendency in the
 Plateau Border and Plateau (\autoref{tab:chap07-coef}). The lowest observation intensity occurs in areas of 
 native forests, urban land use and water bodies. All field observation campaigns were less intense than the 
 first. Observation intensity reduction factor was similar between the second and seventh field campaigns 
 (about \num{-0.75} times). The largest reduction occurred in the \num{13}th field campaign (\num{-2.18} 
-times), 
-when observation intensity started to increase again until the last field campaign.
+times), when observation intensity started to increase again until the last field campaign.
 
-\begin{table}[!ht]
- \caption[Estimated coefficients for the fitted non-stationary Poisson point process model.]{Estimated 
-coefficients for the fitted non-stationary Poisson point process model and their lower and upper limits at the 
-\SI{95}{\percent} confidence interval. Physiographic strata has three levels: Central Depression, Plateau 
-Border and Plateau. Land use has seven levels: native forest, shrubland, animal husbandry, crop agriculture, 
-forestry, urban and water. Field campaigns has \num{22} levels represented with 
- increasing number from the first to the last campaign. Significance levels of the two-tailed Z test against 
-the null 
- hypothesis that each regression coefficient is equal to zero are given for p-values of \num{0} (***), 
- \num{0.001} (**), \num{0.01} (*), \num{0.05} ( ) and \num{1} (na).}
- \label{tab:chap07-coef}
- \centering\footnotesize
- \begin{tabular}{lrrlrr}
-  \hline
-  Predictor		& Estimate 	& Standard error	& Z test & Lower limit 	& Upper limit	\\ 
-  \hline
-  (Intercept)		& -10.37 	& 0.24 			& na 	& -10.85	& -9.90         \\ 
-  Plateau border	& -0.03 	& 0.20 			&    	& -0.42 	& 0.37	\\ 
-  Plateau		& -0.07 	& 0.31 			&    	& -0.67 	& 0.53 	\\ 
-  Shrubland		& 1.17 		& 0.18 			& *** 	& 0.82 	        & 1.52 	\\ 
-  Animal husbandry	& 0.95 		& 0.14 			& *** 	& 0.67 		& 1.23 	\\ 
-  Crop agriculture	& 1.59 		& 0.19 			& *** 	& 1.22 		& 1.96 	\\ 
-  Forestry		& 1.10 		& 0.28 			& *** 	& 0.56 		& 1.64 	\\ 
-  Urban			& -1.12 	& 0.52 			& * 	& -2.13 	& -0.11 \\ 
-  Water			& 0.74 		& 0.72 			&    	& -0.68 	& 2.16 	\\ 
-  Field campaign 2	& -0.70 	& 0.32 			& * 	& -1.32 	& -0.08\\ 
-  Field campaign 3	& -0.68 	& 0.31 			& * 	& -1.29 	& -0.07\\ 
-  Field campaign 4	& -0.75 	& 0.32 			& * 	& -1.37 	& -0.13\\ 
-  Field campaign 5	& -0.85 	& 0.39 			& * 	& -1.60 	& -0.09 \\ 
-  Field campaign 6	& -1.04 	& 0.37 			& **	& -1.77 	& -0.31 \\ 
-  Field campaign 7	& -0.74 	& 0.43 			&    	& -1.58 	& 0.09 	\\ 
-  Field campaign 8	& -1.36 	& 0.34 			& *** 	& -2.03 	& -0.69 \\ 
-  Field campaign 9	& -1.56 	& 0.43 			& *** 	& -2.40 	& -0.73 \\ 
-  Field campaign 10	& -1.49 	& 0.38 			& *** 	& -2.24 	& -0.75 \\ 
-  Field campaign 11	& -1.44 	& 0.41 			& *** 	& -2.24 	& -0.63 \\ 
-  Field campaign 12	& -1.39 	& 0.36 			& *** 	& -2.10 	& -0.68 \\ 
-  Field campaign 13	& -2.18 	& 0.44 			& *** 	& -3.04 	& -1.32 \\ 
-  Field campaign 14	& -1.64 	& 0.45 			& *** 	& -2.53 	& -0.75 \\ 
-  Field campaign 15	& -1.90 	& 0.36 			& *** 	& -2.61 	& -1.19 \\ 
-  Field campaign 16	& -1.93 	& 0.44 			& *** 	& -2.79 	& -1.07 \\ 
-  Field campaign 17	& -1.20 	& 0.38 			& ** 	& -1.94 	& -0.46 \\ 
-  Field campaign 18	& -1.25 	& 0.41			& ** 	& -2.06 	& -0.45 \\ 
-  Field campaign 19	& -1.14 	& 0.51 			& * 	& -2.15 	& -0.13 \\ 
-  Field campaign 20	& -1.33 	& 0.41 			& ** 	& -2.13 	& -0.53 \\ 
-  Field campaign 21	& -1.35 	& 0.38 			& *** 	& -2.10 	& -0.60 \\ 
-  Field campaign 22	& -0.28 	& 0.42 			&    	& -1.10 	& 0.54 	\\ 
-  \hline
- \end{tabular}
-\end{table}
+\ctable[
+  caption  = {Estimated coefficients for the fitted non-stationary Poisson point process model and their lower 
+  and upper limits at the \SI{95}{\percent} confidence interval.},
+  cap      = {Estimated coefficients for the fitted non-stationary Poisson point process model.},
+  label    = tab:chap07-coef,
+  notespar,
+  pos      = !ht,
+  maxwidth = \textwidth,
+  % doinside = \scriptsize\setstretch{1.1},
+  doinside = \small
+  ]{lrrlrr}{
+  \tnote[a]{Physiographic strata has three levels: Central Depression, Plateau Border and Plateau. Land use 
+  has seven levels: native forest, shrubland, animal husbandry, crop agriculture, forestry, urban and water. 
+  Field campaigns has \num{22} levels represented with increasing number from the first to the last campaign.
+  
+  \tnote[b]{Significance levels of the two-tailed Z test against the null hypothesis that each regression 
+  coefficient is equal to zero are given for p-values of \num{0} (***), \num{0.001} (**), \num{0.01} (*), 
+  \num{0.05} ( ) and \num{1} (na).}
+  }
+  }{ \FL
+  Predictor\tmark[a,b] & Estimate & Standard error & Z test & Lower limit & Upper limit \ML
+  (Intercept)		& -10.37 	& 0.24 			& na 	& -10.85	& -9.90         \NN
+  Plateau border	& -0.03 	& 0.20 			&    	& -0.42 	& 0.37	\NN
+  Plateau		& -0.07 	& 0.31 			&    	& -0.67 	& 0.53 	\NN
+  Shrubland		& 1.17 		& 0.18 			& *** 	& 0.82 	        & 1.52 	\NN
+  Animal husbandry	& 0.95 		& 0.14 			& *** 	& 0.67 		& 1.23 	\NN
+  Crop agriculture	& 1.59 		& 0.19 			& *** 	& 1.22 		& 1.96 	\NN
+  Forestry		& 1.10 		& 0.28 			& *** 	& 0.56 		& 1.64 	\NN
+  Urban			& -1.12 	& 0.52 			& * 	& -2.13 	& -0.11 \NN
+  Water			& 0.74 		& 0.72 			&    	& -0.68 	& 2.16 	\NN
+  Field campaign 2	& -0.70 	& 0.32 			& * 	& -1.32 	& -0.08 \NN
+  Field campaign 3	& -0.68 	& 0.31 			& * 	& -1.29 	& -0.07\NN 
+  Field campaign 4	& -0.75 	& 0.32 			& * 	& -1.37 	& -0.13\NN
+  Field campaign 5	& -0.85 	& 0.39 			& * 	& -1.60 	& -0.09 \NN 
+  Field campaign 6	& -1.04 	& 0.37 			& **	& -1.77 	& -0.31 \NN
+  Field campaign 7	& -0.74 	& 0.43 			&    	& -1.58 	& 0.09 	\NN
+  Field campaign 8	& -1.36 	& 0.34 			& *** 	& -2.03 	& -0.69 \NN
+  Field campaign 9	& -1.56 	& 0.43 			& *** 	& -2.40 	& -0.73 \NN
+  Field campaign 10	& -1.49 	& 0.38 			& *** 	& -2.24 	& -0.75 \NN
+  Field campaign 11	& -1.44 	& 0.41 			& *** 	& -2.24 	& -0.63 \NN
+  Field campaign 12	& -1.39 	& 0.36 			& *** 	& -2.10 	& -0.68 \NN
+  Field campaign 13	& -2.18 	& 0.44 			& *** 	& -3.04 	& -1.32 \NN
+  Field campaign 14	& -1.64 	& 0.45 			& *** 	& -2.53 	& -0.75 \NN
+  Field campaign 15	& -1.90 	& 0.36 			& *** 	& -2.61 	& -1.19 \NN
+  Field campaign 16	& -1.93 	& 0.44 			& *** 	& -2.79 	& -1.07 \NN
+  Field campaign 17	& -1.20 	& 0.38 			& ** 	& -1.94 	& -0.46 \NN
+  Field campaign 18	& -1.25 	& 0.41			& ** 	& -2.06 	& -0.45 \NN
+  Field campaign 19	& -1.14 	& 0.51 			& * 	& -2.15 	& -0.13 \NN
+  Field campaign 20	& -1.33 	& 0.41 			& ** 	& -2.13 	& -0.53 \NN
+  Field campaign 21	& -1.35 	& 0.38 			& *** 	& -2.10 	& -0.60 \NN
+  Field campaign 22	& -0.28 	& 0.42 			&    	& -1.10 	& 0.54 	\LL
+  }
 
 The fitted non-stationary Poisson point process model gives a fine representation of the observation intensity 
 (\autoref{fig:chap07-trend}, left plot) estimated with the isotropic Gaussian kernel 
@@ -500,17 +503,14 @@ observations. Because the study started on problem areas, there is an \emph{oper
 stronger observation efforts in these areas, adding to the \emph{conceptual} effect described above (See 
 \autoref{subsec:chap07-conceptual}). However, operational issues also lead to the reduction of the 
 observation intensity on poorly accessible areas, such as those with steep slopes and dense forest cover of 
-the 
-Plateau Border. In classical sampling theory an observation process strongly influenced by accessibility 
-issues 
-is called \emph{convenience sampling} \cite{deGruijterEtAl2006}. The most extreme case occurs when soil 
+the Plateau Border. In classical sampling theory an observation process strongly influenced by accessibility 
+issues is called \emph{convenience sampling} \cite{deGruijterEtAl2006}. The most extreme case occurs when soil 
 observations are made only along the road network \cite{CambuleEtAl2013}. This is not the case of the 
 observations made in the Plateau Border, but there is enough evidence to regard them as being the outcome of 
 convenience sampling. Datasets obtained through convenience sampling usually present significant biases that 
 affect the construction of robust digital soil mapping models \cite{BrusEtAl2011}. Therefore, it can be 
 expected beforehand that most digital soil mapping models built for the study area will have a poor 
-performance 
-in the Plateau Border areas.
+performance in the Plateau Border areas.
 
 \subsection{Neurophysiological Responses}
 
@@ -544,8 +544,7 @@ below the available amount of resources available. In other words, they had to r
 to save resources (physiological, psychological and financial). The result was the reduction of the 
 observation intensity. A new motivation shift occurred when the end of the project became closer and the soil 
 modellers perceived that their resources were not completely depleted. Problem areas were visited again and 
-the 
-free survey method used to make new soil observations in a very similar way of the first field campaigns.
+the free survey method used to make new soil observations in a very similar way of the first field campaigns.
 
 \subsection{Observation Model}
 
@@ -577,10 +576,9 @@ similar to that of a spatially random sample.
 The second phase of the observation model starts when the soil modellers are consistently less motivated than 
 when they started the observation process. This decreased motivation comes along with a new focal goal: making 
 a minimum number of observations to obtain a \q{satisfactory} geographic coverage of the area. This is achieved 
-by
-reformulating the planning of field campaigns. The free survey still is the observation method used but with 
-the location of soil observations made beforehand at approximately equally spaced intervals. In the field the 
-soil modellers are free to change this location according to their mental model of soil-landscape 
+by reformulating the planning of field campaigns. The free survey still is the observation method used but 
+with the location of soil observations made beforehand at approximately equally spaced intervals. In the field 
+the soil modellers are free to change this location according to their mental model of soil-landscape 
 relationships but respecting the previously established spacing between observations. They also move from 
 problem areas to those were the spatial soil pattern can be predicted more easily. When strong access issues 
 are faced, convenience sampling is employed. The objective is to save physiological, psychological and 

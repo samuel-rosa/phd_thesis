@@ -28,7 +28,7 @@ their respective research questions:
  \item Determine the suitability of freely available covariates to calibrate soil spatial models.
   \begin{enumerate}[label=(\alph*)]
    \item Does the use of more detailed covariates result in considerably more accurate soil maps?
-   \item How does incorporation of spatial dependence in a soil spatial model compare to the gain in 
+   \item How does incorporation of spatial dependence in a soil spatial model compares to the gain in 
    prediction accuracy obtained from using more detailed covariates?
    \item Are the answers to these research questions consistent across soil properties?
   \end{enumerate}
@@ -68,42 +68,42 @@ is a logical sequence in their presentation, all chapters were planned so that t
 This means that there is some overlap between them, i.e. repeated information. References to specific sections 
 of other chapters using coloured (blue) hyperlinks are common.
 
-\autoref{chap:chap02} is a commented review of the literature on soil spatial modelling and its main sources 
-of uncertainty. The review starts with a discussion about the efforts made by soil spatial modellers to 
-raise awareness about the importance of soil spatial information. These efforts seem to have fuelled a global 
+\autoref{chap:chap02} is a commented review of the literature on soil spatial modelling and its main sources of 
+uncertainty. The review starts with a discussion about the efforts made by soil spatial modellers to raise 
+awareness about the importance of soil spatial information. These efforts seem to have fuelled a global 
 scientific demand for up-to-date, high resolution soil spatial information. The chapter continues with a 
 description of soil spatial modelling along human history, suggesting that the goal of producing soil maps 
 remains more or less the same since the Neolithic Revolution (ca.~\num{10000}~years). The chapter closes with 
 the main sources of uncertainty.
 
-\autoref{chap:chap03} presents the conceptual model of pedogenesis (in Portuguese), which consists of a 
-description of the study area that includes an explicit description of soil-forming factors (climate, geology, 
-geomorphology, hydrology, land use, and vegetation) and processes that determine the soil spatio-temporal 
-distribution. \autoref{chap:chap04} describes the soil data included in the \emph{Santa Maria dataset}, which 
-was used to develop the case studies presented in this thesis. The Santa Maria dataset is composed of 
-$n = 410$ soil observations compiled from studies carried out between \num{2004} and \num{2013}. These studies 
-aimed at producing semi-detailed soil and land use maps, and modelling topsoil carbon stock and vulnerability 
-to erosion. A comprehensive description of the covariate data included in the Santa Maria dataset, and their 
-processing, is given in \autoref{chap:chap05}. Beyond describing the data used in the thesis, the goal of these 
-two chapters, along with the conceptual model of pedogenesis, is to provide the basis for future soil spatial 
-modelling exercises in the study area, and to serve as examples for new soil spatial modelling studies 
-developed elsewhere.
+\autoref{chap:chap03} presents the conceptual model of pedogenesis (in Portuguese), which consists 
+of a description of the study area that includes an explicit description of soil-forming factors (climate, 
+geology, geomorphology, hydrology, land use, and vegetation) and processes that determine the soil 
+spatio-temporal distribution. \autoref{chap:chap04} describes the soil data included in the 
+\emph{Santa Maria dataset}, which was used to develop the case studies presented in this thesis. The Santa
+Maria dataset is composed of $n = 410$ soil observations compiled from studies carried out between \num{2004} 
+and \num{2013}. These studies aimed at producing semi-detailed soil and land use maps, and modelling topsoil 
+carbon stock and vulnerability to erosion. A comprehensive description of the covariate data included in the 
+Santa Maria dataset, and their processing, is given in \autoref{chap:chap05}. Beyond describing 
+the data used in the thesis, the goal of these two chapters, along with the conceptual model of pedogenesis, is 
+to provide the basis for future soil spatial modelling exercises in the study area, and to serve as examples 
+for new soil spatial modelling studies developed elsewhere.
 
-Based on an article published in the peer reviewed journal \geoderma, \autoref{chap:chap06} serves the purpose 
-of meeting the first objective of the thesis and answering its respective research questions. The 
+Based on an article published in the peer reviewed journal \geoderma, \autoref{chap:chap06} serves 
+the purpose of meeting the first objective of the thesis and answering its respective research questions. The 
 prediction performance of linear soil spatial models calibrated using covariates (area-class soil maps, land 
 use maps, geological maps, digital elevation models, and satellite images) available in two levels of detail 
 is evaluated. The influence of taking the spatial dependence of the residuals into account is assessed as 
 well. 
 
-\autoref{chap:chap07} presents an approach that aims at helping to understand the purposive sampling strategy 
-traditionally employed by field soil modellers, i.e. free survey. This is important because many soil 
-spatial modelling projects rely on legacy data, i.e. soil data produced previously and made available (publicly 
-or not), whose observation locations were purposively selected by soil spatial modellers using poorly 
-documented tacit rules. The chapter is designed to answer the research questions of the second objective of the 
-thesis. Point pattern analysis is used to characterize and compare the spatial sample configurations, whereas 
-theories borrowed from Psychology are used to elaborate on the subjective factors involved in selecting soil 
-observation locations.
+\autoref{chap:chap07} presents an approach that aims at helping to understand the purposive 
+sampling strategy traditionally employed by field soil modellers, i.e. free survey. This is important because 
+many soil spatial modelling projects rely on legacy data, i.e. soil data produced previously and made available 
+(publicly or not), whose observation locations were purposively selected by soil spatial modellers using 
+poorly documented tacit rules. The chapter is designed to answer the research questions of the second objective 
+of the thesis. Point pattern analysis is used to characterize and compare the spatial sample configurations, 
+whereas theories borrowed from Psychology are used to elaborate on the subjective factors involved in selecting 
+soil observation locations.
 
 Objective 3 and its research questions are addressed in \autoref{chap:chap08} and \autoref{chap:chap09}. In 
 \autoref{chap:chap08}, three improved sampling algorithms are compared to the original conditioned Latin 
@@ -113,11 +113,11 @@ sampling strategies for spatial trend estimation, variogram estimation, and spat
 very little about the soil spatial variation. The chapter closes with a new general purpose sampling algorithm 
 that aims at the three objectives jointly.
 
-The sequence of eight chapters is closed with a \emph{General Conclusion} where I highlight the main research 
-results and contributions of the study. Next, there are two appendices, both devoted to the description of the 
-two packages for \texttt{R} developed to support the thesis: \texttt{pedometrics} (\autoref{apen:pedometrics}) 
-and \texttt{spsann} (\autoref{apen:spsann}). The first includes miscellaneous functions that were put together 
-for ease of use. The second was designed for the optimization of sample configurations using spatial simulated 
-annealing. All literature references are presented under a unique \emph{Bibliographic References} chapter at 
-the end of the thesis.
-
+The sequence of eight chapters is closed with \hyperref[chap:chap10]{General Conclusions} where I highlight 
+the main research results and contributions of the study. Next, there are two appendices, both devoted to the 
+description of the two packages for \texttt{R} developed to support the thesis: \texttt{spsann} 
+(\autoref{appen:spsann}) and \texttt{pedometrics} (\autoref{appen:pedometrics}). The first was designed for 
+the 
+optimization of sample configurations using spatial simulated annealing. The second includes miscellaneous 
+functions that were put together for ease of use. All literature references are presented under a unique list 
+of \hyperref[chap:references]{Bibliographic References} at the end of the thesis.

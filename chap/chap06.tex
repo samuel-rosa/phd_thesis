@@ -1,10 +1,10 @@
 \artigotrue
 \chapter{DO MORE DETAILED COVARIATES DELIVER MORE ACCURATE SOIL MAPS?}
 \chapternote{This chapter is based on A.~Samuel-Rosa, G.B.M.~Heuvelink, G.M.~Vasques, L.H.C.~Anjos. Do 
-more detailed covariates deliver more accurate soil maps? \emph{Geoderma}, v.243--244, p.214--227, 2015. Terms 
-and expressions have been modified to match the standard terminology used throughout the thesis without 
-compromising the content of the original text. Footnotes were added where a definition required correction or 
-clarification.}
+more detailed environmental covariates deliver more accurate soil maps? \emph{Geoderma}, v.243--244, 
+p.214--227, 2015. Terms and expressions have been modified to match the standard terminology used throughout 
+the thesis without compromising the content of the original text. Footnotes were added where a definition 
+required correction or clarification.}
 \shorttitle{Using More Detailed Covariates}
 \label{chap:chap06}
 
@@ -122,13 +122,11 @@ more
 detailed covariates generally increases soil mapping costs \cite{ShiEtAl2012}.
 
 The objective of this study was to evaluate whether investing in more detailed covariates improves the 
-accuracy 
-of soil maps. The main difference of our study to previous ones is that we use a rigorous statistical approach 
-to assess the added value of using five more detailed covariates simultaneously. We used a  case study in 
-Brazil 
-to compare the accuracy of maps of the clay content, organic carbon content and effective cation exchange 
-capacity of the topsoil as obtained from regression kriging on the five covariates, whereby each covariate was 
-evaluated on two levels of spatial detail.
+accuracy of soil maps. The main difference of our study to previous ones is that we use a rigorous statistical 
+approach to assess the added value of using five more detailed covariates simultaneously. We used a  case study 
+in Brazil to compare the accuracy of maps of the clay content, organic carbon content and effective cation 
+exchange capacity of the topsoil as obtained from regression kriging on the five covariates, whereby each 
+covariate was evaluated on two levels of spatial detail.
 
 \section{MATERIAL AND METHODS}
 \label{sec:chap06-methods}
@@ -138,16 +136,13 @@ evaluated on two levels of spatial detail.
 
 The study area constitutes a small catchment (\SI{\sim2000}{\hectare}) located on the southern edge of the 
 plateau of the Paraná Sedimentary Basin, Rio Grande do Sul, Brazil (\autoref{fig:chap06-location}). The 
-climate 
-is classified as Cfa (K\"oppen -- subtropical humid without a dry season) with mean annual temperature of 
-\SI{19.3}{\celsius}, and mean annual precipitation of \SI{1708}{\mm}, well distributed throughout the year 
+climate is classified as Cfa (K\"oppen -- subtropical humid without a dry season) with mean annual temperature 
+of \SI{19.3}{\celsius}, and mean annual precipitation of \SI{1708}{\mm}, well distributed throughout the year 
 \cite{Maluf2000}. Relief varies between plain (slope between \num{0} and \SI{3}{\percent}) and mountainous 
 (slope between \num{45} and \SI{100}{\percent}), and elevations range between \num{140} and \SI{475}{\m}. 
 Geology consists of basic, intermediate and acid igneous rocks (rhyolite-rhyodacite and andesite-basalt) of 
-the 
-Cretaceous period, consolidated sedimentary rocks (aeolian and fluvial sandstones) of the Triassic and 
-Jurassic 
-periods, and non-consolidated (fluvial and colluvial deposits) of the Quaternary period 
+the Cretaceous period, consolidated sedimentary rocks (aeolian and fluvial sandstones) of the Triassic and 
+Jurassic periods, and non-consolidated (fluvial and colluvial deposits) of the Quaternary period 
 \cite{GasparettoEtAl1988, MacielFilho1990, Sartori2009}. Native semi-deciduous forests occupy more than 
 half of the area, followed by native grassland used for animal husbandry, semi-deciduous shrubland, annual 
 crop agriculture, forestry (Eucalyptus), urban areas, and artificial water bodies \cite{SamuelRosaEtAl2011a}.
@@ -441,10 +436,9 @@ We model each of the soil properties of interest as the outcome of a spatial sto
 composed of fixed and random effects \cite{HeuvelinkEtAl2001, LarkEtAl2006}. We use the point soil 
 observations and spatially exhaustive predictor variables to calibrate the model and predict the outcome of 
 the spatial stochastic process at unobserved locations. This fixed effect (deterministic trend), 
-$m(\textbf{s})$, 
-describes that part of the spatial variation of the soil property that is explained by the covariates. We 
-assume here that is a linear function of the predictor variables. The random effect (stochastic residuals, 
-latent variables), $e(\textbf{s})$, describes that part of the spatial variation that cannot be 
+$m(\textbf{s})$, describes that part of the spatial variation of the soil property that is explained by the 
+covariates. We assume here that is a linear function of the predictor variables. The random effect (stochastic 
+residuals, latent variables), $e(\textbf{s})$, describes that part of the spatial variation that cannot be 
 explained by the covariates \cite{Cressie1993}. It is represented by a spatially correlated, Gaussian 
 distributed random variable, that is assumed stationary in the mean and covariance. Thus, the linear mixed 
 model of spatial variation that we employed is given by
@@ -461,17 +455,16 @@ predictor variables. Variable $X_{0}(\textbf{s})$ is taken as unity so that $\be
 
 \subsubsection{Model selection}
 
-We calibrated $m = 2^5 = 32$ multiple linear regression models for each soil property (fitted using ordinary 
+We calibrated $k = 2^5 = 32$ multiple linear regression models for each soil property (fitted using ordinary 
 least squares, OLS) to model the deterministic trend for each combination of the five covariates (recall from 
 \autoref{sec:chap06-intro} that each covariate is available at two levels of spatial detail, hence $2^5$ 
 combinations). The number of predictor variables used to calibrate each model varied among combinations 
 between $p = 52$ and $p = 62$, because more detailed covariates enabled the derivation of a larger number of 
-predictor 
-variables (except the DEM). Backward VIF (variance inflation factor) selection followed by stepwise AIC 
-(Akaike's Information Criterion) selection were used to select predictor variables to enter the models 
+predictor variables (except the DEM). Backward VIF (variance inflation factor) selection followed by stepwise 
+AIC (Akaike's Information Criterion) selection were used to select predictor variables to enter the models 
 \cite{Samuel-RosaEtAl2014c, VenablesEtAl2002}.
 
-The $m = 32$ multiple linear regression models calibrated for each soil property were ranked using the ratio 
+The $k = 32$ multiple linear regression models calibrated for each soil property were ranked using the ratio 
 between the regression sum of squares and the total sum of squares. Because stepwise regression results in 
 biased models \cite{Harrell2001a}, the ratio of sum of squares was adjusted (${R}^{2}_{adj}$) using the number 
 of predictor variables initially offered to enter the model instead of the reduced number of predictor 
@@ -509,16 +502,16 @@ to the original space of soil properties using stochastic simulation \cite{Chris
  prediction error variance in the original space of soil properties.
 \end{enumerate}
 
-Five error statistics were computed from the LOO-CV results \cite{JanssenEtAl1995, KempenEtAl2010, 
-BrusEtAl2011}. The mean error (\textit{ME}), which measures the prediction bias, the mean absolute error 
-(\textit{MAE}) and the root mean squared error (\textit{RMSE}), which measure the prediction accuracy, the 
-scaled root mean squared error (\textit{SRMSE}, also known as mean squared deviation ratio), which measures 
-how well the prediction error variance matches the squared differences between predicted and observed soil 
-property, where $\textit{SRMSE} > 1$ indicates under-estimation, while $\textit{SRMSE} < 1$ indicates 
-over-estimation, and the amount of variance explained (\textit{AVE}, also known as coefficient of 
+Five error statistics were computed from the leave-one-out cross-validation results \cite{JanssenEtAl1995, 
+KempenEtAl2010, BrusEtAl2011}. The mean error (\textit{ME}), which measures the prediction bias, the mean 
+absolute error (\textit{MAE}) and the root mean squared error (\textit{RMSE}), which measure the prediction 
+accuracy, the scaled root mean squared error (\textit{SRMSE}, also known as mean squared deviation ratio), 
+which measures how well the prediction error variance matches the squared differences between predicted and 
+observed soil property, where $\textit{SRMSE} > 1$ indicates under-estimation, while $\textit{SRMSE} < 1$ 
+indicates over-estimation, and the amount of variance explained (\textit{AVE}, also known as coefficient of 
 determination or ratio of scatter), which measures the fraction of the overall spread of observed values that 
-is explained 
-by the model. The AVE ranges from \num{0} to \num{100}, where $\textit{AVE} = 100$ is the optimal value.
+is explained by the model. The AVE ranges from \num{0} to \num{100}, where $\textit{AVE} = 100$ is the optimal 
+value.
 
 \subsubsection{Spatial prediction}
 \label{subsec:chap06-prediction}
@@ -527,10 +520,10 @@ Only the \emph{baseline} and \emph{best performing} linear mixed models calibrat
 used for spatial prediction. Spatial predictions at a fine grid of \num{\sim800000} point locations were made 
 in the Box-Cox space using the best linear unbiased predictor (BLUP) with the empirical estimates of the 
 random effects (EBLUP) \cite{LarkEtAl2006}. EBLUP with a fixed effect model is conceptually equivalent to 
-kriging 
-with external drift and regression kriging, and mathematically equivalent to kriging with external drift and 
-universal kriging. Point predicted values and prediction error variances were back-transformed to the original 
-soil property space using stochastic simulation as described above (\autoref{subsec:chap06-validation}).
+kriging with external drift and regression kriging, and mathematically equivalent to kriging with external 
+drift and universal kriging. Point predicted values and prediction error variances were back-transformed to the 
+original soil property space using stochastic simulation as described above 
+(\autoref{subsec:chap06-validation}).
 
 \section{RESULTS}
 \label{sec:chap06-results}
@@ -565,15 +558,14 @@ the model with the lowest ${R}^{2}_{adj}$, which we call the \emph{poorest perfo
  \end{minipage}
  \caption[Model series plots for CLAY, SOC, and ECEC.]{Model series plots for CLAY (a), SOC (b), and ECEC (c). 
 The less and more detailed version of each covariate are identified with the yellow (bright) and green (dark) 
-colours, respectively. Multiple linear 
- regression models were ranked using their ${R}^{2}_{adj}$. Triangles show the mean ranking of the more 
-detailed covariates (i.e. centre of green cells).}
+colours, respectively. Multiple linear regression models were ranked using their ${R}^{2}_{adj}$. Triangles 
+show the mean ranking of the more detailed covariates (i.e. centre of green cells).}
  \label{fig:chap06-model-series}
 \end{figure}
 
 The row-wise analysis of the model series plots shows if a model calibrated with the more detailed version of 
 a given covariate has a higher prediction accuracy. This information is retrieved by looking at the row-wise 
-distribution of green cells -- these cells represent the $m = 16$ models calibrated using the more detailed 
+distribution of green cells -- these cells represent the $k = 16$ models calibrated using the more detailed 
 version of a given covariate, irrespective of the version of the other covariates. The more concentrated the 
 green cells are in the right half of the plot, the larger the relative benefit of using the more detailed 
 version of that covariate. For example, the top row of the second model series plot shows the SOC models 
@@ -593,8 +585,7 @@ ranking of the SOC models calibrated using the more detailed version of these tw
 \num{15}--\num{16} (second and third rows). Using the more detailed version of the soil map (\texttt{soil}, 
 fourth row) is not as beneficial as using \texttt{land}, \texttt{geo} or \texttt{dem}, but more beneficial 
 than using \texttt{sat}. Because the covariates were ranked based on the mean rankings, the covariate 
-displayed 
-in the top row of each model series plot is the one which resulted in the largest improvement of the 
+displayed in the top row of each model series plot is the one which resulted in the largest improvement of the 
 prediction accuracy when the more detailed version was used to calibrate the model -- for SOC this is the land 
 use map.
 
