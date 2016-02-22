@@ -276,34 +276,32 @@ strengths of both discrete and continuous models of spatial variation into a sin
 knowledge and consideration of the spatial continuity of soil property values.
 
 The mixed model of spatial variation\footnote{The use that I give to the expression \emph{mixed model of 
-spatial variation}
-in this thesis is approximately equivalent to expressions such as regression-kriging, kriging with external 
-drift, universal
-kriging, hybrid approach for soil mapping, pedometric mapping, digital soil mapping, predictive soil mapping, 
-environmental
-correlation, geostatistical mapping, soil-landscape modelling, and so on. As far as I know, soil modellers have 
-not yet reached an agreement on how these \q{traditional} expressions should be used, nor what their 
-\q{correct} meaning is. See, for example, \citeonline{Hengl2003, McBratneyEtAl2003, ScullEtAl2003}. Because the 
-expression \emph{mixed model of spatial variation} has a theoretical basis (other expressions are defined based 
-on operational aspects), I understand that its adoption and use is a more appropriate choice.} can be viewed as 
-a generalization of previously existing models of spatial variation, by which a soil property 
-$Y(\boldsymbol{s})$ at a given location $\boldsymbol{s}$ is modelled as the outcome of a spatial stochastic 
-process \cite{Cressie1993, HeuvelinkEtAl2001, LarkEtAl2006}. Accordingly, the model is composed of \emph{fixed} 
-and \emph{random effects}. The fixed effects, a deterministic large-scale spatial trend, $m(\boldsymbol{s})$, 
-describes the portion of the spatial variation of the soil property that is explained with the factors of soil 
-formation as suggested by the empirical correlation calculated using point soil observations and spatially 
-exhaustive covariates\footnote{In the statistical literature, the term \emph{covariate} is synonymous to 
-\emph{explanatory variable}, \emph{predictor variable}, and \emph{independent variable}, and refers to the 
-variable that, although not being of primary interest, is used in a model because it determines the behaviour 
-of the \emph{response variable} or \emph{dependent variable} \cite{Everitt2006}. In soil science, a covariate 
-has the same statistical meaning, the difference being that they assume a pedological meaning as well, i.e. 
-they are viewed as proxies, indicators, substitutes, surrogates, approximations of the soil-forming factors due 
-to the simple fact that the soil-forming factors -- the true environmental conditions that helped shape the 
-soil -- are unknown. Covariates are defined \emph{spatially exhaustive} when they cover the entire area being 
-modelled, i.e. they are exhaustively known in the entire geographic space.}. The random effects, also known as 
-stochastic residuals or latent variables, $e(\boldsymbol{s})$, describe the portion of the spatial variation of 
-the soil property that cannot be explained with the covariates but is potentially spatially correlated, the 
-form and degree of this spatial correlation possibly being interpreted pedologically \cite{Lark2012}. Thus
+spatial variation} in this thesis is approximately equivalent to expressions such as regression-kriging, 
+kriging with external drift, universal kriging, hybrid approach for soil mapping, pedometric mapping, digital 
+soil mapping, predictive soil mapping, environmental correlation, geostatistical mapping, soil-landscape 
+modelling, and so on. As far as I know, soil modellers have not yet reached an agreement on how these 
+\q{traditional} expressions should be used, nor what their \q{correct} meaning is. See, for example, 
+\citeonline{Hengl2003, McBratneyEtAl2003, ScullEtAl2003}. Because the expression \emph{mixed model of spatial 
+variation} has a theoretical basis (other expressions are defined based on operational aspects), I understand 
+that its adoption and use is a more appropriate choice.} can be viewed as a generalization of previously 
+existing models of spatial variation, by which a soil property $Y(\boldsymbol{s})$ at a given location 
+$\boldsymbol{s}$ is modelled as the outcome of a spatial stochastic process \cite{Cressie1993, 
+HeuvelinkEtAl2001, LarkEtAl2006}. Accordingly, the model is composed of \emph{fixed} and \emph{random effects}. 
+The fixed effects, a deterministic large-scale spatial trend, $m(\boldsymbol{s})$, describes the portion of the 
+spatial variation of the soil property that is explained with the factors of soil formation as suggested by the 
+empirical correlation calculated using point soil observations and spatially exhaustive covariates\footnote{In 
+the statistical literature, the term \emph{covariate} is synonymous to \emph{explanatory variable}, 
+\emph{predictor variable}, and \emph{independent variable}, and refers to the variable that, although not being 
+of primary interest, is used in a model because it determines the behaviour of the \emph{response variable} or 
+\emph{dependent variable} \cite{Everitt2006}. In soil science, a covariate has the same statistical meaning, 
+the difference being that they assume a pedological meaning as well, i.e. they are viewed as proxies, 
+indicators, substitutes, surrogates, approximations of the soil-forming factors due to the simple fact that the 
+soil-forming factors -- the true environmental conditions that helped shape the soil -- are unknown. Covariates 
+are defined \emph{spatially exhaustive} when they cover the entire area being modelled, i.e. they are 
+exhaustively known in the entire geographic space.}. The random effects, also known as stochastic residuals or 
+latent variables, $e(\boldsymbol{s})$, describe the portion of the spatial variation of the soil property that 
+cannot be explained with the covariates but is potentially spatially correlated, the form and degree of this 
+spatial correlation possibly being interpreted pedologically \cite{Lark2012}. Thus 
 
 \begin{equation}\label{eqn:intro-mixed-model}
 Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
@@ -465,8 +463,7 @@ SumflethEtAl2008, SunEtAl2012, ViscarraRosselEtAl2013, NussbaumEtAl2014, HenglEt
 The main reason for a soil map to be in error is that the background knowledge and data used to
 construct the soil-mapping model is very limited -- we have to try our best with the available
 resources. This means that it will never be possible to construct a model that explains the entire complexity 
-of
-the soil \cite{Tukey1997}, and our knowledge about the soil, and the world as a whole,
+of the soil \cite{Tukey1997}, and our knowledge about the soil, and the world as a whole,
 will always be only partial \cite{Box1993}. Because we cannot eliminate the uncertainty of a soil
 map, they can always be considered as wrong, the difference being that some might be useful
 \cite{Box1976}.
@@ -610,8 +607,7 @@ error has a systematic nature, then a corrective measure can be taken right away
 % then a corrective measure can be taken right away.
 
 A most comprehensive way of dealing with the multiple sources of uncertainty is \emph{error propagation 
-analysis},
-also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989, Taylor1997}. This is done taking
+analysis}, also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989, Taylor1997}. This is done taking
 our uncertainty into account through the modelling steps, seeing how it propagates, and
 evaluating its impact on the uncertainty about the output soil map. This would allow us identifying the
 main source of uncertainty, so that we could try to take corrective measures to improve its quality.
