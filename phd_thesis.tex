@@ -1,16 +1,5 @@
-%\listfiles
-
 %% Tipo de documento e a classe a ser usada para sua formatação.
 \documentclass[tese, header]{UFRuralRJ}
-
-%% Um tipo específico de monografia pode ser informado como parâmetro opcional:
-%\documentclass[tese]{UFRuralRJ}
-
-%% A opção 'openright' força inícios de capítulos em páginas ímpares
-%\documentclass[openright]{UFRuralRJ}
-
-%% Use a opção 'twoside' para gerar uma versão frente-e-verso
-%\documentclass[twoside]{UFRuralRJ}
 
 %%==============================================================================
 %% Pacotes - língua, codificação e fonte
@@ -49,9 +38,6 @@
 \usepackage{wrapfig}
 
 \usepackage{Sweave}
-
-%\bibliographystyle{abbrvnat}
-%\setcitestyle{authoryear,round}
 
 %%==============================================================================
 %% Pacotes - formatação de hyperlinks
@@ -94,8 +80,7 @@
 %% Pacotes - formatação da bibliografia de acordo com as normas da ABNT e da UFRRJ
 %%=============================================================================================================
 
-% IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado
-% depois do pacote 'hyperref'
+% IMPORTANTE: O pacote 'abntex2cite' precisa, obrigatoriamente, ser carregado depois do pacote 'hyperref'
 \usepackage[alf, abnt-and-type=&, abnt-etal-cite=2, abnt-etal-list = 0]{abntex2cite}
 
 %%==============================================================================
@@ -107,8 +92,7 @@
 \let\oldv\verbatim
 \let\oldendv\endverbatim
 \def\verbatim{\par\setbox0\vbox\bgroup\oldv}
-\def\endverbatim{\oldendv\egroup\fboxsep0pt 
-                 \noindent\colorbox[gray]{0.95}{\usebox0}\par}
+\def\endverbatim{\oldendv\egroup\fboxsep0pt\noindent\colorbox[gray]{0.95}{\usebox0}\par}
 
 %%==============================================================================
 %% Packages - other
@@ -129,6 +113,7 @@
 
 % Customising captions in floating environments
 \usepackage[font=small, labelfont=bf, compatibility=false]{caption}
+\captionsetup{format=hang}
 
 % Support for sub-captions
 \usepackage[skip=0pt,position=top,singlelinecheck=off,justification=raggedright, 
@@ -235,8 +220,6 @@ RedeMDS%
 \instituto{Instituto de Agronomia}
 \curso{Curso de Pós-Graduação em Agronomia--Ciência do Solo}
 \area{Ciência do Solo}
-%\grau{Doutor em Agronomia -- Ciência do Solo}
-%\nivel{Doutorado em Agronomia -- Ciência do Solo}
 \local{Seropédica}{RJ}{Brasil}
 
 %%==============================================================================
@@ -255,14 +238,6 @@ RedeMDS%
 \committee[Dra.]{Lopes Assad}{Maria Leonor Ribeiro Casimiro}{UFSCar} %% Examinator
 \committee[Dr.]{Oliveira}{Ronaldo Pereira de}{EMBRAPA} %% Examinator
 \date{24}{Fevereiro}{2016} %% Date of defence
-
-%%==============================================================================
-%% Outros itens
-%%==============================================================================
-
-% \keyword{Pedometria}
-% \keyword{Modelos preditivos}
-% \keyword{Incerteza}
 
 %%=============================================================================
 %% Início do documento
@@ -293,34 +268,10 @@ RedeMDS%
 \makeapprove
 
 %%=============================================================================
-%% Dedicatória (opcional)
-%%=============================================================================
-% \clearpage\mbox{}\vfill\hspace{80mm}\begin{minipage}{76mm}\begin{flushright}{\em
-% Àqueles que financiaram meus estudos...
-% \par
-% ...DEDICO!
-% }\end{flushright}\end{minipage}
-
-%%=============================================================================
 %% Agradecimentos ou Prefácio (opcional)
 %%=============================================================================
 %% Usar versão estrelada do comando 'chapter'.
 \include{chap/preface}
-
-%%=============================================================================
-%% Biografia (opcional)
-%%=============================================================================
-% \chapter*{Biography}
-% O autor nasceu, cresceu e escreveu uma tese.
-
-%%=============================================================================
-%% Epígrafe (opcional)
-%%=============================================================================
-% \clearpage\mbox{}\vfill\hspace{80mm}\begin{minipage}{76mm}\begin{flushright}{\em
-% ``Fazer é a melhor forma de dizer.''
-% \par
-% Autor desconhecido
-% }\end{flushright}\end{minipage}
 
 %%=============================================================================
 %% Resumo geral em português
@@ -372,11 +323,6 @@ reducing our uncertainty requires, first, that we explore the full potential of 
 data using sound spatial modelling techniques.
 \end{generalabstract}
 
-
-%% Lista de Ilustrações (opc)
-%% Lista de Símbolos (opc)
-%% Lista de Anexos e Apêndices (opc)
-
 %%=============================================================================
 %% Lista de figuras
 %%=============================================================================
@@ -391,30 +337,6 @@ data using sound spatial modelling techniques.
 %% Lista de Apêndices (comentar se não houver)
 %%=============================================================================
 \listofappendix
-
-%%=============================================================================
-%% Lista de Anexos (comentar se não houver)
-%%=============================================================================
-% \listofannex
-
-%%=============================================================================
-%% Lista de abreviaturas e siglas
-%%=============================================================================
-%\begin{listofabbrv}{UbiComp}
-%   \item [DSM] Digital Soil Mapping
-%   \item [UbiComp] Computação Ubíqua
-%\end{listofabbrv}
-
-%%=============================================================================
-%% Lista de simbolos (opcional)
-%%=============================================================================
-%Simbolos devem aparecer conforme a ordem em que aparecem no texto
-% o parametro deve ser o símbolo mais longo
-%\begin{listofsymbols}{teste}
-%  \item [$\varnothing$] vazio
-%  \item [$\Gamma$]  Gama
-%  \item [$\forall$] Para todo
-%\end{listofsymbols}
 
 %%=============================================================================
 %% Sumário
@@ -443,6 +365,7 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Referências
 %%=============================================================================
+\selectlanguage{brazilian}
 \shorttitle{Bibliographic References}
 \bibliography{ref/biblio}\label{chap:references}
 
@@ -454,12 +377,5 @@ data using sound spatial modelling techniques.
 % \include{chap/appenb} % Conclusão Geral
 \include{chap/appenc} % R-package spsann
 \include{chap/append} % R-package pedometrics
-
-%%=============================================================================
-%% Anexos
-%%=============================================================================
-% \annex
-% \include{chap/annexa}
-% \include{chap/annexb}
 
 \end{document}
