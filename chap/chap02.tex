@@ -121,18 +121,37 @@ that lasts till today.
 
 \def\footKubrick{\href{https://www.youtube.com/watch?v=qtbOmpTnyOc}{\textit{2001: A Space Odyssey}}}
 
-A lot happened since the Neolithic Revolution \cite{BrevikEtAl2010} -- from bone to spacecraft, as in Kubrick's 
--- \footKubrick,
-and the knowledge constructed with multiple soil spatial studies was fundamental for the development of 
-agriculture and increase of food production -- although many farmers still live in Neolithic conditions 
-\cite{MazoyerEtAl2008}. If we adopt an integrative view, soil maps produced during this long period of human 
-history seem to fit into what we call today the \emph{discrete model of
-spatial variation}. The discrete model of spatial variation explains the variation of soil properties in space 
+%% Footnote %%%%%%%%%%%%%%%
+\def\footsoil{\footnote{It is common sense among many soil scientists, specially in Brazil, 
+that the activity of \emph{soil mapping} concerns the production of \emph{area-class soil maps}, also called 
+\emph{polygon soil maps}, \emph{choropleth soil maps}, and more generally \emph{soil maps}. My view is that 
+such an understanding, which is rooted in the fact that most early soil mapping projects aimed at producing 
+area-class soil maps, is erroneous. Multiple times it results in the confusion between the concept of soil 
+itself and that of soil class, soil taxon and/or soil series. In this thesis a soil map is nothing more 
+than a graphical representation of the soil. For that end, one has to choose a finite number of properties, 
+characteristics, attributes, features of the soil -- the taxonomic classification is one such \emph{feature}. 
+Thus, one must bear in mind that, throughout this thesis, the term \emph{soil} is used to mean \emph{soil} -- 
+the uppermost layer of unconsolidated material of the Earth's surface... --, not soil class or soil taxon or 
+soil series.}}
+
+%% Footnote %%%%%%%%%%%%%%%
+% Classes vs. properties: ‘Classes’ are categories of a pre-defined classification system or
+% recognized during the survey as natural landscape elements; ‘properties’ are measurable Land
+% Characteristics, e.g. soluble salts, or inferred Land Qualities, e.g. toxicity to a specific plant
+% variety. \cite{Rossiter2000}
+
+A lot happened since the Neolithic Revolution \cite{BrevikEtAl2010} -- from bone to spacecraft, as in 
+Kubrick's \footKubrick --, and the knowledge constructed with multiple soil spatial studies was fundamental 
+for the development of agriculture and increase of food production -- although many farmers still live in 
+Neolithic conditions \cite{MazoyerEtAl2008}. If we adopt an integrative view, soil maps produced during this 
+long period of human history seem to fit into what we call today the \emph{discrete model of spatial 
+variation}. The discrete model of spatial variation explains the variation of soil properties in space 
 using mutually exclusive mapping units that are separated by sharply defined, crisp boundaries (i.e. polygons) 
-\cite{Heuvelink1996, Legros2006}. The soil in each mapping unit is more or less homogeneous with regard to its 
-properties at the time of mapping. These properties, which are generally used to name the mapping unit along 
-with other environmental features, can be characterised using one or more direct observations made within the 
-domain of the mapping unit \cite{WebsterEtAl1990, Legros2006}.
+\cite{Heuvelink1996, Legros2006}. The soil\footsoil{} within each mapping unit is more or less homogeneous 
+with regard to its properties at the time of mapping. These properties, which are generally used to name the 
+mapping unit along with other environmental features, can be characterised using one or more direct 
+observations made within the domain of the mapping unit \cite{WebsterEtAl1990, Rossiter2000, 
+Legros2006}.
 
 \subsection{Discrete Model of Spatial Variation}
 
@@ -149,14 +168,13 @@ Florinsky2012}
  soil = f(cl, o, r, p, t, \ldots),
 \end{equation}
 
-\noindent where $soil$ is the soil and its properties, $cl$ if the climate, $o$ 
-are the organisms, including humans, $r$ stands for relief or topography, $p$ is the 
-parent material, $t$ is time or age of the terrain, and $\ldots$ stand for other unknown 
-players. Dokuchaev was aware that producing empirical evidence to corroborate his basic law of soil science was 
-difficult because data on soil formation factors was scarce. Besides, it was difficult to numerically express 
-the relation between soil and formation factors. Despite of these difficulties, the basic law of soil science 
-was readily adopted by soil spatial modellers because it provided a solid basis for explaining the soil spatial 
-variation \cite{Smith1986}.
+\noindent where $soil$ is the soil and its properties, $cl$ if the climate, $o$ are the organisms, including 
+humans, $r$ stands for relief or topography, $p$ is the parent material, $t$ is time or age of the terrain, 
+and $\ldots$ stand for other unknown players. Dokuchaev was aware that producing empirical evidence to 
+corroborate his basic law of soil science was difficult because data on soil formation factors was scarce. 
+Besides, it was difficult to numerically express the relation between soil and formation factors. Despite of 
+these difficulties, the basic law of soil science was readily adopted by soil spatial modellers because it 
+provided a solid basis for explaining the soil spatial variation \cite{Smith1986}.
 
 An important enthusiast and supporter of the use of \autoref{eqn:chap02-clorpt} was Hans Jenny 
 (\citeyear{Jenny1941}). He believed that the large volume of already existing soil data/knowledge, which had 
@@ -182,60 +200,80 @@ scientific/technological developments \cite{HeuvelinkEtAl2001, McBratneyEtAl2003
 continuous media whose properties vary from place to place in such a way that nearby locations have more 
 similar soil property values than distant locations (spatial autocorrelation) --, implying that the fluxes of 
 energy and matter across the landscape had to be understood as being partially homogeneous (within a mapping 
-unit), partially discontinuous (between mapping units) processes. Second, the uncertainty (errors) about mapped 
-soil properties was disregarded, meaning that a single, absolute value for each soil property would be 
-attributed to each mapping unit ignoring that soil properties vary from place to place and that estimates can 
-be affected by all sorts of errors. Last, but not least, some important soil spatial modelling decisions could 
-not be efficiently shared with others by means of formal, explicit knowledge because they were largely based on 
-the intuitive, tacit knowledge of soil modellers, i.e. the knowledge that a soil modeller has about the 
-soil-landscape relationships and the soil modelling process but that cannot be adequately communicated, 
-articulated by verbal (written or spoken) means. This was evidenced, for example, by the fact that different 
-soil modellers would produce considerably different soil maps without being able to explain why 
-\cite{Legros2006, BazagliaFilhoEtAl2013}.
+unit), partially discontinuous (between mapping units) processes. Second, the uncertainty (the 
+acknowledgement of errors) about mapped soil properties was disregarded, meaning that a single, absolute value 
+for each soil property would be attributed to each mapping unit ignoring that soil properties vary from place 
+to place and that estimates can be affected by all sorts of errors. Last, but not least, some important soil 
+spatial modelling decisions could not be efficiently shared with others by means of formal, explicit knowledge 
+because they were largely based on the intuitive, tacit knowledge of soil modellers, i.e. the knowledge that a 
+soil modeller has about the soil-landscape relationships and the soil modelling process but that cannot be 
+adequately communicated, articulated by verbal (written or spoken) means. This was evidenced, for example, by 
+the fact that different soil modellers would produce considerably different soil maps without being able to 
+explain why \cite{Legros2006, BazagliaFilhoEtAl2013}.
 
 \subsection{Continuous Model of Spatial Variation}
 
 Different solutions were explored during the post-war to overcome one or another weaknesses of the discrete 
 model of spatial variation. Most of these solutions came from the new developments in the fields of 
-mathematics, statistics and informatics, many of them already successfully employed by the mining industry 
-\cite{Matheron1969}. For example, those important soil spatial modelling decisions, generally taken with basis 
-on the tacit knowledge of the soil modeller, could now be more efficiently communicated with others through the 
-use of computers -- provided they had a computer. This is because using a computer to produce soil maps 
-requires modelling rules to be formalized in the form of a computer script, which is the mean used to establish 
-the communication between the soil modeller (a human being) and the data processing environment (a computer).
+mathematics, statistics and informatics. For example, those important soil spatial modelling decisions, 
+generally taken with basis on the tacit knowledge of the soil modeller, could now be more efficiently 
+communicated with others through the use of computers -- provided they had a computer. This is because using a 
+computer to produce soil maps requires modelling rules to be formalized in the form of a computer script, 
+which is the mean used to establish the communication between the soil modeller (a human being) and the data 
+processing environment (a computer).
 
-Soil modellers also understood that the error about the mapped soil property could be acknowledged using 
-classical statistics. First, the definition of mapping units, which was based on the knowledge of the 
-soil-forming factors, needed to be viewed as a modelling exercise that aims at minimizing the within-unit 
-variance (and maximizing the between-unit variance) of a soil property \cite{VoltzEtAl1990}. Then, the most 
-likely value of a soil property at any one point in a given mapping unit would be its mean over the multiple 
-observations made in that mapping unit \cite{VoltzEtAl1990, Cressie1993}. The only requirement -- so that the 
-estimated mean would be fair (unbiased) -- was that the location of soil observations be selected using some 
-form of randomization (probability sampling) such as it is done in controlled agronomic experiments, e.g. 
-simple random sampling within mapping units \cite{deGruijterEtAl1990}. It follows that the uncertainty about 
-the value of the mapped soil property is the same everywhere within a mapping unit, irrespective of the 
-location of existing soil observations \cite{Heuvelink1996}. This is because due to statistical independence 
-and constant variance within mapping units, the expected error of predicting the value of a soil property at 
-any location with its mean is also the same everywhere.
+Some soil modellers also came to understand that the error about the mapped soil property could be 
+acknowledged using classical statistical theory. First, the definition of mapping units, which was based on 
+the knowledge of the soil-forming factors, needed to be viewed as a modelling exercise that aims at minimizing 
+the within-unit variance (and maximizing the between-unit variance) of a soil property \cite{VoltzEtAl1990}. 
+This was equivalent to designing controlled agronomic experiments as devised by Ronald Fisher in the United 
+Kingdom during the 1920s, by which large plots and blocking are used to deal with the effects of short and 
+long-range variation, respectively \cite{WebsterEtAl2007}. In both cases the spatial autocorrelation was 
+regarded as being of little importance -- it still is in most agricultural experiments. Then, under the 
+assumption of spatial independence within mapping units, the most likely value of a soil property at any one 
+point in a given mapping unit would be its mean over the multiple observations made in that mapping unit 
+\cite{VoltzEtAl1990, Cressie1993}. It follows that the uncertainty about the value of the mapped soil property
+is the same everywhere within a mapping unit, irrespective of the location of existing soil observations 
+\cite{Heuvelink1996}. This is because due to statistical independence and constant variance within mapping 
+units, the expected error of predicting the value of a soil property at any location with its mean is also the
+same everywhere. The only requirement so that the estimated mean and variance would be fair (unbiased) was 
+that the location of soil observations be selected using some form of randomization (probability sampling) 
+such as it is done in controlled agronomic experiments \cite{deGruijterEtAl1990}.
 
 Those solutions still required describing \q{soil bodies} as discrete, homogeneous entities, and continued 
-neglecting the spatial variation and autocorrelation of soil properties. For that end, one solution was to 
-ignore the knowledge on soil-forming factors and use the \emph{continuous model of spatial variation}. 
-Accordingly, the main requirement was that a soil property be treated as the outcome of a random (stochastic) 
-spatial process \cite{Cressie1993, Webster2000}. At first, the proposition of \emph{imagining} the soil as 
-being the result of randomness is awkward (\autoref{eqn:chap02-clorpt}). However, pondering on the multitude of 
-soil-forming factors and processes, and on the complexity of their interactions \cite{BockheimEtAl2010, 
-GrunwaldEtAl2011}, as well as on the limitations of the existing knowledge on soil spatial variation, one can 
-easily conclude that soil is a chaotic media \cite{Webster2000} -- so why not treat it as such? One only had to 
-\emph{imagine} that the value of a soil property observed at a given location simply was one that happened to 
-be recorded by chance among an infinitely large number of values that could have been recorded instead 
-\cite{Webster2000}. In other words, one had to \emph{imagine} that, if a soil property is recorded multiple 
-times at the same location, the recorded values would not necessarily be the same. As such, a soil property at 
-a given location would not be described using a single absolute value, but a probability distribution function 
-(PDF), generally the normal (Gaussian), characterised by the mean and variance of those \q{recorded} values. 
-Accordingly, to describe the fact that soil property values at nearby locations are more similar than at 
-locations further apart -- they covary, vary together or jointly -- would require a joint probability 
-distribution function, characterised by the covariance \cite{WebsterEtAl1990, Cressie1993}.
+neglecting the spatial variation and autocorrelation of soil properties. Besides, despite the statistical 
+soundness, most soil modellers fiercely rejected to employ random sampling and \emph{design-based} estimation. 
+They have always preferred to select observation locations purposively according to their mental model of 
+soil-landscape relationships because, from a pedological perspective, this seemed more reasonable. However, 
+they were generally unaware of the biasedness of their \emph{model-based} estimates. For some soil spatial 
+modellers a solution was to ignore the knowledge on soil-forming factors and use a different model of spatial 
+variation: the \emph{continuous model of spatial variation}. Accordingly, the main requirement was that a soil 
+property be treated as a regionalized variable, the outcome of a random (stochastic) spatial process 
+\cite{Cressie1993, Webster2000}. The theory of \emph{regionalized variables} was laid down during the 1960s by 
+the French mathematician Georges Matheron deeply based on the previous work of the South African engineer 
+Daniel Krige, the Swedish forestry statistician Bertil Matérn, among others \cite{Krige1951, Matern1960, 
+Matheron1965, MatheronEtAl1987, WebsterEtAl2007} -- unfortunately Matheron and colleagues seem to have been 
+unaware of the developments made by the Russian mathematician Andrey Kolmogorov in the 1930s and 1940s on the 
+prediction of stochastic processes.
+
+At first, the proposition of \emph{imagining} the soil as being the result of randomness is awkward (see, for 
+example, \autoref{eqn:chap02-clorpt}). However, pondering on the multitude of soil-forming factors and 
+processes, and on the complexity of their interactions \cite{BockheimEtAl2010, GrunwaldEtAl2011}, as well as 
+on the limitations of the existing knowledge on soil spatial variation, one can easily conclude that soil is a 
+chaotic media \cite{Webster2000} -- so why not treat it as such? One only had to \emph{imagine} that the value 
+of a soil property observed at a given location simply was one that happened to be recorded by chance among an 
+infinitely large number of values that could have been recorded instead \cite{Webster2000}. In other words, 
+one had to \emph{imagine} that, if a soil property is recorded multiple times at the same location, the 
+recorded values would not necessarily be the same. As such, a soil property at a given location would not be 
+described using a single absolute value, but a probability distribution function (PDF), generally the normal 
+(Gaussian), characterised by the mean and variance of those \q{recorded} values. Accordingly, to describe the 
+fact that soil property values at nearby locations are more similar than at locations further apart -- they 
+covary, vary together or jointly -- would require a joint probability distribution function, characterised by 
+the covariance \cite{WebsterEtAl1990, Cressie1993}.
+
+
+
+
 
 Different from its discrete counterpart, the continuous model of spatial variation takes into account the 
 relative location of existing observations when predicting a soil property at a given unobserved location. In 
