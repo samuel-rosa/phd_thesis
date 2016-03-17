@@ -1413,6 +1413,7 @@
 %% Informações sobre o capítulo, geralmente usado no caso de documento no formato de capítulos.
 %% A nota é adicionada na mesma página onde aparece o título do capítulo, sem interferir na numeração.
 \newcommand\chapternote[1]{%
+  \vspace*{-12.1pt} % Necessário para evitar adição de espaço
   \begingroup
   \renewcommand\thefootnote{}\footnote{\hspace{-1em}*~#1}%
   \addtocounter{footnote}{-1}%
