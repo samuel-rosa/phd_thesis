@@ -3,7 +3,7 @@
 I was never sure about what a thesis should consist of: I worked on so many things during the four years of my 
 doctorate that I found myself somewhat lost when I had to decide what to write in the thesis. There are 
 official documents suggesting \emph{how} the thesis should be written, but not exactly \emph{what} should be 
-written -- I find the definitions somewhat vague. For example, the manual of our university states that a 
+written -- I find the definitions somewhat vague. For example, the manual of our University states that a 
 \q{thesis consists of the result of a research which is presented as the final requirement for the completion 
 of a doctorate}\footnote{\citeonline{UFRRJ2006}}, which is quite the same thing said by the International 
 Organization for Standardization (\iso): a \q{document which presents the author's research and findings and 
@@ -19,8 +19,13 @@ objective, ultimate, universal definition of what a thesis should consist of mea
 student, it was my responsibility to construct such a definition. This idea gave me back the long-lost 
 excitement to write my thesis. I did not want to follow a boring ritual. I wanted to have fun and be completely 
 honest with the reader, as Richard Webster\footnote{\citeonline{Webster2003}} had once suggested. 
-As such, I started thinking about all steps given since the start of the doctorate, something like \q{Once upon 
-a time in Seropédica...}.
+As such, I started thinking about all steps given since the start of the doctorate, something like 
+
+\vspace*{5pt}
+{\calligra\Large\noindent
+Once upon a time in Seropédica...
+}
+\vspace*{5pt}
 
 As the title says, this thesis is about a research on the factors determining a soil map to be more or less 
 accurate, what I call \emph{sources of uncertainty}. Many of these sources are known, others are still unknown, 
@@ -62,8 +67,7 @@ significant amount of bibliographic material to support the teaching of modern s
 techniques in soil classes at Brazilian universities.
 
 \def\footlatex{\footnote{See more about \LaTeX{} in \href{https://en.wikipedia.org/wiki/LaTeX}{Wikipedia}. The 
-\LaTeX{} 
-class that I have adapted to compile this thesis is available in 
+\LaTeX{} class that I have adapted to compile this thesis is available in 
 \href{https://github.com/samuel-rosa/UFRuralRJ}{GitHub}.}}
 
 With time it became clear that the five objectives and the expected results were too ambitious. I certainly was 
@@ -89,12 +93,12 @@ realized that I also needed to make my research the most reproducible as possibl
 thorough description of all data processing steps, including making available all computer scripts so that they 
 could be reused by other people. The result was thousands of lines of computer code, mostly on 
 \texttt{R}\footr{}, which I used to indirectly access most of other computer programs. These computer scripts 
-have shown to be invaluable for my own applications, and I always hoped that other people will find them useful 
-as well. But I then learned that many well known methods of data analysis/processing are not used simply 
-because they are not implemented in a (single) software package. As such, making only the computer scripts 
-available did seem to be a poor solution. Developing and maintaining a software package in the most popular 
-environment for data processing and analysis, i.e. \texttt{R}\footr{}, was a natural decision. Although being 
-fun, programming took a lot of resources!
+have shown to be invaluable for my own applications, and I have always hoped that other people would find them 
+useful as well. But I then learned that many well known methods of data analysis/processing are not used 
+simply because they are not implemented in a (single) software package. As such, making only the computer 
+scripts available did seem to be a poor solution. Developing and maintaining a software package in the most 
+popular environment for data processing and analysis, i.e. \texttt{R}, was a natural decision. Although 
+being fun, programming took a lot of resources!
 
 A significant amount of resources was also spent preparing a description of the soil-forming factors and 
 processes that determine the soil spatio-temporal distribution in the study area where the case studies were to 
@@ -126,7 +130,7 @@ for improving the description of the model series plot. Fortunately, they were a
 a proper definition for the differences observed between the covariates that were being compared. The study was 
 not exactly about their accuracy, but about how they were produced and their level of spatial detail.
 
-Devising an experiment to evaluate the influence of sample size and design on the accuracy of soil maps also 
+Devising an experiment to evaluate the influence of sample design on the accuracy of soil maps also 
 was a challenge. Most soil data used for soil spatial modelling were produced in the past century (legacy data) 
 with observation locations purposively selected by soil spatial modellers using tacit rules. As such, I wanted 
 to build an algorithm composed of a set of objective decision rules that would produce spatial samples similar 
@@ -145,14 +149,14 @@ more objective decision rules formulated with basis on conceptual and operationa
 \href{https://en.wikipedia.org/wiki/Travelling_salesman_problem}{Wikipedia}.}}
 
 We then invited Dick Brus (Alterra, the Netherlands) to participate devising the experiment to evaluate the 
-influence of sample size and design on the accuracy of soil maps. After some talks and a bibliographic review, 
+influence of sample design on the accuracy of soil maps. After some talks and a bibliographic review, 
 we decided for using sampling algorithms that are based on the so-called spatial simulated annealing which are 
 commonly used to produce spatial samples for soil spatial modelling. The problem was that we did not know of 
 spatial simulated annealing being implemented in any free and open source software package in a way that could 
 meet the requirements of our study. Again, the solution was to work on our own implementation of spatial 
-simulated annealing, which resulted in a second package for R. Having decided the sampling algorithm to 
-work with, we needed to choose a sound method to take sampling costs into account. Because the access time to 
-sampling points usually is the major cost component in soil sampling, Gerard and I thought of coupling with 
+simulated annealing, which resulted in a second package for \texttt{R}. Having decided the sampling algorithm 
+to work with, we needed to choose a sound method to take sampling costs into account. Because the access time 
+to sampling points usually is the major cost component in soil sampling, Gerard and I thought of coupling with 
 spatial simulated annealing an algorithm to solve the problem of travelling from one sampling point to the next 
 with the least cost\foottravel. This would be a good piece of work, but we soon realized that solving the 
 travelling problem was impossible given the available resources. The goal of taking sampling costs into account 
@@ -163,7 +167,7 @@ learn that the sampling algorithms that we had chosen had weaknesses -- apparent
 thought that, perhaps, we could improve on those algorithms! A literature review suggested that we were correct 
 and there was room for algorithmic improvements. Working on these improvements took a lot of resources, and I 
 guess we came up with interesting, sound solutions. We only needed to know if the algorithmic improvements had 
-any practical added value before evaluating the influence of sample size and design of prediction accuracy. It 
+any practical added value before evaluating the influence of sample design of prediction accuracy. It 
 seemed appropriate to carry out two experiments, the first to evaluate the algorithmic improvements, the second 
 to compare the algorithms. Again, the results were promising, specially from the algorithmic point of view. 
 With regard to prediction accuracy, we cannot make high claims because the algorithms were tested using a 
@@ -173,7 +177,7 @@ experiment to evaluate covariate selection methods became impossible due to the 
 This was a pity because I visited Murray Lark at the the British Geological Survey (\bgs) headquarters in 
 Nottingham, UK, to discuss about that experiment.
 
-Like it happened with the third objective, there was not enough time to conduct experiments to meet the 
+Like it happened with the third objective, there was not enough resources to conduct experiments to meet the 
 fourth and fifth objectives. I think the topic of the fourth objective is a very important one, directly 
 related to the problem of selecting covariates, which I really wanted to deal with. I would 
 have been very happy if I could discuss the topic at least partially, but perhaps partial solutions may not be 
@@ -189,7 +193,7 @@ the original goal of defining a working protocol for soil spatial modelling. Thi
 documenting the soil and covariate data, as well as their processing steps, and describing the soil-forming 
 factors that determine the soil spatio-temporal distribution in the study area. I know that these technical 
 contributions do not help meeting any of the original scientific objectives. The same applies to the two 
-\texttt{R}-packages that I developed and maintained, and the experiment conducted to understand how soil 
+\texttt{R}-packages that I developed, and the experiment conducted to understand how soil 
 spatial modellers decide upon where to observe the soil, which were not originally planned in the research 
 project. But I guess this is still valid, perhaps very important, as it seems to be common in any scientific 
 research: you end up doing many things that are quite different from those that you were originally planning to 
@@ -227,17 +231,17 @@ because I would never write this thesis without their support. These are:
  
  \item ISRIC -- World Soil Information, for unconditionally supporting my research.
  
- \item Embrapa Soils, for supporting my research.
+ \item Embrapa Solos, for supporting my research.
  
  \item Universidade Federal de Santa Maria, through the Department of Soil Science, for supporting my research.
 
  \item Ministry of the Environment of Brazil, for providing some of the data that we used.
 \end{itemize}
 
-I need to note that six individuals gave important contributions during the preparation of the 
-data that were used to develop the case studies. Three of them are from the Universidade 
-Federal Rural do Rio de Janeiro: Fabio Paes Leme Ferreira, Anastácia Perci Campos de Almeida, and Mauro Antônio 
-Homem Antunes. The other three are from the Universidade Federal de Santa Maria: Ricardo Simão Diniz Dalmolin, 
+I need to note that seven individuals gave important contributions during the preparation of the data that 
+were used to develop the case studies. Four of them are from the Universidade Federal Rural do Rio de Janeiro: 
+Fabio Paes Leme Ferreira, Anastácia Perci Campos de Almeida, Pedro de Souza Calegaro and Mauro Antônio Homem 
+Antunes. The other three are from the Universidade Federal de Santa Maria: Ricardo Simão Diniz Dalmolin, 
 Jean Michel Moura Bueno, and Luis Fernando Chimelo Ruiz. Along with them, I must thank the development teams 
 and module/package authors of the many free and open source software and operating system that were used to 
 develop the case studies.
@@ -248,8 +252,8 @@ any other informal occasion. Their contributions were invaluable for usually rai
 pointing to extremely helpful references, and helping me seeing the research problems from another perspective.
 Special thanks are due to Ad van Oostrum, Andreas Papritz, Bas Kempen, Bradley Miller, Chantal Hendriks, 
 Dominique Arrouays, Edgardo Ramos Medeiros, Eloi Carvalho Ribeiro, Jorge Mendes de Jesus, Madlene Nussbaum, 
-Marcos Angelini, Murray Lark, Nicolas Saby, Pablo Miguel, Pedro de Souza Calegaro, Richard Webster, Thomas 
-Caspari, Tom Hengl, Titia Mulder, and many others that I might have forgotten.
+Marcos Angelini, Murray Lark, Nicolas Saby, Pablo Miguel, Richard Webster, Thomas Caspari, Tom Hengl, Titia 
+Mulder, and many others that I might have forgotten.
 
 Having the story of a doctorate to tell depends not only on scientific and/or technical contributions,
 but also on the unconditional support of family, friends, and colleagues. My family, which gained several new 
@@ -274,3 +278,10 @@ through my veins!
  
  Seropédica, February 2016.
 \end{flushright}
+
+\noindent
+\textbf{P.S.} The reader should be aware that, despite the book style and formatting can cause estrangement, 
+it follows the standards of the Universidade Federal Rural do Rio de Janeiro -- we even created a \LaTeX{} 
+class for that end! I agree that the chapter numbering style is awkward. So is the use of two languages 
+(English and Portuguese). But, please, do not crucify me for the awkwardness. Leave it aside and enjoy the 
+content!
