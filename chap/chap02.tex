@@ -245,16 +245,15 @@ neglecting the spatial variation and autocorrelation of soil properties. Besides
 soundness, most soil modellers fiercely rejected to employ random sampling and \emph{design-based} estimation. 
 They have always preferred to select observation locations purposively according to their mental model of 
 soil-landscape relationships because, from a pedological perspective, this seemed more reasonable. However, 
-they were generally unaware of the biasedness of their \emph{model-based} estimates. For some soil spatial 
-modellers a solution was to ignore the knowledge on soil-forming factors and use a different model of spatial 
-variation: the \emph{continuous model of spatial variation}. Accordingly, the main requirement was that a soil 
-property be treated as a regionalized variable, the outcome of a random (stochastic) spatial process 
-\cite{Cressie1993, Webster2000}. The theory of \emph{regionalized variables} was laid down during the 1960s by 
-the French mathematician Georges Matheron deeply based on the previous work of the South African engineer 
-Daniel Krige, the Swedish forestry statistician Bertil Matérn, among others \cite{Krige1951, Matern1960, 
-Matheron1965, MatheronEtAl1987, WebsterEtAl2007} -- unfortunately Matheron and colleagues seem to have been 
-unaware of the developments made by the Russian mathematician Andrey Kolmogorov in the 1930s and 1940s on the 
-prediction of stochastic processes.
+they were generally unaware of the biasedness of their \emph{model-based} estimates. For other soil spatial 
+modellers a solution was to partially ignore the knowledge on soil-forming factors and use a different model 
+of spatial variation: the \emph{continuous model of spatial variation}. Accordingly, the main requirement was 
+that a soil property be treated as a regionalized variable, the outcome of a random (stochastic) spatial 
+process \cite{Cressie1993, Webster2000}. A comprehensive theory of \emph{regionalized variables} was first 
+constructed during the 1960s by the French mathematician Georges Matheron, heavily based on earlier studies of 
+engineers, mathematician, meteorology and statistician such as the South African Daniel Krige, the Swedish 
+Bertil Matérn, the Russian Andrey Kolmogorov, among others \cite{Krige1951, Matern1960, Matheron1965, 
+MatheronEtAl1987, Cressie1990, WebsterEtAl2007}.
 
 At first, the proposition of \emph{imagining} the soil as being the result of randomness is awkward (see, for 
 example, \autoref{eqn:chap02-clorpt}). However, pondering on the multitude of soil-forming factors and 
@@ -269,28 +268,24 @@ described using a single absolute value, but a probability distribution function
 (Gaussian), characterised by the mean and variance of those \q{recorded} values. Accordingly, to describe the 
 fact that soil property values at nearby locations are more similar than at locations further apart -- they 
 covary, vary together or jointly -- would require a joint probability distribution function, characterised by 
-the covariance \cite{WebsterEtAl1990, Cressie1993}.
-
-
-
-
+the covariance \cite{WebsterEtAl1990, Cressie1993}. The obvious difficulty in this approach is that the PDF 
+cannot be defined because we usually have one single value recorded at each observation location.
 
 Different from its discrete counterpart, the continuous model of spatial variation takes into account the 
 relative location of existing observations when predicting a soil property at a given unobserved location. In 
 the simplest case, the most likely value of a soil property in a given location is defined by a constant mean 
 computed over all observations made in the mapping region, plus a random variable with mean zero and (spatial) 
-covariance that depends only on the separation distance between locations \cite{WebsterEtAl1990, Cressie1993}. 
-The main idea underlying the continuous model of spatial variation is that soil property values at nearby 
-locations are more similar than at locations further apart \cite{WebsterEtAl1990}. Thus, we err less if we 
-predict the value of a soil property at a given location with a value observed at a nearby location than with a 
-value observed at a distant location. Optimally, because the soil is a continuous media and its properties vary 
-in space in an autocorrelated fashion, we make the most accurate prediction taking a weighted average of the 
-values recorded at all observation locations, nearby locations receiving larger weights than distant locations. 
-In both cases, it follows that the uncertainty about the mapped soil property is larger the farther from 
-existing soil observations, i.e. it is spatially varying \cite{Cressie1993}.
-
-% The obvious difficulty in this approach is that the PDF cannot be defined because we usually 
-% have one single value recorded at each observation location.
+covariance that depends only on the separation distance between locations \cite{WebsterEtAl1990, Cressie1993}.
+This prediction method is known as the \emph{best linear unbiased predictor} (BLUP), usually called 
+\emph{ordinary kriging}. The main idea underlying the continuous model of spatial variation is that soil 
+property values at nearby locations are more similar than at locations further apart \cite{WebsterEtAl1990}. 
+Thus, we err less if we predict the value of a soil property at a given location with a value observed at a 
+nearby location than with a value observed at a distant location. Optimally, because the soil is a continuous 
+media and its properties vary in space in an autocorrelated fashion, we make the most accurate prediction 
+taking a weighted average of the values recorded at all observation locations, nearby locations receiving 
+larger weights than distant locations. In both cases, it follows that the uncertainty about the mapped soil 
+property is larger the farther from existing soil observations, i.e. it is spatially varying 
+\cite{Cressie1993}.
 
 \subsection{Mixed Model of Spatial Variation}
 
