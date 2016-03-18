@@ -57,10 +57,9 @@ freely available as CSV files in a repository hosted in \dnosgeneral{}. Files \t
 (latlong, WGS1984), and field and laboratory data, respectively. Files \texttt{fieldMetadata.csv} and 
 \texttt{labMetadata.csv} contain the metadata. Every soil property is identified with a code composed of three 
 or four capital letters. For example, soil organic carbon is identified with \texttt{ORCA}. A column 
-containing 
-the number of laboratory replicates is identified with the code of the soil property followed by the letter 
-\q{N}. The column containing the sample standard deviation is identified in the same manner, but using \q{SD}. 
-For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
+containing the number of laboratory replicates is identified with the code of the soil property followed by the 
+letter \q{N}. The column containing the sample standard deviation is identified in the same manner, but using 
+\q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
 
 The reader should be aware that soil science evolved in Brazil following a somewhat different pathway than in 
 the countries of the northern hemisphere due to the specific features of \emph{tropical soils}. Methods have 
@@ -72,10 +71,9 @@ to solve any problems in this document.
 
 The Santa Maria dataset is composed of three subsets which are described in the next three sections. Together, 
 these subsets yield a sampling density of about \num{\pm0.18}~observations per hectare, with an average 
-separation 
-distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation distances of 
-\num{18} and \SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by more than 
-\SI{49}{\metre}.
+separation distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation 
+distances of \num{18} and \SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by 
+more than \SI{49}{\metre}.
 
 \subsection{Subset I}
 

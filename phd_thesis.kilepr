@@ -262,7 +262,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=119
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:chap/chap03.rnw]
@@ -1032,7 +1032,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=346
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [view-settings,view=0,item:UFRuralRJ.cls]
