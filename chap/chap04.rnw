@@ -92,29 +92,25 @@ knowledge, can be found in \href{https://en.wikipedia.org/wiki/Tacit_knowledge}{
 
 All observation locations were selected purposively or by convenience. Tacit knowledge\foottacit{} was the 
 main tool to choose the observation locations, a process that was carried out in the office using 
-\googleearth{} 
-imagery of the years of \num{2008} and \num{2009}. The main goal of the researchers was to obtain a sample 
-that 
-they understood as being representative of the different landforms, land uses, and soil taxa present in the 
-study area. They also wanted the observations to be spread throughout the entire study area.
+\googleearth{} imagery of the years of \num{2008} and \num{2009}. The main goal of the researchers was to 
+obtain a sample that they understood as being representative of the different landforms, land uses, and soil 
+taxa present in the study area. They also wanted the observations to be spread throughout the entire study 
+area.
 
 At the observation locations, the researchers defined an area of \SI{\pm100}{\metre\squared} within which they 
 opened three soil pits up to a depth of \SI{20}{\centi\metre}. Soil samples were collected up to a depth of 
 \SI{20}{\centi\metre}, the depth being measured with a ruler. The resulting sampling depth of Subset I varies 
 from \num{2} to \SI{20}{\centi\metre}, with an average of \SI{17}{\centi\metre}. This variation of the 
-vertical 
-sampling support was not a problem for the researchers because their goal was to sample the \emph{topsoil}. 
-The topsoil was defined as the topmost soil layer, with a depth equal or inferior to \SI{20}{\centi\metre}, 
-being 
-the soil layer most susceptible to degradation induced by poor agricultural practices and land use changes.
+vertical sampling support was not a problem for the researchers because their goal was to sample the 
+\emph{topsoil}. The topsoil was defined as the topmost soil layer, with a depth equal or inferior to 
+\SI{20}{\centi\metre}, being the soil layer most susceptible to degradation induced by poor agricultural 
+practices and land use changes.
 
 Soil samples from the three pits opened in each sampling area were used to produce a composite sample which 
-was 
-used for laboratory analyses. Subsurface soil features were observed with an auger in each pit, and the 
-average 
-(continuous variables) or most common (categorical variables) value recorded. Note that soil sampling was done 
-using an areal support -- an area of \SI{\pm100}{\metre\squared}. However, the shape and exact area of the 
-sampling units are unknown, and georeferencing took place at point support.
+was used for laboratory analyses. Subsurface soil features were observed with an auger in each pit, and the 
+average (continuous variables) or most common (categorical variables) value recorded. Note that soil sampling 
+was done using an areal support -- an area of \SI{\pm100}{\metre\squared}. However, the shape and exact area of 
+the sampling units are unknown, and georeferencing took place at point support.
 
 \begin{figure}[!ht]
 \centering
@@ -127,6 +123,7 @@ sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
 cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
 pts <- data.frame(slot(cal_data, "coords"))
 pts[, "id"] <- c(rep("black", 340), rep("red", 10))
+pts[, "pch"] <- c(rep(20, 340), rep(8, 10))
 invisible(capture.output(
   spgrass6::initGRASS(
     gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
@@ -149,19 +146,19 @@ p <- sp::spplot(
   panel = function(x, y, ...) {
     sp::panel.polygonsplot(x, y, ...)
     lattice::panel.points(
-      x = pts[, "longitude"], y = pts[, "latitude"], pch = 20, col = pts[, "id"])
+      x = pts[, "longitude"], y = pts[, "latitude"], pch = pts[, "pch"], col = pts[, "id"])
     lattice::panel.abline(
       v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
       col = "gray", lty = "dashed", lwd = 0.5)
   }) +
-  latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed"))
+  latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed", lwd = 0.5))
 print(p)
 @
 \includegraphics[width=0.90\textwidth]{fig/chap04-subsets-I-III}
-\caption[Spatial distribution of \emph{Subset I} and \emph{Subset III}.]{Spatial distribution of the point soil 
-observations contained in \emph{Subset I} ($n = 340$, black) and \emph{Subset III} ($n = 10$, red) of the Santa 
-Maria dataset. The drainage network is shown in the background to give an idea of how the locations of soil 
-observations is related to terrain features.}
+\caption[Spatial distribution of \emph{Subset I} and \emph{Subset III}.]{Spatial distribution of the point 
+soil observations contained in \emph{Subset I} ($n = 340$, black solid circles) and \emph{Subset III} ($n = 
+10$, red stars) of the Santa Maria dataset. The drainage network is shown in the background (blue 
+dashed line) to give an idea of how the locations of soil observations is related to terrain features.}
 \label{fig:chap04-subsets-I-III}
 \end{figure}
 
@@ -170,8 +167,7 @@ horizontal positional error of less than \SI{\pm8}{\metre} positioned approximat
 sampling area. Sometimes, the horizontal positional error was larger than \SI{\pm8}{\metre} due the effects
 of vegetation, terrain, and satellite configuration. In these cases, observation locations 
 were georeferenced in the office using \SI{1}{\metre} spatial resolution \googleearth{} imagery with 
-positional 
-horizontal error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
+positional horizontal error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
 
 Every observation was identified with a number in increasing order, following the order in which the 
 observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out, yielding 
@@ -180,41 +176,85 @@ an observation density of about \num{18}~observations per \si{\kilo\metre\square
 \subsection{Subset II}
 \label{sec:chap04-subset-ii}
 
-The second subset ($n = 60$) was produced in the years \num{2012} and \num{2013}, and was intended to 
-constitute an independent dataset for validation purposes. Because of the many access limitations 
-(geographic barriers and prohibition by landowners) and shortage of workforce, budget, infrastructure and 
-time faced in previous field campaigns, researchers chose to employ transect (cluster) sampling 
-\cite{MiguelEtAl2012, Moura-BuenoEtAl2012, Samuel-RosaEtAl2013}. They started defining the population of 
-transects using their knowledge of the study area, taking into account the factors that they thought 
+The second subset ($n = 60$, \autoref{fig:chap04-subset-II}) was produced in the years \num{2012} and 
+\num{2013}, and was intended to constitute an independent dataset for validation purposes. Because of the many 
+access limitations (geographic barriers and prohibition by landowners) and shortage of workforce, budget, 
+infrastructure and time faced in previous field campaigns, researchers chose to employ transect (cluster) 
+sampling \cite{MiguelEtAl2012, Moura-BuenoEtAl2012, Samuel-RosaEtAl2013}. They started defining the population 
+of transects using their knowledge of the study area, taking into account the factors that they thought 
 determined the spatial distribution of soil properties. Each researcher (three) delineated $m = 60$ easily 
 accessible, straight transects of \SI{400}{\metre} following the spatial gradients of selected environmental 
-features 
-(topography, geology, vegetation, land use, and soils), totaling 180 transects. Accordingly, knowledge of 
-existing roads, human 
-settlements, water bodies, and other access limitations was used as well. The activity was carried out using 
-\googlearth{} imagery of the years of \num{2008} and \num{2009}.
+features (topography, geology, vegetation, land use, and soils), totaling 180 transects. Accordingly, 
+knowledge of existing roads, human settlements, water bodies, and other access limitations was used as well. 
+The activity was carried out using \googlearth{} imagery of the years of \num{2008} and \num{2009}.
 
-% TODO: add a figure with all transects highlighting the selected ones.
-% \caption{Three experts drawn 180 linear transects aligned in the direction of maximum expected 
-% spatial variance of environmental features. They avoided locations where it was known that geographic 
-% barriers or landowners would impede the access to collect soil samples. Using probability sampling, 12 
-% transects were selected to collect validation observations (red).}
+\begin{figure}[!ht]
+\centering
+<<subset-II, fig = TRUE, echo = FALSE, include = FALSE>>=
+cal_data <- read.table(
+  "~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";",
+  header = TRUE, na.strings = "na")[, c("longitude", "latitude")]
+sp::coordinates(cal_data) <- ~ longitude + latitude
+sp::proj4string(cal_data) <- sp::CRS("+init=epsg:4674") # sirgas2000
+cal_data <- sp::spTransform(cal_data, sp::CRS("+init=epsg:32722")) # wgs1984utm22s
+pts <- data.frame(slot(cal_data, "coords"))
+invisible(capture.output(
+  spgrass6::initGRASS(
+    gisBase = "/usr/lib/grass64/", gisDbase = path.expand("~/dbGRASS"),
+    location = "dnos-sm-rs", mapset = "predictions", pid = Sys.getpid(),
+    override = TRUE)
+))
+invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
+invisible(capture.output(drain <- spgrass6::readVECT6("STREAM_10", ignore.stderr = TRUE)))
+invisible(capture.output(drain <- rgeos::gIntersection(drain, pol, byid = TRUE)))
+trans <- suppressWarnings(raster::shapefile(
+  "~/projects/dnos-sm-rs/dnos-sm-rs-data/transects/all_transects.shp"))
+p <- sp::spplot(
+  pol, zcol = "cat", col = "gray", fill = "lemonchiffon",
+  scales = list(draw = TRUE), colorkey = FALSE, aspect = "iso",
+  xlim = c(cal_data@bbox[1, 1] * 0.9998, cal_data@bbox[1, 2] * 1.0005),
+  ylim = c(cal_data@bbox[2, 1] * 0.99999, cal_data@bbox[2, 2] * 1.00001),
+  par.settings = list(
+    fontsize = list(text = 12, points = 8),
+    layout.widths = list(left.padding = 0, right.padding = 0),
+    layout.heights = list(top.padding = 0, bottom.padding = 0)),
+  panel = function(x, y, ...) {
+    sp::panel.polygonsplot(x, y, ...)
+    lattice::panel.points(
+      x = pts[351:410, "longitude"], y = pts[351:410, "latitude"], pch = 20, col = "red")
+    lattice::panel.abline(
+      v = seq(227000, 232000, 1000), h = seq(6712000, 6722000, 1000),
+      col = "gray", lty = "dashed", lwd = 0.5)
+  }) +
+  latticeExtra::layer(sp::sp.lines(drain, col = "dodgerblue", lty = "dashed", lwd = 0.5)) +
+  latticeExtra::layer(sp::sp.lines(trans, lty = "dotted"))
+print(p)
+@
+\includegraphics[width=0.90\textwidth]{fig/chap04-subset-II}
+\caption[Twelve transects were selected using simple random sampling to yield $n = 60$ validation 
+observations]{Three soil spatial modellers manually drew 180 straight transects (black dotted lines) aligned 
+in the direction of maximum expected spatial variation of environmental conditions. They avoided locations 
+where it was known that geographic barriers or landowners would impede the access to make soil observations. 
+Twelve transects were probabilistically selected using simple random sampling to yield $n = 60$ validation 
+observations (red solid circles) separated by equidistant intervals of \SI{100}{\metre}. The drainage network 
+is shown in the background (blue dashed line) to give an idea of how the location and direction of transects 
+is related to terrain features.}
+\label{fig:chap04-subset-II}
+\end{figure}
 
 Twelve out of the $m = 180$ transects were randomly selected using as many iterations as necessary until 
 there were no intersecting transects, and there was at least one transect in each of the three major 
 geomorphological units of the study area (\textit{Planalto}, \textit{Rebordo do Planalto}, and 
-\textit{Depressão Periférica}). 
-Finally, $n = 5$ observation locations, separated by equidistant intervals of \SI{100}{\metre}, were 
-selected in each transect. Observation locations were named with a number in increasing order, 
-following the order in which the observations were made, starting from \num{341} (\num{341}--\num{400}).
+\textit{Depressão Periférica}). Finally, $n = 5$ observation locations, separated by equidistant intervals of 
+\SI{100}{\metre}, were selected in each transect. Observation locations were named with a number in increasing 
+order, following the order in which the observations were made, starting from \num{341} (\num{341}--\num{400}).
 
 Observation locations were identified in the field using a GNSS receiver with a horizontal positional error
 of less than \SI{\pm8}{\metre}. A single soil pit was opened within a radius of \SI{2}{\metre} from the 
-predefined 
-observation location. Soil sampling and description was carried out using the same procedure used with 
-\emph{Subset I}, except that in Subset II a single pit was observed. More accurate geographic coordinates were 
-collected in the field using a Differential Global Positioning System (DGPS) with a horizontal positional error 
-of less than \SI{1}{\centi\metre}.
+predefined observation location. Soil sampling and description was carried out using the same procedure used 
+with \emph{Subset I}, except that in Subset II a single pit was observed. More accurate geographic coordinates 
+were collected in the field using a Differential Global Positioning System (DGPS) with a horizontal positional 
+error of less than \SI{1}{\centi\metre}.
 
 \subsection{Subset III}
 
