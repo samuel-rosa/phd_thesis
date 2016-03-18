@@ -122,17 +122,17 @@ that lasts till today.
 \def\footKubrick{\href{https://www.youtube.com/watch?v=qtbOmpTnyOc}{\textit{2001: A Space Odyssey}}}
 
 %% Footnote %%%%%%%%%%%%%%%
-\def\footsoil{\footnote{It is common sense among many soil scientists, specially in Brazil, 
+\def\footsoil{\footnote{It is common sense among many soil scientists, not only in Brazil, 
 that the activity of \emph{soil mapping} concerns the production of \emph{area-class soil maps}, also called 
 \emph{polygon soil maps}, \emph{choropleth soil maps}, and more generally \emph{soil maps}. My view is that 
 such an understanding, which is rooted in the fact that most early soil mapping projects aimed at producing 
-area-class soil maps, is erroneous. Multiple times it results in the confusion between the concept of soil 
-itself and that of soil class, soil taxon and/or soil series. In this thesis a soil map is nothing more 
-than a graphical representation of the soil. For that end, one has to choose a finite number of properties, 
-characteristics, attributes, features of the soil -- the taxonomic classification is one such \emph{feature}. 
-Thus, one must bear in mind that, throughout this thesis, the term \emph{soil} is used to mean \emph{soil} -- 
-the uppermost layer of unconsolidated material of the Earth's surface... --, not soil class or soil taxon or 
-soil series.}}
+area-class soil maps -- see \citep{Grunwald2009} for a discussion --, is erroneous. Multiple times it results 
+in the confusion between the concept of soil itself and that of soil class, soil taxon and/or soil series. In 
+this thesis a soil map is nothing more than a graphical representation of the soil. For that end, one has to 
+choose a finite number of properties, characteristics, attributes, features of the soil -- the taxonomic 
+classification is one such \emph{feature}. Thus, one must bear in mind that, throughout this thesis, the term 
+\emph{soil} is used to mean \emph{soil} -- the uppermost layer of unconsolidated material of the Earth's 
+surface... --, not soil class or soil taxon or soil series.}}
 
 %% Footnote %%%%%%%%%%%%%%%
 % Classes vs. properties: ‘Classes’ are categories of a pre-defined classification system or
@@ -289,52 +289,57 @@ property is larger the farther from existing soil observations, i.e. it is spati
 
 \subsection{Mixed Model of Spatial Variation}
 
-Availability of general-purpose computers fuelled the use and development of the continuous model of
-spatial variation, especially in European, North American, and Oceanian countries
-\cite{HeuvelinkEtAl2001, McBratneyEtAl2003, ScullEtAl2003}. But limitations in its prediction
-performance and developments in remote sensing and machine-learning algorithms helped many soil
-scientists to understand that the continuous model of spatial variation had limitations too. For
-instance, it is unable to capture abrupt changes in the values of soil properties that occur, for
-example, between agricultural fields, parent materials, land uses, and so on
-\cite{SteinEtAl1988, VoltzEtAl1990}. Because, contrary to the discrete model of spatial variation, the
-continuous model of spatial variation largely ignores the existing pedological knowledge
-\cite{Grunwald2009, Lark2012}. Soil scientists also understood that the discrete model of spatial
-variation was more efficient than previously thought \cite{BregtEtAl1987}. First, because it was now
-possible to employ Jenny's equation of soil-forming factors for soil mapping using remote sensing
-products as surrogates of the factors of soil formation \cite{MooreEtAl1993}. Second, machine-learning
-algorithms enabled identifying complex spatial patterns that before could only be identified by an
-experienced soil scientist \cite{McKenzieEtAl1999}. The most logical step was to combine the
-strengths of both discrete and continuous models of spatial variation into a single model -- the
-\emph{mixed model of spatial variation} --, that is, inclusion of the existing pedological
-knowledge and consideration of the spatial continuity of soil property values.
+Availability of general-purpose computers fuelled the use and development of the continuous model of spatial 
+variation, especially in European, North American, and Oceanian countries \cite{HeuvelinkEtAl2001, 
+McBratneyEtAl2003, ScullEtAl2003}. But limitations in its prediction performance and developments in remote 
+sensing and machine-learning algorithms helped many soil scientists to understand that the continuous model of
+spatial variation had limitations too. For instance, it is unable to capture abrupt changes in the values of 
+soil properties that occur, for example, between agricultural fields, parent materials, land uses, and so on
+\cite{SteinEtAl1988, VoltzEtAl1990}. Because, compared to the discrete model of spatial variation, in its 
+simplest form, the continuous model of spatial variation largely ignores the existing pedological knowledge
+\cite{Grunwald2009, Lark2012}. Soil scientists also understood that the discrete model of spatial variation 
+was more efficient than previously thought \cite{BregtEtAl1987, HeuvelinkEtAl2001}. First, because it was now
+possible to employ the equation of soil-forming factors (\autoref{eqn:chap02-clorpt}) for soil mapping using 
+remote sensing products as surrogates of the factors of soil formation \cite{MooreEtAl1993}. Second, 
+machine-learning algorithms enabled identifying complex spatial patterns that before could only be identified 
+by an experienced soil scientist \cite{McKenzieEtAl1999}. The most logical step was to combine the strengths 
+of both discrete and continuous models of spatial variation into a single model -- the \emph{mixed model of 
+spatial variation} --, that is, inclusion of the existing pedological knowledge and consideration of the 
+spatial continuity of soil property values.
 
-The mixed model of spatial variation\footnote{The use that I give to the expression \emph{mixed model of 
-spatial variation} in this thesis is approximately equivalent to expressions such as regression-kriging, 
-kriging with external drift, universal kriging, hybrid approach for soil mapping, pedometric mapping, digital 
-soil mapping, predictive soil mapping, environmental correlation, geostatistical mapping, soil-landscape 
-modelling, and so on. As far as I know, soil modellers have not yet reached an agreement on how these 
-\q{traditional} expressions should be used, nor what their \q{correct} meaning is. See, for example, 
-\citeonline{Hengl2003, McBratneyEtAl2003, ScullEtAl2003}. Because the expression \emph{mixed model of spatial 
-variation} has a theoretical basis (other expressions are defined based on operational aspects), I understand 
-that its adoption and use is a more appropriate choice.} can be viewed as a generalization of previously 
-existing models of spatial variation, by which a soil property $Y(\boldsymbol{s})$ at a given location 
-$\boldsymbol{s}$ is modelled as the outcome of a spatial stochastic process \cite{Cressie1993, 
-HeuvelinkEtAl2001, LarkEtAl2006}. Accordingly, the model is composed of \emph{fixed} and \emph{random effects}. 
-The fixed effects, a deterministic large-scale spatial trend, $m(\boldsymbol{s})$, describes the portion of the 
-spatial variation of the soil property that is explained with the factors of soil formation as suggested by the 
-empirical correlation calculated using point soil observations and spatially exhaustive covariates\footnote{In 
-the statistical literature, the term \emph{covariate} is synonymous to \emph{explanatory variable}, 
-\emph{predictor variable}, and \emph{independent variable}, and refers to the variable that, although not being 
-of primary interest, is used in a model because it determines the behaviour of the \emph{response variable} or 
-\emph{dependent variable} \cite{Everitt2006}. In soil science, a covariate has the same statistical meaning, 
-the difference being that they assume a pedological meaning as well, i.e. they are viewed as proxies, 
-indicators, substitutes, surrogates, approximations of the soil-forming factors due to the simple fact that the 
-soil-forming factors -- the true environmental conditions that helped shape the soil -- are unknown. Covariates 
-are defined \emph{spatially exhaustive} when they cover the entire area being modelled, i.e. they are 
-exhaustively known in the entire geographic space.}. The random effects, also known as stochastic residuals or 
-latent variables, $e(\boldsymbol{s})$, describe the portion of the spatial variation of the soil property that 
-cannot be explained with the covariates but is potentially spatially correlated, the form and degree of this 
-spatial correlation possibly being interpreted pedologically \cite{Lark2012}. Thus 
+% Footnote
+\def\footmixed{\footnote{The use that I give to the expression \emph{mixed model of spatial variation} in this 
+thesis is approximately equivalent to expressions such as regression-kriging, kriging with external drift, 
+universal kriging, hybrid approach for soil mapping, pedometric mapping, digital soil mapping, predictive soil 
+mapping, environmental correlation, geostatistical mapping, soil-landscape modelling, and so on. As far as I 
+know, soil spatial modellers have not yet reached an agreement on how these \q{traditional} expressions should 
+be used, nor what their \q{correct} meaning is. See, for example, \citeonline{Hengl2003, McBratneyEtAl2003, 
+ScullEtAl2003}. Because the expression \emph{mixed model of spatial variation} has a stronger theoretical 
+basis (other expressions are defined based on operational aspects), I understand that its adoption and use is 
+a more appropriate choice.}}
+
+% Footnote
+\def\footcovar{\footnote{In the statistical literature, the term \emph{covariate} is synonymous to 
+\emph{explanatory variable}, \emph{predictor variable}, and \emph{independent variable}, and refers to the 
+variable that, although not being of primary interest, is used in a model because it determines the behaviour 
+of the \emph{response variable} or \emph{dependent variable} \cite{Everitt2006}. In soil science, a covariate 
+has the same statistical meaning, the difference being that they assume a pedological meaning as well, i.e. 
+they are viewed as proxies, indicators, substitutes, surrogates, approximations of the soil-forming factors 
+due to the simple fact that the soil-forming factors -- the true environmental conditions that helped shape 
+the soil -- are unknown and cannot be known. Covariates are defined \emph{spatially exhaustive} when they 
+cover the entire area being modelled, i.e. they are exhaustively known in the entire geographic space.}}
+
+The mixed model of spatial variation\footmixed{} can be viewed as a generalization of previously existing 
+models of spatial variation, by which a soil property, here denoted $Y(\boldsymbol{s})$, at a given spatial 
+location symbolised as $\boldsymbol{s}$ is modelled as the outcome of a spatial stochastic process 
+\cite{Cressie1993, HeuvelinkEtAl2001, LarkEtAl2006}. Accordingly, the model is composed of \emph{fixed} and 
+\emph{random effects}. The fixed effects, a deterministic large-scale spatial trend, denoted 
+$m(\boldsymbol{s})$, describes the portion of the spatial variation of the soil property that is explained 
+with the factors of soil formation as suggested by the empirical correlation calculated using point soil 
+observations and spatially exhaustive covariates\footcovar. The random effects, also known as stochastic 
+residuals or latent variables, denoted $e(\boldsymbol{s})$, describe the portion of the spatial variation of 
+the soil property that cannot be explained with the covariates but is potentially spatially correlated, the 
+form and degree of this spatial correlation possibly being interpreted pedologically \cite{Lark2012}. Thus 
 
 \begin{equation}\label{eqn:intro-mixed-model}
 Y(\boldsymbol{s}) = m(\boldsymbol{s}) + e(\boldsymbol{s}).
@@ -345,9 +350,8 @@ statistical and data-mining methods, generally resulting in better performance t
 alone, as well as integrating the existing pedological knowledge provided it is translated into a mathematical 
 form \cite{OdehEtAl1994, OdehEtAl1995, Heuvelink1996, McBratneyEtAl2000, HenglEtAl2004, Lopez-GranadosEtAl2005, 
 WebsterEtAl2007, Grunwald2009, Lark2012}. These features promoted the rapid popularization of the mixed model 
-of spatial variation, and many recent large scale soil-mapping projects already successfully employed the mixed 
-model of spatial variation \cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
-% and the development of the Internet, 
+of spatial variation, and many recent large scale soil-mapping projects already successfully employed the 
+mixed model of spatial variation \cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
 
 % Unfortunately, along with the success of the mixed model of spatial variation, came a rupture between soil 
 % modellers pertaining to different \q{schools}, building a negative atmosphere in many
@@ -378,12 +382,11 @@ model of spatial variation \cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015
 
 Despite the rapid technological developments observed recently, the activity of modelling the soil remained 
 essentially the same throughout human history. Soil maps still serve the same old purpose of representing our 
-limited understanding about the spatial
-organization of the soil in the natural environment in a simplified manner, as well as giving insights about 
-how the soil came to be and how they should be managed \cite{Jenny1941, Hudson1992, Legros2006, 
-Blanco-CanquiEtAl2010, Grunwald2010}. For this reason, irrespective of the method/model used to produce soil 
-maps, perhaps we should use an (integrative) expression such as \emph{soil spatial modelling} instead of 
-picking one of the many currently used.
+limited understanding about the spatial organization of the soil in the natural environment in a simplified 
+manner, as well as giving insights about how the soil came to be and how they should be managed 
+\cite{Jenny1941, Hudson1992, Legros2006, Blanco-CanquiEtAl2010, Grunwald2010}. For this reason, irrespective 
+of the method/model used to produce soil maps, perhaps we should use an (integrative) expression such as 
+\emph{soil spatial modelling} instead of picking one out of the many currently used.
 
 It follows that, based on the existing body of knowledge on soil spatial modelling and the currently available 
 technologies, we should try to define what it constitutes, in practice, the soil spatial modelling activity. A 
@@ -391,8 +394,8 @@ suggested general (didactic) sequence of steps that we believe represent what is
 spatial modelling is presented below.
 
 \begin{description}
-\item[Step 1] Identify a reality or problem entity, the geographic region for which
-there is a demand of spatial soil information. Target soil properties are appointed as well as the
+\item[Step 1] Identify a reality or problem entity, the geographic region for which there is a demand of 
+spatial soil information. Target soil properties are appointed as well as the
 required accompanying output information (e.g. metadata). Key modelling decisions are taken in this step
 such as the support (punctual or areal), spatial resolution (and possibly the cartographic scale),
 coordinate reference system, etc. Depending on how well defined the demand is, the model of spatial
