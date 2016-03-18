@@ -390,94 +390,90 @@ of the method/model used to produce soil maps, perhaps we should use an (integra
 
 It follows that, based on the existing body of knowledge on soil spatial modelling and the currently available 
 technologies, we should try to define what it constitutes, in practice, the soil spatial modelling activity. A 
-suggested general (didactic) sequence of steps that we believe represent what is or should be done in soil 
-spatial modelling is presented below.
+suggested general (didactic) sequence of eight steps that we believe represent what is or should be done in 
+soil spatial modelling is presented below. The first step is numbered zero (0) to emphasize its importance: we
+believe it to be a crucial step, where political, economical and paradigmatic decisions have to be made. Many
+soil spatial modelling projects are not implemented because this first step is not completed.
 
 \begin{description}
-\item[Step 1] Identify a reality or problem entity, the geographic region for which there is a demand of 
-spatial soil information. Target soil properties are appointed as well as the
-required accompanying output information (e.g. metadata). Key modelling decisions are taken in this step
-such as the support (punctual or areal), spatial resolution (and possibly the cartographic scale),
-coordinate reference system, etc. Depending on how well defined the demand is, the model of spatial
-variation can also be specified, i.e. discrete, continuous, or mixed. Data policy is discussed (What data
-should be public? How to make data public? How to implement the data policy?) and agreed upon. Finally,
-the available infrastructure, budget, time, and workforce are specified so that next steps can be
-appropriately planned as to fulfil the demand.
+\item[Step 0] Identify a reality or problem entity, the geographic region for which there is a demand of 
+spatial soil information. Target soil properties are appointed as well as the required accompanying output 
+information (e.g. metadata). A minimum required accuracy level of the produced soil information can also be 
+defined. Key modelling decisions are taken in this step such as the support (punctual or areal), spatial 
+resolution (and possibly the cartographic scale), coordinate reference system, etc. Depending on how well 
+defined the demand is, the model of spatial variation can also be specified, i.e. discrete, continuous, or 
+mixed. Data policy is discussed (What data should be public? How to make data public? How to implement the 
+data policy?) and agreed upon. Finally, the available infrastructure, budget, time, and workforce are 
+specified so that next steps can be appropriately planned as to fulfil the demand.
 
-\item[Step 2] Develop a conceptual model of pedogenesis, a verbal representation of the
-reality or problem entity including the explicit description of soil-forming factors and processes
-that determine the spatio-temporal distribution of soil properties. This requires gathering the most
-of the existing environmental information contained in scientific articles, technical reports,
-books, websites, local knowledge, as well as existing maps of the soil, land use, geology, digital
-elevation models, satellite images, aerial photographs, among others. Environmental information is used
-to articulate pedogenetic concepts. Provided that any of the existing soil data are available, an
-exploratory data analysis can help unravelling soil-landscape relationships. The poorer the volume of
-existing environmental information, and the less experienced the soil modeller is, the more
-important an exploratory field campaign is to help understanding the existing soil-landscape relationships.
+\item[Step 1] Develop a conceptual model of pedogenesis, a verbal representation of the reality or problem 
+entity including the explicit description of soil-forming factors and processes that determine the 
+spatio-temporal distribution of soil properties. This requires gathering the most of the existing 
+environmental information contained in scientific articles, technical reports, books, websites, local 
+knowledge, as well as existing maps of the soil, land use, geology, digital elevation models, satellite 
+images, aerial photographs, among others. Environmental information is used to articulate pedogenetic 
+concepts. Provided that any of the existing soil data are available, an exploratory data analysis can help 
+unravelling soil-landscape relationships. The poorer the volume of existing environmental information, and the 
+less experienced the soil modeller is, the more important an exploratory field campaign is to help 
+understanding the existing soil-landscape relationships.
 
-\item[Step 3] Define the model of spatial variation, a translation of the conceptual
-model of pedogenesis into a set of possible mathematical representations. Depending on
-how well defined the demand was, the model of spatial variation was already specified in
-\textbf{Step 1}. Provided the volume of existing environmental information and legacy soil data is
-moderate to large and/or the soil modeller is very experienced and/or the available budget
-allows carrying out exploratory field campaigns, a single model of spatial variation is
-defined, i.e. discrete, continuous, or mixed. Assuming that the mixed model of spatial variation is
-chosen, the statistical and/or data-mining models that will be used to represent the discrete
-and continuous components are specified, taking into account the feasibility of meeting their
-requirements given the available soil data, infrastructure, budget, time, and workforce. If multiple
-models or statistical and/or data-mining models are chosen, the pedological and
-statistical criteria for identifying the best performing model are defined.
+\item[Step 2] Define the model of spatial variation, a translation of the conceptual model of pedogenesis into 
+a set of possible mathematical representations. Depending on how well defined the demand was, the model of 
+spatial variation was already specified in \textbf{Step 0}. Provided the volume of existing environmental 
+information and legacy soil data is moderate to large and/or the soil modeller is very experienced and/or the 
+available budget allows carrying out exploratory field campaigns, a single model of spatial variation is
+defined, i.e. discrete, continuous, or mixed. Assuming that the mixed model of spatial variation is chosen, 
+the statistical and/or data-mining models that will be used to represent the discrete and continuous 
+components are specified, taking into account the feasibility of meeting their requirements given the 
+available soil data, infrastructure, budget, time, and workforce. If multiple models or statistical and/or 
+data-mining models are chosen, the pedological and statistical criteria for identifying the best performing 
+model are defined.
 
-\item[Step 4] Prepare the modelling database, a collection of soil and covariate data
-needed to estimate the parameters and test the chosen statistical and/or data-mining
-models. If required, this includes preparing a sampling plan with formally defined selection rules,
-making properly documented field soil observations, and running replicated laboratory analyses.
-Soil data from different sources are harmonized. Covariates are selected using the conceptual model
-of pedogenesis and empirical evidence. Both soil and covariate data are assessed regarding the need
-for nonlinear transformations to meet the requirements of the chosen statistical and/or
-data-mining models, and to improve their empirical correlation. Several of these tasks can be (and
+\item[Step 3] Prepare the modelling database, a collection of soil and covariate data needed to estimate the 
+parameters and test the chosen statistical and/or data-mining models. In some rare cases the modelling 
+database is already available and does not require any further improvement. If this is the case, then this 
+step would have already been covered in \textbf{Step 1}. However, in most cases this step requires preparing a
+sampling plan with formally defined selection rules, making properly documented field soil observations, and 
+running replicated laboratory analyses. Soil data from different sources are harmonized. Covariates are 
+selected using the conceptual model of pedogenesis and empirical evidence. Both soil and covariate data are 
+assessed regarding the need for nonlinear transformations to meet the requirements of the chosen statistical 
+and/or data-mining models, and to improve their empirical correlation. Several of these tasks can be (and
 usually are) carried out with the aid of a data processing environment (a computer).
 
-\item[Step 5] Estimate the parameters of the statistical and/or data-mining
-models, a task that essentially depends on translating the set of possible mathematical
-representations of the conceptual model of pedogenesis into a computer representation, that is, a
-computer code or script. Developing a well documented computer code that describes all processing
-steps ease re-design, future consistency checks, correction of mistakes, and
-dissemination/reproducibility. Calibrated models are evaluated using statistical criteria defined in
-\textbf{Step 3} such as goodness-of-fit measures. Best performing models are evaluated regarding their
-tenability (pedological evaluation), which includes visually assessing draft soil maps, and how well
-they represent the range of possible mathematical models. Failure in this last assessment suggests
-that the model requires adjustments, possibly more calibration data, or that it can be discarded.
+\item[Step 4] Estimate the parameters of the statistical and/or data-mining models, a task that essentially 
+depends on translating the set of possible mathematical representations of the conceptual model of pedogenesis 
+into a computer representation, that is, a computer code or script. Developing a well documented computer code 
+that describes all processing steps ease re-design, future consistency checks, correction of mistakes, and 
+dissemination/reproducibility. Calibrated models are evaluated using statistical criteria defined in 
+\textbf{Step 2} such as goodness-of-fit measures, as well as regarding their tenability (pedological 
+evaluation). The latter includes visually assessing draft soil maps, and how well they represent the range of 
+possible mathematical models. Failure in any of these evaluations suggests that the model requires adjustments,
+possibly more calibration data, or that it can be discarded.
 
-\item[Step 6] Validate the statistical and/or data-mining models, preferentially
-predicting the values of the modelled soil properties at a set of independent, probabilistically
-selected observation locations for which the true values are known. If an independent set of
-observation locations is unavailable, validation is performed using leave-one-out cross-validation.
-The best performing model, selected using the statistical criteria defined in \textbf{Step 3}, is
-assumed to be the best mathematical representation of the reality under study. If two or more
-models present similar prediction performance and have a considerably different structure, then it
-can be assumed that the best mathematical representation of the reality under study is given by the
-aggregated version of these models, or parsimony is considered to elect the simpler model with 
-fewer variables, steps, rules, etc. If previous steps have already allowed selecting a single best
-performing model, statistical validation is used only to assess model accuracy.
+\item[Step 5] Validate the statistical and/or data-mining models, preferentially predicting the values of the 
+modelled soil properties at a set of independent, probabilistically selected observation locations for which 
+the true values are known. If an independent set of observation locations is unavailable, validation is 
+performed using leave-one-out cross-validation. The best performing model is selected using the set of criteria
+defined in \textbf{Step 2}: this is the best mathematical representation of the reality under study given the 
+available data and knowledge. If two or more models present similar performance and have a considerably 
+different structure, then (1) an aggregated version of these models is constructed or (2) parsimony is 
+considered to elect the simpler model with fewer variables, steps, rules, etc. If previous steps have already 
+allowed defining/selecting a single model, statistical validation is used only to assess model accuracy.
 
-\item[Step 7] Make spatial predictions, the application of the best performing
-model(s) to predict soil properties values at unvisited locations. If demanded, the uncertainty
-about the predicted soil properties values (i.e. the prediction interval) is estimated too.
-Maps of the target soil properties as well as the required accompanying output information
-(e.g. point soil observations, covariate maps, uncertainty maps, metadata, computer scripts)
-are delivered to the users of the soil information, and possibly used to populate a spatial soil
-information system, where they are made available for inspection using different visualization
-techniques. Provided there is infrastructure, budget, time, and workforce available, modelling
-steps can be re-designed and the outputs updated at the user request.
+\item[Step 6] Make spatial predictions, the application of the best performing model(s) to predict soil 
+properties values at unvisited locations in the entire modelling region. If demanded, the uncertainty about 
+the predicted soil properties values (i.e. the prediction interval) is estimated too. Maps of the target soil 
+properties as well as the required accompanying output information (e.g. point soil observations, covariate 
+maps, uncertainty maps, metadata, computer scripts) are delivered to the users of the soil information, and 
+possibly used to populate a spatial soil information system, where they are made available for inspection 
+using different visualization techniques. Provided there is infrastructure, budget, time, and workforce 
+available, modelling steps can be re-designed and the outputs updated at the user request.
 
-\item[Step 8] Reformulate the conceptual model of pedogenesis, the use
-of the knowledge gained during the previous steps until the production of the soil property
-maps, which give insights about the reality or problem entity under study, to correct
-and/or improve the description of soil-forming factors and processes that determine the
-spatio-temporal distribution of soil properties. If demanded, the reformulated conceptual model
-of pedogenesis is delivered to the users of the soil information as well to help in scenario analysis
-and decision making.
+\item[Step 7] Improve on the conceptual model of pedogenesis, the use of the knowledge gained during the 
+previous steps until the production of the soil property maps, which give insights about the reality or problem
+entity under study, to correct and/or improve the description of soil-forming factors and processes that 
+determine the soil spatio-temporal distribution. If demanded, the reformulated conceptual model of pedogenesis 
+is delivered to the users of the soil information as well to help in scenario analysis and decision making.
 \end{description}
 
 \section{SOURCES OF UNCERTAINTY IN SOIL SPATIAL MODELLING}
