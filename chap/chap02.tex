@@ -478,68 +478,88 @@ is delivered to the users of the soil information as well to help in scenario an
 
 \section{SOURCES OF UNCERTAINTY IN SOIL SPATIAL MODELLING}
 
-Soil spatial models, like any other model, are nothing more than a gross simplification of reality.
-This means that soil models are unable to explain the spatio-temporal soil variation in
-its entirety, but only a small part of it \cite{Heuvelink1998a, Legros2006}. When we use a
-soil-mapping model to produce continuous representations of soil properties across space and/or time,
-i.e. soil maps, these continuous representations will inexorably deviate from the \q{truth}. What
-the soil map presents is our most likely expectation about the soil properties -- not our
-\emph{certainty} about them. The deviation from the \q{truth} is what we call \emph{error}. Many
-examples from the soil-mapping literature show that, irrespective of the soil property, soil-mapping
-models have a quite variable predictive performance, usually explaining between \SI{15}{\percent}
-(or less) and (rarely more than) \SI{75}{\percent} of the soil spatial variation
-\cite{MooreEtAl1993, OdehEtAl1994, GesslerEtAl1995, McKenzieEtAl1999, GobinEtAl2001, 
-SumflethEtAl2008, SunEtAl2012, ViscarraRosselEtAl2013, NussbaumEtAl2014, HenglEtAl2015,
- GaschEtAl2015, HeungEtAl2016}.
+Soil spatial models, like any other model \cite{Box1976}, are nothing more than a simplification of reality. 
+The reason for this is the fact that the existing knowledge and data are \emph{always} (very) limited -- we 
+have to try our best with the available resources. This means that soil spatial models are unable to explain 
+the spatial soil variation in its entirety, but only a small part of it \cite{Heuvelink1998a, Legros2006}. When 
+we use a spatial soil model to produce continuous representations of soil properties across space, i.e. soil 
+maps, these continuous representations will inexorably deviate from the \q{truth}. What the soil map presents 
+is our most likely expectation about the soil properties -- not our \emph{certainty} about them. The deviation 
+from the \q{truth} is what we call \emph{error}.
 
-The main reason for a soil map to be in error is that the background knowledge and data used to
-construct the soil-mapping model is very limited -- we have to try our best with the available
-resources. This means that it will never be possible to construct a model that explains the entire complexity 
-of the soil \cite{Tukey1997}, and our knowledge about the soil, and the world as a whole,
-will always be only partial \cite{Box1993}. Because we cannot eliminate the uncertainty of a soil
-map, they can always be considered as wrong, the difference being that some might be useful
-\cite{Box1976}.
+Many examples from the soil spatial modelling literature show that, irrespective of the soil property, spatial 
+soil models have a quite variable predictive performance. In general, these models explain between 
+\SI{15}{\percent} (or less) and (rarely more than) \SI{75}{\percent} of the soil spatial variation 
+\cite{MooreEtAl1993, OdehEtAl1994, GesslerEtAl1995, McKenzieEtAl1999, GobinEtAl2001, SumflethEtAl2008, 
+SunEtAl2012, ViscarraRosselEtAl2013, NussbaumEtAl2014, HenglEtAl2015, GaschEtAl2015, HeungEtAl2016}. Thus, 
+because we cannot eliminate the uncertainty of a soil map, they can always be considered as wrong, the 
+difference being that some might be useful.
 
 \subsection{Soil Data}
 
-Soil modellers aim at producing the most accurate representations of the soil given the
-available resources. Thus, a reasonable research program is the identification of the causes for
-soil maps being more or less uncertain. For instance, the error that results from making
-extrapolations and interpolations to predict soil properties at unvisited locations is an
-important source of uncertainty \cite{HeuvelinkEtAl1999, RefsgaardEtAl2006}. In the case of
-data-centred soil models, such as the mixed model of spatial variation, these errors are
-larger the farther we are from the existing observations. Thus, the most efficient way of reducing
-these errors is to increase the number of observations and improve the spatial coverage of the mapping
-region \cite{BrusEtAl2007a}. However, most soil-mapping projects must rely on using only soil
-data produced many years ago \cite{KempenEtAl2009, HenglEtAl2014, PoggioEtAl2014, 
-NussbaumEtAl2014, MulderEtAl2016}, when most sampling locations were chosen by soil 
-modellers using non-explicit location rules, usually placing more samples in complex and
-less known areas \cite{Rossiter2000}.
+Soil modellers aim at producing the most accurate representations of the soil given the available resources. 
+Thus, a reasonable research program is the identification of the causes for soil maps being more or less 
+accurate. For instance, the error that results from making extrapolations and interpolations to predict soil 
+properties at unvisited locations is an important source of uncertainty \cite{HeuvelinkEtAl1999, 
+RefsgaardEtAl2006}. In the case of data-centred soil models, such as the mixed model of spatial variation, 
+these errors are larger the farther we are from the existing observations. Thus, the most efficient way of 
+reducing these errors generally is to increase the number of observations and improve the spatial coverage of 
+the mapping region \cite{BrusEtAl2007a}. However, most soil spatial modelling projects must rely on using only 
+\emph{legacy} soil data, i.e. soil data produced many years or decades ago \cite{KempenEtAl2009, HenglEtAl2014,
+PoggioEtAl2014, NussbaumEtAl2014, MulderEtAl2016}.
 
-On the contrary, if the budget of the soil-mapping project includes (additional) sampling, soil
-modellers have to decide upon the number and spatial configuration of the sample
-\cite{deGruijterEtAl2006, WebsterEtAl2013}. Unfortunately this is not an easy task, except if the
-goal is on modelling very few soil properties that can be rapidly measured using field
-sensors, and for which a model of spatial (co)variation can be assumed known \cite{MarchantEtAl2006}.
-In most cases, several difficult-to-measure soil properties have to be modelled/mapped, many of
-which have a poorly known structure of spatial (co)variation. If using the mixed model of spatial
-variation, the chosen spatial sample configuration has to be appropriate for estimating the spatial
-trend \cite{HenglEtAl2003a, MinasnyEtAl2006b} and the variogram model
-\cite{WarrickEtAl1987, WebsterEtAl1992, Lark2002}, making spatial predictions
-\cite{YfantisEtAl1987, WalvoortEtAl2010} and, (cross)validating the model/map \cite{BrusEtAl2011}, four
-often conflicting objectives. Besides, one must be careful not to decide upon collecting an insufficient
- or an exaggerated number of soil samples. Under-sampling can result in soil models with large 
-uncertainty, while over-sampling can produce modelling benefits that do not outweigh the sampling costs 
-\cite{vanGroenigenEtAl1999}.
+Legacy soil data have weaknesses that can affect prediction accuracy. For example, the size of the impact of 
+using outdated soil data for predicting the current status of soil properties is unknown. However, we can 
+expect that this impact will be larger on the accuracy of predictions of soil properties that are relatively 
+more sensitive to land-use and climatic changes such as the organic carbon content. This is one of the reasons 
+for the high uncertainty of global estimates of organic carbon storage in soils \cite{HenglEtAl2014}. A second 
+weakness is the generally poor \q{quality} of soil legacy data for current uses. A poor quality arises from 
+documentation inconsistencies, diversity of field and laboratory methods, use of different measurement units 
+and nomenclature, absence of spatial positioning data, varying levels of precision and accuracy, among others 
+\cite{RibeiroEtAl2015}. As for the use of outdated data, how much the use of non-standardised and 
+non-harmonised soil data affects soil spatial predictions remains unknown. Finally, legacy soil data can poorly
+represent the mapping region due to bias in the selection of observations locations. This location bias comes 
+from soil modellers sampling preferentially in complex and less known areas (to gain knowledge of 
+soil-landscape relationships) or by convenience in most easy access areas (to optimize the use of the available
+resources) \cite{Rossiter2000, deGruijterEtAl2006}.
 
-Soil data may not only poorly cover the geographic and/or feature spaces \cite{HenglEtAl2003a}, but
-also have significant laboratory and positional errors \cite{NelsonEtAl2011}. Besides, some soil
-properties may naturally contain more errors due to their conceptual definition and analytical
-procedures employed. Take particle-size distribution as an example. First, the errors are propagated
-to the fraction obtained by difference (silt). Second, pre-treatments, such as organic matter
-oxidation, can change mineral structure \cite{MikuttaEtAl2005a}. And third, ignoring that the
-particle-size distribution is a compositional datum can introduce bias in the predictions
-\cite{LarkEtAl2007}.
+Some times the budget of the soil spatial modelling project (fortunately) includes (additional) sampling. 
+Then soil modellers have to decide upon the number and spatial configuration of the sample 
+\cite{deGruijterEtAl2006, WebsterEtAl2013}. But this is not an easy task, except if the goal is on modelling 
+very few soil properties that can be rapidly measured using field sensors, and for which a model of spatial 
+(co)variation can be assumed known \cite{MarchantEtAl2006}. In most cases, several difficult-to-measure soil 
+properties have to be modelled, many of which have a poorly known structure of spatial (co)variation. If using 
+the mixed model of spatial variation, the chosen spatial sample configuration has to be appropriate for 
+estimating the spatial trend \cite{HenglEtAl2003a, MinasnyEtAl2006b} and the variogram model 
+\cite{WarrickEtAl1987, WebsterEtAl1992, Lark2002}, making spatial predictions \cite{YfantisEtAl1987, 
+WalvoortEtAl2010} and, (cross)validating spatial predictions \cite{BrusEtAl2011}, four often conflicting 
+objectives. Besides, one must be careful not to decide upon collecting an insufficient or an exaggerated number
+of soil samples. Under-sampling can result in soil models with large uncertainty, while over-sampling can 
+produce modelling benefits that do not outweigh the sampling costs \cite{vanGroenigenEtAl1999}.
+
+% Footnote %%%%%
+\def\footfeature{\footnote{The \emph{feature space}, also known as \emph{attribute space}, is the 
+multi-dimensional mathematical space defined by the set of covariates used in a soil spatial modelling 
+exercise. Specifically, if the number of covariates is equal to \textit{p}, then the feature space is a 
+\textit{p}-dimensional mathematical space. In contrast, the \emph{geographic space} is the bi-dimensional 
+mathematical space defined by the geographic coordinates of the mapping region. Both spaces are \emph{finite} 
+in the sense that they are bounded by the set of geographic coordinates that define the geographic limits of 
+the study area (or mapping region) and any existing non-mapping area. However, while the feature space is a 
+\emph{discrete space} -- the set of possible values attributed to the covariates is limited to the set of 
+known existing covariate values --, the geographic space is a \emph{continuous space} -- any pair of values 
+can be attributed to the geographic coordinates provided it is bounded by the geographic limits of the study 
+area and any existing non-mapping area.}}
+
+Soil data can uniformly cover the geographic and/or feature spaces\footfeature{}, but at an observation 
+density that still is unable to capture the main structures of correlated spatial variation of a soil property.
+This is likely to happen when the range of correlated spatial variation is relatively short (small scale 
+variation) compared to the size of the mapping region (large scale variation) \cite{Burrough1983}. Soil data 
+can also have significant laboratory and positional errors \cite{NelsonEtAl2011}. Besides, data on some soil 
+properties may naturally contain more errors due to conceptual definitions and analytical procedures employed. 
+Take particle-size distribution as an example. First, the errors are propagated to the fraction obtained by 
+difference (silt). Second, pre-treatments, such as organic matter oxidation, can change mineral structure 
+\cite{MikuttaEtAl2005a}. And third, ignoring that the particle-size distribution is a compositional datum can 
+introduce bias in the predictions \cite{LarkEtAl2007}.
 
 \subsection{Covariate Data}
 
