@@ -126,7 +126,7 @@ that lasts till today.
 that the activity of \emph{soil mapping} concerns the production of \emph{area-class soil maps}, also called 
 \emph{polygon soil maps}, \emph{choropleth soil maps}, and more generally \emph{soil maps}. My view is that 
 such an understanding, which is rooted in the fact that most early soil mapping projects aimed at producing 
-area-class soil maps -- see \citep{Grunwald2009} for a discussion --, is erroneous. Multiple times it results 
+area-class soil maps -- see \citet{Grunwald2009} for a discussion --, is erroneous. Multiple times it results 
 in the confusion between the concept of soil itself and that of soil class, soil taxon and/or soil series. In 
 this thesis a soil map is nothing more than a graphical representation of the soil. For that end, one has to 
 choose a finite number of properties, characteristics, attributes, features of the soil -- the taxonomic 
@@ -141,7 +141,7 @@ surface... --, not soil class or soil taxon or soil series.}}
 % variety. \cite{Rossiter2000}
 
 A lot happened since the Neolithic Revolution \cite{BrevikEtAl2010} -- from bone to spacecraft, as in 
-Kubrick's \footKubrick --, and the knowledge constructed with multiple soil spatial studies was fundamental 
+Kubrick's \footKubrick{} --, and the knowledge constructed with multiple soil spatial studies was fundamental 
 for the development of agriculture and increase of food production -- although many farmers still live in 
 Neolithic conditions \cite{MazoyerEtAl2008}. If we adopt an integrative view, soil maps produced during this 
 long period of human history seem to fit into what we call today the \emph{discrete model of spatial 
@@ -563,62 +563,70 @@ introduce bias in the predictions \cite{LarkEtAl2007}.
 
 \subsection{Covariate Data}
 
-Another important source of uncertainty is the covariate data used to calibrate the soil models. Their 
-effect appears as a poor correlation with soil properties being modelled, resulting in poor predictions.
-One of the reasons why the covariate data can be poorly correlated with the soil property is the fact
-that they also contain varying levels of error \cite{HeuvelinkEtAl1989} which could make them 
-poor proxies of the soil forming factors. These errors derive from the various 
-methods of data generation, analytical procedures and, inherent characteristics of
-each site. For example, digital elevation models usually present larger errors in areas with steep
-slopes, rough terrains, and high altitude, and with dense forest cover or urbanized
-\cite{Florinsky1998, Toutin2000, FisherEtAl2006}. Interpolation of elevation data using kriging
-can produce spurious artefacts \cite{HenglEtAl2009} compared to hydrologically consistent
-algorithms \cite{Hutchinson1989}. And stereoscopic correlation techniques produce digital elevation
+Another important source of uncertainty is the covariate data used to calibrate the soil models. Their effect 
+appears as a poor correlation with soil properties being modelled, resulting in poor predictions. Several are 
+the possible reasons for the covariate data to be poorly correlated with the soil property. One of the them is 
+the fact that the covariate data also contain varying levels of error \cite{HeuvelinkEtAl1989} which could 
+make them poor proxies of the soil-forming factors. These errors derive from the various methods of data 
+generation, analytical procedures and, inherent characteristics of each site. For example, digital elevation 
+models usually present larger errors in areas with steep slopes, rough terrains, and high altitude, and with 
+dense forest cover or urbanized \cite{Florinsky1998, Toutin2000, FisherEtAl2006}. Interpolation of elevation 
+data using kriging can produce spurious artefacts \cite{HenglEtAl2009} compared to hydrologically consistent 
+algorithms \cite{Hutchinson1989}. And stereoscopic correlation techniques generally produce digital elevation 
 models with poorer quality than interferometric synthetic aperture radar \cite{HirtEtAl2010}.
 
-The method used to select which covariates to include in the soil spatial model can also be a reason for
-soil maps being in more or less error. This is because every method can select considerably different 
-sets of covariates, perhaps including a few that are poorly correlated with soil properties. The selection
-of covariates is especially important because the number of available (uncertain) covariates is large, 
-many of which possibly being statistically redundant. 
+The method used to select which covariates to include in the soil spatial model can also be a reason for soil 
+maps to be in more or less error. This is because every method can select considerably different sets of 
+covariates, perhaps including a few that are poorly correlated with soil properties. The selection of 
+covariates is especially important because the number of available (uncertain) covariates is large, many of 
+which possibly being statistically redundant. 
 
 A pedologically sound approach for the selection of covariates is the elicitation of the knowledge of a 
-few experts \cite{LarkEtAl2007a, MeyerEtAl2001}. An expert is every soil modeller with long-term 
-practical experience in soil mapping \cite{MeyerEtAl2001} and deep knowledge of the mapping 
-region, as expressed in the conceptual model of pedogenesis, as well as of the soil and covariate data. 
-However, it may be that the understanding about the mapping region may be limited to a point that enables
-building only a very uncertain conceptual model of pedogenesis. Take for example a geomorphologically 
-complex, unstable landscape that consistently suffers from natural and/or anthropogenic alterations. 
-Establishing soil-landscape relationships is very difficult in such circumstances, especially if the 
-geomorphological complexity is increased as it is rejuvenated \cite{StreckEtAl2008}. Similar uncertainty
-regarding the soil-landscape relationships can arise in very old, stable surfaces of the tropics that have gone
-through many environmental modifications, but were not affected by Pleistocene glaciations
-\cite{MckenzieEtAl2006}. These landscapes commonly have polygenetic soils that present properties
-reflecting today and ancient vegetation and climate \cite{PainEtAl1995, Ker1998}. One could wonder 
-whether expert soil modellers would be more efficient at identifying the covariates with the highest 
-predictive 
-power than sound statistical inference in such circumstances.
+few experts \cite{LarkEtAl2007a, MeyerEtAl2001}. An expert is every soil modeller with long-term practical 
+experience in soil spatial modelling and deep knowledge of the mapping region, as expressed in the conceptual 
+model of pedogenesis, as well as of the soil and covariate data. However, it may be that the understanding 
+about the mapping region may be limited to a point that enables building only a very poor conceptual model of 
+pedogenesis. Take for example a geomorphologically complex, unstable landscape that consistently suffers from 
+natural and/or anthropogenic alterations. Establishing soil-landscape relationships is very difficult in such 
+circumstances, especially if the geomorphological complexity is increased as the landscape is rejuvenated 
+\cite{StreckEtAl2008}. Similar uncertainty regarding the soil-landscape relationships can arise in very old, 
+stable surfaces of the tropics that have gone through many environmental modifications, but were not affected 
+by Pleistocene glaciations \cite{MckenzieEtAl2006}. These landscapes commonly have polygenetic soils that 
+present properties reflecting today and ancient vegetation and climate \cite{PainEtAl1995, Ker1998}. One could 
+wonder whether expert soil modellers would be more efficient at identifying the covariates with the highest 
+predictive power than sound statistical inference in such circumstances.
 
-A commonly used approach to select the covariates to enter a soil-mapping model is automated selection.
-Because automated selection algorithms are available in most software packages \cite{Harrell2001a},
-they are relatively easy to use \cite{DraperEtAl1971}, deliver satisfactory results,
-\cite{HenglEtAl2004}, and are needed to automate soil-mapping routines \cite{HenglEtAl2014}. The
-main uncertainty here is on which method to use. Some methods analyse all possible combinations of
-covariates. Others simulate the process of natural selection \cite{AndersenEtAl2010}.
-Cross-validation selects covariates that produce the best predictions on test sets
-\cite{GuyonEtAl2003}. Other methods take into account the order in which the covariates are added
-to (forward selection) or removed from (backward elimination) the model \cite{LarkEtAl2007a}. 
-The stepwise method adds and removes covariates until no further addition or removal results in
-significant changes in the model \cite{DraperEtAl1998}. Many other methods exist and have been
-used in soil-mapping projects \cite{PoggioEtAl2013,NussbaumEtAl2014}. Some prefer to use
-dimensionality reduction techniques to reduce the number of covariates \cite{Massy1965} before
-running the covariate selection algorithm \cite{tenCatenEtAl2011a, HenglEtAl2014}. However, there
-are evidences that the number of problems associated with using automated covariate selection
-methods, and dimensionality reduction techniques, can be greater than the number of advantages 
-\cite{FarrarEtAl1967, Jackson1993, Chatfield1995, Edirisooriya1995, Harrell2001a, Jolliffe2002, 
-Peres-NetoEtAl2005, LarkEtAl2007a}. The most evident being the fact that each method produces a
- different set of covariates which may have a weaker physical or biological relation with the soil 
-property being modelled.
+A commonly used approach to select the covariates to enter a soil spatial model is automated selection. 
+Automated covariate selection algorithms have always been relatively easy to use \cite{DraperEtAl1971} and are 
+available in most software packages \cite{Harrell2001a}. They generally deliver satisfactory results and are 
+needed to automate soil spatial modelling routines \cite{HenglEtAl2014}. Each of them employs different search 
+strategies. For example, some methods analyse all possible combinations of covariates. Others simulate the 
+process of natural selection \cite{AndersenEtAl2010}. Cross-validation selects covariates that produce the best 
+predictions on test sets \cite{GuyonEtAl2003}. Other methods take into account the order in which the 
+covariates are added to (forward selection) or removed from (backward elimination) the model 
+\cite{LarkEtAl2007a}. The stepwise method adds and removes covariates until no further addition or removal 
+results in significant changes in the model \cite{DraperEtAl1998}. Some prefer to use dimensionality reduction 
+techniques to reduce the number of covariates \cite{Massy1965} before running the covariate selection algorithm 
+\cite{tenCatenEtAl2011a, HenglEtAl2014}. Several other methods exist and have been used in soil spatial 
+modelling \cite{PoggioEtAl2013, NussbaumEtAl2014}. Because each algorithm employs a different search 
+strategy, they generally select different sets of covariates possibly with varying degrees of correlation 
+with the soil property being modelled. The best covariate selection algorithm can be identified, for example, 
+using sound statistical inference made on external validation data. However, this is rarely done and the most 
+popular algorithm, or that implemented in the available software package is used. Besides, there are evidences 
+that the number of problems associated with using automated covariate selection methods, and dimensionality 
+reduction techniques, can be greater than the number of advantages \cite{FarrarEtAl1967, Jackson1993, 
+Chatfield1995, Edirisooriya1995, Harrell2001a, Jolliffe2002, Peres-NetoEtAl2005, LarkEtAl2007a, Ratner2010}.
+
+Despite the difficulties associated with using uncertain covariates and automated selection algorithms, 
+their contribution to the error in soil spatial modelling is poorly understood. For example, more accurate and 
+more detailed covariate data may not necessarily be a better proxy of the soil-forming factors 
+\cite{ThompsonEtAl2001, EldeiryEtAl2008, KimEtAl2014}. In very old and stable surfaces of the tropics such as 
+described above, current soil properties are more due to past than to present environmental conditions. Present 
+day covariate data are not indicators of such environmental conditions. Indeed, some studies have shown that 
+\q{degrading} the accuracy of the covariates to produce multi-scale representations of the landscape can yield 
+more accurate predictions \cite{Wood1996, ZhuEtAl2008, BehrensEtAl2010a}. However, this approach multiplies the 
+number of covariates, increasing the need to better understand the effects of using automated selection 
+algorithms in soil spatial modelling.
 
 \subsection{Model Structure}
 
