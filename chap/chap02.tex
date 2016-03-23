@@ -650,18 +650,29 @@ is far from being comprehensive -- others will do a better job. The main message
 eliminate the uncertainty of a soil map and, as such, our knowledge about the soil will \emph{always} be 
 limited. Despite of this, soil spatial models -- and the entire body of human knowledge -- are still needed to 
 guide our every-day actions. So, instead of eliminating uncertainty, the real quest is for understanding it 
-and its sources. If for instance it happens to us to gain knowledge that a source of error has a systematic 
-nature, then a corrective measure can be taken right away.
+and its sources. For instance, if it happens to us to gain knowledge that a source of uncertainty 
+systematically affects our soil spatial models in a very specific manner, then a corrective measure can be 
+taken right away.
 
-A most comprehensive way of dealing with the multiple sources of uncertainty is \emph{error propagation 
-analysis}, also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989, Taylor1997}. This is done taking
-our uncertainty into account through the modelling steps, seeing how it propagates, and
-evaluating its impact on the uncertainty about the output soil map. This would allow us identifying the
-main source of uncertainty, so that we could try to take corrective measures to improve its quality.
-But such an exercise is cumbersome \cite{NelsonEtAl2011}, and the efforts required may not
-outweigh the benefits, this being one of the reasons why it is rarely carried out. Another important
-reason for error propagation analysis being unpopular is the common ignorance and lack of
-understanding -- perhaps prejudice -- about error and uncertainty \cite{Wechsler2003, Heuvelink2005}.
-But the most important reason seems to be that statistical packages and data analysis environments do
-not include -- if they ever will or should include -- a simple routine, a button, to run a complete
-uncertainty analysis \cite{HeuvelinkEtAl2006b}.
+The most comprehensive way of dealing with the multiple sources of uncertainty is \emph{error propagation 
+analysis}, also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989, Taylor1997}. This is done taking 
+our uncertainty into account through all modelling steps, seeing how it propagates, and evaluating its impact 
+on the uncertainty about the output soil map. This would allow us identifying the main source of uncertainty, 
+so that we could try to take corrective measures to improve its quality. But such an exercise is cumbersome, 
+and the efforts required may not outweigh the benefits, this being one of the main reasons why it is rarely 
+carried out \cite{HeuvelinkEtAl2006b, NelsonEtAl2011} -- including this thesis. Another important reason for 
+error propagation analysis being unpopular is the common ignorance and lack of understanding -- perhaps 
+prejudice -- about error and uncertainty \cite{Wechsler2003, Heuvelink2005}.
+
+Considering the difficulties with implementing a sound error propagation analysis -- given the available 
+resources --, it seems reasonable to devise studies limited to only a few sources of uncertainty. The 
+knowledge on the sources of uncertainty gathered here suggests that the calibration and covariate data, and 
+the model structure should be the focus of such studies. In general, the main decisions made by soil spatial 
+modellers concern these three topics. However, fine tuning the model structure seems to strongly depend on 
+the existing soil and covariate data. For example, capturing the moderate to large scale structures of soil 
+spatial variation largely depends on using covariates that depict environmental conditions at multiple scales.
+This also requires the soil data to cover the feature and geographic spaces. On the other hand, capturing the 
+structure of the short range spatial variation depends on having soil observations at short distances. Thus, 
+it may be that evaluating the impact of soil and covariate data on prediction accuracy should precede that of 
+the model structure. Besides, gathering soil and covariate data have a larger weight on the costs of soil 
+spatial modelling that choosing the model structure.
