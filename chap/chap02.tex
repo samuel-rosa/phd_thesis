@@ -107,7 +107,7 @@ community efforts have brought about a renewed recognition of the importance of 
 environment among the general public.
 
 \section{MODERN SOIL SPATIAL MODELLING}
-\label{sec:soil-modelling}
+\label{sec:chap02-soil-modelling}
 
 Technology plays a determinant role on how we perceive the world around us -- see, for example, 
 \citeonline{Hartemink2009}. When early farmers, during the Neolithic Revolution, ca.~\num{10000}~years ago, 
@@ -633,41 +633,45 @@ selection algorithms in soil spatial modelling.
 \subsection{Model Structure}
 
 % Footnote %%%%%
-\def\footlinear{\footnote{Linear models are models that involve the covariates only through a weighted sum of 
-all covariates. \cite{Harrell2001a}. In such models no parameter appears as an exponent or is multiplied or 
-divided by another parameter \cite{KutnerEtAl2004}.}}
+% \def\footlinear{\footnote{Linear models are models that involve the covariates only through a weighted sum 
+% of all covariates. \cite{Harrell2001a}. In such models no parameter appears as an exponent or is multiplied 
+% or divided by another parameter \cite{KutnerEtAl2004}.}}
 
-Soil modellers have also to chose the type of model that will be used to explain the soil spatial variation.
-Three types of models that can be used for that end were presented in \autoref{sec:soil-modelling}. The 
-discrete model of spatial variation, which uses information on the soil-forming factors, usually has a large 
-ability to explain the structure of the large scale soil spatial variation. The same applies to the 
-deterministic component of the mixed model of spatial variation. In both cases soil modellers have to choose 
-the form of the model that will be used to account for the empirical relation between covariates and soil 
-properties. For example, early soil spatial modelling projects were based solely on using \emph{mental models} 
-that could account for many complex interactions among covariates \cite{Hudson1992}. Later, soil modelling 
-projects started using linear statistical models \cite{MooreEtAl1993, OdehEtAl1994}. Developments in 
-informatics introduced new forms of modelling this relation. Many later soil spatial modelling projects 
-employed nonlinear statistical models and machine-learning algorithms, including regression trees, artificial 
-neural networks, random forests, support vector machines, among many others \cite{HeungEtAl2016}. The main 
-reason being that these nonlinear models and machine-learning algorithms usually have a greater ability to 
-capture more complex site-specific soil-landscape relations \cite{Grunwald2009}.
+The last source of uncertainty discussed here is the structure of the model of spatial variation. Such a 
+source of uncertainty arises from the fact that soil spatial variation can be modelled using very different 
+spatial models (\autoref{sec:chap02-soil-modelling}). Based on the existing knowledge and available data and 
+resources, the soil modeller must decide between modelling the deterministic (discrete model) or the 
+stochastic (continuous model) or both components (mixed model) of soil spatial variation. Optimally, the best 
+model structure is selected based on statistical inferences made using external validation data. However, like 
+covariate selection algorithms, soil modellers usually select a single model, generally the most popular or 
+that implemented in the available software package.
 
-% Accurately capturing the structure of the large scale soil spatial variation depends on the form of the 
-% model, but also on the available soil and covariate data (see \autoref{sec:chap02-covar-data} and 
-% \autoref{sec:chap02-soil-data}). The same is true when modelling the structure of the small scale soil 
-% spatial variation using the continuous model of spatial variation (or the stochastic component of the mixed 
-% model of spatial variation). Here the soil modeller has to decide upon the form of the spatial covariance 
-% function. The number of decisions required increases if the choice is for using the mixed model of spatial 
-% variation to model both deterministic and stochastic components of soil spatial variation. 
+The deterministic component of spatial variation, which uses information on the soil-forming factors (i.e. 
+covariates), usually has a larger ability to explain the structure of the large scale soil spatial variation. 
+For that end, besides the covariates (\autoref{sec:chap02-covar-data}), soil modellers have to choose the form 
+of the model that will be used to account for the empirical relation between covariates and soil properties. 
+Early soil spatial modelling was based solely on using \emph{mental models} (or tacit models) that could 
+account for many complex effects of the covariates on soil properties \cite{Hudson1992}. Later, due to 
+developments in statistics, these mental models were replaced with \emph{linear models} \cite{MooreEtAl1993, 
+OdehEtAl1994}. These linear models account for the effects of the covariates on the soil property being 
+modelled only through a weighted sum of the individual effects of all covariates \cite{Harrell2001a}. 
 
-% The decision can be based on the existing pedological knowledge and on using sound statistical inference 
-% made on external validation data. 
+Developments in informatics introduced new forms of modelling soil-landscape relationships. Many soil spatial 
+modellers started to employ nonlinear models, most of them based on machine-learning algorithms such as 
+classification and regression trees, artificial neural networks, random forests, support vector machines, among 
+many others \cite{McBratneyEtAl2000, HeungEtAl2016}. The main reason for the ready adoption of these nonlinear 
+models is that they usually have a greater ability to capture more complex site-specific soil-landscape 
+relations \cite{Grunwald2009}, possibly yielding more accurate predictions.
 
-The fact that each model produces a different soil map may be seen as a problem, although the validation 
-statistics may suggest that the differences in their performance are insignificant \cite{HeungEtAl2016}. A 
-solution is to aggregate the predictions of the many models, but this will not necessarily reduce our 
-uncertainty. Besides, machine-learning methods are more difficult to implement and interpret 
-\cite{Grunwald2009}, possibly being more prone to error.
+Modelling the structure of the small scale soil spatial variation usually requires employing stochastic 
+models. This can be done using both the continuous and mixed models of spatial variation. Here the soil 
+modeller has to decide upon the form of the spatial covariance function (exponential, spherical, circular, 
+Gaussian, linear, etc) \cite{WebsterEtAl2007}. Again, the decision can be based on the existing pedological 
+knowledge and on using statistical inferences made with validation data. However, different spatial covariance 
+functions yield spatial predictions with similar accuracies, although the visual aspect of the resulting maps 
+is considerably different \cite{Lark2000a}. This also happens when modelling the deterministic component of 
+spatial variation \cite{HeungEtAl2016}. A solution is to aggregate the predictions of the many different 
+models, but this will not necessarily reduce our uncertainty.
 
 \section{CONCLUSIONS}
 
