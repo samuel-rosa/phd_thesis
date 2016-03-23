@@ -293,7 +293,7 @@ property is larger the farther from existing soil observations, i.e. it is spati
 Availability of general-purpose computers fuelled the use and development of the continuous model of spatial 
 variation, especially in European, North American, and Oceanian countries \cite{HeuvelinkEtAl2001, 
 McBratneyEtAl2003, ScullEtAl2003}. But limitations in its prediction performance and developments in remote 
-sensing and machine-learning algorithms helped many soil scientists to understand that the continuous model of
+sensing and nonlinear models helped many soil scientists to understand that the continuous model of
 spatial variation had limitations too. For instance, it is unable to capture abrupt changes in the values of 
 soil properties that occur, for example, between agricultural fields, parent materials, land uses, and so on
 \cite{SteinEtAl1988, VoltzEtAl1990}. Because, compared to the discrete model of spatial variation, in its 
@@ -302,7 +302,7 @@ simplest form, the continuous model of spatial variation largely ignores the exi
 was more efficient than previously thought \cite{BregtEtAl1987, HeuvelinkEtAl2001}. First, because it was now
 possible to employ the equation of soil-forming factors (\autoref{eqn:chap02-clorpt}) for soil mapping using 
 remote sensing products as surrogates of the factors of soil formation \cite{MooreEtAl1993}. Second, 
-machine-learning algorithms enabled identifying complex spatial patterns that before could only be identified 
+nonlinear models enabled identifying complex spatial patterns that before could only be identified 
 by an experienced soil scientist \cite{McKenzieEtAl1999}. The most logical step was to combine the strengths 
 of both discrete and continuous models of spatial variation into a single model -- the \emph{mixed model of 
 spatial variation} --, that is, inclusion of the existing pedological knowledge and consideration of the 
@@ -353,31 +353,6 @@ form \cite{OdehEtAl1994, OdehEtAl1995, Heuvelink1996, McBratneyEtAl2000, HenglEt
 WebsterEtAl2007, Grunwald2009, Lark2012}. These features promoted the rapid popularization of the mixed model 
 of spatial variation, and many recent large scale soil-mapping projects already successfully employed the 
 mixed model of spatial variation \cite{PoggioEtAl2014, NussbaumEtAl2014, HenglEtAl2015}.
-
-% Unfortunately, along with the success of the mixed model of spatial variation, came a rupture between soil 
-% modellers pertaining to different \q{schools}, building a negative atmosphere in many
-% countries (see examples from Brazil [\url{https://groups.google.com/forum/#!forum/soil-mapping}] and
-% Spain [\url{http://www.madrimasd.org/blogs/universo/2009/10/07/126094}]). On one side, this was
-% caused by the (presumptuous) assumption that the mixed model of spatial variation possibly
-% represented a \q{paradigm shift} in soil science \cite{McBratneyEtAl2003} and that it is the
-% ultimate soil mapping method, superior to all others \cite{MinasnyEtAl2016}. This assumption is
-% certainly untrue, specially in many poorer regions where the mixed model of spatial variation seems
-% useless because farmers already obtain satisfactory yields and properly manage their soils using
-% indigenous/local knowledge
-% \cite{Barrera-BassolsEtAl2003, Barrera-BassolsEtAl2006, HillyerEtAl2006, CorreiaEtAl2007, 
-% ValeJuniorEtAl2007}.
-% Perhaps the strong criticism made against soil scientists that
-% refused to adopt the mixed model of spatial variation, using somewhat pejorative arguments
-% \cite{HeuvelinkEtAl2001,Mendonca-SantosEtAl2003}, helped building this unfruitful scenario. On
-% the other side, soil scientists disliked losing importance in the research field in which they worked for
-% decades, perhaps very afraid of the new technological developments due to their poor knowledge of
-% mathematics, statistics, and informatics \cite{Webster2001,SamuelRosa2012}.
-
-% Although all that is very common when a new theory or method appears
-% \cite{Russell1932, Feyerabend1977, Kuhn2011}, I think we have reached a point in which nothing else
-% can be gained by
-% playing one soil scientist against the other. Such a (noble) understanding was already shared by
-% \citeonline{Jenny1941} when comparing \cited{soil geographers} and \cited{soil functionalists}.
 
 \subsection{Spatial Soil Modelling Steps}
 
@@ -632,11 +607,6 @@ selection algorithms in soil spatial modelling.
 
 \subsection{Model Structure}
 
-% Footnote %%%%%
-% \def\footlinear{\footnote{Linear models are models that involve the covariates only through a weighted sum 
-% of all covariates. \cite{Harrell2001a}. In such models no parameter appears as an exponent or is multiplied 
-% or divided by another parameter \cite{KutnerEtAl2004}.}}
-
 The last source of uncertainty discussed here is the structure of the model of spatial variation. Such a 
 source of uncertainty arises from the fact that soil spatial variation can be modelled using very different 
 spatial models (\autoref{sec:chap02-soil-modelling}). Based on the existing knowledge and available data and 
@@ -657,11 +627,11 @@ OdehEtAl1994}. These linear models account for the effects of the covariates on 
 modelled only through a weighted sum of the individual effects of all covariates \cite{Harrell2001a}. 
 
 Developments in informatics introduced new forms of modelling soil-landscape relationships. Many soil spatial 
-modellers started to employ nonlinear models, most of them based on machine-learning algorithms such as 
-classification and regression trees, artificial neural networks, random forests, support vector machines, among 
-many others \cite{McBratneyEtAl2000, HeungEtAl2016}. The main reason for the ready adoption of these nonlinear 
-models is that they usually have a greater ability to capture more complex site-specific soil-landscape 
-relations \cite{Grunwald2009}, possibly yielding more accurate predictions.
+modellers started to employ nonlinear models such as classification and regression trees, artificial neural 
+networks, random forests, support vector machines, among many others \cite{McBratneyEtAl2000, HeungEtAl2016}. 
+The main reason for the ready adoption of these nonlinear models is that they usually have a greater ability to 
+capture more complex site-specific soil-landscape relations \cite{Grunwald2009}, possibly yielding more 
+accurate predictions.
 
 Modelling the structure of the small scale soil spatial variation usually requires employing stochastic 
 models. This can be done using both the continuous and mixed models of spatial variation. Here the soil 
@@ -673,23 +643,15 @@ is considerably different \cite{Lark2000a}. This also happens when modelling the
 spatial variation \cite{HeungEtAl2016}. A solution is to aggregate the predictions of the many different 
 models, but this will not necessarily reduce our uncertainty.
 
-\section{CONCLUSIONS}
+\section{FINAL CONSIDERATIONS}
 
 The sources of uncertainty in soil spatial modelling are multiple and the list that has been presented here
-is far from being comprehensive -- others will do a better job. The main message is that we cannot 
-eliminate the uncertainty of a soil map and, as such, our knowledge about the soil will always
-be limited. Despite of this, soil spatial models -- and the entire body of human knowledge -- are still
-needed to guide our every-day actions. So, instead of eliminating uncertainty, the real quest is for
-understanding it and its sources. If for instance it happens to us to gain knowledge that a source of 
-error has a systematic nature, then a corrective measure can be taken right away.
-
-% Because while studying the multiple sources of uncertainty -- the
-% \emph{known unknowns} --, instead of bringing them all into light, turning them into sources of 
-% error which we have a good understanding of -- the \emph{known knowns} --, we end up uncovering 
-% other sources of error that we were not aware of -- the \emph{unknown unknowns} \cite{Wikipedia2015}. 
-% If a known (or unknown) unknown happens to become a known known, then action can be taken to 
-% reduce our uncertainty. For example, if we gain knowledge that a source of error has a systematic nature, 
-% then a corrective measure can be taken right away.
+is far from being comprehensive -- others will do a better job. The main message is that we \emph{cannot} 
+eliminate the uncertainty of a soil map and, as such, our knowledge about the soil will \emph{always} be 
+limited. Despite of this, soil spatial models -- and the entire body of human knowledge -- are still needed to 
+guide our every-day actions. So, instead of eliminating uncertainty, the real quest is for understanding it 
+and its sources. If for instance it happens to us to gain knowledge that a source of error has a systematic 
+nature, then a corrective measure can be taken right away.
 
 A most comprehensive way of dealing with the multiple sources of uncertainty is \emph{error propagation 
 analysis}, also called \emph{uncertainty analysis} \cite{HeuvelinkEtAl1989, Taylor1997}. This is done taking
@@ -703,39 +665,3 @@ understanding -- perhaps prejudice -- about error and uncertainty \cite{Wechsler
 But the most important reason seems to be that statistical packages and data analysis environments do
 not include -- if they ever will or should include -- a simple routine, a button, to run a complete
 uncertainty analysis \cite{HeuvelinkEtAl2006b}.
-
-%Since soil maps still are useful, despite being in error, most soil-mapping projects adopt a very
-%pragmatic approach, and the uncertainty is almost completely ignored \cite{McBratneyEtAl2003, 
-%ScullEtAl2003}.
-%In other words, we assume that all sources of uncertainty are insignificant.
-%Positional and analytical errors are disregarded, covariates are taken as certain, and so on. These
-%data are used to calibrate a few models, whose parameters are assumed to be estimated without error
-%\cite{DiggleEtAl1998}. The soil-mapping model with the best validation statistics, generally
-%chosen using (the optimistic) cross-validation, is selected to make spatial predictions at unvisited
-%locations \cite{BrusEtAl2011}. Errors in the resulting map are regarded as being due to interpolation
-%error. Most soil models will output an estimate of this uncertainty, i.e. a measure of what
-%we do not know about the modelled/mapped soil property such as the kriging prediction error variance
-%\cite{HeuvelinkEtAl1989}. But even such a measure is nothing more than a model of our uncertainty
-%whose quality needs proper assessment \cite{Goovaerts2001}. Because soil models that ignore
-%the spatial autocorrelation of the prediction errors generally are optimistic about our uncertainty,
-%i.e. they estimate that we know more than we actually do. And geostatistical models can either
-%under- or overestimate the uncertainty depending on the available data and modelling decisions
-%\cite{Lark2000a}.
-
-%Continually ignoring the uncertainty in soil-mapping projects is quite a dangerous choice
-%\cite{HeuvelinkEtAl1999}. It can induce the layman -- and even other scientists -- to think that
-%soil modellers produce perfect, complete answers to soil-related issues. The most likely
-%consequence is what already happened in the end of the 1980's in most countries when funds for
-%soil-modelling research were almost completely extinguished
-%\cite{Basher1997, Dalmolin1999, Ker1999, Ramos2003, HarteminkEtAl2008, Finke2012}: if the
-% soil map is a perfect
-%representation of reality, then once it is done, soil modellers become useless. Nowadays, many
-%software packages and data analysis environments include a basic routine to take into account, at
-%least, one source of uncertainty \cite{ChristensenEtAl2002, Papritz2015, RibeiroJrEtAl2015}. If a
-%more elaborated, problem-specific software is required, then there is the free and open source
-%software community. Free access to the scientific literature is guaranteed by many governments,
-%universities, and libraries that spend a significant amount of resources every year on subscriptions
-%and maintenance of digital repositories. Anyone with a true interest in contributing to the body of
-%human knowledge must recognize the urgent need to stop neglecting, perhaps consciously denying, 
-%what we already known -- the \emph{unknown knowns} \cite{Zizek2006}.
-
