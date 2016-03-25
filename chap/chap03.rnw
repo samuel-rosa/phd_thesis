@@ -213,21 +213,19 @@ o que corresponde a \SI{\pm60}{\percent} da área bacia do DNOS-CORSAN.}
 \section{CLIMA}
 \label{sec:chap03-clima}
 
+% Footnote %%%%%
 \def\footcfa{\footnote{Mais informações sobre o tipo climático Cfa podem ser encontrados na 
 \href{https://pt.wikipedia.org/wiki/Clima_subtropical_\%C3\%BAmido}{Wikipedia}.}}
-
-% predomina qual tipo de vento?
 
 O clima local é classificado como Cfa\footcfa{} -- subtropical úmido sem estação seca definida --, com 
 temperatura média anual de \SI{19,1}{\celsius}. As temperaturas podem alcançar \SI{>40}{\celsius}, no verão, e 
 valores negativos no inverno \cite{HeldweinEtAl2009}. A precipitação média anual é de \SI{1708}{\milli\metre} 
-bem distribuídos ao longo do ano \cite{Maluf2000}. Predominam os ventos do quadrante leste (frio, úmido e de 
-intensidade fraca a moderada), oeste (frio, seco e de intensidade fraca a moderada) e norte (quente, seco e de 
-intensidade moderada a forte) \cite{HeldweinEtAl2009}.
+bem distribuídos ao longo do ano \cite{Maluf2000}. Predominam os ventos (em ordem de frequência) do quadrante 
+leste (frio, úmido e de intensidade fraca a moderada), oeste (frio, seco e de intensidade fraca a moderada) e 
+norte (quente, seco e de intensidade moderada a forte) \cite{HeldweinEtAl2009}.
 
 O padrão predominante das chuvas é o avançado, caracterizado por ter seu pico de maior intensidade no início 
-da 
-precipitação \cite{MehlEtAl2001}. As chuvas de maior intensidade ocorrem nos meses do final da primavera, 
+da precipitação \cite{MehlEtAl2001}. As chuvas de maior intensidade ocorrem nos meses do final da primavera, 
 verão e início do outono \cite{MouraBueno2012}. Como resultado desse padrão, as chuvas de inverno são as 
 menos erosivas, mesmo que o conteúdo de água do solo permaneça elevado durante todo o período. O padrão de 
 precipitação também é condicionado pelo relevo. Observações feitas em três locais durante o ano de \num{2011}, 
@@ -239,14 +237,13 @@ O relevo também deve condicionar o fluxo radiativo que atinge as diferentes sup
 estudos que demonstrem a efetividade desse fenômeno na área, é reconhecido que grande parte da superfície em 
 terrenos de topografia complexa é influenciada pelo efeito de sombreamento, sobretudo nas primeiras horas da 
 manhã e no final da tarde \cite{OliphantEtAl2003}. Além disso, a declividade do terreno possui forte 
-influência 
-sobre o ângulo de interceptação da radiação solar pelas superfícies \cite{Birkeland1999}. Como consequência, 
-deve ocorrer variações na temperatura e conteúdo de água no solo nas diferentes superfícies. Os meses de 
-inverno são marcados por ainda menor disponibilidade de radiação solar devido à alta frequência de nevoeiros, 
-sobretudo nas partes mais baixas, com valores normais de insolação de \SI{5,1}{\hour\per\day} 
+influência sobre o ângulo de interceptação da radiação solar pelas superfícies \cite{Birkeland1999}. Como 
+consequência, deve ocorrer variações na temperatura e conteúdo de água no solo nas diferentes superfícies. Os 
+meses de inverno são marcados por ainda menor disponibilidade de radiação solar devido à alta frequência de 
+nevoeiros, sobretudo nas partes mais baixas, com valores normais de insolação de \SI{5,1}{\hour\per\day} 
 \cite{HeldweinEtAl2009}. Além disso, devido à variação de altitude entre \num{139} e \SI{475}{\metre}, deve 
-ocorrer diferença na temperatura da ordem de \SI{4}{\celsius} entre a parte mais baixa e a 
-parte mais alta \cite{HeldweinEtAl2009}.
+ocorrer diferença na temperatura da ordem de \SI{4}{\celsius} entre a parte mais baixa e a parte mais alta 
+\cite{HeldweinEtAl2009}.
 
 \section{GEOLOGIA}
 \label{sec:chap03-geologia}
