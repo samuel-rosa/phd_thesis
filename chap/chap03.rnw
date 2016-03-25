@@ -248,62 +248,45 @@ ocorrer diferença na temperatura da ordem de \SI{4}{\celsius} entre a parte mai
 \section{GEOLOGIA}
 \label{sec:chap03-geologia}
 
-A geologia é bastante complexa, sendo constituída por três formações geológicas, além de depósitos coluviais 
+A geologia é bastante complexa, sendo constituída de três formações geológicas, além de depósitos coluviais 
 e aluviais do Quaternário. A literatura sobre o tema é vasta \cite{Bortoluzzi1974, Brasil1980, 
 GasparettoEtAl1988, MacielFilho1990, Machado1998, PieriniEtAl2002, MarquesEtAl2005, Milani2005, Pinto2005, 
 CPRM2007, Pedron2007, Sartori2009, NascimentoEtAl2010, WerlangEtAl2010, PedronEtAl2012}, e uma revisão da 
 mesma é apresentada aqui.
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/geo1988}
-%   \caption{Mapa da geologia da AEPQ-SM publicado na escala 1:50.000 \citep{GasparettoEtAl1988}.\\Legenda: 
-% SG-S - Sequência Superior da Formação Serra Geral, CT - Formação Caturrita, BT - Formação Botucatu, SG-I - 
-% Sequência Inferior da Formação Serra Geral.}
-%   \label{fig:geo1988}
-% \end{figure}
-
+% Link %%%%%
 \def\caturrita{\href{https://pt.wikipedia.org/wiki/Forma\%C3\%A7\%C3\%A3o_Caturrita}{Formação Caturrita}}
 
 Na base da sequência estratigráfica, em elevações abaixo de \SI{\pm200}{\metre}, está a \caturrita{}, 
-constituída por material sedimentar depositado em ambiente fluvial no Triássico Superior. Sua composição é 
-diversa, apresentando seixos de siltito argiloso vermelho na base, seguido por arenito avermelhado de 
+constituída de material sedimentar depositado em ambiente fluvial no Triássico Superior. Sua composição é 
+diversa, apresentando seixos de siltito argiloso vermelho na base, seguido de arenito avermelhado de 
 granulometria fina à média, composição quartzosa e matriz argilosa, podendo ainda conter considerável teor de 
 feldspato, sobreposto por siltito e folhelho também avermelhados. Em geral, a granulometria do arenito é mais 
 grosseira e menos argilosa na base da deposição. Devido à sua origem fluvial, a Formação Caturrita apresenta 
 marcada estratificação cruzada acanalada e tabular. A origem fluvial também resulta em significativa variação 
 espacial na granulometria do arenito, identificada pelo contraste entre áreas de maior cimentação e coesão, 
-com 
-outras de maior condutividade hidráulica. Imediatamente acima da Formação Caturrita encontra-se, ora a 
+com outras de maior condutividade hidráulica. Imediatamente acima da Formação Caturrita encontra-se, ora a 
 Formação Botucatu, ora a Sequência Inferior da Formação Serra Geral.
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/geo1990}
-%   \caption{Mapa da geologia da AEPQ-SM publicado na escala 1:25.000 \citep{MacielFilho1990}.\\Legenda: QD - 
-% Depósitos do Quaternário, SG-S - Sequência Superior da Formação Serra Geral, CT - Formação Caturrita, BT - 
-% Formação Botucatu, SG-I - Sequência Inferior da Formação Serra Geral.}
-%   \label{fig:geo1990}
-% \end{figure}
-
+% Link %%%%%
 \def\serrageral{\href{http://pt.wikipedia.org/wiki/Forma\%C3\%A7\%C3\%A3o_Serra_Geral}{Formação Serra Geral}}
 
 Em elevações entre \num{\pm200} e \SI{\pm350}{\metre} está a Sequência Inferior da \serrageral{} 
-(basaltos-andesitos toleíticos). As rochas básicas são de coloração cinza-escura e são constituídas por 
+(basaltos-andesitos toleíticos). As rochas básicas são de coloração cinza-escura e são constituídas de 
 plagioclásio cálcico, clinopiroxênio, magnetita e material intersticial de quartzo e material desvitrificado. 
 Em elevações superiores a \SI{\pm350}{\metre} está a Sequência Superior da Formação Serra Geral (vitrófilos, 
 riólitos-riodacitos granofíricos). As rochas ácidas apresentam cor cinza-clara, estrutura microcristalina e 
-são constituídas por cristais e plagioclásio, clinopiroxênios, hornblenda uralítica e magnetita. A origem 
+são constituídas de cristais e plagioclásio, clinopiroxênios, hornblenda uralítica e magnetita. A origem 
 desse material remonta o Cretáceo, quando sucessivos derrames de lavas de origem vulcânica fissural ocorreram 
 durante aproximadamente \num{10} milhões de anos em toda a Bacia do Paraná. Esses eventos ocorreram ao mesmo 
 tempo em que iniciava-se a separação das plataformas continentais que hoje constituem a América do Sul e 
-África, 
-marcando o final da existência do supercontinente Pangeia.
+África, marcando o final da existência do supercontinente Pangeia.
 
+% Link %%%%%
 \def\botucatu{\href{http://pt.wikipedia.org/wiki/Forma\%C3\%A7\%C3\%A3o_Botucatu}{Formação Botucatu}}
 
 O arenito eólico constituinte da \botucatu{} é encontrado tanto assentado sobre a Formação Caturrita, como no 
-interior da Formação Serra Geral (arenito \emph{intertrap}). Trata-se de um arenito quartzoso de granulometria 
+interior da Formação Serra Geral (arenito \emph{intertrap}). Trata-se de arenito quartzoso de granulometria 
 fina à média, contendo feldspato alterado e cimentado por sílica ou por óxido de ferro, que lhe confere a 
 coloração rosa-avermelhada. Sua deposição teve início no Cretáceo Inferior, período em que a Bacia do Paraná 
 estava sob influência de clima desértico. Essa condição climática continuou durante todo o período em que 
@@ -321,10 +304,9 @@ As deposições do Quaternário são constituídas por depósitos coluviais e al
 Formações Serra Geral (fragmentos de tamanho variado) e Botucatu. Em elevações abaixo de \SI{\pm200}{\metre} 
 são mais comuns os depósitos coluviais de uma ou ambas as Formações Botucatu e Caturrita. Esses depósitos 
 ocorrem de maneira descontínua nas encostas. Próximo aos cursos de água na porção mais baixa da bacia e no 
-entorno do reservatório, encontram-se depósitos fluviais recentes, geralmente formados por fragmentos 
+entorno do reservatório, encontram-se depósitos fluviais recentes, geralmente constituídos de fragmentos 
 arredondados (seixos) de tamanho variável e/ou sedimentos arenosos. Em pequenas áreas abaciadas e mal 
-drenadas, 
-os sedimentos apresentam granulometria mais fina.
+drenadas, os sedimentos apresentam granulometria mais fina.
 
 \section{GEOMORFOLOGIA}
 \label{sec:chap03-geomorfologia}
