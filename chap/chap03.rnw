@@ -315,76 +315,57 @@ A área de estudo está situada na porção sul da Bacia Sedimentar do Paraná. 
 resultado dos processos erosivos que ocorreram durante o Terciário e o Quaternário \cite{Sartori2009}, após as 
 últimas deposições de lavas vulcânicas e de sedimentos eólicos. Durante esse período, a esculturação da 
 paisagem foi determinada pelas alternações entre climas úmidos, semiáridos e áridos \cite{Sartori2009}. 
-Atualmente, o clima subtropical úmido favorece a instalação e permanência de uma vegetação mais eficiente na 
+Atualmente, o clima subtropical úmido favorece a instalação e permanência de vegetação mais eficiente na 
 redução do processo de dissecação da paisagem \cite{Sartori2009, NascimentoEtAl2010}. Isso permite que as 
 superfícies geomórficas atinjam maior estabilidade e maturidade, embora o uso agrícola das terras tenha 
-acelerado os processos erosivos na área.
+acelerado, pontualmente, os processos erosivos na área devido à limitada adoção de práticas conservacionistas 
+(\autoref{sec:chap03-landuse}).
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/dem90}
-%   \caption{Modelo digital de elevação da AEPQ-SM com resolução espacial de 90~m (SRTM DEM versão 4) 
-% \citep{JarvisEtAl2008}.}
-%   \label{fig:dem90}
-% \end{figure}
-
-As unidades morfoestruturais que abrangem a área são o Planalto e o Rebordo do Planalto da Bacia do Paraná 
-\cite{NascimentoEtAl2010}. O Planalto é marcado por relevo suave-ondulado a ondulado, com formas denudacionais 
-de superfícies planas com topos convexos (fluxo hídrico divergente). Nesses locais, as vertentes assumem a 
-forma convexa levemente ondulada \cite{NascimentoEtAl2010}, muitas vezes encaixadas em falhas e/ou fraturas. 
-Já o Rebordo do Planalto é caracterizado pela ampla variação altimétrica, declividade acentuada e escarpas 
-abruptas, apresentando formas denudacionais com topos convexos (fluxo hídrico divergente), aguçados e em 
-formas de escarpas. Nesses locais, as vertentes assumem forma retilínea com grande desnível 
-\cite{NascimentoEtAl2010}, muitas vezes interrompidas por degraus ou patamares, na maioria das vezes 
-encaixadas 
-em falhas e/ou fraturas. Esses patamares são resultado da ação diferencial dos processos denudacionais sobre a 
-paisagem, geralmente condicionados pela resistência do material de origem, seja ela química/mineralógica 
-(rochas vulcânicas básicas vs. ácidas), física/granulométrica (rochas vulcânicas versus sedimentares), ou 
-estrutural (padrão de diaclasamento vertical vs. horizontal das rochas vulcânicas) \cite{Holtz2003, 
-Pedron2007, 
-StreckEtAl2008}. Entretanto, em algumas situações, os patamares são formados por depósitos coluviais -- mesmo 
-nas partes altas do Rebordo do Planalto -- resultantes de movimentos de massa causados por eventos 
-pluviométricos de elevada intensidade e/ou duração \cite{PinheiroEtAl2004, PaisaniEtAl2010}. Nesses casos, os 
-patamares possuem menor dimensão e maior declividade. Em outras situações, os patamares coluviais, sobretudo 
-aqueles originados dos arenitos da Formação Botucatu, formam 
+A bacia do DNOS é abrangida pela unidade morfoestrutural do Rebordo do Planalto da Bacia do Paraná 
+\cite{NascimentoEtAl2010}. O Rebordo do Planalto é caracterizado pela ampla variação altimétrica, declividade 
+acentuada e escarpas abruptas, apresentando formas denudacionais com topos convexos (fluxo hídrico 
+divergente), aguçados e em formas de escarpas. Nesses locais, as vertentes assumem forma retilínea com grande 
+desnível \cite{NascimentoEtAl2010}, muitas vezes interrompidas por degraus ou patamares, na maioria das vezes 
+encaixadas em falhas e/ou fraturas. Esses patamares são resultado da ação diferencial dos processos 
+denudacionais sobre a paisagem, geralmente condicionados pela resistência do material de origem, seja ela 
+química/mineralógica (rochas vulcânicas básicas vs. ácidas), física/granulométrica (rochas vulcânicas versus 
+sedimentares), ou estrutural (padrão de diaclasamento vertical vs. horizontal das rochas vulcânicas) 
+\cite{Holtz2003, Pedron2007, StreckEtAl2008}. Entretanto, em algumas situações, os patamares são formados por 
+depósitos coluviais -- mesmo nas partes altas do Rebordo do Planalto -- resultantes de movimentos de massa 
+causados por eventos pluviométricos de elevada intensidade e/ou duração \cite{PinheiroEtAl2004, 
+PaisaniEtAl2010}. Nesses casos, os patamares possuem menor dimensão e maior declividade. Em outras situações, 
+os patamares coluviais, sobretudo aqueles originados dos arenitos da Formação Botucatu, formam 
 vertentes alongadas e com menor inclinação, que chegam até a margem dos cursos de água.
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/dem10}
-%   \caption{Modelo digital de elevação da AEPQ-SM com interpolado de curvas de nível com 10~m de 
-% equidistância 
-% \citep{DSG1980, DSG1992, DSG1992a}.}
-%   \label{fig:dem10}
-% \end{figure}
-
-Apesar da área de estudo ser abrangida pelas unidades morfoestruturais do Planalto e do Rebordo do Planalto
-da Bacia do Paraná, as características geomorfológicas das porções mais baixas da paisagem são similares 
-àquelas encontradas na Depressão Periférica. Essas áreas são marcadas pelo acúmulo de sedimentos provenientes 
-do Planalto e do Rebordo, formando planícies aluviais que se intercalam entre as coxilhas (denominação 
-regional de colinas). Essas áreas são caracterizadas pela presença de formas agradacionais de planície fluvial 
-e formas denudacionais de topos convexos e de superfícies planas. As últimas correspondem às coxilhas de 
-algumas dezenas de metros de altitude, geralmente formadas sobre o substrato da Formação Caturrita 
-\cite{GasparettoEtAl1988}, e assentadas na base do Rebordo do Planalto. Essas coxilhas constituem 
-divisores de água de pequena amplitude que auxiliam na subdivisão da área em pequenas sub-bacias 
+Como a bacia do DNOS se encontra em uma região de transição morfoestrutural, as características 
+geomorfológicas das porções mais altas e mais baixas da paisagem são similares àquelas encontradas nas 
+unidades morfoestruturais adjacentes, respectivamente, o Planalto e a Depressão Periférica. O Planalto é 
+marcado pelo relevo suave-ondulado a ondulado, com formas denudacionais de superfícies planas com topos 
+convexos (fluxo hídrico divergente). Nesses locais, as vertentes assumem forma convexa levemente ondulada, 
+muitas vezes encaixadas em falhas e/ou fraturas \cite{NascimentoEtAl2010}. Já a Depressão Periférica é marcada 
+pelo acúmulo de sedimentos provenientes do Planalto e do Rebordo do Planalto, formando planícies aluviais que 
+se intercalam entre as coxilhas (denominação regional de colinas). Ali predominam as formas agradacionais de 
+planície fluvial e formas denudacionais com topos convexos e superfícies planas. As últimas correspondem às 
+coxilhas de algumas dezenas de metros de altitude, geralmente formadas sobre o substrato da Formação Caturrita 
+e assentadas na base do Rebordo do Planalto \cite{GasparettoEtAl1988}. Essas coxilhas constituem divisores de 
+água de pequena amplitude comumente usados na subdivisão da bacia do DNOS em pequenas sub-bacias 
 \cite{Marins2004, Sartori2009}. Nesses locais as vertentes costumam ser alongadas e assumem a forma 
-predominantemente côncava devido aos processos de deposição sedimentar e erosão fluvial, apesar dos mesmos 
-serem muito fracos sob a atual condição climática 
-\cite{NascimentoEtAl2010, WerlangEtAl2010}.
+predominantemente côncava devido aos processos de deposição sedimentar e erosão fluvial, muito fracos sob a 
+atual condição climática \cite{NascimentoEtAl2010, WerlangEtAl2010}.
 
-A grande heterogeneidade geomorfológica da área de estudo se traduz em uma grande heterogeneidade textural 
+A grande heterogeneidade geomorfológica da bacia do DNOS se traduz em uma grande heterogeneidade textural 
 do relevo, ou rugosidade, resultante da ação climática ao longo do tempo geológico \cite{NascimentoEtAl2010}. 
-Entretanto, em menor escala, a ação antrópica também atua sobre a configuração geomorfológica da área. O 
-principal efeito se deu pela erosão da camada superficial do solo, cultivado intensivamente sem o uso de 
-práticas conservacionistas ao longo de inúmeras décadas \cite{Menezes2008, Sturmer2008, Miguel2010, 
-SamuelRosaEtAl2011a}. Além disso, a abertura de caminhos para acesso às áreas de produção nos patamares do 
-Rebordo do Planalto e nos topos de morros proporcionou a formação de canais de concentração e escoamento dos 
-fluxos hídricos, levando à formação inicial de voçorocas. Obras de maior expressividade, como ferrovias, ruas 
-e rodovias pavimentadas, conjuntos habitacionais e construções isoladas, as quais envolvem operações de 
-terraplanagem e aterramento, também resultaram em modificações localizadas na geomorfologia da área. Por fim, 
-a construção do reservatório possibilitou a formação de uma área de agradação da paisagem bastante estável em 
-seu entorno, uma vez que o sedimento removido do Planalto e do Rebordo do Planalto não são mais transportados 
-a jusante.
+Entretanto, em menor escala, a ação antrópica também atuou sobre a configuração geomorfológica da área 
+(\autoref{sec:chap03-landuse}). O principal efeito se deu pela erosão da camada superficial do solo, cultivado 
+intensivamente sem adoção de práticas conservacionistas ao longo de inúmeras décadas \cite{Menezes2008, 
+Sturmer2008, Miguel2010, SamuelRosaEtAl2011a}. Além disso, a abertura de caminhos para acesso às áreas de 
+produção nos patamares do Rebordo do Planalto e nos topos de morros proporcionou a formação de canais de 
+concentração e escoamento dos fluxos hídricos superficiais, levando à formação inicial de voçorocas. Obras de 
+maior expressividade, como ferrovias, ruas e rodovias pavimentadas, conjuntos habitacionais e construções 
+isoladas, as quais envolvem operações de terraplanagem e aterramento, também resultaram em modificações 
+localizadas na geomorfologia da área. Por fim, a construção do reservatório possibilitou a formação de uma 
+área de agradação da paisagem bastante estável em seu entorno, uma vez que o sedimento removido do Planalto e 
+do Rebordo do Planalto já não são mais transportados a jusante.
 
 \section{HIDROGRAFIA}
 \label{sec:chap03-hidrografia}
