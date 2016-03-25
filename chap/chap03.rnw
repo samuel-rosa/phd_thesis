@@ -371,50 +371,50 @@ do Rebordo do Planalto já não são mais transportados a jusante.
 \label{sec:chap03-hidrografia}
 
 A hidrografia da área é condicionada pelas condições geomorfológicas, geológicas, pedológicas e climáticas, ao 
-mesmo tempo em que exerce forte influência sobre a modelagem da paisagem \cite{NascimentoEtAl2010}. Como a área 
-é 
-abrangida pelas unidades morfoestruturais do Planalto e do Rebordo do Planalto da Bacia do Paraná, a drenagem 
-apresenta um padrão bem definido, geralmente retangular, determinado pelas falhas e/ou fraturas 
-\cite{Bortoluzzi1974, GasparettoEtAl1988, NascimentoEtAl2010}. A própria formação da bacia do DNOS se deve 
-a existência de falhas e/ou fraturas \cite{GasparettoEtAl1988}. A principal e maior delas localiza-se no eixo 
-central da bacia, onde atualmente está localizado o leito do rio Vacacaí-Mirim. Quanto aos tributários do rio 
-Vacacaí-Mirim, a maioria possui o leito assentado sobre outras falhas e/ou fraturas de menor dimensão 
-perpendiculares àquela do eixo central da bacia.
+mesmo tempo em que exerce forte influência sobre a modelagem da paisagem \cite{NascimentoEtAl2010}. Como a 
+bacia do DNOS é abrangida pela unidade morfoestrutural do Rebordo do Planalto da Bacia do Paraná 
+(\autoref{sec:chap03-geomorfologia}), a drenagem apresenta padrão bem definido, geralmente retangular, 
+determinado pelas falhas e/ou fraturas \cite{Bortoluzzi1974, GasparettoEtAl1988, NascimentoEtAl2010}. A 
+própria formação da bacia do DNOS se deve a existência de falhas e/ou fraturas \cite{GasparettoEtAl1988}. A 
+principal e maior delas localiza-se no eixo central da bacia, onde atualmente está localizado o leito do Rio 
+Vacacaí-Mirim. Quanto aos tributários do Rio Vacacaí-Mirim, a maioria possui leito assentado sobre outras 
+falhas e/ou fraturas de menor dimensão perpendiculares àquela do eixo central da bacia.
 
 Nas áreas mais baixas, cujas características geomorfológicas se assemelham à Depressão Periférica, a drenagem 
-apresenta configuração serpenteada, resultado dos processos de deposição sedimentar e erosão fluvial 
+apresenta configuração sinuosa, resultado dos processos de deposição sedimentar e erosão fluvial 
 \cite{PaivaEtAl2001, SutiliEtAl2009}. Como o relevo é plano a suave-ondulado, e as vertentes longas e 
 predominantemente côncavas, o lençol freático fica próximo da superfície do solo. A variação das condições 
 meteorológicas ao longo do ano fazem com que o lençol freático apresente flutuação significativa, mantendo o 
-conteúdo de água do solo elevado durante os meses mais frios (menor evapotranspiração) \cite{HeldweinEtAl2009}.
-Isso também favorece a ocorrência de inundações, sobretudo nas proximidades dos cursos de água e do 
-reservatório \cite{Goldani2006}.
+conteúdo de água do solo elevado durante os meses mais frios (menor evapotranspiração) 
+\cite{HeldweinEtAl2009}. Isso também favorece a ocorrência de inundações, sobretudo nas proximidades dos 
+cursos de água e do reservatório \cite{Goldani2006}.
 
-Muitos cursos de água localizados no Planalto, no Rebordo do Planalto e nas coxilhas assentadas em sua base, 
-são sazonais. Em geral, esses cursos de água estão em atividade apenas nos meses mais frios do ano, quando a 
-disponibilidade de água no ambiente é maior, ou durante os eventos de precipitação de forte intensidade, que 
-ocorrem nos meses de verão \cite{HeldweinEtAl2009, MouraBueno2012}. Os cursos de água do Rebordo do Planalto 
-costumam apresentar leito raso e pedregoso, muitas vezes assentado sobre rochas da Formação Serra Geral 
-\cite{SutiliEtAl2009}. Já os cursos de água localizados nos patamares e coxilhas costumam ser rasos, se 
-assentados sobre as rochas da Formação Caturrita, ou profundos, se assentados sobre as rochas da Formação 
-Botucatu ou depósitos coluvionares, formando voçorocas. Segundo relatos de alguns dos moradores mais antigos, 
-muitas nascentes e pequenos cursos de água já perderam totalmente sua atividade, sobretudo quando localizadas 
-no interior ou à jusante de áreas de uso antrópico.
+Muitos cursos de água localizados na áreas cujas características geomorfológicas se assemelham ao Planalto, 
+assim como no Rebordo do Planalto e nas coxilhas assentadas em sua base, são sazonais. Em geral, esses cursos 
+de água estão em atividade apenas nos meses mais frios do ano, quando a disponibilidade de água no ambiente é 
+maior, ou durante os eventos de precipitação de forte intensidade, que ocorrem nos meses de verão 
+\cite{HeldweinEtAl2009, MouraBueno2012}. Os cursos de água do Rebordo do Planalto costumam apresentar leito 
+raso e pedregoso, muitas vezes assentado sobre rochas da Formação Serra Geral \cite{SutiliEtAl2009}. Já os 
+cursos de água localizados nos patamares e coxilhas costumam ser rasos, se assentados sobre rochas da Formação 
+Caturrita, ou profundos, se assentados sobre rochas da Formação Botucatu ou depósitos coluviais, formando 
+voçorocas. Segundo relatos de alguns dos moradores mais antigos da bacia do DNOS, muitas nascentes e pequenos 
+cursos de água já perderam totalmente sua atividade, sobretudo quando localizadas no interior ou à jusante de 
+áreas de uso antrópico intensivo.
 
 Dado que a declividade e o desnível entre a parte mais baixa e a parte mais alta da área são acentuados, as 
 cheias costumam apresentar velocidade e vazão bastante grandes \cite{PaivaEtAl2001, SutiliEtAl2009}. Em média, 
-nos \SI{7}{\km} de extensão do rio Vacacaí-Mirim, da nascente até o reservatório, a declividade média é de 
+nos \SI{7}{\km} de extensão do Rio Vacacaí-Mirim, da nascente até o reservatório, a declividade média é de 
 \SI{0,03}{\m\per\m}. Isso representa um desnível de \SI{\pm210}{\m}, o que resulta em um tempo de concentração 
-da bacia estimado em \SI{3}{\hour} \cite{PaivaEtAl2001}. Essas características causam erosão severa nas 
+da bacia estimado de \SI{3}{\hour} \cite{PaivaEtAl2001}. Essas características causam erosão severa nas 
 margens dos cursos de água nas áreas mais baixas (depósitos aluviais), sobretudo nos raios externos das 
-curvas, onde a velocidade da água é maior \cite{SutiliEtAl2009}. Em alguns trechos, os cursos de água chegam a 
-ter sua largura duplicada em menos de uma década, resultando no aumento da sinuosidade e do nível de fundo 
-\cite{PaivaEtAl2001}. Esses eventos comprometem áreas de produção, bem como a estrutura de residências e vias 
-públicas localizadas nas margens dos cursos de água. Grande parte do material removido das margens dos cursos 
-de água é transportado para dentro do reservatório, que já perdeu mais de \SI{30}{\percent} de sua capacidade 
-inicial de armazenamento de água \cite{DillEtAl2004}.
+curvas, onde a velocidade da água é maior \cite{SutiliEtAl2009}. Em alguns trechos, os cursos de água chegaram 
+a ter sua largura duplicada em menos de uma década, resultando no aumento da sinuosidade e do nível de fundo 
+\cite{PaivaEtAl2001}. Esses eventos comprometem áreas de produção agrícola, bem como a estrutura de 
+residências e vias públicas localizadas nas margens dos cursos de água. Grande parte do material removido das 
+margens dos cursos de água é transportado para dentro do reservatório, que já perdeu mais de 
+um terço de sua capacidade inicial de armazenamento de água \cite{DillEtAl2004}.
 
-\section{USO DA TERRA  E VEGETAÇÃO}
+\section{USO DA TERRA E VEGETAÇÃO}
 \label{sec:chap03-landuse}
 
 A área de estudo já foi intensamente ocupada em tempos pretéritos. Isso é evidenciado pela grande quantidade, 
