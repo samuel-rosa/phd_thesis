@@ -417,74 +417,55 @@ um terço de sua capacidade inicial de armazenamento de água \cite{DillEtAl2004
 \section{USO DA TERRA E VEGETAÇÃO}
 \label{sec:chap03-landuse}
 
-A área de estudo já foi intensamente ocupada em tempos pretéritos. Isso é evidenciado pela grande quantidade, 
-extensão e boa distribuição da rede viária em toda a sua área. Além disso, a área é cortada por uma estrada 
-férrea e avizinha uma rodovia federal, ambas muito movimentadas. Entretanto, nas últimas décadas, muitos 
-caminhos internos das propriedades rurais foram desativados, fruto do abandono de áreas de produção, a maioria 
-delas localizada nos topos dos morros, patamares do Rebordo ou no fundo de vales, onde a manutenção dos 
-caminhos é muito onerosa, especialmente quando distantes da sede das propriedades. No passado, essas estradas 
-internas possibilitaram o trânsito de pessoas e o transporte da produção agrossilvopastoril, a qual era 
-comercializada às margens da estrada férrea e nas áreas urbanas do município. Atualmente, o tráfego está 
-concentrado nas estradas principais e secundárias, enquanto alguns poucos caminhos internos são utilizados 
-apenas na condução 
+A bacia do DNOS já foi intensamente ocupada em tempos pretéritos para a produção agrossilvopastoril. Isso é 
+evidenciado pela grande quantidade, extensão e boa distribuição da rede viária em toda a sua área. Além disso, 
+a área é cortada por uma estrada férrea e avizinha uma rodovia federal, ambas muito movimentadas. Entretanto, 
+nas últimas décadas, muitos caminhos internos das propriedades rurais foram desativados, fruto do abandono de 
+áreas de produção, a maioria delas localizada nos topos dos morros, patamares do Rebordo ou no fundo de vales, 
+onde a manutenção dos caminhos é muito onerosa, especialmente quando distantes da sede das propriedades 
+(\autoref{fig:chap05-land-use} e \autoref{fig:chap05-sat-image}). No passado, essas estradas internas 
+possibilitavam o trânsito de pessoas e o transporte da produção agrossilvopastoril, a qual era comercializada 
+às margens da estrada férrea e nas áreas urbanas do município. Atualmente, o tráfego está concentrado nas 
+estradas principais e secundárias, enquanto alguns poucos caminhos internos são utilizados apenas na condução 
 de rebanhos ou no acesso a pequenas áreas de produção agrícola. A maioria dos caminhos internos inativos está 
-localizada no interior de áreas de floresta natural regenerada, o que dificulta a sua identificação pelo uso 
-de imagens aéreas ou orbitais. Em alguns casos, esses caminhos são utilizados em atividades de turismo 
-ecológico, especialmente para caminhadas a pé, ou atividades esportivas com motocicletas (trilhas).
+localizada no interior de áreas de floresta natural regenerada, o que dificulta a sua identificação com 
+imagens aéreas ou orbitais. Em alguns casos, esses caminhos são utilizados em atividades de turismo, 
+especialmente para caminhadas a pé, ou atividades esportivas com motocicletas (trilhas).
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/land1980}
-%   \caption{Mapa do uso da terra da AEPQ-SM publicado na escala 1:25.000 \citep{DSG1980, DSG1992, 
-% DSG1992a}.\\Legenda de acordo com o guia para descrição do solo da FAO \citep{FAO2006}: S - Assentamentos 
-% humanos, PF - Silvicultura, H - Pecuária, FS - Floresta nativa.}
-%   \label{fig:land1980}
-% \end{figure}
+O abandono de muitas áreas de produção agrossilvopastoril possibilitou a regeneração da vegetação natural em 
+grande parte da bacia do DNOS. Atualmente, a área ocupada por florestas e vegetação secundária (capoeira) 
+representa \SI{\pm60}{\percent} da área total \cite{SamuelRosaEtAl2011a}. Isso mostra que, assim como toda a 
+região do Rebordo do Planalto da Bacia do Paraná, o uso da terra para fins agrossilvopastoris foi 
+desintensificado nas últimas décadas \cite{SEMA/UFSM2001, DillEtAl2004, Poelking2007, Miguel2010, 
+SamuelRosaEtAl2011a, Dullius2012, TenCatenEtAl2012}. As áreas de floresta são encontradas nos mais diversos 
+estádios de desenvolvimento, com os estratos intermediário e superior concentrando a maior parte dos 
+indivíduos. As florestas originais, e secundárias em estádio avançado de desenvolvimento, são encontradas, 
+predominantemente, em áreas de difícil acesso. Em geral, as áreas de floresta predominam nas regiões com maior 
+declividade e solo raso e pedregoso. Tais condições pedológicas são resultado das condições geológicas e 
+geomorfológicas e/ou da degradação causada pelo intenso uso da terra para produção agrossilvopastoril durante 
+inúmeras décadas \cite{SamuelRosaEtAl2011a}.
 
-O abandono de muitas áreas de produção possibilitou a regeneração da vegetação natural em grande parte da 
-área. Atualmente, a área ocupada por florestas e vegetação secundária (capoeira) representa 
-\SI{\pm60}{\percent} da área total \cite{SamuelRosaEtAl2011a}. Isso mostra que, assim como toda a região do 
-Rebordo do Planalto da Bacia do Paraná, o uso da terra foi desintensificado nas últimas décadas 
-\cite{SEMA/UFSM2001, DillEtAl2004, Poelking2007, Miguel2010, SamuelRosaEtAl2011a, Dullius2012, 
-TenCatenEtAl2012}. As áreas florestadas são encontradas nos mais diversos estádios de desenvolvimento, com os 
-estratos intermediário e superior concentrando a maior parte dos indivíduos. As florestas originais, e 
-secundárias em estágio avançado de desenvolvimento, são encontradas apenas em áreas de difícil acesso. Em 
-geral, as áreas florestadas predominam nas regiões de maior declividade, com solo raso e pedregoso. Tais 
-condições pedológicas são resultado, na maioria dos casos, das condições geológicas e geomorfológicas, mas 
-também podem derivar da degradação causada pelo intenso uso da terra durante inúmeras décadas 
-\cite{SamuelRosaEtAl2011a}. A ocorrência de fragmentos ao longo dos cursos de água, estradas e próximo de 
-edificações é comum. Nas formações mais jovens, é comum encontrar fragmentos de carvão e sinais de uso 
-agrícola 
-no passado. As áreas sob vegetação secundária (capoeira) também ocorrem em toda a bacia de captação, 
-predominantemente em locais de difícil acesso e acentuada declividade, geralmente interligados por caminhos 
-internos, indicando sua utilização agrícola no passado \cite{SamuelRosaEtAl2011a}. Sua composição florística 
-varia entre as áreas, predominando espécies de porte herbáceo e arbustivo. O solo dessas áreas costuma ser 
-menos pedregoso que nas áreas florestadas, mas apresentam profundidade semelhante \cite{SamuelRosaEtAl2011a}, 
-indicando que as atividades agrícolas foram encerradas antes do solo atingir seu nível máximo de degradação. 
-Entretanto, a reserva de nutrientes do solo, assim como a sua fertilidade física, foram esgotadas a tal ponto 
-que a vegetação secundária ainda não foi 
-capaz de produzir melhorias significativas quando comparado com as condições originais \cite{Menezes2008, 
+A ocorrência de fragmentos florestais ao longo das margens dos cursos de água, estradas e próximo de 
+edificações é comum. Nas formações mais jovens, é comum encontrar fragmentos de carvão e outros sinais do uso 
+agrossilvopastoril num passado recente. As áreas sob vegetação secundária (capoeira) também ocorrem em toda a 
+bacia do DNOS, predominantemente em locais de difícil acesso e acentuada declividade, geralmente interligados 
+por caminhos internos, indicando sua utilização agrossilvopastoril no passado \cite{SamuelRosaEtAl2011a}. Sua 
+composição florística varia entre as áreas, predominando espécies de porte herbáceo e arbustivo. O solo dessas 
+áreas costuma ser menos pedregoso que nas áreas florestadas, mas apresentam profundidade semelhante 
+\cite{SamuelRosaEtAl2011a}, possivelmente indicando que as atividades agrossilvopastoril foram encerradas 
+antes do solo atingir seu nível máximo de degradação. Entretanto, a reserva de nutrientes do solo, assim como 
+a sua fertilidade física, foram esgotadas a tal ponto que a vegetação secundária ainda não foi capaz de 
+produzir melhorias significativas quando comparado com as condições originais \cite{Menezes2008, 
 Zalamena2008}.
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/land2009}
-%   \caption{Mapa do uso da terra da AEPQ-SM publicado na escala 1:2.000 \citep{SamuelRosaEtAl2011a}.\\Legenda 
-% de acordo com o guia para descrição do solo da FAO \citep{FAO2006}: O - Outros usos (água), S - 
-% Assentamentos 
-% humanos, PF - Silvicultura, AA - Agricultura anual, H - Pecuária, SS - Vegetação secundária (capoeira), FS - 
-% Floresta nativa.}
-%   \label{fig:land2009}
-% \end{figure}
-
-Apesar do abandono de muitas áreas de produção agrícola nas últimas décadas, sobretudo aquelas com maior 
-dificuldade de acesso, os caminhos internos utilizados para o escoamento da produção, mesmo depois de 
+Apesar do abandono de muitas áreas de produção agrossilvopastoril nas últimas décadas, sobretudo aquelas com 
+maior dificuldade de acesso, os caminhos internos utilizados para o escoamento da produção, mesmo depois de 
 inativos, continuam associados ao processo de degradação do solo. Isso ocorre porque, na grande maioria dos 
 casos, todo o fluxo da água de escoamento superficial proveniente dos eventos de precipitação é concentrado 
 nesses caminhos internos, onde, geralmente, quantidade significativa de resíduos vegetais está depositada. 
 Esse resíduo vegetal, mais a fração mineral do solo carregada pela enxurrada, costuma chegar com facilidade 
-aos cursos de água. No caso dos caminhos internos ainda utilizados na condução de rebanhos, a produção de 
-sedimentos minerais tende a ser ainda maior, haja vista o impacto mecânico do pisoteio animal sobre a 
+aos cursos de água. No caso dos caminhos internos ainda utilizados na condução de rebanhos bovinos, a produção 
+de sedimentos minerais tende a ser ainda maior, haja vista o impacto mecânico do pisoteio animal sobre a 
 desagregação do solo. Além disso, muitas áreas florestadas e sob vegetação secundária ainda são utilizadas 
 para o pastoreio de bovinos e equinos \cite{SamuelRosaEtAl2011a}. Isso causa a degradação da camada 
 superficial do solo, sobretudo pela sua compactação, dificultando a infiltração da água dos eventos de 
@@ -493,70 +474,50 @@ regeneração natural é prejudicada, uma vez que plantas em estádio inicial de
 superficiais são destruídas \cite{ScheneiderEtAl1978, HackEtAl2005}. O resultado desse processo é a perda da 
 qualidade do solo e, consequentemente, da produtividade da floresta \cite{KonigEtAl2002}.
 
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/ndvi30}
-%   \caption{Mapa do índice de vegetação por diferença normalizada (Landsat~5~TM) da AEPQ-SM em dezembro de 
-% 2010.}
-%   \label{fig:ndvi30}
-% \end{figure}
-
-Dado que a área de estudo também possui áreas com relevo plano a suave-ondulado e solo profundo, 
+Dado que a bacia do DNOS também possui áreas com relevo plano a suave-ondulado e solo profundo, 
 \SI{\pm30}{\percent} de sua superfície ainda é utilizada com atividades agrossilvopastoris ao longo de todo o 
 ano, principalmente a pecuária bovina extensiva \cite{SamuelRosaEtAl2011a}. As áreas de produção animal 
-extensiva 
-predominam nas porções norte, sul e centro-oeste, ao longo dos cursos de água e estradas. O solo é mais 
-profundo e menos pedregoso do que em áreas de floresta natural e vegetação secundária. Além disso, são 
+extensiva predominam nas porções norte, sul e centro-oeste, ao longo dos cursos de água e estradas. O solo é 
+mais profundo e menos pedregoso do que em áreas de floresta natural e vegetação secundária. Além disso, são 
 encontrados fragmentos de carvão e formações de microrrelevo devido ao uso de implementos agrícolas para o 
-revolvimento do solo na maior parte dos locais, evidenciando seu uso agrícola no passado. Essas áreas podem 
-ser divididas entre aquelas de campo sujo (pastagens naturais mal manejadas, com predomínio de vegetação de 
-porte herbáceo-arbustivo) e campo limpo (pastagens naturais e perenes bem manejadas) 
+revolvimento do solo na maior parte desses locais, evidenciando seu uso agrícola num passado recente. Essas 
+áreas podem ser divididas entre aquelas de campo sujo (pastagens naturais mal manejadas, com predomínio de 
+vegetação de porte herbáceo-arbustivo) e campo limpo (pastagens naturais e perenes bem manejadas) 
 \cite{SamuelRosaEtAl2011a}. Em geral, as áreas de campo sujo estão próximas a áreas de vegetação secundária 
 (capoeira), com relevo mais declivoso e solo mais pedregoso e raso do que aquelas de campo limpo. Assim como 
-nas áreas florestadas e sob vegetação secundária, 
-a dinâmica de uso dessas áreas ao longo do tempo é bastante complexa, dificultando o estabelecimento de 
-relações diretas com a maior parte das características do solo. Entretanto, sob o ponto de vista da reserva de 
-nutrientes e matéria orgânica, o solo pode ser considerado pobre, uma vez que a exploração pecuária é 
-totalmente extrativista e extensiva.
-
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[height=7cm]{figures/ndvi5}
-%   \caption{Mapa do índice de vegetação por diferença normalizada (RapidEye) da AEPQ-SM em novembro de 2012.}
-%   \label{fig:ndvi5}
-% \end{figure}
+nas áreas de floresta e sob vegetação secundária, a dinâmica de uso dessas áreas ao longo do tempo é 
+bastante complexa, dificultando o estabelecimento de relações diretas com a maior parte das características do 
+solo. Entretanto, sob o ponto de vista da reserva de nutrientes e matéria orgânica, o solo pode ser 
+considerado pobre, uma vez que a exploração pecuária é totalmente extrativista e extensiva.
 
 As atividades agrossilvopastoris que ocupam menor extensão territorial são a agricultura e a silvicultura. As 
-áreas de lavoura estão dispersas em toda a área, geralmente localizadas em terrenos de pequena declividade e 
-com solo medianamente profundo. Entretanto, algumas áreas de produção ocorrem em declives superiores a 
-\SI{50}{\percent} e com solo raso e pedregoso \cite{SamuelRosaEtAl2011a}. Em qualquer das situações, as 
-condições de degradação do solo costumam ser bastante avançadas, exceto por algumas áreas de produção 
-olerícola. Assim como as áreas de agricultura, as florestas plantadas (\textit{Eucalyptus spp.}) são 
-implantadas em áreas de menor declividade e com solo mais profundo, geralmente onde o acesso com máquinas é 
-melhor, sobretudo pela necessidade de manejo e escoamento da produção. A área ocupada por essa atividade 
-possui 
-tendência de crescimento, haja vista os novos plantios existentes e o relato de alguns moradores 
-\cite{SamuelRosaEtAl2011a}. Em geral, os novos plantios são implantados em áreas de produção agropecuária, 
-seja 
-pelo elevado nível de degradação do solo já atingido, seja pela redução da força de trabalho das famílias 
-devido ao êxodo rural, ou pela maior lucratividade dessa atividade.
+áreas de lavoura estão dispersas em toda a área, geralmente localizadas em terrenos de menor declividade e 
+solo medianamente profundo. Entretanto, algumas áreas de produção agrícola possuem declives superiores a 
+\SI{50}{\percent} e solo raso e pedregoso \cite{SamuelRosaEtAl2011a}. Em qualquer das situações, as condições 
+de degradação do solo costumam ser bastante avançadas devido à ausência de práticas conservacionistas, exceto 
+por algumas áreas de produção olerícola. Assim como as áreas de agricultura, as florestas plantadas 
+(\textit{Eucalyptus spp.}) são implantadas em áreas com menor declividade e solo mais profundo, geralmente 
+onde o acesso com máquinas é melhor, sobretudo pela necessidade de manejo e escoamento da produção. A área 
+ocupada por essa atividade possui tendência de crescimento, haja vista os novos plantios existentes e o relato 
+de alguns moradores \cite{SamuelRosaEtAl2011a}. Em geral, os novos plantios são implantados em áreas de 
+produção agropecuária, seja pelo elevado nível de degradação do solo já atingido, seja pela redução da força 
+de trabalho das famílias devido ao êxodo rural, ou pela maior lucratividade dessa atividade.
 
-Por fim, as obras de engenharia e assentamentos urbanos são aquelas que ocupam a menor parte da área de 
-estudo. No que diz respeito à malha viária, a maior concentração ocorre na porção sul, junto ao maior 
-assentamento urbano, localizado no entorno do reservatório. Entretanto, diversas construções são encontradas 
-ao longo das estradas que cortam a área, muitas das quais são pertencentes a moradores do centro da cidade de 
-Santa Maria e são utilizadas apenas como sítios de final de semana. O número de sítios de final de semana 
-aumentou significativamente ao longo da última década \cite{Goldani2006}, muitos dos quais construídos em 
-locais inapropriados, como margens dos corpos de água e áreas de forte declividade. Esse processo de 
-urbanização desordenada, que exigiu a realização de obras de corte e aterramento dos terrenos, é um importante 
+Por fim, as obras de engenharia e assentamentos urbanos são aquelas que ocupam a menor parte da bacia do DNOS. 
+No que diz respeito à malha viária, a maior concentração ocorre na porção sul, junto ao maior assentamento 
+urbano, localizado no entorno do reservatório. Entretanto, diversas construções são encontradas ao longo das 
+estradas que cortam a área, muitas das quais são pertencentes a moradores do centro da cidade de Santa Maria e 
+são utilizadas apenas como sítios de final de semana. O número de sítios de final de semana aumentou 
+significativamente nas últimas décadas \cite{Goldani2006}, muitos dos quais construídos em locais 
+inapropriados, como margens dos corpos de água e áreas com forte declividade. Esse processo de urbanização 
+desordenada, que exigiu a realização de obras de corte e aterramento dos terrenos, é um importante 
 contribuinte da carga de sedimentos recebida pelo reservatório anualmente \cite{PaivaEtAl2001, DillEtAl2004, 
-MiguelEtAl2014}. Soma-se a isso os resíduos domésticos e cloacais despejados nos cursos de água devido à falta 
-de coleta e tratamento \cite{Goldani2006}. Quanto às demais obras de engenharia, destacam-se os reservatórios 
-de água, a maioria deles de pequena extensão, utilizados para a dessedentação animal. Como os cursos de água 
-de maior volume estão localizados na porção sul da área, a maior parte dos reservatórios de água está na 
-porção norte \cite{SamuelRosaEtAl2011a}. Além disso, a menor permeabilidade do solo e do substrato rochoso, 
-bem 
-como da condição topográfica, favorecem essa característica.
+MiguelEtAl2014}. Soma-se a isso os resíduos domésticos e cloacais historicamente despejados nos cursos de água 
+devido à falta de coleta e tratamento \cite{Goldani2006}. Quanto às demais obras de engenharia, destacam-se os 
+reservatórios de água, a maioria deles de pequena extensão, utilizados para a dessedentação animal. Como os 
+cursos de água de maior volume estão localizados na porção sul da área, a maior parte dos reservatórios de 
+água está na porção norte \cite{SamuelRosaEtAl2011a}. Além disso, a menor permeabilidade do solo e do substrato 
+rochoso, bem como da condição topográfica, favorecem essa característica.
 
 \section{PEDOLOGIA}
 
