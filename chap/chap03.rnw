@@ -418,9 +418,9 @@ um terço de sua capacidade inicial de armazenamento de água \cite{DillEtAl2004
 \label{sec:chap03-landuse}
 
 A bacia do DNOS foi intensamente ocupada em tempos pretéritos para produção agrossilvopastoril de pequeno 
-porte (agricultura familiar) usando sistemas de cultivo convencional (aração, queimada). Isso é evidenciado, 
-primeiramente, pela grande quantidade, extensão e boa distribuição da rede viária em toda a sua área. Além 
-disso, a área é cortada por uma estrada férrea e avizinha uma rodovia federal, ambas muito movimentadas. 
+porte (agricultura familiar) usando sistemas de cultivo convencional com aração periódica e queimada. A grande 
+quantidade, extensão e boa distribuição da rede viária em toda a área é uma forte evidência dessa ocupação. A 
+área também é cortada por uma estrada férrea e avizinha uma rodovia federal, ambas muito movimentadas. 
 Entretanto, nas últimas décadas, muitos caminhos internos das propriedades rurais foram desativados, fruto do 
 abandono de muitas áreas de produção agrossilvopastoril, a maioria delas localizada nos topos dos morros, 
 patamares do Rebordo ou no fundo de vales, onde a manutenção dos caminhos é muito onerosa, especialmente 
@@ -527,33 +527,105 @@ O solo da bacia do DNOS possui características com forte dependência do materi
 descrito anteriormente, é um importante condicionante da geomorfologia e da hidrografia 
 \cite{NascimentoEtAl2010}. Nas superfícies geomórficas mais estáveis, como no topo do Planalto (rochas 
 vulcânicas), nos terraços do Rebordo (rochas vulcânicas e sedimentares) e nas coxilhas de relevo 
-suave-ondulado a ondulado (rochas sedimentares), as condições ambientais proporcionaram maior desenvolvimento 
-do solo em profundidade \cite{Moser1990}. Já nas áreas de relevo mais acidentado do Rebordo, onde acredita-se 
-que a taxa de formação do solo seja semelhante à taxa de remoção natural, as condições ambientais foram pouco 
-favoráveis ao desenvolvimento do solo em profundidade \cite{Moser1990, DalmolinEtAl2006a, Sturmer2008, 
-SamuelRosaEtAl2011a}. Além da condição geomorfológica, a resistência da rocha ao intemperismo também deve ter 
-sido um importante condicionante do desenvolvimento do solo em profundidade nesses locais \cite{Pedron2007}. 
-Já nas planícies aluviais, as características atuais do solo foram fortemente influenciadas pelo hidromorfismo 
-e deposição sedimentar, resultando em solo de maior profundidade \cite{Moser1990, Miguel2010}. A forte 
-influência do material de origem também aparece na textura do solo. Enquanto os arenitos conferem textura 
-arenosa ao solo, sobretudo aqueles da Formação Botucatu, as rochas vulcânicas conferem textura média ao solo, 
-sobretudo os basaltos-andesitos toleíticos (\autoref{sec:chap05-geo-maps}).
+suave-ondulado a ondulado (rochas sedimentares), as condições ambientais são mais favoráveis ao 
+desenvolvimento do solo em profundidade \cite{Moser1990}. O contrário ocorre nas áreas de relevo mais 
+acidentado do Rebordo, onde acredita-se que a taxa de formação do solo seja semelhante à taxa de remoção 
+natural \cite{Moser1990, DalmolinEtAl2006a, Sturmer2008, SamuelRosaEtAl2011a}. Além da condição 
+geomorfológica, a resistência da rocha ao intemperismo também condiciona o desenvolvimento do solo em 
+profundidade nesses locais \cite{Pedron2007}. Já nas planícies aluviais, as características do solo foram 
+fortemente influenciadas pelo hidromorfismo e deposição sedimentar, geralmente resultando em solo de coloração 
+acinzentada e maior profundidade do que nas área declivosas Rebordo \cite{Moser1990, Miguel2010}.
 
-Como a bacia do DNOS possui a maior parte de sua superfície em condições de forte declividade, e foi 
-intensamente ocupada em tempos pretéritos para produção agrossilvopastoril (\autoref{sec:chap03-landuse}), o 
-solo é, predominantemente, pouco profundo. Nessas áreas o solo costuma apresentar profundidade inferior à 
-\SI{50}{\cm} até o contato lítico, sendo comum a ocorrência de pedregosidade e rochosidade abundantes 
-\cite{Miguel2010}. Assim, predominam as classes taxonômicas Neossolo Litólico Distro-Úmbrico típico, 
-Cambissolo Háplico Ta Eutrófico típico, Neossolo Litólico Eutro-Úmbrico típico e Neossolo Regolítico 
-Distro-Úmbrico típico (\autoref{sec:chap05-soil-maps}). Em muitas áreas de maior estabilidade (topos de 
-morros, patamares do Rebordo do Planalto e coxilhas), onde as condições para o desenvolvimento pedogenético 
-devem ter sido mais favoráveis \cite{Moser1990}, o solo também apresenta características que poderiam indicar 
-seu fraco desenvolvimento \cite{MouraBueno2012}. Entretanto, nessas áreas, o solo sofreu severa degradação ao 
-longo das inúmeras décadas de cultivo intensivo sem uso de práticas conservacionistas, fazendo com que parte 
-significativa de sua camada superficial fosse perdida \cite{SamuelRosaEtAl2011a}. Nos patamares constituídos 
-inicialmente de colúvios sedimentares (arenito Botucatu) e vulcânicos (fragmentos de tamanhos variáveis), 
-atualmente, devido à forte erosão a que foi submetido, o solo apresenta superfície recoberta por fragmentos 
-rochosos que limitam seu uso para atividades agrossilvopastoris \cite{MouraBueno2012}.
+Como a bacia do DNOS possui a maior parte de sua área em condições de declividade moderada à forte, e foi 
+intensamente ocupada em tempos pretéritos para produção agrossilvopastoril com aração e queimada periódicas 
+(\autoref{sec:chap03-landuse}), o solo é, predominantemente, pouco profundo. Nas áreas de declividade moderada 
+à forte o solo costuma apresentar profundidade inferior à \SI{50}{\cm} até o contato lítico, sendo comum a 
+ocorrência de pedregosidade e rochosidade abundantes \cite{Miguel2010}. Assim, predominam as classes 
+taxonômicas Neossolo Litólico Distro-Úmbrico típico, Cambissolo Háplico Ta Eutrófico típico, Neossolo Litólico 
+Eutro-Úmbrico típico e Neossolo Regolítico Distro-Úmbrico típico (\autoref{sec:chap05-soil-maps}). O efeito do 
+uso inapropriado do solo para produção agrossilvopastoril aparece mesmo em algumas áreas de maior estabilidade
+(topos de morros, patamares do Rebordo do Planalto e coxilhas) onde as condições para o desenvolvimento 
+pedogenético são mais favoráveis \cite{Moser1990, MouraBueno2012}. Por exemplo, alguns patamares do Rebordo, 
+inicialmente constituídos de colúvios sedimentares (arenito Botucatu) e vulcânicos (fragmentos de tamanhos 
+variáveis), apresentam solo com superfície recoberta por fragmentos rochosos, fruto da forte erosão a que foi 
+submetido, limitando a continuação de seu uso para atividades agrossilvopastoris \cite{MouraBueno2012}.
+
+Existe consenso de que a pequena profundidade do solo na maior parte da bacia do DNOS seja devida ao material 
+de origem, às condições geomorfológicas e hidrológicas, bem como aos sistemas de cultivo do solo empregados ao 
+longo de inúmeras décadas. Contudo, a diversidade de fatores e a escassez de estudos torna impossível isolar a 
+contribuição individual de cada fator. Por exemplo, não existe estimativa quantitativa do volume total de solo 
+perdido devido à erosão em áreas de produção agrossilvopastoril. Entretanto, acredita-se que horizontes 
+pedogenéticos inteiros tenham sido removidos, dando origem ao processo de retrocesso pedogenético do solo
+\cite{SamuelRosaEtAl2011a}. Esse processo reflete a involução da classificação taxonômica do solo dentro de um 
+determinado sistema taxonômico. A comum ocorrência do táxon Neossolo Litólico com solum de pouco menos de 
+\SI{50}{\cm} em inúmeras áreas de produção agrícola é usada para corroborar essa hipótese. Isso porque o valor 
+de \SI{50}{\cm} para o solum é aquele usado para distinguir os taxa Neossolo Litólico e Neossolo Regolítico no 
+Sistema Brasileiro de Classificação do Solo \cite{SantosEtAl2013a}. A mesma hipótese foi levantada em outras 
+regiões de topografia complexa para explicar a identificação dos táxa Cambissolo e Luvissolo onde antes 
+observava-se o táxon Chernossolo \cite{StreckEtAl2008}. Essa involução da classificação taxonômica seria 
+resultado da remoção do horizonte pedogenético A chernozêmico devido à erosão acelerada pelo uso agrícola 
+extrativista e intenso praticado por várias décadas. Em resumo, nas áreas onde a taxa de formação do solo é 
+semelhante à taxa de erosão natural, o uso agrossilvopastoril da terra sem adoção de práticas 
+conservacionistas invariavelmente resultaria na degradação do solo e consequente retrocesso pedogenético 
+porque a soma das taxas de erosão natural e erosão induzida seria maior do que a taxa de formação do solo.
+
+As áreas com maior potencial de desenvolvimento pedogenético em profundidade possuem menor expressão 
+territorial. Elas correspondem à paisagem menos declivosa do Planalto (rochas vulcânicas), algumas coxilhas 
+(rochas sedimentares) e depósitos aluviais \cite{Miguel2010}. Em áreas de material de origem vulcânica, 
+sobretudo basaltos-andesitos toleíticos, identifica-se o táxon Argissolo Vermelho Alítico típico, que 
+caracteriza solo com horizonte superficial de textura arenosa a média, sobrejacente a um horizonte 
+subsuperficial de textura média a argilosa \cite{Miguel2010}. Nas áreas do Planalto em que ocorrem 
+riólitos-riodacitos granofíricos, o solo costuma apresentar menor profundidade, sendo predominantemente 
+classificado como Neossolo Litólico e Cambissolo Háplico. Em pequenas manchas, o solo é classificado como 
+Argissolo Vermelho-Amarelo. O menor desenvolvimento do solo em profundidade em área de riólitos-riodacitos 
+granofíricos deve-se, em parte, à maior resistência dessas rochas ao intemperismo, uma vez que possui maior 
+teor de sílica, sobretudo na forma de grandes de cristais de quartzo cristalizados a baixa temperatura 
+(\SI{<600}{\celsius}) \cite{Pedron2007}. Contudo, a pequena profundidade do solo também resulta da degradação 
+causada pelo longo uso agrossilvopastoril sem adoção de práticas conservacionistas. Até o momento é impossível 
+isolar a contribuição desses dois fatores de formação sobre as características do solo.
+
+Em áreas de material de origem sedimentar (Formação Caturrita), o solo costuma ser classificado como 
+Argissolo Bruno-Acinzentado Alítico abrúptico. Trata-se de solo com horizonte superficial de textura arenosa 
+que transiciona de maneira abrupta para um horizonte subsuperficial de textura argilosa \cite{Miguel2010}. 
+Essa descontinuidade textural geralmente é atribuída a processos pedogenéticos, sobretudo a perda (erosão 
+lateral seletiva) e translocação (argiluviação) das partículas mais finas. Contudo, devido à complexidade 
+geológica e geomorfológica da área, outros fatores podem ter contribuído. O primeiro deles estaria relacionado 
+às características do próprio material de origem que, por ter sido formado em ambiente fluvial durante um 
+período de mudança climática no Triássico, apresenta camadas deposicionais com granulometria diferenciada 
+\cite{PieriniEtAl2002}. Assim, a presença de camadas de siltitos e folhelhos poderia ter contribuído para a 
+formação da descontinuidade textural. Outro fator seria uma possível contribuição dos arenitos da Formação 
+Botucatu e \emph{intertrap} na Formação Serra Geral. Dado que esse material está localizado em posições 
+superiores na paisagem e são bastante suscetíveis à erosão, o mesmo poderia ter contribuído para a formação do 
+horizonte superficial arenoso do solo. Em ambos os casos, a descontinuidade textural seria atribuída à 
+ocorrência de descontinuidade litológica, com a diferença de que no primeiro caso as litologias pertenceriam à 
+mesma formação geológica.
+
+Nas áreas deprimidas da paisagem do Planalto, formando pequenas bacias de acumulação, ou nas áreas planas ao 
+longo dos cursos de água da Depressão Periférica, o solo é classificado como Planossolo Háplico Alítico típico 
+\cite{Miguel2010}. Trata-se de solo com horizonte superficial de textura média sobre horizonte subsuperficial 
+de textura média a argilosa, podendo ou não apresentar horizonte intermediário eluvial. Ainda mais próximo dos 
+cursos de água, o solo é classificado como Neossolo Flúvico Tb Eutrófico fragmentário \cite{Miguel2010}. Como 
+o seu material de origem é diverso e possui arranjamento espacial discordante, a textura do solo é variável, 
+mas sempre arenosa ou média, nunca argilosa, mesmo quando presente em áreas do Planalto ou do Rebordo. Por 
+fim, com expressão territorial ainda menor, o solo é classificado como Neossolo Quartzarênico Órtico típico em 
+alguns patamares do Rebordo, sejam eles de origem estrutural ou da deposição de colúvios do arenito da 
+Formação Botucatu.
+
+Atualmente, o aumento da área ocupada por florestas devido ao abandono de diversas área de produção sugere que 
+a bacia do DNOS esteja adentrando um período de redução da degradação do solo, exceto nas áreas de expansão 
+urbana. Os processos erosivos já apresentam caráter mais pontual, onde a geomorfologia parece possuir papel 
+preponderante. Segundo estimativas, apenas uma pequena fração da área apresenta perdas de solo por erosão 
+laminar acima de valores toleráveis \cite{Miguel2010}. Algumas observações até mesmo indicam que essas 
+estimativas estão acima da perda real de solo por erosão laminar \cite{MouraBueno2012}.
+
+
+Espera-se que a redução da degradação do solo contribua, num futuro próximo, para a construção de um 
+entendimento mais acurado da relação entre o solo e os demais componentes ambientais, principalmente nas áreas 
+florestadas recentemente abandonadas.
+
+
+
+
 
 \begin{figure}[!ht]
 \centering
@@ -582,44 +654,14 @@ lattice::bwplot(
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
 @
 \includegraphics[width=0.60\textwidth]{fig/chap03-clay-land-parent}
-\caption[Argila no solo e sua relação com o uso da terra e o material de origem do solo.]{Distribuição do 
-conteúdo de argila (\si{\gram\per\kilo\gram}) na camada superficial do solo (\SI{\leq20}{\cm}) e sua relação 
-com o uso da terra (pecuária, agricultura, silvicultura, floresta e capoeira) e o tipo de rocha subjacente 
-(ígnea ou sedimentar) que possivelmente serviu como material de origem. Material de origem sedimentar confere 
-ao solo conteúdo de argila inferior do que material de origem ígnea.}
+\caption[Argila no solo e sua relação com o uso da terra e o material de origem do solo.]{
+Distribuição do conteúdo de argila (\si{\gram\per\kilo\gram}) na camada superficial do solo (\SI{\leq20}{\cm}) 
+e sua relação com o uso da terra e vegetação (pecuária, agricultura, silvicultura, floresta e capoeira) e o 
+tipo de material de origem (ígnea -- rocha ígnea, ou sedimentar -- rocha sedimentar ou sedimentos diversos).
+Solo desenvolvido a partir de material de origem sedimentar apresenta conteúdo de argila inferior à solo 
+desenvolvido a partir de material de origem ígnea. }
 \label{fig:chap03-clay-land-parent}
 \end{figure}
-
-As áreas com maior potencial de desenvolvimento pedogenético em profundidade possuem menor expressão 
-territorial. Elas correspondem à paisagem menos declivosa do Planalto (rochas vulcânicas), algumas coxilhas 
-(rochas sedimentares) e depósitos aluviais \cite{Miguel2010}. Em áreas de material de origem vulcânica, 
-sobretudo basaltos-andesitos toleíticos, encontra-se solo de classe taxonômica Argissolo Vermelho Alítico 
-típico. Trata-se de solo com horizonte superficial de textura arenosa a média, sobrejacente a um horizonte 
-subsuperficial de textura média a argilosa \cite{Miguel2010}. Nas áreas do Planalto em que ocorrem 
-riólitos-riodacitos granofíricos, o solo costuma apresentar menor profundidade, sendo predominantemente 
-classificado como Neossolo Litólico e Cambissolo Háplico. Em pequenas manchas, o solo é classificado como 
-Argissolo Vermelho-Amarelo. O menor desenvolvimento do solo em profundidade em área de riólitos-riodacitos 
-granofíricos deve-se, em parte, à maior resistência dessas rochas ao intemperismo, uma vez que possui maior 
-teor de sílica, sobretudo na forma de grandes de cristais de quartzo cristalizados a baixa temperatura 
-(\SI{<600}{\celsius}) \cite{Pedron2007}. Contudo, a pequena profundidade do solo também resulta da degradação 
-causada pelo longo uso agrossilvopastoril sem adoção de práticas conservacionistas. Até o momento é impossível 
-isolar a contribuição dos diferentes fatores de formação sobre as características do solo.
-
-Em áreas de material de origem sedimentar (Formação Caturrita), o solo costuma ser classificado como 
-Argissolo Bruno-Acinzentado Alítico abrúptico. Trata-se de solo com horizonte superficial de textura arenosa 
-que transiciona de maneira abrupta para um horizonte subsuperficial de textura argilosa \cite{Miguel2010}. 
-Essa descontinuidade textural geralmente é atribuída a processos pedogenéticos, sobretudo a perda (erosão 
-lateral seletiva) e translocação (argiluviação) das partículas mais finas. Contudo, devido à complexidade 
-geológica e geomorfológica da área, outros fatores podem ter contribuído. O primeiro deles estaria relacionado 
-às características do próprio material de origem que, por ter sido formado em ambiente fluvial durante um 
-período de mudança climática no Triássico, apresenta camadas deposicionais com granulometria diferenciada 
-\cite{PieriniEtAl2002}. Assim, a presença de camadas de siltitos e folhelhos poderia ter contribuído para a 
-formação da descontinuidade textural. Outro fator seria uma possível contribuição dos arenitos da Formação 
-Botucatu e \emph{intertrap} na Formação Serra Geral. Dado que esse material está localizado em posições 
-superiores na paisagem e são bastante suscetíveis à erosão, o mesmo poderia ter contribuído para a formação do 
-horizonte superficial arenoso do solo. Em ambos os casos, a descontinuidade textural seria atribuída à 
-ocorrência de descontinuidade litológica, com a diferença de que no primeiro caso as litologias pertenceriam à 
-mesma formação geológica.
 
 \begin{figure}[!ht]
 \centering
@@ -650,8 +692,9 @@ lattice::bwplot(
 \includegraphics[width=0.60\textwidth]{fig/chap03-orca-land-parent}
 \caption[Carbono orgânico no solo e sua relação com o uso da terra e o material de origem do 
 solo.]{Distribuição do conteúdo de carbono orgânico (\si{\gram\per\kilo\gram}) na camada superficial do solo 
-(\SI{\leq20}{\cm}) e sua relação com o uso da terra (pecuária, agricultura, silvicultura, floresta e capoeira) 
-e o tipo de rocha subjacente (ígnea ou sedimentar) que possivelmente serviu como material de origem. O 
+(\SI{\leq20}{\cm}) e sua relação com o uso da terra e vegetação (pecuária, agricultura, silvicultura, floresta 
+e capoeira) e o tipo de material de origem (ígnea -- rocha ígnea, ou sedimentar -- rocha sedimentar ou 
+sedimentos diversos). O 
 conteúdo de carbono é mais elevado em solo florestal, independente do tipo de rocha que deu origem ao solo. 
 Contudo, o conteúdo de carbono é notadamente maior quando o solo tem rocha ígnea como material originário. Da 
 mesma forma, considerados todos os tipos de uso da terra, o conteúdo de carbono no solo é sempre maior quando 
@@ -659,26 +702,7 @@ o solo é derivado de rocha ígnea.}
 \label{fig:chap03-orca-land-parent}
 \end{figure}
 
-Nas áreas deprimidas da paisagem do Planalto, formando pequenas bacias de acumulação, ou nas áreas planas ao 
-longo dos cursos de água da Depressão Periférica, o solo é classificado como Planossolo Háplico Alítico típico 
-\cite{Miguel2010}. Trata-se de solo com horizonte superficial de textura média sobre horizonte subsuperficial 
-de textura média a argilosa, podendo ou não apresentar horizonte intermediário eluvial. Ainda mais próximo dos 
-cursos de água, o solo é classificado como Neossolo Flúvico Tb Eutrófico fragmentário \cite{Miguel2010}. Como 
-o material de origem é diverso e possui arranjamento espacial discordante, a textura do solo é variável, mas 
-sempre arenosa ou média, nunca argilosa, mesmo quando presente em áreas do Planalto ou do Rebordo. Por fim, 
-com expressão territorial ainda menor, o solo é classificado como Neossolo Quartzarênico Órtico típico em 
-alguns patamares do Rebordo, sejam eles de origem estrutural ou da deposição de colúvios do arenito da 
-Formação Botucatu.
 
-Apesar das características do solo da bacia do DNOS apontarem para sua fragilidade, sobretudo sua 
-granulometria, a geomorfologia possui papel preponderante sobre o potencial de perda de solo por erosão 
-laminar \cite{Miguel2010}. Contudo, a maior parte das áreas de maior declividade estão atualmente ocupadas por 
-densa cobertura florestal \cite{SamuelRosaEtAl2011a}, reduzindo a fragilidade do solo. Estimativas indicam que 
-apenas uma pequena fração da área deve apresentar perdas de solo por erosão laminar acima de valores 
-toleráveis \cite{Miguel2010}. Algumas observações até mesmo indicam que essas estimativas estão acima da perda 
-real de solo por erosão laminar na bacia \cite{Branco1998, MouraBueno2012}. Isso permite sugerir que os 
-processos de degradação do solo na área de estudo são de pequena intensidade e bastante pontuais, 
-principalmente nas área de expansão urbana.
 
 \begin{figure}[!ht]
 \centering
@@ -709,30 +733,18 @@ lattice::bwplot(
 \includegraphics[width=0.60\textwidth]{fig/chap03-ecec-land-parent}
 \caption[Capacidade de troca de cátions efetiva no solo e sua relação com o uso da terra e o material de 
 origem do solo.]{Distribuição da capacidade de troca de cátions efetiva (\si{\milli\mole\per\kilo\gram}) na 
-camada superficial do solo (\SI{\leq20}{\cm}) e sua relação com o uso da terra (pecuária, agricultura, 
-silvicultura, floresta e capoeira) e o tipo de rocha subjacente (ígnea ou sedimentar) que possivelmente serviu 
-como material de origem.}
+camada superficial do solo (\SI{\leq20}{\cm}) e sua relação 
+com o uso da terra e vegetação (pecuária, agricultura, silvicultura, floresta e capoeira) e o tipo de material 
+de origem (ígnea -- rocha ígnea, ou sedimentar -- rocha sedimentar ou sedimentos diversos).}
 \label{fig:chap03-ecec-land-parent}
 \end{figure}
 
 
 
 
-\section{CONCLUSIONS}
-
-A área de estudos em modelagem espacial do solo da bacia do DNOS apresenta grande diversidade pedológica, 
-fruto da diversidade da geologia e geomorfologia, determinantes dos fluxos hidrológicos na paisagem, bem como 
-pelo intenso uso da terra com atividades agrossilvopastoris atuais e pretéritas. Em geral, o solo apresenta 
-elevada vulnerabilidade à degradação, com impacto direto sobre a população local e regional, cujo 
-abastecimento de água depende do reservatório do DNOS. Atualmente, a área parece adentrar um período de 
-redução 
-da alteração das características da paisagem, o que deverá evitar a degradação do solo, exceto nas áreas de 
-expansão urbana.
-
-Espera-se que a estabilização da paisagem contribua, num futuro próximo, para a construção de um entendimento 
-mais acurado da relação entre o solo e os demais componentes ambientais, principalmente nas áreas florestadas 
-recentemente abandonadas. Nesse sentido, o presente documento constitui apenas a primeira versão do modelo 
-conceitual de pedogênese da bacia do DNOS. Na medida em que o entendimento sobre a variação espaço-temporal do 
-solo na bacia do DNOS for aprimorado, novas versões do modelo conceitual de pedogênese serão construídas.
 
 
+A forte influência da geologia também aparece na textura do solo. Enquanto os arenitos 
+conferem textura arenosa ao solo, sobretudo aqueles da Formação Botucatu, as rochas vulcânicas conferem 
+textura 
+média ao solo, sobretudo os basaltos-andesitos toleíticos (\autoref{sec:chap05-geo-maps}).

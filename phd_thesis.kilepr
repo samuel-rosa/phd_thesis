@@ -267,10 +267,10 @@ order=1
 
 [item:chap/chap03.rnw]
 archive=true
-column=0
+column=52
 encoding=UTF-8
 highlight=LaTeX
-line=719
+line=640
 mode=LaTeX
 open=true
 order=1
@@ -1072,10 +1072,10 @@ JumpList=
 ViMarks=.,669,30,[,669,30,],669,30
 
 [view-settings,view=0,item:chap/chap03.rnw]
-CursorColumn=0
-CursorLine=719
+CursorColumn=52
+CursorLine=640
 JumpList=
-ViMarks=.,718,0,[,718,0,],-1,-1
+ViMarks=.,661,25,[,661,25,],661,25
 
 [view-settings,view=0,item:chap/chap03.tex]
 CursorColumn=11
