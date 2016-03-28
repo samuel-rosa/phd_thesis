@@ -267,12 +267,12 @@ order=1
 
 [item:chap/chap03.rnw]
 archive=true
-column=19
+column=12
 encoding=UTF-8
 highlight=LaTeX
-line=19
+line=691
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:chap/chap03.tex]
@@ -287,10 +287,10 @@ order=6
 
 [item:chap/chap04.rnw]
 archive=true
-column=64
+column=106
 encoding=UTF-8
 highlight=LaTeX
-line=142
+line=414
 mode=LaTeX
 open=false
 order=2
@@ -300,27 +300,27 @@ archive=true
 column=0
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=206
 mode=LaTeX
 open=false
 order=8
 
 [item:chap/chap05.rnw]
 archive=true
-column=7
+column=27
 encoding=UTF-8
 highlight=LaTeX
-line=215
+line=1022
 mode=LaTeX
 open=false
 order=-1
 
 [item:chap/chap05.tex]
 archive=true
-column=0
+column=23
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=574
 mode=LaTeX
 open=false
 order=5
@@ -337,10 +337,10 @@ order=7
 
 [item:chap/chap07.tex]
 archive=true
-column=0
+column=49
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=7
 mode=LaTeX
 open=false
 order=11
@@ -1030,9 +1030,9 @@ archive=true
 column=0
 encoding=UTF-8
 highlight=LaTeX
-line=149
+line=354
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [view-settings,view=0,item:UFRuralRJ.cls]
@@ -1072,10 +1072,10 @@ JumpList=
 ViMarks=.,669,30,[,669,30,],669,30
 
 [view-settings,view=0,item:chap/chap03.rnw]
-CursorColumn=19
-CursorLine=19
+CursorColumn=12
+CursorLine=691
 JumpList=
-ViMarks=.,38,10,[,38,10,],38,10
+ViMarks=.,156,81,[,156,81,],156,81
 
 [view-settings,view=0,item:chap/chap03.tex]
 CursorColumn=11
@@ -1084,26 +1084,26 @@ JumpList=
 ViMarks=.,5,0,[,2,0,],5,43
 
 [view-settings,view=0,item:chap/chap04.rnw]
-CursorColumn=64
-CursorLine=142
+CursorColumn=106
+CursorLine=414
 JumpList=
-ViMarks=.,2,1,[,2,1,],2,11
+ViMarks=.,414,103,[,414,103,],414,103
 
 [view-settings,view=0,item:chap/chap04.tex]
-CursorColumn=18
-CursorLine=121
+CursorColumn=0
+CursorLine=206
 JumpList=
-ViMarks=.,2,1,[,2,1,],2,11
+ViMarks=.,0,0,[,0,0,],-1,-1
 
 [view-settings,view=0,item:chap/chap05.rnw]
-CursorColumn=7
-CursorLine=215
+CursorColumn=27
+CursorLine=1022
 JumpList=
 ViMarks=.,1344,52,[,1344,52,],1344,52
 
 [view-settings,view=0,item:chap/chap05.tex]
-CursorColumn=20
-CursorLine=564
+CursorColumn=23
+CursorLine=574
 JumpList=
 ViMarks=.,915,34,[,915,34,],915,34
 
@@ -1187,6 +1187,6 @@ ViMarks=.,4,37,[,4,37,],4,37
 
 [view-settings,view=0,item:phd_thesis.tex]
 CursorColumn=0
-CursorLine=149
+CursorLine=354
 JumpList=
-ViMarks=.,350,19,[,350,19,],350,19
+ViMarks=.,146,0,[,146,0,],146,55

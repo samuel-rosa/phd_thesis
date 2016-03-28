@@ -1,8 +1,8 @@
 \artigotrue
 \chapter{THE SANTA MARIA DATASET. PART I -- SOIL DATA}
-\chapternote{Collaborated in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno 
+\chapternote{Collaborated in the preparation of this manuscript: Pablo Miguel (UFPel), Jean Michel Moura Bueno 
 (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), 
-Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and Ad 
+Gustavo de Mattos Vasques (Embrapa Solos), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and Ad 
 van Oostrum (ISRIC -- World Soil Information).}
 \shorttitle{Soil Data}
 \label{chap:chap04}
@@ -19,20 +19,20 @@ analysis}
   
 \begin{chapterabstract}{english}{\enkeys}
 The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between \num{2008} and 
-\num{2013} in the catchment of the DNOS/CORSAN (\textit{Departamento Nacional de Obras de Saneamento}/
-\textit{Companhia Riograndense de Saneamento}) reservoir, located in the southern Brazilian state of Rio 
-Grande do Sul. These soil data were produced during the development of research projects that aimed at 
-producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
-erosion. All observation locations were selected purposively or by convenience. Several environmental features 
-were described at the observation locations, such as land use, geology, soil classification, slope, drainage 
-condition, presence of coarse fragments and rock outcrops, soil coverage with vegetation, among 
+\num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
+Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), located in the southern Brazilian 
+state of Rio Grande do Sul. These soil data were produced during the development of research projects that 
+aimed at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability 
+to erosion. All observation locations were selected purposively or by convenience. Several environmental 
+features were described at the observation locations, such as land use, geology, soil classification, slope, 
+drainage condition, presence of coarse fragments and rock outcrops, soil coverage with vegetation, among 
 other peculiarities of each observation location that were not recorded in a systematic way. Soil samples were 
 submitted to laboratory analysis to determine the soil organic carbon content, particle size distribution, 
 bulk density, and the content of exchangeable bases (calcium, magnesium, potassium, and sodium) and acidity. 
 The effective cation exchange capacity was calculated as the sum of exchangeable bases and acidity. The soil 
-data is freely available as CSV files in a repository hosted in GitHub. These include the identification of 
-all observation locations, their geographic coordinates, and field and laboratory data. The number of 
-laboratory replicates and the sample standard deviation is provided as well.
+data is freely available in a repository hosted in GitHub. These include the identification of all observation 
+locations, their geographic coordinates, and field and laboratory data. The number of laboratory replicates 
+and the sample standard deviation is provided as well.
 \end{chapterabstract}
 
 \formatchapter
@@ -40,9 +40,9 @@ laboratory replicates and the sample standard deviation is provided as well.
 \section{INTRODUCTION}
 \label{sec:chap04-introduction}
 
-The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between 
-\num{2004} and \num{2013} in the catchment of the DNOS/CORSAN (\textit{Departamento Nacional de Obras de 
-Saneamento}/\textit{Companhia Riograndense de Saneamento})reservoir, located in the southern border of the 
+The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between \num{2004} and 
+\num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
+Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), located in the southern border of the 
 Plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, Brazil. These 
 point soil observations cover the northern sector of the catchment -- an area of \SI{\pm2000}{\hectare}, which 
 corresponds to \SI{\pm60}{\percent} of the entire catchment. These soil data were produced during the 
@@ -50,49 +50,47 @@ development of research projects that aimed at producing semi-detailed soil and 
 \cite{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012}, and predicting topsoil carbon stock and 
 vulnerability to erosion \cite{Samuel-Rosa2009, MouraBueno2012, Miguel2013}.
 
-This document presents a description of the soil data contained in the Santa Maria dataset, including the 
+This manuscript presents a description of the soil data contained in the Santa Maria dataset, including the 
 procedures for soil sampling and description, as well as the analytical methods employed. The soil data is 
-freely available as CSV files in a repository hosted in \dnosgeneral{}. Files \texttt{fieldData.csv} and 
-\texttt{labData.csv} contain the identification of all observation locations, their geographic coordinates 
-(latlong, WGS1984), and field and laboratory data, respectively. Files \texttt{fieldMetadata.csv} and 
-\texttt{labMetadata.csv} contain the metadata. Every soil property is identified with a code composed of three 
-or four capital letters. For example, soil organic carbon is identified with \texttt{ORCA}. A column 
-containing 
-the number of laboratory replicates is identified with the code of the soil property followed by the letter 
-\q{N}. The column containing the sample standard deviation is identified in the same manner, but using \q{SD}. 
-For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
+freely available as comma-separated values (CSV) files in a repository hosted in \dnosgeneral{}. Files 
+\texttt{fieldData.csv} and \texttt{labData.csv} contain the identification of all observation locations, their 
+geographic coordinates (latlong, WGS1984), and field and laboratory data, respectively. Files 
+\texttt{fieldMetadata.csv} and \texttt{labMetadata.csv} contain the metadata. Every soil property is 
+identified with a code composed of three or four capital letters. For example, soil organic carbon is 
+identified with \texttt{ORCA}. A column containing the number of laboratory replicates is identified with the 
+code of the soil property followed by the letter \q{N}. The column containing the sample standard deviation is 
+identified in the same manner, but using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
 
 The reader should be aware that soil science evolved in Brazil following a somewhat different pathway than in 
-the countries of the northern hemisphere due to the specific features of \emph{tropical soils}. Methods have 
-been adapted along the years, possibly leading to nomenclature mismatches. The reader is invited to contribute 
-to solve any problems in this document.
+the countries of the northern hemisphere due to the specific soil features of tropical and subtropical 
+regions. Methods have been adapted along the years, possibly leading to nomenclature mismatches. The reader is 
+invited to contribute to solve any problems in this document.
 
 \section{FIELD SAMPLING}
 \label{sec:chap04-sampling}
 
 The Santa Maria dataset is composed of three subsets which are described in the next three sections. Together, 
 these subsets yield a sampling density of about \num{\pm0.18}~observations per hectare, with an average 
-separation 
-distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation distances of 
-\num{18} and \SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by more than 
-\SI{49}{\metre}.
+separation distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation 
+distances of \num{18} and \SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by 
+more than \SI{49}{\metre}.
 
 \subsection{Subset I}
 
-The first subset ($n = 340$, \autoref{fig:chap04-subsets-I-III}) was produced as part of projects that aimed 
-at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
-erosion \cite{Samuel-Rosa2009, SamuelRosaEtAl2011a, MiguelEtAl2012, Moura-BuenoEtAl2012, Samuel-RosaEtAl2013}. 
-The researchers faced several difficulties with a budget cut and shortage of workforce. They also had 
-restricted access to several areas due to geographic barriers and prohibition of access by some landowners. 
-These difficulties forced the researchers to reduce the originally aimed number of observations ($n = 500$) 
-during the development of the project.
+The first subset ($n = 340$, \autoref{fig:chap04-subsets-I-III}) was produced between 2008 and 20011 as part 
+of projects that aimed at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock 
+and vulnerability to erosion \cite{Samuel-Rosa2009, SamuelRosaEtAl2011a, MiguelEtAl2012, Moura-BuenoEtAl2012, 
+Samuel-RosaEtAl2013}. The researchers faced several difficulties with a budget cut and shortage of workforce. 
+They also had restricted access to several areas due to geographic barriers and prohibition of access by some 
+landowners. These difficulties forced the researchers to reduce the originally aimed number of observations ($n 
+= 500$) during the development of the project.
 
-\def\foottacit{\footnote{A comprehensive explanation of what \emph{tacit knowledge} is, opposed to explicit 
-knowledge, can be found in \href{https://en.wikipedia.org/wiki/Tacit_knowledge}{Wikipedia}.}}
+\def\foottacit{\footnote{A comprehensive explanation of what \emph{tacit knowledge} is, opposed to 
+\emph{explicit knowledge}, can be found in \href{https://en.wikipedia.org/wiki/Tacit_knowledge}{Wikipedia}.}}
 
 All observation locations were selected purposively or by convenience. Tacit knowledge\foottacit{} was the 
 main tool to choose the observation locations, a process that was carried out in the office using 
-\googleearth{} imagery of the years of \num{2008} and \num{2009}. The main goal of the researchers was to 
+Google Earth\rr{} imagery of the years of \num{2008} and \num{2009}. The main goal of the researchers was to 
 obtain a sample that they understood as being representative of the different landforms, land uses, and soil 
 taxa present in the study area. They also wanted the observations to be spread throughout the entire study 
 area.
@@ -102,7 +100,7 @@ opened three soil pits up to a depth of \SI{20}{\centi\metre}. Soil samples were
 \SI{20}{\centi\metre}, the depth being measured with a ruler. The resulting sampling depth of Subset I varies 
 from \num{2} to \SI{20}{\centi\metre}, with an average of \SI{17}{\centi\metre}. This variation of the 
 vertical sampling support was not a problem for the researchers because their goal was to sample the 
-\emph{topsoil}. The topsoil was defined as the topmost soil layer, with a depth equal or inferior to 
+\emph{topsoil}. The topsoil was defined as the topmost soil layer, with a thickness equal or inferior to 
 \SI{20}{\centi\metre}, being the soil layer most susceptible to degradation induced by poor agricultural 
 practices and land use changes.
 
@@ -126,8 +124,8 @@ Georeferencing was done in the field using a Global Navigation Satellite System 
 horizontal positional error of less than \SI{\pm8}{\metre} positioned approximately at the centre of the
 sampling area. Sometimes, the horizontal positional error was larger than \SI{\pm8}{\metre} due the effects
 of vegetation, terrain, and satellite configuration. In these cases, observation locations 
-were georeferenced in the office using \SI{1}{\metre} spatial resolution \googleearth{} imagery with 
-positional horizontal error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
+were georeferenced in the office using \SI{1}{\metre} spatial resolution Google Earth\rr{} imagery 
+with positional horizontal error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
 
 Every observation was identified with a number in increasing order, following the order in which the 
 observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out, yielding 
@@ -146,7 +144,7 @@ determined the spatial distribution of soil properties. Each researcher (three) 
 accessible, straight transects of \SI{400}{\metre} following the spatial gradients of selected environmental 
 features (topography, geology, vegetation, land use, and soils), totaling 180 transects. Accordingly, 
 knowledge of existing roads, human settlements, water bodies, and other access limitations was used as well. 
-The activity was carried out using \googlearth{} imagery of the years of \num{2008} and \num{2009}.
+The activity was carried out using Google Earth\rr{} imagery of the years of \num{2008} and \num{2009}.
 
 \begin{figure}[!ht]
 \centering
@@ -184,60 +182,116 @@ were purposively selected using tacit knowledge after a preliminary area-class s
 and/or the observations included in \emph{Subset I} had been made. The researchers aimed at observation 
 locations that they understood as being most representative of the soil mapping units depicted in their 
 respective area-class soil maps. A single soil sample was taken from each of the described soil horizons and 
-used for laboratory analysis (see below). The resulting depth of the uppermost A horizons varies from \num{12} 
-to \SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried using a GNSS 
-receiver with a horizontal positional error of less than \SI{\pm8}{\metre} positioned at the observation 
+used for laboratory analysis (see below). The resulting thickness of the uppermost A horizons varies from 
+\num{12} to \SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried using a 
+GNSS receiver with a horizontal positional error of less than \SI{\pm8}{\metre} positioned at the observation 
 location. Data are identified in the Santa Maria dataset using the same identification that was used in the 
 studies from where they were compiled.
 
 \section{FIELD DESCRIPTION}
 
-Several environmental features were described at the observation locations. The next sections present a 
-description of how this was done.
+Several environmental features were described at the observation locations. This sections present a summary
+description of how this description was done, specifically, for subsets I and II. A thorough explanation of 
+how field description was done for subset III is given by \citet{Pedron2005} and \citet{Miguel2010} -- most of 
+it followed \citet{SantosEtAl2013}. Merging field descriptions from subset III with those of subset I and II 
+was preceded by conceptual translations if required -- this practice is reported when used.
 
-\subsection{Land Use}
+Finally, the code used in the database to identify each of the variables described in the field is presented 
+between parenthesis using fixed-width or monospace font.
 
-Land use (\texttt{LAND}) was assessed in the years of \num{2008} and \num{2009} using data collected in the 
-field and Google Earth imagery. Five land uses were identified: native forest (primary or secondary), 
-shrubland 
-(abandoned areas with predominance of shrub-sized vegetation, known in Brazil as \emph{capoeira}), animal 
-husbandry (grasslands), forestry (\textit{Eucalyptus spp.} and \textit{Pinus spp.}), and annual crop 
-agriculture. Other 
-land uses such as human settlements and water bodies were not observed/sampled.
+\subsection{Land Use and Vegetation}
+
+Land use (\texttt{LAND}) was assessed at the time of sampling using data collected in the field. Five land 
+uses were identified using nomenclature of \citet{FAO2006} (\autoref{fig:chap04-land}):
+
+\begin{description}
+\item[\texttt{animal husbandry}] Native grasslands used for animal husbandry.
+\item[\texttt{crop agriculture}] Annual and biannual crop agriculture.
+\item[\texttt{forestry}] Plantations of \textit{Eucalyptus spp.} and \textit{Pinus spp.}.
+\item[\texttt{native forest}] Primary or secondary native forests.
+\item[\texttt{shrubland}] Abandoned areas with predominance of shrub-sized vegetation, known in Brazil as 
+\emph{capoeira}.
+\end{description}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.60\textwidth]{fig/chap04-land}
+\caption[Distribution of land use types in the Santa Maria dataset.]{Distribution of land use types in the 
+Santa Maria dataset. Most soil observations were made in areas used for animal husbandry although more that 
+half of the area is occupied with native forest (\autoref{sec:chap05-land-use}).}
+\label{fig:chap04-land}
+\end{figure}
+
+Other land uses are observed in the study area such as human settlements and water bodies 
+(\autoref{sec:chap05-land-use}). However, due to access constraints, soil observations were not made in areas 
+under these land uses.
 
 \subsection{Geology}
 
-Soil parent material (\texttt{PARENT}, sedimentary or igneous), geologic formation (\texttt{GEO}), and 
-lithology (\texttt{LITHO}) was inferred from direct observation of soil properties and local environmental 
-features in the field. Existing geologic maps were used only when soil characteristics and environmental 
-features were insufficient to reach an agreement about the most likely soil parent material, geologic 
-formation, and lithology.
+Soil parent material (\texttt{PARENT}) was inferred in the field from direct observation of soil properties 
+and local environmental features. Two classes were identified using nomenclature of \cite{FAO2006}:
+
+\begin{description}
+\item \texttt{igneous} Soil derived from the \textit{in sutu} weathering of igneous rocks.
+\item \texttt{sedimentary} Soil derived from the \textit{in sutu} weathering of sedimentary rocks, or from 
+sediments of igneous and/or sedimentary rocks.
+\end{description}
+
+Underlying geologic formation (\texttt{GEO}) and lithology (\texttt{LITHO}) were inferred based on soil 
+properties and environmental features observed in the field, and on existing area-class soil maps 
+(\autoref{sec:chap05-soil-maps}) geologic maps (\autoref{sec:chap05-geo-maps}).
 
 \subsection{Soil Classification}
 
-The most likely soil classification (\texttt{TAXON}) was inferred in the field using direct observation of 
-soil 
+The most likely taxon (\texttt{TAXON}) of the Brazilian System of Soil Classification (SiBCS) 
+\cite{SantosEtAl2013a} was inferred in the field using data obtained from direct observation of soil 
 properties (\SI{20}{\centi\metre}-deep soil pits and auger holes down to the diagnostic subsurface horizon or 
-bedrock) and local environmental features. Soil taxon was inferred only to the second categorical level of 
-the Brazilian System of Soil Classification \cite{SantosEtAl2013a} because further levels require data that 
-were not observed in the field.
+bedrock) and local environmental features. These data were then interpreted using the bases and concepts of 
+the SiBCS to identify the most likely taxon up to the second taxonomic level of the SiBCS. Further levels of 
+the SiBCS were not considered because making any sort of inference would require data that were not observable 
+in the field. Eleven taxa were identified (\autoref{fig:chap04-taxon}):
 
-% TODO: move this description of the soil taxa to the metadata file.
-% RF - Neossolo Flúvico, RL - Neossolo Litólico, RR - Neossolo Regolítico, RQ - Neossolo 
-% Quartzarênico, PV - Argissolo Vermelho, PVA - Argissolo Vermelho-Amarelo, PA - Argissolo 
-% Amarelo, PBAC - Argissolo Bruno-Acinzentado, SX - Planossolo Háplico, CX - Cambissolo Háplico.
+\begin{description}
+\item[\texttt{CX}] Cambissolo Háplico.
+\item[\texttt{GX}] Gleissolo Háplico.
+\item[\texttt{PA}] Argissolo Amarelo.
+\item[\texttt{PBAC}] Argissolo Bruno-Acinzentado.
+\item[\texttt{PV}] Argissolo Vermelho.
+\item[\texttt{PVA}] Argissolo Vermelho-Amarelo.
+\item[\texttt{RL}] Neossolo Litólico.
+\item[\texttt{RQ}] Neossolo Quartzarênico.
+\item[\texttt{RR}] Neossolo Regolítico.
+\item[\texttt{RY}] Neossolo Flúvico.
+\item[\texttt{SX}] Planossolo Háplico.
+\end{description}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.60\textwidth]{fig/chap04-taxon}
+\caption[Distribution of soil taxa in the Santa Maria dataset.]{Distribution of soil taxa in the Santa Maria 
+dataset. Most soil observations were classified as Neossolo Litólico and Argissolo Bruno-Acinzentado, which 
+agrees with information conveyed by existing area-class soil maps (\autoref{fig:chap05-soil-maps}).}
+\label{fig:chap04-taxon}
+\end{figure}
 
 \subsection{Slope}
 
 The slope gradient (\texttt{SLOPE}, \si{\percent}) was measured using a clinometer, the observer and target 
-being at a constant height above the ground. The distance between observer and target was between 
-\SI{30}{\metre} (dense forests) and \SI{50}{\metre} (open fields).
+being at a constant height above the ground (\autoref{fig:chap04-slope}). The distance between observer and 
+target was between \SI{30}{\metre} (dense forests) and \SI{50}{\metre} (open fields).
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.60\textwidth]{fig/chap04-slope}
+\caption[Distribution of slope gradient in the Santa Maria dataset.]{Distribution of slope gradient in the 
+Santa Maria dataset. Most soil observations were made in areas with a slope gradient $\SI{<25}{\percent}$.}
+\label{fig:chap04-slope}
+\end{figure}
 
 \subsection{Drainage}
 
 Soil drainage status (\texttt{DRAIN}) was inferred visually from soil features observed with an auger using 
-the 
-classification scheme proposed by \citeonline{SantosEtAl2013}.
+the classification scheme proposed by \citet{SantosEtAl2013}.
 
 \subsection{Coarse Fragments and Rock Outcrops}
 
@@ -247,10 +301,10 @@ present, and \num{0} (zero) otherwise. The same approach was adopted to describe
 (\texttt{ROCK}). The quantity of coarse fragments (\texttt{GRAVEL}, \si{\percent}) was estimated visually in 
 some observation points.
 
-It is worth noting that the approach employed to describe the presence of coarse fragments and rock outcrops is 
-not in line with the standard soil description guidelines currently used in Brazil. The reason for this is that 
-these soil properties were understood as being secondary at the time of sampling. As such, it seemed reasonable 
-to record only their presence/absence.
+It is worth noting that the approach employed to describe the presence of coarse fragments and rock outcrops 
+is not in line with the standard soil description guidelines currently used in Brazil. The reason for 
+recording only their presence/absence is that the actual content was not of primary interest at the time of 
+sampling.
 
 \subsection{Canopy}
 
