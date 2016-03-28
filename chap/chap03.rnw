@@ -1,9 +1,9 @@
 \artigotrue
-\chapter{MODELO CONCEITUAL DE PEDOGÊNESE}
+\chapter{MODELO CONCEITUAL DE PEDOGÊNESE DA BACIA DO DNOS}
 \chapternote{Colaboraram na preparação deste manuscrito: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), 
 Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de 
 Mattos Vasques (Embrapa Solos), e Gerard B. M. Heuvelink (ISRIC -- World Soil Information).}
-\shorttitle{Modelo Conceitual de Pedogênese da Área de Estudo}
+\shorttitle{Modelo Conceitual de Pedogênese}
 \label{chap:chap03}
 %\SweaveUTF8
 \SweaveOpts{prefix.string = fig/chap03}
@@ -154,7 +154,7 @@ plot(brazil)
 \includegraphics[width=0.90\textwidth]{fig/chap03-location}
 \caption[Localização da bacia de captação do reservatório do DNOS-CORSAN, em Santa Maria, RS, 
 Brasil]{Localização da bacia de captação do reservatório do Departamento Nacional de Obras de 
-Saneamento-Companhia Riograndense de Saneamento no Município de Santa Maria (em vermelho), Estado do Rio 
+Saneamento-Companhia Riograndense de Saneamento no Município de Santa Maria (em azul), Estado do Rio 
 Grande do Sul (em verde), Brasil, na porção sul da Província Geológica do Paraná (em cinza).}
 \label{fig:chap03-location}
 \end{figure}
