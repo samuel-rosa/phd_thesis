@@ -1,8 +1,8 @@
 \artigotrue
 \chapter{THE SANTA MARIA DATASET. PART I -- SOIL DATA}
-\chapternote{Collaborated in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno 
+\chapternote{Collaborated in the preparation of this manuscript: Pablo Miguel (UFPel), Jean Michel Moura Bueno 
 (UFSM), Ricardo Simão Diniz Dalmolin (UFSM), Andrisa Balbinot (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), 
-Gustavo de Mattos Vasques (Embrapa Soils), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and Ad 
+Gustavo de Mattos Vasques (Embrapa Solos), Gerard B. M. Heuvelink (ISRIC -- World Soil Information), and Ad 
 van Oostrum (ISRIC -- World Soil Information).}
 \shorttitle{Soil Data}
 \label{chap:chap04}
@@ -19,20 +19,20 @@ analysis}
   
 \begin{chapterabstract}{english}{\enkeys}
 The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between \num{2008} and 
-\num{2013} in the catchment of the DNOS/CORSAN (\textit{Departamento Nacional de Obras de Saneamento}/
-\textit{Companhia Riograndense de Saneamento}) reservoir, located in the southern Brazilian state of Rio 
-Grande do Sul. These soil data were produced during the development of research projects that aimed at 
-producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
-erosion. All observation locations were selected purposively or by convenience. Several environmental features 
-were described at the observation locations, such as land use, geology, soil classification, slope, drainage 
-condition, presence of coarse fragments and rock outcrops, soil coverage with vegetation, among 
+\num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
+Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), located in the southern Brazilian 
+state of Rio Grande do Sul. These soil data were produced during the development of research projects that 
+aimed at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability 
+to erosion. All observation locations were selected purposively or by convenience. Several environmental 
+features were described at the observation locations, such as land use, geology, soil classification, slope, 
+drainage condition, presence of coarse fragments and rock outcrops, soil coverage with vegetation, among 
 other peculiarities of each observation location that were not recorded in a systematic way. Soil samples were 
 submitted to laboratory analysis to determine the soil organic carbon content, particle size distribution, 
 bulk density, and the content of exchangeable bases (calcium, magnesium, potassium, and sodium) and acidity. 
 The effective cation exchange capacity was calculated as the sum of exchangeable bases and acidity. The soil 
-data is freely available as CSV files in a repository hosted in GitHub. These include the identification of 
-all observation locations, their geographic coordinates, and field and laboratory data. The number of 
-laboratory replicates and the sample standard deviation is provided as well.
+data is freely available in a repository hosted in GitHub. These include the identification of all observation 
+locations, their geographic coordinates, and field and laboratory data. The number of laboratory replicates 
+and the sample standard deviation is provided as well.
 \end{chapterabstract}
 
 \formatchapter
@@ -40,9 +40,9 @@ laboratory replicates and the sample standard deviation is provided as well.
 \section{INTRODUCTION}
 \label{sec:chap04-introduction}
 
-The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between 
-\num{2004} and \num{2013} in the catchment of the DNOS/CORSAN (\textit{Departamento Nacional de Obras de 
-Saneamento}/\textit{Companhia Riograndense de Saneamento})reservoir, located in the southern border of the 
+The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between \num{2004} and 
+\num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
+Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), located in the southern border of the 
 Plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, Brazil. These 
 point soil observations cover the northern sector of the catchment -- an area of \SI{\pm2000}{\hectare}, which 
 corresponds to \SI{\pm60}{\percent} of the entire catchment. These soil data were produced during the 
@@ -50,32 +50,30 @@ development of research projects that aimed at producing semi-detailed soil and 
 \cite{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012}, and predicting topsoil carbon stock and 
 vulnerability to erosion \cite{Samuel-Rosa2009, MouraBueno2012, Miguel2013}.
 
-This document presents a description of the soil data contained in the Santa Maria dataset, including the 
+This manuscript presents a description of the soil data contained in the Santa Maria dataset, including the 
 procedures for soil sampling and description, as well as the analytical methods employed. The soil data is 
-freely available as CSV files in a repository hosted in \dnosgeneral{}. Files \texttt{fieldData.csv} and 
-\texttt{labData.csv} contain the identification of all observation locations, their geographic coordinates 
-(latlong, WGS1984), and field and laboratory data, respectively. Files \texttt{fieldMetadata.csv} and 
-\texttt{labMetadata.csv} contain the metadata. Every soil property is identified with a code composed of three 
-or four capital letters. For example, soil organic carbon is identified with \texttt{ORCA}. A column 
-containing 
-the number of laboratory replicates is identified with the code of the soil property followed by the letter 
-\q{N}. The column containing the sample standard deviation is identified in the same manner, but using \q{SD}. 
-For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
+freely available as comma-separated values (CSV) files in a repository hosted in \dnosgeneral{}. Files 
+\texttt{fieldData.csv} and \texttt{labData.csv} contain the identification of all observation locations, their 
+geographic coordinates (latlong, WGS1984), and field and laboratory data, respectively. Files 
+\texttt{fieldMetadata.csv} and \texttt{labMetadata.csv} contain the metadata. Every soil property is 
+identified with a code composed of three or four capital letters. For example, soil organic carbon is 
+identified with \texttt{ORCA}. A column containing the number of laboratory replicates is identified with the 
+code of the soil property followed by the letter \q{N}. The column containing the sample standard deviation is 
+identified in the same manner, but using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
 
 The reader should be aware that soil science evolved in Brazil following a somewhat different pathway than in 
-the countries of the northern hemisphere due to the specific features of \emph{tropical soils}. Methods have 
-been adapted along the years, possibly leading to nomenclature mismatches. The reader is invited to contribute 
-to solve any problems in this document.
+the countries of the northern hemisphere due to the specific soil features of tropical and subtropical 
+regions. Methods have been adapted along the years, possibly leading to nomenclature mismatches. The reader is 
+invited to contribute to solve any problems in this document.
 
 \section{FIELD SAMPLING}
 \label{sec:chap04-sampling}
 
 The Santa Maria dataset is composed of three subsets which are described in the next three sections. Together, 
 these subsets yield a sampling density of about \num{\pm0.18}~observations per hectare, with an average 
-separation 
-distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation distances of 
-\num{18} and \SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by more than 
-\SI{49}{\metre}.
+separation distance between two neighbouring points of \SI{180}{\metre}, minimum and maximum separation 
+distances of \num{18} and \SI{328}{\metre}, \SI{95}{\percent} of neighbouring observations being separated by 
+more than \SI{49}{\metre}.
 
 \subsection{Subset I}
 
@@ -102,7 +100,7 @@ opened three soil pits up to a depth of \SI{20}{\centi\metre}. Soil samples were
 \SI{20}{\centi\metre}, the depth being measured with a ruler. The resulting sampling depth of Subset I varies 
 from \num{2} to \SI{20}{\centi\metre}, with an average of \SI{17}{\centi\metre}. This variation of the 
 vertical sampling support was not a problem for the researchers because their goal was to sample the 
-\emph{topsoil}. The topsoil was defined as the topmost soil layer, with a depth equal or inferior to 
+\emph{topsoil}. The topsoil was defined as the topmost soil layer, with a thickness equal or inferior to 
 \SI{20}{\centi\metre}, being the soil layer most susceptible to degradation induced by poor agricultural 
 practices and land use changes.
 
@@ -126,7 +124,8 @@ Georeferencing was done in the field using a Global Navigation Satellite System 
 horizontal positional error of less than \SI{\pm8}{\metre} positioned approximately at the centre of the
 sampling area. Sometimes, the horizontal positional error was larger than \SI{\pm8}{\metre} due the effects
 of vegetation, terrain, and satellite configuration. In these cases, observation locations 
-were georeferenced in the office using \SI{1}{\metre} spatial resolution \googleearth{} imagery with 
+were georeferenced in the office using \SI{1}{\metre} spatial resolution Google Earth\rr{} imagery 
+with 
 positional horizontal error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
 
 Every observation was identified with a number in increasing order, following the order in which the 
