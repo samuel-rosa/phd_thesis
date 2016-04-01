@@ -285,10 +285,13 @@ dataset using the same identification that was used in the studies from which th
 \section{FIELD DESCRIPTION}
 
 Several environmental features were described at the observation locations. This sections present a summary
-description of how this description was done, specially, for subsets I and II. A thorough explanation of 
-how field description was done for subset III is given by \citet{Pedron2005} and \citet{Miguel2010} -- most of 
-it followed \citet{SantosEtAl2013}. Merging field descriptions from subset III with those of subset I and II 
-was preceded by conceptual translations if required -- this practice is reported when used.
+description of how this description was done, specially for subsets I and II, which have not been documented 
+before. For subset III, a thorough explanation of how field description was done is given by 
+\citet{Pedron2005} and \citet{Miguel2010}.
+
+Despite the different origins of the datasets, soil sampling and description guidelines are very similar. As 
+such, merging field descriptions from subset III with those of subset I and II was easy, rarely requiring 
+conceptual translations and adaptations -- this practice is reported when used.
 
 Finally, the code used in the database to identify each of the variables described in the field is presented 
 between parenthesis using fixed-width or monospace font.
@@ -422,9 +425,9 @@ soil_data <-
              na.strings = "na")$SLOPE
 
 # Plot
+xlab <- "Slope gradient (%)"
 lattice::histogram(
-  x = soil_data, col = "lightgray", 
-  xlab = paste("Number of observations (n = ", length(na.exclude(soil_data)), ")",  sep = ""),
+  x = soil_data, col = "lightgray", xlab = xlab,
   par.settings = list(
     fontsize = list(text = 14, points = 8), box.rectangle = list(col = "black"), 
     layout.widths = list(left.padding = 0, right.padding = 0),
@@ -502,7 +505,7 @@ visually in the field using three classes:
 
 \begin{description}
 \item[low] \SI{<25}{\percent}
-\item[medium] {25--75}{\percent}
+\item[medium] 25--\SI{75}{\percent}
 \item[high] \SI{>75}{\percent}
 \end{description}
 
@@ -514,46 +517,83 @@ peculiarities of each observation location and were not recorded in a systematic
 \section{LABORATORY ANALYSIS}
 \label{sec:chap04-laboratory}
 
-Soil samples were air dried, crushed and passed through a \SI{2}{\milli\metre}-sieve prior to laboratory 
-analyses using the methods described in the next sections. One or more laboratory replicates were used to 
-calculate analytical errors.
+Several laboratory analysis were performed with the soil samples collected in the DNOS catchment. This 
+sections present a summary description of how this analyses were done, specially for subsets I and II, which 
+have not been documented before. For subset III, a thorough explanation of how laboratory analyses were done 
+is given by \citet{Pedron2005} and \citet{Miguel2010}.
+
+Despite the different origins of the datasets, laboratory analyses protocols are very similar. As such, 
+merging the results of laboratory analyses from subset III with those of subset I and II was easy, rarely 
+requiring the use of conversion factors -- this practice is reported when used. In all three datasets, soil 
+samples were air dried, crushed and passed through a \SI{2}{\milli\metre}-sieve prior to laboratory analyses. 
+For datasets I and II, one or more laboratory replicates were used to enable calculating analytical errors.
+
+The same coding standard used with field description variables is used here, i.e. the code used in the 
+database is presented between parenthesis using fixed-width or monospace font.
 
 \subsection{Soil Organic Fraction}
 \label{sec:chap04-organic}
 
-The soil organic carbon content (\texttt{ORCA}, \si{\gram\per\kilo\gram}) was determined using the method of
-\citeonline{Mebius1960} modified by \citeonline{YeomansEtAl1988} as described by \citeonline{ClaessenEtAl1997}.
+The soil organic carbon content (\texttt{ORCA}, \si{\gram\per\kilo\gram}) was determined using wet combustion 
+\cite{YeomansEtAl1988, Mebius1960, TedescoEtAl1995, ClaessenEtAl1997}.
 
+% Footnote %%%%%
 \def\footsulfochromic{\footnote{See a detailed description of the sulfochromic solution, or chromic acid, at 
 \href{http://en.wikipedia.org/wiki/Chromic_acid}{Wikipedia}.}}
 
-Sample aliquots of \num{0.050} to \SI{0.500}{\gram} were placed in glass digestion tubes 
-(\SI{80}{\milli\liter}). The amount of sample used varied according to the ORCA estimated by visual 
-interpretation of soil colour. Every digestion tube received an aliquot of \SI{10}{\milli\liter} of 
-sulfochromic solution\footsulfochromic{} [\SI{0.067}{\mole\per\liter} potassium bichromate solution
-(\ce{K2Cr2O7}) in the presence of concentrated sulphuric acid (\ce{H2SO4})] and a small reflux funnel 
-to avoid loss of reagent during digestion. A digestion block with capacity for \num{40}~samples was used:
-\num{36}~tubes with soil sample plus \num{3}~tubes with blank plus \num{1}~tube with \ce{H2SO4} and a
-thermometer for temperature control. Digestion at \SI{150}{\celsius} last \SI{30}{\minute}. Three blanks 
-were prepared and set aside at room temperature to estimate the loss of reagent due to heat in the digestion 
-block. After digestion the tubes were set aside at room temperature to cool down. Next, the solution was 
-transferred to Erlenmeyer flasks (\SI{250}{\milli\liter}) with \SI{60}{\milli\liter} of distilled water and
-\SI{2}{\milli\liter} of concentrated orthophosphoric acid [\ce{H3PO4}] and \num{3}~drops of 
-\SI{1}{\percent}~diphenylamine). The solution was titrated using \SI{0.1}{\mole\per\liter} ammonium ferrous
-sulphate (\ce{FeSO4(NH4)2 * 6H2O}) until persistent green colour. The results were multiplied by \num{1.11}
-to correct to the standard method (dry combustion).
+Sample aliquots of \num{0.050} to \SI{0.500}{\g} were placed in glass digestion tubes (\SI{80}{\ml}). The 
+amount of sample used varied according to the \texttt{ORCA} estimated by visual interpretation of soil colour. 
+Every digestion tube received an aliquot of \SI{10}{\ml} of sulfochromic solution\footsulfochromic{} 
+[\SI{0.067}{\mole\per\liter} potassium bichromate solution (\ce{K2Cr2O7}) in the presence of concentrated 
+sulphuric acid (\ce{H2SO4})] and a small reflux funnel to avoid loss of reagent during digestion. A digestion 
+block with capacity for \num{40}~samples was used: \num{36}~tubes with soil sample plus \num{3}~tubes with 
+blank plus \num{1}~tube with \ce{H2SO4} and a thermometer for temperature check. Digestion at 
+\SI{150}{\celsius} last \SI{30}{\minute}. Three blanks were prepared and set aside at room temperature to 
+estimate the loss of reagent due to heat in the digestion block.
 
-The soil organic matter content of the observations compiled from \citeonline{Pedron2005} was determined 
-using the method described by \citeonline{TedescoEtAl1995}. Sample aliquots of \SI{2.5}{\milli\liter}
-were placed in Erlenmeyer flasks (\SI{50}{\milli\liter}). Every Erlenmeyer flask received an aliquot of 
-\SI{15}{\milli\liter} of \SI{0.067}{\mole\per\liter} sulfochromic solution (\ce{Na2Cr2O7 + H2SO4}). The 
-flasks were heated in a water bath at \num{75} to \SI{80}{\celsius} during \SI{30}{\minute} and shaken 
-for \SI{5}{\minute}. A water aliquot of \SI{15}{\milli\liter} was added to the flask and let overnight 
-(\num{15} to \SI{18}{\hour}). In the next day, an aliquot of \SI{3.0}{\milli\liter} was sampled to a 
-small cup with \SI{3.0}{\milli\liter} of distilled water. The absorbency of the supernatant was measured 
-at \SI{645}{\nano\metre}. The results were transformed to organic carbon content using the Van Bemmelen 
-factor (\num{1.724}), the result assumed to be equivalent to soil organic carbon content measured using the 
-standard method. The results are expressed using a volume-basis and were converted to a mass-basis using a
+After digestion the tubes were set aside at room temperature to cool down. Next, the solution was transferred 
+to Erlenmeyer flasks (\SI{250}{\ml}) with \SI{60}{\ml} of distilled water and \SI{2}{\ml} of concentrated 
+orthophosphoric acid [\ce{H3PO4}] and \num{3}~drops of \SI{1}{\percent}~diphenylamine. The solution was 
+titrated using \SI{0.1}{\mole\per\liter} ammonium ferrous sulphate (\ce{FeSO4(NH4)2 * 6H2O}) until persistent 
+green colour. The results were multiplied by \num{1.11} to correct the estimated soil organic carbon content 
+to the standard analytical method (dry combustion).
+
+\begin{figure}[!ht]
+\centering
+<<orca, fig = TRUE, echo = FALSE, include = FALSE>>=
+soil_data <- 
+  read.table("~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";", header = TRUE,
+             na.strings = "na")$ORCA
+
+# Plot
+xlab <- expression(paste('Organic carbon content (g ', kg^-1, ')', sep = ''))
+lattice::histogram(
+  x = soil_data, col = "lightgray", xlab = xlab,
+  par.settings = list(
+    fontsize = list(text = 14, points = 8), box.rectangle = list(col = "black"), 
+    layout.widths = list(left.padding = 0, right.padding = 0),
+    layout.heights = list(top.padding = 0, bottom.padding = 0))
+)
+
+@
+\includegraphics[width=0.60\textwidth]{fig/chap04-orca}
+\caption[Distribution of organic carbon content in the Santa Maria dataset.]{Distribution of organic carbon 
+content in the Santa Maria dataset. The distribution is severely skewed.}
+\label{fig:chap04-orca}
+\end{figure}
+
+Observations compiled from \citet{Pedron2005} had their soil organic matter content determined instead of the 
+organic carbon content. Sample aliquots of \SI{2.5}{\ml} were placed in Erlenmeyer flasks (\SI{50}{\ml}). 
+Every Erlenmeyer flask received an aliquot of \SI{15}{\ml} of \SI{0.067}{\mole\per\liter} sulfochromic 
+solution (\ce{Na2Cr2O7 + H2SO4}). The flasks were heated in a water bath at 75--\SI{80}{\celsius} during 
+\SI{30}{\minute} and shaken for \SI{5}{\minute}. A water aliquot of \SI{15}{\ml} was added to the flask and 
+let overnight (15--\SI{18}{\hour}).
+
+In the next day, an aliquot of \SI{3.0}{\ml} was sampled to a small plastic cup with \SI{3.0}{\ml} of 
+distilled water. The absorbency of the supernatant was measured at \SI{645}{\nano\metre}. The results were 
+transformed to organic carbon content assuming that \SI{58}{\percent} of the organic matter is composed of 
+organic carbon, the result assumed to be equivalent to soil organic carbon content measured using the standard 
+analytical method. The results are expressed using a volume-basis and were converted to a mass-basis using a
 1:1 relation because the mass of the sample aliquot used in the analyses is unknown.
 
 \subsection{Particle Size Analysis}
