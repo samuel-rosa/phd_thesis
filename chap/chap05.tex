@@ -5,7 +5,7 @@ Topodata digital elevation model}, presented at the XXXIV Brazilian Congress of 
 \cite{Samuel-RosaEtAl2013c}, and \textit{Evaluation of freely available ancillary data used for detailed soil 
 mapping in Brazil}, presented at the EGU General Assembly 2014 \cite{Samuel-RosaEtAl2014}. Also collaborated 
 in the preparation of this document: Pablo Miguel (UFPel), Jean Michel Moura Bueno (UFSM), Ricardo Simão Diniz 
-Dalmolin (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Soils), and Gerard 
+Dalmolin (UFSM), Lúcia Helena Cunha dos Anjos (UFRRJ), Gustavo de Mattos Vasques (Embrapa Solos), and Gerard 
 B. M. Heuvelink (ISRIC -- World Soil Information).}
 \shorttitle{Covariate Data}
 \label{chap:chap05}
@@ -22,17 +22,13 @@ B. M. Heuvelink (ISRIC -- World Soil Information).}
 \def\enkeys{Area-class soil maps. Digital elevation models. Geological maps. Land use maps. Satellite images}
   
 \begin{chapterabstract}{english}{\enkeys}
-The Santa Maria dataset comprises a list of more than 100 covariates covering the catchment of the DNOS-CORSAN 
-(\textit{Departamento Nacional de Obras de Saneamento}-\textit{Companhia Riograndense de Saneamento}) 
-reservoir, 
-located in the southern Brazilian state of Rio Grande do Sul. These covariates were derived from five freely 
-available sources in two levels of spatial detail: area-class soil maps, digital elevation models, geological 
-maps, land use maps, 
-and satellite images. These covariate data are the outcome of projects that aimed at modelling various 
-environmental 
-features and were carried out as part of local (soil, geology, land use), regional (terrain, land use), and 
-global (terrain, 
-land use) mapping initiatives.
+The Santa Maria dataset comprises a list of more than 100 covariates covering the catchment of the reservoir of 
+the \textit{Departamento Nacional de Obras de Saneamento}-\textit{Companhia Riograndense de Saneamento} 
+(DNOS-CORSAN), located in the southern Brazilian state of Rio Grande do Sul. These covariates were derived from 
+five freely available sources in two levels of spatial detail: area-class soil maps, digital elevation models, 
+geological maps, land use maps, and satellite images. These covariate data are the outcome of projects that 
+aimed at modelling various environmental features and were carried out as part of local (soil, geology, land 
+use), regional (terrain, land use), and global (terrain, land use) mapping initiatives.
 \end{chapterabstract}
 
 \formatchapter
@@ -41,14 +37,14 @@ land use) mapping initiatives.
 \label{sec:chap05-intro}
 
 The Santa Maria dataset is a data set comprising spatially exhaustive covariate data produced in the 1980s, 
-1990s, and 2000s covering the catchment of the DNOS-CORSAN reservoir, located in the southern border of the 
-plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, Brazil. Some 
-of these covariate data cover only part of the catchment, mainly the northern sector, which has an area of 
-about
-\SI{2000}{\hectare}, corresponding to about \SI{60}{\percent} of the entire catchment. These covariate data 
-are the outcome of projects that aimed at modelling various environmental features and were carried out as 
-part of local (soil, geology, land use), regional (terrain, land use), and global (terrain, land use) mapping 
-initiatives.
+1990s, and 2000s covering the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
+Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), henceforth called \emph{DNOS 
+catchment}, located in the southern border of the plateau of the Paraná Sedimentary Basin, in the city of 
+Santa Maria, state of Rio Grande do Sul, Brazil. Some of these covariate data cover only part of the DNOS
+catchment, mainly the northern sector, which has an area of about \SI{2000}{\hectare}, corresponding to about 
+\SI{60}{\percent} of the entire catchment. These covariate data are the outcome of projects that aimed at 
+modelling various environmental features and were carried out as part of local (soil, geology, land use), 
+regional (terrain, land use), and global (terrain, land use) mapping initiatives.
 
 Covariate data were harmonized to a reference grid of \SI{5}{\m} grid size. The coordinate reference 
 system (CRS) is WGS1984 / UTM zone 22S, coded \href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} 
@@ -89,18 +85,29 @@ measure of the uncertainty about the true position of the covariate in the geogr
 The field location of the GCPs is as follows (in Portuguese):
 
 \begin{description}
- \item [GCP 01] Em Santa Maria, no lado direito da barragem de concreto do reservatório do DNOS-CORSAN, 
- \SI{6}{\m} antes de chegar a ponte sobre o vertedouro, a \SI{3}{\m} de distância do centro da estrada que 
- desce da rodovia federal BR158.
- 
- \item [GCP 02] Na entrada da Estrada do Perau, Rua Gralha Azul, em Itaara, no centro do canteiro, entre o 
- outdoor e a árvore (\textit{Cedrella fissilis}), junto à rodovia federal BR158.
- 
- \item [GCP 03] Na entrada de Itaara, próximo ao equipamento estático de fiscalização eletrônica de 
- velocidade, na rodovia federal BR158, a \SI{520}{\m} do Museu de Ufologia, em frente à Fruteira da 
- Esquina. Do outro lado da rodovia há uma torre, possivelmente de telefonia celular, e entrada para a mina de 
- extração de brita DallaPasqua, localizada a \SI{4}{\km} do local.
- 
+\item[GCP 01]
+% Em Santa Maria, no lado direito da barragem de concreto do reservatório do DNOS-CORSAN, \SI{6}{\m} antes de 
+% chegar a ponte sobre o vertedouro, a \SI{3}{\m} de distância do centro da estrada que desce da rodovia 
+% federal BR158.
+In Santa Maria, on the right side of the concrete dam of the DNOS-CORSAN reservoir, \SI{6}{\m} 
+before reaching the bridge over the spillway, distant \SI{3}{\m} from the centre of the road that descends 
+from the BR-158 federal highway.
+
+\item[GCP 02]
+% Em Itaara, na entrada da Estrada do Perau, Rua Gralha Azul, no centro do canteiro, entre o outdoor e a árvore 
+% (\textit{Cedrella fissilis}), junto à rodovia federal BR158.
+In Itaara, at the entrance of the Estrada do Perau, Rua Gralha Azul, in the centre of the roundabout, between 
+the outdoor and the tree (\textit{Cedrella fissilis}), close to the BR-158 federal highway.
+
+\item[GCP 03]
+% Em Itaara, próximo ao equipamento estático de fiscalização eletrônica de velocidade, na rodovia federal 
+% BR158, a \SI{520}{\m} do Museu de Ufologia, em frente à Fruteira da Esquina, do lado oposto da torre de 
+% telefonia celular e da entrada para a mina de extração de brita DallaPasqua, localizada a \SI{4}{\km} do 
+% local.
+In Itaara, near the speed monitoring radar of the BR-158 federal highway, distant \SI{520}{\m} from the UFO 
+Museum, opposite the Fruteira da Esquina, opposite to the cell phone tower and to the entrance of the gravel 
+pit DallaPasqua, located \SI{4}{\km} away from the site.
+
  \item [GCP 04] Em Santa Maria, na entrada da estrada de acesso ao cemitério do Bairro Campestre do Menino 
  Deus, do lado direito da Estrada do Perau (subindo), alinhado (\SI{50}{\cm}) com a frente das casas, a
  \SI{2,2}{\m} do muro, a \SI{6,5}{\m} do meio-fio da Estrada do Perau, a \SI{50}{\m} da ponte sobre o Rio
@@ -204,11 +211,12 @@ derived dummy variables are described in the text.}
 \end{figure}
 
 The second area-class soil map (\soilNew) included in the Santa Maria dataset \cite{Miguel2010} was prepared 
-at a \scale{25000}. Satellite images produced by Digital Globe\textregistered{} Quick Bird satellite, freely 
-available for visualization in \googleearth, were used to produce the first draft of the soil 
-map. Existing area-class soil maps and technical reports \cite{Pedron2005, Poelking2007, Sturmer2008} were 
-used to help defining the preliminary soil map legend. Point field observations (soil pits and boreholes) were 
-made in more than \num{350} locations using a purposive sampling approach (see \autoref{chap:chap04} and 
+at a \scale{25000}. Satellite images produced by Digital Globe\rr{} Quickbird satellite (\SI{2.4}{\m} spatial 
+resolution), freely available for visualization in Google Earth\rr{}, were used to produce the first 
+draft of the soil map. Existing area-class soil maps and technical reports \cite{Pedron2005, Poelking2007, 
+Sturmer2008} were used to help defining the preliminary soil map legend. Point field observations (soil pits 
+and boreholes) were made in more than \num{350} locations using a purposive sampling approach (see 
+\autoref{chap:chap04} and 
 \autoref{chap:chap07}). These observations helped to identify six modal (representative) soil profiles. Soil 
 sampling and description of modal soil profiles, and laboratory analyses of soil samples, followed the standard 
 protocols adopted in Brazil \cite{ClaessenEtAl1997, SantosEtAl2005}. Soil classification was done following the 
