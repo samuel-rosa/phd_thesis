@@ -61,7 +61,7 @@ mismatches. The reader is invited to contribute to solve any problems in this do
 
 The description presented in this manuscript includes the procedures for soil sampling and description, as 
 well as the analytical methods employed\foottropics{}. Soil data is described using summary plots with 
-descriptive statistics. Finally, a description of the structure of the dataset and of how it can be accessed 
+descriptive statistics. Finally, a description of the structure of the database and of how it can be accessed 
 and used is presented. 
 
 \section{FIELD SAMPLING}
@@ -164,19 +164,19 @@ p <- sp::spplot(
 print(p)
 @
 \includegraphics[width=0.90\textwidth]{fig/chap04-subsets-I-III}
-\caption[Spatial distribution of \emph{Subset I} and \emph{Subset III}.]{Spatial distribution of the point 
-soil observations contained in \emph{Subset I} ($n = 340$, black solid circles) and \emph{Subset III} ($n = 
+\caption[Spatial distribution of \emph{Subset I} and \emph{Subset III}.]{Spatial distribution of the soil 
+observations contained in \emph{Subset I} ($n = 340$, black solid circles) and \emph{Subset III} ($n = 
 10$, red stars) of the Santa Maria dataset. The drainage network is shown in the background (blue 
 dashed line) to give an idea of how the locations of soil observations is related to terrain features.}
 \label{fig:chap04-subsets-I-III}
 \end{figure}
 
 Georeferencing was done in the field using a Global Navigation Satellite System (GNSS) receiver with a 
-horizontal positional error of less than \SI{\pm8}{\metre} positioned approximately at the centre of the
-sampling area. Sometimes, the horizontal positional error was larger than \SI{\pm8}{\metre} due the effects
+horizontal positional error of less than \SI{8}{\metre} positioned approximately at the centre of the
+sampling area. Sometimes, the horizontal positional error was larger than \SI{8}{\metre} due the effects
 of vegetation, terrain, and satellite configuration. In these cases, observation locations were georeferenced 
 in the office using \SI{1}{\metre} spatial resolution Google Earth\rr{} imagery with positional horizontal 
-error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
+error of \SI{6}{\metre} (\autoref{tab:chap05-google-geo-val}).
 
 Every observation was identified with a number in increasing order, following the order in which the 
 observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out, yielding 
@@ -193,9 +193,10 @@ sampling \cite{MiguelEtAl2012, Moura-BuenoEtAl2012, Samuel-RosaEtAl2013}. They s
 of transects using their knowledge of the study area, taking into account the factors that they thought 
 determined the spatial distribution of soil properties. Each researcher (three) delineated $m = 60$ easily 
 accessible, straight transects of \SI{400}{\metre} following the spatial gradients of selected environmental 
-features (topography, geology, vegetation, land use, and soils), totaling 180 transects. Accordingly, 
+features (topography, geology, vegetation, land use, and soils), totalling 180 transects. Accordingly, 
 knowledge of existing roads, human settlements, water bodies, and other access limitations was used as well. 
-The activity was carried out using Google Earth\rr{} imagery of the years of \num{2008} and \num{2009}.
+The activity was carried out using \SI{1}{\metre} spatial resolution Google Earth\rr{} imagery of the years of 
+\num{2008} and \num{2009}.
 
 \begin{figure}[!ht]
 \centering
@@ -253,36 +254,38 @@ is related to terrain features.}
 
 Twelve out of the $m = 180$ transects were randomly selected using as many iterations as necessary until 
 there were no intersecting transects, and there was at least one transect in each of the three major 
-geomorphological units of the study area (\textit{Planalto}, \textit{Rebordo do Planalto}, and 
-\textit{Depressão Periférica}). Finally, $n = 5$ observation locations, separated by equidistant intervals of 
-\SI{100}{\metre}, were selected in each transect. Observation locations were named with a number in increasing 
-order, following the order in which the observations were made, starting from \num{341} (\num{341}--\num{400}).
+morphostructural units of the DNOS catchment (\textit{Planalto}, \textit{Rebordo do Planalto}, and 
+\textit{Depressão Periférica}) (\autoref{chap:chap03}). Finally, $n = 5$ observation locations, separated by 
+equidistant intervals of \SI{100}{\metre}, were selected in each transect. Observation locations were named 
+with a number in increasing order, following the order in which the observations were made, starting from 
+\num{341} (\num{341}--\num{400}).
 
-Observation locations were identified in the field using a GNSS receiver with a horizontal positional error
-of less than \SI{\pm8}{\metre}. A single soil pit was opened within a radius of \SI{2}{\metre} from the 
-predefined observation location. Soil sampling and description was carried out using the same procedure used 
-with \emph{Subset I}, except that in Subset II a single pit was observed. More accurate geographic coordinates 
-were collected in the field using a Differential Global Positioning System (DGPS) with a horizontal positional 
-error of less than \SI{1}{\centi\metre}.
+The location of the observations was identified in the field using a GNSS receiver with a horizontal 
+positional error of less than \SI{8}{\metre}. Soil sampling and description was carried out using the same 
+procedure used with \emph{Subset I}, except for the fact that a single soil pit was opened within a radius of 
+\SI{2}{\m} from the predefined observation location. More accurate geographic coordinates were collected in 
+the field using a Differential Global Positioning System (DGPS) with a horizontal positional error of less 
+than \SI{1}{\centi\metre}.
 
 \subsection{Subset III}
 
-The third subset ($n = 10$) contains data compiled from the studies of \citeonline{Pedron2005} and
-\citeonline{Miguel2010}, specifically from the uppermost A horizon of modal soil profiles whose locations 
-were purposively selected using tacit knowledge after a preliminary area-class soil map had been produced 
-and/or the observations included in \emph{Subset I} had been made. The researchers aimed at observation 
-locations that they understood as being most representative of the soil mapping units depicted in their 
-respective area-class soil maps. A single soil sample was taken from each of the described soil horizons and 
-used for laboratory analysis (see below). The resulting thickness of the uppermost A horizons varies from 
-\num{12} to \SI{30}{\centi\metre}, with a mean of \SI{22.6}{\centi\metre}. Georeferencing was carried using a 
-GNSS receiver with a horizontal positional error of less than \SI{\pm8}{\metre} positioned at the observation 
-location. Data are identified in the Santa Maria dataset using the same identification that was used in the 
-studies from where they were compiled.
+The third subset ($n = 10$) contains data compiled from the studies of \citet{Pedron2005} and 
+\citet{Miguel2010}, specifically from the uppermost A horizon of modal soil profiles (point support) whose 
+locations were purposively selected using tacit knowledge after a preliminary area-class soil map had been 
+produced and/or the observations included in \emph{Subset I} had been made.
+
+\citet{Pedron2005} and \citet{Miguel2010} aimed at observation locations that they understood as being most 
+representative of the soil mapping units depicted in their respective area-class soil maps. A single soil 
+sample was taken from each of the described soil horizons and used for laboratory analysis. The resulting 
+thickness of the uppermost A horizons varies from \num{12} to \SI{30}{\centi\metre}, with a mean of 
+\SI{22.6}{\centi\metre}. Georeferencing was carried using a GNSS receiver with a horizontal positional error 
+of less than \SI{8}{\metre} positioned at the observation location. Data are identified in the Santa Maria 
+dataset using the same identification that was used in the studies from which they were compiled.
 
 \section{FIELD DESCRIPTION}
 
 Several environmental features were described at the observation locations. This sections present a summary
-description of how this description was done, specifically, for subsets I and II. A thorough explanation of 
+description of how this description was done, specially, for subsets I and II. A thorough explanation of 
 how field description was done for subset III is given by \citet{Pedron2005} and \citet{Miguel2010} -- most of 
 it followed \citet{SantosEtAl2013}. Merging field descriptions from subset III with those of subset I and II 
 was preceded by conceptual translations if required -- this practice is reported when used.
@@ -494,8 +497,14 @@ sampling.
 \subsection{Canopy}
 
 % TODO: add three figures as examples of each class.
-Soil coverage with vegetation (\texttt{CANOPY}) was inferred visually in the field using three classes: low 
-(\SI{<25}{\percent}), medium (\SIrange{25}{75}{\percent}), and high (\SI{>75}{\percent}).
+Soil coverage with vegetation, an idea of the density of stand or plant cover, (\texttt{CANOPY}) was inferred 
+visually in the field using three classes:
+
+\begin{description}
+\item[low] \SI{<25}{\percent}
+\item[medium] {25--75}{\percent}
+\item[high] \SI{>75}{\percent}
+\end{description}
 
 \subsection{Additional Information}
 
