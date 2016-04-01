@@ -9,21 +9,38 @@ van Oostrum (ISRIC -- World Soil Information).}
 %\SweaveUTF8
 \SweaveOpts{prefix.string = fig/chap04, pdf = FALSE, png = TRUE}
 
-%\def\ptkeys{}
-%\begin{chapterabstract}{brazilian}{\ptkeys}
-% Este é o resumo em português.
-%\end{chapterabstract}
+\def\ptkeys{Modelagem espacial do solo. Amostragem intencional. Dados legados. Descrição do solo no campo. 
+Análise laboratorial do solo}
+\begin{chapterabstract}{brazilian}{\ptkeys}
+O \emph{conjunto de dados de Santa Maria} compreende dados do solo de $n = 410$  observações feitas entre 
+2008 e 2013 na bacia do reservatório do Departamento Nacional de Obras de Saneamento-Companhia Riograndense de 
+Saneamento (DNOS-CORSAN), localizada no estado brasileiro do Rio Grande do Sul. Esses dados do solo foram 
+produzidos no âmbito de projetos de pesquisa que visam a produção de mapas semi-detalhados do solo e do
+uso da terra, e prever o estoque superficial de carbono no solo e sua vulnerabilidade à erosão. Todos os 
+locais de observação foram selecionados intencionalmente ou por conveniência. Várias características 
+ambientais foram descritas nos locais de observação, tais como o uso da terra, geologia, classificação do 
+solo, declividade, condições de drenagem, presença de fragmentos grosseiros e afloramentos rochosos, cobertura 
+do solo com vegetação, entre outras peculiaridades de cada local de observação que não foram registradas de 
+uma forma sistemática. As amostras do solo foram submetidos à análise de laboratório para determinar o 
+conteúdo de carbono orgânico no solo, a distribuição do tamanho de partículas, a densidade e o conteúdo de 
+bases (cálcio, magnésio, potássio e sódio) e acidez trocáveis. A capacidade de troca de cátions efetiva foi 
+calculada como a soma das bases e acidez trocáveis. Os dados do solo estão livremente disponíveis em um 
+repositório hospedado no GitHub. Eles incluem a identificação de todos os locais de observação, as suas 
+coordenadas geográficas, e dados de campo e de laboratório. O número de repetições de laboratório e o desvio 
+padrão amostral também são fornecidos.
+
+\end{chapterabstract}
 
 \def\enkeys{Spatial soil modelling. Purposive sampling. Legacy data. Soil field description. Soil laboratory 
 analysis}
   
 \begin{chapterabstract}{english}{\enkeys}
-The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between \num{2008} and 
-\num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
+The \emph{Santa Maria dataset} comprises soil data from $n = 410$ soil observations made between \num{2008} 
+and \num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
 Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), located in the southern Brazilian 
-state of Rio Grande do Sul. These soil data were produced during the development of research projects that 
-aimed at producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability 
-to erosion. All observation locations were selected purposively or by convenience. Several environmental 
+state of Rio Grande do Sul. These soil data were produced within the scope of research projects that aimed at 
+producing semi-detailed soil and land use maps, and predicting topsoil carbon stock and vulnerability to 
+erosion. All observation locations were selected purposively or by convenience. Several environmental 
 features were described at the observation locations, such as land use, geology, soil classification, slope, 
 drainage condition, presence of coarse fragments and rock outcrops, soil coverage with vegetation, among 
 other peculiarities of each observation location that were not recorded in a systematic way. Soil samples were 
@@ -503,9 +520,9 @@ Soil coverage with vegetation, an estimate of the density of stand or plant cove
 inferred visually in the field using three classes:
 
 \begin{description}
-\item[low] \SI{<25}{\percent}
-\item[medium] 25--\SI{75}{\percent}
-\item[high] \SI{>75}{\percent}
+\item[\texttt{low}] \SI{<25}{\percent}
+\item[\texttt{medium}] 25--\SI{75}{\percent}
+\item[\texttt{high}] \SI{>75}{\percent}
 \end{description}
 
 \subsection{Additional Information}
@@ -764,7 +781,7 @@ soil_data <-
 # Plot
 lattice::histogram(
   x = soil_data, col = "lightgray", 
-  xlab = expression(paste('Bulk density (Mg ', m^-3, ')', sep = '')),
+  xlab = expression(paste('effective cation exchange capacity (mmol ', kg^-1, ')', sep = '')),
   par.settings = list(
     fontsize = list(text = 14, points = 8), box.rectangle = list(col = "black"), 
     layout.widths = list(left.padding = 0, right.padding = 0),
@@ -783,7 +800,6 @@ exchangeable bases and exchangeable acidity (\autoref{fig:chap04-ecec}), i.e.
 \begin{equation*}
  \texttt{ECEC} = \texttt{CALC} + \texttt{MAGN} + \texttt{POTA} + \texttt{SODI} + \texttt{EXAC}.
 \end{equation*}
-
 
 % TODO: Provide a more detailed description of how these are calculated and include the data in the database.
 % The sum of exchangeable bases (BASES) is given by the sum of the exchangeable calcium, magnesium, sodium and 
@@ -849,46 +865,52 @@ exchangeable bases and exchangeable acidity (\autoref{fig:chap04-ecec}), i.e.
 
 \section{DATASET STRUCTURE}
 
-The soil data is 
-freely available as comma-separated values (CSV) files in a repository hosted in \dnosgeneral{}. Files 
-\texttt{fieldData.csv} and \texttt{labData.csv} contain the identification of all observation locations, their 
-geographic coordinates (latlong, WGS1984), and field and laboratory data, respectively. Files 
-\texttt{fieldMetadata.csv} and \texttt{labMetadata.csv} contain the metadata. Every soil property is 
-identified with a code composed of three or four capital letters. For example, soil organic carbon is 
-identified with \texttt{ORCA}. A column containing the number of laboratory replicates is identified with the 
-code of the soil property followed by the letter \q{N}. The column containing the sample standard deviation is 
-identified in the same manner, but using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
+The soil data contained in the Santa Maria dataset, as well as the code used in its processing, is freely 
+available in the web-based \git{} repository \github{}. The repository has the following folder structured:
 
+\begin{verbatim}
+dnos-sm-rs-general
+|- code/                # source code folder
+|  - R/                 # R source code folder
+|    - general.R        # R source code file
+|
+|- data/                # soil data folder
+|  - fieldData.csv      # field data file
+|  - fieldMetadata.csv  # field metadata file
+|  - labData.csv        # laboratory data file
+|  - labMetadata.csv    # laboratory metadata file
+|- README.md            # description of the repository
+\end{verbatim}
 
-\section{CONCLUSIONS}
+Soil data files are available as comma-separated values (CSV) files. The identification of all observation 
+locations, their geographic coordinates (latlong, WGS1984), and field and laboratory data are contained in 
+files \texttt{fieldData.csv} and \texttt{labData.csv}, respectively. Files \texttt{fieldMetadata.csv} and 
+\texttt{labMetadata.csv} contain the metadata. Every soil property is identified with a code composed of three 
+or four capital letters. For example, soil organic carbon is identified with \texttt{ORCA}. A column 
+containing the number of laboratory replicates is identified with the code of the soil property followed by 
+the letter \q{N}. The column containing the sample standard deviation is identified in the same manner, but 
+using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
 
-The main goal of documenting the soil data contained in the Santa Maria dataset was to provide the reader the 
-basis to understand the soil data used in the thesis, and also to support future soil spatial modelling 
-exercises in 
-the catchment of the DNOS reservoir.
-
-As a result of an ongoing collaborative effort, this documentation will be improved in the near future as new 
-studies are developed. We plan to include new figures to exemplify how field soil sampling was carried out. 
-Details of non-standard soil description and analysis methods will likely be extended. This includes the 
-oxidative 
-treatment with \ce{H2O2} to which soil samples were submitted prior to particle size distribution analysis. 
-For 
-cases such as the ECEC, determined using a non-standard method, we plan to develop a study to calibrate a 
-model 
-to convert our results to the standard method for determining exchangeable bases, which uses barium chloride 
-(\ce{BaCl2}) for saturation.
-
-Other already existing soil data will also be included in the Santa Maria dataset and documented as well. 
-These 
-data have not been used in any study so far, including the potential acidity, sum of exchangeable bases, 
-potential 
-cation exchange capacity, base saturation, aluminium saturation, and the five size classes of the sand 
-fraction.
-
-Once a comprehensive documentation of the existing soil data has been constructed, we will prepare a basic 
-spatial exploratory soil data analysis. We hope that our effort to properly document the soil data that we 
-produced,
-and make it freely available for use, will serve as an example for future soil spatial modelling studies 
-developed 
-elsewhere.
-
+% \section{CONCLUSIONS}
+% 
+% The main goal of documenting the soil data contained in the Santa Maria dataset was to provide the reader 
+% the basis to understand the soil data used in the thesis, and also to support future soil spatial modelling 
+% exercises in the catchment of the DNOS reservoir.
+% 
+% As a result of an ongoing collaborative effort, this documentation will be improved in the near future as 
+% new studies are developed. We plan to include new figures to exemplify how field soil sampling was carried 
+% out. Details of non-standard soil description and analysis methods will likely be extended. This includes 
+% the oxidative treatment with \ce{H2O2} to which soil samples were submitted prior to particle size 
+% distribution analysis. For cases such as the ECEC, determined using a non-standard method, we plan to 
+% develop a study to calibrate a model to convert our results to the standard method for determining 
+% exchangeable bases, which uses barium chloride (\ce{BaCl2}) for saturation.
+% 
+% Other already existing soil data will also be included in the Santa Maria dataset and documented as well. 
+% These data have not been used in any study so far, including the potential acidity, sum of exchangeable 
+% bases, potential cation exchange capacity, base saturation, aluminium saturation, and the five size classes 
+% of the sand fraction.
+% 
+% Once a comprehensive documentation of the existing soil data has been constructed, we will prepare a basic 
+% spatial exploratory soil data analysis. We hope that our effort to properly document the soil data that we 
+% produced, and make it freely available for use, will serve as an example for future soil spatial modelling 
+% studies developed elsewhere.
