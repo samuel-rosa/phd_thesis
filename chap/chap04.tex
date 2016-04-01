@@ -40,31 +40,29 @@ and the sample standard deviation is provided as well.
 \section{INTRODUCTION}
 \label{sec:chap04-introduction}
 
-The Santa Maria dataset comprises soil data from $n = 410$ point soil observations made between \num{2004} and 
-\num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
-Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), located in the southern border of the 
-Plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, Brazil. These 
-point soil observations cover the northern sector of the catchment -- an area of \SI{\pm2000}{\hectare}, which 
-corresponds to \SI{\pm60}{\percent} of the entire catchment. These soil data were produced during the 
+This manuscript presents a description of the soil data contained in the \emph{Santa Maria dataset}. The Santa 
+Maria dataset comprises soil data from $n = 410$ soil observations made between \num{2004} and \num{2013} in 
+the catchment of the reservoir of the \textit{Departamento Nacional de Obras de Saneamento}-\textit{Companhia 
+Riograndense de Saneamento} (DNOS-CORSAN), henceforth called \emph{DNOS catchment}, located in the southern 
+border of the Plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, 
+Brazil.
+
+The soil observations cover the northern sector of the DNOS catchment -- an area of \SI{\pm2000}{\hectare}, 
+which corresponds to \SI{\pm60}{\percent} of the entire catchment. These soil data were produced during the 
 development of research projects that aimed at producing semi-detailed soil and land use maps (\scale{25000}) 
 \cite{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012}, and predicting topsoil carbon stock and 
 vulnerability to erosion \cite{Samuel-Rosa2009, MouraBueno2012, Miguel2013}.
 
-This manuscript presents a description of the soil data contained in the Santa Maria dataset, including the 
-procedures for soil sampling and description, as well as the analytical methods employed. The soil data is 
-freely available as comma-separated values (CSV) files in a repository hosted in \dnosgeneral{}. Files 
-\texttt{fieldData.csv} and \texttt{labData.csv} contain the identification of all observation locations, their 
-geographic coordinates (latlong, WGS1984), and field and laboratory data, respectively. Files 
-\texttt{fieldMetadata.csv} and \texttt{labMetadata.csv} contain the metadata. Every soil property is 
-identified with a code composed of three or four capital letters. For example, soil organic carbon is 
-identified with \texttt{ORCA}. A column containing the number of laboratory replicates is identified with the 
-code of the soil property followed by the letter \q{N}. The column containing the sample standard deviation is 
-identified in the same manner, but using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
+% Footnote %%%%%
+\def\foottropics{\footnote{The reader should be aware that soil science evolved in Brazil following a somewhat 
+different pathway than in the countries of the northern hemisphere due to the specific soil features of 
+tropical and subtropical regions. Methods have been adapted along the years, possibly leading to nomenclature 
+mismatches. The reader is invited to contribute to solve any problems in this document.}}
 
-The reader should be aware that soil science evolved in Brazil following a somewhat different pathway than in 
-the countries of the northern hemisphere due to the specific soil features of tropical and subtropical 
-regions. Methods have been adapted along the years, possibly leading to nomenclature mismatches. The reader is 
-invited to contribute to solve any problems in this document.
+The description presented in this manuscript includes the procedures for soil sampling and description, as 
+well as the analytical methods employed\foottropics{}. Soil data is described using summary plots with 
+descriptive statistics. Finally, a description of the structure of the dataset and of how it can be accessed 
+and used is presented. 
 
 \section{FIELD SAMPLING}
 \label{sec:chap04-sampling}
@@ -82,33 +80,46 @@ of projects that aimed at producing semi-detailed soil and land use maps, and pr
 and vulnerability to erosion \cite{Samuel-Rosa2009, SamuelRosaEtAl2011a, MiguelEtAl2012, Moura-BuenoEtAl2012, 
 Samuel-RosaEtAl2013}. The researchers faced several difficulties with a budget cut and shortage of workforce. 
 They also had restricted access to several areas due to geographic barriers and prohibition of access by some 
-landowners. These difficulties forced the researchers to reduce the originally aimed number of observations ($n 
-= 500$) during the development of the project.
+landowners. These difficulties forced the researchers to reduce the originally aimed number of observations 
+($n = 500$) during the development of the project.
 
-\def\foottacit{\footnote{A comprehensive explanation of what \emph{tacit knowledge} is, opposed to 
-\emph{explicit knowledge}, can be found in \href{https://en.wikipedia.org/wiki/Tacit_knowledge}{Wikipedia}.}}
+All observation locations were selected purposively or by convenience. Tacit knowledge 
+(\autoref{sec:chap02-discrete} and \autoref{sec:chap07-elicited}) was the main tool to choose the observation 
+locations, a process that was carried out in the office using \SI{1}{\metre} spatial resolution Google 
+Earth\rr{} imagery of the years of \num{2008} and \num{2009}. The main goal of the researchers was to obtain a 
+sample that they understood as being representative of the different landforms, land uses, and soil taxa 
+present in the DNOS catchment. They also wanted the observations to be spread throughout the entire DNOS 
+catchment.
 
-All observation locations were selected purposively or by convenience. Tacit knowledge\foottacit{} was the 
-main tool to choose the observation locations, a process that was carried out in the office using 
-Google Earth\rr{} imagery of the years of \num{2008} and \num{2009}. The main goal of the researchers was to 
-obtain a sample that they understood as being representative of the different landforms, land uses, and soil 
-taxa present in the study area. They also wanted the observations to be spread throughout the entire study 
-area.
+% Footnote %%%%%
+\def\footsupport{\footnote{\emph{Sample support} refers to the shape, size and orientation of sampling units, 
+the latter being the smallest single entity that we are able or choose to observe in the universe of interest, 
+i.e. the sampling region. A discrete universe such as a forest is defined by the collection of these single 
+entities. However, by definition, such single entities have no real, physical existence in continuous 
+universes such as the soil -- their \q{existence} require our prior, more or less arbitrary, definition of 
+their shape, size and orientation. This definition is usually based on theoretical and practical 
+considerations. For example, the sampling unit can be defined as a roughly polygonal block that is large 
+enough to encompass the pattern of small-scale local vertical (\SI{\leq2}{\m}) and horizontal 
+(1--\SI{10}{\square\metre}) variability of soil properties -- a pedon. Depending on the size of the sampling 
+unit relative to the universe of interest, the sample support is referred to as \emph{areal} or \emph{point} 
+sample support. A pedon of \SI{10}{\square\metre} area observed in an agricultural field of \SI{1}{\hectare} 
+corresponds to the \emph{areal sample support}. However, the same pedon observed in a catchment of 
+\SI{200}{\hectare} would correspond to the \emph{point sample support}.}}
 
 At the observation locations, the researchers defined an area of \SI{\pm100}{\metre\squared} within which they 
 opened three soil pits up to a depth of \SI{20}{\centi\metre}. Soil samples were collected up to a depth of 
 \SI{20}{\centi\metre}, the depth being measured with a ruler. The resulting sampling depth of Subset I varies 
 from \num{2} to \SI{20}{\centi\metre}, with an average of \SI{17}{\centi\metre}. This variation of the 
-vertical sampling support was not a problem for the researchers because their goal was to sample the 
-\emph{topsoil}. The topsoil was defined as the topmost soil layer, with a thickness equal or inferior to 
+vertical sampling support\footsupport{} was not a problem for the researchers because their goal was to sample 
+the \emph{topsoil}. The topsoil was defined as the topmost soil layer, with a thickness equal or inferior to 
 \SI{20}{\centi\metre}, being the soil layer most susceptible to degradation induced by poor agricultural 
 practices and land use changes.
 
 Soil samples from the three pits opened in each sampling area were used to produce a composite sample which 
 was used for laboratory analyses. Subsurface soil features were observed with an auger in each pit, and the 
 average (continuous variables) or most common (categorical variables) value recorded. Note that soil sampling 
-was done using an areal support -- an area of \SI{\pm100}{\metre\squared}. However, the shape and exact area of 
-the sampling units are unknown, and georeferencing took place at point support.
+was done using an areal horizontal support -- an area of \SI{\pm100}{\metre\squared}. However, the shape and 
+exact area of the sampling units are unknown, and georeferencing took place at point support.
 
 \begin{figure}[!ht]
 \centering
@@ -123,13 +134,13 @@ dashed line) to give an idea of how the locations of soil observations is relate
 Georeferencing was done in the field using a Global Navigation Satellite System (GNSS) receiver with a 
 horizontal positional error of less than \SI{\pm8}{\metre} positioned approximately at the centre of the
 sampling area. Sometimes, the horizontal positional error was larger than \SI{\pm8}{\metre} due the effects
-of vegetation, terrain, and satellite configuration. In these cases, observation locations 
-were georeferenced in the office using \SI{1}{\metre} spatial resolution Google Earth\rr{} imagery 
-with positional horizontal error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
+of vegetation, terrain, and satellite configuration. In these cases, observation locations were georeferenced 
+in the office using \SI{1}{\metre} spatial resolution Google Earth\rr{} imagery with positional horizontal 
+error of \SI{\pm6}{\metre} (\autoref{tab:chap05-google-geo-val}).
 
 Every observation was identified with a number in increasing order, following the order in which the 
 observations were made (\num{001}--\num{340}). A total of \num{17}~field campaigns were carried out, yielding 
-an observation density of about \num{18}~observations per \si{\kilo\metre\squared}.
+an observation density of about \num{18}~observations per \si{\kilo\metre\squared} (\autoref{chap:chap07}).
 
 \subsection{Subset II}
 \label{sec:chap04-subset-ii}
@@ -551,6 +562,19 @@ exchangeable bases and exchangeable acidity, i.e.
 % the normal distribution to the data -- a product of the \Rpackage{pedometrics}.}
 % \label{fig:intro-soil-properties}
 % \end{figure}
+
+\section{DATASET STRUCTURE}
+
+The soil data is 
+freely available as comma-separated values (CSV) files in a repository hosted in \dnosgeneral{}. Files 
+\texttt{fieldData.csv} and \texttt{labData.csv} contain the identification of all observation locations, their 
+geographic coordinates (latlong, WGS1984), and field and laboratory data, respectively. Files 
+\texttt{fieldMetadata.csv} and \texttt{labMetadata.csv} contain the metadata. Every soil property is 
+identified with a code composed of three or four capital letters. For example, soil organic carbon is 
+identified with \texttt{ORCA}. A column containing the number of laboratory replicates is identified with the 
+code of the soil property followed by the letter \q{N}. The column containing the sample standard deviation is 
+identified in the same manner, but using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
+
 
 \section{CONCLUSIONS}
 
