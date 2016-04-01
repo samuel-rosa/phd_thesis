@@ -499,9 +499,8 @@ sampling.
 
 \subsection{Canopy}
 
-% TODO: add three figures as examples of each class.
-Soil coverage with vegetation, an idea of the density of stand or plant cover, (\texttt{CANOPY}) was inferred 
-visually in the field using three classes:
+Soil coverage with vegetation, an estimate of the density of stand or plant cover, (\texttt{CANOPY}) was 
+inferred visually in the field using three classes:
 
 \begin{description}
 \item[low] \SI{<25}{\percent}
@@ -535,13 +534,13 @@ database is presented between parenthesis using fixed-width or monospace font.
 \label{sec:chap04-organic}
 
 The soil organic carbon content (\texttt{ORCA}, \si{\gram\per\kilo\gram}) was determined using wet combustion 
-\cite{YeomansEtAl1988, Mebius1960, TedescoEtAl1995, ClaessenEtAl1997}.
+\cite{YeomansEtAl1988, Mebius1960, TedescoEtAl1995, ClaessenEtAl1997} (\autoref{fig:chap04-orca}).
 
 % Footnote %%%%%
 \def\footsulfochromic{\footnote{See a detailed description of the sulfochromic solution, or chromic acid, at 
 \href{http://en.wikipedia.org/wiki/Chromic_acid}{Wikipedia}.}}
 
-Sample aliquots of \num{0.050} to \SI{0.500}{\g} were placed in glass digestion tubes (\SI{80}{\ml}). The 
+Sample aliquots of \num{0.050}--\SI{0.500}{\g} were placed in glass digestion tubes (\SI{80}{\ml}). The 
 amount of sample used varied according to the \texttt{ORCA} estimated by visual interpretation of soil colour. 
 Every digestion tube received an aliquot of \SI{10}{\ml} of sulfochromic solution\footsulfochromic{} 
 [\SI{0.067}{\mole\per\liter} potassium bichromate solution (\ce{K2Cr2O7}) in the presence of concentrated 
@@ -566,9 +565,9 @@ soil_data <-
              na.strings = "na")$ORCA
 
 # Plot
-xlab <- expression(paste('Organic carbon content (g ', kg^-1, ')', sep = ''))
 lattice::histogram(
-  x = soil_data, col = "lightgray", xlab = xlab,
+  x = soil_data, col = "lightgray", 
+  xlab = expression(paste('Organic carbon content (g ', kg^-1, ')', sep = '')),
   par.settings = list(
     fontsize = list(text = 14, points = 8), box.rectangle = list(col = "black"), 
     layout.widths = list(left.padding = 0, right.padding = 0),
@@ -578,65 +577,110 @@ lattice::histogram(
 @
 \includegraphics[width=0.60\textwidth]{fig/chap04-orca}
 \caption[Distribution of organic carbon content in the Santa Maria dataset.]{Distribution of organic carbon 
-content in the Santa Maria dataset. The distribution is severely skewed.}
+content (\si{\gram\per\kilo\gram}) in the Santa Maria dataset.}
 \label{fig:chap04-orca}
 \end{figure}
 
 Observations compiled from \citet{Pedron2005} had their soil organic matter content determined instead of the 
-organic carbon content. Sample aliquots of \SI{2.5}{\ml} were placed in Erlenmeyer flasks (\SI{50}{\ml}). 
+soil organic carbon content. Sample aliquots of \SI{2.5}{\ml} were placed in Erlenmeyer flasks (\SI{50}{\ml}). 
 Every Erlenmeyer flask received an aliquot of \SI{15}{\ml} of \SI{0.067}{\mole\per\liter} sulfochromic 
 solution (\ce{Na2Cr2O7 + H2SO4}). The flasks were heated in a water bath at 75--\SI{80}{\celsius} during 
 \SI{30}{\minute} and shaken for \SI{5}{\minute}. A water aliquot of \SI{15}{\ml} was added to the flask and 
 let overnight (15--\SI{18}{\hour}).
 
 In the next day, an aliquot of \SI{3.0}{\ml} was sampled to a small plastic cup with \SI{3.0}{\ml} of 
-distilled water. The absorbency of the supernatant was measured at \SI{645}{\nano\metre}. The results were 
-transformed to organic carbon content assuming that \SI{58}{\percent} of the organic matter is composed of 
-organic carbon, the result assumed to be equivalent to soil organic carbon content measured using the standard 
-analytical method. The results are expressed using a volume-basis and were converted to a mass-basis using a
-1:1 relation because the mass of the sample aliquot used in the analyses is unknown.
+distilled water. The absorbency of the supernatant was measured at \SI{645}{\nano\metre}. The estimated soil 
+organic matter content was transformed to soil organic carbon content assuming that \SI{58}{\percent} of the 
+soil organic matter is composed of organic carbon. The resulting transformed \texttt{ORCA} value was assumed 
+to be equivalent to soil organic carbon content measured using the standard analytical method (dry 
+combustion). The results are expressed using a volume-basis and were converted to a mass-basis using a 1:1 
+relation because the mass of the sample aliquot used in the analyses is unknown.
 
 \subsection{Particle Size Analysis}
 \label{chap:chap04-granulometry}
 
-\def\footsuzuki{\footnote{As far as I know, a comprehensive description of this method has not been 
-published so far, neither in Portuguese nor in English. You can visit the homepage of the Soil Physics 
-Laboratory of the Universidate Federal de Santa Maria at \url{https://coral.ufsm.br/fisicadosolo/} to get more 
-information about the method or contact their developers.}}
+% Footnote %%%%%
+\def\footsuzuki{\footnote{As far as I know, a comprehensive description of this method has not been published 
+so far, neither in Portuguese nor in English. You can visit the homepage of the Soil Physics Laboratory of the 
+Universidade Federal de Santa Maria at \url{https://coral.ufsm.br/fisicadosolo/} to get more information about 
+the method or contact their developers.}}
 
-Particle size analysis was performed using the pipette method, with the sand fraction (\texttt{SAND}, 
-\SIrange{0.053}{2}{\milli\metre}, \si{\gram\per\kilo\gram}) determined by wet sieving, and the silt fraction 
-(\texttt{SILT}, \SIrange{0.002}{0.053}{\milli\metre}, \si{\gram\per\kilo\gram}) calculated by difference. 
-The analytical procedure is an adaptation\footsuzuki{} of the method of the Soil Conservation Service of 
-the United States Department of Agriculture \cite{UnitedStates1972} made by the Soil Physics Laboratory of the 
+Particle size analysis was performed using the pipette method (\texttt{CLAY}, \SI{<0.002}{\mm}, 
+\si{\gram\per\kilo\gram}), with the sand fraction (\texttt{SAND}, 0.053--\SI{2}{\mm}, 
+\si{\gram\per\kilo\gram}) determined by wet sieving, and the silt fraction (\texttt{SILT}, 
+0.002--\SI{0.053}{\mm}, \si{\gram\per\kilo\gram}) calculated by difference \cite{ClaessenEtAl1997}. The 
+analytical procedure includes adaptations\footsuzuki{} of the method of the Soil Conservation Service of the 
+United States Department of Agriculture \cite{UnitedStates1972} made by the Soil Physics Laboratory of the 
 \textit{Universidade Federal de Santa Maria} \cite{SuzukiEtAl2004, SuzukiEtAl2004a}.
 
-First, a sample aliquot of \SI{20}{\gram} was placed in a \SI{100}{\milli\liter} glass container (height: 
-\SI{10.5}{\centi\metre}; diameter: \SI{2.75}{\centi\metre}; weight: \SI{85}{\gram}). Two nylon spheres with a 
-diameter of \SI{1.71}{\centi\metre} and weighting \SI{3.04}{\gram} (density: \SI{1.11}{\g\per\cm\cubic}) were 
-added to act as physical disaggregating agents. Then, an aliquot of \SI{10}{\milli\liter} of 
-\SI{1}{\mole\per\liter} sodium hydroxide (\ce{NaOH}) solution was added to act as chemical dispersing agent 
-along with \SI{40}{\milli\liter} of distilled water. The glass container was closed with a plastic cap, 
-manually shaken for \SI{10}{\second}, and placed in a horizontal mechanical shaker with capacity for 
-\num{85}~samples. The suspension was left to stand overnight (\SI{10}{\hour}). In the next day the suspension 
-was submitted to horizontal mechanical agitation during \SI{4}{\hour} at \si{120} cycles per minute 
-\cite{SuzukiEtAl2004, SuzukiEtAl2004a}.
+Before particle size analysis, all soil samples with organic matter content \SI{>5}{\percent} -- estimated 
+assuming that \SI{58}{\percent} of the soil organic matter is composed of organic carbon -- were submitted to 
+oxidative treatment with hydrogen peroxide (\ce{H2O2}). For this end, an aliquot of \SI{20}{\g} of soil was 
+placed in a \SI{1000}{\ml} Beaker, to which \SI{15}{\ml} of distilled water and 5--\SI{15}{\ml} of 
+\SI{30}{\percent} \ce{H2O2} were added -- the larger the \texttt{ORCA}, the smaller the quantity of \ce{H2O2} 
+added to avoid loss of material due to the strong frothing that usually takes place during the first addition 
+of \ce{H2O2}. The mixture was homogenized and covered with a watch glass and allowed to stand for 
+\SI{12}{\hour}, when another 5--\SI{15}{\ml} of \ce{H2O2} was added. The addition of 5--\SI{15}{\ml} of 
+\ce{H2O2} continued at approximately regular intervals of \SI{6}{\hour} until the mixture did not present any 
+more effervescence (frothing). The Beaker was transferred to hot plate at a temperature of \SI{50}{\celsius} 
+to evaporate the excess water and remove any remaining \ce{H2O2}. All \ce{H2O2}-treated soil material was 
+transferred quantitatively to a tared \SI{100}{\ml} glass container and put to dry overnight in an oven at 
+\SI{45}{\celsius}. When the soil material was completely dry, the glass container was transferred to a 
+desiccator chamber where it was let to cool for \SI{30}{\minute}. Then, the glass container was weighted with 
+\SI{0.001}{\g} accuracy to estimate quantity of soil material remaining after the \ce{H2O2} treatment.
+
+For particle size analysis, a sample aliquot of \SI{20}{\g} (or approximately \SI{20}{\g} when the material 
+was submitted to oxidative treatment with \ce{H2O2}) was placed in a \SI{100}{\ml} glass container (height: 
+\SI{10.5}{\cm}; diameter: \SI{2.75}{\cm}; weight: \SI{85}{\g}). Two nylon spheres with a diameter of 
+\SI{1.71}{\cm} and weighting \SI{3.04}{\g} (density: \SI{1.11}{\g\per\cm\cubic}) were added to act as physical 
+disaggregating agents. Then, an aliquot of \SI{10}{\ml} of \SI{1}{\mole\per\liter} sodium hydroxide 
+(\ce{NaOH}) solution was added to act as chemical dispersing agent along with \SI{40}{\ml} of distilled water. 
+The glass container was closed with a plastic cap, manually shaken for \SI{10}{\second}, and placed in a 
+horizontal mechanical shaker with capacity for \num{85}~samples. The suspension was left to stand overnight 
+(\SI{10}{\hour}). In the next day the suspension was submitted to horizontal mechanical agitation during 
+\SI{4}{\hour} at \si{120} cycles per minute.
+
+\begin{figure}[!ht]
+\centering
+<<clay, fig = TRUE, echo = FALSE, include = FALSE>>=
+soil_data <- 
+  read.table("~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";", header = TRUE,
+             na.strings = "na")$CLAY
+
+# Plot
+lattice::histogram(
+  x = soil_data, col = "lightgray", 
+  xlab = expression(paste('Clay content (g ', kg^-1, ')', sep = '')),
+  par.settings = list(
+    fontsize = list(text = 14, points = 8), box.rectangle = list(col = "black"), 
+    layout.widths = list(left.padding = 0, right.padding = 0),
+    layout.heights = list(top.padding = 0, bottom.padding = 0))
+)
+@
+\includegraphics[width=0.60\textwidth]{fig/chap04-clay}
+\caption[Distribution of clay content in the Santa Maria dataset.]{Distribution of clay content 
+(\si{\gram\per\kilo\gram}) in the Santa Maria dataset.}
+\label{fig:chap04-clay}
+\end{figure}
 
 After horizontal agitation, the suspension was poured in a plastic graduated cylinder with capacity for 
-\SI{1000}{\milli\liter} using a glass funnel and a metal sieve to hold the two nylon spheres. The suspension 
-in 
-the graduated cylinder was completed to \SI{1000}{\milli\liter} and homogenized using a hand stirrer 
-(\SI{30}{\second}). The suspension was allowed to stand until sedimentation was complete. The time needed was 
-calculated using the Stokes’ law with the temperature measured in a graduated cylinder filled with distilled 
-water.
+\SI{1000}{\ml} using a glass funnel and a metal sieve to hold the two nylon spheres. The suspension in the 
+graduated cylinder was completed to \SI{1000}{\ml} and homogenized using a hand stirrer (\SI{30}{\second}). 
+The suspension was allowed to stand on a vibration-free table to settle the clay fraction (\SI{<0.002}{\mm}) 
+to a depth of \SI{5}{\cm}. The settling time needed was calculated using the Stokes’ law with the temperature 
+measured in a graduated cylinder filled with distilled water. After settling, an aliquot of \SI{50}{\ml} of 
+the suspension was collected at a depth of \SI{5}{\cm} using a hand volumetric pipette. The aliquot was 
+transferred to a tared moisture Beacker and put to dry overnight at \SI{105}{\celsius}. When the material was 
+completely dry, the Beacker was transferred to a desiccator chamber where it was let to cool for 
+\SI{30}{\minute}. Then, the Beacker was weighted with \SI{0.001}{\g} accuracy to estimate \texttt{CLAY} 
+(\autoref{fig:chap04-clay}).
 
-%TODO provide a more detailed description of how CLAY was determined as well as of the oxidative
-%treatment with H2O2.
-
-The clay fraction (\texttt{CLAY}, \SI{<0.002}{\milli\metre}, \si{\gram\per\kilo\gram}) was determined by the 
-pipette method. Soil samples with organic matter content \SI{>5}{\percent} were submitted to oxidative 
-treatment with hydrogen peroxide (\ce{H2O2}) prior to the analysis following the recommendations of
-\citeonline{ClaessenEtAl1997}.
+The suspension remaining in the plastic graduated cylinder after the \SI{50}{\ml}-aliquot had been collected 
+was passed through a \SI{0.053}{\mm} sieve. The material retained in the sieve was washed thoroughly with 
+water tap. The remaining material was quantitatively transferred to a tared moisture Beacker and put to dry 
+overnight at \SI{105}{\celsius}. When the material was completely dry, the Beacker was transferred to a 
+desiccator chamber where it was let to cool for \SI{30}{\minute}. Then, the Beacker was weighted with 
+\SI{0.001}{\g} accuracy to estimate \texttt{SAND}.
 
 %The sand fraction was separated into five size classes:
 %
@@ -661,34 +705,80 @@ treatment with hydrogen peroxide (\ce{H2O2}) prior to the analysis following the
 \label{chap:chap04-bude}
 
 % TODO: Provide a more detailed description of how this is done.
-The bulk soil density (\texttt{BUDE}, \si{\mega\gram\per\cubic\metre}) was determined using the core method 
-with a metallic ring (height: \SI{3}{\centi\metre}; diameter: \SI{5}{\centi\metre}) as described by 
-\citeonline{ClaessenEtAl1997}. The bulk soil density was not determined in the locations where the soil was 
-very shallow or stony.
+The bulk soil density (\texttt{BUDE}, \si{\mega\gram\per\cubic\metre}) at the soil surface was determined 
+using the core method with a metallic ring (height: \SI{3}{\centi\metre}; diameter: \SI{5}{\centi\metre}) 
+\cite{ClaessenEtAl1997} (\autoref{fig:chap04-bude}).
+
+\begin{figure}[!ht]
+\centering
+<<bude, fig = TRUE, echo = FALSE, include = FALSE>>=
+soil_data <- 
+  read.table("~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";", header = TRUE,
+             na.strings = "na")$BUDE
+
+# Plot
+lattice::histogram(
+  x = soil_data, col = "lightgray", 
+  xlab = expression(paste('Bulk density (Mg ', m^-3, ')', sep = '')),
+  par.settings = list(
+    fontsize = list(text = 14, points = 8), box.rectangle = list(col = "black"), 
+    layout.widths = list(left.padding = 0, right.padding = 0),
+    layout.heights = list(top.padding = 0, bottom.padding = 0))
+)
+@
+\includegraphics[width=0.60\textwidth]{fig/chap04-bude}
+\caption[Distribution of bulk density in the Santa Maria dataset.]{Distribution of bulk density 
+(\si{\mega\gram\per\cubic\metre}) in the Santa Maria dataset.}
+\label{fig:chap04-bude}
+\end{figure}
+
+The bulk soil density was not determined in the locations where the soil was very shallow or stony.
 
 \subsection{Exchangeable Bases and Acidity}
 \label{chap:chap04-ecec}
 
 The exchangeable calcium (\texttt{CALC}, \si{\milli\mole\per\kilo\gram}) and magnesium (\texttt{MAGN}, 
 \si{\milli\mole\per\kilo\gram}) were determined by atomic absorption spectroscopy after extraction with 
-\SI{1.0}{\mole\per\liter} \ce{KCl} solution using the method described by \citeonline{ClaessenEtAl1997}. 
-The exchangeable sodium (\texttt{SODI}, \si{\milli\mole\per\kilo\gram}) and potassium (\texttt{POTA}, 
-\si{\milli\mole\per\kilo\gram}) were extracted with a \SI{0.05}{\mole\per\liter} \ce{HCl} solution plus 
-\SI{0.025}{\mole\per\liter} \ce{H2SO} (Mehlich-\num{1} solution). Both were quantified by means of flame 
-atomic emission spectrometry using the method described by \citeonline{TedescoEtAl1995}.
+\SI{1.0}{\mole\per\liter} \ce{KCl} solution \cite{ClaessenEtAl1997}. The exchangeable sodium (\texttt{SODI}, 
+\si{\milli\mole\per\kilo\gram}) and potassium (\texttt{POTA}, \si{\milli\mole\per\kilo\gram}) were extracted 
+with a \SI{0.05}{\mole\per\liter} \ce{HCl} solution plus \SI{0.025}{\mole\per\liter} \ce{H2SO} 
+(Mehlich-\num{1} solution). Both were quantified by means of flame atomic emission spectrometry 
+\cite{TedescoEtAl1995}.
 
 The exchangeable acidity (\texttt{EXAC}, \si{\milli\mole\per\kilo\gram}) was extracted using the same 
 \SI{1.0}{\mole\per\liter} \ce{KCl} solution used to extract the exchangeable calcium and magnesium. It was 
-determined by titrimetry with \SI{0.025}{\mole\per\liter} \ce{NaOH} solution as described by 
-\citeonline[p.~103]{ClaessenEtAl1997}.
+determined by titrimetry with \SI{0.025}{\mole\per\liter} \ce{NaOH} solution \cite{ClaessenEtAl1997}.
 
 % TODO: Include POAC in the database and improve the description of how it was determined.
 % The potential acidity (POAC, \si{\milli\mole\per\kilo\gram}) was determined with \SI{1.0}{\mole\per\liter} 
 % calcium acetate solution at pH~\num{7.0} and titrated with \SI{0.0606}{\mole\per\liter} \ce{NaOH} solution 
 % as described by \citeonline{ClaessenEtAl1997}.
 
+\begin{figure}[!ht]
+\centering
+<<ecec, fig = TRUE, echo = FALSE, include = FALSE>>=
+soil_data <- 
+  read.table("~/projects/dnos-sm-rs/dnos-sm-rs-general/data/labData.csv", sep = ";", header = TRUE,
+             na.strings = "na")$ECEC
+
+# Plot
+lattice::histogram(
+  x = soil_data, col = "lightgray", 
+  xlab = expression(paste('Bulk density (Mg ', m^-3, ')', sep = '')),
+  par.settings = list(
+    fontsize = list(text = 14, points = 8), box.rectangle = list(col = "black"), 
+    layout.widths = list(left.padding = 0, right.padding = 0),
+    layout.heights = list(top.padding = 0, bottom.padding = 0))
+)
+@
+\includegraphics[width=0.60\textwidth]{fig/chap04-ecec}
+\caption[Distribution of effective cation exchange capacity in the Santa Maria dataset.]{Distribution of 
+effective cation exchange capacity (\si{\milli\mole\per\kilo\gram}) in the Santa Maria dataset.}
+\label{fig:chap04-ecec}
+\end{figure}
+
 The effective cation exchange capacity (ECEC, \si{\milli\mole\per\kilo\gram}) was defined as the sum of 
-exchangeable bases and exchangeable acidity, i.e. 
+exchangeable bases and exchangeable acidity (\autoref{fig:chap04-ecec}), i.e. 
 
 \begin{equation*}
  \texttt{ECEC} = \texttt{CALC} + \texttt{MAGN} + \texttt{POTA} + \texttt{SODI} + \texttt{EXAC}.
