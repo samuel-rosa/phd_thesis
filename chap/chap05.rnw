@@ -1086,15 +1086,16 @@ depicted in less detailed geologic maps.
 \label{sec:chap05-land-use}
 
 The first land use map used to derive covariate data included in the Santa Maria dataset was produced by 
-manually digitizing land use data of \num{1980} (\landOld{}) published in the most recent 
-topographic map produced by the Brazilian Army (\scale{25000}) \cite{DSG1992a, DSG1992}. Most processing 
-steps, including the correction of positional bias, are described in \autoref{sec:chap05-dem}, except for 
-the use of the nearest neighbour resampling method to match \landOld{} to the reference grid.
+manually digitizing land use data of \num{1980} (\landOld{}, \autoref{fig:chap05-land-use-old}) published in 
+the most recent topographic map produced by the Brazilian Army (\scale{25000}) \cite{DSG1992a, DSG1992}. Most 
+processing steps, including the correction of positional bias, are described in \autoref{sec:chap05-dem}, 
+except for the use of the nearest neighbour resampling method to match \landOld{} to the reference grid.
 
 \begin{figure}[!ht]
 \centering
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-land-use-old}
 \centering
 <<land-old, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
  
@@ -1135,6 +1136,7 @@ print(map)
 \end{minipage}
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-land-use-new}
 \centering
 <<land-new, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -1177,6 +1179,7 @@ print(map)
 \end{minipage}
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-land-use-diff}
 \centering
 <<land-diff, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -1210,20 +1213,19 @@ print(map)
 \end{minipage}
 \caption[Land use maps included in the Santa Maria dataset.]{Land use maps (a) \landOld{} and (b) \landNew{} 
 used to derive indicator covariates included in the Santa Maria dataset such as (c) \texttt{LUdiff}, the land 
-use change between the years of 1980 and 2009. Legend abbreviations and derived dummy variables are described 
-in the text.}
+use change between the years of 1980 and 2009. Legend abbreviations and derived indicator variables are 
+described in the text.}
 \label{fig:chap05-land-use}
 \end{figure}
 
-The second land use map (\landNew{}) was prepared at a \scale{2000} using high resolution (\SI{2.4}{\m}) 
-Digital Globe\rr{} QuickBird satellite images of \num{2008} and \num{2009}, made publicly available in 
-Google Earth\rr{}
-\cite{SamuelRosaEtAl2011a}. Identification of land uses and delineation of mapping units were done manually, on 
-the computer screen, without using any automated classification routine. Positional validation of 
-Google Earth\rr{} imagery revealed that they have only minor systematic positional errors 
-(\autoref{tab:chap05-google-geo-val}). Despite this, the attribute validation of both land use maps, using $n = 
-60$ validation points placed along $m = 12$ linear transects, showed that they have similar overall accuracy 
-close to \SI{70.00}{\percent}.
+The second land use map (\landNew{}, \autoref{fig:chap05-land-use-new}) was prepared at a \scale{2000} using 
+high resolution (\SI{2.4}{\m}) Digital Globe\rr{} QuickBird satellite images of \num{2008} and \num{2009}, 
+made publicly available in Google Earth\rr{} \cite{SamuelRosaEtAl2011a}. Identification of land uses and 
+delineation of mapping units were done manually, on the computer screen, without using any automated 
+classification routine. Positional validation of Google Earth\rr{} imagery revealed that they have only minor 
+systematic positional errors (\autoref{tab:chap05-google-geo-val}). Despite of this, the attribute validation 
+of both land use maps, using $n = 60$ validation points placed along $m = 12$ linear transects, showed that 
+they have similar overall accuracy close to \SI{70.00}{\percent}.
 
 \ctable[
   caption  = {Error statistics of the horizontal validation of Google Earth\rr{} imagery using $n = 14$ ground 
@@ -1245,43 +1247,37 @@ close to \SI{70.00}{\percent}.
 
 \landOld{} was used to derive $p = 2$ covariates defined as indicator variables, with plantation forests 
 (\textit{PF}) and human settlements (\textit{S}) being grouped together due to their small importance in terms 
-of 
-covered area (\textit{PF}) and for not containing any soil observation (\textit{S}). These covariates are:
+of covered area (\textit{PF}) and for not containing any soil observation (\textit{S}). These covariates are:
 
 \begin{description}
- \item[\texttt{LU1980a}] Native forest (\textit{FS}), which is likely to have soils with higher fertility.
+\item[\texttt{LU1980a}] Native forest (\textit{FS}), which is likely to have soils with higher fertility.
   
- \item[\texttt{LU1980b}] Animal husbandry (\textit{H}), the second most important land use in the study area, 
-which is
- likely to have a soil fertility status lower than native forests.
+\item[\texttt{LU1980b}] Animal husbandry (\textit{H}), the second most important land use in the study area, 
+which is likely to have a soil fertility status lower than native forests.
 \end{description}
 
 Four ($p = 4$) indicator covariates were derived from \landNew{}, with plantation forests (\textit{PF}), human 
-settlements (\textit{S}), and other land uses (\textit{O}), which comprise natural and artificial water bodies, 
-being 
-grouped together due to their small importance in terms of covered area (\textit{PF}) and for not containing 
-any 
-soil observation (\textit{S} and \textit{O}). These covariates are:
+settlements (\textit{S}), and other land uses (\textit{O}), which comprise natural and artificial water 
+bodies, being grouped together due to their small importance in terms of covered area (\textit{PF}) and for 
+not containing any soil observation (\textit{S} and \textit{O}). These covariates are:
 
 \begin{description}
- \item[\texttt{LU2009a}] Native forest (\textit{FS}), as described above.
+\item[\texttt{LU2009a}] Native forest (\textit{FS}), as described above.
  
- \item[\texttt{LU2009b}] Shrubland (\textit{SS}), which is likely to have a soil fertility level above those 
-found in
- areas used with annual crop agriculture and animal husbandry, but lower than in native forests.
+\item[\texttt{LU2009b}] Shrubland (\textit{SS}), which is likely to have a soil fertility level above those 
+found in areas used with annual crop agriculture and animal husbandry, but lower than in native forests.
  
- \item[\texttt{LU2009c}] Animal husbandry (\textit{H}), as described above.
+\item[\texttt{LU2009c}] Animal husbandry (\textit{H}), as described above.
   
- \item[\texttt{LU2009d}] Annual crop agriculture (\textit{AA}), which is likely to present the lowest soil 
-fertility 
- levels due to the usually poor management practices employed.
+\item[\texttt{LU2009d}] Annual crop agriculture (\textit{AA}), which is likely to present the lowest soil 
+fertility levels due to the usually poor management practices employed.
 \end{description}
 
-A seventh indicator covariate (\texttt{LUdiff}) was derived using data from both land use maps. It consists of 
-the land use change between \num{1980} and \num{2009}, computed by checking if the land use has changed (1) or 
-remained the same (0) in every grid cell after the 29-year period. \texttt{LUdiff} can be useful, for example, 
-to explain the low soil organic carbon content in forest soils due to previous use with crop agriculture or 
-animal husbandry.
+A seventh indicator covariate (\texttt{LUdiff}, \autoref{fig:chap05-land-use-diff}) was derived using data 
+from both land use maps. It consists of the land use change between \num{1980} and \num{2009}, computed by 
+checking if the land use has changed (1) or remained the same (0) in every grid cell after the 29-year period. 
+\texttt{LUdiff} can be useful, for example, to explain the low soil organic carbon content in forest soils due 
+to previous use with crop agriculture or animal husbandry.
 
 \section{SATELLITE IMAGES}
 \label{sec:chap05-sat-image}
