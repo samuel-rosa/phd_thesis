@@ -89,11 +89,16 @@ gcps <- gcps[which(gcps$source == "field"), c("x", "y", "id")]
 sp::coordinates(gcps) <- ~ x + y
 sp::proj4string(gcps) <- sp::CRS("+init=epsg:32722") # wgs1984utm22s
 
+# Load road info
+roads_rs <- raster::shapefile("~/projects/dnos-sm-rs/dnos-sm-rs-data/roads/roads_rs.shp")
+roads_rs <- list("sp.polygons", roads_rs, col = "gray", lty = 2)
+
 # Prepare plot
 p <- sp::spplot(
   pol, zcol = "cat", col = "gray", fill = "lemonchiffon", scales = list(draw = TRUE), colorkey = FALSE, 
   aspect = "iso", xlim = c(gcps@bbox[1, 1] * 0.998, gcps@bbox[1, 2] * 1.005),
   ylim = c(gcps@bbox[2, 1] * 0.9999, gcps@bbox[2, 2] * 1.0001),
+  sp.layout = list(roads_rs),
   par.settings = list(
     fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)),
@@ -104,15 +109,19 @@ p <- sp::spplot(
       v = seq(222000, 233000, 1000), h = seq(6712000, 6725000, 1000),
       col = "gray", lty = "dashed", lwd = 0.5)
     lattice::panel.text(x = gcps@coords[, "x"], y = gcps@coords[, "y"], labels = gcps$id, pos = 4)
+    lattice::panel.text(x = sp::coordinates(pol)[1], y = sp::coordinates(pol)[2], labels = "DNOS catchment",
+      cex = 0.8)
   })
 
 # Plot
 print(p)
 @
-\includegraphics[width = 0.90\textwidth]{fig/chap05-field-gcps}
+\includegraphics[width = 0.90\textwidth,trim=0 15mm 0 15mm, clip]{fig/chap05-field-gcps}
 \caption[Ground control points used for the positional validation of the covariates.]{Spatial distribution of 
 the ground control points ($n = 14$, red dots) used for the horizontal positional validation of covariates 
-included in the Santa Maria dataset.}
+included in the Santa Maria dataset. The location of the ground control points is highly determined by the 
+local road network (dashed grey line) surrounding the catchment of the reservoir of the \textit{Departamento 
+Nacional de Obras de Saneamento}-\textit{Companhia Riograndense de Saneamento}.}
 \label{fig:chap05-field-gcps}
 \end{figure}
 
@@ -152,52 +161,93 @@ In Itaara, near the speed monitoring radar of the BR-158 federal highway, distan
 Museum, opposite the Fruteira da Esquina, opposite to the cell phone tower and to the entrance of the gravel 
 pit DallaPasqua, located \SI{4}{\km} away from the site.
 
- \item [GCP 04] Em Santa Maria, na entrada da estrada de acesso ao cemitério do Bairro Campestre do Menino 
- Deus, do lado direito da Estrada do Perau (subindo), alinhado (\SI{50}{\cm}) com a frente das casas, a
- \SI{2,2}{\m} do muro, a \SI{6,5}{\m} do meio-fio da Estrada do Perau, a \SI{50}{\m} da ponte sobre o Rio
- Vacacaí-Mirim.
+\item[GCP 04]
+% Em Santa Maria, na entrada da rua que dá acesso ao cemitério do Bairro Campestre do Menino Deus, no lado 
+% direito da Estrada do Perau em direção à rodovia federal BR158, alinhado com a fachada das residências, a 
+% \SI{2,2}{\m} de distância do muro frontal, a \SI{6,5}{\m} de distância do meio-fio da Estrada do Perau, a 
+% \SI{50}{\m} de distãncia da ponte sobre o Rio Vacacaí-Mirim.
+In Santa Maria, at the entrance of the street that leads to the cemetery of the Campestre do Menino Deus 
+neighbourhood, on the right side of Perau Road going towards the federal highway BR-158, aligned with the 
+façade of the residences, \SI{2.2}{\m} away from the front wall, \SI{6.5}{\m} away from the curb of the Perau 
+Road, \SI{50}{\m} away from the bridge over the Vacacaí-Mirim River.
+
+\item[GCP 05]
+% Em Santa Maria, na entrada do Rancho do Amaral, junto à porteira, no lado direito, fora da estrada, distante 
+% \SI{1}{\m} de uma palmeira e \SI{1}{\m} do muro de pedras.
+In Santa Maria, at the entrance of the Rancho do Amaral, next to the gate, on the right size, off the road, 
+\SI{1}{\m} away of a palm tree and \SI{1}{\m} away from the stone wall.
  
- \item [GCP 05] Na entrada do Rancho do Amaral, junto à porteira, no lado direito, fora da estrada, distante 
- \SI{1}{\m} de uma palmeira e \SI{1}{\m} do muro de pedras.
+\item[GCP 06]
+% Em Itaara, na Avenida Etelvina, na beira da estrada, a \SI{2,5}{\m} de distância do centro da estrada,
+% alinhado com a cerca que separa a floresta nativa do pomar de \textit{Citrus}~sp.~localizado do outro lado 
+% da estrada.
+In Itaara, Etelvina Avenue, on the roadside, \SI{2.5}{\m} away from the road centre, aligned with the fence 
+that separates the native forest from the \textit{Citrus}~sp.~orchard located across the road.
+
+\item[GCP 07]
+% Em Itaara, Localidade de Estação Pinhal, no lado esquerdo do acesso à mina de extração de brita DallaPasqua, 
+% sob a rede de transmissão de eletricidade.
+In Itaara, Estação Pinhal Locality, on the left side of the beginning of the road that gives access to the 
+DallaPasqua gravel pit, under the electricity transmission network.
+
+\item[GCP 08]
+% Em Santa Maria, Distrito de Santo Antão, na entrada da estrada que dá acesso à Central de Tratamento de 
+% Resíduos da Caturrita, em frente à Escola Municipal de Ensino Fundamental Intendente Manoel Ribas.
+In Santa Maria, Santo Antão District, at the beginning of the road that gives access to the Caturrita Waste 
+Treatment Centre, opposite the Municipal Elementary School Intendente Manoel Ribas.
  
- \item [GCP 06] Em Itaara, na Avenida Etelvina, na beira da estrada, a \SI{2,5}{\m} do centro da estrada,
- alinhado (\SI{20}{\cm}) com a cerca que separa a floresta nativa do pomar de \textit{Citrus}~sp.~localizado 
- do outro lado da estrada.
+\item[GCP 09]
+% Em São Martinho da Serra, Localidade de Água Negra, na bifurcação da estrada que vem de Santa Maria e que dá 
+% acesso à Localidade de Campinas, junto à parada de ônibus, no canteiro no meio da bifurcação, \SI{40}{\m} 
+% distante do Piquete Laçador Jorge R.~da Silva, em frente ao Mercado do Ronaldo.
+In São Martinho da Serra, Água Negra Locality, at the bifurcation of the road coming from Santa Maria and 
+giving access to the Campinas Locality, close to the bus stop, at the roundabout in the middle of bifurcation, 
+\SI{40}{\m} away from the Piquete Laçador Jorge R.~da Silva, in front of Ronaldo's Market.
+
+\item[GCP 10]
+% Em Santa Maria, na estrada em direção à São Martinho da Serra, depois da capela Santo Antão, no lado externo 
+% de uma curva, próximo a duas pequenas árvores, alinhado com a cerca que marca a divisa entre duas 
+% propriedades ocupadas com campo nativo. Em frente à propriedade com duas residências, uma delas com dois 
+% andares e quatro pequenos lagos nos fundos.
+In Santa Maria, on the road towards São Martinho da Serra, after Santo Antão Chapel, on the outside of a 
+curve, near two small trees, aligned with the fence that marks the boundary between two properties occupied 
+with native grass. In front of the property with two houses, one with two floors and four small lakes in the 
+backyard.
  
- \item [GCP 07] Em Itaara, no lado esquerdo da entrada da estrada que dá acesso à mina de extração de brita
- DallaPasqua, sob a rede de transmissão de eletricidade. Localidade de Estação Pinhal. 
+\item[GCP 11]
+% Em Itaara, entrada para a Localidade Rincão dos Minello, no início da estrada que dá acesso à Brita Pinhal, 
+% ao lado da rodovia federal BR158, \SI{5}{\m} de distância à frente do corte no terreno expondo a rocha de 
+% arenito da Formação Botucatu, \SI{15}{\m} distante do poste da linha de transmissão de eletricidade da 
+% companhia AES.
+In Itaara, at the entrance to the Rincão dos Minello Locality, at the beginning of the road that gives access 
+to Brita Pinhal, next to the federal highway BR-158, \SI{5}{\m} away and in front of the road cut exposing the 
+sandstone rocks of the Botucatu Formation, \SI{15}{\m} away from the post of the electricity transmission line 
+of the AES company.
+
+\item[GCP 12]
+% Em Itaara, na rodovia federal BR158, em frente ao lago da SOCEPE, na entrada da cidade, próximo ao Bar e 
+% Armazém Ricardo, deslocado em \SI{1}{\m} para dentro do passeio em relação ao alinhamento dos postes da rede 
+% elétrica.
+In Itaara, at the federal highway BR-158, in front of the SOCEPE Lake, in the city entrance, near the Ricardo's 
+Bar and Warehouse, shifted \SI{1}{\m} into the sidewalk in relation to the alignment of the posts of the 
+electrical network.
+
+\item[GCP 13]
+% Em Itaara, na Vila Etelvina, com uma vinha à montante, alinhado com a cerca que divide duas propriedades 
+% localizadas no lado oposto da estrada, uma à esquerda coberta com floresta nativa/exótica e outra à direita 
+% ocupada com lavoura de culturas anuais.
+In Itaara, at Vila Etelvina, with a vineyard upstream, aligned with the fence that divides two properties 
+located on the opposite side of the road, the one on the left covered with native/exotic woods and the other on 
+the right occupied with field of annual crops.
  
- \item [GCP 08] No Distrito de Santo Antão, na entrada da estrada para a Central de Tratamento de Resíduos
- da Caturrita, em frente à Escola Municipal de Ensino Fundamental Intendente Manoel Ribas.
- 
- \item [GCP 09] Em São Martinho da Serra, na localidade de Água Negra, na bifurcação da estrada que vem de
- Santa Maria e que dá acesso à localidade de Campinas, junto à parada de ônibus, no canteiro no meio da
- bifurcação, \SI{40}{\m} distante do Piquete Laçador Jorge R.~da Silva, em frente ao Mercado do Ronaldo.
- 
- \item [GCP 10] Na estrada de Santa Maria para São Martinho da Serra, em uma curva, no lado externo, próximo a
- duas pequenas árvores, alinhado (\SI{1}{\m}) com a cerca que marca a divisa entre duas propriedades e campo
- nativo. Em frente à propriedade com duas casas, uma delas com dois andares e quatro pequenos lagos nos
- fundos. Depois da capela Santo Antão.
- 
- \item [GCP 11] Em Itaara, na entrada da estrada que dá acesso à Brita Pinhal, junto à rodovia federal BR185,
- ao lado (distante \SI{5}{\m}) do corte no terreno expondo a rocha de arenito da Formação Botucatu,
- \SI{15}{\m} distante do poste da linha de transmissão de eletricidade da companhia AES, na entrada para a
- localidade de Rincão dos Minello.
- 
- \item [GCP 12] Em Itaara, em frente ao lago da SOCEPE, na entrada da cidade, junto à rodovia federal BR158,
- próximo ao Bar e Armazém Ricardo, deslocado em \SI{1}{\m} para dentro do passeio em relação ao alinhamento 
- dos postes da rede elétrica.
- 
- \item [GCP 13] Em Itaara, na Vila Etelvina, alinhado com a cerca (a \SI{30}{\cm}) que divide duas 
-propriedades, uma à 
- esquerda coberta com floresta nativa/exótica e outra à direita ocupada com lavoura de culturas anuais. O ponto 
-está 
- locado no lado oposto. Plantação de videiras logo acima, no divisor de águas.
- 
- \item [GCP 14] Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após o término 
- da subida íngreme com calçamento apenas nos trilhos, no final da floresta e início do campo nativo, alinhado 
- (a \SI{20}{\cm}) com a cerca dos dois lados da estrada. Locado \SI{1}{\m} distante do moirão da cerca do 
- lado esquerdo subindo, no interior da estrada.
+\item[GCP 14]
+% Em Itaara, na estrada que sobe para a propriedade do Sr. Antoninho Luccas, logo após o término da subida 
+% íngreme com calçamento apenas nos trilhos, no final da floresta e início do campo nativo, alinhado (a 
+% \SI{20}{\cm}) com a cerca dos dois lados da estrada. Locado \SI{1}{\m} distante do moirão da cerca do lado 
+% esquerdo subindo, no interior da estrada.
+In Itaara, in the road that goes towards the property of Mr. Antoninho Luccas, soon after the steep climb, 
+where there is only pavement on the tracks, at the end of the forest and beginning of native grass, aligned 
+with the fence on both sides of road, \SI{1}{\m} away from the left corner fence post.
 \end{description}
 
 Attribute validation of soil, geologic, and land use maps, and digital elevation models was done using a set of 
