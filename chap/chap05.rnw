@@ -374,7 +374,7 @@ plot(p1)
 \end{minipage} 
 \caption[Area-class soil maps included in the Santa Maria dataset.]{Area-class soil maps (a) \soilOld{} and 
 (b) \soilNew{} used to derive indicator covariates included in the Santa Maria dataset. Legend abbreviations 
-and derived dummy variables are described in the text.}
+and derived indicator variables are described in the text.}
 \label{fig:chap05-soil-maps}
 \end{figure}
 
@@ -899,13 +899,13 @@ A total of $p = 1 \times \texttt{ELEV} + 7 \times (\texttt{NOR}, \texttt{SLP}, \
 \section{GEOLOGIC MAPS}
 \label{sec:chap05-geo-maps}
 
-Geologic data comes from the two most recent geologic maps (\geoOld{} and \geoNew{}) published at the 
-\scales{50000}{25000} \cite{GasparettoEtAl1988, MacielFilho1990} (\autoref{fig:chap05-geo-maps}). Both of 
-them were produced based on the most recent topographic sheets produced by the Brazilian Army at the 
-\scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, geologic maps were 
-available only in analogical format, and were hand digitized and georeferenced in QGIS. Intersections 
-between all meridians and parallels ($n = 16$) were used as control points to adjust a second order polynomial 
-model. Resampling was performed using the cubic resampling method. The original CRS 
+Geologic data comes from the two most recent geologic maps (\geoOld{} -- \autoref{fig:chap05-geo-old}, and 
+\geoNew{} -- \autoref{fig:chap05-geo-new}) published at the \scales{50000}{25000} \cite{GasparettoEtAl1988, 
+MacielFilho1990}. Both of them were produced based on the most recent topographic sheets produced by the 
+Brazilian Army at the \scales{50000}{25000} \cite{DSG1980, DSG1992, DSG1992a}. Alike topographic maps, 
+geologic maps were available only in analogical format, and were hand digitized and georeferenced in QGIS. 
+Intersections between all meridians and parallels ($n = 16$) were used as control points to adjust a second 
+order polynomial model. Resampling was performed using the cubic resampling method. The original CRS 
 (EPSG:31982 -- SIRGAS2000 / UTM zone 22S) was transformed to match the reference grid using the 
 \Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
@@ -913,6 +913,7 @@ model. Resampling was performed using the cubic resampling method. The original 
 \centering
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-geo-old}
 \centering
 <<geo-old, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -952,6 +953,7 @@ plot(map)
 \end{minipage}
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-geo-new}
 \centering
 <<geo-new, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -999,23 +1001,23 @@ plot(map)
 @
 \includegraphics[width = \textwidth]{fig/chap05-geo-new}
 \end{minipage} 
-\caption[Geologic maps included in the Santa Maria dataset.]{Geologic maps (a) \geoOld{} and (b) \geoNew{} used 
-to derive indicator covariates included in the Santa Maria dataset. Legend abbreviations and derived dummy 
-variables are described in the text.}
+\caption[Geologic maps included in the Santa Maria dataset.]{Geologic maps (a) \geoOld{} and (b) \geoNew{} 
+used to derive indicator covariates included in the Santa Maria dataset. Legend abbreviations and derived 
+indicator variables are described in the text.}
 \label{fig:chap05-geo-maps}
 \end{figure}
 
 The positional validation of geologic maps was performed using $n = 8$ (\geoOld{}) and $n = 5$ (\geoNew{}) 
-GCPs, respectively. Validation statistics show that the positional accuracy of neither geologic map meets the 
+GCPs, respectively. Validation statistics show that the positional accuracy of neither geologic maps meets the 
 high-quality standards of the current Brazilian legislation (\autoref{tab:chap05-geology-geo-val}). Estimated 
-RMSE are \num{147} and \SI{69}{\m} for \geoOld{} and \geoNew{}, respectively, when the maximum RMSE accepted 
-are \num{25} and \SI{13}{\m}, respectively. For \geoOld{}, the lowest accuracy is found in the y-coordinate, 
-while for \geoNew{}, the x-coordinate is the least accurate. Validation statistics suggest that there is a 
-strong systematic error, which probably was propagated from the topographic maps used to produce the geologic 
-maps. Therefore, the same strategy (affine transformation) used to remove the systematic positional error of 
-the topographic maps was employed on geologic maps. Due to the lack of GCPs, model parameters were adjusted 
-using the same set of GCPs used for the validation. The estimated uncertainty (RMSE) of the affine 
-transformation is \num{86} and \SI{22}{\m} for \geoOld{} and \geoNew{}, respectively.
+RMSE are \num{147} and \SI{69}{\m} for \geoOld{} and \geoNew{}, respectively, when the maximum RMSE 
+recommended are \num{25} and \SI{13}{\m}, respectively. For \geoOld{}, the lowest accuracy is found in the 
+y-coordinate, while for \geoNew{}, the x-coordinate is the least accurate. Validation statistics suggest that 
+there is a strong systematic error, which probably was propagated from the topographic maps used to produce 
+the geologic maps. Therefore, the same strategy (affine transformation) used to remove the systematic 
+positional error of the topographic maps was employed on geologic maps. Due to the lack of GCPs, model 
+parameters were adjusted using the same set of GCPs used for the validation. The estimated uncertainty (RMSE) 
+of the affine transformation is \num{86} and \SI{22}{\m} for \geoOld{} and \geoNew{}, respectively.
 
 \ctable[
   caption  = {Error statistics of the horizontal validation of geologic maps \geoOld{} and \geoNew{} using 
@@ -1050,32 +1052,32 @@ transformation is \num{86} and \SI{22}{\m} for \geoOld{} and \geoNew{}, respecti
 %  \label{fig:chap05-geology-azim}
 % \end{figure}
 
-Three ($p = 3$) covariates were derived from \geoOld{}:
+Three ($p = 3$) indicator covariates were derived from \geoOld{}:
 
 \begin{description}
- \item[\texttt{GEO\_50a}] Inferior Sequence of the Serra Geral Formation. Composed mainly by basic 
- igneous rocks (tholeiitic basalt and andesite). It is likely related to high soil clay content and effective 
-cation exchange capacity;
+\item[\texttt{GEO\_50a}] Inferior Sequence of the Serra Geral Formation. Composed mainly by basic igneous 
+rocks (tholeiitic basalt and andesite). It is likely related to high soil clay content and effective cation 
+exchange capacity.
  
- \item[\texttt{GEO\_50b}] Superior Sequence of the Serra Geral Formation. Composed mainly by acid 
- igneous rocks (granophyric rhyolite and rhyodacite). It is likely related to moderate to 
- high \texttt{CLAY} and \texttt{ECEC};
+\item[\texttt{GEO\_50b}] Superior Sequence of the Serra Geral Formation. Composed mainly by acid igneous rocks 
+(granophyric rhyolite and rhyodacite). It is likely related to moderate to high \texttt{CLAY} and 
+\texttt{ECEC}.
  
- \item[\texttt{GEO\_50c}] Botucatu Formation. Composed mainly by aeolian sandstones. It is likely  related to 
-low \texttt{CLAY} and \texttt{ECEC};
+\item[\texttt{GEO\_50c}] Botucatu Formation. Composed mainly by aeolian sandstones. It is likely related to 
+low \texttt{CLAY} and \texttt{ECEC}.
 \end{description}
 
-Four ($p = 4$) covariates were derived from \geoNew{}, the first three of them having the same meaning 
-of those derived from \geoOld{}:
+Four ($p = 4$) indicator covariates were derived from \geoNew{}, the first three of them having the same 
+meaning of those derived from \geoOld{}:
 
 \begin{description}
- \item[\texttt{GEO\_25a}] Inferior Sequence of the Serra Geral Formation;
+\item[\texttt{GEO\_25a}] Inferior Sequence of the Serra Geral Formation.
  
- \item[\texttt{GEO\_25b}] Superior Sequence of the Serra Geral Formation;
+\item[\texttt{GEO\_25b}] Superior Sequence of the Serra Geral Formation.
  
- \item[\texttt{GEO\_25c}] Botucatu Formation;
+\item[\texttt{GEO\_25c}] Botucatu Formation.
  
- \item[\texttt{GEO\_25d}] Quaternary deposits of fluvial, alluvial, and colluvial origin. It can help 
+\item[\texttt{GEO\_25d}] Quaternary deposits of fluvial, alluvial, and colluvial origin. It can help 
 explaining the low clay content in areas where the soil is believed to have developed from igneous rocks as 
 depicted in less detailed geologic maps.
 \end{description}
