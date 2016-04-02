@@ -42,7 +42,7 @@ available in two levels of spatial detail: area-class soil maps, digital elevati
 land use maps, and satellite images. These covariate data are the outcome of projects that aimed at modelling 
 various environmental features and were carried out as part of local (soil, geology, land use), regional 
 (terrain, land use), and global (terrain, land use) mapping initiatives. The covariate data is freely 
-available in a GRASS GIS repository hosted in MEGASync, while the source code used in its production and 
+available in a GRASS GIS database hosted in MEGAsync servers, while the source code used in its production and 
 processing is freely available in a repository hosted in GitHub.
 \end{chapterabstract}
 
@@ -79,11 +79,49 @@ description of the satellite images included in the Santa Maria dataset.
 \section{DATABASE STRUCTURE}
 \label{sec:chap05-database}
 
-Covariate data were harmonized to a reference grid of \SI{5}{\m} grid size. The coordinate reference 
-system (CRS) is WGS1984 / UTM zone 22S, coded \href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} 
-by the European Petroleum Survey Group (\href{http://www.epsg.org/}{EPSG}).
+Preparing the covariate data to enter the Santa Maria dataset required creating two databases. The first 
+contains only vector (point) data, specifically point ground control data, as well as the code used in its 
+processing. This database is freely available in the web-based \git{} repository \github{}. This is the same 
+repository containing the soil data (\autoref{sec:chap04-database}). The repository has the following folder 
+structured:
 
+\begin{verbatim}
+dnos-sm-rs-general
+|- code/              # source code folder
+|  - R/               # R source code folder
+|    - general.R      # R source code file
+|
+|- data/              # data folder
+|  - gcpData.csv      # ground control data file
+|  - gcpMetadata.csv  # ground control metadata file
+|- README.md          # description of the repository
+\end{verbatim}
 
+Ground control data files are available as comma-separated values (CSV) files. The identification of all 
+observation locations, their geographic coordinates (EPSG:31982), and elevation data are contained in the file 
+\texttt{gcpData.csv}. File \texttt{gcpMetadata.csv} contain the metadata.
+
+\def\megasync{\href{https://mega.nz}{MEGAsync}}
+
+% Footnote %%%%%
+\def\footgrass{\footnote{Detailed information about the structure of a GRASS GIS database can be found in 
+GRASS GIS \href{https://grass.osgeo.org/grass64/manuals/helptext.html}{help pages}.}}
+
+The second database contains both vector (point, line and polygon) and raster (image) data. This database is 
+freely available in \megasync{} servers, and is structured as a GRASS GIS database\footgrass{}. The database 
+has the following folder structured:
+
+\begin{verbatim}
+dbGRASS               # GRASS GIS database
+|- dnos-sm-rs         # Santa Maria dataset
+|  - PERMANENT/          # general definitions folder
+|  - predicitons/        # data folder
+\end{verbatim}
+
+All covariate data in the GRASS GIS database are harmonized to a reference grid of \SI{5}{\m} grid size. The 
+coordinate reference system (CRS) is WGS1984 / UTM zone 22S, coded 
+\href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} by the European Petroleum Survey Group 
+(\href{http://www.epsg.org/}{EPSG}).
 
 \section{GROUND CONTROL POINTS}
 \label{sec:chap05-gcp}

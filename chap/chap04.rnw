@@ -865,9 +865,11 @@ exchangeable bases and exchangeable acidity (\autoref{fig:chap04-ecec}), i.e.
 % \end{figure}
 
 \section{DATABASE STRUCTURE}
+\label{sec:chap04-database}
 
 The soil data contained in the Santa Maria dataset, as well as the code used in its processing, is freely 
-available in the web-based \git{} repository \github{}. The repository has the following folder structured:
+available in the web-based \git{} repository \github{}. This is the same repository containing the ground 
+control data (\autoref{sec:chap05-database}) The repository has the following folder structured:
 
 \begin{verbatim}
 dnos-sm-rs-general
