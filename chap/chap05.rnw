@@ -1283,34 +1283,33 @@ to previous use with crop agriculture or animal husbandry.
 \label{sec:chap05-sat-image}
 
 Two sources of satellite images were used to produce covariate data included in the Santa Maria dataset. The 
-first is the Thematic Mapper (TM) sensor aboard the longest-operating Earth observation satellite -- Landsat 5. 
-The satellite image used was acquired on \num{26} December \num{2010} and is freely available in the database 
-of the Division of Image Generation of the Brazilian National Institute for Space Research (\inpedgi). The 
-image contains seven spectral bands (\autoref{tab:chap05-satellites}) (including a thermal band that is not 
-included in the Santa Maria dataset), with \SI{8}{\bit} radiometric resolution (digital numbers from 
-\numrange{0}{255}) and \SI{30}{\m} spatial resolution. The satellite image was orthorectified using 
-Geomatica\rr{} OrthoEngine\rr{} with the Landsat rigorous model (Toutin's Model) 
+first is the Thematic Mapper (TM) sensor aboard the longest-operating Earth observation satellite -- Landsat 
+5 (\autoref{fig:chap05-sat-old}). The satellite image used was acquired on \num{26} December \num{2010} and is 
+freely available in the database of the Division of Image Generation of the Brazilian National Institute for 
+Space Research (\inpedgi). The image contains seven spectral bands (\autoref{tab:chap05-satellites}) 
+(including a thermal band that is not included in the Santa Maria dataset), with \SI{8}{\bit} radiometric 
+resolution (digital numbers from \numrange{0}{255}) and \SI{30}{\m} spatial resolution. The satellite image 
+was orthorectified using Geomatica\rr{} OrthoEngine\rr{} with the Landsat rigorous model (Toutin's Model) 
 \cite{Toutin2004, PCIGeomatics2007}. Due to the absence of good identifiable field GCPs, $n = 28$ GCPs were 
-collected from Google Earth\rr{} imagery, which have a high positional accuracy in the study area 
-(\autoref{tab:chap05-google-geo-val}). GCPs were located 
-at easily identifiable geographical markers such as road intersections and bridges, evenly distributed 
-throughout the image, and covering a variety of elevations, following standard recommendations 
-\cite{PCIGeomatics2007}. 
+collected from Google Earth\rr{} imagery, which have a high positional accuracy in the DNOS catchment 
+(\autoref{tab:chap05-google-geo-val}). GCPs were located at easily identifiable geographical markers such as 
+road intersections and bridges, evenly distributed throughout the image, and covering a variety of elevations, 
+following standard recommendations \cite{PCIGeomatics2007}. 
 % TODO: add link to \autoref{fig:chap05-ortho-gcps}
 The DEM used for orthorectification is TOPODATA after preprocessing as described in \autoref{sec:chap05-dem}. 
 Resampling was done using the nearest neighbour method to avoid changing the digital numbers.
 
-After orthorectification, all bands were imported into GRASS, where all other necessary corrections were 
+After orthorectification, all bands were imported into GRASS GIS, where all other necessary corrections were 
 performed. Radiometric correction (conversion from digital numbers to top-of-atmosphere reflectance) was done 
 using \grass{i.landsat.toar}. Atmospheric correction (removal of the effects of the atmosphere on the 
 reflectance values) was done with the 6S atmospheric model \cite{VermoteEtAl1997} as implemented in 
 \grass{i.atcorr} using the tropical atmospheric model, the continental aerosols model, an image-based 
 visibility estimate of \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
 
-The second source of satellite images is RapidEye. Images are available through the Brazilian Ministry of the 
-Environment \cite{Brasil2012}, which has a full coverage of the Brazilian territory for \num{2011} and 
-\num{2012}. The satellite image used (tile number \num{2225403}) was acquired on \num{16} November \num{2012} 
-(second coverage). It contains five spectral bands 
+The second source of satellite images is RapidEye (\autoref{fig:chap05-sat-new}). Images are available through 
+the Brazilian Ministry of the Environment \cite{Brasil2012}, which has a full coverage of the Brazilian 
+territory for \num{2011} and \num{2012}. The satellite image used (tile number \num{2225403}) was acquired on 
+\num{16} November \num{2012} (second coverage). It contains five spectral bands 
 (\autoref{tab:chap05-satellites}), featuring among them the so-called red-edge band, located between the red 
 and the near-infrared bands. This spectral band is the main feature distinguishing RapidEye images from most 
 other sources of satellite images, considered to provide additional information about the vegetation 
@@ -1322,6 +1321,7 @@ version \num{4} DEM \cite{RapidEye2013}.
 \centering
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-sat-old}
 \centering
 <<sat-old, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -1350,6 +1350,7 @@ print(map)
 \end{minipage}
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-sat-new}
 \centering
 <<sat-new, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -1376,8 +1377,8 @@ print(map)
 @
 \includegraphics[width = \textwidth]{fig/chap05-sat-new}
 \end{minipage} 
-\caption[Satellite images included in the Santa Maria dataset.]{Satellite images used to derive covariates such 
-as (a) \texttt{NDVI\_30} and (b) \texttt{NDVI\_5b} included in the Santa Maria dataset.}
+\caption[Satellite images included in the Santa Maria dataset.]{Satellite images used to derive covariates 
+such as (a) \texttt{NDVI\_30} and (b) \texttt{NDVI\_5b} included in the Santa Maria dataset.}
 \label{fig:chap05-sat-image}
 \end{figure}
 
@@ -1406,10 +1407,10 @@ as (a) \texttt{NDVI\_30} and (b) \texttt{NDVI\_5b} included in the Santa Maria d
   }
 
 The RapidEye image was atmospherically corrected using the 6S atmospheric model \cite{VermoteEtAl1997} 
-employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- \grass{i.atcorr} was not used because a 
-\atcorrbug{} was found when trying to correct the RapidEye image -- assuming a tropical atmospheric model, the 
-continental aerosols model, an image-based 
-visibility estimate of \SI{20}{\km}, and a constant elevation of \SI{300}{\m}.
+employing the Fortran code developed by \citeonline{AntunesEtAl2013} -- \grass{i.atcorr} was not used because 
+a \atcorrbug{} was found when trying to correct the RapidEye image -- assuming a tropical atmospheric model, 
+the continental aerosols model, an image-based visibility estimate of \SI{20}{\km}, and a constant elevation 
+of \SI{300}{\m}.
 
 After atmospheric correction, Landsat 5 TM and RapidEye images were resampled using the nearest neighbour 
 method to match the reference grid. Topographic correction was performed using \grass{i.topo.corr} with 
@@ -1454,8 +1455,8 @@ index (NDVI) and the soil-adjusted vegetation index (SAVI), calculated as
 \end{equation}
 
 \noindent where $\text{NIR} = \texttt{NIR\_30a}$ and $\text{RED} = \texttt{RED\_30}$ for the Landsat 5 TM 
-image, and $\text{NIR} = \texttt{NIR\_5}$ and $\text{RED} = \texttt{RED\_5}$ or $\text{RED} = \texttt{EDGE\_5}$ 
-for RapidEye image.
+image, and $\text{NIR} = \texttt{NIR\_5}$ and $\text{RED} = \texttt{RED\_5}$ or $\text{RED} = 
+\texttt{EDGE\_5}$ for RapidEye image.
 
 \section{DATABASE STRUCTURE}
 
@@ -1463,7 +1464,7 @@ Covariate data were harmonized to a reference grid of \SI{5}{\m} grid size. The 
 system (CRS) is WGS1984 / UTM zone 22S, coded \href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} 
 by the European Petroleum Survey Group (\href{http://www.epsg.org/}{EPSG}).
 
-\section{CONCLUSIONS}
+% \section{CONCLUSIONS}
 
 % This document presented a thorough description of the covariate data (area-class soil maps, digital 
 % elevation models, geological maps, land use maps, and satellite images) contained in the Santa Maria 
