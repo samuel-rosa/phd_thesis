@@ -533,16 +533,16 @@ Regosol).
 \label{sec:chap05-dem}
 
 Two digital elevation models (DEMs) are included in the Santa Maria dataset as sources of terrain covariates. 
-The first DEM (\demNew) is the result of the interpolation of the contour lines of the most recent topographic 
-sheets produced by the Brazilian Army (\scale{25000}) that cover the study area \cite{DSG1980, DSG1992, 
-DSG1992a}. Topographic sheets were digitalized and georeferenced using the GDAL Georeferencer plugin in QGIS. 
-Intersections between all meridians and parallels (about \num{160} per topographic sheet) were used as control 
-points to adjust a third order polynomial model. Resampling was performed using the cubic resampling method. 
-All contour lines, peaks, lakes and rivers, and their respective attributes within a distance of 
-\SI{1000}{\metre} from the boundary of the study area were manually digitized and stored in vector format. 
-After digitalization, the original coordinate reference system (EPSG:31982 -- SIRGAS2000 / UTM zone 22S) of all 
-vector files was transformed to WGS1984 / UTM zone 22S (EPSG:32722) using the \Rpackage{rgdal} 
-\cite{BivandEtAl2013a}.
+The first DEM (\demNew, \autoref{fig:chap05-dem-old}) is the result of the interpolation of the contour lines 
+of the most recent topographic sheets produced by the Brazilian Army (\scale{25000}) that cover the DNOS 
+catchment \cite{DSG1980, DSG1992, DSG1992a}. Topographic sheets were digitalized and georeferenced using the 
+GDAL Georeferencer plugin in QGIS. Intersections between all meridians and parallels (about $n = 160$ per 
+topographic sheet) were used as control points to adjust a third order polynomial model. Resampling was 
+performed using the cubic resampling method. All contour lines, peaks, lakes and rivers, and their respective 
+attributes within a distance of \SI{1000}{\m} from the boundary of the DNOS catchment were manually digitized 
+and stored in vector format. After digitalization, the original coordinate reference system (EPSG:31982 -- 
+SIRGAS2000 / UTM zone 22S) of all vector files was transformed to WGS1984 / UTM zone 22S (EPSG:32722) using 
+the \Rpackage{rgdal} \cite{BivandEtAl2013a}.
 
 The horizontal positional validation of topographic maps was performed using the $n = 14$ GCPs. According to 
 Brazilian legislation, high-quality map standards require that at least \SI{90}{\percent} of the GCPs have 
@@ -552,8 +552,8 @@ overall observed horizontal error ($\text{RMSE} = \SI{65}{\m}$) is larger than t
 regulations (\autoref{tab:chap05-topomap-geo-val}). The mean error vector is larger than \SI{60}{\metre} with 
 an azimuth of \SI{63}{\degree}. Both x- and y-coordinates are positively biased, but the largest error occurs 
 in the x-coordinate (\SI{50}{\metre}). Similar ME and MAE values suggests that there is a strong systematic 
-positional error. An affine transformation was employed using the \Rpackage{vec2dtransf} \cite{Carrillo2012} to 
-correct this systematic error. Model parameters were adjusted using the same set of GCPs used for the 
+positional error. An affine transformation was employed using the \Rpackage{vec2dtransf} \cite{Carrillo2012} 
+to correct this systematic error. Model parameters were adjusted using the same set of GCPs used for the 
 validation in the geographic space.
 
 \ctable[
@@ -590,7 +590,7 @@ Interpolation of the raster surface with \SI{5}{\metre} grid size was performed 
 based on the ANUDEM program \cite{Hutchinson1989}. Vector files of contour lines (\texttt{multiline}), 
 drainage network (\texttt{multiline}), lakes (\texttt{polygons}) and peaks (\texttt{points}) were used to 
 generate a hydrologically sound DEM, that is, a DEM without spurious depressions and giving a precise 
-representation of the hydrological data. Next, the interpolated DEM was imported into GRASS, where a 
+representation of the hydrological data. Next, the interpolated DEM was imported into GRASS GIS, where a 
 neighbourhood average filter was used to remove stair-like artefacts. A window of $7 \times 7$ pixels was used 
 because it removed a significant amount of the artefacts and did not affect the derived boundary of the study 
 area (see more bellow).
@@ -618,29 +618,31 @@ can be transformed to the global vertical datum using the following equation:
  H_{\text{EGM1996}} = H_{\text{MAPGEO2010}} + N_{\text{MAPGEO2010}} - N_{\text{EGM1996}}.
 \end{equation}
 
-\noindent The difference in the geoidal undulation estimated by both models is of about one meter in the 
-entire study area. Thus, transforming the vertical datum was done adding one meter to the raster surface 
-interpolated from contour lines, yielding the first DEM included in the Santa Maria dataset (\demNew{}).
+\noindent The difference in the geoidal undulation estimated by both models is of about \SI{1}{\m} in the 
+entire DNOS catchment. Thus, transforming the vertical datum was performed adding \SI{1}{\m} to the raster 
+surface interpolated from contour lines, yielding the first DEM included in the Santa Maria dataset 
+(\demNew{}).
 
-The second DEM (\demOld{}) is the well known SRTM DEM ($\SI{3}{\arcsecond} \approx \SI{90}{\m}$ spatial 
-resolution) produced by the National Aeronautics and Space Administration’s Jet Propulsion Laboratory in 
-collaboration with the National Geospatial\-/Intelligence Agency \cite{RodriguezEtAl2006}. The SRTM DEM version 
-used here is the \emph{sink\-/filled SRTM version \num{4}}, prepared by the Consultative Group for 
-International Agricultural Research (\cgiar) using the same hydrologically correct interpolation method that 
-was used above to produce \demNew{} \cite{ReuterEtAl2007, JarvisEtAl2008}. However, the only data source used 
-was the SRTM DEM version 3 converted to point data.
+The second DEM (\demOld{}, \autoref{fig:chap05-dem-new}) is the well known SRTM DEM ($\SI{3}{\arcsecond} 
+\approx \SI{90}{\m}$ spatial resolution) produced by the National Aeronautics and Space Administration’s Jet 
+Propulsion Laboratory in collaboration with the National Geospatial\-/Intelligence Agency 
+\cite{RodriguezEtAl2006}. The SRTM DEM version used here is the \emph{sink-filled SRTM version \num{4}}, 
+prepared by the Consultative Group for International Agricultural Research (\cgiar) using the same 
+hydrologically correct interpolation method that was used before to produce \demNew{} \cite{ReuterEtAl2007, 
+JarvisEtAl2008}. However, the only data source used was the SRTM DEM version 3 converted to point data.
 
 The SRTM DEM was processed to match the reference grid using cubic resampling (\gdal{gdalwarp} and 
 \grass{r.resamp.interp}). This resampling method was used because it is efficient in minimizing the 
 double-oblique stripping present in SRTM products \cite{Samuel-RosaEtAl2013c}. Sinks produced during datum 
 transformation were filled using the \grass{r.fill.dir}. Vertical datum transformation was not necessary 
 because elevation values of the SRTM DEM already are referenced to the global geoid model EGM1996 
-(orthometric heights). These DEMs were used to derive the terrain covariates used in the thesis. 
+(orthometric heights).
 
 \begin{figure}[!ht]
 \centering
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-dem-old}
 \centering
 <<dem-old, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -673,6 +675,7 @@ plot(p1)
 \end{minipage}
 \begin{minipage}[b]{0.45\textwidth}
 \subcaption{}
+\label{fig:chap05-dem-new}
 \centering
 <<dem-new, fig = TRUE, echo = FALSE, include = FALSE, height = 7, width = 6>>=
 
@@ -708,26 +711,27 @@ and (b) \demNew{} used to derive terrain covariates included in the Santa Maria 
 \label{fig:chap05-dem}
 \end{figure}
 
-A third DEM was included with the sole purpose of supporting the orthorectification -- removal of the effects 
-of the perspective of the sensor on the relative position of objects in the image -- and topographic correction 
--- removal of the effects of the topography on the reflectance values, i.e. on the illumination of the 
-geomorphic surfaces -- of satellite images (\autoref{sec:chap05-sat-image}) \cite{Mather2004, 
-Schowengerdt2007}. The third DEM (\topodata) was produced by the Brazilian National Institute for Space 
-Research (\inpe) by refining the SRTM DEM version 1 (\q{unfinished}) to $\SI{1}{\arcsecond} \approx 
-\SI{30}{\m}$ spatial resolution using ordinary kriging with a Gaussian spatial autocorrelation model 
-\cite{ValerianoEtAl2012}. Eight tiles were mosaicked (\gdal{gdal\_translate}) and the CRS transformed from 
-WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S (EPSG:32722) using cubic resampling (\gdal{gdalwarp}), and the 
-sinks filled using \grass{r.fill.dir}. Before the atmospheric correction of satellite images, orthometric 
-heights were converted to ellipsoidal heights using \autoref{eqn:geoidal}, the geoidal undulation calculated 
-with the gravitational model EGM1996. This conversion was done because orbital satellites use the WGS1984 
-ellipsoid as vertical datum. For the orthorectification of satellite images, the DEM was then processed using 
-\grass{r.resamp.interp} with the bicubic resampling method to match the reference grid.
+A third DEM (not shown) was included in the Santa Maria dataset with the sole purpose of supporting the 
+orthorectification -- removal of the effects of the perspective of the sensor on the relative position of 
+objects in the image -- and topographic correction -- removal of the effects of the topography on the 
+reflectance values, i.e. on the illumination of the geomorphic surfaces -- of satellite images 
+(\autoref{sec:chap05-sat-image}) \cite{Mather2004, Schowengerdt2007}. The third DEM (\topodata) was produced 
+by the Brazilian National Institute for Space Research (\inpe) by refining the SRTM DEM version 1 
+(\q{unfinished}) to $\SI{1}{\arcsecond} \approx \SI{30}{\m}$ spatial resolution using ordinary kriging with a 
+Gaussian spatial autocorrelation model \cite{ValerianoEtAl2012}. Eight tiles were mosaicked 
+(\gdal{gdal\_translate}) and the CRS transformed from WGS1984 (EPSG:4326) to WGS1984 / UTM zone 22S 
+(EPSG:32722) using cubic resampling (\gdal{gdalwarp}), and the sinks filled using \grass{r.fill.dir}. Before 
+the atmospheric correction of satellite images, orthometric heights were converted to ellipsoidal heights 
+using \autoref{eqn:geoidal}, the geoidal undulation calculated with the gravitational model EGM1996. This 
+conversion was done because orbital satellites use the WGS1984 ellipsoid as vertical datum. For the 
+orthorectification of satellite images, the DEM was then processed using \grass{r.resamp.interp} with the 
+bicubic resampling method to match the reference grid.
 
-The three DEMs present similar vertical accuracy (\autoref{tab:chap05-dem-attr-val}). In the case of \demNew{}, 
-which was derived from contour lines published at a \scale{25000}, the vertical positional accuracy does not 
-meet the high-quality standards of current Brazilian legislation, which states that 90% of the GCPs should have 
-vertical errors smaller than \SI{5}{\metre}, which is half of the distance between contour lines 
-\cite{Brasil1984}. The corresponding RMSE should be less than \SI{3}{\metre}.
+The three DEMs present similar vertical accuracy (\autoref{tab:chap05-dem-attr-val}). In the case of 
+\demNew{}, which was derived from contour lines published at a \scale{25000}, the vertical positional accuracy 
+does not meet the high-quality standards of current Brazilian legislation, which states that 
+\SI{90}{\percent} of the GCPs should have vertical errors smaller than \SI{5}{\metre}, which is half of the 
+distance between contour lines \cite{Brasil1984}. The corresponding RMSE should be less than \SI{3}{\metre}.
 
 \ctable[
   caption  = {Error statistics of the vertical validation of \demOld, TOPODATA, and \demNew{} using $n = 60$
@@ -769,15 +773,15 @@ vertical errors smaller than \SI{5}{\metre}, which is half of the distance betwe
 % \end{figure}
 
 Despite all DEMs present a similar vertical accuracy, \demNew{} is considered the highest quality DEM in the 
-Santa Maria dataset. Because it was produced using information about the drainage network and location of lakes 
-and natural depressions, it is likely to provide a better hydrological representation of the study area. As 
-such, \demNew{} was used to estimate the geographical limits (boundary) of the catchment that constitute the 
-study area, for which GRASS modules \texttt{r.watershed} and \texttt{r.water.outlet} were employed. Because the 
+Santa Maria dataset. Because it was produced using information about the drainage network and location of 
+lakes and natural depressions, it is likely to provide a better hydrological representation of the DNOS 
+catchment. As such, \demNew{} was used to estimate the geographical limits (boundary) of the DNOS catchment, 
+for which GRASS GIS modules \texttt{r.watershed} and \texttt{r.water.outlet} were employed. Because the 
 overall deviation between the affine-corrected coordinates of topographic maps and target coordinates of GCPs 
 is $\text{RMSE} = \SI{29.55}{\m}$ -- there still is uncertainty about the correct position of topographic maps 
--- a \SI{30}{\m} buffer was added to the geographical limits of the catchment. The water outlet point used to 
-estimate the boundary is located on the bridge that crosses the main drainage channel (\ang{-29.65868}, 
-\ang{-53.78969}).
+-- a \SI{30}{\m} buffer was added to the estimated geographical limits of the DNOS catchment. The water outlet 
+point used to estimate the boundary is located on the bridge that crosses the main drainage channel 
+(\ang{-29.65868}, \ang{-53.78969}).
 
 Eight terrain attributes were derived from each of \demOld{} and \demNew{} to produce the covariate data 
 included in the Santa Maria dataset, the first of them being elevation (\texttt{ELEV}). The others are slope, 
@@ -832,9 +836,9 @@ print(map)
 \end{figure}
 
 Aspect values had to be corrected before use because \grass{r.param.scale} stores aspect values in the range 
-\SIrange{0}{+180}{\degree} from West to North to East, and \SIrange{0}{-180}{\degree} from West to South to 
-East, when the standard procedure is to work with aspect values ranging from \SIrange{0}{360}{\degree} 
-clockwise. This correction was done using
+0--\SI{+180}{\degree} from West to North to East, and 0--\SI{-180}{\degree} from West to South to East, when 
+the standard procedure is to work with aspect values ranging from 0--\SI{360}{\degree} clockwise. This 
+correction was done using
 
 \begin{equation}
  \texttt{ASP}_{0} =
@@ -854,9 +858,9 @@ clockwise. This correction was done using
  \end{cases}
 \end{equation}
 
-\noindent A second correction of aspect values involved their linearization. This is necessary because aspect 
+\noindent A second correction of aspect values involved their linearisation. This is necessary because aspect 
 is a circular variable, that is, the beginning (\ang{0}) and end (\ang{360}) of the measurement scale have the 
-same physical meaning. Aspect values were transformed to northernness (\texttt{NOR}), a measure of the degree 
+same physical meaning. Aspect values were transformed to northernness (\texttt{NOR}), a measure of the level 
 of exposition of a given surface to the North, a linear variable, using the equation
 
 \begin{equation}\label{eqn:NOR}
@@ -865,7 +869,7 @@ of exposition of a given surface to the North, a linear variable, using the equa
 
 Flow accumulation (ACC), also known as catchment area or contributing area, was calculated using 
 \grass{r.watershed}, the resulting raster surface being multiplied by the square of the cell size (i.e. by the 
-cell area \SI{\approx25}{\metre\square}) to convert to areal units. This raster surface was used to calculate 
+cell area \SI{25}{\metre\square}) to convert to areal units. This raster surface was used to calculate 
 the topographic wetness index (\texttt{TWI}) and the stream power index (\texttt{SPI}) using
 
 \begin{equation}\label{eqn:sACC}
@@ -883,16 +887,14 @@ the topographic wetness index (\texttt{TWI}) and the stream power index (\texttt
 \end{equation}
 
 \noindent where sACC is the specific catchment area, \SI{5}{\m} is the cell size, and \texttt{SLP} is the 
-slope 
-raster surface calculated using seven different window sizes.
+slope raster surface calculated using seven different window sizes.
 
 The topographic position index \texttt{TPI} was calculated with \saga{ta\_morphometry}. Different values of 
 maximum radius were used to include the effect of scale, all of them related to the window sizes used to 
 calculate previous terrain attributes. A minimum radius value of \SI{3}{\m} was used in all calculations.
 
-A total of $1 \times \texttt{ELEV} + 7 \times (\texttt{NOR}, \texttt{SLP}, \texttt{TWI}, \texttt{SPI}, 
-\texttt{TPI}) = 36$ covariates 
-were defined using the terrain attributes derived from \demOld{} and \demNew{}.
+A total of $p = 1 \times \texttt{ELEV} + 7 \times (\texttt{NOR}, \texttt{SLP}, \texttt{TWI}, \texttt{SPI}, 
+\texttt{TPI}) = 36$ covariates were defined using the terrain attributes derived from \demOld{} and \demNew{}.
 
 \section{GEOLOGIC MAPS}
 \label{sec:chap05-geo-maps}
