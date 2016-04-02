@@ -55,17 +55,35 @@ The \emph{Santa Maria dataset} is a data set comprising spatially exhaustive cov
 1980s, 1990s, and 2000s covering the catchment of the reservoir of the \textit{Departamento Nacional de Obras 
 de Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), henceforth called \emph{DNOS 
 catchment}, located in the southern border of the plateau of the Paraná Sedimentary Basin, in the city of 
-Santa Maria, state of Rio Grande do Sul, Brazil.
+Santa Maria, state of Rio Grande do Sul, Brazil. Most of the covariate data cover only part of the DNOS 
+catchment, mainly the northern sector, which has an area of \SI{\pm2000}{\hectare}, corresponding to 
+\SI{\pm60}{\percent} of the entire catchment. These covariate data are the outcome of projects that aimed at 
+modelling various environmental features and were carried out as part of local (soil, geology, land use), 
+regional (terrain, land use), and global (terrain, land use) mapping initiatives.
 
-Some of the covariate data contained in the Santa Maria dataset cover only part of the DNOS catchment, mainly 
-the northern sector, which has an area of about \SI{2000}{\hectare}, corresponding to about \SI{60}{\percent} 
-of the entire catchment. These covariate data are the outcome of projects that aimed at modelling various 
-environmental features and were carried out as part of local (soil, geology, land use), regional (terrain, 
-land use), and global (terrain, land use) mapping initiatives.
+This manuscript presents a thorough description of the covariate data contained in the Santa Maria dataset. 
+These are area-class soil maps, digital elevation models, geological maps, land use maps, and satellite 
+images. A thorough description of the procedures for their production, as well as the processing methods 
+employed is given as well. The original sources of the covariate data are freely available at the producers 
+databases or in public libraries.
 
-This manuscript presents a description of the covariate data contained in the Santa Maria dataset, including 
-the procedures for their production, as well as the processing methods employed. The original sources of the 
-covariate data are freely available at the producers databases or in public libraries.
+The manuscript is divided in seven sections. \autoref{sec:chap05-database} presents general information about 
+the covariates, as well as the structure of the database where they have been stored and managed. Next, 
+\autoref{sec:chap05-gcp} describes how ground data was collected to help processing and validating the 
+existing covariate data. Area-class soil maps included in the Santa Maria dataset are described in 
+\autoref{sec:chap05-soil-maps}, while \autoref{sec:chap05-dem} deals with the digital elevation models. 
+Geologic maps and land use maps are described in \autoref{sec:chap05-geo-maps} and 
+\autoref{sec:chap05-land-use}, respectively. \autoref{sec:chap05-sat-image} closes the chapter with a 
+description of the satellite images included in the Santa Maria dataset.
+
+\section{DATABASE STRUCTURE}
+\label{sec:chap05-database}
+
+Covariate data were harmonized to a reference grid of \SI{5}{\m} grid size. The coordinate reference 
+system (CRS) is WGS1984 / UTM zone 22S, coded \href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} 
+by the European Petroleum Survey Group (\href{http://www.epsg.org/}{EPSG}).
+
+
 
 \section{GROUND CONTROL POINTS}
 \label{sec:chap05-gcp}
@@ -1457,12 +1475,6 @@ index (NDVI) and the soil-adjusted vegetation index (SAVI), calculated as
 \noindent where $\text{NIR} = \texttt{NIR\_30a}$ and $\text{RED} = \texttt{RED\_30}$ for the Landsat 5 TM 
 image, and $\text{NIR} = \texttt{NIR\_5}$ and $\text{RED} = \texttt{RED\_5}$ or $\text{RED} = 
 \texttt{EDGE\_5}$ for RapidEye image.
-
-\section{DATABASE STRUCTURE}
-
-Covariate data were harmonized to a reference grid of \SI{5}{\m} grid size. The coordinate reference 
-system (CRS) is WGS1984 / UTM zone 22S, coded \href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} 
-by the European Petroleum Survey Group (\href{http://www.epsg.org/}{EPSG}).
 
 % \section{CONCLUSIONS}
 
