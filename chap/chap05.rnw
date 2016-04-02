@@ -877,7 +877,7 @@ map <- sp::spplot(
   slp, scales = list(draw = FALSE), col.regions = terrain.colors(64), 
   colorkey = list(space = "bottom"),
   par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
+    fontsize = list(text = 12, points = 8), layout.widths = list(left.padding = 0, right.padding = 0),
     layout.heights = list(top.padding = 0, bottom.padding = 0)))
 
 # Plot and clean workspace
