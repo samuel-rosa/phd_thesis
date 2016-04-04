@@ -25,23 +25,38 @@ invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.st
 
 @
 
-%\def\ptkeys{}
-%
-%\begin{chapterabstract}{brazilian}{\ptkeys}
-% Este é o resumo em português.
-%\end{chapterabstract}
+\def\ptkeys{Mapas areais de classes de solo. Modelos digitais de elevação. Mapas geológicos. Mapas de uso da 
+terra. Imagens de satélite}
+\begin{chapterabstract}{brazilian}{\ptkeys}
+O \emph{conjunto de dados de Santa Maria} compreende uma lista de mais de $p = 100$ covariáveis espacialmente 
+exaustivas produzidas nos 1980s, 1990s, and 2000s cobrindo a bacia do reservatório do Departamento Nacional de 
+Obras de Saneamento-Companhia Riograndense de Saneamento (DNOS-CORSAN), localizada no estado sulista 
+brasileiro do Rio Grande do Sul. Essas covariáveis foram derivadas de cinco fontes disponíveis gratuitamente 
+em dois níveis de detalhe espacial: mapas areais de classes de solo (escala cartográfica de 1:\num{100000} e 
+1:\num{25000}), modelos digitais de elevação (dados orbitais de radar com resolução espacial de \SI{90}{\m} e 
+dados de curvas de nível com escala cartográfica de 1:\num{25000}), mapas geológicos (escala cartográfica de 
+1:\num{50000} e 1:\num{25000}), mapas de uso da terra (escala cartográfica de 1:\num{25000} e 1:\num{2000}), e 
+imagens de satélite (resolução espacial de 30 e \SI{5}{\m}). Esses dados de covariáveis são o resultado de 
+projetos que visaram modelar várias características ambientais e foram realizados como parte de iniciativas 
+locais (solo, geologia, uso da terra), regionais (terreno, uso da terra) e globais (terreno, uso da terra) de 
+mapeamento. Os dados de covariáveis estão disponíveis gratuitamente em uma base de dados do GRASS GIS 
+hospedada nos servidores do MEGAsync, enquanto o código-fonte utilizado na sua produção e processamento está 
+disponível gratuitamente em um repositório hospedado no GitHub.
+\end{chapterabstract}
 
-\def\enkeys{Area-class soil maps. Digital elevation models. Geological maps. Land use maps. Satellite images}
-
+\def\enkeys{Area-class soil maps. Digital elevation models. Geologic maps. Land use maps. Satellite images}
 \begin{chapterabstract}{english}{\enkeys}
 The \emph{Santa Maria dataset} comprises a list of more than $p = 100$ spatially exhaustive covariates 
 produced in the 1980s, 1990s, and 2000s covering the catchment of the reservoir of the \textit{Departamento 
 Nacional de Obras de Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), located in the 
 southern Brazilian state of Rio Grande do Sul. These covariates were derived from five sources that are freely 
-available in two levels of spatial detail: area-class soil maps, digital elevation models, geological maps, 
-land use maps, and satellite images. These covariate data are the outcome of projects that aimed at modelling 
-various environmental features and were carried out as part of local (soil, geology, land use), regional 
-(terrain, land use), and global (terrain, land use) mapping initiatives. The covariate data is freely 
+available in two levels of spatial detail: area-class soil maps (cartographic scale of 1:\num{100000} and 
+1:\num{25000}), digital elevation models (airborne radar data with \SI{90}{\m} spatial resolution and 
+contour line data at a \scale{25000}), geological maps (cartographic scale of 1:\num{50000} 
+and 1:\num{25000}), land use maps (cartographic scale of 1:\num{25000} and 1:\num{2000}), and satellite images 
+(30 and \SI{5}{\m} spatial resolution). These covariate data are the outcome of projects that aimed at 
+modelling various environmental features and were carried out as part of local (soil, geology, land use), 
+regional (terrain, land use), and global (terrain, land use) mapping initiatives. The covariate data is freely 
 available in a GRASS GIS database hosted in MEGAsync servers, while the source code used in its production and 
 processing is freely available in a repository hosted in GitHub.
 \end{chapterabstract}
@@ -97,11 +112,15 @@ dnos-sm-rs-general
 |- README.md          # description of the repository
 \end{verbatim}
 
-Ground control data files are available as comma-separated values (CSV) files. The identification of all 
-observation locations, their geographic coordinates (EPSG:31982), and elevation data are contained in the file 
-\texttt{gcpData.csv}. File \texttt{gcpMetadata.csv} contain the metadata.
+\def\sirgas{\href{http://spatialreference.org/ref/epsg/31982/}{\texttt{EPSG:31982}}}
 
-\def\megasync{\href{https://mega.nz}{MEGAsync}}
+Ground control data files are available as comma-separated values (CSV) files. The identification of all 
+observation locations, their geographic coordinates, and elevation data are contained in the file 
+\texttt{gcpData.csv}. File \texttt{gcpMetadata.csv} contain the metadata. The coordinate reference system 
+(CRS) is \texttt{SIRGAS 2000 / UTM zone 22S}, coded \sirgas{} by the European Petroleum Survey Group 
+(\href{http://www.epsg.org/}{EPSG}).
+
+\def\megasync{\href{https://mega.nz/\#F!aY5CRQqY}{MEGAsync}}
 
 % Footnote %%%%%
 \def\footgrass{\footnote{Detailed information about the structure of a GRASS GIS database can be found in 
@@ -118,10 +137,10 @@ dbGRASS               # GRASS GIS database
 |  - predicitons/        # data folder
 \end{verbatim}
 
+\def\wgs{\href{http://spatialreference.org/ref/epsg/32722/}{\texttt{EPSG:32722}}}
+
 All covariate data in the GRASS GIS database are harmonized to a reference grid of \SI{5}{\m} grid size. The 
-coordinate reference system (CRS) is WGS1984 / UTM zone 22S, coded 
-\href{http://spatialreference.org/ref/epsg/32722/}{\num{32722}} by the European Petroleum Survey Group 
-(\href{http://www.epsg.org/}{EPSG}).
+CRS is \texttt{WGS1984 / UTM zone 22S}, coded \wgs{}.
 
 \section{GROUND CONTROL POINTS}
 \label{sec:chap05-gcp}

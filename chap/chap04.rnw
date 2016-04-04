@@ -24,7 +24,7 @@ do solo com vegetação, entre outras peculiaridades de cada local de observaç�
 uma forma sistemática. As amostras do solo foram submetidos à análise de laboratório para determinar o 
 conteúdo de carbono orgânico no solo, a distribuição do tamanho de partículas, a densidade e o conteúdo de 
 bases (cálcio, magnésio, potássio e sódio) e acidez trocáveis. A capacidade de troca de cátions efetiva foi 
-calculada como a soma das bases e acidez trocáveis. Os dados do solo estão livremente disponíveis em um 
+calculada como a soma das bases e acidez trocáveis. Os dados do solo estão disponíveis gratuitamente em um 
 repositório hospedado no GitHub. Eles incluem a identificação de todos os locais de observação, as suas 
 coordenadas geográficas, e dados de campo e de laboratório. O número de repetições de laboratório e o desvio 
 padrão amostral também são fornecidos.
