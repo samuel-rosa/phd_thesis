@@ -57,18 +57,16 @@ and the sample standard deviation is provided as well.
 \section{INTRODUCTION}
 \label{sec:chap04-introduction}
 
-This manuscript presents a description of the soil data contained in the \emph{Santa Maria dataset}. The Santa 
-Maria dataset comprises soil data from $n = 410$ soil observations made between \num{2004} and \num{2013} in 
-the catchment of the reservoir of the \textit{Departamento Nacional de Obras de Saneamento}-\textit{Companhia 
-Riograndense de Saneamento} (DNOS-CORSAN), henceforth called \emph{DNOS catchment}, located in the southern 
-border of the Plateau of the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, 
-Brazil.
-
-The soil observations cover the northern sector of the DNOS catchment -- an area of \SI{\pm2000}{\hectare}, 
-which corresponds to \SI{\pm60}{\percent} of the entire catchment. These soil data were produced during the 
-development of research projects that aimed at producing semi-detailed soil and land use maps (\scale{25000}) 
-\cite{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, MiguelEtAl2012}, and predicting topsoil carbon stock and 
-vulnerability to erosion \cite{Samuel-Rosa2009, MouraBueno2012, Miguel2013}.
+The \emph{Santa Maria dataset} comprises soil data from $n = 410$ soil observations made between \num{2004} 
+and \num{2013} in the catchment of the reservoir of the \textit{Departamento Nacional de Obras de 
+Saneamento}-\textit{Companhia Riograndense de Saneamento} (DNOS-CORSAN), henceforth called \emph{DNOS 
+catchment}, located in the southern border of the Plateau of the Paraná Sedimentary Basin, in the city of 
+Santa Maria, state of Rio Grande do Sul, Brazil. Soil observations cover the northern sector of the DNOS 
+catchment -- an area of \SI{\pm2000}{\hectare}, which corresponds to \SI{\pm60}{\percent} of the entire 
+catchment. These soil data were produced during the development of research projects that aimed at producing 
+semi-detailed soil and land use maps (\scale{25000}) \cite{Pedron2005, Miguel2010, SamuelRosaEtAl2011a, 
+MiguelEtAl2012}, and predicting topsoil carbon stock and vulnerability to erosion \cite{Samuel-Rosa2009, 
+MouraBueno2012, Miguel2013}.
 
 % Footnote %%%%%
 \def\foottropics{\footnote{The reader should be aware that soil science evolved in Brazil following a somewhat 
@@ -76,10 +74,52 @@ different pathway than in the countries of the northern hemisphere due to the sp
 tropical and subtropical regions. Methods have been adapted along the years, possibly leading to nomenclature 
 mismatches. The reader is invited to contribute to solve any problems in this document.}}
 
-The description presented in this manuscript includes the procedures for soil sampling and description, as 
-well as the analytical methods employed\foottropics{}. Soil data is described using summary plots with 
-descriptive statistics. Finally, a description of the structure of the database and of how it can be accessed 
-and used is presented. 
+This chapter presents a thorough description of the soil data contained in the Santa Maria dataset. A 
+thorough description of the procedures for soil sampling and description, as well as the analytical methods 
+employed\foottropics{} is given. Soil data is also described using summary plots with descriptive statistics.
+
+The chapter is divided in four sections. \autoref{sec:chap04-database} presents general information about 
+the data, as well as the structure of the database where they have been stored and managed. Next, 
+\autoref{sec:chap04-sampling} describes how field soil observation was carried out in each of the different 
+project that contributed with soil data to the Santa Maria dataset. Methods used to describe the soil in the 
+field are described in \autoref{sec:chap04-field-description}. \autoref{sec:chap04-laboratory} closes the 
+chapter with a description of the laboratory methods used to produce data on physical and chemical soil 
+properties.
+
+\section{DATABASE STRUCTURE}
+\label{sec:chap04-database}
+
+The soil data contained in the Santa Maria dataset, as well as the code used in its processing, is freely 
+available in the web-based \git{} repository \github{}. This is the same repository containing the ground 
+control data (\autoref{sec:chap05-database}) The repository has the following folder structured:
+
+\begin{verbatim}
+dnos-sm-rs-general
+|- code/                # source code folder
+|  - R/                 # R source code folder
+|    - general.R        # R source code file
+|
+|- data/                # soil data folder
+|  - fieldData.csv      # field data file
+|  - fieldMetadata.csv  # field metadata file
+|  - labData.csv        # laboratory data file
+|  - labMetadata.csv    # laboratory metadata file
+|- README.md            # description of the repository
+\end{verbatim}
+
+\def\wgs{\href{http://spatialreference.org/ref/epsg/4326/}{\texttt{EPSG:4326}}}
+
+Soil data files are available as comma-separated values (CSV) files. The identification of all observation 
+locations, their geographic coordinates, and field and laboratory data are contained in files 
+\texttt{fieldData.csv} and \texttt{labData.csv}, respectively. Files \texttt{fieldMetadata.csv} and 
+\texttt{labMetadata.csv} contain the metadata. The coordinate reference system (CRS) is \texttt{WGS 84}, coded 
+\wgs{} by the European Petroleum Survey Group (\href{http://www.epsg.org/}{EPSG}).
+
+Every soil property is identified with a code composed of three or four capital letters. For example, soil 
+organic carbon is identified with \texttt{ORCA}. A column containing the number of laboratory replicates is 
+identified with the code of the soil property followed by the letter \q{N}. The column containing the sample 
+standard deviation is identified in the same manner, but using \q{SD}. For example, \texttt{ORCA\_N} and 
+\texttt{ORCA\_SD}.
 
 \section{FIELD SAMPLING}
 \label{sec:chap04-sampling}
@@ -863,36 +903,6 @@ exchangeable bases and exchangeable acidity (\autoref{fig:chap04-ecec}), i.e.
 % the normal distribution to the data -- a product of the \Rpackage{pedometrics}.}
 % \label{fig:intro-soil-properties}
 % \end{figure}
-
-\section{DATABASE STRUCTURE}
-\label{sec:chap04-database}
-
-The soil data contained in the Santa Maria dataset, as well as the code used in its processing, is freely 
-available in the web-based \git{} repository \github{}. This is the same repository containing the ground 
-control data (\autoref{sec:chap05-database}) The repository has the following folder structured:
-
-\begin{verbatim}
-dnos-sm-rs-general
-|- code/                # source code folder
-|  - R/                 # R source code folder
-|    - general.R        # R source code file
-|
-|- data/                # soil data folder
-|  - fieldData.csv      # field data file
-|  - fieldMetadata.csv  # field metadata file
-|  - labData.csv        # laboratory data file
-|  - labMetadata.csv    # laboratory metadata file
-|- README.md            # description of the repository
-\end{verbatim}
-
-Soil data files are available as comma-separated values (CSV) files. The identification of all observation 
-locations, their geographic coordinates (latlong, WGS1984), and field and laboratory data are contained in 
-files \texttt{fieldData.csv} and \texttt{labData.csv}, respectively. Files \texttt{fieldMetadata.csv} and 
-\texttt{labMetadata.csv} contain the metadata. Every soil property is identified with a code composed of three 
-or four capital letters. For example, soil organic carbon is identified with \texttt{ORCA}. A column 
-containing the number of laboratory replicates is identified with the code of the soil property followed by 
-the letter \q{N}. The column containing the sample standard deviation is identified in the same manner, but 
-using \q{SD}. For example, \texttt{ORCA\_N} and \texttt{ORCA\_SD}.
 
 % \section{CONCLUSIONS}
 % 

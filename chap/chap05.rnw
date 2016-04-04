@@ -22,7 +22,6 @@ invisible(system("r.mask -o buffer_BASIN_10", ignore.stderr = TRUE))
 
 # Load polygon with the boundary of the study area
 invisible(capture.output(pol <- spgrass6::readVECT6("buffer_BASIN_10", ignore.stderr = TRUE)))
-
 @
 
 \def\ptkeys{Mapas areais de classes de solo. Modelos digitais de elevação. Mapas geológicos. Mapas de uso da 
@@ -76,13 +75,13 @@ catchment, mainly the northern sector, which has an area of \SI{\pm2000}{\hectar
 modelling various environmental features and were carried out as part of local (soil, geology, land use), 
 regional (terrain, land use), and global (terrain, land use) mapping initiatives.
 
-This manuscript presents a thorough description of the covariate data contained in the Santa Maria dataset. 
+This chapter presents a thorough description of the covariate data contained in the Santa Maria dataset. 
 These are area-class soil maps, digital elevation models, geological maps, land use maps, and satellite 
 images. A thorough description of the procedures for their production, as well as the processing methods 
-employed is given as well. The original sources of the covariate data are freely available at the producers 
-databases or in public libraries.
+employed is given. The original sources of the covariate data are freely available at the producers databases 
+or in public libraries.
 
-The manuscript is divided in seven sections. \autoref{sec:chap05-database} presents general information about 
+The chapter is divided in seven sections. \autoref{sec:chap05-database} presents general information about 
 the covariates, as well as the structure of the database where they have been stored and managed. Next, 
 \autoref{sec:chap05-gcp} describes how ground data was collected to help processing and validating the 
 existing covariate data. Area-class soil maps included in the Santa Maria dataset are described in 
@@ -389,9 +388,8 @@ color <- c(sibcs$colors[2], sibcs$colors[41], sibcs$colors[21], sibcs$colors[39]
 # Prepare plot
 p1 <- sp::spplot(
   map, main = "", col.regions = color, 
-  par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)))
+  par.settings = list(fontsize = list(text = 16, points = 12)))
+  
 # Prepare legend
 names(p1$legend) <- "inside"
 p1$legend$inside$x <- 0.73
@@ -400,7 +398,6 @@ p1$legend$inside$args$key$space <- "left"
 
 # Plot and clean workspace
 plot(p1)
-
 @
 \includegraphics[width = \textwidth]{fig/chap05-soil-old}
 \end{minipage}
@@ -430,9 +427,7 @@ color <- c(
 # Prepare plot
 p1 <- sp::spplot(
   map, main = "", col.regions = color, 
-  par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)))
+  par.settings = list(fontsize = list(text = 16, points = 12)))
 
 # Prepare legend
 names(p1$legend) <- "inside"
@@ -1010,9 +1005,7 @@ map@data[, 1] <- plyr::revalue(
 # Prepare plot
 map <- sp::spplot(
   map, main = "", col.regions = sp::bpy.colors(4), 
-  par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)))
+  par.settings = list(fontsize = list(text = 16, points = 12)))
 
 # Prepare legend
 names(map$legend) <- "inside"
@@ -1053,9 +1046,7 @@ invisible(capture.output(poly <- spgrass6::readVECT6("poly", ignore.stderr = TRU
 poly@bbox <- pol@bbox
 map <- sp::spplot(
   map, main = "", col.regions = sp::bpy.colors(4),
-  par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)),
+  par.settings = list(fontsize = list(text = 16, points = 12)),
   sp.layout = list("sp.polygons", poly, first = FALSE, 
                    col = ifelse(poly$value == 0, "transparent", " black"), 
                    fill = ifelse(poly$value == 0, "transparent", "lightgray"), alpha = 0.5))
@@ -1193,9 +1184,7 @@ map@data[, 1] <- plyr::revalue(
 # Prepare plot
 map <- sp::spplot(
   map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 13, 4, 18)], 
-  par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)))
+  par.settings = list(fontsize = list(text = 16, points = 12)))
 
 # Prepare legend
 names(map$legend) <- "inside"
@@ -1236,9 +1225,7 @@ map@data[, 1] <- plyr::revalue(
 # Prepare plot
 map <- sp::spplot(
   map, main = "", col.regions = worldgrids_pal$glc2000[c(1, 12, 13, 16, 4, 18, 20)],
-  par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)))
+  par.settings = list(fontsize = list(text = 16, points = 12)))
 
 # Prepare legend
 names(map$legend) <- "inside"
@@ -1270,9 +1257,7 @@ map@data[, 1] <- as.factor(map@data[, 1])
 # Prepare plot
 map <- sp::spplot(
   map, main = "", col.regions = c("lightgreen", "lightyellow"),
-  par.settings = list(
-    fontsize = list(text = 16, points = 12), layout.widths = list(left.padding = 0, right.padding = 0),
-    layout.heights = list(top.padding = 0, bottom.padding = 0)))
+  par.settings = list(fontsize = list(text = 16, points = 12)))
 
 # Prepare legend
 names(map$legend) <- "inside"
