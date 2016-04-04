@@ -10,7 +10,6 @@ Mattos Vasques (Embrapa Solos), e Gerard B. M. Heuvelink (ISRIC -- World Soil In
 
 \def\ptkeys{Província Geológica do Paraná. Bacia do DNOS. Rebordo do Planalto. Fatores de formação do solo. 
 Pedogênese}
-
 \begin{chapterabstract}{brazilian}{\ptkeys}
 O presente manuscrito apresenta o modelo conceitual de pedogênese -- uma descrição explícita dos fatores e 
 processos de formação do solo que determinam as características do solo e o seu padrão de distribuição 
@@ -33,15 +32,14 @@ perenes. O uso da terra para produção agrossilvopastoril foi intenso em tempos
 degradação do solo. O abandono de muitas áreas degradadas permitiu a regeneração da vegetação natural, 
 resultando na atual ocupação com florestas e vegetação secundária de \SI{\pm60}{\percent}. Em geral, o solo é 
 pouco profundo devido ao predomínio de condições de forte declividade. É comum encontrar solo raso mesmo em 
-áreas de maior estabilidade como fruto da degradação pelo uso agrícola. O solo é mais profundo no Planalto, nos 
-terraços do Rebordo, nas coxilhas (colinas) de relevo suave-ondulado a ondulado, e nas planícies aluviais. A 
-textura é mais fina e homogênea ao longo do perfil quando desenvolvido a partir de rochas ígneas. As 
+áreas de maior estabilidade como fruto da degradação pelo uso agrícola. O solo é mais profundo no Planalto, 
+nos terraços do Rebordo, nas coxilhas (colinas) de relevo suave-ondulado a ondulado, e nas planícies aluviais. 
+A textura é mais fina e homogênea ao longo do perfil quando desenvolvido a partir de rochas ígneas. As 
 características do solo nas planícies aluviais são determinadas pela presença constante de lençol freático 
 próximo da superfície.
 \end{chapterabstract}
 
 \def\enkeys{Paraná Geological Province. DNOS Catchment. Plateau Border. Soil-forming factors. Pedogenesis}
-  
 \begin{chapterabstract}{english}{\enkeys}
 This document presents the conceptual model of pedogenesis -- an explicit description of soil-forming factors 
 and processes that determine the spatio-temporal distribution of soil properties  -- of the catchment of the 
