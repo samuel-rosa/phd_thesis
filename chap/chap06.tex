@@ -21,35 +21,35 @@ required correction or clarification.}
 \def\savi{\texttt{SAVI}} %
 \def\sibcs{Brazilian System of Soil Classification}
 
-% \def\portuguesekeys{Mapeamento Digital do Solo. Modelo Linear Misto. Informação Auxiliar. Seleção de 
-% Variáveis. Acurácia do Modelo. Custo do Mapeamento do Solo}
+\def\portuguesekeys{Mapeamento Digital do Solo. Modelo Linear Misto. Informação Auxiliar. Seleção de 
+Variáveis. Acurácia do Modelo. Custo do Mapeamento do Solo}
 
-% \begin{chapterabstract}{brazilian}{\portuguesekeys}
-% Neste estudo nós avaliamos se investir em covariáveis espacialmente mais detalhadas aumenta a acurácia dos 
-% mapas do solo. Nós usamos um estudo de caso no sul do Brasil para mapear o conteúdo de argila (CLAY), o 
-% conteúdo de carbono orgânico (SOC), e capacidade de troca de cátions efetiva (ECEC) da camada superficial do 
-% solo de uma área de \SI{\sim2000}{\hectare} localizada na borda do planalto da Bacia Sedimentar do Paraná. 
-% Cinco covariáveis, cada uma com dois níveis de detalhe espacial, foram usadas: mapa areal-categórico de solo,
-% modelos digitais de elevação (DEM), mapas geológicos, mapas de uso da terra, e imagens de satélite. Trinta e 
-% dois modelos de regressão linear múltipla foram calibrados para cada propriedade do solo usando todas as 
-% combinações de detalhe espacial das covariáveis. Para cada combinação, \textit{stepwise regression} foi 
-% usada para selecionar as variáveis preditoras incorporadas no modelo. A avaliação dos modelos foi feita 
-% usando o R-quadrado ajustado da regressão. O modelo de referência, calibrado com a versão menos detalhada de 
-% cada covariável, e o modelo com o melhor desempenho, foram usados para calibrar dois modelos lineares mistos 
-% para cada propriedade do solo. Parâmetros dos modelos foram estimados usando máxima verossimilhança 
-% restrita. Predições espaciais foram realizadas usando o melhor preditor linear não-enviesado empírico. 
-% Validação-cruzada foi usada para validar os modelos de regressão linear múltipla e dos modelos lineares 
-% mistos de referência e com melhor desempenho. Os resultados mostram que para CLAY a acurácia da predição não 
-% aumentou consideravelmente por usar covariáveis mais detalhadas. A quantidade de variância explicada 
-% aumentou apenas \SI{\sim2}{\pp} (pontos percentuais), menos do que obtido pela inclusão do passo de 
-% krigagem, que explicou \SI{4}{\pp}. Por outro lado, a predição de SOC e ECEC aumentou em \SI{\sim13}{\pp} 
-% quando o modelo de referência foi substituído pelo modelo com melhor desempenho. Em geral, o aumento no 
-% desempenho preditivo foi modesto e pode não sobrepor os custos adicionais do uso de covariáveis mais 
-% detalhadas. Pode ser mais eficiente investir recursos adicionais na coleta de mais observações do solo, ou 
-% no aumento do detalhe apenas da covariável que tem o efeito de aumento mais forte. Em nosso estudo, a última 
-% funcionaria apenas para SOC e ECEC pelo investimento em um mapa de uso da terra mais detalhado e, 
-% possivelmente, também em um mapa geológico e DEM mais detalhados.
-% \end{chapterabstract}
+\begin{chapterabstract}{brazilian}{\portuguesekeys}
+Neste estudo nós avaliamos se investir em covariáveis espacialmente mais detalhadas aumenta a acurácia dos 
+mapas do solo. Nós usamos um estudo de caso no sul do Brasil para mapear o conteúdo de argila (CLAY), o 
+conteúdo de carbono orgânico (SOC), e capacidade de troca de cátions efetiva (ECEC) da camada superficial do 
+solo de uma área de \SI{\sim2000}{\hectare} localizada na borda do planalto da Bacia Sedimentar do Paraná. 
+Cinco covariáveis, cada uma com dois níveis de detalhe espacial, foram usadas: mapa areal-categórico de solo,
+modelos digitais de elevação (DEM), mapas geológicos, mapas de uso da terra, e imagens de satélite. Trinta e 
+dois modelos de regressão linear múltipla foram calibrados para cada propriedade do solo usando todas as 
+combinações de detalhe espacial das covariáveis. Para cada combinação, \textit{stepwise regression} foi 
+usada para selecionar as variáveis preditoras incorporadas no modelo. A avaliação dos modelos foi feita 
+usando o R-quadrado ajustado da regressão. O modelo de referência, calibrado com a versão menos detalhada de 
+cada covariável, e o modelo com o melhor desempenho, foram usados para calibrar dois modelos lineares mistos 
+para cada propriedade do solo. Parâmetros dos modelos foram estimados usando máxima verossimilhança 
+restrita. Predições espaciais foram realizadas usando o melhor preditor linear não-enviesado empírico. 
+Validação-cruzada foi usada para validar os modelos de regressão linear múltipla e dos modelos lineares 
+mistos de referência e com melhor desempenho. Os resultados mostram que para CLAY a acurácia da predição não 
+aumentou consideravelmente por usar covariáveis mais detalhadas. A quantidade de variância explicada 
+aumentou apenas \SI{\sim2}{\pp} (pontos percentuais), menos do que obtido pela inclusão do passo de 
+krigagem, que explicou \SI{4}{\pp}. Por outro lado, a predição de SOC e ECEC aumentou em \SI{\sim13}{\pp} 
+quando o modelo de referência foi substituído pelo modelo com melhor desempenho. Em geral, o aumento no 
+desempenho preditivo foi modesto e pode não sobrepor os custos adicionais do uso de covariáveis mais 
+detalhadas. Pode ser mais eficiente investir recursos adicionais na coleta de mais observações do solo, ou 
+no aumento do detalhe apenas da covariável que tem o efeito de aumento mais forte. Em nosso estudo, a última 
+funcionaria apenas para SOC e ECEC pelo investimento em um mapa de uso da terra mais detalhado e, 
+possivelmente, também em um mapa geológico e DEM mais detalhados.
+\end{chapterabstract}
 
 \def\englishkeys{Digital Soil Mapping. Linear Mixed Model. Auxiliary Information. Variable Selection. Model
 Accuracy. Soil Mapping Cost}
@@ -57,31 +57,25 @@ Accuracy. Soil Mapping Cost}
 \begin{chapterabstract}{english}{\englishkeys}
 In this study we evaluated whether investing in more spatially detailed covariates improves the accuracy of 
 soil maps. We used a case study from Southern Brazil to map clay content (CLAY), organic carbon content 
-(SOC), 
-and effective cation exchange capacity (ECEC) of the topsoil for a \SI{\approx2000}{\hectare} area located on 
-the edge of the plateau of the Paraná Sedimentary Basin. Five covariates, each with two levels of spatial 
-detail were used: area-class soil maps, digital elevation models (DEM), geologic maps, land use maps, and 
-satellite images. Thirty-two multiple linear regression models were calibrated for each soil property using 
-all 
-spatial detail combinations of the covariates. For each combination, stepwise regression was used to select 
-predictor variables incorporated in the model. Model evaluation was done using the adjusted R-square of the 
-regression. The baseline model, calibrated with the less detailed version of each covariate, and the best 
+(SOC), and effective cation exchange capacity (ECEC) of the topsoil for a \SI{\approx2000}{\hectare} area 
+located on the edge of the plateau of the Paraná Sedimentary Basin. Five covariates, each with two levels of 
+spatial detail were used: area-class soil maps, digital elevation models (DEM), geologic maps, land use maps, 
+and satellite images. Thirty-two multiple linear regression models were calibrated for each soil property 
+using all spatial detail combinations of the covariates. For each combination, stepwise regression was used to 
+select predictor variables incorporated in the model. Model evaluation was done using the adjusted R-square of 
+the regression. The baseline model, calibrated with the less detailed version of each covariate, and the best 
 performing model were used to calibrate two linear mixed models for each soil property. Model parameters were 
 estimated using restricted maximum likelihood. Spatial prediction was performed using the empirical best 
-linear 
-unbiased predictor. Validation of baseline and best performing linear multiple regression and linear mixed 
-models was done using cross-validation. Results show that for CLAY the prediction accuracy did not 
-considerably 
-improve by using more detailed covariates. The amount of variance explained increased only \num{\sim2} 
-percentage points (\si{\pp}), less than that obtained by including the kriging step, which explained 
-\SI{4}{\pp}. On the other hand, prediction of SOC and ECEC improved by \SI{\sim13}{\pp} when the baseline 
-model 
-was replaced by the best performing model. Overall, the increase in prediction performance was modest and may 
-not outweigh the extra costs of using more detailed covariates. It may be more efficient to spend extra 
-resources on collecting more soil observations, or increasing the detail of only those covariates that have 
-the 
-strongest improvement effect. In our  case study, the latter would only work for SOC and ECEC, by investing in 
-a more detailed land use map and possibly also a more detailed geologic map and DEM.
+linear unbiased predictor. Validation of baseline and best performing linear multiple regression and linear 
+mixed models was done using cross-validation. Results show that for CLAY the prediction accuracy did not 
+considerably improve by using more detailed covariates. The amount of variance explained increased only 
+\num{\sim2} percentage points (\si{\pp}), less than that obtained by including the kriging step, which 
+explained \SI{4}{\pp}. On the other hand, prediction of SOC and ECEC improved by \SI{\sim13}{\pp} when the 
+baseline model was replaced by the best performing model. Overall, the increase in prediction performance was 
+modest and may not outweigh the extra costs of using more detailed covariates. It may be more efficient to 
+spend extra resources on collecting more soil observations, or increasing the detail of only those covariates 
+that have the strongest improvement effect. In our  case study, the latter would only work for SOC and ECEC, 
+by investing in a more detailed land use map and possibly also a more detailed geologic map and DEM.
 \end{chapterabstract}
 
 \formatchapter
@@ -93,8 +87,7 @@ Modern soil mapping relies on the use of statistical models to produce digital r
 soil distribution using point soil observations and spatially exhaustive covariates \cite{McBratneyEtAl2003, 
 ScullEtAl2003, Florinsky2012}. Three important weaknesses in the statistical soil distribution modelling 
 approach can be pointed out. First, it requires sufficient and appropriately distributed point soil data 
-within 
-the area being mapped \cite{CarreEtAl2007a}. Second, the model structure explores only the empirical 
+within the area being mapped \cite{CarreEtAl2007a}. Second, the model structure explores only the empirical 
 relationship among environmental conditions and soil properties, being less comprehensive than soil-landscape 
 process models \cite{Grunwald2009}. Last, the covariates are only approximations of the true environmental 
 conditions that helped shape the soil. They serve only as proxies (surrogates) of the current environmental 
@@ -108,18 +101,14 @@ influence the success of soil mapping -- this study contributes to this effort. 
 the more resources are spent on the construction of a covariate and the more spatial information it has, the 
 more accurately it describes the environmental conditions \cite{HupyEtAl2004, HenglEtAl2013a}. It is also 
 generally believed that such \emph{more detailed} covariates will be more valuable for soil mapping and lead 
-to 
-more accurate soil property predictions \cite{CavazziEtAl2013, MaynardEtAl2014}. If these more detailed 
+to more accurate soil property predictions \cite{CavazziEtAl2013, MaynardEtAl2014}. If these more detailed 
 covariates convey more information and represent more adequately the environmental conditions -- the drivers 
-of 
-soil forming processes --, then it is fair to expect that they improve the accuracy of the resulting soil 
-maps. 
-However, some studies have shown the contrary \cite{ThompsonEtAl2001, EldeiryEtAl2008, KimEtAl2014}. For 
+of soil forming processes --, then it is fair to expect that they improve the accuracy of the resulting soil 
+maps. However, some studies have shown the contrary \cite{ThompsonEtAl2001, EldeiryEtAl2008, KimEtAl2014}. For 
 example, the window size at which DEM derivatives are calculated can be more important than the spatial 
 resolution of the DEM \cite{Wood1996, ZhuEtAl2008, BehrensEtAl2010a}. The uncertainty about the added value of 
 using more detailed covariates is of concern for those seeking to use resources efficiently, because using 
-more 
-detailed covariates generally increases soil mapping costs \cite{ShiEtAl2012}.
+more detailed covariates generally increases soil mapping costs \cite{ShiEtAl2012}.
 
 The objective of this study was to evaluate whether investing in more detailed covariates improves the 
 accuracy of soil maps. The main difference of our study to previous ones is that we use a rigorous statistical 
@@ -249,6 +238,7 @@ Thus, the reader should bear in mind that our definition of spatial detail is br
 or spatial scale. It should also not be confounded with spatial support \cite{WebsterEtAl2007} or thematic 
 detail \cite{Rossiter2000}.
 
+% Footnote %%%%%
 \def\footcovars{\footnote{In statistical terms, the terms \emph{covariate} and \emph{predictor variable} are 
 synonymous, and the reason for the use given in this study is purely operational.}}
 
@@ -319,8 +309,8 @@ from \soilNew{} (\autoref{tab:chap06-soil-covars}).
  \end{minipage}
  \caption[Area-class soil maps, geologic maps, and land use maps compared in the study. ]{Area-class soil maps 
 (a, b), geologic maps (c, d), and land use maps (e, f) compared in our study. The less and more detailed 
-version are displayed at the left and right, respectively. Legend abbreviations and derived dummy variables are 
-described in Tables \ref{tab:chap06-soil-covars}--\ref{tab:chap06-land-covars}.}
+version are displayed at the left and right, respectively. Legend abbreviations and derived dummy variables 
+are described in Tables \ref{tab:chap06-soil-covars}--\ref{tab:chap06-land-covars}.}
  \label{fig:chap06-cat-covars}
 \end{figure}
 
@@ -391,10 +381,10 @@ pattern.
   \centering
   \includegraphics[width=60mm]{fig/chap06-FIG4d}
  \end{minipage}
- \caption[Digital elevation models and satellite images compared in the study.]{Digital elevation models (a, c) 
+\caption[Digital elevation models and satellite images compared in the study.]{Digital elevation models (a, c) 
 and satellite images, depicted using the normalized difference vegetation index (b, d), compared in our study. 
 The less detailed version is displayed at the top, while the more detailed version is shown on the bottom.}
- \label{fig:chap06-con-covars}
+\label{fig:chap06-con-covars}
 \end{figure}
 
 Eight DEM derivatives were calculated: elevation (\elev), slope (\slp), aspect (\asp), northernness (\nor), 
@@ -521,8 +511,8 @@ used for spatial prediction. Spatial predictions at a fine grid of \num{\sim8000
 in the Box-Cox space using the best linear unbiased predictor (BLUP) with the empirical estimates of the 
 random effects (EBLUP) \cite{LarkEtAl2006}. EBLUP with a fixed effect model is conceptually equivalent to 
 kriging with external drift and regression kriging, and mathematically equivalent to kriging with external 
-drift and universal kriging. Point predicted values and prediction error variances were back-transformed to the 
-original soil property space using stochastic simulation as described above 
+drift and universal kriging. Point predicted values and prediction error variances were back-transformed to 
+the original soil property space using stochastic simulation as described above 
 (\autoref{subsec:chap06-validation}).
 
 \section{RESULTS}
@@ -628,8 +618,7 @@ largest positive shift when the more detailed version was used (\SI{+0.085}{\pp}
 for ECEC). \texttt{sat} became less important when the more detailed version was used -- see its low ranking 
 in all model series plots. The increase of the importance of \texttt{geo} was larger for ECEC 
 (\SI{+0.026}{\pp}) than for SOC (\SI{+0.013}{\pp}) -- see the difference in the mean ranking of \texttt{geo} 
-in 
-the SOC (\num{14}) and ECEC (\num{12}) model series plots.
+in the SOC (\num{14}) and ECEC (\num{12}) model series plots.
 
 \input{chap/tab/chap06-TAB4.tex}
 
@@ -888,12 +877,12 @@ but the improvement was not large and may not outweigh the costs. Also, the mode
 detailed versions of all covariates were not the best performing models. Using more detailed satellite images 
 and land use maps degraded CLAY predictions. Although the more detailed soil map had the largest benefit for 
 CLAY, it may be too costly and impractical since its production usually requires having available more 
-detailed versions of all other covariates. For SOC and ECEC, simply using a more detailed land use map resulted 
-in considerably more accurate predictions. However, the superior performance may not outweigh the extra costs 
-because producing a more detailed land use map usually requires up-to-date field observations and satellite 
-images. Thus, the decision to adopt a more detailed covariate for soil mapping will ultimately depend on a 
-trade-off between the increased accuracy and the extra budget required. It may also depend on other potential 
-applications of the covariates, but this is not our concern here.
+detailed versions of all other covariates. For SOC and ECEC, simply using a more detailed land use map 
+resulted in considerably more accurate predictions. However, the superior performance may not outweigh the 
+extra costs because producing a more detailed land use map usually requires up-to-date field observations and 
+satellite images. Thus, the decision to adopt a more detailed covariate for soil mapping will ultimately 
+depend on a trade-off between the increased accuracy and the extra budget required. It may also depend on 
+other potential applications of the covariates, but this is not our concern here.
 
 One interesting observation is that if a less detailed covariate yields poor predictions, its more detailed 
 version has the potential to produce larger improvement in model performance. However, this is only a 
