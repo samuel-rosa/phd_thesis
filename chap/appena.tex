@@ -3,125 +3,127 @@
 \shorttitle{Introdução Geral}
 \label{appen:introduction-pt}
 
-Modern soil spatial modelling is based on using statistical models to explore the empirical relationship among 
-environmental conditions and soil properties. These soil spatial models, like any other model, are nothing 
-more than a simplification of reality. Unless we observe the soil everywhere -- which would destroy the 
-soil and render the observations useless --, no matter how large the volume of data is, or how comprehensive 
-our background knowledge, it will \emph{never} be possible to construct a model that explains the entire 
-complexity of the soil. Thus, the outcome of a soil spatial model, i.e. a soil map, will \emph{always} deviate 
-from the \q{truth} -- this deviation from the \q{truth} is what we call \emph{error}. What a soil map conveys 
-is what we expect the soil to be, acknowledging that there is \emph{uncertainty} about it.
+A modelagem espacial do solo moderna é baseada na utilização de modelos estatísticos para explorar a relação 
+empírica entre as condições ambientais e as propriedades do solo. Estes modelos espaciais do solo, como 
+qualquer outro modelo, não são nada mais do que uma simplificação da realidade. A menos que observemos o solo 
+em todos os lugares -- o que destruiria o solo e tornaria as observações inúteis --, não importa quão grande 
+seja o volume de dados, ou quão abrangente o nosso conhecimento for, \emph{nunca} será possível construir um 
+modelo que explique toda a complexidade do solo. Assim, o resultado de um modelo espacial do solo, ou seja, um 
+mapa do solo, \emph{sempre} desviará da \q{verdade} -- esse desvio da \q{verdade} é o que chamamos de 
+\emph{error}. O que um mapa do solo transmite é o que esperamos que o solo seja, reconhecendo que há 
+\emph{incerteza} sobre ele.
 
-Because soil spatial modellers aim at using the available resources to produce the most accurate 
-representation of the soil, a sensible research programme is to investigate the main causes for soil maps 
-being more or less \emph{uncertain}. There are many sources of uncertainty in soil spatial modelling, such as 
-the errors that result from using a poor statistical model or from making interpolations and extrapolations 
-to predict soil properties at unvisited locations. Another important source of uncertainty is the data used to 
-assess the empirical relationship among environmental conditions and soil properties: covariate and soil data.
+Dado que modeladores espaciais do solo procuram utilizar os recursos disponíveis para produzir a representação 
+mais precisa do solo, um programa de pesquisa sensível é investigar as principais causas para os mapas do solo 
+serem mais ou menos \emph{incertos}. Existem muitas fontes de incerteza na modelagem espacial do solo, tais 
+como os erros que resultam da utilização de um modelo estatístico deficiente ou de fazer interpolações e 
+extrapolações para predizer as propriedades do solo em locais não visitados. Outra importante fonte de 
+incerteza é os dados utilizados para avaliar a relação empírica entre as condições ambientais e as 
+propriedades do solo: dados de covariáveis e solo.
 
-The general objective of this thesis is to evaluate important sources of uncertainty in soil spatial modelling 
-with emphasis on soil and covariate data. This general objective can be divided into specific objectives and 
-their respective research questions:
+O objetivo geral dessa tese é avaliar importantes fontes de incerteza na modelagem espacial do solo com ênfase 
+em dados de solo e de covariáveis. Este objetivo geral pode ser dividido em objetivos específicos e suas 
+respectivas questões de pesquisa:
 
 \begin{enumerate}[label=(\Roman*)]
- \item Determine the suitability of freely available covariates to calibrate soil spatial models.
-  \begin{enumerate}[label=(\alph*)]
-   \item Does the use of more detailed covariates result in considerably more accurate soil maps?
-   \item How does incorporation of spatial dependence in a soil spatial model compares to the gain in 
-   prediction accuracy obtained from using more detailed covariates?
-   \item Are the answers to these research questions consistent across soil properties?
-  \end{enumerate}
- 
- \item Identify the factors that determine how field soil spatial modellers select soil observation locations.
-  \begin{enumerate}[label=(\alph*)]
-   \item Which factors are considered for deciding upon the location of soil observations, and do they have a 
-   pedological origin?
-   \item Do the factors play the same role along the course of the soil observation process?
-   \item Can point pattern analysis help understanding the purposive sampling strategy traditionally employed
-   by field soil spatial modellers?
-  \end{enumerate}
+\item Determinar a aptidão de covariáveis disponíveis gratuitamente para calibrar modelos espaciais do solo.
 
-\item Identify appropriate calibration sample sizes and designs for soil spatial modelling.
 \begin{enumerate}[label=(\alph*)]
-\item Can the conditioned Latin hypercube sampling algorithm be improved, and does this improvement deliver 
-more accurate soil spatial predictions?
-\item Which are the most theoretically sound sampling algorithms for spatial trend estimation, variogram 
-estimation, and spatial prediction when we know very little about the soil spatial variation?
-\item Can these sampling algorithms be used to construct a general purpose sampling algorithm?
+\item Será que o uso de covariáveis mais detalhadas resulta em mapas consideravelmente mais precisos do solo?
 
-%   \item How suboptimal is it to use a sample configuration that was optimized for a different purpose?
-%   \item Is the predictive performance of a soil-mapping model estimated using a sample configuration 
-%   optimized using heuristics poorer than that of another soil-mapping model whose parameters were estimated 
-%   using a sample configuration optimized using an \textit{a priori} knowledge of the model?
-%   \item Is it possible to obtain a sample configuration that is efficient in identifying and estimating i) 
-%   the spatial trend and ii) the variogram model, and iii) making spatial predictions?
-%   \item How does the sample configuration affect the estimated model parameters and thus the conclusions 
-% that 
-%   can be drawn under the light of the existing conceptual model of pedogenesis?
-%   \item Are the answers to the research questions above consistent across sample sizes and soil properties?
-  \end{enumerate}
+\item Como é que a incorporação de dependência espacial em um modelo espacial do solo se compara ao ganho na 
+acurácia de predição obtido pelo uso de covariáveis mais detalhadas?
+
+\item As respostas a essas questões de pesquisa são consistentes entre propriedades do solo?
+\end{enumerate}
+ 
+\item Identificar os fatores que determinam como modeladores espaciais de campo do solo selecionam os locais 
+de observação do solo.
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Quais fatores são considerados para decidir sobre a localização das observações do solo? Eles têm uma 
+origem pedológica?
+
+\item Será que os fatores desempenham o mesmo papel ao longo do curso do processo de observação do solo?
+
+\item Pode a análise de padrão pontual ajudar a compreender a estratégia de amostragem intencional 
+tradicionalmente empregada por modeladores espaciais de campo do solo?
 \end{enumerate}
 
-The thesis is composed of eight chapters where each of the above mentioned objectives are met. Although there 
-is a logical sequence in their presentation, all chapters were planned so that they could be read separately. 
-This means that there is some overlap between them, i.e. repeated information. References to specific sections 
-of other chapters using coloured (blue) hyperlinks are common.
+\newpage
 
-\autoref{chap:chap02} is a commented review of the literature on soil spatial modelling and its main sources 
-of 
-uncertainty. The review starts with a discussion about the efforts made by soil spatial modellers to raise 
-awareness about the importance of soil spatial information. These efforts seem to have fuelled a global 
-scientific demand for up-to-date, high resolution soil spatial information. The chapter continues with a 
-description of soil spatial modelling along human history, suggesting that the goal of producing soil maps 
-remains more or less the same since the Neolithic Revolution (ca.~\num{10000}~years). The chapter closes with 
-the main sources of uncertainty.
+\item Identificar tamanhos e delineamentos amostrais de calibração apropriados para a modelagem espacial do 
+solo.
+\begin{enumerate}[label=(\alph*)]
+\item Pode o algoritmo de amostragem hipercubo Latino condicionado ser melhorado? Será que essa melhoria 
+resulta em pedições espaciais do solo mais acuradas?
 
-\autoref{chap:chap03} presents the conceptual model of pedogenesis (in Portuguese), which consists 
-of a description of the study area that includes an explicit description of soil-forming factors (climate, 
-geology, geomorphology, hydrology, land use, and vegetation) and processes that determine the soil 
-spatio-temporal distribution. \autoref{chap:chap04} describes the soil data included in the 
-\emph{Santa Maria dataset}, which was used to develop the case studies presented in this thesis. The Santa
-Maria dataset is composed of $n = 410$ soil observations compiled from studies carried out between \num{2004} 
-and \num{2013}. These studies aimed at producing semi-detailed soil and land use maps, and modelling topsoil 
-carbon stock and vulnerability to erosion. A comprehensive description of the covariate data included in the 
-Santa Maria dataset, and their processing, is given in \autoref{chap:chap05}. Beyond describing 
-the data used in the thesis, the goal of these two chapters, along with the conceptual model of pedogenesis, 
-is 
-to provide the basis for future soil spatial modelling exercises in the study area, and to serve as examples 
-for new soil spatial modelling studies developed elsewhere.
+\item Quais são os algoritmos de amostragem teoricamente mais sólidos para estimativa da espacial tendência, 
+estimativa do variograma, e predição espacial quando sabemos muito pouco sobre a variação espacial do solo?
 
-Based on an article published in the peer reviewed journal \geoderma, \autoref{chap:chap06} serves 
-the purpose of meeting the first objective of the thesis and answering its respective research questions. The 
-prediction performance of linear soil spatial models calibrated using covariates (area-class soil maps, land 
-use maps, geological maps, digital elevation models, and satellite images) available in two levels of detail 
-is evaluated. The influence of taking the spatial dependence of the residuals into account is assessed as 
-well. 
+\item Podem esses algoritmos de amostragem ser usados para construir um algoritmo genérico de amostragem 
+intencional?
 
-\autoref{chap:chap07} presents an approach that aims at helping to understand the purposive 
-sampling strategy traditionally employed by field soil modellers, i.e. free survey. This is important because 
-many soil spatial modelling projects rely on legacy data, i.e. soil data produced previously and made 
-available 
-(publicly or not), whose observation locations were purposively selected by soil spatial modellers using 
-poorly documented tacit rules. The chapter is designed to answer the research questions of the second 
-objective 
-of the thesis. Point pattern analysis is used to characterize the spatial sample configuration, 
-whereas theories borrowed from Psychology are used to elaborate on the subjective factors involved in 
-selecting 
-soil observation locations.
+\end{enumerate}
+\end{enumerate}
 
-Objective 3 and its research questions are addressed in \autoref{chap:chap08} and \autoref{chap:chap09}. In 
-\autoref{chap:chap08}, three improved sampling algorithms are compared to the original conditioned Latin 
-hypercube sampling algorithm on how they affect geographic coverage, estimated model parameters and prediction 
-accuracy. The influence of sample size is also discussed. \autoref{chap:chap09} presents the most efficient 
-sampling strategies for spatial trend estimation, variogram estimation, and spatial prediction when we know 
-very little about the soil spatial variation. The chapter closes with a new general purpose sampling algorithm 
-that aims at the three objectives jointly.
 
-The sequence of eight chapters is closed with \hyperref[chap:chap10]{General Conclusions} where I highlight 
-the main research results and contributions of the study. Next, there are two appendices, both devoted to the 
-description of the two packages for \texttt{R} developed to support the thesis: \texttt{spsann} 
-(\autoref{appen:spsann}) and \texttt{pedometrics} (\autoref{appen:pedometrics}). The first was designed for 
-the optimization of sample configurations using spatial simulated annealing. The second includes miscellaneous 
-functions that were put together for ease of use. All literature references are presented under a unique list 
-of \hyperref[chap:references]{Bibliographic References} at the end of the thesis.
+A tese é composta por oito capítulos, onde cada um dos objetivos mencionados acima são cumpridos. Embora haja 
+uma sequência lógica na sua apresentação, todos os capítulos foram planejadas para que pudessem ser lidos 
+separadamente. Isto significa que existe uma certa sobreposição entre eles, isto é, informações repetidas. As 
+referências a seções específicas de outros capítulos utilizando hiperlinks coloridos (azul) são comuns.
 
+\autoref{chap:chap02} é uma revisão comentada da literatura sobre modelagem espacial do solo e suas principais 
+fontes de incerteza. A revisão começa com uma discussão sobre os esforços envidados pelos modeladores espaciais 
+do solo para aumentar a conscientização sobre a importância da informação espacial do solo. Esses esforços 
+parecem ter impulsionado uma demanda científica global por informação espacial do solo atualizada e em alta 
+resolução. O capítulo continua com uma descrição da modelagem espacial do solo ao longo da história humana, 
+sugerindo que o objetivo de produzir mapas do solo permanece mais ou menos o mesmo desde a Revolução Neolítica 
+(ca.~\num{10000}~anos). O capítulo termina com as principais fontes de incerteza.
+
+\autoref{chap:chap04} descreve os dados do solo incluídos no \emph{conjunto de dados de Santa Maria}, que foi 
+usado para desenvolver os estudos de caso apresentados nesta tese. O conjunto de dados de Santa Maria é 
+composto de $n = 410$ observações do solo compiladas de estudos realizados entre 2004 e 2013. Esses estudos 
+visavam a geração de mapas semi-detalhados do solo e uso da terra, e a modelagem do estoque de carbono na 
+camada superficial do solo e da vulnerabilidade à erosão. Uma descrição detalhada dos dados de covariáveis 
+incluídos no conjunto de dados de Santa Maria, e seu processamento, é dada no \autoref{chap:chap05}. 
+\autoref{chap:chap03} apresenta o modelo conceitual de pedogênese (em português), que consiste numa descrição 
+da área de estudo que inclui uma descrição explícita dos fatores de formação do solo (clima, geologia, 
+geomorfologia, hidrologia, uso da terra e vegetação) e processos que determinam a distribuição espaço-temporal 
+do solo. Além de descrever os dados utilizados na tese, o objetivo desses capítulos, juntamente com o modelo 
+conceitual de pedogênese, é fornecer a base para futuros exercícios de modelagem espacial do solo na área de 
+estudo, e servir como exemplo para novas estudos de modelagem espacial do solo desenvolvidos em outros lugares.
+
+Baseado em um artigo publicado na revista avaliada por pares \geoderma, \autoref{chap:chap06} serve o 
+propósito de atingir o primeiro objetivo da tese e responder a suas respectivas questões de pesquisa. O 
+desempenho preditivo de modelos lineares espaciais do solo calibrados utilizando covariáveis (mapas do solo 
+área de classe, mapas de uso da terra, mapas geológicos, modelos digitais de elevação, e imagens de satélite) 
+disponíveis em dois níveis de detalhe é avaliado. A influência de levar em conta a dependência espacial dos 
+resíduos também é avaliada.
+
+\autoref{chap:chap07} apresenta uma abordagem que visa ajudar a compreender a estratégia de amostragem 
+intencional tradicionalmente empregada por modeladores de campo do solo, ou seja, caminhamento livre. Isso é 
+importante porque muitos projetos de modelagem espacial do solo dependem de dados legados, ou seja, dados do 
+solo produzidos previamente e disponibilizados (publicamente ou não), cujos locais de observação foram 
+selecionados intencionalmente por modeladores espaciais do solo usando regras tácitas mal documentadas. O 
+capítulo foi concebido para responder às questões de pesquisa do segundo objetivo da tese. Análise de padrão 
+pontual é utilizada para caracterizar a configuração espacial da amostra, enquanto teorias emprestadas da 
+Psicologia são usados para elaborar sobre os fatores subjetivos envolvidos na seleção de locais de observação 
+do solo.
+
+O objetivo 3 e suas questões de pesquisa são abordados no \autoref{chap:chap08} e \autoref{chap:chap09}. No 
+\autoref{chap:chap08}, três algoritmos de amostragem aperfeiçoados são comparados com o algoritmo original de 
+amostragem hipercubo Latino condicionado em como eles afetam a cobertura geográfica, os parâmetros estimados 
+do modelo e a acurácia preditiva. A influência do tamanho da amostra também é discutida. \autoref{chap:chap09} 
+apresenta as estratégias de amostragem mais eficientes para estimativa da tendência espacial, estimativa do 
+variograma, e predição espacial quando sabemos muito pouco sobre a variação espacial do solo. O capítulo 
+termina com um novo algoritmo genérico de amostragem que visa os três objetivos conjuntamente.
+
+A sequência de oito capítulos é encerrada com \hyperref[chap:chap10]{Conclusões Gerais} onde destaco os 
+principais resultados da pesquisa e contribuições do estudo. Em seguida, há dois apêndices, ambos dedicados à 
+descrição dos dois pacotes para \texttt{R} desenvolvidos para apoiar a tese: \texttt{spsann} 
+(\autoref{appen:spsann}) e \texttt{pedometria} (\autoref{appen:pedometrics}). O primeiro foi projetado para a 
+otimização de configurações amostrais usando o recozimento simulado espacial. O segundo inclui funções 
+auxiliares que foram colocadas juntas para facilidade de uso. Todas as referências da literatura são 
+apresentadas sob uma lista única de \hyperref[chap:references]{Referências Bibliográficas} no final da tese.
