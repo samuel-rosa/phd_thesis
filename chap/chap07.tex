@@ -53,25 +53,27 @@ modellers suggests that PPA can help understand the sampling strategy used by so
 
 \section{INTRODUCTION}
 
-Free survey has been used for many decades in soil spatial modelling. It is a model-based sampling method that 
-relies on the mental model of soil-landscape relationships of field soil spatial modellers (also known as 
-soil surveyors). This mental model is built with the experience gained in the field and its quality is 
-directly proportional to the years of field work. However, this model is rarely formalized as a verbal 
-representation and is lost when the soil modeller deceases, hindering the transmission of soil knowledge to 
-young soil modellers. The present study assesses the potential of point pattern analysis (PPA) as a tool to 
-help understanding the purposive sampling strategy traditionally employed by field soil modellers.
+Free survey has been successfully employed for many decades in soil spatial modelling. It is a model-based 
+soil sampling method that relies on the mental model of soil-landscape relationships of field soil spatial 
+modellers -- also known as soil surveyors. This mental model -- or tacit knowledge -- is built with the 
+experience gained in the field and its quality generally is directly proportional to the years of field work. 
+The main drawback is that formalising such complex models as verbal representations -- formal knowledge -- is 
+rather difficult, the reason why it is rarely or only partially done. Thus, the tacit knowledge is at the risk 
+of being lost when the soil modeller deceases, hindering the transmission of soil knowledge to young soil 
+modellers. The present study assesses the potential of \emph{point pattern analysis} (PPA) as a tool to help 
+understanding the purposive sampling strategy traditionally employed by field soil modellers.
 
-Point pattern analysis includes a series of statistical techniques devoted to the analysis of sets of points 
-distributed in the geographic space \cite{Diggle2003}. The main objective of these techniques is to provide 
-empirical evidence to infer about the underlying process (a biological or other deterministic mechanism) that 
-generated the point pattern \cite{BivandEtAl2008}. A basic assumption is that the point pattern can be treated 
-as a realization of a spatially homogeneous (stationary) random point process in the plane \cite{Diggle2003}. 
-Assuming that soil observations made using the free survey method come from a stochastic process is unrealistic 
-because soil observations are made following the conceptual model of pedogenesis of soil modellers. In other 
-words, they are the product of an unspecified deterministic process, alike many other biological mechanisms 
-evaluated using point pattern analysis. Point pattern analysis serves as an efficient exploratory tool in these 
-circumstances and helps choosing non-stationary models to fit spatially inhomogeneous processes 
-\cite{Baddeley2010} alike soil observation.
+The point pattern analysis toolbox includes multiple statistical techniques devoted to the analysis of sets of 
+points distributed in the geographic space \cite{Diggle2003}. The main objective of these techniques is to 
+provide empirical evidence to infer about the underlying process -- a biological or other deterministic 
+mechanism -- that generated the \emph{point pattern} \cite{BivandEtAl2008}. A basic assumption is that the 
+point pattern can be treated as a realization of a spatially homogeneous (stationary) random point process in 
+the plane \cite{Diggle2003}. Assuming that soil observations made using the free survey method come from a 
+stochastic process is unrealistic because soil observations are made following the conceptual model of 
+pedogenesis of soil modellers. In other words, they are the product of an unspecified deterministic process, 
+alike many other biological mechanisms evaluated using point pattern analysis. Point pattern analysis serves 
+as an efficient exploratory tool in these circumstances and helps choosing non-stationary models to fit 
+spatially inhomogeneous processes \cite{Baddeley2010} alike soil observation.
 
 Calibrating a point process model requires some knowledge of the underlying process -- the biological 
 mechanism -- that generated the point pattern. For example, such knowledge can be obtained by eliciting the 
@@ -79,25 +81,21 @@ judgements of experts, a common practice in many fields of research \cite{OHagan
 are consulted when important decisions have to be made during the development of a project or when there is 
 great uncertainty about a phenomenon or event \cite{MeyerEtAl2001}. An expert is every individual who has a 
 deep knowledge about a given theme. When trying to understand a soil observation process, an expert is every 
-soil modeller that helped planning and conducting field sampling. The elicitation can be carried out in several 
-ways \cite{Cooke1991, MeyerEtAl2001, OHaganEtAl2006} but due to operational issues, individual interview is the 
-method most commonly employed. It also helps avoiding negative dominance effects due to eventual hierarchical 
-relationships among experts \cite{Cooke1991}. Aggregation of expert judgements can be done using behavioural 
-methods, where each expert evaluates the information provided by other experts until a common point is reached 
-\cite{OrsiEtAl2011}.
+soil modeller that helped planning and conducting field sampling. The elicitation can be carried out in 
+several ways \cite{Cooke1991, MeyerEtAl2001, OHaganEtAl2006} but due to operational issues, individual 
+interview is the method most commonly employed. It also helps avoiding negative dominance effects due to 
+eventual hierarchical relationships among experts \cite{Cooke1991}. Aggregation of expert judgements can be 
+done using behavioural methods, where each expert evaluates the information provided by other experts until a 
+common point is reached \cite{OrsiEtAl2011}.
 
-Eliciting expert judgement is an important step towards understanding the underlying process that generated 
-the point pattern of soil observation. Deeper knowledge can be constructed with this information through its 
-articulation with psychological theories. For instance, psychological theories can help unravelling possible 
-influences of the surrounding environment on how soil modellers perceive distances, or how their motivation 
-shifts along field sampling campaigns. Studies have been developed in many fields of research \cite{Hull1932, 
-BonnesEtAl2002, StampsEtAl2004, BonezziEtAl2011, Toure-TilleryEtAl2011a} without coming to a common conclusion 
-about the neurophysiological responses of people under different situations. However, it is well known that the 
-motivation to develop a series of tasks changes with time \cite{BonezziEtAl2011, Toure-TilleryEtAl2011a} and 
-that the architecture of the surrounding environment has significant effects on the way space and distances are 
-perceived \cite{Coeterier1994, EpsteinEtAl1998}. This suggests that operational and conceptual biases in the 
-soil observation process could be more easily depicted when empirical data produced using point pattern 
-analysis and the interview of experts are analysed under the light of psychological theories.
+Eliciting expert judgement is a key step towards understanding the underlying process that generated the point 
+pattern of soil observation. Articulating expert information with psychological theories can provide important 
+insights on the structure of this process. For example, it is agreed that the motivation to develop a series 
+of tasks changes with time \cite{BonezziEtAl2011, Toure-TilleryEtAl2011a} and that the architecture of the 
+surrounding environment influences the way space and distances are perceived \cite{Coeterier1994, 
+EpsteinEtAl1998}. Taking such psychological elements into account could help explaining the origins of any
+operational and conceptual tendencies noticed in the soil observation process as evidenced by the point 
+pattern analysis and the interview of experts.
 
 Environmental psychology is the field of science dedicated to the study of the relationships between human 
 behaviour and the surrounding physical environment \cite{BonnesEtAl2002}. One of the recognized effects of the 
@@ -122,29 +120,19 @@ emotions that reduce the efforts toward the main goal and shift the focus to ano
 relax initial standards to save time and resources. The \emph{outcome-focused motivation} prevails in this 
 phase, which is the bottom of the U-shaped motivation curve. As the main goal becomes closer, the motivation 
 increases again from the desire to accomplish all tasks using means that follow previously established rules as 
-in the beginning of the project. Stronger adherence to standards (previously established rules) at the 
-beginning and end of a project is possibly explained by the fact that self-signalling concerns (the image made 
-about the self) usually are greater in these two phases of goal pursuit 
+in the beginning of the project. Stronger adherence to previously established rules and standards at the 
+beginning and end of a project is possibly explained by the fact that the concerns about the image that one 
+makes of himself (self-signalling concerns) usually are greater in these two phases of goal pursuit 
 \cite{Toure-TilleryEtAl2011}.
 
 \section{CASE STUDY}
 
-A  case study was conducted to evaluate the potential of point pattern analysis as a tool to help 
-understanding the purposive sampling strategy traditionally employed by field soil modellers. The database is 
-composed of the $n = 340$ soil observations made in a small catchment (\SI{20}{\km\squared}) in Southern Brazil 
-between \num{2008} and \num{2011} for the purpose of mapping soils, land use, carbon stocks, and vulnerability 
-to erosion \cite{SamuelRosaEtAl2011a, MiguelEtAl2012, Samuel-RosaEtAl2013}. The catchment is located in the 
-municipalities of Itaara and Santa Maria (\autoref{fig:chap07-chap07-location}). Climate is classified as Cfa 
-(K{\"o}ppen climate classification -- subtropical humid without a dry season) with mean annual temperature of 
-\SI{19.3}{\celsius}, and mean annual precipitation of \SI{1708}{\mm} well distributed throughout the year 
-\cite{Maluf2000}. Relief varies between plain (slope between \num{0} and \SI{3}{\percent}) and mountainous 
-(slope between \num{45} and \SI{100}{\percent}), and elevations range between \num{139} and \SI{475}{\m}. There 
-are three main geological formations which consist of (a) basic, intermediate and acid igneous rocks 
-(rhyolite-rhyodacite and andesite-basalt) of the Cretaceous period; (b) consolidated sedimentary rocks (aeolian 
-and fluvial sandstones) of the Triassic and Jurassic periods; and (c) non-consolidated (fluvial and colluvial 
-deposits) of the Quaternary period \cite{GasparettoEtAl1988, MacielFilho1990, Sartori2009}. Forest areas occupy 
-more than half of the study area, followed by native grassland, shrubland, farmland, forestry, urban areas and 
-artificial water bodies \cite{SamuelRosaEtAl2011a}.
+A case study was conducted using a database composed of $n = 340$ soil observations made between \num{2008} 
+and \num{2011} in a small catchment (\SI{20}{\km\squared}) located in the southern border of the Plateau of 
+the Paraná Sedimentary Basin, in the city of Santa Maria, state of Rio Grande do Sul, Brazil 
+(\autoref{fig:chap07-chap07-location}). Soil observations were made for the purpose of soil and land use 
+mapping, as well as modelling soil carbon stocks and vulnerability to erosion \cite{Miguel2010, 
+Samuel-Rosa2009, MouraBueno2012, Miguel2013}.
 
 \begin{figure}[!ht]
 \centering
@@ -162,31 +150,76 @@ composed of $n = 340$ soil observations made between the years of \num{2008} and
 \label{fig:chap07-chap07-location}
 \end{figure}
 
+Local climate is classified as Cfa (K{\"o}ppen climate classification -- subtropical humid without a dry 
+season) with mean annual temperature of \SI{19.3}{\celsius}, and mean annual precipitation of \SI{1708}{\mm} 
+well distributed throughout the year \cite{Maluf2000}. Relief varies between plain (slope between \num{0} and 
+\SI{3}{\percent}) and mountainous (slope between \num{45} and \SI{100}{\percent}), and elevations range 
+between \num{139} and \SI{475}{\m} above sea level. There are three main geological formations which consist 
+of (a) basic, intermediate and acid igneous rocks (rhyolite-rhyodacite and andesite-basalt) of the Cretaceous 
+period; (b) consolidated sedimentary rocks (aeolian and fluvial sandstones) of the Triassic and Jurassic 
+periods; and (c) non-consolidated (fluvial and colluvial deposits) of the Quaternary period 
+\cite{GasparettoEtAl1988, MacielFilho1990, Sartori2009}. Forest areas occupy more than half of the study area, 
+followed by native grassland, shrubland, farmland, forestry, urban areas and artificial water bodies 
+\cite{SamuelRosaEtAl2011a}.
+
 \subsection{Elicitation of Expert Judgements}
 
-The soil observation process was described by the two soil modellers who planned and conducted the 22 field 
-campaigns in the study area. Their knowledge about the soil observation process was elicited using individual 
-interviews and written narratives. Written narratives were obtained by making a bibliographic review of 
-published material and asking the soil modellers to make written descriptions of the soil observation process.
+Starting knowledge to understand the soil observation process and calibrate a point process model was 
+obtained eliciting the judgements of experts. An expert is every individual who has a deep, comprehensive 
+knowledge about the object under study \cite{MeyerEtAl2001}, specifically, every soil modeller that helped 
+planning and conducting the field campaigns that yielded the $n = 340$ soil observations in the study area. 
+Due to operational constraints, the elicitation was carried out using email-based discussions and written 
+narratives. First, written narratives were obtained by making a bibliographic review of published material 
+such as articles, reports and theses. All information gathered was processed by the authors to yield a 
+starting description of the soil observation process.
+
+In the next step, field soil modellers were asked to prepare individual written description of the soil 
+observation process. In their description, soil modellers were asked to point to the aspects that influenced 
+most the selection of observation locations, as well as describe all important events and/or changes that 
+might occurred in during the development of their project. Their description was then used to improve the 
+existing description prepared by the authors, which was then submitted to appreciation by the field soil 
+modellers. This step was carried out using a behavioural method \cite{OrsiEtAl2011}, specifically, email-based 
+group discussions coordinated by the authors. These were responsible for aggregating expert judgements and 
+continuously improving the description of the soil observation process until a common point was reached.
+
+The resulting starting description of the soil observation process was used to define a set of covariates that 
+could potentially be included in the point process model. These covariates are presented and described in 
+\autoref{sec:chap07-elicited} along with a summary description of the soil observation process, while their 
+use to construct the point process model is explained next in \autoref{sec:chap07-ppa}. 
 
 \subsection{Point Pattern Analysis}
+\label{sec:chap07-ppa}
 
-Analysis of the point pattern was carried out using tools available in the \texttt{R} environment 
-\cite{R2013}, mainly the \texttt{spatstat} \cite{Baddeley2010} package. Point pattern analysis included 
-estimating the \emph{G} function of the spatial distribution of the point pattern. Monte Carlo simulations ($n 
-= 19$) were used to build the envelope of the \emph{G} function. The envelope was used to test the point 
-pattern for complete spatial randomness along the entire distance interval at a level of confidence of 
-\SI{95}{\percent}. Analysis of the observation intensity (i.e., density of observation points) in the 
-geographic space was accomplished by estimating an isotropic Gaussian kernel with edge effect correction by the 
-method of Diggle \cite{Diggle1985}. The bandwidth of the Gaussian kernel was adjusted to minimize the 
-square-mean-error criterion defined by Diggle \cite{Diggle1985}. The observation intensity was also analysed by 
-estimating empty space distances and the Stienen diagram, which depicts point observations using circles of 
-diameter proportional to the nearest neighbour distance. Analysis of the Stienen diagram was done in 
-\googleearth{} using the \texttt{plotKML} package \cite{Hengl2014}. A non-stationary Poisson point process 
-model was fitted to the point pattern using covariates suggested by the judgements elicited from the experts. A 
-generalized linear model with a log link was fitted by maximizing the pseudolikelihood using the Berman-Turner 
-computational approximation \cite{Baddeley2010}. This point process model was then used as estimate of the 
-observation intensity to estimate the envelope of the detrended \emph{G} function.
+Point pattern analysis was carried out using tools available in the \texttt{R} environment, mainly the 
+\texttt{spatstat} package \cite{Baddeley2010}.
+
+The observation intensity in the geographic space, i.e. the average density of observation points per unit 
+area, was estimated non-parametrically by kernel smoothing. Here, an isotropic Gaussian kernel with edge 
+effect correction by the method of \citet{Diggle1985} was employed. The bandwidth of the Gaussian kernel 
+was adjusted to minimize the square-mean-error criterion defined by \citet{Diggle1985}.
+
+Inter-point interactions were investigated using two measures of distance between observation points. The 
+first is the \emph{empty space distance} or void distance, which measures the Euclidean distance from every 
+single location in the observation window to the nearest existing observation point. The second is the 
+\emph{nearest neighbour distance}, i.e. the Euclidean distance from every existing observation point to its 
+nearest existing observation point. The latter was used to construct an \emph{Stienen diagram}, which consists 
+of  depicting every point using a circle with diameter and colour intensity proportional to its nearest 
+neighbour distance. The Stienen diagram was visualised in Google Earth\rr{} to check for possible correlations 
+between environmental conditions and nearest neighbour distances.
+
+
+
+
+Point pattern analysis included estimating the \emph{G} function of the spatial distribution of the point 
+pattern. Monte Carlo simulations ($n = 19$) were used to build the envelope of the \emph{G} function. The 
+envelope was used to test the point pattern for complete spatial randomness along the entire distance interval 
+at a level of confidence of \SI{95}{\percent}.
+
+A non-stationary Poisson point process model was fitted to the point pattern using covariates suggested by the 
+judgements elicited from the experts. A generalized linear model with a log link was fitted by maximizing the 
+pseudolikelihood using the Berman-Turner computational approximation \cite{Baddeley2010}. This point process 
+model was then used as estimate of the observation intensity to estimate the envelope of the detrended \emph{G} 
+function.
 
 \section{RESULTS}
 
@@ -247,7 +280,8 @@ Middle-Eastern sectors.
 \end{figure}
 
 The Stienen diagram (\href{https://www.dropbox.com/s/m00seobmpl5qtui/stienen.kml?dl=0}{click
-here to download} and open in \googleearth) helped identifying areas where the observation pattern is 
+here to download} and open in Google Earthz\rr{}) helped identifying areas where the observation 
+pattern is 
 approximately regular, such as the Northern sector where the circles are approximately aligned and have about 
 the same size. In the Southern sector, where the size of the circles is variable, the observation process seem 
 to be approximately random. The relation between observation intensity and environmental features is also very 
@@ -314,7 +348,7 @@ in the space domain.
 Among all covariates available, land use, physiographic strata and field campaigns 
 (\autoref{fig:chap07-covars}) are those which better explain the spatial distribution of the point process 
 (\autoref{tab:chap07-deviance}). This corroborates the interpretation of the Stienen diagram (plotted in 
-\googleearth) and \autoref{fig:chap07-nndistG} made above. Land use produces the largest deviance 
+Google Earth\rr{}) and \autoref{fig:chap07-nndistG} made above. Land use produces the largest deviance 
 reduction, followed by field campaigns and physiographic strata. The interactions between predictors also 
 reduce the deviance and were not included in the model to avoid increasing its complexity.
 
