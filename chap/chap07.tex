@@ -1,52 +1,86 @@
 \artigotrue
-\chapter{SPATIAL POINT PATTERN ANALYSIS OF SOIL SURVEY SAMPLING LOCATIONS}
+\chapter{SPATIAL POINT PATTERN ANALYSIS OF SOIL SURVEY OBSERVATION LOCATIONS}
 \chapternote{This chapter is based on the studies \textit{An approach to help formalizing the purposive 
 sampling strategy of classical soil surveys}, presented at the 20th World Congress of Soil Science 
 \cite{Samuel-RosaEtAl2014b}, and \textit{Spatial point pattern analysis of soil survey sampling locations}, 
 presented at the 10th European Conference on Geostatistics for Environmental Applications 
 \cite{Samuel-RosaEtAl2014a}.}
-\shorttitle{Spatial Pattern of Sampling Locations}
+\shorttitle{Spatial Pattern of Observation Locations}
 \label{chap:chap07}
 
-%\def\ptkeys{Modelagem espacial do solo, Caminhamento livre, Análise de padrão pontual, Julgamento 
-%especialista, Motivação}
+\def\ptkeys{Modelagem espacial do solo. Caminhamento livre. Análise de padrão pontual. Julgamento 
+especialista. Motivação}
 
-%\begin{chapterabstract}{brazilian}{\ptkeys}
-%Este é o resumo em português.
-%\end{chapterabstract}
+\begin{chapterabstract}{brazilian}{\ptkeys}
+Modeladores espaciais de campo do solo normalmente selecionam os locais de observação com base no 
+conhecimento tácito sobre as relações solo-paisagem. O objetivo desse estudo foi avaliar o potencial da 
+análise de padrão pontual (PPA) para ajudar a compreender a estratégia de amostragem intencional, 
+tradicionalmente empregada por modeladores de campo do solo. Um conjunto de dados consistindo de $n = 340$ 
+observações do solo obtidas em um exercício de modelagem espacial do solo realizado no Sul do Brasil entre 
+\num{2008} e \num{2011} foi usado. PPA foi realizada utilizando os pacotes \texttt{spatstat} e 
+\texttt{splancs} do \texttt{R}. A intensidade de observação do solo foi estimada utilizando um núcleo de 
+convolução suavizador Gaussiano isotrópico. A função $G$ não-homogênea e simulações de Monte Carlo foram 
+usadas para avaliar o padrão espacial dos pontos de observação. Um modelo de processo de Poisson 
+não-estacionário foi ajustado utilizando covariáveis (uso da terra e atributos do terreno) e a data de 
+observação para avaliar como características ambientais e outros fatores intervenientes influenciam a escolha 
+dos locais de observação. Comparações entre PPA e julgamentos elicitados dos modeladores do solo que 
+realizaram a modelagem do solo foram usadas para validar a análise. A PPA mostrou que os locais de observação 
+do solo são não-homogeneamente distribuídos na área de estudo. Duas áreas foram mais densamente amostradas 
+(distância do vizinho mais próximo, $\text{NND} < \SI{125}{\m}$), uma no setor Sul, a outra no setor 
+Centro-Norte-oriental. Os pontos de observação têm uma distribuição espacial aproximadamente aleatória nessas 
+duas áreas, enquanto que nas zonas de baixa densidade amostral eles são espaçados à distâncias aproximadamente 
+regulares ($\text{NND} > \SI{125}{\m}$). Uso da terra, estratos fisiográficos, e data de observação tem uma 
+influência significativa sobre a distribuição espacial dos locais de observação. O uso da terra produz a maior 
+redução na desviância (\SI{6}{\percent}), seguido pela data de observação (\SI{4}{\percent}) e estratos 
+fisiográficos (\SI{2}{\cento}). Esses resultados estão em concordância com os julgamentos eliciados dos 
+modeladores do solo. De acordo com eles, as áreas mais densamente amostrados são aquelas onde eles tinham um 
+conhecimento menos consistente das relações solo-paisagem. Estas áreas foram visitadas nas primeiras e nas 
+últimas campanhas de campo, evidenciando um efeito temporal. Por outro lado, a maioria das campanhas 
+intermediárias foram realizadas em áreas onde eles tinham um melhor conhecimento das relações solo-paisagem. 
+Outras campanhas intermediárias foram realizadas em áreas de difícil acesso, onde os modeladores do solo 
+selecionaram os locais de observação por conveniência. Campanhas de campo intermediárias também coincidiram 
+com um corte no orçamento. A interação desses fatores intervenientes reduzir a motivação dos modeladores do 
+solo para realizar amostragem mais intensiva. Os modeladores do solo também relataram que eles realizaram uma 
+estratificação mental da área de estudo antes de selecionar os locais de observação. Características do 
+terreno compuseram a primeira variável de estratificação, ao passo que o uso da terra foi utilizado como 
+variável de estratificação de segundo estágio. A estreita concordância entre a PPA e os julgamentos elicitados 
+dos modeladores do solo sugere que PPA pode ajudar a compreender a estratégia de amostragem utilizada por 
+modeladores do solo.
+\end{chapterabstract}
 
 \def\enkeys{Soil spatial modelling. Free survey. Point pattern analysis. Expert judgement. Motivation}
   
 \begin{chapterabstract}{english}{\enkeys}
-Field soil spatial modellers usually select sampling locations based on tacit knowledge about soil-landscape 
-relationships. The aim of this study was to assess the potential of point pattern analysis (PPA) to help 
-understanding the purposive sampling strategy traditionally employed by field soil modellers. A dataset 
-consisting of $n = 340$ soil samples obtained in a soil spatial modelling exercise carried out in Southern 
-Brazil between \num{2008} and \num{2011} was used. PPA was performed using the 
-\Rpackage{spatstat}. Soil sampling density was estimated using an isotropic Gaussian kernel smoother. The 
-inhomogeneous G function and Monte Carlo simulations were used to evaluate the spatial pattern of the sampling 
-points. A non-stationary Poisson point process model was fitted using covariates (land use and terrain 
-attributes) and the sampling date to evaluate how environmental features and other intervening factors 
-influenced the choice of sampling locations. Comparisons between PPA and judgements elicited from the 
-soil modellers who carried out the soil modelling were used to validate the analysis. PPA showed that soil 
-sampling locations are inhomogeneously distributed in the study area. Two areas were more densely sampled 
-(nearest neighbour distances, $\text{NND} < \SI{125}{\m}$), one in the Southern sector, the other in the 
-Middle-North-eastern sector. Sampling points have an approximately random spatial distribution in these two 
-areas, while in the less densely sampled areas they are spaced at approximately regular distances ($\text{NND} 
-> \SI{125}{\m}$). Land use, physiographic strata, and sampling date have a significant influence on the spatial
-distribution of sampling locations. Land use yields the largest deviance reduction (\SI{6}{\percent}), followed
-by sampling date (\SI{4}{\percent}) and physiographic strata (\SI{2}{\percent}). These results are in close 
-agreement with judgements elicited from soil modellers. According to them, more densely sampled areas are 
-those where they had a less consistent knowledge of soil-landscape relationships. These areas were visited in 
-the first and last field campaigns, evidencing a temporal effect. On the other hand, most of the intermediate 
-campaigns were carried out in areas where they had a better knowledge of soil-landscape relationships. Other 
-intermediate campaigns were carried out in areas of poor accessibility, where soil modellers selected sampling 
-locations by convenience. Intermediate field campaigns also coincided with a budget cut. The interplay of 
-these intervening factors reduced the motivation of the soil modellers to conduct more intensive sampling. 
-Soil modellers also reported that they performed a mental stratification of the study area prior to selecting 
-sampling locations. Terrain features composed the first stratification variable, while land use was used as 
-the stage-two stratification variable. The close agreement between PPA and judgements elicited from soil 
-modellers suggests that PPA can help understand the sampling strategy used by soil modellers.
+Field soil spatial modellers usually select observation locations based on tacit knowledge about 
+soil-landscape relationships. The aim of this study was to assess the potential of point pattern analysis 
+(PPA) to help understanding the purposive sampling strategy traditionally employed by field soil modellers. A 
+dataset consisting of $n = 340$ soil observations obtained in a soil spatial modelling exercise carried out in 
+Southern Brazil between \num{2008} and \num{2011} was used. PPA was performed using the \texttt{R}-packages 
+\texttt{spatstat} and \texttt{splancs}. Soil observation intensity was estimated using an isotropic Gaussian 
+kernel smoother. The inhomogeneous $G$ function and Monte Carlo simulations were used to evaluate the spatial 
+pattern of the observation points. A non-stationary Poisson point process model was fitted using covariates 
+(land use and terrain attributes) and the observation date to evaluate how environmental features and other 
+intervening factors influenced the choice of observation locations. Comparisons between PPA and judgements 
+elicited from the soil modellers who carried out the soil modelling were used to validate the analysis. PPA 
+showed that soil observation locations are inhomogeneously distributed in the study area. Two areas were more 
+densely sampled (nearest neighbour distance, $\text{NND} < \SI{125}{\m}$), one in the Southern sector, 
+the other in the Centre-North-eastern sector. Observation points have an approximately random spatial 
+distribution in these two areas, while in the less densely sampled areas they are spaced at approximately 
+regular distances ($\text{NND} > \SI{125}{\m}$). Land use, physiographic strata, and observation date have a 
+significant influence on the spatial distribution of observation locations. Land use yields the largest 
+deviance reduction (\SI{6}{\percent}), followed by observation date (\SI{4}{\percent}) and physiographic 
+strata (\SI{2}{\percent}). These results are in close agreement with judgements elicited from soil modellers. 
+According to them, more densely sampled areas are those where they had a less consistent knowledge of 
+soil-landscape relationships. These areas were visited in the first and last field campaigns, evidencing a 
+temporal effect. On the other hand, most of the intermediate campaigns were carried out in areas where they 
+had a better knowledge of soil-landscape relationships. Other intermediate campaigns were carried out in areas 
+of poor accessibility, where soil modellers selected observation locations by convenience. Intermediate field 
+campaigns also coincided with a budget cut. The interplay of these intervening factors reduced the motivation 
+of the soil modellers to conduct more intensive sampling. Soil modellers also reported that they performed a 
+mental stratification of the study area prior to selecting observation locations. Terrain features composed 
+the first stratification variable, while land use was used as the stage-two stratification variable. The close 
+agreement between PPA and judgements elicited from soil modellers suggests that PPA can help understand the 
+sampling strategy used by soil modellers.
 \end{chapterabstract}
 
 \formatchapter
