@@ -10,11 +10,25 @@ Federal Rural do Rio de Janeiro, Brazil).}
 \shorttitle{Sampling for the Spatial Trend}
 \label{chap:chap08}
 
-% \def\ptkeys{Recozimento simulado, Otimização multi-objetivo, Pareto, Amostragem por hipercubo latino 
-% condicionado, Covariáveis}
-% \begin{chapterabstract}{brazilian}{\ptkeys}
-% Este é o resumo em português.
-% \end{chapterabstract}
+\def\ptkeys{Recozimento simulado. Otimização multi-objetivo. Pareto. Amostragem por hipercubo latino 
+condicionado. Covariáveis}
+
+\begin{chapterabstract}{brazilian}{\ptkeys}
+A tendência espacial é a parte de um modelo espacial do solo que explica, de maneira deterministica, a 
+variação espacial do solo usando covariáveis. O método de amostragem mais comumente usado para identificar e 
+estimar a tendência espacial é a \emph{amostragem no hipercubo latino condicionado} (CLHS). Neste estudo nós 
+propomos melhorias conceituais e algorítmicas no CLHS, as quais são avaliadas utilizando dados sintéticos 
+derivados de um estudo de caso do mundo real, em Santa Maria, sul do Brasil. As melhorias incluem: 1) usar o 
+$r$ de Pearson somente quando todas as covariáveis são numéricas, e o $V$ de Cramér quando algumas ou todas as 
+covariáveis são fatores, 2) definir os estratos marginais de amostragem utilizando apenas os valores únicos 
+dos quantis amostrais estimados com uma função descontínua, e 3) escalar as funções objetivo para o mesmo 
+intervalo aproximado de valores usando a abordagem do limite superior-inferior com os valores máximo e mínimo 
+de Pareto antes de agregá-las em uma única função de utilidade usando uma soma ponderada. Em comparação com os 
+CLHS original, as modificação propostas resultaram em um algoritmo de amostragem com melhor comportamento 
+numérico, mas isso não se traduz necessariamente em maior acurácia na predição. O tamanho da amostra tem uma 
+influência maior na acurácia da predição do que o algoritmo de amostragem. No entanto, otimizar configurações 
+amostrais visando a associação/correlação entre as covariáveis pode degradar a acurácia da predição.
+\end{chapterabstract}
 
 \def\enkeys{Simulated annealing. Multi-objective optimization. Pareto. Conditioned Latin hypercube sampling. 
 Covariates}
@@ -158,14 +172,14 @@ corrected by simply attributing different \emph{weights} to each objective (see 
 
 To address the problem above we propose to replace Pearson's $r$ with Cramér's $V$
 
-\begin{equation}\label{eqn:chap08-cramer} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-cramer}
  V =  \sqrt{\frac{\chi^2 / n}{min(n_\text{col} - 1, n_\text{row} - 1)}},
 \end{equation}
 
 \noindent where $n_\text{row}$ and $n_\text{col}$ are the number of rows and columns of the bivariate 
 contingency table, $n$ is the sample size, and $\chi^2$ is the chi-squared statistic
 
-\begin{equation}\label{eqn:chap08-chi-squared} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-chi-squared}
  \chi^2 = \sum_{i = 1}^{n_\text{row}}\sum_{j=1}^{n_\text{col}}\frac{(O_{ij} - E_{ij})^2}{E_{ij}},
 \end{equation}
 
@@ -189,7 +203,7 @@ variables} \cite{Arora2011} -- at the $n$ sample points. The lower the objective
 spatial sample is to meeting the respective objective. Thus, when solving a MOCOP, one aims at minimizing the 
 vector of $k$ objective functions \cite{Arora2011}
 
-\begin{equation}\label{eqn:chap08-mocop} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-mocop}
  \boldsymbol{f}(\boldsymbol{X}) = (f_1(\boldsymbol{X}), f_2(\boldsymbol{X}), \ldots, f_k(\boldsymbol{X})),
 \end{equation}\label{eqn:chap08-mocop}
 
@@ -216,7 +230,7 @@ sum} method, which is used in the CLHS. It employs weights to incorporate the \e
 the user, their relative values reflecting the importance of each objective function \cite{MarlerEtAl2009}. 
 Thus, the MOCOP boils down to minimizing the \emph{convex} combination of objective functions
 
-\begin{equation}\label{eqn:chap08-utility} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-utility}
  U = \sum_{i=1}^{k} w_i f_i(\boldsymbol{X}),
 \end{equation}
 
@@ -250,7 +264,7 @@ below).
 
 We propose using a more robust approach, i.e. the \emph{upper-lower bound approach},
 
-\begin{equation}\label{eqn:chap08-pareto-min-max} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-pareto-min-max}
  f_i'' = \frac{f_i(\boldsymbol{X}) - f_i^{\circ}}{f_i^{max} - f_i^{\circ}},
 \end{equation}\label{eqn:chap08-pareto-min-max}
 
@@ -279,7 +293,7 @@ the extra time needed to optimize each of the $k$ objective functions individual
 Given the proposed modifications, the problem of sampling for spatial trend estimation for soil mapping is 
 redefined using two objective functions,
 
-\begin{equation}\label{eqn:chap08-corr} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-corr}
  \text{CORR} = \sum_{i=1}^{p}\sum_{j=1}^{p}|\varphi_{ij} - v_{ij}|,
 \end{equation}
 
@@ -287,7 +301,7 @@ redefined using two objective functions,
 all covariates are numeric) at the $i$th row and $j$th column of the $p$-dimensional population and sample 
 association (or correlation) matrices, and
 
-\begin{equation}\label{eqn:chap08-dist} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-dist}
  \text{DIST} = \sum_{i=1}^{p}\sum_{j=1}^{c_i} |\pi_{ij} - \gamma_{ij}|,
 \end{equation}
 
@@ -298,7 +312,7 @@ $i$th covariate. With these two objective functions, we define a utility functio
 \textbf{A}ssociation/\textbf{C}orrelation measure and the marginal \textbf{D}istribution of the 
 \textbf{C}ovariates,
 
-\begin{equation}\label{eqn:chap08-acdc} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-acdc}
  \text{ACDC} = w_1\text{CORR} + w_2 \text{DIST},
 \end{equation}
 
@@ -386,11 +400,10 @@ $m(\boldsymbol{s})$ and $e(\boldsymbol{s})$, respectively (\autoref{fig:chap08-b
  \end{minipage}
  \caption[(Non)Linear mixed model fitted to the soil bulk density data.]{(Non)Linear mixed model fitted to the 
  soil bulk density data (BUDE, $\si{\mega\gram\per\cubic\metre} \times 100$) measured at $n = 282$ 
-calibration locations. The top panel shows the relation between out-of-bag random regression forest 
-predictions and BUDE, here representing the deterministic component $m(\boldsymbol{s})$. The bottom panel shows 
-the restricted maximum likelihood fit of the variogram model (red line) to BUDE, i.e. the stochastic component 
-$e(\boldsymbol{s})$. Exponentially spaced lag-distance classes are used to depict the sample variogram (blue 
-dots) along with the number of point-pairs in each variogram lag-distance class.}
+calibration locations. (a) shows the relation between out-of-bag random regression forest predictions and BUDE, 
+here representing the deterministic component $m(\boldsymbol{s})$. (b) shows the restricted maximum likelihood 
+fit of the variogram model to BUDE, i.e. the stochastic component $e(\boldsymbol{s})$. Exponentially spaced 
+lags are used to depict the sample variogram along with the number of point-pairs in each lag.}
  \label{fig:chap08-bude-vario}
 \end{figure}
 
@@ -481,8 +494,8 @@ random sampling} \cite{WalvoortEtAl2010}: first, one of the candidate \q{grid ce
 replacement in the neighbourhood, i.e. independently of already being occupied by another sample point; then, 
 the candidate location for the sample point is selected within that \q{grid cell} by simple random sampling.
 
-However, to be able to escape from apparently optima solutions that appear too early during the search to be 
-true -- local optima solutions --, the newly selected sample configuration $\boldsymbol{X}_{i + 1}$ can be 
+However, to be able to escape from apparently optima solutions that appear too early during the search -- 
+local optima solutions --, the newly selected sample configuration $\boldsymbol{X}_{i + 1}$ can be 
 accepted even if it returns an inferior objective function value, i.e. $\boldsymbol{f}(\boldsymbol{X}_{i + 1}) 
 >  \boldsymbol{f}(\boldsymbol{X}_i)$. This means that the algorithm \q{understands} that taking a step back 
 sometimes during the search can lead to better results. The decision whether to accept or not a sample 
@@ -583,8 +596,8 @@ and annealing schedule ($chain_\text{length}$, $n_\text{chains}$, and $n_\text{c
 by trial and error, and based on the current knowledge and available resources \cite{WebsterEtAl2013}. A useful 
 tool is a plot with the evolution of the objective function values as measured at the end of each Markov chain 
 \cite{LarkEtAl2003}: objective function values should present large fluctuation during the first Markov chains, 
-then gradually stabilize and decrease till a minimum is reached at which they remain for $n_\text{chain stop}$ 
-Markov chains.
+then gradually stabilize and decrease till a minimum is reached at which they remain for $n_\text{chain 
+stop}$ Markov chains.
 
 \subsubsection{Experimental design}
 
@@ -603,15 +616,15 @@ at the end of the search, the neighbourhood of a sample point was constrained to
 composed of that in which the sample point falls and its eight surrounding grid cells.
 
 Each spatial sample optimized with $\mathcal{N} = 3$ sample sizes using the $\mathcal{A} = 4$ sampling 
-algorithms was used to sample from the $\mathcal{R} = 1000$ simulated reality of BUDE to constitute 
+algorithms was used to sample from the $\mathcal{R} = 1000$ simulated realities of BUDE to constitute 
 $\mathcal{D} = \mathcal{A} \times \mathcal{N} \times \mathcal{R} = \num{12000}$ calibration datasets. Sampling 
 was performed using nearest neighbour sampling because simulated data are available only at a finite set of 
-regularly spaced (\SI{5}{\m}) grid points. This corresponds to assuming that BUDE is the same everywhere inside 
-the $5 \times 5$ area surrounding every grid point.
+regularly spaced (\SI{5}{\m}) grid points. This corresponds to assuming that BUDE is the same everywhere 
+inside the $5 \times \SI{5}{\m}$ area surrounding every grid point.
 
 \subsection{Model Calibration}
 
-Each of the $\mathcal{D} = \num{12000}$ calibration dataset was used to calibrate a (non)linear mixed model 
+Each of the $\mathcal{D} = \num{12000}$ calibration datasets was used to calibrate a (non)linear mixed model 
 using the same steps employed for calibrating the soil data generating process as described in 
 \autoref{sec:chap08-simulation}. Two important differences exist, though. First, the shape parameter, $\nu$, 
 of the Whittle-Matérn model was chosen from a set of only three values instead of five ($\nu = (0.5, 1.0, 
@@ -631,8 +644,7 @@ The influence of sampling design and sample size on the spatial prediction accur
 Geographic stratification was obtained using the \textit{k}-means algorithm as implemented in the 
 \Rpackage{spcosa} \cite{WalvoortEtAl2010}. The algorithm was run using three different seeds for the 
 pseudo-random number generator, the resulting stratification with the minimum value of the mean squared 
-shortest distance (MSSD) between calibration and prediction points being selected. Each stratum has $n = 2$ 
-randomly selected validation points.
+shortest distance (MSSD) being selected. Each stratum has $n = 2$ randomly selected validation points.
 
 We used the realization-wise mean error (ME) and mean squared error (MSE) at the probabilistically selected 
 validation points to evaluate the sampling designs. The ME shows the effect of the sampling design on the 
