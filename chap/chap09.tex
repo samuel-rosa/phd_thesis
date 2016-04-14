@@ -10,10 +10,20 @@ Federal Rural do Rio de Janeiro, Brazil).}
 \shorttitle{Sampling in \emph{Terra Incognita}}
 \label{chap:chap09}
 
-%\def\ptkeys{Recozimento simulado, Otimização multi-objetivo, Estimativa do variogram, Predição espacial}
-%\begin{chapterabstract}{brazilian}{\ptkeys}
-%Este é o resumo em português.
-%\end{chapterabstract}
+\def\ptkeys{Recozimento simulado. Otimização multi-objetivo. Estimativa do variogram. Predição espacial}
+\begin{chapterabstract}{brazilian}{\ptkeys}
+Este estudo aborda um problema que muitos modeladores espaciais do solo enfrentam: como chegar à uma 
+configuração amostral espacial eficiente para (I) estimar a tendência espacial, (II) estimar o variograma dos 
+resíduos, e (III) fazer predições espaciais em situações onde nós sabemos muito pouco. A solução proposta 
+consistem em formular um sólido problema de otimização multi-objetivo usando versões robustas de algoritmos de 
+amostragem existentes. A amostra espacial visada deve reproduzir a distribuição marginal das covariáveis de 
+modo que a tendência espacial possa ser estimada com acurácia. Ela também deve conter vários pequenos 
+aglomerados dispersos por toda a região de amostragem para permitir fazer estimativa acurada do comportamento 
+do variograma, especialmente próximo da origem. Finalmente, ela deve cobrir a região de amostragem da forma 
+mais uniforme de tal modo que a média da variância do erro de predição é a menor possível. Esse problema de 
+otimização multi-objetivo pode ser resolvido usando o recozimento simulado espacial conforme implementado no 
+\Rpackage{spann}.
+\end{chapterabstract}
 
 \def\enkeys{Simulated annealing. Multi-objective optimization. Variogram estimation. Spatial prediction}
   
