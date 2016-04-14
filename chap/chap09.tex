@@ -190,7 +190,7 @@ stable sampling algorithm, we suggest that the improved version of the CLHS call
 
 Different from CLHS, ACDC is a multi-objective optimization problem composed of only two objective functions,
 
-\begin{equation}\label{eqn:chap09-corr} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap09-corr}
  \text{CORR} = \sum_{i=1}^{p}\sum_{j=1}^{p}|\varphi_{ij} - v_{ij}|,
 \end{equation}
 
@@ -198,7 +198,7 @@ Different from CLHS, ACDC is a multi-objective optimization problem composed of 
 all covariates are numeric) at the $i$th row and $j$th column of the $p$-dimensional population and sample 
 association (or correlation) matrices, and
 
-\begin{equation}\label{eqn:chap09-dist} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap09-dist}
  \text{DIST} = \sum_{i=1}^{p}\sum_{j=1}^{c_i} |\pi_{ij} - \gamma_{ij}|,
 \end{equation}
 
@@ -206,7 +206,7 @@ association (or correlation) matrices, and
 the $j$th class (or marginal sampling strata) of the $i$th covariate, $c_i$ being the number of classes of the 
 $i$th covariate. As such, ACDC is defined as follows:
 
-\begin{equation}\label{eqn:chap08-acdc} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-acdc}
  \text{ACDC} = w_1\text{CORR} + w_2 \text{DIST},
 \end{equation}
 
@@ -216,20 +216,20 @@ functions.
 \subsection{Sampling for Variogram Estimation}
 \label{sec:chap09-ppl}
 
-An efficient and robust method for variogram estimation in \emph{terra incognita} seems to be missing. For that 
-end, we propose that sampling should be based on placing several small clusters scattered throughout the 
+An efficient and robust method for variogram estimation in \emph{terra incognita} seems to be missing. For 
+that end, we propose that sampling should be based on placing several small clusters scattered throughout the 
 spatial domain as to maximize the amount of information carried by the sample. The most relevant pairwise 
-distances are those that 1) enable an accurate estimate of the 
-behaviour of the variogram near the origin and 2) produce a low estimate of the nugget variance. Our main 
-concern 
-is with the fact that the shape of the variogram and the estimated nugget variance determine the smoothness of 
-the spatial predictions \cite{WebsterEtAl2007}.
+distances are those that 1) enable an accurate estimate of the behaviour of the variogram near the origin and 
+2) produce a low estimate of the nugget variance. Our main concern is with the fact that the shape of the 
+variogram and the estimated nugget variance determine the smoothness of the spatial predictions 
+\cite{WebsterEtAl2007}.
 
 The design of our sampling algorithm starts with the method proposed by \citet{WarrickEtAl1987}. Instead of 
-equidistant, we use exponentially spaced lag-distance classes defined up to the circumradius $r$ of the 
-bounding box of the area as proposed by \citet{TruongEtAl2013}. The exponential spacings are created 
-sequentially from the largest to the smallest lag by halving the immediately preceding larger lag, resulting in 
-narrower lags in the left side of the variogram. It works as follows:
+equidistant (\autoref{fig:chap09-equi-lag}), we use exponentially spaced lag-distance classes defined up to 
+the circumradius $r$ of the bounding box of the area as proposed by \citet{TruongEtAl2013}. The exponential 
+spacings are created sequentially from the largest to the smallest lag by halving the immediately preceding 
+larger lag, resulting in narrower lags in the left side of the variogram (\autoref{fig:chap09-exp-lag}). It 
+works as follows:
 
 \begin{enumerate}
  \item Find $r$. Use the result to define the upper bound of the first rightmost lag.
@@ -240,7 +240,66 @@ narrower lags in the left side of the variogram. It works as follows:
  \item Proceed as in 3--5 until the upper and lower bounds of the leftmost lag have been defined.
 \end{enumerate}
 
-\noindent The number of lag-distance classes depends on the wanted size of the smallest lag. For general 
+\begin{figure}[!ht]
+\centering
+\begin{minipage}{0.45\textwidth}
+\subcaption{}
+\label{fig:chap09-equi-lag}
+\centering
+\begin{tikzpicture}
+\begin{scope}[line width=1pt,->]
+\draw(0,0) -- (0,3) node[pos=0.5, rotate=90, above=1pt]{\textit{Semivariance}};
+\draw(0,0) -- (3,0) node[pos=0.5, below=1pt]{\textit{Distance}};
+\end{scope}
+\draw[red, rounded corners=50pt, line width=0.5pt] (0,0.5) -- (0.5,2.4) -- (3,2.5);
+%% Draw lag boundaries
+\foreach \i in {0.5, 1, ..., 3}{
+  \draw [blue, dashed, line width=0.5pt](\i,0) -- (\i,3);
+}
+%% Draw points
+\path (0.25,1.1) coordinate (0.25,1.1); \fill (0.25,1.1) circle (0.05cm);
+\path (0.75,2) coordinate (0.75,2); \fill (0.75,2) circle (0.05cm);
+\path (1.25,2) coordinate (1.25,2); \fill (1.25,2) circle (0.05cm);
+\path (1.75,2.5) coordinate (1.75,2.5); \fill (1.75,2.5) circle (0.05cm);
+\path (2.25,2.3) coordinate (2.25,2.3); \fill (2.25,2.3) circle (0.05cm);
+\path (2.75,2.5) coordinate (2.75,2.5); \fill (2.75,2.5) circle (0.05cm);
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\subcaption{}
+\label{fig:chap09-exp-lag}
+\centering
+\begin{tikzpicture}
+\begin{scope}[line width=1pt,->]
+\draw(0,0) -- (0,3) node[pos=0.5, rotate=90, above=1pt]{\textit{Semivariance}};
+\draw(0,0) -- (3,0) node[pos=0.5, below=1pt]{\textit{Distance}};
+\end{scope}
+\draw[red, rounded corners=50pt, line width=0.5pt] (0,0.5) -- (0.5,2.4) -- (3,2.5);
+\foreach \i in {0, 1, ..., 5}{
+  \draw [blue, dashed, line width=0.5pt](3/2^\i,0) -- (3/2^\i,3);
+}
+%% Draw points
+\path (3/2^5 / 2,0.6) coordinate (3/2^5 / 2,0.6);
+  \fill (3/2^5 / 2,0.6) circle (0.05cm);
+\path (3/2^4 - 3/2^5 / 2,0.9) coordinate (3/2^4 - 3/2^5 / 2,0.8); 
+  \fill (3/2^4 - 3/2^5 / 2,0.9) circle (0.05cm);
+\path (3/2^3 - 3/2^4 / 2,1.3) coordinate (3/2^3 - 3/2^4 / 2,1.3); 
+  \fill (3/2^3 - 3/2^4 / 2,1.3) circle (0.05cm);
+\path (3/2^2 - 3/2^3 / 2,1.6) coordinate (3/2^2 - 3/2^3 / 2,1.6);
+  \fill (3/2^2 - 3/2^3 / 2,1.6) circle (0.05cm);
+\path (3/2^1 - 3/2^2 / 2,2.2) coordinate (3/2^1 - 3/2^2 / 2,2.2); 
+  \fill (3/2^1 - 3/2^2 / 2,2.2) circle (0.05cm);
+\path (3 - 3/2^1 / 2,2.5) coordinate (3 - 3/2^1 / 2,2.5); 
+  \fill (3 - 3/2^1 / 2,2.5) circle (0.05cm);
+\end{tikzpicture}
+\end{minipage}
+\caption[Equidistant and exponential lag-distance classes.]{Representation of sample variograms with (a)
+equidistant and (b) exponentially spaced lag-distance classes. The dashed vertical lines represent the lower 
+and upper bounds of the lag-distance classes.}
+\label{fig:chap09-lags}
+\end{figure}
+
+The number of lag-distance classes depends on the wanted size of the smallest lag. For general 
 applications, it seems appropriate to use a maximum of seven lags, where the size of the smallest lag will be 
 approximately \SI{2}{\percent} of the circumradius $r$ of the bounding box of the area. Having defined the 
 bounds of the lag-distance classes, our objective is to find a spatial sample configuration such that every 
@@ -252,7 +311,7 @@ sample configuration, the criterion to be minimized is the sum of differences be
 $\boldsymbol{l}^*$ and observed $\boldsymbol{l}$ distributions of unique \textbf{P}oints \textbf{P}er 
 \textbf{L}ag
 
-\begin{equation}\label{eqn:chap08-ppl} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-ppl}
  \text{PPL} = \sum_{i = 1}^{q} l_i^* - l_i,
 \end{equation}
 
@@ -270,7 +329,7 @@ regions containing also irregularly shaped non-sampling areas.
 
 The MSSD is given by
 
-\begin{equation}% SEE IMAGE BELOW
+\begin{equation}
  \text{MSSD} = \frac{1}{N} \sum_{i = 1}^{N} min_j(D_{ij}^2),
 \end{equation}
 
@@ -286,7 +345,7 @@ combinatorial optimization problem (MOCOP) (\autoref{eqn:chap08-mocop}). A utili
 aggregating the three criteria described above using the weighted sum method (\autoref{eqn:chap08-utility})
 so that the sample points cover, extend over, spread over, SPAN the feature, variogram and geographic spaces,
 
-\begin{equation}\label{eqn:chap08-span} % SEE IMAGE BELOW
+\begin{equation}\label{eqn:chap08-span}
 \text{SPAN} = w_1 \text{CORR} + w_2 \text{DIST} + w_3 \text{PPL} + w_4 \text{MSSD}, 
 \end{equation}
 
@@ -294,11 +353,12 @@ so that the sample points cover, extend over, spread over, SPAN the feature, var
 aggregation, each objective function is scaled to the same approximate range of values using the upper-lower 
 bound approach with the Pareto minimum and maximum values (\autoref{eqn:chap08-pareto-min-max}) so that any 
 potential numerical dominance can be eliminated or minimized, and the weights can play the desired role 
-\cite{MarlerEtAl2005, MarlerEtAl2009}. Solving the multi-objective optimization problem of sampling in 
+\cite{MarlerEtAl2005, MarlerEtAl2009}. The multi-objective optimization problem of sampling in 
 \emph{terra incognita} (SPAN) can be solved using spatial simulated annealing as implemented in the 
-\Rpackage{spsann}. Simulated annealing is a popular method with widespread use to solve combinatorial 
-optimization problems due to its robustness against local optima and easiness of implementation 
-\cite{MetropolisEtAl1953, KirkpatrickEtAl1983, Cerny1985, AartsEtAl1989, Groenigen1999a}.
+\Rpackage{spsann} (\autoref{sec:chap08-spsann} and \autoref{appen:spsann}). Simulated annealing is a popular 
+method with widespread use to solve combinatorial optimization problems due to its robustness against local 
+optima and easiness of implementation \cite{MetropolisEtAl1953, KirkpatrickEtAl1983, Cerny1985, AartsEtAl1989, 
+Groenigen1999a}.
 
 \section{CONCLUSIONS}
 
