@@ -190,9 +190,10 @@ use to construct the point process model is explained next in \autoref{sec:chap0
 \subsection{Point Pattern Analysis}
 \label{sec:chap07-ppa}
 
-Point pattern analysis was carried out using the \texttt{R}-package \texttt{spatstat} \cite{Baddeley2010}.
+Point pattern analysis was carried out using the \texttt{R}-packages \texttt{spatstat} \cite{Baddeley2010} and 
+\texttt{splancs} \cite{RowlingsonEtAl1993}.
 
-The first step consisted in estimating the observation window $W$, i.e. the limits of the spatial domain where 
+The first step consisted of estimating the observation window $W$, i.e. the limits of the spatial domain where 
 soil observation were made. This was necessary because soil observation points are not constrained to the 
 physical limits of the study area (\autoref{sec:chap04-sampling}). The estimate of $W$ was entirely based on 
 the spatial point pattern assuming that the observation points have been generated independently and uniformly 
@@ -200,14 +201,21 @@ distributed inside an unknown $W$. The maximum likelihood estimate of the unknow
 hull $H'$ of the observation points, with the scaling factor equal to $1/\sqrt{1 - \frac m n}$, where $n$ is 
 the number of observation points and $m$ the number of vertices of the convex hull $H$ \cite{RipleyEtAl1977}.
 
-Spatial distribution of observation points was investigated using two measures of distance between observation 
-points. The first is the \emph{empty space distance} or void distance, which measures the Euclidean distance 
-from every single location in $W$ to the nearest existing observation point. The second is the 
-\emph{nearest neighbour distance}, i.e. the Euclidean distance from every existing observation point to its 
-nearest existing observation point. The latter was used to construct an \emph{Stienen diagram}, which consists 
-of depicting every point using a circle with diameter and colour intensity proportional to its nearest 
-neighbour distance. The Stienen diagram was visualised in Google Earth\rr{} to check for possible correlations 
-between environmental conditions and nearest neighbour distances.
+The spatial distribution of observation points was investigated using two measures of distance between 
+observation points. The first is the \emph{empty space distance} or void distance, which measures the 
+Euclidean distance from every single location in $W$ to the nearest existing observation point. The second is 
+the \emph{nearest neighbour distance} (NND), i.e. the Euclidean distance from every existing observation point 
+to its nearest existing observation point. The latter was used to construct an \emph{Stienen diagram}, which 
+consists of depicting every point using a circle with diameter and colour intensity proportional to its 
+NND. The Stienen diagram was visualised in Google Earth\rr{} to check for possible correlations between 
+environmental conditions and nearest neighbour distances.
+
+The temporal variation of NND was evaluated computing summary statistics based on the order in which soil 
+observations were made. The first of them was the auto-correlation coefficient of first order, $r(1)$, which 
+measures the strength of the interaction between a soil observation made at time $t$ and the soil observation 
+made at time $t + 1$ \cite{Pruscha2013}. Next, a moving average with a window size of $n = 34$ observation 
+points was calculated. Finally, a third degree polynomial was adjusted to NND to describe the structure of 
+the long-term temporal variation.
 
 Evaluation of the spatial distribution of observation points suggested the observation intensity $\lambda$, 
 i.e. the average density of observation points per unit area, to be spatially inhomogeneous. Contrary to the 
@@ -236,12 +244,12 @@ nearest neighbour distance lies outside the envelope at any moment with an exact
 
 Finally, assuming that the observation points have been generated independently of each other inside $W$, an 
 inhomogeneous (non-stationary) Poisson point process model was calibrated to estimate the intensity function.
-A series of spatially exhaustive covariates was used to define explanatory variables of the intensity 
-function. These covariates served as proxies of the factors that determined the selection of observation 
-locations by field soil spatial modellers. For that end, a generalized linear model with a log link was 
-fitted by maximizing the pseudolikelihood using the Berman-Turner computational approximation 
-\cite{Baddeley2010}. This spatial point process model was then used to estimate the intensity function to 
-estimate the envelope of the detrended $G$ function.
+A series of spatially exhaustive covariates was used to define explanatory (deterministic) variables of the 
+intensity function. These covariates served as proxies of the factors that determined the selection of 
+observation locations by field soil spatial modellers. For that end, a generalized linear model with a log 
+link was fitted by maximizing the pseudolikelihood using the Berman-Turner computational approximation 
+\cite{Baddeley2010}. The quality of the fit was evaluated using an analysis of deviance table and visually 
+by comparing the nonparametric and parametric estimates of the intensity function.
 
 \section{RESULTS}
 
@@ -285,12 +293,11 @@ the soil-landscape relationships was poorer. This yielded the final outcome of $
 
 \subsubsection{Observation intensity}
 
-The spatial distribution of the relative soil observation intensity estimated using an isotropic Gaussian 
-kernel is shown in \autoref{fig:chap07-trend} (left plot). There are two regions where soil observation 
-was more intense. The first and largest of them is located in the South-western sector, while the second is 
-located in the Middle-North-eastern sector, with the largest values found in the South-western sector. 
-Differences in observation intensity resulted in the occurrence of patches with poor geographic coverage 
-(Figure \ref{fig:chap07-intensity}). The largest patches are located in the Middle and Middle-Eastern sectors.
+There are two regions where soil observation was more intense. The first and largest of them is located in the 
+South-western sector, while the second is located in the Middle-North-eastern sector, with the largest values 
+found in the South-western sector. Differences in observation intensity resulted in the occurrence of patches 
+with poor geographic coverage (Figure \ref{fig:chap07-intensity}). The largest patches are located in the 
+Middle and Middle-Eastern sectors.
 
 \begin{figure}[!ht]
 \centering
@@ -300,8 +307,9 @@ Differences in observation intensity resulted in the occurrence of patches with 
 \label{fig:chap07-intensity}
 \end{figure}
 
-The Stienen diagram (\href{https://www.dropbox.com/s/m00seobmpl5qtui/stienen.kml?dl=0}{click
-here to download} and open in Google Earth\rr{}) helped identifying areas where the observation 
+\def\stienen{\href{https://www.dropbox.com/s/lyzcvwdie5rs8rr/stienen.kml?dl=0}{click here to download}}
+
+The Stienen diagram (\stienen{} and open in Google Earth\rr{}) helped identifying areas where the observation 
 pattern is approximately regular, such as the Northern sector where the circles are approximately aligned and 
 have about the same size. In the Southern sector, where the size of the circles is variable, the observation 
 process seem to be approximately random. The relation between observation intensity and environmental features 
@@ -483,22 +491,22 @@ values range from \num{-1} to \num{0.81}.}
 \label{fig:chap07-trend}
 \end{figure}
 
-The envelope of the detrended estimated inhomogeneous \emph{G} function suggests that the fitted non-stationary 
-Poisson point process model has efficiently captured the trend of the point pattern 
-(\autoref{fig:chap07-detrended}). A slight difference between the curve of the empirical point process 
-(continuous black line) and the theoretical curve (dashed red line) still exists in the middle range of the 
-NND. Inclusion of interaction terms between predictors in the fitted model could help explaining this still 
-remaining trend feature.
+% The envelope of the detrended estimated inhomogeneous \emph{G} function suggests that the fitted 
+% non-stationary Poisson point process model has efficiently captured the trend of the point pattern 
+% (\autoref{fig:chap07-detrended}). A slight difference between the curve of the empirical point process 
+% (continuous black line) and the theoretical curve (dashed red line) still exists in the middle range of the 
+% NND. Inclusion of interaction terms between predictors in the fitted model could help explaining this still 
+% remaining trend feature.
 
-\begin{figure}[!h]
-\centering
-\includegraphics[trim=0mm 0mm 0mm 35mm, clip=true, width=0.6\textwidth]{fig/chap07-fit-gest-sim}
-\caption[Global envelope of the detrended estimated inhomogeneous \emph{G} function.]{Global envelope of the 
-detrended estimated inhomogeneous \emph{G} function. After detrending the curve of the empirical point process 
-(continuous black line) follows a pattern similar to that of the theoretical curve (dashed red line) of a 
-completely random spatial point process.}
-\label{fig:chap07-detrended}
-\end{figure}
+% \begin{figure}[!h]
+% \centering
+% \includegraphics[trim=0mm 0mm 0mm 35mm, clip=true, width=0.6\textwidth]{fig/chap07-fit-gest-sim}
+% \caption[Global envelope of the detrended estimated inhomogeneous \emph{G} function.]{Global envelope of the 
+% detrended estimated inhomogeneous \emph{G} function. After detrending the curve of the empirical point 
+% process (continuous black line) follows a pattern similar to that of the theoretical curve (dashed red line) 
+% of a completely random spatial point process.}
+% \label{fig:chap07-detrended}
+% \end{figure}
 
 \section{DISCUSSION}
 
