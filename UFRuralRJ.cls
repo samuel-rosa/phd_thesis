@@ -36,7 +36,7 @@
 %% Identificação
 %%==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[11/02/2016 v.0.8 Formatação de documentos acadêmicos da UFRuralRJ]
+\ProvidesClass{UFRuralRJ}[15/04/2016 v.0.9 Formatação de documentos acadêmicos da UFRuralRJ]
 
 %%==============================================================================
 %% Declaração de opções da classe
@@ -45,10 +45,11 @@
 %% Tese de doutorado
 \DeclareOption{tese}{
   \AtEndOfClass{
-    \newcommand{\titlepagespecificinfo}{\tesespecificinfo}
-    \def\grau{\tesegrau}
-    \def\doctypename{\tesename}
-    \def\doctypearticle{a}
+    \newcommand{\titlepagespecificinfo}{\tesespecificinfo}%
+    \def\grau{\tesegrau}%
+    \def\doctypename{\tesename}%
+    \def\doctypearticle{a}%
+    \def\aprovadoem{Tese aprovada em}%
     % \def\doctypenameCIP{Tese (Doutorado)}
   }
 }
@@ -60,6 +61,7 @@
     \def\grau{\dissgrau}
     \def\doctypename{\dissname}
     \def\doctypearticle{a}
+    \def\aprovadoem{Disserta{\c{c}}{\~a}o aprovada em}%
     % \def\doctypenameCIP{Disserta{\c{c}}{\~a}o (Mestrado)}
   }
 }
@@ -434,7 +436,24 @@
   \gdef\@publmonth{#2}
   \gdef\@publyear{#3}
 }
-\date{\monthname}{\number\year}
+% \date{\monthname}{\number\year}
+\newcommand{\MONTH}{%
+  \ifcase\@publmonth
+  \or Janeiro% 1
+  \or Fevereiro% 2
+  \or Março% 3
+  \or Abril% 4
+  \or Maio% 5
+  \or Junho% 6
+  \or Julho% 7
+  \or Agosto% 8
+  \or Setembro% 9
+  \or Outubro% 10
+  \or Novembro% 11
+  \or Dezembro% 12
+  \fi}
+% \def\dataAprova{\@publday/\@publmonth/\@publyear}
+\def\dataAprova{\@publday/\@publmonth/\@publyear}
 
 %% Obsoleto
 % \newcommand{\dateingles}[2]{{#1}~$\text{\@publday}^{\text{#2}}$,~\@publyear}
@@ -548,7 +567,8 @@
     \end{flushright}
     \vspace{15mm}
     \centerline{\LargeE\@city,~\@state,~\@country} %% Cidade, estado e país
-    \centerline{\LargeE\@publmonth~\ofname~\@publyear} %% Mês e ano
+    % \centerline{\LargeE\@publmonth~\ofname~\@publyear} %% Mês e ano
+    \centerline{\LargeE\MONTH~\ofname~\@publyear} %% Mês e ano
   }
 }
 
@@ -673,8 +693,8 @@
 \newcommand{\approvecommitteeinfo}{%
   \vfill
   \parbox[t]{\textwidth}{
-%     \MakeUppercase{\doctypename~\aprovadaem~\@date.}
-    \MakeUppercase{\aprovadoem~\@date.}
+    % \MakeUppercase{\aprovadoem~\@date.}
+    \MakeUppercase{\aprovadoem~\dataAprova.}
     }
     \vfill
     \vspace{18mm}

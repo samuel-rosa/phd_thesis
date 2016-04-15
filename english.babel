@@ -62,7 +62,6 @@ Tese submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de
 Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o do grau de 
 \ifautora\textbf{\grau{a}}\else\textbf{\grau{e}}\fi~no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
-\def\aprovadoem{Documento aprovado em}%
 \def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%
 \def\sobcoorienta{\textit{e co-orienta\c{c}{\~a}o~de}}%
 \def\andname{e}%

@@ -63,7 +63,6 @@ Disserta{\c{c}}{\~a}o submetida como requisito parcial para obten{\c{c}}{\~a}o d
 \ifautora\textbf{\grau{a}}\else\textbf{\grau{e}}\fi~no \@curso, \'{A}rea de Concentra{\c{c}}{\~a}o em \@area.
 }%
 \def\byname{por}%
-\def\aprovadoem{Documento aprovado em}%
 \def\soborienta{\textit{Sob orienta\c{c}{\~a}o~de}}%
 \def\sobcoorienta{\textit{e co-orienta\c{c}{\~a}o~de}}%
 \def\andname{e}%
