@@ -36,7 +36,7 @@
 %% Identificação
 %%==============================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[15/04/2016 v.0.9 Formatação de documentos acadêmicos da UFRuralRJ]
+\ProvidesClass{UFRuralRJ}[20/04/2016 v.0.9 Formatação de documentos acadêmicos da UFRuralRJ]
 
 %%==============================================================================
 %% Declaração de opções da classe
@@ -124,13 +124,14 @@
 \def\ufrrjcurto{UFRRJ}
 \newcommand{\titulo}[1]{\gdef\@titulo{#1}}
 \newcommand{\curso}[1]{\gdef\@curso{#1}}
-% \newcommand{\altCurso}[1]{\gdef\@altCurso{#1}} %% Obsoleto
 \newcommand{\area}[1]{\gdef\@area{#1}}
 \newcommand{\instituto}[1]{\gdef\@instituto{#1}}
+\newcommand{\local}[3]{\gdef\@city{#1}\gdef\@state{#2}\gdef\@country{#3}}
+
+% \newcommand{\altCurso}[1]{\gdef\@altCurso{#1}} %% Obsoleto
 % \newcommand{\grau}[1]{\gdef\@grau{#1}} %% Obsoleto
 % \newcommand{\nivel}[1]{\gdef\@nivel{#1}} %% Obsoleto
 \newcommand{\trabalhoNumero}[1] {\gdef\@trabalhoNumero{#1}}
-\newcommand{\local}[3]{\gdef\@city{#1}\gdef\@state{#2}\gdef\@country{#3}}
 
 %% Institutos
 \def\IA{Instituto de Agronomia}
@@ -188,6 +189,10 @@
 \RequirePackage{color, xcolor}
 \RequirePackage{fix-cm} % para funcionar corretamente o tamanho das fontes da capa
 
+%% Pacote para identificar se está em página par ou ímpar.
+\RequirePackage{changepage}
+\strictpagecheck
+
 %%=============================================================================
 %% Margens do texto
 %%=============================================================================
@@ -199,6 +204,7 @@
   \newlength{\mdt@pagenummargin}\setlength{\mdt@pagenummargin}{15mm}
   \newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{20mm}
   \setlength{\marginparwidth}{25mm}
+  
   %% Ajuste das medidas verticais
   \setlength{\topmargin}{\mdt@pagenummargin}
   \addtolength{\topmargin}{-1em}
@@ -211,6 +217,7 @@
   \addtolength{\textheight}{-\mdt@bottommargin}
   \setlength{\footskip}{\mdt@bottommargin}
   \addtolength{\footskip}{-\mdt@pagenummargin}
+  
   %% Ajuste das medidas horizontais
   \setlength{\oddsidemargin}{\mdt@sidemargin}
   \addtolength{\oddsidemargin}{-1in}
@@ -221,14 +228,16 @@
   \addtolength{\marginparsep}{-\marginparwidth}
   \setlength{\marginparsep}{.5\marginparsep}
 \else
+
   %% Definições gerais
   \newlength{\mdt@topmargin}\setlength{\mdt@topmargin}{30mm}
   \newlength{\mdt@bottommargin}\setlength{\mdt@bottommargin}{20mm}
-  \newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{30mm}
+  \newlength{\mdt@sidemargin}\setlength{\mdt@sidemargin}{30mm}       % ASR: Qual é a tua utilidade???
   \newlength{\mdt@pagenummargin}\setlength{\mdt@pagenummargin}{15mm}
-  \setlength{\marginparwidth}{25mm}
+  \setlength{\marginparwidth}{25mm}                                  % ASR: Qual é a tua utilidade???
   \newlength{\mdt@insidemargin}\setlength{\mdt@insidemargin}{30mm}
   \newlength{\mdt@outsidemargin}\setlength{\mdt@outsidemargin}{20mm}
+  
   %% Ajuste das medidas verticais
   \setlength{\topmargin}{\mdt@pagenummargin}
   \addtolength{\topmargin}{-1em}
@@ -241,10 +250,14 @@
   \addtolength{\textheight}{-\mdt@bottommargin}
   \setlength{\footskip}{\mdt@bottommargin}
   \addtolength{\footskip}{-\mdt@pagenummargin}
+  
   %% Ajuste das medidas horizontais
   \setlength{\oddsidemargin}{\mdt@insidemargin}
-  \addtolength{\oddsidemargin}{-1in}
+  \addtolength{\oddsidemargin}{-\marginparwidth} % twoside: Controla a margem direita quando esta for a menor
+  
   \setlength{\evensidemargin}{\mdt@outsidemargin}
+  \addtolength{\evensidemargin}{-\marginparwidth} % twoside: Controla a margem esquerda quando esta for a menor
+  
   \setlength{\textwidth}{\paperwidth}
   \addtolength{\textwidth}{-\mdt@insidemargin}
   \addtolength{\textwidth}{-\mdt@outsidemargin}
@@ -475,8 +488,19 @@
     \thetitlepage
   \end{titlepage}
   \clearpage
-  \secondtitlepage
-  \setcounter{page}{2}
+  
+  %% Verificar se a opção 'twoside' foi declarada.
+  %% Em caso positivo, uma página em branco é adicionada.
+  \if@twoside
+    \null
+    \thispagestyle{empty}%
+    \setcounter{page}{2}%
+    \newpage
+    \secondtitlepage
+  \else
+    \secondtitlepage
+    \setcounter{page}{2}%
+  \fi
 }
 
 %%=============================================================================
@@ -578,7 +602,14 @@
 
 \newcommand{\makeapprove}{%
   \clearpage
-  \theapprovepage
+  \if@twoside
+    \null
+    \thispagestyle{empty}% 
+    \newpage
+    \secondtitlepage
+  \else
+    \secondtitlepage
+  \fi
 }
 \newcommand{\theapprovepage}{%
   \noindent
@@ -901,7 +932,13 @@
 %% primeira seção primária ficará 10 mm abaixo da margem superior.
 
 \newenvironment{chapterabstract}[2]{
-  \if@openright\cleardoublepage\else\clearpage\fi
+  
+  %% ASR: O comando a seguir faz com que os dois resumos de um mesmo capítulo sejam colocados sempre no lado 
+  %% direito quando o documento é impresso em frente e verso. Isso cria uma página em branco entre eles.
+  %% Até onde vai meu conhecimento, isso não é necessário.
+  %% \if@openright\cleardoublepage\else\clearpage\fi
+  \clearpage
+  
     \gdef\@mykeywords{#2}
   \begin{otherlanguage}{#1}
     
@@ -914,7 +951,7 @@
     % \setlength{\baselineskip}{0.67\baselineskip} %% Espaçamento simples
     
     \vspace*{-14mm} %% Alinhamento superior
-    \vspace*{10mm}  %% Coloca o resumo a 10 mm da margem superior
+    % \vspace*{10mm}  %% Coloca o resumo a 10 mm da margem superior
     
     %\section*{\centering\MakeUppercase{\abstractname}} %% Título centralizado
     \addtocounter{section}{1} %% adicionar numeração ao 'resumo' no corpo do texto
@@ -927,6 +964,7 @@
     % \addcontentsline{toc}{section}{\MakeUppercase{\abstractname}}
     % \addcontentsline{toc}{section}{\uppercase{\abstractname}}
     % \addcontentsline{toc}{section}{\uppercase{\protect\numberline{\thesection}\abstractname}}
+    
     \addcontentsline{toc}{section}{\protect\numberline{\thesection}\abstractname}
     
     \vspace{2mm} %% Espaço do título até o corpo do texto
@@ -939,9 +977,16 @@
 }
 
 \newcommand{\formatchapter}{
-  \if@openright\cleardoublepage\else\clearpage\fi
-  \vspace*{-13.5mm}
-  \vspace*{10mm}
+  %% ASR: O comando a seguir faz com que os dois resumos de um mesmo capítulo sejam colocados sempre no lado 
+  %% direito quando o documento é impresso em frente e verso. Isso cria uma página em branco entre eles.
+  %% Até onde vai meu conhecimento, isso não é necessário.
+  %% \if@openright\cleardoublepage\else\clearpage\fi
+  \clearpage
+  
+  %% Os comandos a seguir colocavam o inicio do primeiro item do texto 4 cm abaixo da margem superior da 
+  %% pagina.
+  % \vspace*{-13.5mm}
+  % \vspace*{10mm}
 }
 
 %%=============================================================================
@@ -1001,8 +1046,8 @@
       %% ASR: São adicionados 10 pontos de espaço vertical antes e após o titulo de cada capitulo no sumario.
       %%      COmo não existe definição oficial, a decisão de adicionar 10 pontos é completamente arbitrária.
       \ifchap%
+       
        \addtocontents{toc}{\protect\addvspace{10\p@}}%
-        
         \ifartigo
          \refstepcounter{artigo}
          \addcontentsline{toc}{chapter}{%
@@ -1014,8 +1059,8 @@
          \addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp\thechapter}~#1}%
         \fi
        \addtocontents{toc}{\protect\addvspace{10\p@}}%
+       
       \fi
-      
       \addtocontents{lof}{\protect\addvspace{0\p@}}% list of figures
       \addtocontents{lot}{\protect\addvspace{0\p@}}% list of tables
       
@@ -1027,8 +1072,21 @@
 %% Colocar título de capítulos no formato de artigo 
 %% Posição: 20 mm abaixo da margem superior
 \def\@makechapterhead#1{%
+  
+  %% Verificar se o documento será impresso em frente e verso.
+  \if@twoside
+    \if@openright
+      \checkoddpage
+      \ifoddpage
+        \clearpage
+      \else
+        \cleardoublepage
+      \fi
+    \fi
+  \fi
+  
   %% Colocar título dos itens principais do documento a 10 mm da margem superior
-  \vspace*{5.5mm} 
+  % \vspace*{5.5mm}
   \ifchap
     %% Colocar o termo 'CAPÍTULO' 20 mm abaixo da margem superior
     \ifartigo\vspace*{8mm}\else\vspace*{0mm}\fi
@@ -1123,9 +1181,24 @@
 }
 
 %% Formatação da versão estrelada (*) dos capítulos
+%% A versão estrelada dos capítulos é usada para definir os itens da parte preliminar do documento acadêmico.
+%% Aqui não deve-se empregar o verso do papel quando o documento é impresso em frente e verso (exceto para a
+%% ficha catalográfica).
 \def\@schapter#1{%
-  %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo 
-  %%      mundo alinhado na toc
+  
+  %% Verificar se o documento será impresso em frente e verso.
+  \if@twoside
+    \if@openright
+      \checkoddpage
+      \ifoddpage
+        \clearpage
+      \else
+        \cleardoublepage
+      \fi
+    \fi
+  \fi
+  
+  %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo mundo alinhado na toc
   \ifchap\if@aftertoc\addcontentsline{toc}{chapter}{\hspace*{0.35em}#1}\fi\fi%
   \addtocontents{lof}{\protect\addvspace{0\p@}}%Original = 10\p@
   \addtocontents{lot}{\protect\addvspace{0\p@}}%
@@ -1152,28 +1225,23 @@
 \renewcommand\section{\@startsection{section}{1}{0pt}%
                                    {20pt}%
                                    {10pt}%
-                                   {\centering\reset@font\bfseries\@setfontsize
-                                     \Large{12}{20}}}
+                                   {\centering\reset@font\bfseries\@setfontsize\Large{12}{20}}}
 \renewcommand\subsection{\@startsection{subsection}{2}{0pt}%
                                    {20pt}%
                                    {10pt}%
-                                   {\reset@font\bfseries\@setfontsize
-                                     \Large{12}{20}}}
+                                   {\reset@font\bfseries\@setfontsize\Large{12}{20}}}
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{0pt}%
                                    {20pt}%
                                    {10pt}%
-                                   {\reset@font\bfseries\@setfontsize
-                                     \Large{12}{20}}}
+                                   {\reset@font\bfseries\@setfontsize\Large{12}{20}}}
 \renewcommand\paragraph{\@startsection{paragraph}{4}{0pt}%
                                    {20pt}%
                                    {10pt}%
-                                   {\reset@font\bfseries\@setfontsize
-                                     \Large{12}{20}}}	
+                                   {\reset@font\bfseries\@setfontsize\Large{12}{20}}}	
 \renewcommand\subparagraph{\@startsection{subparagraph}{5}{0pt}%
                                    {1ex}%
                                    {-1em}%
-                                   {\reset@font\bfseries\@setfontsize
-                                     \Large{12}{20}}}
+                                   {\reset@font\bfseries\@setfontsize\Large{12}{20}}}
 
 %%=============================================================================
 %% TODO: Lista de quadros
@@ -1271,6 +1339,9 @@
    \interlinepenalty \@M
    \normalfont
    
+   %% Cabeçalho dos apêndice usado quando a opção 'twoside' é declarada
+   \shorttitle{\appendixname}
+   
    %% ASR: O comando '\thechapter' é usado para adicionar numeração ao apêndice, seguindo a sequência
    %%      dos capítulos anteriores. Mas para que o comando '\thechapter' funcione, é necessário aumentar
    %%      em um a contagem do contador de capítulos.
@@ -1285,11 +1356,16 @@
    \addtocontents{toc}{\protect\addvspace{10\p@}}
   
   \vfil\newpage
+  
+  %% Verificar se o documento será impresso em frente e verso.
   \if@twoside
     \if@openright
-      \null
-      \thispagestyle{empty}%
-      \newpage
+      \checkoddpage
+      \ifoddpage
+        \clearpage
+      \else
+        \cleardoublepage
+      \fi
     \fi
   \fi
   \if@tempswa
@@ -1350,6 +1426,9 @@
    \interlinepenalty \@M
    \normalfont
    
+   %% Cabeçalho dos apêndice usado quando a opção 'twoside' é declarada
+   \shorttitle{\annexname}
+   
    % \LargeF \bfseries \MakeUppercase\annexname\par}%
    %% ASR: \hspace*{0.35em} é uma solução rápida e suja para deixar todo 
    %%      mundo alinhado na toc
@@ -1364,11 +1443,15 @@
    
    
   \vfil\newpage
+  %% Verificar se o documento será impresso em frente e verso.
   \if@twoside
     \if@openright
-      \null
-      \thispagestyle{empty}%
-      \newpage
+      \checkoddpage
+      \ifoddpage
+        \clearpage
+      \else
+        \cleardoublepage
+      \fi
     \fi
   \fi
   \if@tempswa

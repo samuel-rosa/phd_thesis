@@ -5,52 +5,52 @@
 
 Esta tese fez uma contribuição pedológica com o desenvolvimento de uma descrição abrangente dos fatores e 
 processos de formação do solo que determinam a distribuição espaço-temporal das propriedades do solo na área 
-de estudo de caso de Santa Maria. O modelo conceitual de pedogênese, apresentado em \autoref{chap:chap03}, 
+de estudo de Santa Maria. O modelo conceitual de pedogênese, apresentado em \autoref{chap:chap03}, 
 mostrou que a distribuição espacial das propriedades do solo é muito variável, mesmo quando sob o mesmo uso da 
-terra. Em escalas espaciais grosseiras, essa variação espacial é determinada pela diversidade geológica e 
-geomorfológica da área, enquanto que em escalas espaciais finas, as (pobres) práticas agrícolas passadas e 
-atuais parecem desempenhar um papel preponderante. Juntamente com o modelo conceitual de pedogênese, 
+terra. Em escalas espaciais maiores, essa variação espacial é determinada pela diversidade geológica e 
+geomorfológica da área, enquanto que em escalas espaciais menores, as práticas agrícolas usadas no passado e 
+no presente parecem desempenhar papel preponderante. Juntamente com o modelo conceitual de pedogênese, 
 \autoref{chap:chap04} e \autoref{chap:chap05} constituem uma contribuição técnica dessa tese. Esses capítulos 
 fornecem a base para exercícios de modelagem espacial do solo na área de estudo.
 
-\autoref{chap:chap06} demonstrou que as covariáveis existentes, gratuitamente disponíveis, são adequados para 
-calibrar modelos espaciais de solo. Foi demonstrado que a utilização de covariáveis mais detalhadas resulta em 
-apenas um pequeno aumento na acurácia da predição de modelos lineares espaciais do solo. O aumento observado é 
+\autoref{chap:chap06} demonstrou que as covariáveis existentes, gratuitamente disponíveis, são adequadas para 
+calibrar modelos espaciais do solo. Foi demonstrado que a utilização de covariáveis mais detalhadas resulta 
+apenas em pequeno aumento na acurácia da predição de modelos lineares espaciais do solo. O aumento observado é 
 comparável ao efeito da incorporação de dependência espacial no modelo espacial do solo, e pode não compensar 
-os custos adicionais de usar covariáveis mais detalhados. Em geral, uma covariável mais detalhada tem um maior 
+os custos adicionais de usar covariáveis mais detalhados. Em geral, uma covariável mais detalhada tem maior 
 potencial de melhorar a acurácia da predição quando uma propriedade do solo é pobremente predita pela sua 
-versão menos detalhada. No entanto, a magnitude da melhoria pode depender de outras covariáveis que estão 
-incluídas no modelo. Escolher se deve-se ou não investir em covariáveis mais detalhados depende da força da 
+versão menos detalhada. No entanto, a magnitude da melhoria pode depender das outras covariáveis 
+incluídas no modelo. Decidir se deve-se ou não investir em covariáveis mais detalhados depende da força da 
 relação entre as covariáveis e a propriedade do solo que está sendo modelada, e da diferença relativa entre as 
 versões menos e mais detalhadas das covariáveis. É provavelmente melhor aumentar substancialmente o detalhe de 
-uma covariável menos influente do que marginalmente aumentar o detalhe da covariável mais influente. No 
+uma covariável menos influente do que aumentar marginalmente o detalhe da covariável mais influente. No 
 entanto, deve-se sempre considerar se meios mais eficientes de aumentar a acurácia da predição existem (por 
 exemplo, a obtenção de mais observações do solo).
 
 \autoref{chap:chap07} mostrou que vários fatores influenciam o modo como modeladores espaciais de campo 
-do solo decidem onde colocar locais de observação do solo. Estes são de três tipos: conceituais, operacionais 
-e psicológicos. O primeiro diz respeito ao conhecimento dos modeladores espacial do solo sobre as relações 
-solo-paisagem, e parece estar relacionado com os anos de experiência de campo. A segunda refere-se aos 
-recursos disponíveis (infra-estrutura, força de trabalho e do orçamento) para fazer observações do solo, bem 
-como à restrições ao acesso impostas por proprietários de terras e as barreiras geográficas, por exemplo. A 
-terceira refere-se à forma como os modeladores do solo percebem seu ambiente físico circundante e como o curso 
-de sua motivação muda durante o processo de observação do solo. Análise do padrão pontual ajudou a compreender 
-que existe um balanço entre os fatores conceituais e operacionais, que determina como a motivação dos 
-modeladores de campo do solo muda o foco para um ou outro objetivo imediato. Dependendo do objetivo focal, a 
-configuração amostral resultante se assemelha a um padrão pontual aleatório (aprendizagem/verificação das 
-relações solo-paisagem -- motivação focada nos meios) ou regular (maximizar o número de observações e a 
-cobertura geográfica -- motivação focada no resultado).
+do solo escolhem os locais de observação do solo. Esses fatores são de três tipos: conceituais, 
+operacionais e psicológicos. O primeiro diz respeito ao conhecimento dos modeladores espacial do solo sobre as 
+relações solo-paisagem, e parece estar relacionado com os anos de experiência de campo. O segundo refere-se 
+aos recursos disponíveis (infra-estrutura, força de trabalho e do orçamento) para fazer observações do solo, 
+bem como a restrições ao acesso impostas por proprietários de terras e barreiras geográficas, por exemplo. 
+O terceiro refere-se à forma como os modeladores do solo percebem seu ambiente físico circundante e como o 
+curso de sua motivação muda durante o processo de observação do solo. A análise de padrão pontual ajudou a 
+compreender que existe um balanço entre os fatores conceituais e operacionais, o qual determina como a 
+motivação dos modeladores de campo do solo muda o foco para um ou outro objetivo imediato. Dependendo do 
+objetivo focal, a configuração amostral resultante se assemelha a um padrão pontual aleatório 
+(aprendizagem/verificação das relações solo-paisagem -- motivação focada nos meios) ou regular (maximizar o 
+número de observações e a cobertura geográfica -- motivação focada no resultado).
 
-\autoref{chap:chap08} mostrou que o algoritmo de amostragem no hipercubo latino condicionado, um algoritmo 
-popular usado para otimizar configurações amostrais espaciais para a estimativa da tendência espacial, pode 
-ser consideravelmente aperfeiçoado. Em comparação com o CLHS original, as modificações propostas resultaram em 
-um algoritmo de amostragem com um comportamento numérico superior, mas isso não se traduz necessariamente em 
-maior acurácia da predição. Por exemplo, o tamanho da amostra tem uma influência maior na acurácia da predição 
-do que o algoritmo de amostragem. No entanto, ter em vista a associação/correlação entre covariáveis degrada 
-a acurácia da predição, possivelmente porque a cobertura do espaço geográfico é mais pobre. Como tal, ao 
-otimizar uma configuração amostral para a estimativa de tendência espacial, deveria ser suficiente visar 
-apenas a reprodução da distribuição marginal das covariáveis. Isso deve ser feito usando apenas os estratos 
-marginais de amostragem não vazios.
+\autoref{chap:chap08} mostrou que o algoritmo de amostragem no hipercubo latino condicionado (CLHS), um 
+algoritmo popular usado para otimizar configurações amostrais espaciais para a estimativa da tendência 
+espacial, pode ser consideravelmente aperfeiçoado. Em comparação com o CLHS original, as modificações propostas 
+resultaram em um algoritmo de amostragem com um comportamento numérico superior, mas isso não se traduz 
+necessariamente em maior acurácia da predição. Por exemplo, o tamanho da amostra tem uma influência maior na 
+acurácia da predição do que o algoritmo de amostragem. No entanto, ter em vista a associação/correlação entre 
+covariáveis degrada a acurácia da predição, possivelmente porque a cobertura do espaço geográfico é mais pobre. 
+Como tal, ao otimizar uma configuração amostral para a estimativa de tendência espacial, deveria ser suficiente 
+visar apenas a reprodução da distribuição marginal das covariáveis. Isso deve ser feito usando apenas os 
+estratos marginais de amostragem não vazios.
 
 \autoref{chap:chap09} mostrou como otimizar configurações amostrais para estimativa da tendência espacial e do 
 variograma, e interpolação espacial em situações em que sabemos muito pouco sobre a distribuição espacial do 
@@ -73,12 +73,12 @@ gratuitamente e podem ser obtidos no The Comprehensive R Archive Network (\cran)
 No geral, essa tese mostrou que o complexa interação entre o solo e os dados covariáveis pode ter uma grande 
 influência sobre a acurácia dos mapas do solo. Uma receita única, universal, de baixo custo para reduzir a 
 incerteza na modelagem espacial do solo parece fora de alcance. Os estudos de caso sugeriram que soluções são 
-específicas para cada caso e dependem principalmente dos dados do solo e covariáveis existentes. A obtenção 
+específicas para cada caso e dependem principalmente dos dados do solo e covariáveis existentes. A obtenção de
 mais amostras do solo mostrou ser uma estratégia eficiente, desde que os recursos disponíveis permitam a 
 amostragem extra. Caso contrário, decidir sobre formas rentáveis de reduzir a incerteza requer, em primeiro 
 lugar, que exploremos todo o potencial dos dados do solo e covariáveis existentes usando técnicas robustas de 
 modelagem espaciais. Tal exercício exige um conhecimento abrangente das relações solo-paisagem, bem como uma 
-minuciosa documentação dos dados do solo e covariáveis para que os seus pontos fracos e fortes podem ser 
+minuciosa documentação dos dados do solo e covariáveis para que os seus pontos fracos e fortes possam ser 
 facilmente identificados. Então, a decisão sobre investir na melhoria da qualidade dos dados do solo ou 
-covariáveis ou ambos dependerá do balanço entre o aumento da qualidade dos dados/predição e a quantidade de 
+covariáveis ou ambos dependerá do balanço entre o aumento da qualidade dos dados/predição e da quantidade de 
 recursos necessários.

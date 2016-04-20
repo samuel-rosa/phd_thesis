@@ -1,5 +1,5 @@
 %% Tipo de documento e a classe a ser usada para sua formatação.
-\documentclass[tese, header]{UFRuralRJ}
+\documentclass[tese, header, twoside, openright]{UFRuralRJ}
 
 %%==============================================================================
 %% Pacotes - língua, codificação e fonte
@@ -248,6 +248,7 @@ RedeMDS%
 %%=============================================================================
 %% Início do documento
 %%=============================================================================
+\raggedbottom %% If you want all the extra white space to appear at the bottom of such pages
 \begin{document}
 
 %%=============================================================================
@@ -282,12 +283,42 @@ RedeMDS%
 %%=============================================================================
 %% Resumo geral em português
 %%=============================================================================
-% \def\tituloportugues{Análise de fontes de incerteza na modelagem espacial do solo}
-% \def\chavesportugues{Pedometria. Mapeamento Digital do Solo. Dados de Solo e Covariáveis}
-% \generalabstracttrue
-% \begin{generalabstract}{brazilian}{\tituloportugues}{\chavesportugues}
-% 
-% \end{generalabstract}
+\def\tituloPT{Análise de fontes de incerteza na modelagem espacial do solo}
+\def\chavesPT{Pedometria. Mapeamento Digital do Solo. Dados de Solo e Covariáveis}
+\def\nivelPT{Doutorado em Agronomia, Ciência do Solo}
+
+\generalabstracttrue
+\begin{generalabstract}{brazilian}{\tituloPT}{\chavesPT}{\nivelPT}
+A modelagem espacial do solo moderna usa modelos estatísticos para explorar a relação empírica entre 
+as condições ambientais e as propriedades do solo. Esses modelos são uma simplificação da realidade, e seu 
+resultado (mapa do solo) estará sempre \emph{errado}. O que um mapa do solo transmite é o que esperamos que o 
+solo seja, reconhecendo que somos \emph{incertos} sobre ele. O objetivo dessa tese é avaliar importantes 
+fontes de incerteza na modelagem espacial do solo, com ênfase nos dados do solo e covariáveis. Estudos de 
+caso foram desenvolvidos usando dados de uma bacia hidrográfica do sul do Brasil. A distribuição 
+espacial do solo na área de estudo é variável, sendo determinada pela geologia e geomorfologia (escalas 
+espaciais maiores) e práticas agrícolas (escalas espaciais menores). Quatro propriedades do solo foram 
+exploradas: teor de argila, teor de carbono orgânico, capacidade de troca catiônica efetiva e densidade. Cinco 
+covariáveis, cada um com dois níveis de detalhe espacial, foram utilizadas: mapas areais de classes de solo, 
+modelos digitais de elevação, mapas geológicos, mapas de uso da terra, e imagens de satélite. Esses dados 
+constituem o \emph{conjunto de dados de Santa Maria}. Dois pacotes para \texttt{R} foram criados, o primeiro 
+(\texttt{pedometrics}) contendo várias funções para a análise exploratória espacial de dados e calibração de 
+modelos, o segundo (\texttt{spann}) projetado para a optimização de amostras espaciais usando recozimento 
+simulado. Os estudos de caso ilustraram que as covariáveis existentes são apropriadas para calibrar modelos 
+espaciais do solo, e que o uso de covariáveis mais detalhadas resulta em modesto aumento na acurácia 
+de predição que pode não compensar os custos adicionais. Meios mais eficientes de aumentar a acurácia de 
+predição devem ser explorados, como obter mais observações do solo. Para esse fim, deve-se usar meios 
+objetivos para a seleção dos locais de observação a fim de minimizar os efeitos das respostas psicológicas dos 
+modeladores do solo a fatores conceituais e operacionais sobre o plano de amostragem. Isso porque as 
+dificuldades conceituais e operacionais encontradas no campo determinam mudanças na motivação dos modeladores 
+do solo entre aprendizagem/verificação das relações solo-paisagem e maximização do número de observações e 
+cobertura geográfica. Para estimar a tendência espacial, deve ser suficiente otimizar as amostras espaciais 
+visando somente reproduzir a distribuição marginal das covariáveis. Para otimizar configurações amostrais para 
+estimar a tendência espacial e o variograma, e interpolação espacial, pode-se formular um problema de 
+otimização multi-objetivo sólido usando versões robustas de algoritmos de amostragem existentes. No geral, 
+aprendemos que uma receita única, universal para a redução da incerteza na modelagem espacial do solo não pode 
+ser formulada. Decidir sobre formas eficazes de redução da incerteza requer, em primeiro lugar, que exploremos 
+todo o potencial dos dados existentes usando técnicas de modelagem espacial sólidas.
+\end{generalabstract}
 
 %%=============================================================================
 %% English General Abstract
@@ -309,15 +340,15 @@ scales), and by agricultural practices (fine spatial scales). Four topsoil prope
 content, organic carbon content, effective cation exchange capacity and bulk density. Five covariates, each 
 with two levels of spatial detail, were used: area-class soil maps, digital elevation models, geologic maps, 
 land use maps, and satellite images. These soil and covariate data constitute the \emph{Santa Maria dataset}. 
-Two packages for \texttt{R} were created in support of the case studies, the first (\texttt{pedometrics}) 
+Two packages for \texttt{R} were created in support to the case studies, the first (\texttt{pedometrics}) 
 containing various functions for spatial exploratory data analysis and model calibration, the second 
 (\texttt{spsann}) designed for the optimization of spatial samples using simulated annealing. The case studies 
-illustrated that existing covariates are suitable for calibrating soil spatial models, and using more 
+illustrated that existing covariates are suitable for calibrating soil spatial models, and that using more 
 detailed covariates results in only a modest increase in the prediction accuracy that may not outweigh the 
 extra costs. More efficient means of increasing prediction accuracy should be explored, such as obtaining more 
 soil observations. For this end, one should use objective means for selecting observation locations to 
 minimize the effects of psychological responses of soil modellers to conceptual and operational factors on the 
-sampling design. This is because conceptual and operational difficulties encountered in the field determine 
+sampling design. This because conceptual and operational difficulties encountered in the field determine 
 how the motivation of soil modellers shifts between learning/verifying soil-landscape relationships and 
 maximizing the number of observations and geographic coverage. For the sole purpose of spatial trend 
 estimation, it should suffice to optimize spatial samples aiming only at reproducing the marginal distribution 
@@ -378,6 +409,7 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
+\shorttitle{Apêndice}
 \appendix
 \include{chap/appenc} % R-package spsann
 \include{chap/append} % R-package pedometrics
