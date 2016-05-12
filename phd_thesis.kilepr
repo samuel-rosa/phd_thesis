@@ -221,10 +221,10 @@ Mode=LaTeX
 
 [item:UFRuralRJ.cls]
 archive=true
-column=31
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=1055
+line=124
 mode=LaTeX
 open=false
 order=3
@@ -331,10 +331,10 @@ order=2
 
 [item:chap/chap04.tex]
 archive=true
-column=12
+column=24
 encoding=UTF-8
 highlight=LaTeX
-line=134
+line=606
 mode=LaTeX
 open=false
 order=8
@@ -351,30 +351,30 @@ order=1
 
 [item:chap/chap05.tex]
 archive=true
-column=27
+column=8
 encoding=UTF-8
 highlight=LaTeX
-line=896
+line=856
 mode=LaTeX
 open=false
 order=5
 
 [item:chap/chap06.tex]
 archive=true
-column=15
+column=16
 encoding=UTF-8
 highlight=LaTeX
-line=145
+line=809
 mode=LaTeX
 open=false
 order=7
 
 [item:chap/chap07.tex]
 archive=true
-column=100
+column=12
 encoding=UTF-8
 highlight=LaTeX
-line=518
+line=427
 mode=LaTeX
 open=false
 order=1
@@ -384,7 +384,7 @@ archive=true
 column=0
 encoding=UTF-8
 highlight=LaTeX
-line=386
+line=790
 mode=LaTeX
 open=false
 order=1
@@ -971,7 +971,7 @@ order=-1
 
 [item:chap/preface.tex]
 archive=true
-column=0
+column=18
 encoding=UTF-8
 highlight=LaTeX
 line=0
@@ -1064,16 +1064,16 @@ archive=true
 column=0
 encoding=UTF-8
 highlight=LaTeX
-line=257
+line=271
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [view-settings,view=0,item:UFRuralRJ.cls]
-CursorColumn=31
-CursorLine=1055
+CursorColumn=0
+CursorLine=124
 JumpList=
-ViMarks=.,1055,31,[,1055,31,],1055,31
+ViMarks=.,114,0,[,114,0,],114,0
 
 [view-settings,view=0,item:brazilian.babel]
 CursorColumn=29
@@ -1136,10 +1136,10 @@ JumpList=
 ViMarks=.,871,32,[,871,32,],871,32
 
 [view-settings,view=0,item:chap/chap04.tex]
-CursorColumn=12
-CursorLine=134
+CursorColumn=24
+CursorLine=606
 JumpList=
-ViMarks=.,0,0,[,0,0,],-1,-1
+ViMarks=.,606,24,[,606,24,],606,24
 
 [view-settings,view=0,item:chap/chap05.rnw]
 CursorColumn=0
@@ -1148,28 +1148,28 @@ JumpList=
 ViMarks=.,879,28,[,879,28,],879,28
 
 [view-settings,view=0,item:chap/chap05.tex]
-CursorColumn=27
-CursorLine=896
+CursorColumn=8
+CursorLine=856
 JumpList=
 ViMarks=.,915,34,[,915,34,],915,34
 
 [view-settings,view=0,item:chap/chap06.tex]
-CursorColumn=15
-CursorLine=145
+CursorColumn=16
+CursorLine=809
 JumpList=
-ViMarks=.,891,3,[,891,3,],891,3
+ViMarks=.,809,0,[,809,0,],809,15
 
 [view-settings,view=0,item:chap/chap07.tex]
-CursorColumn=100
-CursorLine=518
+CursorColumn=12
+CursorLine=427
 JumpList=
-ViMarks=.,522,107,[,523,0,],-1,-1
+ViMarks=.,427,12,[,427,12,],427,12
 
 [view-settings,view=0,item:chap/chap08.tex]
 CursorColumn=0
-CursorLine=386
+CursorLine=790
 JumpList=
-ViMarks=.,405,93,[,405,93,],405,93
+ViMarks=.,790,16,[,790,16,],790,16
 
 [view-settings,view=0,item:chap/chap09.tex]
 CursorColumn=17
@@ -1184,10 +1184,10 @@ JumpList=
 ViMarks=.,67,46,[,67,46,],67,46
 
 [view-settings,view=0,item:chap/preface.tex]
-CursorColumn=37
-CursorLine=247
+CursorColumn=18
+CursorLine=0
 JumpList=
-ViMarks=.,269,8,[,269,8,],269,8
+ViMarks=.,0,18,[,0,18,],0,18
 
 [view-settings,view=0,item:chap/preliminaries.tex]
 CursorColumn=62
@@ -1233,6 +1233,6 @@ ViMarks=.,4,37,[,4,37,],4,37
 
 [view-settings,view=0,item:phd_thesis.tex]
 CursorColumn=0
-CursorLine=257
+CursorLine=271
 JumpList=
-ViMarks=.,307,40,[,307,36,],307,40
+ViMarks=.,12,0,[,6,0,],12,0

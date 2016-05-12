@@ -32,15 +32,15 @@
 %% 
 %%=============================================================================================================
 
-%%==============================================================================
+%%=============================================================================================================
 %% Identificação
-%%==============================================================================
+%%=============================================================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{UFRuralRJ}[20/04/2016 v.0.9 Formatação de documentos acadêmicos da UFRuralRJ]
+\ProvidesClass{UFRuralRJ}[11/05/2016 v.0.10 Formatação de documentos acadêmicos da UFRuralRJ]
 
-%%==============================================================================
+%%=============================================================================================================
 %% Declaração de opções da classe
-%%==============================================================================
+%%=============================================================================================================
 
 %% Tese de doutorado
 \DeclareOption{tese}{
@@ -100,25 +100,26 @@
 
 }
 
+%% Idioma
 \DeclareOption{english}{
   \@englishtrue\OptionNotUsed}\newif\if@english\@englishfalse
 
-%% Usar cabeçalho com título curto do capítulo
+%% Cabeçalho com título curto do capítulo
 \DeclareOption{header}{
   \@headertrue\OptionNotUsed}\newif\if@header\@headerfalse
 
-%% Usar margens otimizadas
+%% Margens otimizadas
 \DeclareOption{newmargins}{
   \@newmarginstrue\OptionNotUsed}\newif\if@newmargins\@newmarginsfalse
 
-%% TODO: incluir opção 'twoside'
+%% Impressão em frente e verso
 \DeclareOption{oneside}{\AtEndOfClass{\@twosidefalse}\OptionNotUsed}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions\relax
 
-%%==============================================================================
+%%=============================================================================================================
 %% Comandos e definições gerais
-%%==============================================================================
+%%=============================================================================================================
 
 \def\ufrrjlongo{Universidade Federal Rural do Rio de Janeiro}
 \def\ufrrjcurto{UFRRJ}
@@ -192,6 +193,10 @@
 %% Pacote para identificar se está em página par ou ímpar.
 \RequirePackage{changepage}
 \strictpagecheck
+
+%% Pacote para garantir a impressão dos itens da parte preliminar do documento acadêmico
+%% na página da direita quando usadas as opções 'twoside' e 'openright'
+\RequirePackage{afterpage}
 
 %%=============================================================================
 %% Margens do texto
@@ -1199,6 +1204,7 @@
 \def\@schapter#1{%
   
   %% Verificar se o documento será impresso em frente e verso.
+  %% Em caso positivo, o título do item será impresso na próxima página da direita.
   \if@twoside
     \if@openright
       \checkoddpage
@@ -1214,6 +1220,21 @@
   \ifchap\if@aftertoc\addcontentsline{toc}{chapter}{\hspace*{0.35em}#1}\fi\fi%
   \addtocontents{lof}{\protect\addvspace{0\p@}}%Original = 10\p@
   \addtocontents{lot}{\protect\addvspace{0\p@}}%
+  
+  %% Verificar se o documento será impresso em frente e verso.
+  %% Em caso positivo os itens da parte preliminar do documento acadêmico devem ser impressos na página do
+  %% lado direito, ficando a página do lado esquerdo em branco.
+  %% Note que o comando abaixo só será eficiente quando os itens da parte preliminar do documento acadêmico
+  %% tiverem um máximo de duas páginas.
+  \if@twoside
+    \if@openright
+      \afterpage{\mbox{}\clearpage}
+    \else
+      \vspace*{0mm}
+    \fi
+  \fi 
+  
+  
   \@makeschapterhead{#1}\@afterheading
 }
 

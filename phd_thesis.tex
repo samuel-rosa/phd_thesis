@@ -4,6 +4,14 @@
 \newif\ifprint
 \printtrue
 
+\newcommand{\printbreak}[1]{
+  \ifprint
+    \addtocontents{#1}{\protect\cleardoublepage}
+  \else
+    \addtocontents{#1}{\protect\clearpage}
+  \fi
+}
+
 %%==============================================================================
 %% Pacotes - língua, codificação e fonte
 %%==============================================================================
