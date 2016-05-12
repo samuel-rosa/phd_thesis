@@ -1,6 +1,9 @@
 %% Tipo de documento e a classe a ser usada para sua formatação.
 \documentclass[tese, header, twoside, openright]{UFRuralRJ}
 
+\newif\ifprint
+\printtrue
+
 %%==============================================================================
 %% Pacotes - língua, codificação e fonte
 %%==============================================================================
@@ -132,6 +135,9 @@
 
 % Con­trol lay­out of item­ize, enu­mer­ate, de­scrip­tion
 \usepackage{enumitem}
+
+% Control positioning of pre-textual elements
+\usepackage{afterpage}
 
 %%==============================================================================
 %% User-defined macros
