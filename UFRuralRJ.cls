@@ -198,6 +198,7 @@
 %%=============================================================================
 
 \if@newmargins
+  
   %% Definições gerais
   \newlength{\mdt@topmargin}\setlength{\mdt@topmargin}{25mm}
   \newlength{\mdt@bottommargin}\setlength{\mdt@bottommargin}{25mm}
@@ -254,10 +255,8 @@
   %% Ajuste das medidas horizontais
   \setlength{\oddsidemargin}{\mdt@insidemargin}
   \addtolength{\oddsidemargin}{-\marginparwidth} % twoside: Controla a margem direita quando esta for a menor
-  
   \setlength{\evensidemargin}{\mdt@outsidemargin}
   \addtolength{\evensidemargin}{-\marginparwidth} % twoside: Controla a margem esquerda quando esta for a menor
-  
   \setlength{\textwidth}{\paperwidth}
   \addtolength{\textwidth}{-\mdt@insidemargin}
   \addtolength{\textwidth}{-\mdt@outsidemargin}
@@ -316,27 +315,22 @@
 %indentar em 1,25 o primeiro parágrafo
 \setlength{\parindent}{1.25cm}%
 
-%%==============================================================================
-%% Numeração das páginas
-%%==============================================================================
-%% O número da página é colocado no canto superior direito porque a margem 
-%% superior, que é de 30 mm, possui mais espaço para acomodar o número da página
-%% do que a margem inferior, que é de 20 mm.
+%%=============================================================================================================
+%% Numeração das páginas e cabeçalho
+%%=============================================================================================================
+%% Na formatação padrão, o número da página é colocado no canto inferior direito das páginas do documento
+%% acadêmico. Quando o documento acadêmico é impresso em frente e verso, o número da página é colocado no 
+%% canto inferior externo das páginas. Isso significa o lado esquerdo para páginas pares, e o lado direito
+%% para páginas ímpares.
+%% A formatação do cabeçalho, usando quando a opção 'header' é declarada, é semelhante à formatação do número
+%% da página. O texto do cabeçalho é colocado no canto superior externo das páginas, sendo o espaço restante
+%% ocupado com uma barra horizontal.
 
-%% Canto direito superior
-% \def\ps@UFRuralRJ{
-%   \let\@oddfoot\@empty
-%   \let\@evenfoot\@empty
-%   \def\@evenhead{{\small\thepage}}
-%   \def\@oddhead{\hspace*{\fill}{\small\thepage}}
-% }
-
-%% Canto direito inferior
 \def\ps@UFRuralRJ{
   \def\@oddfoot{\hspace*{\fill}{\small\thepage}}
   \def\@evenfoot{{\small\thepage}}
   \if@header
-    \def\@evenhead{\hrulefill~\scriptsize\@chaptertitle}
+    \def\@evenhead{\scriptsize\@chaptertitle~\hrulefill}
     \def\@oddhead{\hrulefill~\scriptsize\@chaptertitle}
   \else
     \let\@evenhead\@empty
@@ -604,11 +598,11 @@
   \clearpage
   \if@twoside
     \null
-    \thispagestyle{empty}% 
+    \thispagestyle{empty}%
     \newpage
-    \secondtitlepage
+    \theapprovepage
   \else
-    \secondtitlepage
+    \theapprovepage
   \fi
 }
 \newcommand{\theapprovepage}{%
@@ -1046,6 +1040,24 @@
       %% ASR: São adicionados 10 pontos de espaço vertical antes e após o titulo de cada capitulo no sumario.
       %%      COmo não existe definição oficial, a decisão de adicionar 10 pontos é completamente arbitrária.
       \ifchap%
+       
+       %% Verificar se o documento será impresso em frente e verso.
+       %% Em caso positivo, os itens do sumário são impressos apenas nas páginas ímpares (lado direito)
+       %% do documento.
+%        \addtocontents{toc}{
+%          \protect\if@twoside
+%            \protect\if@openright
+%              \protect\checkoddpage
+%              \protect\ifoddpage
+% %                \protect\vspace{0mm}
+%                \protect\afterpage{\mbox{}\clearpage}
+%              \protect\else
+% %                \protect\cleardoublepage
+%                \protect\vspace{0mm}
+%              \protect\fi
+%             \protect\fi
+%            \protect\fi
+%        }
        
        \addtocontents{toc}{\protect\addvspace{10\p@}}%
         \ifartigo
