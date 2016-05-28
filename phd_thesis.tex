@@ -25,7 +25,7 @@
 %% Pacotes - formatação de equações, números, elementos químicos
 %%==============================================================================
 
-\usepackage{amsmath,latexsym,amssymb}
+\usepackage{amsmath, latexsym, amssymb}
 \usepackage[range-phrase = --, binary-units = true]{siunitx} %% Sistema Internacional de Unidades
 \DeclareSIUnit\pp{pp} % pencentual point
 
@@ -64,8 +64,8 @@
 
 \usepackage[%hidelinks%, 
             bookmarksopen=true,linktoc=page,colorlinks=true,
-            linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
-            % linkcolor=black, citecolor=black, filecolor=black, urlcolor=black,
+%             linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
+            linkcolor=black, citecolor=black, filecolor=black, urlcolor=black,
             pdftitle={Analysis of Sources of Uncertainty in Soil Spatial Modelling},
             pdfauthor={Alessandro Samuel-Rosa},
             pdfsubject={Tese de Doutorado},
@@ -146,6 +146,9 @@
 
 % Control positioning of pre-textual elements
 \usepackage{afterpage}
+
+% Use Times New Roman... Must load last
+\usepackage{times}
 
 %%==============================================================================
 %% User-defined macros
@@ -246,6 +249,7 @@ RedeMDS%
 %% Identification of supervisors
 %%==============================================================================
 \advisor[Professora]{Ph.D.}{Anjos}{Lúcia Helena Cunha dos}{UFRRJ}
+\orientadoratrue
 \coadvisor[Pesquisador]{Ph.D.}{Vasques}{Gustavo de Mattos}
 \coadvisor[Professor]{Ph.D.}{Heuvelink}{Gerardus Bernardus Maria}
 
@@ -255,8 +259,8 @@ RedeMDS%
 \committee[Ph.D.]{Vasques}{Gustavo de Mattos}{EMBRAPA} %% President
 \committee[Dr.]{Ceddia}{Marcos Bacis}{UFRRJ} %% Examinator
 \committee[Ph.D.]{Teixeira}{Wenceslau Geraldes}{EMBRAPA} %% Examinator
-\committee[Ph.D.]{Lopes Assad}{Maria Leonor Ribeiro Casimiro}{UFSCar} %% Examinator
 \committee[Ph.D.]{Oliveira}{Ronaldo Pereira de}{EMBRAPA} %% Examinator
+\committee[Ph.D.]{Lopes Assad}{Maria Leonor Ribeiro Casimiro}{UFSCar} %% Examinator
 \date{24}{02}{2016} %% Date of defence
 
 %%=============================================================================
@@ -273,21 +277,47 @@ RedeMDS%
 %%=============================================================================
 %% Ficha catalográfica
 %%=============================================================================
-% Como a CIP vai ser impressa atrás da página de rosto, as margens inner e outer	
-% devem ser invertidas.
-%\newgeometry{inner=20mm,outer=30mm,top=30mm,bottom=20mm}
-%\makeCIP{alessandrosamuel@yahoo.com.br}% email do autor
-%\restoregeometry
+% \authorbirthyear{1985}
+% \advisorbirthyear{1957}
+% \begin{figure}[!HT]
+%  \centering
+%  \includegraphics[width=210mm, height=297mm]{cip.pdf}
+% \end{figure}
+\makeCIP{alessandrosamuelrosa@gmail.com}% email do autor
+
+% \def\tmp{
+% \begin{minipage}{\textwidth}
+% \vspace{3ex}
+% \hrule
+% %   \vskip 10\p@
+% \noindent \copyright \ \@publyear \\
+% Todos os direitos autorais reservados a \@authora. A reprodu{\c{c}}{\~a}o de partes ou do todo deste 
+% documento s\'{o} poder\'{a} ser feita mediante a cita{\c{c}}{\~a}o da fonte. \\ 
+% % %   E-mail: \href{mailto:#1}{#1}\\
+% \\
+% \noindent
+% Este documento foi criado usando o sistema \LaTeX{} de prepara{\c{c}}{\~a}o de documentos para
+% composi{\c{c}}{\~a}o de alta qualidade originalmente desenvolvido por Leslie Lamport a partir do sistema de 
+% formata{\c{c}}{\~a}o \TeX{} criado por Donald Knuth.\\
+% O formato final deste documento foi obtido usando a classe \texttt{UFRuralRJ}, uma adaptação livre das classes 
+% \texttt{mdtufsm} e \texttt{iiufrgs} para a formatação de documentos acadêmicos produzidos na Universidade 
+% Federal Rural do Rio de Janeiro (UFRRJ) de acordo com as recomendações contidas na terceira edição do 
+% \textit{Manual de instruções para organização e apresentação de dissertações e teses na UFRRJ}.
+% \end{minipage}
+% }
+
+% \includepdf[pagecommand={\begin{tikzpicture}[remember picture, overlay]\node[anchor=south west] at 
+% (-1.45,-\textheight+25) {\tmp};\end{tikzpicture}}, width=210mm, height=297mm]{cip.pdf}
 
 %Se for usar a catalogação gerada pelo gerador do site da biblioteca comentar as linhas
 %acima e utilizar o comando abaixo
 %\includeCIP{CIP.pdf}
-\newpage
-\noindent\fbox{\parbox{\textwidth}{%
-  \begin{center}
-    É permitida a reprodução parcial ou total desta obra, desde que citada a fonte.
-  \end{center}
-}}%
+% \newpage
+% \noindent\fbox{\parbox{\textwidth}{%
+%   \begin{center}
+%     É permitida a reprodução parcial ou total desta obra, desde que citada a fonte.
+%   \end{center}
+% }}%
 
 %%=============================================================================
 % Folha de aprovação
@@ -429,8 +459,7 @@ data using sound spatial modelling techniques.
 %%=============================================================================
 %% Apêndices
 %%=============================================================================
-\shorttitle{Apêndice}
-\appendix
+\appendix\shorttitle{Apêndice}
 \include{chap/appenc} % R-package spsann
 \include{chap/append} % R-package pedometrics
 \include{chap/appena} % Introdução Geral

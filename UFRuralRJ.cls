@@ -50,7 +50,7 @@
     \def\doctypename{\tesename}%
     \def\doctypearticle{a}%
     \def\aprovadoem{Tese aprovada em}%
-    % \def\doctypenameCIP{Tese (Doutorado)}
+    \def\doctypenameCIP{Tese (Doutorado)}
   }
 }
 
@@ -62,7 +62,7 @@
     \def\doctypename{\dissname}
     \def\doctypearticle{a}
     \def\aprovadoem{Disserta{\c{c}}{\~a}o aprovada em}%
-    % \def\doctypenameCIP{Disserta{\c{c}}{\~a}o (Mestrado)}
+    \def\doctypenameCIP{Disserta{\c{c}}{\~a}o (Mestrado)}
   }
 }
 
@@ -156,7 +156,7 @@
 
 %% Definições de gênero
 \newif\ifautora %% 'autora' em vez de 'autor'
-% \newif\iforientadora %% 'orientadora' em vez de 'orientador'
+\newif\iforientadora %% 'orientadora' em vez de 'orientador'
 % \newif\ifcoorientadora %% 'co-orientadora' em vez de 'co-orientador'. Obsoleto
 
 %% Definições de capítulo
@@ -197,6 +197,11 @@
 %% Pacote para garantir a impressão dos itens da parte preliminar do documento acadêmico
 %% na página da direita quando usadas as opções 'twoside' e 'openright'
 \RequirePackage{afterpage}
+
+%% Formatação da Ficha Catalográfica
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage{pdfpages}
 
 %%=============================================================================
 %% Margens do texto
@@ -596,19 +601,21 @@
 }
 
 %%==============================================================================
-%% Definição padrão da folha de aprovação e CIP
+%% Definição padrão da folha de aprovação
 %%==============================================================================
 
 \newcommand{\makeapprove}{%
+  %% Não é preciso pular uma página quando o documento é impresso em frente e verso porque
+  %% a página anterior deve conter a ficha catalográfica.
   \clearpage
-  \if@twoside
-    \null
-    \thispagestyle{empty}%
-    \newpage
+%   \if@twoside
+%     \null
+%     \thispagestyle{empty}%
+%     \newpage
+%     \theapprovepage
+%   \else
     \theapprovepage
-  \else
-    \theapprovepage
-  \fi
+%   \fi
 }
 \newcommand{\theapprovepage}{%
   \noindent
@@ -631,86 +638,125 @@
   }
 }
 
+%==============================================================================================================
+% Ficha catalográfica
+%==============================================================================================================
+
+% \newcommand{\authorbirthyear}[1]{\gdef\@authorbirthyear{#1}}
+% \newcommand{\advisorbirthyear}[1]{\gdef\@advisorbirthyear{#1}}
+
 \newcommand{\makeCIP}[1]{
-  \clearpage
-  \mbox{} \vfill
-  \@cipwindow
-	\vspace{2ex}
-  \nominata{#1}
+%   \clearpage
+%   \vspace*{\fill}
+%   \@cipwindow
+%   \vspace*{\fill}
+%   \nominata{#1}
   %% se for impresso, não deve contar a página, pois será impressa no verso da
   %% folha de aprovação
   %\setcounter{page}{2}
+  
+  %% ASR: Usando o pacote tikz para adicionar Ficha Catalográfica fornecida pela Biblioteca Central da UFRRJ
+  %% com nota no final da página sobre direitos autorais e sistema usado para produção e formatação do 
+  %% documento.
+  \includepdf[pagecommand={\begin{tikzpicture}[remember picture, overlay]\node[anchor=south west] at 
+(-1.45,-\textheight+25) {\nominata{#1}};\end{tikzpicture}}, width=210mm, height=297mm]{cip.pdf}
 }
 
-\def\@cipwindow{%
-  \noindent
-  \framebox[140mm]{
-  \begin{minipage}{120mm}%
-    \vspace*{2ex}
-    \setlength{\parindent}{2em}%
-    \setlength{\parskip}{1.4ex}%
-    \noindent \@authoralast, \@authorafirst\par
-    %\@title\ / por \@authora.\ -- \@publyear.\\
-    \@titulo\ / \byname \@authora.\ -- \@publyear.\\
-                \indent\pageref{LastPage}~f.: il.; 30~cm. \par
-				\indent\iforientadora\advisornamef\else
-				 \advisorname\fi: \@advisorfirst\ \@advisorlast
-				\@ifundefined{@coadvisor}{}{\\ \indent
-				 \ifcoorientadora\coadvisornamef\else
-				 \coadvisorname\fi: \@coadvisorfirst\ 
-				 \@coadvisorlast} \\
-				\indent \doctypenameCIP \ - \ufrrjlongo, \@instituto,
-				\@altCurso, RJ, \@publyear. \par
-                \@cipkw I.~\@advisorlast, \@advisorfirst. 
-                \@ifundefined{@coadvisorfirst}{II.~T\'{\i}tulo.}{II.~
-                \@coadvisorlast, \@coadvisorfirst. III.~T\'{\i}tulo.}\par
-        \vspace{4ex}
-        \end{minipage}%
-        }%
-    }
+% \def\@cipwindow{%
+%   \noindent
+%   \framebox[140mm]{
+%   \begin{minipage}{120mm}%
+%     \vspace*{2ex}
+%     \setlength{\parindent}{2em}%
+%     \setlength{\parskip}{1.4ex}%
+%     \noindent \textcolor{red}{
+%       Consulte a Biblioteca Central da UFRRJ para obter a ficha catalogr\'{a}fica do seu documento 
+%       acad\^{e}mico.} \par
+%     \noindent \@authoralast, \@authorafirst, \@authorbirthyear--\par
+%     % \@titulo\ / \byname~\@authora.\ -- \@publyear.\\
+%     \@titulo\ / \@authora.\ --\@publyear.\\
+%     % \indent\pageref{LastPage}~f.: il.; 30~cm. \par
+%     \indent\pageref{LastPage}~f.: il.\par
+%     \indent\iforientadora\advisornamef\else\advisorname\fi:~\@advisorfirst~\@advisorlast\\
+% 				\@ifundefined{@coadvisor}{}{\\ \indent
+% 				 \ifcoorientadora\coadvisornamef\else
+% 				 \coadvisorname\fi: \@coadvisorfirst\ 
+% 				 \@coadvisorlast} \\
+%     \indent\doctypenameCIP \ -- \ufrrjlongo, \@instituto, \@curso, RJ, \@publyear. \par
+%                 \@cipkw I.~\@advisorlast, \@advisorfirst. 
+%                 \@ifundefined{@coadvisorfirst}{II.~T\'{\i}tulo.}{II.~
+%                 \@coadvisorlast, \@coadvisorfirst. III.~T\'{\i}tulo.}\par
+%         I. \@advisorlast, \@advisorfirst, \@advisorbirthyear--. II. \ufrrjlongo. \@curso. III. T\'{i}tulo.
+%         \vspace{4ex}
+%         \end{minipage}%
+%         }%
+%     }
 
+%% Direitos autorais e e-mail do autor
 \newcommand{\nominata}[1]{
- \vspace{3ex}
- % \noindent
- % Ficha catalográfica elaborada por \\
- % {#1} \\
- % Biblioteca Central da UFSM \\
-  \hrule
-  \vskip 10\p@
-  \noindent \copyright \ \@publyear \\
-  Todos os direitos autorais reservados a \@authora. A reprodu{\c{c}}{\~a}o de
-  partes ou do todo deste trabalho s\'{o} poder\'{a} ser feita mediante a 
-  cita{\c{c}}{\~a}o da fonte. \\
-  E-mail: {#1}
+%   \vspace{3ex}
+%   \hrule
+%   \vskip 10\p@
+%   \noindent \copyright \ \@publyear \\
+%   Todos os direitos autorais reservados a \@authora. A reprodu{\c{c}}{\~a}o de partes ou do todo deste 
+%   documento s\'{o} poder\'{a} ser feita mediante a cita{\c{c}}{\~a}o da fonte. \\ 
+%   E-mail: \href{mailto:#1}{#1}\\
+%   \\
+%   \noindent
+%   Este documento foi criado usando o sistema \LaTeX{} de prepara{\c{c}}{\~a}o de documentos para
+%   composi{\c{c}}{\~a}o de alta qualidade originalmente desenvolvido por Leslie Lamport a partir do sistema de 
+%   formata{\c{c}}{\~a}o \TeX{} criado por Donald Knuth.
+
+%% ASR: Nota a ser adicionada no final da página contendo a Ficha Catalográfica sobre direitos autorais e 
+%% sistema usado para produção e formatação do documento.
+\begin{minipage}{\textwidth}
+\vspace{3ex}
+\hrule
+\vskip 10\p@
+\noindent \copyright \ \@publyear \\
+Todos os direitos autorais reservados a \@authora. A reprodu{\c{c}}{\~a}o de partes ou do todo deste 
+documento s\'{o} poder\'{a} ser feita mediante a cita{\c{c}}{\~a}o da fonte. \\ 
+E-mail: \href{mailto:#1}{#1}\\
+\\
+\noindent
+Este documento foi criado usando o sistema \LaTeX{} de prepara{\c{c}}{\~a}o de documentos para
+composi{\c{c}}{\~a}o de alta qualidade originalmente desenvolvido por Leslie Lamport a partir do sistema de 
+formata{\c{c}}{\~a}o \TeX{} criado por Donald Knuth.\\
+O formato final deste documento foi obtido usando a classe \texttt{UFRuralRJ}, uma adapta{\c{c}}{\~a}o livre 
+das classes \texttt{mdtufsm} e \texttt{iiufrgs} para a formata{\c{c}}{\~a}o de documentos acad\^{e}micos 
+produzidos na Universidade Federal Rural do Rio de Janeiro (UFRRJ) de acordo com as recomenda{\c{c}}{\~o}es 
+contidas na terceira edi{\c{c}}{\~a}o do \textit{Manual de instru{\c{c}}{\~o}es para organiza{\c{c}}{\~a}o e 
+apresenta{\c{c}}{\~a}o de disserta{\c{c}}{\~o}es e teses na UFRRJ}, publicado no ano de 2006.
+\end{minipage}
 }
 
-\newcommand{\includeCIP}[1]{
+% \newcommand{\includeCIP}[1]{
    %impresso no verso da folha de rosto, nesse caso não deve contar a página
    %\setcounter{page}{1}
-   \clearpage\mbox{}
-   \AddToShipoutPicture{\includegraphics{#1}}
-   \clearpage
-   \ClearShipoutPicture
-}
+%    \clearpage\mbox{}
+%    \AddToShipoutPicture{\includegraphics{#1}}
+%    \clearpage
+%    \ClearShipoutPicture
+% }
 
-\def\@authorbox{%
-  \parbox[t]{\textwidth}{%
-    \centering
-    \vspace{2cm}
-    \LargeC{A Comiss\~{a}o Examinadora, abaixo assinada,} \\
-	  {aprova \doctypearticle~\doctypename} \\[2cm]
-	  \MakeUppercase{\LargeC\textbf{\@titulo}}\\[1,5cm]
-	  elaborad\doctypearticle~por\\
-	  \textbf{\@authora}\\
-	  \@ifundefined{@authorb}{}{\textbf{\@authorb}\\}%
-	  \@ifundefined{@authorc}{}{\textbf{\@authorc}\\}%
-	  \@ifundefined{@authord}{}{\textbf{\@authord}\\}%
-	  \vspace{1.5cm}
-		 {como requisito parcial para obten{\c{c}}{\~a}o do grau de} \\
-		 % \textbf{\@grau}
-		 \textbf{\grau}
-  }
-}
+% \def\@authorbox{%
+%   \parbox[t]{\textwidth}{%
+%     \centering
+%     \vspace{2cm}
+%     \LargeC{A Comiss\~{a}o Examinadora, abaixo assinada,} \\
+% 	  {aprova \doctypearticle~\doctypename} \\[2cm]
+% 	  \MakeUppercase{\LargeC\textbf{\@titulo}}\\[1,5cm]
+% 	  elaborad\doctypearticle~por\\
+% 	  \textbf{\@authora}\\
+% 	  \@ifundefined{@authorb}{}{\textbf{\@authorb}\\}%
+% 	  \@ifundefined{@authorc}{}{\textbf{\@authorc}\\}%
+% 	  \@ifundefined{@authord}{}{\textbf{\@authord}\\}%
+% 	  \vspace{1.5cm}
+% 		 {como requisito parcial para obten{\c{c}}{\~a}o do grau de} \\
+% 		 % \textbf{\@grau}
+% 		 \textbf{\grau}
+%   }
+% }
 
 %%==============================================================================
 %% Informações do comitê de avaliação do trabalho
