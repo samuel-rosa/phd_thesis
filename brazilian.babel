@@ -42,7 +42,7 @@
 \def\keywordsname{Palavras-chave}%
 \def\cipcaption{CIP -- CATALOGA{\c{C}}{\~A}O NA PUBLICA{\c{C}}{\~A}O}%
 
-\def\folhas{f}%
+\def\folhas{p}%
 \def\dissname{Disserta{\c{c}}{\~a}o}%
 \def\dissgrau{Mestr}% NÂO adicione a letra 'e'... Veja abaixo em \dissspecificinfo como isso é resolvido!!!
 \def\tesename{Tese}%

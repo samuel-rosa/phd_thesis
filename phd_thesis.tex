@@ -1,8 +1,12 @@
 %% Tipo de documento e a classe a ser usada para sua formatação.
-\documentclass[tese, header, twoside, openright]{UFRuralRJ}
+\documentclass[tese, header, % default options
+twoside, openright,          % university version
+% newmargins                   % optimized version
+]{UFRuralRJ}
 
 \newif\ifprint
 \printtrue
+% \printfalse
 
 \newcommand{\printbreak}[1]{
   \ifprint
@@ -64,13 +68,16 @@
 
 \usepackage[%hidelinks%, 
             bookmarksopen=true,linktoc=page,colorlinks=true,
-%             linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
-            linkcolor=black, citecolor=black, filecolor=black, urlcolor=black,
-            pdftitle={Analysis of Sources of Uncertainty in Soil Spatial Modelling},
+            % print
+%             linkcolor=black, citecolor=black, filecolor=black, urlcolor=black,
+            % digital
+            linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,            
+            pdftitle={Análise de Fontes de Incerteza na Modelagem Espacial do Solo},
             pdfauthor={Alessandro Samuel-Rosa},
             pdfsubject={Tese de Doutorado},
             pdfkeywords={Pedometria, Modelos, Incerteza}
             ]{hyperref}
+
 \usepackage[hyphenbreaks]{breakurl} % lidar com url longa
 
 %% Mudar o nome padrão das seções, subseções, e subsubseções mostrados quando usa-se \autoref{label}. Para 
@@ -148,7 +155,7 @@
 \usepackage{afterpage}
 
 % Use Times New Roman... Must load last
-\usepackage{times}
+\ifprint\usepackage{times}\fi
 
 %%==============================================================================
 %% User-defined macros
