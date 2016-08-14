@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.1.3
-lastDocument=phd_thesis.tex
+lastDocument=chap/chap08.tex
 masterDocument=
 name=phd_thesis
 pkg_extIsRegExp=false
@@ -226,7 +226,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=635
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:brazilian.babel]
@@ -236,7 +236,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=44
 mode=LaTeX
-open=true
+open=false
 order=2
 
 [item:chap/appena.tex]
@@ -281,13 +281,13 @@ order=-1
 
 [item:chap/chap01.tex]
 archive=true
-column=8
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=46
+line=50
 mode=LaTeX
-open=false
-order=2
+open=true
+order=3
 
 [item:chap/chap02.tex]
 archive=true
@@ -381,23 +381,23 @@ order=1
 
 [item:chap/chap08.tex]
 archive=true
-column=0
+column=40
 encoding=UTF-8
 highlight=LaTeX
-line=790
+line=275
 mode=LaTeX
-open=false
+open=true
 order=1
 
 [item:chap/chap09.tex]
 archive=true
-column=17
+column=82
 encoding=UTF-8
 highlight=LaTeX
-line=24
+line=189
 mode=LaTeX
-open=false
-order=3
+open=true
+order=2
 
 [item:chap/chap10.tex]
 archive=true
@@ -1061,10 +1061,10 @@ order=-1
 
 [item:phd_thesis.tex]
 archive=true
-column=81
+column=20
 encoding=UTF-8
 highlight=LaTeX
-line=343
+line=346
 mode=LaTeX
 open=true
 order=0
@@ -1106,8 +1106,8 @@ JumpList=
 ViMarks=.,3,9,[,3,9,],3,9
 
 [view-settings,view=0,item:chap/chap01.tex]
-CursorColumn=8
-CursorLine=46
+CursorColumn=0
+CursorLine=50
 JumpList=
 ViMarks=.,46,14,[,46,8,],46,21
 
@@ -1166,16 +1166,16 @@ JumpList=
 ViMarks=.,427,12,[,427,12,],427,12
 
 [view-settings,view=0,item:chap/chap08.tex]
-CursorColumn=0
-CursorLine=790
+CursorColumn=40
+CursorLine=275
 JumpList=
-ViMarks=.,790,16,[,790,16,],790,16
+ViMarks=.,488,19,[,488,19,],488,19
 
 [view-settings,view=0,item:chap/chap09.tex]
-CursorColumn=17
-CursorLine=24
+CursorColumn=82
+CursorLine=189
 JumpList=
-ViMarks=.,23,109,[,24,0,],-1,-1
+ViMarks=.,187,67,[,187,67,],187,73
 
 [view-settings,view=0,item:chap/chap10.tex]
 CursorColumn=17
@@ -1232,7 +1232,7 @@ JumpList=
 ViMarks=.,4,37,[,4,37,],4,37
 
 [view-settings,view=0,item:phd_thesis.tex]
-CursorColumn=81
-CursorLine=343
+CursorColumn=20
+CursorLine=346
 JumpList=
 ViMarks=.,71,0,[,71,0,],71,0

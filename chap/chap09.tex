@@ -81,12 +81,12 @@ $Y(\boldsymbol{s})$. Compared to probability sampling, purposive sampling genera
 The criterion used to select the sampling locations can be defined based on the chosen statistical model 
 \cite{deGruijterEtAl2006, Mueller2007, WebsterEtAl2013}. A set of mathematical and heuristic rules is then 
 formalized in the form of a computer algorithm to find the sampling locations that minimize (or maximize) that 
-criterion. The more we know about the structure of spatial variation of $Y(\boldsymbol{s})$, the more likely we 
+criterion. The more we know about the structure of spatial variation of $Y(\boldsymbol{s})$, the more likely we
 are to obtain the optimum sample configuration given the chosen statistical model.
 
 However, the statistical model is usually unknown before we sample. This is especially common when multiple 
 soil properties have to be mapped and the available information is insufficient to decide on the structure of 
-the spatial variation. Because we usually want to make the least possible number of assumptions about the model 
+the spatial variation. Because we usually want to make the least possible number of assumptions about the model
 structure, the safest solution is to use a space filling design \cite{HenglEtAl2003a, deGruijterEtAl2006, 
 Mueller2007, WalvoortEtAl2010}: the locations are selected as to generate a sample that covers the geographic 
 and/or feature space(s) as evenly as possible. In areas with very little information on the spatial variation 
@@ -99,14 +99,14 @@ and make spatial predictions.
 
 The spatial trend corresponds to the spatial variation of $Y(\boldsymbol{s})$ that is explained linearly or 
 non-linearly by the covariates. For a linear spatial trend, the sample should cover the extremes of the 
-distribution of the covariates \cite{Mueller2007}. For models with interactions and/or higher order terms there 
-are the response surface designs \cite{BoxEtAl1951, LeschEtAl1995}. These approaches produce clusters of points 
+distribution of the covariates \cite{Mueller2007}. For models with interactions and/or higher order terms there
+are the response surface designs \cite{BoxEtAl1951, LeschEtAl1995}. These approaches produce clusters of points
 and ignore the spatial autocorrelation of the residuals \cite{BrusEtAl2007a, Mueller2007}. Optimal sampling 
 designs for neural nets, random forests, etc., are yet unknown.
 
 A common solution for spatial trend estimation in \emph{terra incognita} is to use a feature space filling 
 sample. \citet{HenglEtAl2003a} sampled along the marginal distribution of the covariates using equal-range 
-strata with weights proportional to the frequency distribution. \citet{MinasnyEtAl2007a} sampled equal-variance 
+strata with weights proportional to the frequency distribution. \citet{MinasnyEtAl2007a} sampled equal-variance
 geographic strata created using the variance of the covariates retained in their first principal component.
 
 A more elaborated method, formulated as a multi-objective optimization problem composed of three objective 
@@ -114,11 +114,11 @@ functions, was developed by \citet{MinasnyEtAl2006b} based on Latin hypercube sa
 probability sampling method \cite{McKayEtAl1979}. The method, known as conditioned Latin hypercube sampling 
 (CLHS), is based on sampling along the marginal distribution of the numeric and factor covariates using 
 equal-area strata (quantile sampling) and proportionally to the area occupied by each level, respectively, and 
-reproducing the linear correlations among the numeric covariates \cite{MinasnyEtAl2006b}. CLHS is very flexible 
+reproducing the linear correlations among the numeric covariates \cite{MinasnyEtAl2006b}. CLHS is very flexible
 and can be easily extended, two important reasons for its popularity \cite{MinasnyEtAl2010a, RoudierEtAl2012}.
 
-Recently, \citet{Samuel-RosaEtAl2016} proposed conceptual and algorithmic improvements on the CLHS. Algorithmic 
-improvements concern the definition of the marginal sampling strata, the measurement of the correlation between 
+Recently, \citet{Samuel-RosaEtAl2016} proposed conceptual and algorithmic improvements on the CLHS. Algorithmic
+improvements concern the definition of the marginal sampling strata, the measurement of the correlation between
 covariates, and the aggregation of the objective functions. These have resulted in a more numerically stable 
 sampling algorithm which not necessarily translates into more accurate spatial predictions. Conceptually, the 
 goal of the method was reformulated as aiming at a spatial sample that reproduces an association/correlation 
@@ -143,23 +143,23 @@ Lark2002}. But how to do that when we are ignorant about the shape of the variog
 Russo1984, WarrickEtAl1987} proposed a conservative solution: the points should be located as to match a 
 uniform distribution of pairwise distances. Their claim was that the sample would be globally optimal for an 
 infinite set of unknown variograms. This has not been proven mathematically nor corroborated by empirical 
-evidence. The resulting sample usually is redundant (poorly informative), concentrating most of the points in a 
-single large cluster, with a few scattered points -- many of the point-pairs are computed using the same subset 
+evidence. The resulting sample usually is redundant (poorly informative), concentrating most of the points in a
+single large cluster, with a few scattered points -- many of the point-pairs are computed using the same subset
 of points.
 
 Another critique to the idea of \citet{BreslerEtAl1982, Russo1984, WarrickEtAl1987} is that it was rooted on 
 the use of the method-of-moments to fit a continuous function to the binned empirical variogram. Nowadays we 
 recognize that the estimates of the method-of-moments are affected by the correlation between the sequence of 
 classes of pairwise distances and that more robust methods exist \cite{DiggleEtAl2002}. Maximum likelihood 
-methods estimate model parameters using all data points, avoiding the need for an \textit{ad hoc} definition of 
+methods estimate model parameters using all data points, avoiding the need for an \textit{ad hoc} definition of
 classes of pairwise distances that generally smooth out the structure of the spatial process  
 \cite{Lark2000}.
 
 \subsection{Sampling for Spatial Interpolation}
 
-Kriging is the best unbiased linear predictor of soil properties \cite{LarkEtAl2006}. Overall better prediction 
+Kriging is the best unbiased linear predictor of soil properties \cite{LarkEtAl2006}. Overall better prediction
 accuracy depends on spreading the sample points as uniformly as possible throughout the study area. This is 
-because for a stationary isotropic random field the kriging variance is a function only of the distance between 
+because for a stationary isotropic random field the kriging variance is a function only of the distance between
 sample points \cite{Cressie1993}. Regular sampling grids are commonly used to obtain a uniform geographic 
 coverage, although triangular equilateral grids are more efficient \cite{WebsterEtAl2007}. Their main weakness 
 is the inefficient coverage of the geographic space when the sampling region is irregularly shaped and/or 
@@ -177,15 +177,15 @@ It has been suggested that efficient optimization of sample configurations for s
 upon minimizing a distance-based metric \cite{RoyleEtAl1998}. One such metric is the mean squared shortest 
 distance (MSSD) between sample and prediction points, which is equivalent to finding, for each point in the 
 prediction grid, the nearest neighbouring sample point  \cite{BrusEtAl2006}. Because the MSSD takes into 
-account all points in the prediction grid, its minimization produces a spatial sample that uniformly covers the 
+account all points in the prediction grid, its minimization produces a spatial sample that uniformly covers the
 geographic space, irrespective of the sampling region being irregularly shaped and/or containing 
-irregularly shaped non-sampling areas \cite{WalvoortEtAl2010}. However, this renders the method computationally 
+irregularly shaped non-sampling areas \cite{WalvoortEtAl2010}. However, this renders the method computationally
 expensive because a large distance matrix has to be computed every time a candidate spatial sample is 
 generated.
 
 The problem of minimizing the MSSD can be speeded up reformulating it in terms of an unsupervised 
 classification problem. The objects to be classified are the points of the prediction grid and the 
-classification variables are the x- and y-coordinates, the cluster centers defining the sampling locations 
+classification variables are the x- and y-coordinates, the cluster centres defining the sampling locations 
 \cite{WalvoortEtAl2010}. This classification problem can be solved using the \textit{k}-means clustering 
 algorithm, which is computationally fast, but sensitive to local optima solutions.
 
@@ -204,7 +204,7 @@ Different from CLHS, ACDC is a multi-objective optimization problem composed of 
  \text{CORR} = \sum_{i=1}^{p}\sum_{j=1}^{p}|\varphi_{ij} - v_{ij}|,
 \end{equation}
 
-\noindent where $\varphi_{ij}$ and $v_{ij}$ are the population and sample associations (or correlations in case 
+\noindent where $\varphi_{ij}$ and $v_{ij}$ are the population and sample associations (or correlations in case
 all covariates are numeric) at the $i$th row and $j$th column of the $p$-dimensional population and sample 
 association (or correlation) matrices, and
 
@@ -332,9 +332,9 @@ later aims at a uniform distribution of the number of \emph{point-pairs} per lag
 \subsection{Sampling for Spatial Interpolation}
 
 There are not many strategies for optimizing spatial samples for spatial interpolation in \emph{terra 
-incognita} as there are for spatial trend estimation. Among the existing options, the MSSD seems to be the most 
+incognita} as there are for spatial trend estimation. Among the existing options, the MSSD seems to be the most
 suited criterion. The main reasons for this are 1) its direct link with the need for minimizing the prediction 
-error variance when making spatial predictions, and 2) its flexibility to deal with irregularly shaped sampling 
+error variance when making spatial predictions, and 2) its flexibility to deal with irregularly shaped sampling
 regions containing also irregularly shaped non-sampling areas.
 
 The MSSD is given by
